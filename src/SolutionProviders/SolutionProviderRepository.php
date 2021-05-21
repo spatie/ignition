@@ -58,7 +58,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
                 return true;
             })
-            ->map(fn(string $solutionClass) => new $solutionClass)
+            ->map(fn (string $solutionClass) => new $solutionClass)
             ->filter(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
                 try {
                     return $solutionProvider->canSolve($throwable);

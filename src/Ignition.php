@@ -7,23 +7,9 @@ use Spatie\FlareClient\Flare;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
 use Spatie\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
-use Spatie\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
-use Spatie\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
-use Spatie\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Spatie\Ignition\SolutionProviders\MergeConflictSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingColumnSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingImportSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingLivewireComponentSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingMixManifestSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingPackageSolutionProvider;
-use Spatie\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Spatie\Ignition\SolutionProviders\SolutionProviderRepository;
-use Spatie\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Spatie\Ignition\SolutionProviders\UndefinedPropertySolutionProvider;
-use Spatie\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
-use Spatie\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
-use Spatie\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Throwable;
 
 class Ignition

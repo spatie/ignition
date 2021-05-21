@@ -3,13 +3,8 @@
 namespace Spatie\Ignition\ErrorPage;
 
 use Closure;
-use Exception;
 use Illuminate\Contracts\Support\Arrayable;
-use Laravel\Telescope\Http\Controllers\HomeController;
-use Laravel\Telescope\IncomingExceptionEntry;
-use Laravel\Telescope\Telescope;
 use Spatie\FlareClient\Report;
-use Spatie\Ignition\Ignition;
 use Spatie\Ignition\IgnitionConfig;
 use Spatie\Ignition\Solutions\SolutionTransformer;
 use Throwable;
