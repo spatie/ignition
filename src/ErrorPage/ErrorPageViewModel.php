@@ -20,7 +20,7 @@ class ErrorPageViewModel implements Arrayable
 
     protected array $solutions = [];
 
-    protected array $ignitionConfig;
+    protected IgnitionConfig $ignitionConfig;
 
     protected Report $report;
 
@@ -34,7 +34,7 @@ class ErrorPageViewModel implements Arrayable
 
     public function __construct(
         ?Throwable $throwable,
-        array $ignitionConfig,
+        IgnitionConfig $ignitionConfig,
         Report $report,
         array $solutions
     ) {
@@ -65,33 +65,6 @@ class ErrorPageViewModel implements Arrayable
         return htmlspecialchars($throwableString);
     }
 
-    public function telescopeUrl(): ?string
-    {
-        try {
-            if (! class_exists(Telescope::class)) {
-                return null;
-            }
-
-            if (! count(Telescope::$entriesQueue)) {
-                return null;
-            }
-
-            $telescopeEntry = collect(Telescope::$entriesQueue)->first(function ($entry) {
-                return $entry instanceof IncomingExceptionEntry;
-            });
-
-            if (is_null($telescopeEntry)) {
-                return null;
-            }
-
-            $telescopeEntryId = (string) $telescopeEntry->uuid;
-
-            return url(action([HomeController::class, 'index'])."/exceptions/{$telescopeEntryId}");
-        } catch (Exception $exception) {
-            return null;
-        }
-    }
-
     public function title(): string
     {
         $message = htmlspecialchars($this->report->getMessage());
@@ -106,8 +79,6 @@ class ErrorPageViewModel implements Arrayable
 
     public function solutions(): array
     {
-        $solutions = [];
-
         foreach ($this->solutions as $solution) {
             $solutions[] = (new SolutionTransformer($solution))->toArray();
         }
@@ -134,29 +105,6 @@ class ErrorPageViewModel implements Arrayable
         return file_get_contents($assetPath);
     }
 
-    public function styles(): array
-    {
-        return array_keys(Ignition::styles());
-    }
-
-    public function scripts(): array
-    {
-        return array_keys(Ignition::scripts());
-    }
-
-    public function tabs(): string
-    {
-        return json_encode(Ignition::$tabs);
-    }
-
-    public function defaultTab(?string $defaultTab, ?array $defaultTabProps)
-    {
-        $this->defaultTab = $defaultTab ?? 'StackTab';
-
-        if ($defaultTabProps) {
-            $this->defaultTabProps = $defaultTabProps;
-        }
-    }
 
     protected function shareEndpoint(): string
     {
@@ -167,16 +115,12 @@ class ErrorPageViewModel implements Arrayable
     {
         return [
             'throwableString' => $this->throwableString(),
-            'telescopeUrl' => $this->telescopeUrl(),
             'shareEndpoint' => $this->shareEndpoint(),
             'title' => $this->title(),
             'config' => $this->ignitionConfig,
             'solutions' => $this->solutions(),
             'report' => $this->report(),
             'housekeepingEndpoint' => '',
-            'styles' => $this->styles(),
-            'scripts' => $this->scripts(),
-            'tabs' => $this->tabs(),
             'jsonEncode' => Closure::fromCallable([$this, 'jsonEncode']),
             'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
             'defaultTab' => $this->defaultTab,

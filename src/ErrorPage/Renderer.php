@@ -16,26 +16,27 @@ class Renderer
 
     public function render(string $viewName, array $_data)
     {
-
         $viewFile = "{$this->viewPath}{$viewName}.php";
-$_data['report']['application_path'] = '';
-        try {
-            extract((array) $_data, EXTR_OVERWRITE);
 
-            include $viewFile;
-        } catch (Exception $exception) {
-            $viewException = new ViewException($exception->getMessage());
-            $viewException->setView($viewFile);
-            $viewException->setViewData($_data);
+        // try {
+        extract((array)$_data, EXTR_OVERWRITE);
 
-            throw $viewException;
-        }
+        include $viewFile;
+        /*
+    } catch (Exception $exception) {
+        $viewException = new ViewException($exception->getMessage());
+        $viewException->setView($viewFile);
+        $viewException->setViewData($_data);
+
+        throw $viewException;
+    }
+        */
 
 
     }
 
     protected function formatPath(string $path): string
     {
-        return preg_replace('/(?:\/)+$/u', '', $path).'/';
+        return preg_replace('/(?:\/)+$/u', '', $path) . '/';
     }
 }

@@ -9,6 +9,7 @@ class StringComparator
     public static function findClosestMatch(array $strings, string $input, int $sensitivity = 4): ?string
     {
         $closestDistance = -1;
+
         $closestMatch = null;
 
         foreach ($strings as $string) {

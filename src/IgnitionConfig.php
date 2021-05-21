@@ -11,7 +11,7 @@ class IgnitionConfig implements Arrayable
 
     public function __construct(array $options = [])
     {
-        $this->options = $this->mergeWithDefaultConfig($options);
+        $this->options = $options;
     }
 
     public function editor(): ?string
@@ -65,10 +65,5 @@ class IgnitionConfig implements Arrayable
             'enableRunnableSolutions' => $this->runnableSolutionsEnabled(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
         ];
-    }
-
-    protected function mergeWithDefaultConfig(array $options = []): array
-    {
-        return array_merge(config('ignition') ?: include __DIR__.'/../config/ignition.php', $options);
     }
 }

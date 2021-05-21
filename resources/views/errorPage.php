@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="theme-<?=$config['theme']?>">
+<html class="theme-light">
 <!--
 <?=$throwableString?>
 -->
@@ -19,10 +19,6 @@
 
     <title><?= $title ?></title>
 
-    <?php foreach ($styles as $script): ?>
-        <link rel="stylesheet" href="<?=$housekeepingEndpoint?>/styles/<?=$script?>">
-    <?php endforeach; ?>
-
 </head>
 <body class="scrollbar-lg">
 
@@ -32,14 +28,11 @@
             'report' => $report,
             'config' => $config,
             'solutions' => $solutions,
-            'telescopeUrl' => $telescopeUrl,
             'shareEndpoint' => $shareEndpoint,
             'defaultTab' => $defaultTab,
             'defaultTabProps' => $defaultTabProps,
-            'appEnv' => $appEnv,
-            'appDebug' => $appDebug,
         ])
-    ?>;
+        ?>;
 </script>
 
 <noscript><pre><?=$throwableString?></pre></noscript>

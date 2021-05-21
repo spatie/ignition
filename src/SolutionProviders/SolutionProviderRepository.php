@@ -50,15 +50,15 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
                     return false;
                 }
 
+                /*
                 if (in_array($solutionClass, config('ignition.ignored_solution_providers', []))) {
                     return false;
                 }
+                */
 
                 return true;
             })
-            ->map(function (string $solutionClass) {
-                return app($solutionClass);
-            })
+            ->map(fn(string $solutionClass) => new $solutionClass)
             ->filter(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
                 try {
                     return $solutionProvider->canSolve($throwable);
