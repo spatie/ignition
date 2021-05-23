@@ -2,33 +2,22 @@
 
 namespace Spatie\Ignition;
 
-use Closure;
+use ErrorException;
 use Spatie\FlareClient\Flare;
+use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
 use Spatie\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
-use Spatie\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
-use Spatie\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
-use Spatie\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Spatie\Ignition\SolutionProviders\MergeConflictSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingColumnSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingImportSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingLivewireComponentSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingMixManifestSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingPackageSolutionProvider;
-use Spatie\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Spatie\Ignition\SolutionProviders\SolutionProviderRepository;
-use Spatie\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Spatie\Ignition\SolutionProviders\UndefinedPropertySolutionProvider;
-use Spatie\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
-use Spatie\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
-use Spatie\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Throwable;
 
 class Ignition
 {
     protected bool $anonymize = false;
+
+    protected Flare $flare;
 
     protected string $flareApiKey = '';
 
@@ -36,31 +25,27 @@ class Ignition
 
     protected string $applicationPath = '';
 
-    protected ?Closure $configureFlareUsing = null;
+    protected array $middleware = [];
+
+    protected string $theme = 'light';
+
+    protected IgnitionConfig $ignitionConfig;
 
     protected SolutionProviderRepository $solutionProviderRepository;
 
-    public static function make()
+    public static function make(): self
     {
         return new static();
     }
 
     public function __construct()
     {
+        $this->flare = Flare::make();
+
+        $this->ignitionConfig = IgnitionConfig::loadFromConfigFile();
+
         $this->solutionProviderRepository = new SolutionProviderRepository($this->getDefaultSolutions());
     }
-
-    public function register()
-    {
-        error_reporting(-1);
-
-        set_error_handler([$this, 'handleError']);
-
-        set_exception_handler([$this, 'handleException']);
-
-        return $this;
-    }
-
 
     public function applicationPath(string $applicationPath): self
     {
@@ -69,9 +54,23 @@ class Ignition
         return $this;
     }
 
+    public function addSolutions(array $solutions): self
+    {
+        $this->solutionProviderRepository->registerSolutionProviders($solutions);
+
+        return $this;
+    }
+
     public function anonymizeIp(): self
     {
         $this->anonymize = true;
+
+        return $this;
+    }
+
+    public function theme(string $theme): self
+    {
+        $this->ignitionConfig->setOption('theme', $theme);
 
         return $this;
     }
@@ -87,36 +86,61 @@ class Ignition
 
     public function configureFlare(callable $callable): self
     {
-        $this->configureFlareUsing = $callable;
+        ($callable)($this->flare);
 
         return $this;
     }
 
-    public function handleError($level, $message, $file = '', $line = 0, $context = [])
+    public function registerMiddleware($middleware)
     {
-        throw new \ErrorException($message, 0, $level, $file, $line);
+        if (! is_array($middleware)) {
+            $middleware = [$middleware];
+        }
+
+        foreach($middleware as $singleMiddleware) {
+            $this->middleware[] = $middleware;
+        }
     }
 
-    public function handleException(Throwable $throwable): void
+    public function register(): self
     {
-        $flare = Flare::register($this->flareApiKey, $this->flareApiSecret);
+        error_reporting(-1);
 
-        if ($this->configureFlareUsing) {
-            ($this->configureFlareUsing)($flare);
+        set_error_handler([$this, 'renderError']);
+
+        set_exception_handler([$this, 'renderException']);
+
+        return $this;
+    }
+
+    public function renderError($level, $message, $file = '', $line = 0, $context = []): void
+    {
+        throw new ErrorException($message, 0, $level, $file, $line);
+    }
+
+    public function renderException(Throwable $throwable): void
+    {
+        $this->flare
+            ->setApiToken($this->flareApiKey)
+            ->setApiSecret($this->flareApiSecret);
+
+        foreach($this->middleware as $singleMiddleware) {
+            $this->flare->registerMiddleware($singleMiddleware);
         }
 
         if ($this->applicationPath !== '') {
-            $flare->applicationPath($this->applicationPath);
+            $this->flare->applicationPath($this->applicationPath);
         }
 
         if ($this->anonymize) {
-            $flare->anonymizeIp();
+            $this->flare->anonymizeIp();
         }
 
-        $report = $flare->createReport($throwable);
+        $report = $this->flare->createReport($throwable);
+
         $viewModel = new ErrorPageViewModel(
             $throwable,
-            new IgnitionConfig(),
+            $this->ignitionConfig,
             $report,
             $this->solutionProviderRepository->getSolutionsForThrowable($throwable)
         );
@@ -126,7 +150,7 @@ class Ignition
         $renderer->render('errorPage', $viewModel->toArray());
 
         if ($this->flareApiKey !== '') {
-            $flare->report($throwable);
+            $this->flare->report($throwable);
         }
     }
 

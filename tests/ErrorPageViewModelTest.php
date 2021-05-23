@@ -6,7 +6,7 @@ use Exception;
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
-use Spatie\Ignition\IgnitionConfig;
+use Spatie\Ignition\Config\IgnitionConfig;
 
 class ErrorPageViewModelTest extends TestCase
 {

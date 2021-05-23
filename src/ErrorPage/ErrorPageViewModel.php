@@ -10,7 +10,7 @@ use Laravel\Telescope\IncomingExceptionEntry;
 use Laravel\Telescope\Telescope;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Ignition;
-use Spatie\Ignition\IgnitionConfig;
+use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Solutions\SolutionTransformer;
 use Throwable;
 
