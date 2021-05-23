@@ -3,7 +3,6 @@
 namespace Spatie\Ignition\Config;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Support\Arr;
 
 class IgnitionConfig implements Arrayable
 {
@@ -62,7 +61,8 @@ class IgnitionConfig implements Arrayable
 
     public function runnableSolutionsEnabled(): bool
     {
-        return $this->options['enable_share_button'] ?? false;;
+        return $this->options['enable_share_button'] ?? false;
+        ;
     }
 
     public function toArray(): array

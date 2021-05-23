@@ -97,7 +97,7 @@ class Ignition
             $middleware = [$middleware];
         }
 
-        foreach($middleware as $singleMiddleware) {
+        foreach ($middleware as $singleMiddleware) {
             $this->middleware[] = $middleware;
         }
     }
@@ -124,7 +124,7 @@ class Ignition
             ->setApiToken($this->flareApiKey)
             ->setApiSecret($this->flareApiSecret);
 
-        foreach($this->middleware as $singleMiddleware) {
+        foreach ($this->middleware as $singleMiddleware) {
             $this->flare->registerMiddleware($singleMiddleware);
         }
 

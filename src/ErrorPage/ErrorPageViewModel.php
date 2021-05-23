@@ -5,7 +5,6 @@ namespace Spatie\Ignition\ErrorPage;
 use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Spatie\FlareClient\Report;
-use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Solutions\SolutionTransformer;
 use Throwable;
