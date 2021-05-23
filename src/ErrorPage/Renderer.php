@@ -31,8 +31,6 @@ class Renderer
         throw $viewException;
     }
         */
-
-
     }
 
     protected function formatPath(string $path): string
