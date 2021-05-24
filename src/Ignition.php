@@ -27,8 +27,6 @@ class Ignition
 
     protected array $middleware = [];
 
-    protected string $theme = 'light';
-
     protected IgnitionConfig $ignitionConfig;
 
     protected SolutionProviderRepository $solutionProviderRepository;
@@ -54,7 +52,7 @@ class Ignition
         return $this;
     }
 
-    public function addSolutions(array $solutions): self
+    public function addSolutionProviders(array $solutions): self
     {
         $this->solutionProviderRepository->registerSolutionProviders($solutions);
 
@@ -111,7 +109,6 @@ class Ignition
         return $this;
     }
 
-
     public function register(): self
     {
         error_reporting(-1);
@@ -130,10 +127,10 @@ class Ignition
 
     public function renderException(Throwable $throwable): void
     {
+
         $this->flare
             ->setApiToken($this->flareApiKey)
             ->setApiSecret($this->flareApiSecret);
-
         foreach ($this->middleware as $singleMiddleware) {
             $this->flare->registerMiddleware($singleMiddleware);
         }
@@ -157,7 +154,12 @@ class Ignition
 
         $renderer = new Renderer(__DIR__ . '/../resources/views');
 
-        $renderer->render('errorPage', $viewModel->toArray());
+        try {
+            $renderer->render('errorPage', $viewModel->toArray());
+
+        } catch (\Throwable $e) {
+            dd($e);
+        }
 
         if ($this->flareApiKey !== '') {
             $this->flare->report($throwable);

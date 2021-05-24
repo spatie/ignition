@@ -120,6 +120,7 @@ class ErrorPageViewModel implements Arrayable
             'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
             'defaultTab' => $this->defaultTab,
             'defaultTabProps' => $this->defaultTabProps,
+            'theme' => $this->ignitionConfig->theme(),
         ];
     }
 }

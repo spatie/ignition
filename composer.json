@@ -13,8 +13,8 @@
         "php": "^7.4|^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "spatie/flare-client-php": "dev-main as 1.8",
-        "spatie/ignition-contracts": "dev-main as 1.0.3",
+        "spatie/flare-client-php": "dev-main",
+        "spatie/ignition-contracts": "^1.0.3",
         "monolog/monolog": "^2.0",
         "symfony/console": "^5.0",
         "symfony/var-dumper": "^5.0"

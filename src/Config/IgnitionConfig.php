@@ -17,7 +17,11 @@ class IgnitionConfig implements Arrayable
 
     public function __construct(array $options = [])
     {
-        $this->options = $options;
+        $defaultOptions = [
+            'theme' => 'light',
+        ];
+
+        $this->options = array_merge($defaultOptions, $options);
     }
 
     public function mergeWithDefaults(array $newDefaults): self
