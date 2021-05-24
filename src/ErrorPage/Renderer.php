@@ -2,9 +2,6 @@
 
 namespace Spatie\Ignition\ErrorPage;
 
-use Exception;
-use Spatie\Ignition\Exceptions\ViewException;
-
 class Renderer
 {
     protected string $viewPath;
