@@ -7,6 +7,7 @@ use Spatie\FlareClient\Context\BaseContextProviderDetector;
 use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
+use Spatie\FlareClient\FlareMiddleware\AnonymizeIp;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
@@ -18,8 +19,6 @@ use Throwable;
 
 class Ignition
 {
-    protected bool $anonymize = false;
-
     protected Flare $flare;
 
     protected string $flareApiKey = '';
@@ -78,7 +77,7 @@ class Ignition
 
     public function anonymizeIp(): self
     {
-        $this->anonymize = true;
+        $this->registerMiddleware(AnonymizeIp::class);
 
         return $this;
     }
@@ -162,10 +161,6 @@ class Ignition
 
         if ($this->applicationPath !== '') {
             $this->flare->applicationPath($this->applicationPath);
-        }
-
-        if ($this->anonymize) {
-            $this->flare->anonymizeIp();
         }
 
         $report = $this->flare->createReport($throwable);
