@@ -96,7 +96,7 @@ class Ignition
         }
 
         foreach ($middleware as $singleMiddleware) {
-            $this->middleware[] = $middleware;
+            $this->middleware = array_merge($this->middleware, $middleware);
         }
 
         return $this;
@@ -141,7 +141,7 @@ class Ignition
         if ($this->anonymize) {
             $this->flare->anonymizeIp();
         }
-     
+
         $report = $this->flare->createReport($throwable);
 
         $viewModel = new ErrorPageViewModel(
@@ -155,7 +155,7 @@ class Ignition
 
         try {
             $renderer->render('errorPage', $viewModel->toArray());
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             dd($e);
         }
 
