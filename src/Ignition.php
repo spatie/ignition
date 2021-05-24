@@ -129,8 +129,8 @@ class Ignition
     {
 
         $this->flare
-            ->setApiToken($this->flareApiKey)
-            ->setApiSecret($this->flareApiSecret);
+            ->setApiToken($this->flareApiKey ?? '')
+            ->setApiSecret($this->flareApiSecret ?? '');
         foreach ($this->middleware as $singleMiddleware) {
             $this->flare->registerMiddleware($singleMiddleware);
         }
@@ -142,7 +142,7 @@ class Ignition
         if ($this->anonymize) {
             $this->flare->anonymizeIp();
         }
-
+     
         $report = $this->flare->createReport($throwable);
 
         $viewModel = new ErrorPageViewModel(
