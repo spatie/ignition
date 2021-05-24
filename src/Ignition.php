@@ -3,16 +3,17 @@
 namespace Spatie\Ignition;
 
 use ErrorException;
+use Spatie\FlareClient\Context\BaseContextProviderDetector;
 use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
-use Spatie\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MergeConflictSolutionProvider;
-use Spatie\Ignition\SolutionProviders\SolutionProviderRepository;
-use Spatie\Ignition\SolutionProviders\UndefinedPropertySolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
+use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
 use Throwable;
 
 class Ignition
@@ -47,6 +48,8 @@ class Ignition
         $this->ignitionConfig = IgnitionConfig::loadFromConfigFile();
 
         $this->solutionProviderRepository = new SolutionProviderRepository($this->getDefaultSolutions());
+
+        $this->contextProviderDetector = new BaseContextProviderDetector();
     }
 
     public function applicationPath(string $applicationPath): self
@@ -150,7 +153,9 @@ class Ignition
     {
         $this->flare
             ->setApiToken($this->flareApiKey ?? '')
-            ->setApiSecret($this->flareApiSecret ?? '');
+            ->setApiSecret($this->flareApiSecret ?? '')
+            ->setContextDectector($this->contextProviderDetector);
+
         foreach ($this->middleware as $singleMiddleware) {
             $this->flare->registerMiddleware($singleMiddleware);
         }
@@ -161,10 +166,6 @@ class Ignition
 
         if ($this->anonymize) {
             $this->flare->anonymizeIp();
-        }
-
-        if ($this->contextProviderDetector) {
-            $this->flare->setContextDectector($this->contextProviderDetector);
         }
 
         $report = $this->flare->createReport($throwable);
@@ -181,7 +182,7 @@ class Ignition
         try {
             $renderer->render('errorPage', $viewModel->toArray());
         } catch (Throwable $e) {
-            dd($e);
+            throw $e;
         }
 
         if ($this->flareApiKey !== '') {

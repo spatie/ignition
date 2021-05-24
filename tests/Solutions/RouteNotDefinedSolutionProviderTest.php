@@ -4,7 +4,7 @@ namespace Spatie\Ignition\Tests\Solutions;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use Spatie\Ignition\SolutionProviders\RouteNotDefinedSolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\RouteNotDefinedSolutionProvider;
 use Spatie\Ignition\Tests\TestCase;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 

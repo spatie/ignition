@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\Ignition\SolutionProviders\UndefinedPropertySolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
 use Spatie\Ignition\Tests\TestCase;
 
 class UndefinedPropertySolutionProviderTest extends TestCase

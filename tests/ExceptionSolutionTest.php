@@ -4,9 +4,9 @@ namespace Spatie\Ignition\Tests;
 
 use Illuminate\Foundation\Auth\User;
 use RuntimeException;
-use Spatie\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
-use Spatie\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
-use Spatie\Ignition\SolutionProviders\SolutionProviderRepository;
+use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\MissingAppKeySolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
 use Spatie\Ignition\Tests\Exceptions\AlwaysFalseSolutionProvider;
 use Spatie\Ignition\Tests\Exceptions\AlwaysTrueSolutionProvider;
 use Spatie\IgnitionContracts\BaseSolution;

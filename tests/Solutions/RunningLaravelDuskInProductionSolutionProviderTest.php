@@ -3,7 +3,7 @@
 namespace Spatie\Ignition\Tests\Solutions;
 
 use Exception;
-use Spatie\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Spatie\Ignition\Tests\TestCase;
 
 class RunningLaravelDuskInProductionSolutionProviderTest extends TestCase

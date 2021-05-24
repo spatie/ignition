@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Ignition\SolutionProviders;
+namespace Spatie\Ignition\Solutions\SolutionProviders;
 
 use Illuminate\Support\Collection;
 use Spatie\IgnitionContracts\HasSolutionsForThrowable;

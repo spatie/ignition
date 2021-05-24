@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Ignition\SolutionProviders;
+namespace Spatie\Ignition\Solutions\SolutionProviders;
 
 use Illuminate\Support\Str;
 use ParseError;

@@ -4,7 +4,7 @@ namespace Spatie\Ignition\Tests\Solutions;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use Spatie\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Spatie\Ignition\Solutions\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Spatie\Ignition\Support\ComposerClassMap;
 use Spatie\Ignition\Tests\stubs\Controllers\TestTypoController;
 use Spatie\Ignition\Tests\TestCase;
