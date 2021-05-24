@@ -18,19 +18,9 @@ class Renderer
     {
         $viewFile = "{$this->viewPath}{$viewName}.php";
 
-        // try {
         extract((array)$_data, EXTR_OVERWRITE);
 
         include $viewFile;
-        /*
-    } catch (Exception $exception) {
-        $viewException = new ViewException($exception->getMessage());
-        $viewException->setView($viewFile);
-        $viewException->setViewData($_data);
-
-        throw $viewException;
-    }
-        */
     }
 
     protected function formatPath(string $path): string

@@ -20,7 +20,7 @@ class DefaultConfigFinder
     protected function searchConfigFilesOnDisk(string $configDirectory = null): string
     {
         $configNames = [
-            'ray.php',
+            'ignition.php',
         ];
 
         $configDirectory = $configDirectory ?? getcwd();
