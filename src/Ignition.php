@@ -3,7 +3,6 @@
 namespace Spatie\Ignition;
 
 use ErrorException;
-use Spatie\FlareClient\Context\ContextDetector;
 use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
@@ -61,8 +60,7 @@ class Ignition
         string $name,
         string $messageLevel = MessageLevels::INFO,
         array $metaData = []
-    ): self
-    {
+    ): self {
         $this->flare->glow($name, $messageLevel, $metaData);
 
         return $this;
@@ -107,7 +105,7 @@ class Ignition
 
     public function registerMiddleware($middleware): self
     {
-        if (!is_array($middleware)) {
+        if (! is_array($middleware)) {
             $middleware = [$middleware];
         }
 
