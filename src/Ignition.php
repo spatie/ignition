@@ -91,7 +91,7 @@ class Ignition
         return $this;
     }
 
-    public function registerMiddleware($middleware)
+    public function registerMiddleware($middleware): self
     {
         if (! is_array($middleware)) {
             $middleware = [$middleware];
@@ -100,7 +100,17 @@ class Ignition
         foreach($middleware as $singleMiddleware) {
             $this->middleware[] = $middleware;
         }
+
+        return $this;
     }
+
+    public function reset(): self
+    {
+        $this->flare->reset();
+
+        return $this;
+    }
+
 
     public function register(): self
     {
