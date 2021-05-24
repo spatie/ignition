@@ -3,6 +3,9 @@
 namespace Spatie\Ignition;
 
 use ErrorException;
+use Spatie\FlareClient\Context\ContextDetector;
+use Spatie\FlareClient\Context\ContextProviderDetector;
+use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
@@ -29,6 +32,8 @@ class Ignition
 
     protected IgnitionConfig $ignitionConfig;
 
+    protected ContextProviderDetector $contextProviderDetector;
+
     protected SolutionProviderRepository $solutionProviderRepository;
 
     public static function make(): self
@@ -52,9 +57,20 @@ class Ignition
         return $this;
     }
 
-    public function addSolutionProviders(array $solutions): self
+    public function glow(
+        string $name,
+        string $messageLevel = MessageLevels::INFO,
+        array $metaData = []
+    ): self
     {
-        $this->solutionProviderRepository->registerSolutionProviders($solutions);
+        $this->flare->glow($name, $messageLevel, $metaData);
+
+        return $this;
+    }
+
+    public function addSolutionProviders(array $solutionProviders): self
+    {
+        $this->solutionProviderRepository->registerSolutionProviders($solutionProviders);
 
         return $this;
     }
@@ -91,13 +107,20 @@ class Ignition
 
     public function registerMiddleware($middleware): self
     {
-        if (! is_array($middleware)) {
+        if (!is_array($middleware)) {
             $middleware = [$middleware];
         }
 
         foreach ($middleware as $singleMiddleware) {
             $this->middleware = array_merge($this->middleware, $middleware);
         }
+
+        return $this;
+    }
+
+    public function setContextProviderDetector(ContextProviderDetector $contextProviderDetector): self
+    {
+        $this->contextProviderDetector = $contextProviderDetector;
 
         return $this;
     }
@@ -140,6 +163,10 @@ class Ignition
 
         if ($this->anonymize) {
             $this->flare->anonymizeIp();
+        }
+
+        if ($this->contextProviderDetector) {
+            $this->flare->setContextDectector($this->contextProviderDetector);
         }
 
         $report = $this->flare->createReport($throwable);
