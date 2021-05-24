@@ -127,7 +127,6 @@ class Ignition
 
     public function renderException(Throwable $throwable): void
     {
-
         $this->flare
             ->setApiToken($this->flareApiKey)
             ->setApiSecret($this->flareApiSecret);
@@ -156,7 +155,6 @@ class Ignition
 
         try {
             $renderer->render('errorPage', $viewModel->toArray());
-
         } catch (\Throwable $e) {
             dd($e);
         }
