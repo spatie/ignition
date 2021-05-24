@@ -154,7 +154,7 @@ class Ignition
         $this->flare
             ->setApiToken($this->flareApiKey ?? '')
             ->setApiSecret($this->flareApiSecret ?? '')
-            ->setContextDectector($this->contextProviderDetector);
+            ->setContextProviderDectector($this->contextProviderDetector);
 
         foreach ($this->middleware as $singleMiddleware) {
             $this->flare->registerMiddleware($singleMiddleware);
