@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Ignition\Middleware;
+namespace Spatie\Ignition\FlareMiddleware;
 
 use ReflectionClass;
 use Spatie\FlareClient\Report;

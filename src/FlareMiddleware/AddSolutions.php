@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Ignition\Middleware;
+namespace Spatie\Ignition\FlareMiddleware;
 
 use Spatie\FlareClient\Report;
 use Spatie\IgnitionContracts\SolutionProviderRepository;
