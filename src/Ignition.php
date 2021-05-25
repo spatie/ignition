@@ -7,6 +7,7 @@ use Spatie\FlareClient\Context\BaseContextProviderDetector;
 use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
+use Spatie\FlareClient\FlareMiddleware\AddSolutions;
 use Spatie\FlareClient\FlareMiddleware\AnonymizeIp;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
@@ -49,6 +50,8 @@ class Ignition
         $this->solutionProviderRepository = new SolutionProviderRepository($this->getDefaultSolutions());
 
         $this->contextProviderDetector = new BaseContextProviderDetector();
+
+        $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
     }
 
     public function applicationPath(string $applicationPath): self
@@ -153,7 +156,7 @@ class Ignition
         $this->flare
             ->setApiToken($this->flareApiKey ?? '')
             ->setApiSecret($this->flareApiSecret ?? '')
-            ->setContextProviderDectector($this->contextProviderDetector);
+            ->setContextProviderDetector($this->contextProviderDetector);
 
         foreach ($this->middleware as $singleMiddleware) {
             $this->flare->registerMiddleware($singleMiddleware);
