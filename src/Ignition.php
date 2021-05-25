@@ -72,8 +72,7 @@ class Ignition
         string $name,
         string $messageLevel = MessageLevels::INFO,
         array $metaData = []
-    ): self
-    {
+    ): self {
         $this->flare->glow($name, $messageLevel, $metaData);
 
         return $this;
@@ -116,7 +115,7 @@ class Ignition
 
     public function registerMiddleware($middleware): self
     {
-        if (!is_array($middleware)) {
+        if (! is_array($middleware)) {
             $middleware = [$middleware];
         }
 
@@ -183,9 +182,8 @@ class Ignition
 
     protected function setUpFlare(): self
     {
-        if (!$this->flare->apiTokenSet()) {
+        if (! $this->flare->apiTokenSet()) {
             $this->flare->setApiToken($this->flareApiKey ?? '');
-
         }
 
         $this->flare->setContextProviderDetector($this->contextProviderDetector);
