@@ -8,7 +8,7 @@ use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\FlareMiddleware\AddSolutions;
-use Spatie\FlareClient\FlareMiddleware\AnonymizeIp;
+use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
@@ -22,9 +22,9 @@ class Ignition
 {
     protected Flare $flare;
 
-    protected string $flareApiKey = '';
+    protected bool $shouldDisplayException = true;
 
-    protected string $flareApiSecret = '';
+    protected string $flareApiKey = '';
 
     protected string $applicationPath = '';
 
@@ -54,6 +54,13 @@ class Ignition
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
     }
 
+    public function shouldDisplayException(bool $shouldDisplayException): self
+    {
+        $this->shouldDisplayException = $shouldDisplayException;
+
+        return $this;
+    }
+
     public function applicationPath(string $applicationPath): self
     {
         $this->applicationPath = $applicationPath;
@@ -65,7 +72,8 @@ class Ignition
         string $name,
         string $messageLevel = MessageLevels::INFO,
         array $metaData = []
-    ): self {
+    ): self
+    {
         $this->flare->glow($name, $messageLevel, $metaData);
 
         return $this;
@@ -92,11 +100,9 @@ class Ignition
         return $this;
     }
 
-    public function sendToFlare(string $apiKey, string $apiSecret = ''): self
+    public function sendToFlare(string $apiKey): self
     {
         $this->flareApiKey = $apiKey;
-
-        $this->flareApiSecret = $apiSecret;
 
         return $this;
     }
@@ -110,7 +116,7 @@ class Ignition
 
     public function registerMiddleware($middleware): self
     {
-        if (! is_array($middleware)) {
+        if (!is_array($middleware)) {
             $middleware = [$middleware];
         }
 
@@ -141,7 +147,7 @@ class Ignition
 
         set_error_handler([$this, 'renderError']);
 
-        set_exception_handler([$this, 'renderException']);
+        set_exception_handler([$this, 'handleException']);
 
         return $this;
     }
@@ -151,38 +157,17 @@ class Ignition
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 
-    public function renderException(Throwable $throwable): void
+    public function handleException(Throwable $throwable): void
     {
-        $this->flare
-            ->setApiToken($this->flareApiKey ?? '')
-            ->setApiSecret($this->flareApiSecret ?? '')
-            ->setContextProviderDetector($this->contextProviderDetector);
-
-        foreach ($this->middleware as $singleMiddleware) {
-            $this->flare->registerMiddleware($singleMiddleware);
-        }
-
-        if ($this->applicationPath !== '') {
-            $this->flare->applicationPath($this->applicationPath);
-        }
+        $this->setUpFlare();
 
         $report = $this->flare->createReport($throwable);
 
-        $viewModel = new ErrorPageViewModel(
-            $throwable,
-            $this->ignitionConfig,
-            $report,
-            $this->solutionProviderRepository->getSolutionsForThrowable($throwable)
-        );
-
-        // TODO: do not render if production
-        try {
-            (new Renderer())->render($viewModel->toArray());
-        } catch (Throwable $e) {
-            throw $e;
+        if ($this->shouldDisplayException) {
+            $this->displayException($throwable, $report);
         }
 
-        if ($this->flareApiKey !== '') { // TODO: better check in instance
+        if ($this->flare->apiTokenSet()) {
             $this->flare->report($throwable);
         }
     }
@@ -194,5 +179,41 @@ class Ignition
             MergeConflictSolutionProvider::class,
             UndefinedPropertySolutionProvider::class,
         ];
+    }
+
+    protected function setUpFlare(): self
+    {
+        if (!$this->flare->apiTokenSet()) {
+            $this->flare->setApiToken($this->flareApiKey ?? '');
+
+        }
+
+        $this->flare->setContextProviderDetector($this->contextProviderDetector);
+
+        foreach ($this->middleware as $singleMiddleware) {
+            $this->flare->registerMiddleware($singleMiddleware);
+        }
+
+        if ($this->applicationPath !== '') {
+            $this->flare->applicationPath($this->applicationPath);
+        }
+
+        return $this;
+    }
+
+    protected function displayException(Throwable $throwable, Report $report): void
+    {
+        $viewModel = new ErrorPageViewModel(
+            $throwable,
+            $this->ignitionConfig,
+            $report,
+            $this->solutionProviderRepository->getSolutionsForThrowable($throwable)
+        );
+
+        try {
+            (new Renderer())->render($viewModel->toArray());
+        } catch (Throwable $e) {
+            throw $e;
+        }
     }
 }
