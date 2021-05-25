@@ -54,6 +54,13 @@ class Ignition
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
     }
 
+    public function setFlare(Flare $flare): self
+    {
+        $this->flare = $flare;
+
+        return $this;
+    }
+
     public function shouldDisplayException(bool $shouldDisplayException): self
     {
         $this->shouldDisplayException = $shouldDisplayException;
