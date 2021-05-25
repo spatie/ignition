@@ -47,7 +47,7 @@ class Ignition
 
         $this->ignitionConfig = IgnitionConfig::loadFromConfigFile();
 
-        $this->solutionProviderRepository = new SolutionProviderRepository($this->getDefaultSolutions());
+        $this->solutionProviderRepository = new SolutionProviderRepository($this->getDefaultSolutionProviders());
 
         $this->contextProviderDetector = new BaseContextProviderDetector();
 
@@ -78,9 +78,9 @@ class Ignition
         return $this;
     }
 
-    public function anonymizeIp(): self
+    public function useDarkMode(): self
     {
-        $this->registerMiddleware(AnonymizeIp::class);
+        $this->theme('dark');
 
         return $this;
     }
@@ -175,20 +175,19 @@ class Ignition
             $this->solutionProviderRepository->getSolutionsForThrowable($throwable)
         );
 
-        $renderer = new Renderer(__DIR__ . '/../resources/views');
-
+        // TODO: do not render if production
         try {
-            $renderer->render('errorPage', $viewModel->toArray());
+            (new Renderer())->render($viewModel->toArray());
         } catch (Throwable $e) {
             throw $e;
         }
 
-        if ($this->flareApiKey !== '') {
+        if ($this->flareApiKey !== '') { // TODO: better check in instance
             $this->flare->report($throwable);
         }
     }
 
-    protected function getDefaultSolutions(): array
+    protected function getDefaultSolutionProviders(): array
     {
         return [
             BadMethodCallSolutionProvider::class,

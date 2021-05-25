@@ -4,24 +4,12 @@ namespace Spatie\Ignition\ErrorPage;
 
 class Renderer
 {
-    protected string $viewPath;
-
-    public function __construct(string $viewPath)
+    public function render(array $data): void
     {
-        $this->viewPath = $this->formatPath($viewPath);
-    }
+        $viewFile = __DIR__ . '/../../resources/views/errorPage.php';
 
-    public function render(string $viewName, array $_data)
-    {
-        $viewFile = "{$this->viewPath}{$viewName}.php";
-
-        extract((array)$_data, EXTR_OVERWRITE);
+        extract((array)$data, EXTR_OVERWRITE);
 
         include $viewFile;
-    }
-
-    protected function formatPath(string $path): string
-    {
-        return preg_replace('/(?:\/)+$/u', '', $path) . '/';
     }
 }
