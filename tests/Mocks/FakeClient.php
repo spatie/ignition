@@ -28,8 +28,16 @@ class FakeClient extends Client
         Assert::assertCount($expectedCount, $this->requests);
     }
 
-    public function getLastRequest(): array
+    public function getLastRequest(): ?array
     {
-        return Arr::last($this->requests);
+        if (! count($this->requests)) {
+            return null;
+        }
+
+        $reversedRequests = array_reverse($this->requests);
+
+        $key = array_key_first($reversedRequests);
+
+        return $reversedRequests[$key];
     }
 }
