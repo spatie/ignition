@@ -4,7 +4,6 @@ namespace Spatie\Ignition\Tests;
 
 use Exception;
 use Spatie\FlareClient\Flare;
-use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 
