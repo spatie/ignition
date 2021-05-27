@@ -16,6 +16,7 @@ use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
+use Spatie\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Throwable;
 
 class Ignition
@@ -34,7 +35,7 @@ class Ignition
 
     protected ContextProviderDetector $contextProviderDetector;
 
-    protected SolutionProviderRepository $solutionProviderRepository;
+    protected SolutionProviderRepositoryContract $solutionProviderRepository;
 
     public static function make(): self
     {
@@ -53,11 +54,25 @@ class Ignition
 
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
     }
+    
+    public function setConfig(IgnitionConfig $ignitionConfig): self
+    {
+        $this->ignitionConfig = $ignitionConfig;
+        
+        return $this;
+    }
 
     public function setFlare(Flare $flare): self
     {
         $this->flare = $flare;
 
+        return $this;
+    }
+    
+    public function setSolutionProviderRepository(SolutionProviderRepositoryContract $solutionProviderRepository): self
+    {
+        $this->solutionProviderRepository = $solutionProviderRepository;
+        
         return $this;
     }
 
