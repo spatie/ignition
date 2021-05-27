@@ -2,7 +2,6 @@
 
 namespace Spatie\Ignition\Tests\Mocks;
 
-use Illuminate\Support\Arr;
 use PHPUnit\Framework\Assert;
 use Spatie\FlareClient\Http\Client;
 use Spatie\FlareClient\Http\Response;
