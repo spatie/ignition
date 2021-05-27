@@ -54,11 +54,11 @@ class Ignition
 
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
     }
-    
+
     public function setConfig(IgnitionConfig $ignitionConfig): self
     {
         $this->ignitionConfig = $ignitionConfig;
-        
+
         return $this;
     }
 
@@ -68,11 +68,11 @@ class Ignition
 
         return $this;
     }
-    
+
     public function setSolutionProviderRepository(SolutionProviderRepositoryContract $solutionProviderRepository): self
     {
         $this->solutionProviderRepository = $solutionProviderRepository;
-        
+
         return $this;
     }
 

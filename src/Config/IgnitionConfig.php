@@ -24,9 +24,16 @@ class IgnitionConfig implements Arrayable
         $this->options = array_merge($defaultOptions, $options);
     }
 
-    public function mergeWithDefaults(array $newDefaults): self
+    public function mergeAsDefault(array $newDefaults): self
     {
         $this->options = array_merge($newDefaults, $this->options);
+
+        return $this;
+    }
+    
+    public function merge(array $options): self
+    {
+        $this->options = array_merge($this->options, $options);
 
         return $this;
     }
@@ -65,8 +72,7 @@ class IgnitionConfig implements Arrayable
 
     public function runnableSolutionsEnabled(): bool
     {
-        return $this->options['enable_share_button'] ?? false;
-        ;
+        return $this->options['enable_runnable_solutions'] ?? false;
     }
 
     public function toArray(): array

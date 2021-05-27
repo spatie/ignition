@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="theme-<?= $theme ?>}}">
+<html class="theme-<?= $theme ?>">
 <!--
 <?=$throwableString?>
 -->
