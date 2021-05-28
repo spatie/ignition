@@ -16,4 +16,9 @@ class TestCase extends PHPUnitTestCase
         Report::useTime($fakeTime);
         Glow::useTime($fakeTime);
     }
+
+    public function getTestDirectory($subDirectory = ''): string
+    {
+        return __DIR__ . $subDirectory;
+    }
 }
