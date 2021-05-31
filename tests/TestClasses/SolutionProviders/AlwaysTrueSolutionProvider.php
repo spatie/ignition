@@ -1,20 +1,20 @@
 <?php
 
-namespace Spatie\Ignition\Tests\Exceptions;
+namespace Spatie\Ignition\Tests\TestClasses\SolutionProviders;
 
 use Spatie\IgnitionContracts\BaseSolution;
 use Spatie\IgnitionContracts\HasSolutionsForThrowable;
 use Throwable;
 
-class AlwaysFalseSolutionProvider implements HasSolutionsForThrowable
+class AlwaysTrueSolutionProvider implements HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool
     {
-        return false;
+        return true;
     }
 
     public function getSolutions(Throwable $throwable): array
     {
-        return [new BaseSolution('Base Solution')];
+        return [new BaseSolution('My custom solution')];
     }
 }
