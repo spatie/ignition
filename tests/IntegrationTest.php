@@ -22,11 +22,19 @@ class IntegrationTest extends TestCase
         $this->assertEquals('ok', $output);
     }
 
+    /** @test */
+    public function it_can_show_a_solution()
+    {
+        $output = $this->getOutputOfApp('error-with-solution.php');
+
+        $this->assertStringContainsString('Did you mean', $output);
+    }
+
     protected function getOutputOfApp(string $script): string
     {
         $process = Process::fromShellCommandline(
             "php {$script}",
-            $this->getTestDirectory('/Support/apps')
+            $this->getTestDirectory('/stubs/apps')
         );
 
         $process->run();

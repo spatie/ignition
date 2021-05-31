@@ -35,7 +35,7 @@ class UndefinedPropertySolutionProviderTest extends TestCase
 
         $solution = (new $providerClass)->getSolutions($this->getUndefinedPropertyException())[0];
 
-        $this->assertEquals('Did you mean Spatie\Ignition\Tests\Support\Models\Car::$color ?', $solution->getSolutionDescription());
+        $this->assertEquals('Did you mean Spatie\Ignition\Tests\TestClasses\Models\Car::$color ?', $solution->getSolutionDescription());
     }
 
     /** @test */
@@ -50,6 +50,6 @@ class UndefinedPropertySolutionProviderTest extends TestCase
 
     protected function getUndefinedPropertyException(string $property = 'colro'): ErrorException
     {
-        return new ErrorException("Undefined property: Spatie\Ignition\Tests\Support\Models\Car::$$property ");
+        return new ErrorException("Undefined property: Spatie\Ignition\Tests\TestClasses\Models\Car::$$property ");
     }
 }
