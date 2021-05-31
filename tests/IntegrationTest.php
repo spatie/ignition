@@ -15,7 +15,7 @@ class IntegrationTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_the_error_page_for_errors()
+    public function it_can_render_the_error_page_for_syntax_errors()
     {
         $output = $this->getOutputOfApp('syntax-error.php');
 
