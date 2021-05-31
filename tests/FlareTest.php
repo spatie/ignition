@@ -55,7 +55,7 @@ class FlareTest extends TestCase
         $exception = new Exception();
 
         $this->ignition
-            ->configureFlare(function(Flare $flare) {
+            ->configureFlare(function (Flare $flare) {
                 $flare->setApiToken('fake-api-token');
             })
             ->handleException($exception);
