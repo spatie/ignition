@@ -3,7 +3,6 @@
 namespace Spatie\Ignition\Tests;
 
 use Exception;
-use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\Http\Client;
 use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Tests\Mocks\FakeFlare;
