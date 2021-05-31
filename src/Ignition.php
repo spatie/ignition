@@ -185,7 +185,6 @@ class Ignition
 
     public function getFlareReport()
     {
-
     }
 
     public function handleException(Throwable $throwable): Report
