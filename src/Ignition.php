@@ -183,7 +183,12 @@ class Ignition
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 
-    public function handleException(Throwable $throwable): void
+    public function getFlareReport()
+    {
+
+    }
+
+    public function handleException(Throwable $throwable): Report
     {
         $this->setUpFlare();
 
@@ -196,6 +201,8 @@ class Ignition
         if ($this->flare->apiTokenSet()) {
             $this->flare->report($throwable);
         }
+
+        return $report;
     }
 
     protected function getDefaultSolutionProviders(): array
@@ -226,7 +233,7 @@ class Ignition
         return $this;
     }
 
-    public function renderException(Throwable $throwable, Report $report): void
+    public function renderException(Throwable $throwable, Report $report)
     {
         $viewModel = new ErrorPageViewModel(
             $throwable,
