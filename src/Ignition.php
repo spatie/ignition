@@ -62,6 +62,11 @@ class Ignition
         return $this;
     }
 
+    public function getFlare(): Flare
+    {
+        return $this->flare;
+    }
+
     public function setFlare(Flare $flare): self
     {
         $this->flare = $flare;
@@ -185,7 +190,7 @@ class Ignition
         $report = $this->flare->createReport($throwable);
 
         if ($this->shouldDisplayException) {
-            $this->displayException($throwable, $report);
+            $this->renderException($throwable, $report);
         }
 
         if ($this->flare->apiTokenSet()) {
@@ -221,7 +226,7 @@ class Ignition
         return $this;
     }
 
-    protected function displayException(Throwable $throwable, Report $report): void
+    public function renderException(Throwable $throwable, Report $report): void
     {
         $viewModel = new ErrorPageViewModel(
             $throwable,

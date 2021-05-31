@@ -9,6 +9,13 @@ use Spatie\Ignition\Tests\TestClasses\FakeTime;
 
 class TestCase extends PHPUnitTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        ray()->newScreen($this->getName());
+    }
+
     public function useTime(string $dateTime, string $format = 'Y-m-d H:i:s')
     {
         $fakeTime = new FakeTime($dateTime, $format);

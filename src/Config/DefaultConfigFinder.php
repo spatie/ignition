@@ -4,9 +4,9 @@ namespace Spatie\Ignition\Config;
 
 class DefaultConfigFinder
 {
-    public function getSettingsFromConfig(): array
+    public function getSettingsFromConfig(string $configDirectory = null): array
     {
-        $configFilePath = $this->searchConfigFilesOnDisk();
+        $configFilePath = $this->searchConfigFilesOnDisk($configDirectory);
 
         if (! file_exists($configFilePath)) {
             return [];
@@ -24,7 +24,6 @@ class DefaultConfigFinder
         ];
 
         $configDirectory = $configDirectory ?? getcwd();
-
         while (@is_dir($configDirectory)) {
             foreach ($configNames as $configName) {
                 $configFullPath = $configDirectory.DIRECTORY_SEPARATOR.$configName;
