@@ -7,9 +7,17 @@ use Symfony\Component\Process\Process;
 class IntegrationTest extends TestCase
 {
     /** @test */
-    public function it_can_render_the_error_page()
+    public function it_can_render_the_error_page_for_exceptions()
     {
-        $output = $this->getOutputOfApp('basic-error-page.php');
+        $output = $this->getOutputOfApp('basic-exception.php');
+
+        $this->assertStringContainsString('window.ignite', $output);
+    }
+
+    /** @test */
+    public function it_can_render_the_error_page_for_errors()
+    {
+        $output = $this->getOutputOfApp('syntax-error.php');
 
         $this->assertStringContainsString('window.ignite', $output);
     }
@@ -25,7 +33,7 @@ class IntegrationTest extends TestCase
     /** @test */
     public function it_can_show_a_solution()
     {
-        $output = $this->getOutputOfApp('error-with-solution.php');
+        $output = $this->getOutputOfApp('exception-with-solution.php');
 
         $this->assertStringContainsString('Did you mean', $output);
     }
