@@ -3,7 +3,7 @@
 use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Tests\TestClasses\Models\Car;
 
-include ('../../../vendor/autoload.php');
+include('../../../vendor/autoload.php');
 
 Ignition::make()->register();
 

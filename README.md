@@ -10,6 +10,18 @@
 
 ![Screenshot of ignition](https://facade.github.io/ignition/screenshot.png)
 
+Here's the a minimal example.
+
+```php
+use Spatie\Ignition\Ignition;
+
+include 'vendor/autoload.php';
+
+Ignition::make()->register();
+
+throw new Exception('Bye world');
+```
+
 ## Official Documentation
 
 The official documentation for Ignition can be found on the [Flare website](https://flareapp.io/docs/ignition-for-laravel/installation).
