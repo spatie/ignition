@@ -4,6 +4,7 @@ namespace Spatie\Ignition\Tests;
 
 use Exception;
 use Spatie\Ignition\Ignition;
+use Spatie\Ignition\Tests\TestClasses\ContextProviderDetector\DummyContextProviderDetector;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
 use Spatie\Ignition\Tests\TestClasses\DummyFlareMiddleware;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysFalseSolutionProvider;
@@ -42,6 +43,20 @@ class IgnitionTest extends TestCase
             ])
             ->handleException(new Exception('Hey'));
 
-        $this->assertEquals($report->toArray()['solutions'][0]['title'], 'My custom solution');
+        $this->assertEquals('My custom solution', $report->toArray()['solutions'][0]['title']);
+    }
+
+    /** @test */
+    public function a_custom_context_provider_detector_can_be_used()
+    {
+        $report = $this->ignition
+            ->setContextProviderDetector(new DummyContextProviderDetector())
+            ->handleException(new Exception('Hey'));
+
+        $this->assertEquals([
+            'dummy-context-name' => 'dummy-context-value'
+        ], $report->toArray()['context']);
+
+
     }
 }
