@@ -2,8 +2,8 @@
 
 namespace Spatie\Ignition\Tests\TestClasses\ContextProviderDetector;
 
-use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Context\ContextProvider;
+use Spatie\FlareClient\Context\ContextProviderDetector;
 
 class DummyContextProviderDetector implements ContextProviderDetector
 {
@@ -11,5 +11,4 @@ class DummyContextProviderDetector implements ContextProviderDetector
     {
         return new DummyContextProvider();
     }
-
 }
