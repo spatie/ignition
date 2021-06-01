@@ -4,9 +4,9 @@ namespace Spatie\Ignition\Tests;
 
 use Exception;
 use Spatie\Ignition\Ignition;
+use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
 use Spatie\Ignition\Tests\TestClasses\DummyFlareMiddleware;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysFalseSolutionProvider;
-use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
 
 class IgnitionTest extends TestCase
 {
