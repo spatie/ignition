@@ -30,7 +30,7 @@ class IgnitionTest extends TestCase
             ])
             ->handleException(new Exception('Original message'));
 
-        $this->assertEquals($report->getMessage(), "Original message, now modified");
+        $this->assertEquals('Original message, now modified', $report->getMessage());
     }
 
     /** @test */
@@ -56,7 +56,15 @@ class IgnitionTest extends TestCase
         $this->assertEquals([
             'dummy-context-name' => 'dummy-context-value'
         ], $report->toArray()['context']);
+    }
 
+    /** @test */
+    public function a_glow_can_be_added()
+    {
+        $report = $this->ignition
+            ->glow('my glow')
+            ->handleException(new Exception('Hey'));
 
+        $this->assertEquals('my glow', $report->toArray()['glows'][0]['name']);
     }
 }
