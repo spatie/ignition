@@ -5,9 +5,9 @@ namespace Spatie\Ignition\Tests;
 use Exception;
 use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Tests\TestClasses\ContextProviderDetector\DummyContextProviderDetector;
-use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
 use Spatie\Ignition\Tests\TestClasses\DummyFlareMiddleware;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysFalseSolutionProvider;
+use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
 
 class IgnitionTest extends TestCase
 {
@@ -54,7 +54,7 @@ class IgnitionTest extends TestCase
             ->handleException(new Exception('Hey'));
 
         $this->assertEquals([
-            'dummy-context-name' => 'dummy-context-value'
+            'dummy-context-name' => 'dummy-context-value',
         ], $report->toArray()['context']);
     }
 

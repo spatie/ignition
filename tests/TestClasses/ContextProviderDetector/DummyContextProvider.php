@@ -12,5 +12,4 @@ class DummyContextProvider implements ContextProvider
             'dummy-context-name' => 'dummy-context-value',
         ];
     }
-
 }
