@@ -37,6 +37,8 @@ class Ignition
 
     protected SolutionProviderRepositoryContract $solutionProviderRepository;
 
+    protected ?bool $inProductionEnvironment = null;
+
     public static function make(): self
     {
         return new static();
@@ -58,6 +60,13 @@ class Ignition
     public function setConfig(IgnitionConfig $ignitionConfig): self
     {
         $this->ignitionConfig = $ignitionConfig;
+
+        return $this;
+    }
+
+    public function runningInProductionEnvironment(bool $boolean = true): self
+    {
+        $this->inProductionEnvironment = $boolean;
 
         return $this;
     }
@@ -126,9 +135,9 @@ class Ignition
         return $this;
     }
 
-    public function sendToFlare(string $apiKey): self
+    public function sendToFlare(?string $apiKey): self
     {
-        $this->flareApiKey = $apiKey;
+        $this->flareApiKey = $apiKey ?? '';
 
         return $this;
     }
@@ -193,11 +202,11 @@ class Ignition
 
         $report = $this->flare->createReport($throwable);
 
-        if ($this->shouldDisplayException) {
+        if ($this->shouldDisplayException && $this->inProductionEnvironment !== true) {
             $this->renderException($throwable, $report);
         }
 
-        if ($this->flare->apiTokenSet()) {
+        if ($this->flare->apiTokenSet() && $this->inProductionEnvironment !== false) {
             $this->flare->report($throwable);
         }
 

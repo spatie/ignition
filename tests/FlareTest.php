@@ -49,6 +49,18 @@ class FlareTest extends TestCase
         $this->assertCount(1, $this->flare->sentReports);
     }
 
+    public function it_will_not_send_an_exception_to_flare_if_production_mode_was_set_to_false()
+    {
+        $exception = new Exception();
+
+        $this->ignition
+            ->runningInProductionEnvironment()
+            ->sendToFlare('fake-api-key')
+            ->handleException($exception);
+
+        $this->assertCount(0, $this->flare->sentReports);
+    }
+
     /** @test */
     public function it_will_send_an_exception_to_flare_when_an_api_key_is_set_on_flare()
     {

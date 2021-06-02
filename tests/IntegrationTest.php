@@ -38,6 +38,14 @@ class IntegrationTest extends TestCase
         $this->assertStringContainsString('Did you mean', $output);
     }
 
+    /** @test */
+    public function it_will_not_show_ignition_in_a_production_environment()
+    {
+        $output = $this->getOutputOfApp('in-production-environment.php');
+
+        $this->assertEquals('', $output);
+    }
+
     protected function getOutputOfApp(string $script): string
     {
         $process = Process::fromShellCommandline(
