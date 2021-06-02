@@ -44,8 +44,7 @@ composer require spatie/ignition
 
 ## Usage
 
-In order display the Ignition error page when an error occurs in your project, you must add this code. Typically done
-this would be done in the bootstrap part of your application.
+In order display the Ignition error page when an error occurs in your project, you must add this code. Typically, this would be done in the bootstrap part of your application.
 
 ```php
 \Spatie\Ignition\Ignition::make()->register();
