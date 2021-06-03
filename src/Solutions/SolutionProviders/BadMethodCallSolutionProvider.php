@@ -69,7 +69,13 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
             return $percentage;
         });
 
-        return current($methods);
+        $method = current($methods);
+
+        if (false !== $method) {
+            return $method;
+        }
+
+        return null;
     }
 
     protected function getAvailableMethods($class): array
