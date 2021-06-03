@@ -2,6 +2,7 @@
 
 namespace Spatie\Ignition\Solutions\SolutionProviders;
 
+use Spatie\Ignition\Support\Arr;
 use Spatie\IgnitionContracts\HasSolutionsForThrowable;
 use Spatie\IgnitionContracts\ProvidesSolution;
 use Spatie\IgnitionContracts\Solution;
@@ -74,7 +75,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             }
         }, $providedSolutions);
 
-        $providedSolutions = array_flatten($providedSolutions);
+        $providedSolutions = Arr::flatten($providedSolutions);
 
         return array_merge($solutions, $providedSolutions);
     }

@@ -38,10 +38,7 @@
     "autoload": {
         "psr-4": {
             "Spatie\\Ignition\\": "src"
-        },
-        "files": [
-            "src/Support/helpers.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
