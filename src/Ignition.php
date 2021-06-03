@@ -192,10 +192,6 @@ class Ignition
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 
-    public function getFlareReport()
-    {
-    }
-
     public function handleException(Throwable $throwable): Report
     {
         $this->setUpFlare();
