@@ -23,10 +23,6 @@ class ErrorPageViewModel implements Arrayable
 
     protected array $defaultTabProps = [];
 
-    protected string $appEnv;
-
-    protected bool $appDebug;
-
     public function __construct(
         ?Throwable $throwable,
         IgnitionConfig $ignitionConfig,
