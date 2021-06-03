@@ -56,17 +56,17 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
             return true;
         });
-        $providedSolutions = array_map(static function (string $solutionClass): HasSolutionsForThrowable {
+        $providedSolutions = array_map(function (string $solutionClass) {
             return new $solutionClass();
         }, $providedSolutions);
-        $providedSolutions = array_filter($providedSolutions, static function (HasSolutionsForThrowable $provider) use ($throwable): bool {
+        $providedSolutions = array_filter($providedSolutions, function (HasSolutionsForThrowable $provider) use ($throwable) {
             try {
                 return $provider->canSolve($throwable);
             } catch (Throwable $e) {
                 return false;
             }
         });
-        $providedSolutions = array_map(static function (HasSolutionsForThrowable $provider) use ($throwable): array {
+        $providedSolutions = array_map(function (HasSolutionsForThrowable $provider) use ($throwable) {
             try {
                 return $provider->getSolutions($throwable);
             } catch (Throwable $e) {

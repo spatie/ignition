@@ -77,13 +77,13 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
     {
         $properties = $this->getAvailableProperties($class);
 
-        usort($properties, static function (ReflectionProperty $property) use ($invalidPropertyName): float {
+        usort($properties, function (ReflectionProperty $property) use ($invalidPropertyName) {
             similar_text($invalidPropertyName, $property->name, $percentage);
 
             return $percentage;
         });
 
-        $properties = array_filter($properties, static function (ReflectionProperty $property) use ($invalidPropertyName): bool {
+        $properties = array_filter($properties, function (ReflectionProperty $property) use ($invalidPropertyName) {
             similar_text($invalidPropertyName, $property->name, $percentage);
 
             return $percentage >= self::MINIMUM_SIMILARITY;

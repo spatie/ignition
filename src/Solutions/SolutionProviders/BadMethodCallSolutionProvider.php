@@ -63,7 +63,7 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
     {
         $methods = $this->getAvailableMethods($class);
 
-        usort($methods, static function (ReflectionMethod $method) use ($invalidMethodName): float {
+        usort($methods, function (ReflectionMethod $method) use ($invalidMethodName) {
             similar_text($invalidMethodName, $method->name, $percentage);
 
             return $percentage;
