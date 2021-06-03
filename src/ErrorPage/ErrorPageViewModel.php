@@ -74,11 +74,9 @@ class ErrorPageViewModel implements Arrayable
 
     public function solutions(): array
     {
-        foreach ($this->solutions as $solution) {
-            $this->solutions[] = (new SolutionTransformer($solution))->toArray();
-        }
-
-        return $this->solutions;
+        return array_map(function($solution) {
+            return (new SolutionTransformer($solution))->toArray();
+        }, $this->solutions);
     }
 
     public function report(): array
