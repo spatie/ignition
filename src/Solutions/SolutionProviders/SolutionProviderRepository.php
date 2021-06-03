@@ -2,7 +2,6 @@
 
 namespace Spatie\Ignition\Solutions\SolutionProviders;
 
-use Illuminate\Support\Collection;
 use Spatie\IgnitionContracts\HasSolutionsForThrowable;
 use Spatie\IgnitionContracts\ProvidesSolution;
 use Spatie\IgnitionContracts\Solution;
@@ -11,23 +10,23 @@ use Throwable;
 
 class SolutionProviderRepository implements SolutionProviderRepositoryContract
 {
-    protected Collection $solutionProviders;
+    protected array $solutionProviders = [];
 
     public function __construct(array $solutionProviders = [])
     {
-        $this->solutionProviders = Collection::make($solutionProviders);
+        $this->solutionProviders = $solutionProviders;
     }
 
     public function registerSolutionProvider(string $solutionProviderClass): SolutionProviderRepositoryContract
     {
-        $this->solutionProviders->push($solutionProviderClass);
+        $this->solutionProviders[] = $solutionProviderClass;
 
         return $this;
     }
 
     public function registerSolutionProviders(array $solutionProviderClasses): SolutionProviderRepositoryContract
     {
-        $this->solutionProviders = $this->solutionProviders->merge($solutionProviderClasses);
+        $this->solutionProviders = array_merge($this->solutionProviders, $solutionProviderClasses);
 
         return $this;
     }
@@ -44,37 +43,38 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             $solutions[] = $throwable->getSolution();
         }
 
-        $providedSolutions = $this->solutionProviders
-            ->filter(function (string $solutionClass) {
-                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass))) {
-                    return false;
-                }
+        $providedSolutions = array_filter($this->solutionProviders, static function (string $solutionClass): bool {
+            if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass), true)) {
+                return false;
+            }
 
-                /*
-                if (in_array($solutionClass, config('ignition.ignored_solution_providers', []))) {
-                    return false;
-                }
-                */
+            /*
+            if (in_array($solutionClass, config('ignition.ignored_solution_providers', []))) {
+                return false;
+            }
+            */
 
-                return true;
-            })
-            ->map(fn (string $solutionClass) => new $solutionClass)
-            ->filter(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
-                try {
-                    return $solutionProvider->canSolve($throwable);
-                } catch (Throwable $e) {
-                    return false;
-                }
-            })
-            ->map(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
-                try {
-                    return $solutionProvider->getSolutions($throwable);
-                } catch (Throwable $e) {
-                    return [];
-                }
-            })
-            ->flatten()
-            ->toArray();
+            return true;
+        });
+        $providedSolutions = array_map(static function (string $solutionClass): HasSolutionsForThrowable {
+            return new $solutionClass();
+        }, $providedSolutions);
+        $providedSolutions = array_filter($providedSolutions, static function (HasSolutionsForThrowable $provider) use ($throwable): bool {
+            try {
+                return $provider->canSolve($throwable);
+            } catch (Throwable $e) {
+                return false;
+            }
+        });
+        $providedSolutions = array_map(static function (HasSolutionsForThrowable $provider) use ($throwable): array {
+            try {
+                return $provider->getSolutions($throwable);
+            } catch (Throwable $e) {
+                return [];
+            }
+        }, $providedSolutions);
+
+        $providedSolutions = array_flatten($providedSolutions);
 
         return array_merge($solutions, $providedSolutions);
     }

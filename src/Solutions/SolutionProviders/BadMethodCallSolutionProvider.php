@@ -3,7 +3,6 @@
 namespace Spatie\Ignition\Solutions\SolutionProviders;
 
 use BadMethodCallException;
-use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionMethod;
 use Spatie\IgnitionContracts\BaseSolution;
@@ -62,18 +61,21 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 
     protected function findPossibleMethod(string $class, string $invalidMethodName)
     {
-        return $this->getAvailableMethods($class)
-            ->sortByDesc(function (ReflectionMethod $method) use ($invalidMethodName) {
-                similar_text($invalidMethodName, $method->name, $percentage);
+        $methods = $this->getAvailableMethods($class);
 
-                return $percentage;
-            })->first();
+        usort($methods, static function (ReflectionMethod $method) use ($invalidMethodName): float {
+            similar_text($invalidMethodName, $method->name, $percentage);
+
+            return $percentage;
+        });
+
+        return current($methods);
     }
 
-    protected function getAvailableMethods($class): Collection
+    protected function getAvailableMethods($class): array
     {
         $class = new ReflectionClass($class);
 
-        return Collection::make($class->getMethods());
+        return $class->getMethods();
     }
 }

@@ -3,7 +3,6 @@
 namespace Spatie\Ignition\Solutions\SolutionProviders;
 
 use ErrorException;
-use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionProperty;
 use Spatie\IgnitionContracts\BaseSolution;
@@ -76,23 +75,33 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
 
     protected function findPossibleProperty(string $class, string $invalidPropertyName)
     {
-        return $this->getAvailableProperties($class)
-            ->sortByDesc(function (ReflectionProperty $property) use ($invalidPropertyName) {
-                similar_text($invalidPropertyName, $property->name, $percentage);
+        $properties = $this->getAvailableProperties($class);
 
-                return $percentage;
-            })
-            ->filter(function (ReflectionProperty $property) use ($invalidPropertyName) {
-                similar_text($invalidPropertyName, $property->name, $percentage);
+        usort($properties, static function (ReflectionProperty $property) use ($invalidPropertyName): float {
+            similar_text($invalidPropertyName, $property->name, $percentage);
 
-                return $percentage >= self::MINIMUM_SIMILARITY;
-            })->first();
+            return $percentage;
+        });
+
+        $properties = array_filter($properties, static function (ReflectionProperty $property) use ($invalidPropertyName): bool {
+            similar_text($invalidPropertyName, $property->name, $percentage);
+
+            return $percentage >= self::MINIMUM_SIMILARITY;
+        });
+
+        $property = current($properties);
+
+        if (false !== $property) {
+            return $property;
+        }
+
+        return null;
     }
 
-    protected function getAvailableProperties($class): Collection
+    protected function getAvailableProperties($class): array
     {
         $class = new ReflectionClass($class);
 
-        return Collection::make($class->getProperties());
+        return $class->getProperties();
     }
 }
