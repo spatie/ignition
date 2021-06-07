@@ -78,14 +78,6 @@ export default function Stack({ frames, open_frame_index }: Props) {
         <div className="stack">
             <div className="stack-nav">
                 <div className="stack-nav-actions">
-                    <div className="stack-nav-arrows">
-                        <button className="hidden">
-                            <i className="fas fa-arrow-up" />
-                        </button>
-                        <button className="hidden">
-                            <i className="fas fa-arrow-down" />
-                        </button>
-                    </div>
                     <div className="px-4">
                         {vendorFramesExpanded ? (
                             <button
