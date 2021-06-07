@@ -1,7 +1,6 @@
 {
     "name": "@spatie/ignition-ui",
     "version": "1.0.0",
-    "private": true,
     "main": "resources/compiled/error-ui.modern.js",
     "scripts": {
         "bundle-ignition": "microbundle -i resources/js/ignition/index.tsx -o resources/compiled/ignition.js --jsx React.createElement -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production' --no-compress",
