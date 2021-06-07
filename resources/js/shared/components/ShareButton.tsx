@@ -11,29 +11,16 @@ type Props = {
     children: React.ReactChild | Array<React.ReactChild>;
     errorOccurrence: ErrorOccurrence;
     disabled?: boolean;
-    className?: string;
     manageSharesUrl?: string;
 };
 
 /* @todo share button is different in ignition than in flare */
 
-export default function ShareButton({
-    children,
-    errorOccurrence,
-    disabled = false,
-    className = '',
-    manageSharesUrl,
-}: Props) {
+export default function ShareButton({ children, errorOccurrence, disabled = false, manageSharesUrl }: Props) {
     const [sharedUrl, setSharedUrl] = useState('');
     const [error, setError] = useState('');
 
-    const [selectedTabs, setSelectedTabs] = useState<
-        Array<{
-            name: Tabname;
-            prettyName: string;
-            selected: boolean;
-        }>
-    >([
+    const [selectedTabs, setSelectedTabs] = useState<Array<{ name: Tabname; prettyName: string; selected: boolean }>>([
         { name: 'stackTraceTab', prettyName: 'Stack trace', selected: true },
         { name: 'requestTab', prettyName: 'Request', selected: true },
         { name: 'appTab', prettyName: 'App', selected: true },
@@ -83,11 +70,11 @@ export default function ShareButton({
                     <div>
                         <button
                             disabled={disabled}
-                            className={`${className} ${isOpen && 'tab-active'} `}
+                            className={`tab flex items-center ${isOpen ? 'tab-active' : ''}`}
                             onClick={() => toggleMenu()}
                         >
-                            <Icon name="share" />
                             {children}
+                            <Icon name="share" className="ml-2" />
                         </button>
                         {isOpen && (
                             <ul
@@ -120,14 +107,16 @@ export default function ShareButton({
                                     ))}
                                 </div>
                                 <div className="grid grid-cols-auto grid-flow-col justify-between items-center mt-3">
-                                    <Button
-                                        secondary
-                                        className="bg-tint-600 text-white"
-                                        size="sm"
-                                        onClick={onShareError}
-                                    >
-                                        Create&nbsp;share
-                                    </Button>
+                                    {!sharedUrl && (
+                                        <Button
+                                            secondary
+                                            className="bg-tint-600 text-white"
+                                            size="sm"
+                                            onClick={onShareError}
+                                        >
+                                            Create&nbsp;share
+                                        </Button>
+                                    )}
                                     {manageSharesUrl && (
                                         <a
                                             className="link-dimmed-invers underline"

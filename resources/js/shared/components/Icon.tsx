@@ -8,7 +8,7 @@ type Props = {
 export default function Icon({ name, className = '' }: Props) {
     return (
         <svg className={`icon ${className}`}>
-            <use xlinkHref={`#${name}-icon'`} />
+            <use xlinkHref={`#${name}-icon`} />
         </svg>
     );
 }

@@ -239,7 +239,7 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var react_production_min = createCommonjsModule(function (module, exports) {
+var react_production_min$1 = createCommonjsModule(function (module, exports) {
 
   var n = 60103,
       p = 60106;
@@ -642,10 +642,10 @@ var react_production_min = createCommonjsModule(function (module, exports) {
 createCommonjsModule(function (module, exports) {
 });
 
-var react = createCommonjsModule(function (module) {
+var react$1 = createCommonjsModule(function (module) {
 
   {
-    module.exports = react_production_min;
+    module.exports = react_production_min$1;
   }
 });
 
@@ -1023,14 +1023,14 @@ var scheduler = createCommonjsModule(function (module) {
  * LICENSE file in the root directory of this source tree.
  */
 
-function y$2(a) {
+function y$3(a) {
   for (var b = "https://reactjs.org/docs/error-decoder.html?invariant=" + a, c = 1; c < arguments.length; c++) b += "&args[]=" + encodeURIComponent(arguments[c]);
 
   return "Minified React error #" + a + "; visit " + b + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
 }
 
-if (!react) throw Error(y$2(227));
-var ba = new Set(),
+if (!react$1) throw Error(y$3(227));
+var ba$1 = new Set(),
     ca = {};
 
 function da(a, b) {
@@ -1041,7 +1041,7 @@ function da(a, b) {
 function ea(a, b) {
   ca[a] = b;
 
-  for (a = 0; a < b.length; a++) ba.add(b[a]);
+  for (a = 0; a < b.length; a++) ba$1.add(b[a]);
 }
 
 var fa = !("undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement),
@@ -1096,7 +1096,7 @@ function na(a, b, c, d) {
   return !1;
 }
 
-function B$1(a, b, c, d, e, f, g) {
+function B$2(a, b, c, d, e, f, g) {
   this.acceptsBooleans = 2 === b || 3 === b || 4 === b;
   this.attributeName = d;
   this.attributeNamespace = e;
@@ -1107,34 +1107,34 @@ function B$1(a, b, c, d, e, f, g) {
   this.removeEmptyString = g;
 }
 
-var D$1 = {};
+var D$2 = {};
 "children dangerouslySetInnerHTML defaultValue defaultChecked innerHTML suppressContentEditableWarning suppressHydrationWarning style".split(" ").forEach(function (a) {
-  D$1[a] = new B$1(a, 0, !1, a, null, !1, !1);
+  D$2[a] = new B$2(a, 0, !1, a, null, !1, !1);
 });
 [["acceptCharset", "accept-charset"], ["className", "class"], ["htmlFor", "for"], ["httpEquiv", "http-equiv"]].forEach(function (a) {
   var b = a[0];
-  D$1[b] = new B$1(b, 1, !1, a[1], null, !1, !1);
+  D$2[b] = new B$2(b, 1, !1, a[1], null, !1, !1);
 });
 ["contentEditable", "draggable", "spellCheck", "value"].forEach(function (a) {
-  D$1[a] = new B$1(a, 2, !1, a.toLowerCase(), null, !1, !1);
+  D$2[a] = new B$2(a, 2, !1, a.toLowerCase(), null, !1, !1);
 });
 ["autoReverse", "externalResourcesRequired", "focusable", "preserveAlpha"].forEach(function (a) {
-  D$1[a] = new B$1(a, 2, !1, a, null, !1, !1);
+  D$2[a] = new B$2(a, 2, !1, a, null, !1, !1);
 });
 "allowFullScreen async autoFocus autoPlay controls default defer disabled disablePictureInPicture disableRemotePlayback formNoValidate hidden loop noModule noValidate open playsInline readOnly required reversed scoped seamless itemScope".split(" ").forEach(function (a) {
-  D$1[a] = new B$1(a, 3, !1, a.toLowerCase(), null, !1, !1);
+  D$2[a] = new B$2(a, 3, !1, a.toLowerCase(), null, !1, !1);
 });
 ["checked", "multiple", "muted", "selected"].forEach(function (a) {
-  D$1[a] = new B$1(a, 3, !0, a, null, !1, !1);
+  D$2[a] = new B$2(a, 3, !0, a, null, !1, !1);
 });
 ["capture", "download"].forEach(function (a) {
-  D$1[a] = new B$1(a, 4, !1, a, null, !1, !1);
+  D$2[a] = new B$2(a, 4, !1, a, null, !1, !1);
 });
 ["cols", "rows", "size", "span"].forEach(function (a) {
-  D$1[a] = new B$1(a, 6, !1, a, null, !1, !1);
+  D$2[a] = new B$2(a, 6, !1, a, null, !1, !1);
 });
 ["rowSpan", "start"].forEach(function (a) {
-  D$1[a] = new B$1(a, 5, !1, a.toLowerCase(), null, !1, !1);
+  D$2[a] = new B$2(a, 5, !1, a.toLowerCase(), null, !1, !1);
 });
 var oa = /[\-:]([a-z])/g;
 
@@ -1144,31 +1144,31 @@ function pa(a) {
 
 "accent-height alignment-baseline arabic-form baseline-shift cap-height clip-path clip-rule color-interpolation color-interpolation-filters color-profile color-rendering dominant-baseline enable-background fill-opacity fill-rule flood-color flood-opacity font-family font-size font-size-adjust font-stretch font-style font-variant font-weight glyph-name glyph-orientation-horizontal glyph-orientation-vertical horiz-adv-x horiz-origin-x image-rendering letter-spacing lighting-color marker-end marker-mid marker-start overline-position overline-thickness paint-order panose-1 pointer-events rendering-intent shape-rendering stop-color stop-opacity strikethrough-position strikethrough-thickness stroke-dasharray stroke-dashoffset stroke-linecap stroke-linejoin stroke-miterlimit stroke-opacity stroke-width text-anchor text-decoration text-rendering underline-position underline-thickness unicode-bidi unicode-range units-per-em v-alphabetic v-hanging v-ideographic v-mathematical vector-effect vert-adv-y vert-origin-x vert-origin-y word-spacing writing-mode xmlns:xlink x-height".split(" ").forEach(function (a) {
   var b = a.replace(oa, pa);
-  D$1[b] = new B$1(b, 1, !1, a, null, !1, !1);
+  D$2[b] = new B$2(b, 1, !1, a, null, !1, !1);
 });
 "xlink:actuate xlink:arcrole xlink:role xlink:show xlink:title xlink:type".split(" ").forEach(function (a) {
   var b = a.replace(oa, pa);
-  D$1[b] = new B$1(b, 1, !1, a, "http://www.w3.org/1999/xlink", !1, !1);
+  D$2[b] = new B$2(b, 1, !1, a, "http://www.w3.org/1999/xlink", !1, !1);
 });
 ["xml:base", "xml:lang", "xml:space"].forEach(function (a) {
   var b = a.replace(oa, pa);
-  D$1[b] = new B$1(b, 1, !1, a, "http://www.w3.org/XML/1998/namespace", !1, !1);
+  D$2[b] = new B$2(b, 1, !1, a, "http://www.w3.org/XML/1998/namespace", !1, !1);
 });
 ["tabIndex", "crossOrigin"].forEach(function (a) {
-  D$1[a] = new B$1(a, 1, !1, a.toLowerCase(), null, !1, !1);
+  D$2[a] = new B$2(a, 1, !1, a.toLowerCase(), null, !1, !1);
 });
-D$1.xlinkHref = new B$1("xlinkHref", 1, !1, "xlink:href", "http://www.w3.org/1999/xlink", !0, !1);
+D$2.xlinkHref = new B$2("xlinkHref", 1, !1, "xlink:href", "http://www.w3.org/1999/xlink", !0, !1);
 ["src", "href", "action", "formAction"].forEach(function (a) {
-  D$1[a] = new B$1(a, 1, !1, a.toLowerCase(), null, !0, !0);
+  D$2[a] = new B$2(a, 1, !1, a.toLowerCase(), null, !0, !0);
 });
 
 function qa(a, b, c, d) {
-  var e = D$1.hasOwnProperty(b) ? D$1[b] : null;
+  var e = D$2.hasOwnProperty(b) ? D$2[b] : null;
   var f = null !== e ? 0 === e.type : d ? !1 : !(2 < b.length) || "o" !== b[0] && "O" !== b[0] || "n" !== b[1] && "N" !== b[1] ? !1 : !0;
   f || (na(b, c, e, d) && (c = null), d || null === e ? la(b) && (null === c ? a.removeAttribute(b) : a.setAttribute(b, "" + c)) : e.mustUseProperty ? a[e.propertyName] = null === c ? 3 === e.type ? !1 : "" : c : (b = e.attributeName, d = e.attributeNamespace, null === c ? a.removeAttribute(b) : (e = e.type, c = 3 === e || 4 === e && !0 === c ? "" : "" + c, d ? a.setAttributeNS(d, b, c) : a.setAttribute(b, c))));
 }
 
-var ra = react.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED,
+var ra = react$1.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED,
     sa = 60103,
     ta = 60106,
     ua = 60107,
@@ -1188,25 +1188,25 @@ var ra = react.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED,
     Ja = 60131;
 
 if ("function" === typeof Symbol && Symbol.for) {
-  var E$1 = Symbol.for;
-  sa = E$1("react.element");
-  ta = E$1("react.portal");
-  ua = E$1("react.fragment");
-  wa = E$1("react.strict_mode");
-  xa = E$1("react.profiler");
-  ya = E$1("react.provider");
-  za = E$1("react.context");
-  Aa = E$1("react.forward_ref");
-  Ba = E$1("react.suspense");
-  Ca = E$1("react.suspense_list");
-  Da = E$1("react.memo");
-  Ea = E$1("react.lazy");
-  Fa = E$1("react.block");
-  E$1("react.scope");
-  Ga = E$1("react.opaque.id");
-  Ha = E$1("react.debug_trace_mode");
-  Ia = E$1("react.offscreen");
-  Ja = E$1("react.legacy_hidden");
+  var E$2 = Symbol.for;
+  sa = E$2("react.element");
+  ta = E$2("react.portal");
+  ua = E$2("react.fragment");
+  wa = E$2("react.strict_mode");
+  xa = E$2("react.profiler");
+  ya = E$2("react.provider");
+  za = E$2("react.context");
+  Aa = E$2("react.forward_ref");
+  Ba = E$2("react.suspense");
+  Ca = E$2("react.suspense_list");
+  Da = E$2("react.memo");
+  Ea = E$2("react.lazy");
+  Fa = E$2("react.block");
+  E$2("react.scope");
+  Ga = E$2("react.opaque.id");
+  Ha = E$2("react.debug_trace_mode");
+  Ia = E$2("react.offscreen");
+  Ja = E$2("react.legacy_hidden");
 }
 
 var Ka = "function" === typeof Symbol && Symbol.iterator;
@@ -1522,7 +1522,7 @@ function bb(a, b, c) {
 
 function db(a) {
   var b = "";
-  react.Children.forEach(a, function (a) {
+  react$1.Children.forEach(a, function (a) {
     null != a && (b += a);
   });
   return b;
@@ -1564,7 +1564,7 @@ function fb(a, b, c, d) {
 }
 
 function gb(a, b) {
-  if (null != b.dangerouslySetInnerHTML) throw Error(y$2(91));
+  if (null != b.dangerouslySetInnerHTML) throw Error(y$3(91));
   return objectAssign({}, b, {
     value: void 0,
     defaultValue: void 0,
@@ -1580,10 +1580,10 @@ function hb(a, b) {
     b = b.defaultValue;
 
     if (null != c) {
-      if (null != b) throw Error(y$2(92));
+      if (null != b) throw Error(y$3(92));
 
       if (Array.isArray(c)) {
-        if (!(1 >= c.length)) throw Error(y$2(93));
+        if (!(1 >= c.length)) throw Error(y$3(93));
         c = c[0];
       }
 
@@ -1754,14 +1754,14 @@ var ub = objectAssign({
 
 function vb(a, b) {
   if (b) {
-    if (ub[a] && (null != b.children || null != b.dangerouslySetInnerHTML)) throw Error(y$2(137, a));
+    if (ub[a] && (null != b.children || null != b.dangerouslySetInnerHTML)) throw Error(y$3(137, a));
 
     if (null != b.dangerouslySetInnerHTML) {
-      if (null != b.children) throw Error(y$2(60));
-      if (!("object" === typeof b.dangerouslySetInnerHTML && "__html" in b.dangerouslySetInnerHTML)) throw Error(y$2(61));
+      if (null != b.children) throw Error(y$3(60));
+      if (!("object" === typeof b.dangerouslySetInnerHTML && "__html" in b.dangerouslySetInnerHTML)) throw Error(y$3(61));
     }
 
-    if (null != b.style && "object" !== typeof b.style) throw Error(y$2(62));
+    if (null != b.style && "object" !== typeof b.style) throw Error(y$3(62));
   }
 }
 
@@ -1796,7 +1796,7 @@ var yb = null,
 
 function Bb(a) {
   if (a = Cb(a)) {
-    if ("function" !== typeof yb) throw Error(y$2(280));
+    if ("function" !== typeof yb) throw Error(y$3(280));
     var b = a.stateNode;
     b && (b = Db(b), yb(a.stateNode, a.type, b));
   }
@@ -1873,7 +1873,7 @@ function Ob(a, b) {
   }
 
   if (a) return null;
-  if (c && "function" !== typeof c) throw Error(y$2(231, b, typeof c));
+  if (c && "function" !== typeof c) throw Error(y$3(231, b, typeof c));
   return c;
 }
 
@@ -1926,7 +1926,7 @@ function Yb(a, b, c, d, e, f, g, h, k) {
       var l = Tb;
       Sb = !1;
       Tb = null;
-    } else throw Error(y$2(198));
+    } else throw Error(y$3(198));
 
     Ub || (Ub = !0, Vb = l);
   }
@@ -1954,7 +1954,7 @@ function $b(a) {
 }
 
 function ac(a) {
-  if (Zb(a) !== a) throw Error(y$2(188));
+  if (Zb(a) !== a) throw Error(y$3(188));
 }
 
 function bc(a) {
@@ -1962,7 +1962,7 @@ function bc(a) {
 
   if (!b) {
     b = Zb(a);
-    if (null === b) throw Error(y$2(188));
+    if (null === b) throw Error(y$3(188));
     return b !== a ? null : a;
   }
 
@@ -1989,7 +1989,7 @@ function bc(a) {
         f = f.sibling;
       }
 
-      throw Error(y$2(188));
+      throw Error(y$3(188));
     }
 
     if (c.return !== d.return) c = e, d = f;else {
@@ -2030,13 +2030,13 @@ function bc(a) {
           h = h.sibling;
         }
 
-        if (!g) throw Error(y$2(189));
+        if (!g) throw Error(y$3(189));
       }
     }
-    if (c.alternate !== d) throw Error(y$2(190));
+    if (c.alternate !== d) throw Error(y$3(190));
   }
 
-  if (3 !== c.tag) throw Error(y$2(188));
+  if (3 !== c.tag) throw Error(y$3(188));
   return c.stateNode.current === c ? a : b;
 }
 
@@ -2295,31 +2295,31 @@ function Pc(a, b) {
 
 var Qc = scheduler.unstable_now;
 Qc();
-var F$1 = 8;
+var F$2 = 8;
 
 function Rc(a) {
-  if (0 !== (1 & a)) return F$1 = 15, 1;
-  if (0 !== (2 & a)) return F$1 = 14, 2;
-  if (0 !== (4 & a)) return F$1 = 13, 4;
+  if (0 !== (1 & a)) return F$2 = 15, 1;
+  if (0 !== (2 & a)) return F$2 = 14, 2;
+  if (0 !== (4 & a)) return F$2 = 13, 4;
   var b = 24 & a;
-  if (0 !== b) return F$1 = 12, b;
-  if (0 !== (a & 32)) return F$1 = 11, 32;
+  if (0 !== b) return F$2 = 12, b;
+  if (0 !== (a & 32)) return F$2 = 11, 32;
   b = 192 & a;
-  if (0 !== b) return F$1 = 10, b;
-  if (0 !== (a & 256)) return F$1 = 9, 256;
+  if (0 !== b) return F$2 = 10, b;
+  if (0 !== (a & 256)) return F$2 = 9, 256;
   b = 3584 & a;
-  if (0 !== b) return F$1 = 8, b;
-  if (0 !== (a & 4096)) return F$1 = 7, 4096;
+  if (0 !== b) return F$2 = 8, b;
+  if (0 !== (a & 4096)) return F$2 = 7, 4096;
   b = 4186112 & a;
-  if (0 !== b) return F$1 = 6, b;
+  if (0 !== b) return F$2 = 6, b;
   b = 62914560 & a;
-  if (0 !== b) return F$1 = 5, b;
-  if (a & 67108864) return F$1 = 4, 67108864;
-  if (0 !== (a & 134217728)) return F$1 = 3, 134217728;
+  if (0 !== b) return F$2 = 5, b;
+  if (a & 67108864) return F$2 = 4, 67108864;
+  if (0 !== (a & 134217728)) return F$2 = 3, 134217728;
   b = 805306368 & a;
-  if (0 !== b) return F$1 = 2, b;
-  if (0 !== (1073741824 & a)) return F$1 = 1, 1073741824;
-  F$1 = 8;
+  if (0 !== b) return F$2 = 2, b;
+  if (0 !== (1073741824 & a)) return F$2 = 1, 1073741824;
+  F$2 = 8;
   return a;
 }
 
@@ -2372,30 +2372,30 @@ function Tc(a) {
       return 90;
 
     default:
-      throw Error(y$2(358, a));
+      throw Error(y$3(358, a));
   }
 }
 
 function Uc(a, b) {
   var c = a.pendingLanes;
-  if (0 === c) return F$1 = 0;
+  if (0 === c) return F$2 = 0;
   var d = 0,
       e = 0,
       f = a.expiredLanes,
       g = a.suspendedLanes,
       h = a.pingedLanes;
-  if (0 !== f) d = f, e = F$1 = 15;else if (f = c & 134217727, 0 !== f) {
+  if (0 !== f) d = f, e = F$2 = 15;else if (f = c & 134217727, 0 !== f) {
     var k = f & ~g;
-    0 !== k ? (d = Rc(k), e = F$1) : (h &= f, 0 !== h && (d = Rc(h), e = F$1));
-  } else f = c & ~g, 0 !== f ? (d = Rc(f), e = F$1) : 0 !== h && (d = Rc(h), e = F$1);
+    0 !== k ? (d = Rc(k), e = F$2) : (h &= f, 0 !== h && (d = Rc(h), e = F$2));
+  } else f = c & ~g, 0 !== f ? (d = Rc(f), e = F$2) : 0 !== h && (d = Rc(h), e = F$2);
   if (0 === d) return 0;
   d = 31 - Vc(d);
   d = c & ((0 > d ? 0 : 1 << d) << 1) - 1;
 
   if (0 !== b && b !== d && 0 === (b & g)) {
     Rc(b);
-    if (e <= F$1) return b;
-    F$1 = e;
+    if (e <= F$2) return b;
+    F$2 = e;
   }
 
   b = a.entangledLanes;
@@ -2429,7 +2429,7 @@ function Xc(a, b) {
       return b = Yc(805306368 & ~b), 0 === b && (b = 268435456), b;
   }
 
-  throw Error(y$2(358, a));
+  throw Error(y$3(358, a));
 }
 
 function Yc(a) {
@@ -3146,7 +3146,7 @@ function se(a, b) {
   if (Ub) throw a = Vb, Ub = !1, Vb = null, a;
 }
 
-function G$1(a, b) {
+function G$2(a, b) {
   var c = $e(b),
       d = a + "__bubble";
   c.has(d) || (af(b, a, 2, !1), c.add(d));
@@ -3155,7 +3155,7 @@ function G$1(a, b) {
 var bf = "_reactListening" + Math.random().toString(36).slice(2);
 
 function cf(a) {
-  a[bf] || (a[bf] = !0, ba.forEach(function (b) {
+  a[bf] || (a[bf] = !0, ba$1.forEach(function (b) {
     Ye.has(b) || df(b, !1, a, null);
     df(b, !0, a, null);
   }));
@@ -3638,7 +3638,7 @@ function Cb(a) {
 
 function ue(a) {
   if (5 === a.tag || 6 === a.tag) return a.stateNode;
-  throw Error(y$2(33));
+  throw Error(y$3(33));
 }
 
 function Db(a) {
@@ -3660,19 +3660,19 @@ function Bf(a) {
   };
 }
 
-function H$1(a) {
+function H$2(a) {
   0 > Af || (a.current = zf[Af], zf[Af] = null, Af--);
 }
 
-function I$1(a, b) {
+function I$2(a, b) {
   Af++;
   zf[Af] = a.current;
   a.current = b;
 }
 
 var Cf = {},
-    M = Bf(Cf),
-    N = Bf(!1),
+    M$1 = Bf(Cf),
+    N$1 = Bf(!1),
     Df = Cf;
 
 function Ef(a, b) {
@@ -3695,14 +3695,14 @@ function Ff(a) {
 }
 
 function Gf() {
-  H$1(N);
-  H$1(M);
+  H$2(N$1);
+  H$2(M$1);
 }
 
 function Hf(a, b, c) {
-  if (M.current !== Cf) throw Error(y$2(168));
-  I$1(M, b);
-  I$1(N, c);
+  if (M$1.current !== Cf) throw Error(y$3(168));
+  I$2(M$1, b);
+  I$2(N$1, c);
 }
 
 function If(a, b, c) {
@@ -3711,24 +3711,24 @@ function If(a, b, c) {
   if ("function" !== typeof d.getChildContext) return c;
   d = d.getChildContext();
 
-  for (var e in d) if (!(e in a)) throw Error(y$2(108, Ra(b) || "Unknown", e));
+  for (var e in d) if (!(e in a)) throw Error(y$3(108, Ra(b) || "Unknown", e));
 
   return objectAssign({}, c, d);
 }
 
 function Jf(a) {
   a = (a = a.stateNode) && a.__reactInternalMemoizedMergedChildContext || Cf;
-  Df = M.current;
-  I$1(M, a);
-  I$1(N, N.current);
+  Df = M$1.current;
+  I$2(M$1, a);
+  I$2(N$1, N$1.current);
   return !0;
 }
 
 function Kf(a, b, c) {
   var d = a.stateNode;
-  if (!d) throw Error(y$2(169));
-  c ? (a = If(a, b, Df), d.__reactInternalMemoizedMergedChildContext = a, H$1(N), H$1(M), I$1(M, a)) : H$1(N);
-  I$1(N, c);
+  if (!d) throw Error(y$3(169));
+  c ? (a = If(a, b, Df), d.__reactInternalMemoizedMergedChildContext = a, H$2(N$1), H$2(M$1), I$2(M$1, a)) : H$2(N$1);
+  I$2(N$1, c);
 }
 
 var Lf = null,
@@ -3751,7 +3751,7 @@ var Lf = null,
     bg = null,
     cg = !1,
     dg = Sf(),
-    O = 1E4 > dg ? Sf : function () {
+    O$1 = 1E4 > dg ? Sf : function () {
   return Sf() - dg;
 };
 
@@ -3773,7 +3773,7 @@ function eg() {
       return 95;
 
     default:
-      throw Error(y$2(332));
+      throw Error(y$3(332));
   }
 }
 
@@ -3795,7 +3795,7 @@ function fg(a) {
       return Yf;
 
     default:
-      throw Error(y$2(332));
+      throw Error(y$3(332));
   }
 }
 
@@ -3868,7 +3868,7 @@ function qg() {
 
 function rg(a) {
   var b = mg.current;
-  H$1(mg);
+  H$2(mg);
   a.type._context._currentValue = b;
 }
 
@@ -3899,7 +3899,7 @@ function vg(a, b) {
     };
 
     if (null === og) {
-      if (null === ng) throw Error(y$2(308));
+      if (null === ng) throw Error(y$3(308));
       og = b;
       ng.dependencies = {
         lanes: 0,
@@ -4110,13 +4110,13 @@ function Eg(a, b, c) {
     if (null !== e) {
       d.callback = null;
       d = c;
-      if ("function" !== typeof e) throw Error(y$2(191, e));
+      if ("function" !== typeof e) throw Error(y$3(191, e));
       e.call(d);
     }
   }
 }
 
-var Fg = new react.Component().refs;
+var Fg = new react$1.Component().refs;
 
 function Gg(a, b, c, d) {
   b = a.memoizedState;
@@ -4172,7 +4172,7 @@ function Mg(a, b, c) {
   var d = !1,
       e = Cf;
   var f = b.contextType;
-  "object" === typeof f && null !== f ? f = vg(f) : (e = Ff(b) ? Df : M.current, d = b.contextTypes, f = (d = null !== d && void 0 !== d) ? Ef(a, e) : Cf);
+  "object" === typeof f && null !== f ? f = vg(f) : (e = Ff(b) ? Df : M$1.current, d = b.contextTypes, f = (d = null !== d && void 0 !== d) ? Ef(a, e) : Cf);
   b = new b(c, f);
   a.memoizedState = null !== b.state && void 0 !== b.state ? b.state : null;
   b.updater = Kg;
@@ -4196,7 +4196,7 @@ function Og(a, b, c, d) {
   e.refs = Fg;
   xg(a);
   var f = b.contextType;
-  "object" === typeof f && null !== f ? e.context = vg(f) : (f = Ff(b) ? Df : M.current, e.context = Ef(a, f));
+  "object" === typeof f && null !== f ? e.context = vg(f) : (f = Ff(b) ? Df : M$1.current, e.context = Ef(a, f));
   Cg(a, c, e, d);
   e.state = a.memoizedState;
   f = b.getDerivedStateFromProps;
@@ -4215,11 +4215,11 @@ function Qg(a, b, c) {
       c = c._owner;
 
       if (c) {
-        if (1 !== c.tag) throw Error(y$2(309));
+        if (1 !== c.tag) throw Error(y$3(309));
         var d = c.stateNode;
       }
 
-      if (!d) throw Error(y$2(147, a));
+      if (!d) throw Error(y$3(147, a));
       var e = "" + a;
       if (null !== b && null !== b.ref && "function" === typeof b.ref && b.ref._stringRef === e) return b.ref;
 
@@ -4233,15 +4233,15 @@ function Qg(a, b, c) {
       return b;
     }
 
-    if ("string" !== typeof a) throw Error(y$2(284));
-    if (!c._owner) throw Error(y$2(290, a));
+    if ("string" !== typeof a) throw Error(y$3(284));
+    if (!c._owner) throw Error(y$3(290, a));
   }
 
   return a;
 }
 
 function Rg(a, b) {
-  if ("textarea" !== a.type) throw Error(y$2(31, "[object Object]" === Object.prototype.toString.call(b) ? "object with keys {" + Object.keys(b).join(", ") + "}" : b));
+  if ("textarea" !== a.type) throw Error(y$3(31, "[object Object]" === Object.prototype.toString.call(b) ? "object with keys {" + Object.keys(b).join(", ") + "}" : b));
 }
 
 function Sg(a) {
@@ -4411,9 +4411,9 @@ function Sg(a) {
 
   function w(e, g, h, k) {
     var l = La(h);
-    if ("function" !== typeof l) throw Error(y$2(150));
+    if ("function" !== typeof l) throw Error(y$3(150));
     h = l.call(h);
-    if (null == h) throw Error(y$2(151));
+    if (null == h) throw Error(y$3(151));
 
     for (var t = l = null, u = g, z = g = 0, q = null, n = h.next(); null !== u && !n.done; z++, n = h.next()) {
       u.index > z ? (q = u, u = null) : q = u.sibling;
@@ -4529,7 +4529,7 @@ function Sg(a) {
       case 0:
       case 11:
       case 15:
-        throw Error(y$2(152, Ra(a.type) || "Component"));
+        throw Error(y$3(152, Ra(a.type) || "Component"));
     }
     return c(a, d);
   };
@@ -4543,14 +4543,14 @@ var Yg = Sg(!0),
     ch = Bf($g);
 
 function dh(a) {
-  if (a === $g) throw Error(y$2(174));
+  if (a === $g) throw Error(y$3(174));
   return a;
 }
 
 function eh(a, b) {
-  I$1(ch, b);
-  I$1(bh, a);
-  I$1(ah, $g);
+  I$2(ch, b);
+  I$2(bh, a);
+  I$2(ah, $g);
   a = b.nodeType;
 
   switch (a) {
@@ -4563,28 +4563,28 @@ function eh(a, b) {
       a = 8 === a ? b.parentNode : b, b = a.namespaceURI || null, a = a.tagName, b = mb(b, a);
   }
 
-  H$1(ah);
-  I$1(ah, b);
+  H$2(ah);
+  I$2(ah, b);
 }
 
 function fh() {
-  H$1(ah);
-  H$1(bh);
-  H$1(ch);
+  H$2(ah);
+  H$2(bh);
+  H$2(ch);
 }
 
 function gh(a) {
   dh(ch.current);
   var b = dh(ah.current);
   var c = mb(b, a.type);
-  b !== c && (I$1(bh, a), I$1(ah, c));
+  b !== c && (I$2(bh, a), I$2(ah, c));
 }
 
 function hh(a) {
-  bh.current === a && (H$1(ah), H$1(bh));
+  bh.current === a && (H$2(ah), H$2(bh));
 }
 
-var P = Bf(0);
+var P$1 = Bf(0);
 
 function ih(a) {
   for (var b = a; null !== b;) {
@@ -4687,7 +4687,7 @@ function rh(a) {
   if (13 === a.tag) {
     a = a.memoizedState;
     a = null !== a ? a.dehydrated : null;
-    if (!a) throw Error(y$2(317));
+    if (!a) throw Error(y$3(317));
 
     a: {
       a = a.nextSibling;
@@ -4732,14 +4732,14 @@ function uh() {
 var vh = ra.ReactCurrentDispatcher,
     wh = ra.ReactCurrentBatchConfig,
     xh = 0,
-    R = null,
-    S = null,
-    T = null,
+    R$1 = null,
+    S$1 = null,
+    T$1 = null,
     yh = !1,
     zh = !1;
 
 function Ah() {
-  throw Error(y$2(321));
+  throw Error(y$3(321));
 }
 
 function Bh(a, b) {
@@ -4752,7 +4752,7 @@ function Bh(a, b) {
 
 function Ch(a, b, c, d, e, f) {
   xh = f;
-  R = b;
+  R$1 = b;
   b.memoizedState = null;
   b.updateQueue = null;
   b.lanes = 0;
@@ -4764,9 +4764,9 @@ function Ch(a, b, c, d, e, f) {
 
     do {
       zh = !1;
-      if (!(25 > f)) throw Error(y$2(301));
+      if (!(25 > f)) throw Error(y$3(301));
       f += 1;
-      T = S = null;
+      T$1 = S$1 = null;
       b.updateQueue = null;
       vh.current = Fh;
       a = c(d, e);
@@ -4774,11 +4774,11 @@ function Ch(a, b, c, d, e, f) {
   }
 
   vh.current = Gh;
-  b = null !== S && null !== S.next;
+  b = null !== S$1 && null !== S$1.next;
   xh = 0;
-  T = S = R = null;
+  T$1 = S$1 = R$1 = null;
   yh = !1;
-  if (b) throw Error(y$2(300));
+  if (b) throw Error(y$3(300));
   return a;
 }
 
@@ -4790,30 +4790,30 @@ function Hh() {
     queue: null,
     next: null
   };
-  null === T ? R.memoizedState = T = a : T = T.next = a;
-  return T;
+  null === T$1 ? R$1.memoizedState = T$1 = a : T$1 = T$1.next = a;
+  return T$1;
 }
 
 function Ih() {
-  if (null === S) {
-    var a = R.alternate;
+  if (null === S$1) {
+    var a = R$1.alternate;
     a = null !== a ? a.memoizedState : null;
-  } else a = S.next;
+  } else a = S$1.next;
 
-  var b = null === T ? R.memoizedState : T.next;
-  if (null !== b) T = b, S = a;else {
-    if (null === a) throw Error(y$2(310));
-    S = a;
+  var b = null === T$1 ? R$1.memoizedState : T$1.next;
+  if (null !== b) T$1 = b, S$1 = a;else {
+    if (null === a) throw Error(y$3(310));
+    S$1 = a;
     a = {
-      memoizedState: S.memoizedState,
-      baseState: S.baseState,
-      baseQueue: S.baseQueue,
-      queue: S.queue,
+      memoizedState: S$1.memoizedState,
+      baseState: S$1.baseState,
+      baseQueue: S$1.baseQueue,
+      queue: S$1.queue,
       next: null
     };
-    null === T ? R.memoizedState = T = a : T = T.next = a;
+    null === T$1 ? R$1.memoizedState = T$1 = a : T$1 = T$1.next = a;
   }
-  return T;
+  return T$1;
 }
 
 function Jh(a, b) {
@@ -4823,9 +4823,9 @@ function Jh(a, b) {
 function Kh(a) {
   var b = Ih(),
       c = b.queue;
-  if (null === c) throw Error(y$2(311));
+  if (null === c) throw Error(y$3(311));
   c.lastRenderedReducer = a;
-  var d = S,
+  var d = S$1,
       e = d.baseQueue,
       f = c.pending;
 
@@ -4863,7 +4863,7 @@ function Kh(a) {
           next: null
         };
         null === h ? (g = h = n, f = d) : h = h.next = n;
-        R.lanes |= l;
+        R$1.lanes |= l;
         Dg |= l;
       }
       k = k.next;
@@ -4883,7 +4883,7 @@ function Kh(a) {
 function Lh(a) {
   var b = Ih(),
       c = b.queue;
-  if (null === c) throw Error(y$2(311));
+  if (null === c) throw Error(y$3(311));
   c.lastRenderedReducer = a;
   var d = c.dispatch,
       e = c.pending,
@@ -4911,12 +4911,12 @@ function Mh(a, b, c) {
   if (null !== e) a = e === d;else if (a = a.mutableReadLanes, a = (xh & a) === a) b._workInProgressVersionPrimary = d, th.push(b);
   if (a) return c(b._source);
   th.push(b);
-  throw Error(y$2(350));
+  throw Error(y$3(350));
 }
 
 function Nh(a, b, c, d) {
-  var e = U;
-  if (null === e) throw Error(y$2(349));
+  var e = U$1;
+  if (null === e) throw Error(y$3(349));
   var f = b._getVersion,
       g = f(b._source),
       h = vh.current,
@@ -4925,13 +4925,13 @@ function Nh(a, b, c, d) {
   }),
       l = k[1],
       n = k[0];
-  k = T;
+  k = T$1;
   var A = a.memoizedState,
       p = A.refs,
       C = p.getSnapshot,
       x = A.source;
   A = A.subscribe;
-  var w = R;
+  var w = R$1;
   a.memoizedState = {
     refs: p,
     source: b,
@@ -4977,7 +4977,7 @@ function Nh(a, b, c, d) {
     dispatch: null,
     lastRenderedReducer: Jh,
     lastRenderedState: n
-  }, a.dispatch = l = Oh.bind(null, R, a), k.queue = a, k.baseQueue = null, n = Mh(e, b, c), k.memoizedState = k.baseState = n);
+  }, a.dispatch = l = Oh.bind(null, R$1, a), k.queue = a, k.baseQueue = null, n = Mh(e, b, c), k.memoizedState = k.baseState = n);
   return n;
 }
 
@@ -4996,7 +4996,7 @@ function Qh(a) {
     lastRenderedReducer: Jh,
     lastRenderedState: a
   };
-  a = a.dispatch = Oh.bind(null, R, a);
+  a = a.dispatch = Oh.bind(null, R$1, a);
   return [b.memoizedState, a];
 }
 
@@ -5008,10 +5008,10 @@ function Rh(a, b, c, d) {
     deps: d,
     next: null
   };
-  b = R.updateQueue;
+  b = R$1.updateQueue;
   null === b ? (b = {
     lastEffect: null
-  }, R.updateQueue = b, b.lastEffect = a.next = a) : (c = b.lastEffect, null === c ? b.lastEffect = a.next = a : (d = c.next, c.next = a, a.next = d, b.lastEffect = a));
+  }, R$1.updateQueue = b, b.lastEffect = a.next = a) : (c = b.lastEffect, null === c ? b.lastEffect = a.next = a : (d = c.next, c.next = a, a.next = d, b.lastEffect = a));
   return a;
 }
 
@@ -5029,7 +5029,7 @@ function Th() {
 
 function Uh(a, b, c, d) {
   var e = Hh();
-  R.flags |= a;
+  R$1.flags |= a;
   e.memoizedState = Rh(1 | b, c, void 0, void 0 === d ? null : d);
 }
 
@@ -5038,8 +5038,8 @@ function Vh(a, b, c, d) {
   d = void 0 === d ? null : d;
   var f = void 0;
 
-  if (null !== S) {
-    var g = S.memoizedState;
+  if (null !== S$1) {
+    var g = S$1.memoizedState;
     f = g.destroy;
 
     if (null !== d && Bh(d, g.deps)) {
@@ -5048,7 +5048,7 @@ function Vh(a, b, c, d) {
     }
   }
 
-  R.flags |= a;
+  R$1.flags |= a;
   e.memoizedState = Rh(1 | b, c, f, d);
 }
 
@@ -5130,7 +5130,7 @@ function Oh(a, b, c) {
   null === g ? f.next = f : (f.next = g.next, g.next = f);
   b.pending = f;
   g = a.alternate;
-  if (a === R || null !== g && g === R) zh = yh = !0;else {
+  if (a === R$1 || null !== g && g === R$1) zh = yh = !0;else {
     if (0 === a.lanes && (null === g || 0 === g.lanes) && (g = b.lastRenderedReducer, null !== g)) try {
       var h = b.lastRenderedState,
           k = g(h, c);
@@ -5192,7 +5192,7 @@ var Gh = {
       lastRenderedReducer: a,
       lastRenderedState: b
     };
-    a = a.dispatch = Oh.bind(null, R, a);
+    a = a.dispatch = Oh.bind(null, R$1, a);
     return [d.memoizedState, a];
   },
   useRef: Sh,
@@ -5238,10 +5238,10 @@ var Gh = {
       var a = !1,
           b = uf(function () {
         a || (a = !0, c("r:" + (tf++).toString(36)));
-        throw Error(y$2(355));
+        throw Error(y$3(355));
       }),
           c = Qh(b)[1];
-      0 === (R.mode & 2) && (R.flags |= 516, Rh(5, function () {
+      0 === (R$1.mode & 2) && (R$1.flags |= 516, Rh(5, function () {
         c("r:" + (tf++).toString(36));
       }, void 0, null));
       return b;
@@ -5398,7 +5398,7 @@ function oi(a, b) {
 }
 
 function li(a, b, c, d, e) {
-  var f = Ff(c) ? Df : M.current;
+  var f = Ff(c) ? Df : M$1.current;
   f = Ef(b, f);
   tg(b, e);
   c = Ch(a, b, c, d, f, e);
@@ -5421,7 +5421,7 @@ function pi(a, b, c, d, e) {
     g.props = h;
     var k = g.context,
         l = c.contextType;
-    "object" === typeof l && null !== l ? l = vg(l) : (l = Ff(c) ? Df : M.current, l = Ef(b, l));
+    "object" === typeof l && null !== l ? l = vg(l) : (l = Ff(c) ? Df : M$1.current, l = Ef(b, l));
     var n = c.getDerivedStateFromProps,
         A = "function" === typeof n || "function" === typeof g.getSnapshotBeforeUpdate;
     A || "function" !== typeof g.UNSAFE_componentWillReceiveProps && "function" !== typeof g.componentWillReceiveProps || (h !== d || k !== l) && Ng(b, g, d, l);
@@ -5430,7 +5430,7 @@ function pi(a, b, c, d, e) {
     g.state = p;
     Cg(b, d, g, e);
     k = b.memoizedState;
-    h !== d || p !== k || N.current || wg ? ("function" === typeof n && (Gg(b, c, n, d), k = b.memoizedState), (h = wg || Lg(b, c, h, d, p, k, l)) ? (A || "function" !== typeof g.UNSAFE_componentWillMount && "function" !== typeof g.componentWillMount || ("function" === typeof g.componentWillMount && g.componentWillMount(), "function" === typeof g.UNSAFE_componentWillMount && g.UNSAFE_componentWillMount()), "function" === typeof g.componentDidMount && (b.flags |= 4)) : ("function" === typeof g.componentDidMount && (b.flags |= 4), b.memoizedProps = d, b.memoizedState = k), g.props = d, g.state = k, g.context = l, d = h) : ("function" === typeof g.componentDidMount && (b.flags |= 4), d = !1);
+    h !== d || p !== k || N$1.current || wg ? ("function" === typeof n && (Gg(b, c, n, d), k = b.memoizedState), (h = wg || Lg(b, c, h, d, p, k, l)) ? (A || "function" !== typeof g.UNSAFE_componentWillMount && "function" !== typeof g.componentWillMount || ("function" === typeof g.componentWillMount && g.componentWillMount(), "function" === typeof g.UNSAFE_componentWillMount && g.UNSAFE_componentWillMount()), "function" === typeof g.componentDidMount && (b.flags |= 4)) : ("function" === typeof g.componentDidMount && (b.flags |= 4), b.memoizedProps = d, b.memoizedState = k), g.props = d, g.state = k, g.context = l, d = h) : ("function" === typeof g.componentDidMount && (b.flags |= 4), d = !1);
   } else {
     g = b.stateNode;
     yg(a, b);
@@ -5440,7 +5440,7 @@ function pi(a, b, c, d, e) {
     A = b.pendingProps;
     p = g.context;
     k = c.contextType;
-    "object" === typeof k && null !== k ? k = vg(k) : (k = Ff(c) ? Df : M.current, k = Ef(b, k));
+    "object" === typeof k && null !== k ? k = vg(k) : (k = Ff(c) ? Df : M$1.current, k = Ef(b, k));
     var C = c.getDerivedStateFromProps;
     (n = "function" === typeof C || "function" === typeof g.getSnapshotBeforeUpdate) || "function" !== typeof g.UNSAFE_componentWillReceiveProps && "function" !== typeof g.componentWillReceiveProps || (h !== A || p !== k) && Ng(b, g, d, k);
     wg = !1;
@@ -5448,7 +5448,7 @@ function pi(a, b, c, d, e) {
     g.state = p;
     Cg(b, d, g, e);
     var x = b.memoizedState;
-    h !== A || p !== x || N.current || wg ? ("function" === typeof C && (Gg(b, c, C, d), x = b.memoizedState), (l = wg || Lg(b, c, l, d, p, x, k)) ? (n || "function" !== typeof g.UNSAFE_componentWillUpdate && "function" !== typeof g.componentWillUpdate || ("function" === typeof g.componentWillUpdate && g.componentWillUpdate(d, x, k), "function" === typeof g.UNSAFE_componentWillUpdate && g.UNSAFE_componentWillUpdate(d, x, k)), "function" === typeof g.componentDidUpdate && (b.flags |= 4), "function" === typeof g.getSnapshotBeforeUpdate && (b.flags |= 256)) : ("function" !== typeof g.componentDidUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 4), "function" !== typeof g.getSnapshotBeforeUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 256), b.memoizedProps = d, b.memoizedState = x), g.props = d, g.state = x, g.context = k, d = l) : ("function" !== typeof g.componentDidUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 4), "function" !== typeof g.getSnapshotBeforeUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 256), d = !1);
+    h !== A || p !== x || N$1.current || wg ? ("function" === typeof C && (Gg(b, c, C, d), x = b.memoizedState), (l = wg || Lg(b, c, l, d, p, x, k)) ? (n || "function" !== typeof g.UNSAFE_componentWillUpdate && "function" !== typeof g.componentWillUpdate || ("function" === typeof g.componentWillUpdate && g.componentWillUpdate(d, x, k), "function" === typeof g.UNSAFE_componentWillUpdate && g.UNSAFE_componentWillUpdate(d, x, k)), "function" === typeof g.componentDidUpdate && (b.flags |= 4), "function" === typeof g.getSnapshotBeforeUpdate && (b.flags |= 256)) : ("function" !== typeof g.componentDidUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 4), "function" !== typeof g.getSnapshotBeforeUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 256), b.memoizedProps = d, b.memoizedState = x), g.props = d, g.state = x, g.context = k, d = l) : ("function" !== typeof g.componentDidUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 4), "function" !== typeof g.getSnapshotBeforeUpdate || h === a.memoizedProps && p === a.memoizedState || (b.flags |= 256), d = !1);
   }
   return qi(a, b, c, d, f, e);
 }
@@ -5480,12 +5480,12 @@ var si = {
 
 function ti(a, b, c) {
   var d = b.pendingProps,
-      e = P.current,
+      e = P$1.current,
       f = !1,
       g;
   (g = 0 !== (b.flags & 64)) || (g = null !== a && null === a.memoizedState ? !1 : 0 !== (e & 2));
   g ? (f = !0, b.flags &= -65) : null !== a && null === a.memoizedState || void 0 === d.fallback || !0 === d.unstable_avoidThisFallback || (e |= 1);
-  I$1(P, e & 1);
+  I$2(P$1, e & 1);
 
   if (null === a) {
     void 0 !== d.fallback && ph(b);
@@ -5598,7 +5598,7 @@ function Ai(a, b, c) {
       e = d.revealOrder,
       f = d.tail;
   fi(a, b, d.children, c);
-  d = P.current;
+  d = P$1.current;
   if (0 !== (d & 2)) d = d & 1 | 2, b.flags |= 64;else {
     if (null !== a && 0 !== (a.flags & 64)) a: for (a = b.child; null !== a;) {
       if (13 === a.tag) null !== a.memoizedState && yi(a, c);else if (19 === a.tag) yi(a, c);else if (null !== a.child) {
@@ -5618,7 +5618,7 @@ function Ai(a, b, c) {
     }
     d &= 1;
   }
-  I$1(P, d);
+  I$2(P$1, d);
   if (0 === (b.mode & 2)) b.memoizedState = null;else switch (e) {
     case "forwards":
       c = b.child;
@@ -5666,7 +5666,7 @@ function hi(a, b, c) {
   Dg |= b.lanes;
 
   if (0 !== (c & b.childLanes)) {
-    if (null !== a && b.child !== a.child) throw Error(y$2(153));
+    if (null !== a && b.child !== a.child) throw Error(y$3(153));
 
     if (null !== b.child) {
       a = b.child;
@@ -5767,7 +5767,7 @@ Di = function (a, b, c, d) {
 
           for (g in k) k.hasOwnProperty(g) && h[g] !== k[g] && (c || (c = {}), c[g] = k[g]);
         } else c || (f || (f = []), f.push(l, c)), c = k;
-      } else "dangerouslySetInnerHTML" === l ? (k = k ? k.__html : void 0, h = h ? h.__html : void 0, null != k && h !== k && (f = f || []).push(l, k)) : "children" === l ? "string" !== typeof k && "number" !== typeof k || (f = f || []).push(l, "" + k) : "suppressContentEditableWarning" !== l && "suppressHydrationWarning" !== l && (ca.hasOwnProperty(l) ? (null != k && "onScroll" === l && G$1("scroll", a), f || h === k || (f = [])) : "object" === typeof k && null !== k && k.$$typeof === Ga ? k.toString() : (f = f || []).push(l, k));
+      } else "dangerouslySetInnerHTML" === l ? (k = k ? k.__html : void 0, h = h ? h.__html : void 0, null != k && h !== k && (f = f || []).push(l, k)) : "children" === l ? "string" !== typeof k && "number" !== typeof k || (f = f || []).push(l, "" + k) : "suppressContentEditableWarning" !== l && "suppressHydrationWarning" !== l && (ca.hasOwnProperty(l) ? (null != k && "onScroll" === l && G$2("scroll", a), f || h === k || (f = [])) : "object" === typeof k && null !== k && k.$$typeof === Ga ? k.toString() : (f = f || []).push(l, k));
     }
 
     c && (f = f || []).push("style", c);
@@ -5820,8 +5820,8 @@ function Gi(a, b, c) {
 
     case 3:
       fh();
-      H$1(N);
-      H$1(M);
+      H$2(N$1);
+      H$2(M$1);
       uh();
       d = b.stateNode;
       d.pendingContext && (d.context = d.pendingContext, d.pendingContext = null);
@@ -5835,7 +5835,7 @@ function Gi(a, b, c) {
       c = b.type;
       if (null !== a && null != b.stateNode) Di(a, b, c, d, e), a.ref !== b.ref && (b.flags |= 128);else {
         if (!d) {
-          if (null === b.stateNode) throw Error(y$2(166));
+          if (null === b.stateNode) throw Error(y$3(166));
           return null;
         }
 
@@ -5850,57 +5850,57 @@ function Gi(a, b, c) {
 
           switch (c) {
             case "dialog":
-              G$1("cancel", d);
-              G$1("close", d);
+              G$2("cancel", d);
+              G$2("close", d);
               break;
 
             case "iframe":
             case "object":
             case "embed":
-              G$1("load", d);
+              G$2("load", d);
               break;
 
             case "video":
             case "audio":
-              for (a = 0; a < Xe.length; a++) G$1(Xe[a], d);
+              for (a = 0; a < Xe.length; a++) G$2(Xe[a], d);
 
               break;
 
             case "source":
-              G$1("error", d);
+              G$2("error", d);
               break;
 
             case "img":
             case "image":
             case "link":
-              G$1("error", d);
-              G$1("load", d);
+              G$2("error", d);
+              G$2("load", d);
               break;
 
             case "details":
-              G$1("toggle", d);
+              G$2("toggle", d);
               break;
 
             case "input":
               Za(d, f);
-              G$1("invalid", d);
+              G$2("invalid", d);
               break;
 
             case "select":
               d._wrapperState = {
                 wasMultiple: !!f.multiple
               };
-              G$1("invalid", d);
+              G$2("invalid", d);
               break;
 
             case "textarea":
-              hb(d, f), G$1("invalid", d);
+              hb(d, f), G$2("invalid", d);
           }
 
           vb(c, f);
           a = null;
 
-          for (var g in f) f.hasOwnProperty(g) && (e = f[g], "children" === g ? "string" === typeof e ? d.textContent !== e && (a = ["children", e]) : "number" === typeof e && d.textContent !== "" + e && (a = ["children", "" + e]) : ca.hasOwnProperty(g) && null != e && "onScroll" === g && G$1("scroll", d));
+          for (var g in f) f.hasOwnProperty(g) && (e = f[g], "children" === g ? "string" === typeof e ? d.textContent !== e && (a = ["children", e]) : "number" === typeof e && d.textContent !== "" + e && (a = ["children", "" + e]) : ca.hasOwnProperty(g) && null != e && "onScroll" === g && G$2("scroll", d));
 
           switch (c) {
             case "input":
@@ -5938,47 +5938,47 @@ function Gi(a, b, c) {
 
           switch (c) {
             case "dialog":
-              G$1("cancel", a);
-              G$1("close", a);
+              G$2("cancel", a);
+              G$2("close", a);
               e = d;
               break;
 
             case "iframe":
             case "object":
             case "embed":
-              G$1("load", a);
+              G$2("load", a);
               e = d;
               break;
 
             case "video":
             case "audio":
-              for (e = 0; e < Xe.length; e++) G$1(Xe[e], a);
+              for (e = 0; e < Xe.length; e++) G$2(Xe[e], a);
 
               e = d;
               break;
 
             case "source":
-              G$1("error", a);
+              G$2("error", a);
               e = d;
               break;
 
             case "img":
             case "image":
             case "link":
-              G$1("error", a);
-              G$1("load", a);
+              G$2("error", a);
+              G$2("load", a);
               e = d;
               break;
 
             case "details":
-              G$1("toggle", a);
+              G$2("toggle", a);
               e = d;
               break;
 
             case "input":
               Za(a, d);
               e = Ya(a, d);
-              G$1("invalid", a);
+              G$2("invalid", a);
               break;
 
             case "option":
@@ -5992,13 +5992,13 @@ function Gi(a, b, c) {
               e = objectAssign({}, d, {
                 value: void 0
               });
-              G$1("invalid", a);
+              G$2("invalid", a);
               break;
 
             case "textarea":
               hb(a, d);
               e = gb(a, d);
-              G$1("invalid", a);
+              G$2("invalid", a);
               break;
 
             default:
@@ -6010,7 +6010,7 @@ function Gi(a, b, c) {
 
           for (f in h) if (h.hasOwnProperty(f)) {
             var k = h[f];
-            "style" === f ? tb(a, k) : "dangerouslySetInnerHTML" === f ? (k = k ? k.__html : void 0, null != k && ob(a, k)) : "children" === f ? "string" === typeof k ? ("textarea" !== c || "" !== k) && pb(a, k) : "number" === typeof k && pb(a, "" + k) : "suppressContentEditableWarning" !== f && "suppressHydrationWarning" !== f && "autoFocus" !== f && (ca.hasOwnProperty(f) ? null != k && "onScroll" === f && G$1("scroll", a) : null != k && qa(a, f, k, g));
+            "style" === f ? tb(a, k) : "dangerouslySetInnerHTML" === f ? (k = k ? k.__html : void 0, null != k && ob(a, k)) : "children" === f ? "string" === typeof k ? ("textarea" !== c || "" !== k) && pb(a, k) : "number" === typeof k && pb(a, "" + k) : "suppressContentEditableWarning" !== f && "suppressHydrationWarning" !== f && "autoFocus" !== f && (ca.hasOwnProperty(f) ? null != k && "onScroll" === f && G$2("scroll", a) : null != k && qa(a, f, k, g));
           }
 
           switch (c) {
@@ -6047,7 +6047,7 @@ function Gi(a, b, c) {
 
     case 6:
       if (a && null != b.stateNode) Ei(a, b, a.memoizedProps, d);else {
-        if ("string" !== typeof d && null === b.stateNode) throw Error(y$2(166));
+        if ("string" !== typeof d && null === b.stateNode) throw Error(y$3(166));
         c = dh(ch.current);
         dh(ah.current);
         rh(b) ? (d = b.stateNode, c = b.memoizedProps, d[wf] = b, d.nodeValue !== c && (b.flags |= 4)) : (d = (9 === c.nodeType ? c : c.ownerDocument).createTextNode(d), d[wf] = b, b.stateNode = d);
@@ -6055,15 +6055,15 @@ function Gi(a, b, c) {
       return null;
 
     case 13:
-      H$1(P);
+      H$2(P$1);
       d = b.memoizedState;
       if (0 !== (b.flags & 64)) return b.lanes = c, b;
       d = null !== d;
       c = !1;
       null === a ? void 0 !== b.memoizedProps.fallback && rh(b) : c = null !== a.memoizedState;
-      if (d && !c && 0 !== (b.mode & 2)) if (null === a && !0 !== b.memoizedProps.unstable_avoidThisFallback || 0 !== (P.current & 1)) 0 === V && (V = 3);else {
-        if (0 === V || 3 === V) V = 4;
-        null === U || 0 === (Dg & 134217727) && 0 === (Hi & 134217727) || Ii(U, W);
+      if (d && !c && 0 !== (b.mode & 2)) if (null === a && !0 !== b.memoizedProps.unstable_avoidThisFallback || 0 !== (P$1.current & 1)) 0 === V$1 && (V$1 = 3);else {
+        if (0 === V$1 || 3 === V$1) V$1 = 4;
+        null === U$1 || 0 === (Dg & 134217727) && 0 === (Hi & 134217727) || Ii(U$1, W$1);
       }
       if (d || c) b.flags |= 4;
       return null;
@@ -6078,14 +6078,14 @@ function Gi(a, b, c) {
       return Ff(b.type) && Gf(), null;
 
     case 19:
-      H$1(P);
+      H$2(P$1);
       d = b.memoizedState;
       if (null === d) return null;
       f = 0 !== (b.flags & 64);
       g = d.rendering;
       if (null === g) {
         if (f) Fi(d, !1);else {
-          if (0 !== V || null !== a && 0 !== (a.flags & 64)) for (a = b.child; null !== a;) {
+          if (0 !== V$1 || null !== a && 0 !== (a.flags & 64)) for (a = b.child; null !== a;) {
             g = ih(a);
 
             if (null !== g) {
@@ -6102,28 +6102,28 @@ function Gi(a, b, c) {
                 firstContext: a.firstContext
               }), c = c.sibling;
 
-              I$1(P, P.current & 1 | 2);
+              I$2(P$1, P$1.current & 1 | 2);
               return b.child;
             }
 
             a = a.sibling;
           }
-          null !== d.tail && O() > Ji && (b.flags |= 64, f = !0, Fi(d, !1), b.lanes = 33554432);
+          null !== d.tail && O$1() > Ji && (b.flags |= 64, f = !0, Fi(d, !1), b.lanes = 33554432);
         }
       } else {
         if (!f) if (a = ih(g), null !== a) {
           if (b.flags |= 64, f = !0, c = a.updateQueue, null !== c && (b.updateQueue = c, b.flags |= 4), Fi(d, !0), null === d.tail && "hidden" === d.tailMode && !g.alternate && !lh) return b = b.lastEffect = d.lastEffect, null !== b && (b.nextEffect = null), null;
-        } else 2 * O() - d.renderingStartTime > Ji && 1073741824 !== c && (b.flags |= 64, f = !0, Fi(d, !1), b.lanes = 33554432);
+        } else 2 * O$1() - d.renderingStartTime > Ji && 1073741824 !== c && (b.flags |= 64, f = !0, Fi(d, !1), b.lanes = 33554432);
         d.isBackwards ? (g.sibling = b.child, b.child = g) : (c = d.last, null !== c ? c.sibling = g : b.child = g, d.last = g);
       }
-      return null !== d.tail ? (c = d.tail, d.rendering = c, d.tail = c.sibling, d.lastEffect = b.lastEffect, d.renderingStartTime = O(), c.sibling = null, b = P.current, I$1(P, f ? b & 1 | 2 : b & 1), c) : null;
+      return null !== d.tail ? (c = d.tail, d.rendering = c, d.tail = c.sibling, d.lastEffect = b.lastEffect, d.renderingStartTime = O$1(), c.sibling = null, b = P$1.current, I$2(P$1, f ? b & 1 | 2 : b & 1), c) : null;
 
     case 23:
     case 24:
       return Ki(), null !== a && null !== a.memoizedState !== (null !== b.memoizedState) && "unstable-defer-without-hiding" !== d.mode && (b.flags |= 4), null;
   }
 
-  throw Error(y$2(156, b.tag));
+  throw Error(y$3(156, b.tag));
 }
 
 function Li(a) {
@@ -6135,11 +6135,11 @@ function Li(a) {
 
     case 3:
       fh();
-      H$1(N);
-      H$1(M);
+      H$2(N$1);
+      H$2(M$1);
       uh();
       b = a.flags;
-      if (0 !== (b & 64)) throw Error(y$2(285));
+      if (0 !== (b & 64)) throw Error(y$3(285));
       a.flags = b & -4097 | 64;
       return a;
 
@@ -6147,10 +6147,10 @@ function Li(a) {
       return hh(a), null;
 
     case 13:
-      return H$1(P), b = a.flags, b & 4096 ? (a.flags = b & -4097 | 64, a) : null;
+      return H$2(P$1), b = a.flags, b & 4096 ? (a.flags = b & -4097 | 64, a) : null;
 
     case 19:
-      return H$1(P), null;
+      return H$2(P$1), null;
 
     case 4:
       return fh(), null;
@@ -6280,7 +6280,7 @@ function Xi(a, b) {
       return;
   }
 
-  throw Error(y$2(163));
+  throw Error(y$3(163));
 }
 
 function Yi(a, b, c) {
@@ -6374,7 +6374,7 @@ function Yi(a, b, c) {
       return;
   }
 
-  throw Error(y$2(163));
+  throw Error(y$3(163));
 }
 
 function aj(a, b) {
@@ -6483,7 +6483,7 @@ function fj(a) {
       b = b.return;
     }
 
-    throw Error(y$2(160));
+    throw Error(y$3(160));
   }
 
   var c = b;
@@ -6505,7 +6505,7 @@ function fj(a) {
       break;
 
     default:
-      throw Error(y$2(161));
+      throw Error(y$3(161));
   }
 
   c.flags & 16 && (pb(b, ""), c.flags &= -17);
@@ -6554,7 +6554,7 @@ function cj(a, b) {
       d = c.return;
 
       a: for (;;) {
-        if (null === d) throw Error(y$2(160));
+        if (null === d) throw Error(y$3(160));
         e = d.stateNode;
 
         switch (d.tag) {
@@ -6681,7 +6681,7 @@ function ij(a, b) {
       return;
 
     case 6:
-      if (null === b.stateNode) throw Error(y$2(162));
+      if (null === b.stateNode) throw Error(y$3(162));
       b.stateNode.nodeValue = b.memoizedProps;
       return;
 
@@ -6694,7 +6694,7 @@ function ij(a, b) {
       return;
 
     case 13:
-      null !== b.memoizedState && (jj = O(), aj(b.child, !0));
+      null !== b.memoizedState && (jj = O$1(), aj(b.child, !0));
       kj(b);
       return;
 
@@ -6711,7 +6711,7 @@ function ij(a, b) {
       return;
   }
 
-  throw Error(y$2(163));
+  throw Error(y$3(163));
 }
 
 function kj(a) {
@@ -6731,13 +6731,13 @@ function kj(a) {
 var nj = Math.ceil,
     oj = ra.ReactCurrentDispatcher,
     pj = ra.ReactCurrentOwner,
-    X = 0,
-    U = null,
-    Y = null,
-    W = 0,
+    X$1 = 0,
+    U$1 = null,
+    Y$1 = null,
+    W$1 = 0,
     qj = 0,
     rj = Bf(0),
-    V = 0,
+    V$1 = 0,
     sj = null,
     tj = 0,
     Dg = 0,
@@ -6748,10 +6748,10 @@ var nj = Math.ceil,
     Ji = Infinity;
 
 function wj() {
-  Ji = O() + 500;
+  Ji = O$1() + 500;
 }
 
-var Z = null,
+var Z$1 = null,
     Qi = !1,
     Ri = null,
     Ti = null,
@@ -6768,7 +6768,7 @@ var Z = null,
     Hj = 0;
 
 function Hg() {
-  return 0 !== (X & 48) ? O() : -1 !== Fj ? Fj : Fj = O();
+  return 0 !== (X$1 & 48) ? O$1() : -1 !== Fj ? Fj : Fj = O$1();
 }
 
 function Ig(a) {
@@ -6787,18 +6787,18 @@ function Ig(a) {
   }
 
   a = eg();
-  0 !== (X & 4) && 98 === a ? a = Xc(12, Gj) : (a = Sc(a), a = Xc(a, Gj));
+  0 !== (X$1 & 4) && 98 === a ? a = Xc(12, Gj) : (a = Sc(a), a = Xc(a, Gj));
   return a;
 }
 
 function Jg(a, b, c) {
-  if (50 < Dj) throw Dj = 0, Ej = null, Error(y$2(185));
+  if (50 < Dj) throw Dj = 0, Ej = null, Error(y$3(185));
   a = Kj(a, b);
   if (null === a) return null;
   $c(a, b, c);
-  a === U && (Hi |= b, 4 === V && Ii(a, W));
+  a === U$1 && (Hi |= b, 4 === V$1 && Ii(a, W$1));
   var d = eg();
-  1 === b ? 0 !== (X & 8) && 0 === (X & 48) ? Lj(a) : (Mj(a, c), 0 === X && (wj(), ig())) : (0 === (X & 4) || 98 !== d && 99 !== d || (null === Cj ? Cj = new Set([a]) : Cj.add(a)), Mj(a, c));
+  1 === b ? 0 !== (X$1 & 8) && 0 === (X$1 & 48) ? Lj(a) : (Mj(a, c), 0 === X$1 && (wj(), ig())) : (0 === (X$1 & 4) || 98 !== d && 99 !== d || (null === Cj ? Cj = new Set([a]) : Cj.add(a)), Mj(a, c));
   vj = a;
 }
 
@@ -6823,7 +6823,7 @@ function Mj(a, b) {
       if (0 === (k & d) || 0 !== (k & e)) {
         l = b;
         Rc(k);
-        var n = F$1;
+        var n = F$2;
         f[h] = 10 <= n ? l + 250 : 6 <= n ? l + 5E3 : -1;
       }
     } else l <= b && (a.expiredLanes |= k);
@@ -6831,8 +6831,8 @@ function Mj(a, b) {
     g &= ~k;
   }
 
-  d = Uc(a, a === U ? W : 0);
-  b = F$1;
+  d = Uc(a, a === U$1 ? W$1 : 0);
+  b = F$2;
   if (0 === d) null !== c && (c !== Zf && Pf(c), a.callbackNode = null, a.callbackPriority = 0);else {
     if (null !== c) {
       if (a.callbackPriority === b) return;
@@ -6848,16 +6848,16 @@ function Mj(a, b) {
 function Nj(a) {
   Fj = -1;
   Hj = Gj = 0;
-  if (0 !== (X & 48)) throw Error(y$2(327));
+  if (0 !== (X$1 & 48)) throw Error(y$3(327));
   var b = a.callbackNode;
   if (Oj() && a.callbackNode !== b) return null;
-  var c = Uc(a, a === U ? W : 0);
+  var c = Uc(a, a === U$1 ? W$1 : 0);
   if (0 === c) return null;
   var d = c;
-  var e = X;
-  X |= 16;
+  var e = X$1;
+  X$1 |= 16;
   var f = Pj();
-  if (U !== a || W !== d) wj(), Qj(a, d);
+  if (U$1 !== a || W$1 !== d) wj(), Qj(a, d);
 
   do try {
     Rj();
@@ -6868,18 +6868,18 @@ function Nj(a) {
 
   qg();
   oj.current = f;
-  X = e;
-  null !== Y ? d = 0 : (U = null, W = 0, d = V);
+  X$1 = e;
+  null !== Y$1 ? d = 0 : (U$1 = null, W$1 = 0, d = V$1);
   if (0 !== (tj & Hi)) Qj(a, 0);else if (0 !== d) {
-    2 === d && (X |= 64, a.hydrate && (a.hydrate = !1, qf(a.containerInfo)), c = Wc(a), 0 !== c && (d = Tj(a, c)));
-    if (1 === d) throw b = sj, Qj(a, 0), Ii(a, c), Mj(a, O()), b;
+    2 === d && (X$1 |= 64, a.hydrate && (a.hydrate = !1, qf(a.containerInfo)), c = Wc(a), 0 !== c && (d = Tj(a, c)));
+    if (1 === d) throw b = sj, Qj(a, 0), Ii(a, c), Mj(a, O$1()), b;
     a.finishedWork = a.current.alternate;
     a.finishedLanes = c;
 
     switch (d) {
       case 0:
       case 1:
-        throw Error(y$2(345));
+        throw Error(y$3(345));
 
       case 2:
         Uj(a);
@@ -6888,7 +6888,7 @@ function Nj(a) {
       case 3:
         Ii(a, c);
 
-        if ((c & 62914560) === c && (d = jj + 500 - O(), 10 < d)) {
+        if ((c & 62914560) === c && (d = jj + 500 - O$1(), 10 < d)) {
           if (0 !== Uc(a, 0)) break;
           e = a.suspendedLanes;
 
@@ -6919,7 +6919,7 @@ function Nj(a) {
         }
 
         c = e;
-        c = O() - c;
+        c = O$1() - c;
         c = (120 > c ? 120 : 480 > c ? 480 : 1080 > c ? 1080 : 1920 > c ? 1920 : 3E3 > c ? 3E3 : 4320 > c ? 4320 : 1960 * nj(c / 1960)) - c;
 
         if (10 < c) {
@@ -6935,10 +6935,10 @@ function Nj(a) {
         break;
 
       default:
-        throw Error(y$2(329));
+        throw Error(y$3(329));
     }
   }
-  Mj(a, O());
+  Mj(a, O$1());
   return a.callbackNode === b ? Nj.bind(null, a) : null;
 }
 
@@ -6957,21 +6957,21 @@ function Ii(a, b) {
 }
 
 function Lj(a) {
-  if (0 !== (X & 48)) throw Error(y$2(327));
+  if (0 !== (X$1 & 48)) throw Error(y$3(327));
   Oj();
 
-  if (a === U && 0 !== (a.expiredLanes & W)) {
-    var b = W;
+  if (a === U$1 && 0 !== (a.expiredLanes & W$1)) {
+    var b = W$1;
     var c = Tj(a, b);
     0 !== (tj & Hi) && (b = Uc(a, b), c = Tj(a, b));
   } else b = Uc(a, 0), c = Tj(a, b);
 
-  0 !== a.tag && 2 === c && (X |= 64, a.hydrate && (a.hydrate = !1, qf(a.containerInfo)), b = Wc(a), 0 !== b && (c = Tj(a, b)));
-  if (1 === c) throw c = sj, Qj(a, 0), Ii(a, b), Mj(a, O()), c;
+  0 !== a.tag && 2 === c && (X$1 |= 64, a.hydrate && (a.hydrate = !1, qf(a.containerInfo)), b = Wc(a), 0 !== b && (c = Tj(a, b)));
+  if (1 === c) throw c = sj, Qj(a, 0), Ii(a, b), Mj(a, O$1()), c;
   a.finishedWork = a.current.alternate;
   a.finishedLanes = b;
   Uj(a);
-  Mj(a, O());
+  Mj(a, O$1());
   return null;
 }
 
@@ -6981,7 +6981,7 @@ function Vj() {
     Cj = null;
     a.forEach(function (a) {
       a.expiredLanes |= 24 & a.pendingLanes;
-      Mj(a, O());
+      Mj(a, O$1());
     });
   }
 
@@ -6989,37 +6989,37 @@ function Vj() {
 }
 
 function Wj(a, b) {
-  var c = X;
-  X |= 1;
+  var c = X$1;
+  X$1 |= 1;
 
   try {
     return a(b);
   } finally {
-    X = c, 0 === X && (wj(), ig());
+    X$1 = c, 0 === X$1 && (wj(), ig());
   }
 }
 
 function Xj(a, b) {
-  var c = X;
-  X &= -2;
-  X |= 8;
+  var c = X$1;
+  X$1 &= -2;
+  X$1 |= 8;
 
   try {
     return a(b);
   } finally {
-    X = c, 0 === X && (wj(), ig());
+    X$1 = c, 0 === X$1 && (wj(), ig());
   }
 }
 
 function ni(a, b) {
-  I$1(rj, qj);
+  I$2(rj, qj);
   qj |= b;
   tj |= b;
 }
 
 function Ki() {
   qj = rj.current;
-  H$1(rj);
+  H$2(rj);
 }
 
 function Qj(a, b) {
@@ -7027,7 +7027,7 @@ function Qj(a, b) {
   a.finishedLanes = 0;
   var c = a.timeoutHandle;
   -1 !== c && (a.timeoutHandle = -1, pf(c));
-  if (null !== Y) for (c = Y.return; null !== c;) {
+  if (null !== Y$1) for (c = Y$1.return; null !== c;) {
     var d = c;
 
     switch (d.tag) {
@@ -7038,8 +7038,8 @@ function Qj(a, b) {
 
       case 3:
         fh();
-        H$1(N);
-        H$1(M);
+        H$2(N$1);
+        H$2(M$1);
         uh();
         break;
 
@@ -7052,11 +7052,11 @@ function Qj(a, b) {
         break;
 
       case 13:
-        H$1(P);
+        H$2(P$1);
         break;
 
       case 19:
-        H$1(P);
+        H$2(P$1);
         break;
 
       case 10:
@@ -7070,24 +7070,24 @@ function Qj(a, b) {
 
     c = c.return;
   }
-  U = a;
-  Y = Tg(a.current, null);
-  W = qj = tj = b;
-  V = 0;
+  U$1 = a;
+  Y$1 = Tg(a.current, null);
+  W$1 = qj = tj = b;
+  V$1 = 0;
   sj = null;
   uj = Hi = Dg = 0;
 }
 
 function Sj(a, b) {
   do {
-    var c = Y;
+    var c = Y$1;
 
     try {
       qg();
       vh.current = Gh;
 
       if (yh) {
-        for (var d = R.memoizedState; null !== d;) {
+        for (var d = R$1.memoizedState; null !== d;) {
           var e = d.queue;
           null !== e && (e.pending = null);
           d = d.next;
@@ -7097,14 +7097,14 @@ function Sj(a, b) {
       }
 
       xh = 0;
-      T = S = R = null;
+      T$1 = S$1 = R$1 = null;
       zh = !1;
       pj.current = null;
 
       if (null === c || null === c.return) {
-        V = 1;
+        V$1 = 1;
         sj = b;
-        Y = null;
+        Y$1 = null;
         break;
       }
 
@@ -7113,7 +7113,7 @@ function Sj(a, b) {
             g = c.return,
             h = c,
             k = b;
-        b = W;
+        b = W$1;
         h.flags |= 2048;
         h.firstEffect = h.lastEffect = null;
 
@@ -7125,7 +7125,7 @@ function Sj(a, b) {
             n ? (h.updateQueue = n.updateQueue, h.memoizedState = n.memoizedState, h.lanes = n.lanes) : (h.updateQueue = null, h.memoizedState = null);
           }
 
-          var A = 0 !== (P.current & 1),
+          var A = 0 !== (P$1.current & 1),
               p = g;
 
           do {
@@ -7183,7 +7183,7 @@ function Sj(a, b) {
           k = Error((Ra(h.type) || "A React component") + " suspended while rendering, but no fallback UI was specified.\n\nAdd a <Suspense fallback=...> component higher in the tree to provide a loading indicator or placeholder to display.");
         }
 
-        5 !== V && (V = 2);
+        5 !== V$1 && (V$1 = 2);
         k = Mi(k, h);
         p = g;
 
@@ -7221,7 +7221,7 @@ function Sj(a, b) {
       Zj(c);
     } catch (va) {
       b = va;
-      Y === c && null !== c && (Y = c = c.return);
+      Y$1 === c && null !== c && (Y$1 = c = c.return);
       continue;
     }
 
@@ -7236,10 +7236,10 @@ function Pj() {
 }
 
 function Tj(a, b) {
-  var c = X;
-  X |= 16;
+  var c = X$1;
+  X$1 |= 16;
   var d = Pj();
-  U === a && W === b || Qj(a, b);
+  U$1 === a && W$1 === b || Qj(a, b);
 
   do try {
     ak();
@@ -7249,26 +7249,26 @@ function Tj(a, b) {
   } while (1);
 
   qg();
-  X = c;
+  X$1 = c;
   oj.current = d;
-  if (null !== Y) throw Error(y$2(261));
-  U = null;
-  W = 0;
-  return V;
+  if (null !== Y$1) throw Error(y$3(261));
+  U$1 = null;
+  W$1 = 0;
+  return V$1;
 }
 
 function ak() {
-  for (; null !== Y;) bk(Y);
+  for (; null !== Y$1;) bk(Y$1);
 }
 
 function Rj() {
-  for (; null !== Y && !Qf();) bk(Y);
+  for (; null !== Y$1 && !Qf();) bk(Y$1);
 }
 
 function bk(a) {
   var b = ck(a.alternate, a, qj);
   a.memoizedProps = a.pendingProps;
-  null === b ? Zj(a) : Y = b;
+  null === b ? Zj(a) : Y$1 = b;
   pj.current = null;
 }
 
@@ -7283,7 +7283,7 @@ function Zj(a) {
       c = Gi(c, b, qj);
 
       if (null !== c) {
-        Y = c;
+        Y$1 = c;
         return;
       }
 
@@ -7301,7 +7301,7 @@ function Zj(a) {
 
       if (null !== c) {
         c.flags &= 2047;
-        Y = c;
+        Y$1 = c;
         return;
       }
 
@@ -7311,14 +7311,14 @@ function Zj(a) {
     b = b.sibling;
 
     if (null !== b) {
-      Y = b;
+      Y$1 = b;
       return;
     }
 
-    Y = b = a;
+    Y$1 = b = a;
   } while (null !== b);
 
-  0 === V && (V = 5);
+  0 === V$1 && (V$1 = 5);
 }
 
 function Uj(a) {
@@ -7330,12 +7330,12 @@ function Uj(a) {
 function dk(a, b) {
   do Oj(); while (null !== yj);
 
-  if (0 !== (X & 48)) throw Error(y$2(327));
+  if (0 !== (X$1 & 48)) throw Error(y$3(327));
   var c = a.finishedWork;
   if (null === c) return null;
   a.finishedWork = null;
   a.finishedLanes = 0;
-  if (c === a.current) throw Error(y$2(177));
+  if (c === a.current) throw Error(y$3(177));
   a.callbackNode = null;
   var d = c.lanes | c.childLanes,
       e = d,
@@ -7358,12 +7358,12 @@ function dk(a, b) {
   }
 
   null !== Cj && 0 === (d & 24) && Cj.has(a) && Cj.delete(a);
-  a === U && (Y = U = null, W = 0);
+  a === U$1 && (Y$1 = U$1 = null, W$1 = 0);
   1 < c.flags ? null !== c.lastEffect ? (c.lastEffect.nextEffect = c, d = c.firstEffect) : d = c : d = c.firstEffect;
 
   if (null !== d) {
-    e = X;
-    X |= 32;
+    e = X$1;
+    X$1 |= 32;
     pj.current = null;
     kf = fd;
     g = Ne();
@@ -7431,24 +7431,24 @@ function dk(a, b) {
       selectionRange: h
     };
     fd = !1;
-    Z = d;
+    Z$1 = d;
 
     do try {
       ek();
     } catch (va) {
-      if (null === Z) throw Error(y$2(330));
-      Wi(Z, va);
-      Z = Z.nextEffect;
-    } while (null !== Z);
-    Z = d;
+      if (null === Z$1) throw Error(y$3(330));
+      Wi(Z$1, va);
+      Z$1 = Z$1.nextEffect;
+    } while (null !== Z$1);
+    Z$1 = d;
 
     do try {
-      for (g = a; null !== Z;) {
-        var t = Z.flags;
-        t & 16 && pb(Z.stateNode, "");
+      for (g = a; null !== Z$1;) {
+        var t = Z$1.flags;
+        t & 16 && pb(Z$1.stateNode, "");
 
         if (t & 128) {
-          var q = Z.alternate;
+          var q = Z$1.alternate;
 
           if (null !== q) {
             var v = q.ref;
@@ -7458,44 +7458,44 @@ function dk(a, b) {
 
         switch (t & 1038) {
           case 2:
-            fj(Z);
-            Z.flags &= -3;
+            fj(Z$1);
+            Z$1.flags &= -3;
             break;
 
           case 6:
-            fj(Z);
-            Z.flags &= -3;
-            ij(Z.alternate, Z);
+            fj(Z$1);
+            Z$1.flags &= -3;
+            ij(Z$1.alternate, Z$1);
             break;
 
           case 1024:
-            Z.flags &= -1025;
+            Z$1.flags &= -1025;
             break;
 
           case 1028:
-            Z.flags &= -1025;
-            ij(Z.alternate, Z);
+            Z$1.flags &= -1025;
+            ij(Z$1.alternate, Z$1);
             break;
 
           case 4:
-            ij(Z.alternate, Z);
+            ij(Z$1.alternate, Z$1);
             break;
 
           case 8:
-            h = Z;
+            h = Z$1;
             cj(g, h);
             var J = h.alternate;
             dj(h);
             null !== J && dj(J);
         }
 
-        Z = Z.nextEffect;
+        Z$1 = Z$1.nextEffect;
       }
     } catch (va) {
-      if (null === Z) throw Error(y$2(330));
-      Wi(Z, va);
-      Z = Z.nextEffect;
-    } while (null !== Z);
+      if (null === Z$1) throw Error(y$3(330));
+      Wi(Z$1, va);
+      Z$1 = Z$1.nextEffect;
+    } while (null !== Z$1);
 
     v = lf;
     q = Ne();
@@ -7520,21 +7520,21 @@ function dk(a, b) {
     fd = !!kf;
     lf = kf = null;
     a.current = c;
-    Z = d;
+    Z$1 = d;
 
     do try {
-      for (t = a; null !== Z;) {
-        var K = Z.flags;
-        K & 36 && Yi(t, Z.alternate, Z);
+      for (t = a; null !== Z$1;) {
+        var K = Z$1.flags;
+        K & 36 && Yi(t, Z$1.alternate, Z$1);
 
         if (K & 128) {
           q = void 0;
-          var Q = Z.ref;
+          var Q = Z$1.ref;
 
           if (null !== Q) {
-            var L = Z.stateNode;
+            var L = Z$1.stateNode;
 
-            switch (Z.tag) {
+            switch (Z$1.tag) {
               case 5:
                 q = L;
                 break;
@@ -7547,20 +7547,20 @@ function dk(a, b) {
           }
         }
 
-        Z = Z.nextEffect;
+        Z$1 = Z$1.nextEffect;
       }
     } catch (va) {
-      if (null === Z) throw Error(y$2(330));
-      Wi(Z, va);
-      Z = Z.nextEffect;
-    } while (null !== Z);
+      if (null === Z$1) throw Error(y$3(330));
+      Wi(Z$1, va);
+      Z$1 = Z$1.nextEffect;
+    } while (null !== Z$1);
 
-    Z = null;
+    Z$1 = null;
     $f();
-    X = e;
+    X$1 = e;
   } else a.current = c;
 
-  if (xj) xj = !1, yj = a, zj = b;else for (Z = d; null !== Z;) b = Z.nextEffect, Z.nextEffect = null, Z.flags & 8 && (K = Z, K.sibling = null, K.stateNode = null), Z = b;
+  if (xj) xj = !1, yj = a, zj = b;else for (Z$1 = d; null !== Z$1;) b = Z$1.nextEffect, Z$1.nextEffect = null, Z$1.flags & 8 && (K = Z$1, K.sibling = null, K.stateNode = null), Z$1 = b;
   d = a.pendingLanes;
   0 === d && (Ti = null);
   1 === d ? a === Ej ? Dj++ : (Dj = 0, Ej = a) : Dj = 0;
@@ -7568,23 +7568,23 @@ function dk(a, b) {
   if (Mf && "function" === typeof Mf.onCommitFiberRoot) try {
     Mf.onCommitFiberRoot(Lf, c, void 0, 64 === (c.current.flags & 64));
   } catch (va) {}
-  Mj(a, O());
+  Mj(a, O$1());
   if (Qi) throw Qi = !1, a = Ri, Ri = null, a;
-  if (0 !== (X & 8)) return null;
+  if (0 !== (X$1 & 8)) return null;
   ig();
   return null;
 }
 
 function ek() {
-  for (; null !== Z;) {
-    var a = Z.alternate;
-    var b = Z.flags;
-    0 !== (b & 256) && Xi(a, Z);
+  for (; null !== Z$1;) {
+    var a = Z$1.alternate;
+    var b = Z$1.flags;
+    0 !== (b & 256) && Xi(a, Z$1);
     0 === (b & 512) || xj || (xj = !0, hg(97, function () {
       Oj();
       return null;
     }));
-    Z = Z.nextEffect;
+    Z$1 = Z$1.nextEffect;
   }
 }
 
@@ -7618,9 +7618,9 @@ function fk() {
   if (null === yj) return !1;
   var a = yj;
   yj = null;
-  if (0 !== (X & 48)) throw Error(y$2(331));
-  var b = X;
-  X |= 32;
+  if (0 !== (X$1 & 48)) throw Error(y$3(331));
+  var b = X$1;
+  X$1 |= 32;
   var c = Bj;
   Bj = [];
 
@@ -7632,7 +7632,7 @@ function fk() {
     if ("function" === typeof g) try {
       g();
     } catch (k) {
-      if (null === f) throw Error(y$2(330));
+      if (null === f) throw Error(y$3(330));
       Wi(f, k);
     }
   }
@@ -7648,14 +7648,14 @@ function fk() {
       var h = e.create;
       e.destroy = h();
     } catch (k) {
-      if (null === f) throw Error(y$2(330));
+      if (null === f) throw Error(y$3(330));
       Wi(f, k);
     }
   }
 
   for (h = a.current.firstEffect; null !== h;) a = h.nextEffect, h.nextEffect = null, h.flags & 8 && (h.sibling = null, h.stateNode = null), h = a;
 
-  X = b;
+  X$1 = b;
   ig();
   return !0;
 }
@@ -7699,7 +7699,7 @@ function Yj(a, b, c) {
   null !== d && d.delete(b);
   b = Hg();
   a.pingedLanes |= a.suspendedLanes & c;
-  U === a && (W & c) === c && (4 === V || 3 === V && (W & 62914560) === W && 500 > O() - jj ? Qj(a, 0) : uj |= c);
+  U$1 === a && (W$1 & c) === c && (4 === V$1 || 3 === V$1 && (W$1 & 62914560) === W$1 && 500 > O$1() - jj ? Qj(a, 0) : uj |= c);
   Mj(a, b);
 }
 
@@ -7718,7 +7718,7 @@ var ck;
 ck = function (a, b, c) {
   var d = b.lanes;
   if (null !== a) {
-    if (a.memoizedProps !== b.pendingProps || N.current) ug = !0;else if (0 !== (c & d)) ug = 0 !== (a.flags & 16384) ? !0 : !1;else {
+    if (a.memoizedProps !== b.pendingProps || N$1.current) ug = !0;else if (0 !== (c & d)) ug = 0 !== (a.flags & 16384) ? !0 : !1;else {
       ug = !1;
 
       switch (b.tag) {
@@ -7742,19 +7742,19 @@ ck = function (a, b, c) {
         case 10:
           d = b.memoizedProps.value;
           var e = b.type._context;
-          I$1(mg, e._currentValue);
+          I$2(mg, e._currentValue);
           e._currentValue = d;
           break;
 
         case 13:
           if (null !== b.memoizedState) {
             if (0 !== (c & b.child.childLanes)) return ti(a, b, c);
-            I$1(P, P.current & 1);
+            I$2(P$1, P$1.current & 1);
             b = hi(a, b, c);
             return null !== b ? b.sibling : null;
           }
 
-          I$1(P, P.current & 1);
+          I$2(P$1, P$1.current & 1);
           break;
 
         case 19:
@@ -7767,7 +7767,7 @@ ck = function (a, b, c) {
 
           e = b.memoizedState;
           null !== e && (e.rendering = null, e.tail = null, e.lastEffect = null);
-          I$1(P, P.current);
+          I$2(P$1, P$1.current);
           if (d) break;else return null;
 
         case 23:
@@ -7785,7 +7785,7 @@ ck = function (a, b, c) {
       d = b.type;
       null !== a && (a.alternate = null, b.alternate = null, b.flags |= 2);
       a = b.pendingProps;
-      e = Ef(b, M.current);
+      e = Ef(b, M$1.current);
       tg(b, c);
       e = Ch(null, b, d, a, e, c);
       b.flags |= 1;
@@ -7843,7 +7843,7 @@ ck = function (a, b, c) {
             break a;
         }
 
-        throw Error(y$2(306, e, ""));
+        throw Error(y$3(306, e, ""));
       }
 
       return b;
@@ -7857,7 +7857,7 @@ ck = function (a, b, c) {
     case 3:
       ri(b);
       d = b.updateQueue;
-      if (null === a || null === d) throw Error(y$2(282));
+      if (null === a || null === d) throw Error(y$3(282));
       d = b.pendingProps;
       e = b.memoizedState;
       e = null !== e ? e.element : null;
@@ -7911,10 +7911,10 @@ ck = function (a, b, c) {
         g = b.memoizedProps;
         f = e.value;
         var h = b.type._context;
-        I$1(mg, h._currentValue);
+        I$2(mg, h._currentValue);
         h._currentValue = f;
         if (null !== g) if (h = g.value, f = He(h, f) ? 0 : ("function" === typeof d._calculateChangedBits ? d._calculateChangedBits(h, f) : 1073741823) | 0, 0 === f) {
-          if (g.children === e.children && !N.current) {
+          if (g.children === e.children && !N$1.current) {
             b = hi(a, b, c);
             break a;
           }
@@ -7985,7 +7985,7 @@ ck = function (a, b, c) {
       return mi(a, b, c);
   }
 
-  throw Error(y$2(156, b.tag));
+  throw Error(y$3(156, b.tag));
 };
 
 function ik(a, b, c, d) {
@@ -8103,7 +8103,7 @@ function Vg(a, b, c, d, e, f) {
           g = 22;
           break a;
       }
-      throw Error(y$2(130, null == a ? a : typeof a, ""));
+      throw Error(y$3(130, null == a ? a : typeof a, ""));
   }
   b = nh(g, c, b, e);
   b.elementType = a;
@@ -8178,7 +8178,7 @@ function lk(a, b, c, d) {
     c = c._reactInternals;
 
     b: {
-      if (Zb(c) !== c || 1 !== c.tag) throw Error(y$2(170));
+      if (Zb(c) !== c || 1 !== c.tag) throw Error(y$3(170));
       var h = c;
 
       do {
@@ -8198,7 +8198,7 @@ function lk(a, b, c, d) {
         h = h.return;
       } while (null !== h);
 
-      throw Error(y$2(171));
+      throw Error(y$3(171));
     }
 
     if (1 === c.tag) {
@@ -8380,7 +8380,7 @@ yb = function (a, b, c) {
 
           if (d !== a && d.form === a.form) {
             var e = Db(d);
-            if (!e) throw Error(y$2(90));
+            if (!e) throw Error(y$3(90));
             Wa(d);
             ab(d, e);
           }
@@ -8401,34 +8401,34 @@ yb = function (a, b, c) {
 Gb = Wj;
 
 Hb = function (a, b, c, d, e) {
-  var f = X;
-  X |= 4;
+  var f = X$1;
+  X$1 |= 4;
 
   try {
     return gg(98, a.bind(null, b, c, d, e));
   } finally {
-    X = f, 0 === X && (wj(), ig());
+    X$1 = f, 0 === X$1 && (wj(), ig());
   }
 };
 
 Ib = function () {
-  0 === (X & 49) && (Vj(), Oj());
+  0 === (X$1 & 49) && (Vj(), Oj());
 };
 
 Jb = function (a, b) {
-  var c = X;
-  X |= 2;
+  var c = X$1;
+  X$1 |= 2;
 
   try {
     return a(b);
   } finally {
-    X = c, 0 === X && (wj(), ig());
+    X$1 = c, 0 === X$1 && (wj(), ig());
   }
 };
 
 function uk(a, b) {
   var c = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : null;
-  if (!rk(b)) throw Error(y$2(200));
+  if (!rk(b)) throw Error(y$3(200));
   return kk(a, b, null, c);
 }
 
@@ -8476,7 +8476,7 @@ if ("undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__) {
   } catch (a) {}
 }
 
-var __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = vk;
+var __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED$1 = vk;
 var createPortal = uk;
 
 var findDOMNode = function (a) {
@@ -8485,8 +8485,8 @@ var findDOMNode = function (a) {
   var b = a._reactInternals;
 
   if (void 0 === b) {
-    if ("function" === typeof a.render) throw Error(y$2(188));
-    throw Error(y$2(268, Object.keys(a)));
+    if ("function" === typeof a.render) throw Error(y$3(188));
+    throw Error(y$3(268, Object.keys(a)));
   }
 
   a = cc(b);
@@ -8495,29 +8495,29 @@ var findDOMNode = function (a) {
 };
 
 var flushSync = function (a, b) {
-  var c = X;
+  var c = X$1;
   if (0 !== (c & 48)) return a(b);
-  X |= 1;
+  X$1 |= 1;
 
   try {
     if (a) return gg(99, a.bind(null, b));
   } finally {
-    X = c, ig();
+    X$1 = c, ig();
   }
 };
 
 var hydrate = function (a, b, c) {
-  if (!rk(b)) throw Error(y$2(200));
+  if (!rk(b)) throw Error(y$3(200));
   return tk(null, a, b, !0, c);
 };
 
 var render = function (a, b, c) {
-  if (!rk(b)) throw Error(y$2(200));
+  if (!rk(b)) throw Error(y$3(200));
   return tk(null, a, b, !1, c);
 };
 
 var unmountComponentAtNode = function (a) {
-  if (!rk(a)) throw Error(y$2(40));
+  if (!rk(a)) throw Error(y$3(40));
   return a._reactRootContainer ? (Xj(function () {
     tk(null, null, a, !1, function () {
       a._reactRootContainer = null;
@@ -8533,14 +8533,14 @@ var unstable_createPortal = function (a, b) {
 };
 
 var unstable_renderSubtreeIntoContainer = function (a, b, c, d) {
-  if (!rk(c)) throw Error(y$2(200));
-  if (null == a || void 0 === a._reactInternals) throw Error(y$2(38));
+  if (!rk(c)) throw Error(y$3(200));
+  if (null == a || void 0 === a._reactInternals) throw Error(y$3(38));
   return tk(a, b, c, !1, d);
 };
 
-var version = "17.0.2";
+var version$1 = "17.0.2";
 var reactDom_production_min = {
-  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED,
+  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED$1,
   createPortal: createPortal,
   findDOMNode: findDOMNode,
   flushSync: flushSync,
@@ -8550,7 +8550,7 @@ var reactDom_production_min = {
   unstable_batchedUpdates: unstable_batchedUpdates,
   unstable_createPortal: unstable_createPortal,
   unstable_renderSubtreeIntoContainer: unstable_renderSubtreeIntoContainer,
-  version: version
+  version: version$1
 };
 
 /** @license React v0.20.2
@@ -8657,25 +8657,26 @@ var reactDom = createCommonjsModule(function (module) {
   }
 });
 
-var igniteDataContext = react.createContext({});
+var igniteDataContext = react$1.createContext({});
 
+var _excluded$8 = ["path", "className"];
 function FilePath(_ref) {
   var path = _ref.path,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["path", "className"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$8);
 
   var segments = path.replace(/^\/Users/, '~').split('/');
   var file = segments.pop() || '';
   var fileSegments = file.split('.');
-  return react.createElement("span", Object.assign({
+  return react$1.createElement("span", _extends$1({
     className: "ui-path " + className
   }, props), segments.map(function (segment, i) {
-    return react.createElement("span", {
+    return react$1.createElement("span", {
       key: i
-    }, segment, "/", react.createElement("wbr", null));
+    }, segment, "/", react$1.createElement("wbr", null));
   }), fileSegments.map(function (fileSegment, i) {
-    return react.createElement("span", {
+    return react$1.createElement("span", {
       key: i,
       className: i === 0 ? 'font-semibold' : ''
     }, i > 0 && '.', fileSegment);
@@ -8685,52 +8686,52 @@ function FilePath(_ref) {
 function CardHeader(_ref) {
   var errorOccurrence = _ref.errorOccurrence;
 
-  var _useContext = react.useContext(igniteDataContext),
+  var _useContext = react$1.useContext(igniteDataContext),
       telescopeUrl = _useContext.telescopeUrl;
 
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "card-header"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "grid items-center rounded-t border-b border-tint-300 text-xs text-tint-600",
     style: {
       gridTemplateColumns: '1fr 1fr'
     }
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "grid cols-auto justify-start gap-2 px-4 py-2"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "flex items-center"
-  }, react.createElement("a", {
+  }, react$1.createElement("a", {
     href: "http://flareapp.io/docs/ignition-for-laravel/introduction",
     target: "_blank",
     title: "Ignition docs"
-  }, react.createElement("svg", {
+  }, react$1.createElement("svg", {
     className: "w-4 h-5 mr-4",
     viewBox: "0 0 428 988"
-  }, react.createElement("polygon", {
+  }, react$1.createElement("polygon", {
     style: {
       fill: '#FA4E79'
     },
     points: "428,247.1 428,494.1 214,617.5 214,369.3"
-  }), react.createElement("polygon", {
+  }), react$1.createElement("polygon", {
     style: {
       fill: '#FFF082'
     },
     points: "0,988 0,741 214,617.5 214,864.1"
-  }), react.createElement("polygon", {
+  }), react$1.createElement("polygon", {
     style: {
       fill: '#E6003A'
     },
     points: "214,123.9 214,617.5 0,494.1 0,0"
-  }), react.createElement("polygon", {
+  }), react$1.createElement("polygon", {
     style: {
       fill: '#FFE100'
     },
     points: "214,864.1 214,617.5 428,741 428,988"
-  }))), react.createElement(FilePath, {
+  }))), react$1.createElement(FilePath, {
     path: errorOccurrence.application_path
-  }))), react.createElement("div", {
+  }))), react$1.createElement("div", {
     className: "grid cols-auto items-center justify-end gap-4 px-4 py-2"
-  }, telescopeUrl && react.createElement("div", null, react.createElement("a", {
+  }, telescopeUrl && react$1.createElement("div", null, react$1.createElement("a", {
     href: telescopeUrl,
     className: "link-dimmed sm:ml-6",
     target: "_blank"
@@ -8742,11 +8743,11 @@ function ExceptionMessage(_ref) {
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className;
 
-  var _useState = react.useState(false),
+  var _useState = react$1.useState(false),
       fullException = _useState[0],
       setFullException = _useState[1];
 
-  return react.createElement("span", {
+  return react$1.createElement("span", {
     className: "ui-exception-message " + (fullException ? 'ui-exception-message-full' : '') + " " + className,
     onClick: function onClick() {
       return setFullException(!fullException);
@@ -8780,7 +8781,7 @@ var tokenTypes = createCommonjsModule(function (module, exports) {
     PLACEHOLDER: 'placeholder'
   };
   exports["default"] = _default;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var utils$1 = createCommonjsModule(function (module, exports) {
@@ -8947,7 +8948,7 @@ var Indentation_1 = createCommonjsModule(function (module, exports) {
   }();
 
   exports["default"] = Indentation;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var InlineBlock_1 = createCommonjsModule(function (module, exports) {
@@ -9089,7 +9090,7 @@ var InlineBlock_1 = createCommonjsModule(function (module, exports) {
   }();
 
   exports["default"] = InlineBlock;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var Params_1 = createCommonjsModule(function (module, exports) {
@@ -9166,7 +9167,7 @@ var Params_1 = createCommonjsModule(function (module, exports) {
   }();
 
   exports["default"] = Params;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var token = createCommonjsModule(function (module, exports) {
@@ -9535,7 +9536,7 @@ var Formatter_1 = createCommonjsModule(function (module, exports) {
   }();
 
   exports["default"] = Formatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var createOperatorRegex_1 = createOperatorRegex;
@@ -10123,7 +10124,7 @@ var Tokenizer_1 = createCommonjsModule(function (module, exports) {
   }();
 
   exports["default"] = Tokenizer;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var Db2Formatter_1 = createCommonjsModule(function (module, exports) {
@@ -10301,7 +10302,7 @@ var Db2Formatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = Db2Formatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var MariaDbFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -10480,7 +10481,7 @@ var MariaDbFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = MariaDbFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var MySqlFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -10659,7 +10660,7 @@ var MySqlFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = MySqlFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var N1qlFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -10835,7 +10836,7 @@ var N1qlFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = N1qlFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var PlSqlFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -11027,7 +11028,7 @@ var PlSqlFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = PlSqlFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var PostgreSqlFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -11204,7 +11205,7 @@ var PostgreSqlFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = PostgreSqlFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var RedshiftFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -11381,7 +11382,7 @@ var RedshiftFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = RedshiftFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var SparkSqlFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -11592,7 +11593,7 @@ var SparkSqlFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = SparkSqlFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var StandardSqlFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -11769,7 +11770,7 @@ var StandardSqlFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = StandardSqlFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var TSqlFormatter_1 = createCommonjsModule(function (module, exports) {
@@ -11948,7 +11949,7 @@ var TSqlFormatter_1 = createCommonjsModule(function (module, exports) {
   }(_Formatter2["default"]);
 
   exports["default"] = TSqlFormatter;
-  module.exports = exports.default;
+  module.exports = exports["default"];
 });
 
 var sqlFormatter = createCommonjsModule(function (module, exports) {
@@ -12057,19 +12058,19 @@ function FormattedExceptionMessage(_ref) {
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className;
 
-  var _useState = react.useState(message),
+  var _useState = react$1.useState(message),
       cleanedUpMessage = _useState[0],
       setCleanedUpMessage = _useState[1];
 
-  var _useState2 = react.useState(false),
+  var _useState2 = react$1.useState(false),
       isExpanded = _useState2[0],
       setIsExpanded = _useState2[1];
 
-  var _useState3 = react.useState(null),
+  var _useState3 = react$1.useState(null),
       sqlQuery = _useState3[0],
       setSqlQuery = _useState3[1];
 
-  react.useEffect(function () {
+  react$1.useEffect(function () {
     if (exceptionClass === 'Illuminate\\Database\\QueryException' || message.match(/SQLSTATE\[.*\].*\(SQL: .*\)/)) {
       var sqlQueryPattern = /*#__PURE__*/_wrapRegExp(/\(SQL: (.*?)\)($| \(View: .*\)$)/, {
         query: 1
@@ -12082,21 +12083,21 @@ function FormattedExceptionMessage(_ref) {
       setCleanedUpMessage(message.replace(sqlQueryPattern, '$2'));
     }
   }, [message, exceptionClass]);
-  return react.createElement(react.Fragment, null, !sqlQuery && react.createElement(ExceptionMessage, {
+  return react$1.createElement(react$1.Fragment, null, !sqlQuery && react$1.createElement(ExceptionMessage, {
     message: cleanedUpMessage,
     className: className
-  }), sqlQuery && react.createElement(react.Fragment, null, react.createElement("p", {
+  }), sqlQuery && react$1.createElement(react$1.Fragment, null, react$1.createElement("p", {
     className: "ui-exception-message ui-exception-message-full " + className
-  }, cleanedUpMessage), react.createElement("div", {
+  }, cleanedUpMessage), react$1.createElement("div", {
     className: "mt-2"
-  }, react.createElement(react.Fragment, null, react.createElement("code", {
+  }, react$1.createElement(react$1.Fragment, null, react$1.createElement("code", {
     className: "code-block mt-2 text-sm cursor-default",
     onClick: function onClick(e) {
       return e.stopPropagation();
     }
-  }, isExpanded ? react.createElement("pre", null, sqlFormatter$1.format(sqlQuery)) : react.createElement("pre", {
+  }, isExpanded ? react$1.createElement("pre", null, sqlFormatter$1.format(sqlQuery)) : react$1.createElement("pre", {
     className: "truncate pr-12"
-  }, sqlQuery)), react.createElement("button", {
+  }, sqlQuery)), react$1.createElement("button", {
     className: "absolute top-0 right-0 mt-1 mr-2 link-dimmed text-xs",
     onClick: function onClick(e) {
       setIsExpanded(!isExpanded);
@@ -12105,58 +12106,59 @@ function FormattedExceptionMessage(_ref) {
   }, isExpanded ? 'Collapse' : 'Expand')))));
 }
 
+var _excluded$7 = ["name", "method", "className"];
 function ExceptionClass(_ref) {
   var _ref$name = _ref.name,
       name = _ref$name === void 0 ? '' : _ref$name,
       method = _ref.method,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["name", "method", "className"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$7);
 
   var segments = name.split('\\');
   var segmentsClass = segments.pop();
-  return react.createElement("span", Object.assign({
+  return react$1.createElement("span", _extends$1({
     className: "ui-exception-class " + className
   }, props), segments.map(function (segment, i) {
-    return react.createElement("span", {
+    return react$1.createElement("span", {
       key: i
-    }, segment, "\\", react.createElement("wbr", null));
-  }), segmentsClass, react.createElement("wbr", null), method && react.createElement("span", {
+    }, segment, "\\", react$1.createElement("wbr", null));
+  }), segmentsClass, react$1.createElement("wbr", null), method && react$1.createElement("span", {
     className: "ui-exception-method"
   }, name && '::', method));
 }
 
 function ErrorCard(_ref) {
   var errorOccurrence = _ref.errorOccurrence;
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "card card-has-header block mb-12"
-  }, react.createElement(CardHeader, {
+  }, react$1.createElement(CardHeader, {
     errorOccurrence: errorOccurrence
-  }), react.createElement("div", {
+  }), react$1.createElement("div", {
     className: "card-details"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "card-details-overflow scrollbar"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "overflow-hidden text-2xl"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "grid grid-cols-auto grid-flow-col gap-2 items-center justify-start"
-  }, react.createElement(ExceptionClass, {
+  }, react$1.createElement(ExceptionClass, {
     name: errorOccurrence.exception_class
-  })), react.createElement(FormattedExceptionMessage, {
+  })), react$1.createElement(FormattedExceptionMessage, {
     className: "mt-1",
     message: errorOccurrence.exception_message,
     exceptionClass: errorOccurrence.exception_class
-  })), react.createElement("div", null, react.createElement("a", {
+  })), react$1.createElement("div", null, react$1.createElement("a", {
     className: "ui-url",
     href: errorOccurrence.seen_at_url,
     target: "_blank",
     onClick: function onClick(e) {
       return e.stopPropagation();
     }
-  }, errorOccurrence.seen_at_url)))), !!errorOccurrence.solutions.length && react.createElement("span", {
+  }, errorOccurrence.seen_at_url)))), !!errorOccurrence.solutions.length && react$1.createElement("span", {
     className: "card-solution",
     title: "This error has a solution"
-  }, react.createElement("i", {
+  }, react$1.createElement("i", {
     className: "far fa-lightbulb text-base"
   })));
 }
@@ -12320,12 +12322,12 @@ var extend$1 = function extend() {
   return target;
 };
 
-var isPlainObj = value => {
+var isPlainObj = function isPlainObj(value) {
   if (Object.prototype.toString.call(value) !== '[object Object]') {
     return false;
   }
 
-  const prototype = Object.getPrototypeOf(value);
+  var prototype = Object.getPrototypeOf(value);
   return prototype === null || prototype === Object.prototype;
 };
 
@@ -13654,7 +13656,7 @@ function safeFromInt(value, base) {
   code > 55295 && code < 57344 || // Noncharacters.
   code > 64975 && code < 65008 || (code & 65535) === 65535 || (code & 65535) === 65534 || // Out of range
   code > 1114111) {
-    return '\uFFFD';
+    return "\uFFFD";
   }
 
   return fromCharCode_1(code);
@@ -13960,11 +13962,11 @@ function initializeDocument(effects) {
 }
 
 function tokenizeContainer(effects, ok, nok) {
-  return factorySpace(effects, effects.attempt(this.parser.constructs.document, ok, nok), 'linePrefix', this.parser.constructs.disable.null.indexOf('codeIndented') > -1 ? undefined : 4);
+  return factorySpace(effects, effects.attempt(this.parser.constructs.document, ok, nok), 'linePrefix', this.parser.constructs.disable["null"].indexOf('codeIndented') > -1 ? undefined : 4);
 }
 
 function tokenizeLazyFlow(effects, ok, nok) {
-  return factorySpace(effects, effects.lazy(this.parser.constructs.flow, ok, nok), 'linePrefix', this.parser.constructs.disable.null.indexOf('codeIndented') > -1 ? undefined : 4);
+  return factorySpace(effects, effects.lazy(this.parser.constructs.flow, ok, nok), 'linePrefix', this.parser.constructs.disable["null"].indexOf('codeIndented') > -1 ? undefined : 4);
 }
 
 var tokenize_1$1 = tokenize$1;
@@ -14291,7 +14293,7 @@ function tokenizeContinuation(effects, ok, nok) {
       return nok(code);
     }
 
-    if (self.parser.constructs.disable.null.indexOf('codeIndented') > -1 || prefixSize_1(self.events, 'linePrefix') < 4) {
+    if (self.parser.constructs.disable["null"].indexOf('codeIndented') > -1 || prefixSize_1(self.events, 'linePrefix') < 4) {
       return effects.interrupt(self.parser.constructs.flow, nok, ok)(code);
     }
 
@@ -14863,9 +14865,9 @@ function createTokenizer(parser, initialize, from) {
 
       function handleMapOfConstructs(code) {
         if (code in constructs || null in constructs) {
-          return handleListOfConstructs(constructs.null ?
+          return handleListOfConstructs(constructs["null"] ?
           /* c8 ignore next */
-          miniflat_1(constructs[code]).concat(miniflat_1(constructs.null)) : constructs[code])(code);
+          miniflat_1(constructs[code]).concat(miniflat_1(constructs["null"])) : constructs[code])(code);
         }
 
         return bogusState(code);
@@ -14892,7 +14894,7 @@ function createTokenizer(parser, initialize, from) {
             context.currentConstruct = construct;
           }
 
-          if (construct.name && context.parser.constructs.disable.null.indexOf(construct.name) > -1) {
+          if (construct.name && context.parser.constructs.disable["null"].indexOf(construct.name) > -1) {
             return nok();
           }
 
@@ -15089,7 +15091,7 @@ function resolveAllAttention(events, context) {
 
           nextEvents = chunkedPush_1(nextEvents, [['enter', group, context], ['enter', openingSequence, context], ['exit', openingSequence, context], ['enter', text, context]]); // Between.
 
-          nextEvents = chunkedPush_1(nextEvents, resolveAll_1(context.parser.constructs.insideSpan.null, events.slice(open + 1, index), context)); // Closing.
+          nextEvents = chunkedPush_1(nextEvents, resolveAll_1(context.parser.constructs.insideSpan["null"], events.slice(open + 1, index), context)); // Closing.
 
           nextEvents = chunkedPush_1(nextEvents, [['exit', text, context], ['enter', closingSequence, context], ['exit', closingSequence, context], ['exit', group, context]]); // If there are more markers in the closing, add them after.
 
@@ -15333,7 +15335,7 @@ function tokenizeBlockQuoteStart(effects, ok, nok) {
 }
 
 function tokenizeBlockQuoteContinuation(effects, ok, nok) {
-  return factorySpace(effects, effects.attempt(blockQuote, ok, nok), 'linePrefix', this.parser.constructs.disable.null.indexOf('codeIndented') > -1 ? undefined : 4);
+  return factorySpace(effects, effects.attempt(blockQuote, ok, nok), 'linePrefix', this.parser.constructs.disable["null"].indexOf('codeIndented') > -1 ? undefined : 4);
 }
 
 function exit(effects) {
@@ -15385,21 +15387,23 @@ var decodeEntity_browser = decodeEntity;
 
 function decodeEntity(characters) {
   var entity = '&' + characters + ';';
-  var char;
+
+  var _char;
+
   el = el || document.createElement('i');
   el.innerHTML = entity;
-  char = el.textContent; // Some entities do not require the closing semicolon (`&not` - for instance),
+  _char = el.textContent; // Some entities do not require the closing semicolon (`&not` - for instance),
   // which leads to situations where parsing the assumed entity of &notit; will
   // result in the string `¬it;`.  When we encounter a trailing semicolon after
   // parsing and the entity to decode was not a semicolon (`&semi;`), we can
   // assume that the matching was incomplete
 
-  if (char.charCodeAt(char.length - 1) === semicolon && characters !== 'semi') {
+  if (_char.charCodeAt(_char.length - 1) === semicolon && characters !== 'semi') {
     return false;
   } // If the decoded string is equal to the input, the entity was not valid
 
 
-  return char === entity ? false : char;
+  return _char === entity ? false : _char;
 }
 
 var asciiDigit = regexCheck_1(/\d/);
@@ -15410,7 +15414,7 @@ var asciiHexDigit_1 = asciiHexDigit;
 
 function _interopDefaultLegacy$1(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {
-    default: e
+    "default": e
   };
 }
 
@@ -15617,7 +15621,7 @@ function tokenizeCodeFenced(effects, ok, nok) {
 
   function tokenizeClosingFence(effects, ok, nok) {
     var size = 0;
-    return factorySpace(effects, closingSequenceStart, 'linePrefix', this.parser.constructs.disable.null.indexOf('codeIndented') > -1 ? undefined : 4);
+    return factorySpace(effects, closingSequenceStart, 'linePrefix', this.parser.constructs.disable["null"].indexOf('codeIndented') > -1 ? undefined : 4);
 
     function closingSequenceStart(code) {
       effects.enter('codeFencedFence');
@@ -17173,7 +17177,7 @@ function tokenizeHtmlText(effects, ok, nok) {
     effects.enter('lineEnding');
     effects.consume(code);
     effects.exit('lineEnding');
-    return factorySpace(effects, afterPrefix, 'linePrefix', self.parser.constructs.disable.null.indexOf('codeIndented') > -1 ? undefined : 4);
+    return factorySpace(effects, afterPrefix, 'linePrefix', self.parser.constructs.disable["null"].indexOf('codeIndented') > -1 ? undefined : 4);
   }
 
   function afterPrefix(code) {
@@ -17289,7 +17293,7 @@ function resolveToLabelEnd(events, context) {
 
   media = chunkedPush_1(media, [['enter', text, context]]); // Between.
 
-  media = chunkedPush_1(media, resolveAll_1(context.parser.constructs.insideSpan.null, events.slice(open + offset + 4, close - 3), context)); // Text close, marker close, label close.
+  media = chunkedPush_1(media, resolveAll_1(context.parser.constructs.insideSpan["null"], events.slice(open + offset + 4, close - 3), context)); // Text close, marker close, label close.
 
   media = chunkedPush_1(media, [['exit', text, context], events[close - 2], events[close - 1], ['exit', label, context]]); // Reference, resource, or so.
 
@@ -17699,7 +17703,7 @@ function tokenizeListContinuation(effects, ok, nok) {
     self.containerState._closeFlow = true; // As we’re closing flow, we’re no longer interrupting.
 
     self.interrupt = undefined;
-    return factorySpace(effects, effects.attempt(list, ok, nok), 'linePrefix', self.parser.constructs.disable.null.indexOf('codeIndented') > -1 ? undefined : 4)(code);
+    return factorySpace(effects, effects.attempt(list, ok, nok), 'linePrefix', self.parser.constructs.disable["null"].indexOf('codeIndented') > -1 ? undefined : 4)(code);
   }
 }
 
@@ -17718,7 +17722,7 @@ function tokenizeListEnd(effects) {
 
 function tokenizeListItemPrefixWhitespace(effects, ok, nok) {
   var self = this;
-  return factorySpace(effects, afterPrefix, 'listItemPrefixWhitespace', self.parser.constructs.disable.null.indexOf('codeIndented') > -1 ? undefined : 4 + 1);
+  return factorySpace(effects, afterPrefix, 'listItemPrefixWhitespace', self.parser.constructs.disable["null"].indexOf('codeIndented') > -1 ? undefined : 4 + 1);
 
   function afterPrefix(code) {
     return markdownSpace_1(code) || !prefixSize_1(self.events, 'listItemPrefixWhitespace') ? nok(code) : ok(code);
@@ -17929,10 +17933,10 @@ var text = {
 
 };
 var insideSpan = {
-  null: [attention_1, text_1$1.resolver]
+  "null": [attention_1, text_1$1.resolver]
 };
 var disable = {
-  null: []
+  "null": []
 };
 var contentInitial_1 = contentInitial;
 var disable_1 = disable;
@@ -18039,7 +18043,9 @@ function preprocess() {
           next = Math.ceil(column / 4) * 4;
           chunks.push(-2);
 
-          while (column++ < next) chunks.push(-1);
+          while (column++ < next) {
+            chunks.push(-1);
+          }
         } else if (code === 10) {
           chunks.push(-4);
           column = 1;
@@ -18856,27 +18862,27 @@ function parse(options) {
  * LICENSE file in the root directory of this source tree.
  */
 
-var b$1 = "function" === typeof Symbol && Symbol.for,
-    c$1 = b$1 ? Symbol.for("react.element") : 60103,
-    d$1 = b$1 ? Symbol.for("react.portal") : 60106,
-    e$2 = b$1 ? Symbol.for("react.fragment") : 60107,
-    f$1 = b$1 ? Symbol.for("react.strict_mode") : 60108,
-    g$1 = b$1 ? Symbol.for("react.profiler") : 60114,
-    h$1 = b$1 ? Symbol.for("react.provider") : 60109,
-    k$1 = b$1 ? Symbol.for("react.context") : 60110,
-    l$1 = b$1 ? Symbol.for("react.async_mode") : 60111,
-    m$1 = b$1 ? Symbol.for("react.concurrent_mode") : 60111,
-    n$2 = b$1 ? Symbol.for("react.forward_ref") : 60112,
-    p$1 = b$1 ? Symbol.for("react.suspense") : 60113,
-    q$1 = b$1 ? Symbol.for("react.suspense_list") : 60120,
-    r$2 = b$1 ? Symbol.for("react.memo") : 60115,
-    t$1 = b$1 ? Symbol.for("react.lazy") : 60116,
-    v$1 = b$1 ? Symbol.for("react.block") : 60121,
-    w$1 = b$1 ? Symbol.for("react.fundamental") : 60117,
-    x$1 = b$1 ? Symbol.for("react.responder") : 60118,
-    y$1 = b$1 ? Symbol.for("react.scope") : 60119;
+var b$1 = "function" === typeof Symbol && Symbol["for"],
+    c$1 = b$1 ? Symbol["for"]("react.element") : 60103,
+    d$1 = b$1 ? Symbol["for"]("react.portal") : 60106,
+    e$2 = b$1 ? Symbol["for"]("react.fragment") : 60107,
+    f$1 = b$1 ? Symbol["for"]("react.strict_mode") : 60108,
+    g$1 = b$1 ? Symbol["for"]("react.profiler") : 60114,
+    h$1 = b$1 ? Symbol["for"]("react.provider") : 60109,
+    k$1 = b$1 ? Symbol["for"]("react.context") : 60110,
+    l$1 = b$1 ? Symbol["for"]("react.async_mode") : 60111,
+    m$1 = b$1 ? Symbol["for"]("react.concurrent_mode") : 60111,
+    n$3 = b$1 ? Symbol["for"]("react.forward_ref") : 60112,
+    p$2 = b$1 ? Symbol["for"]("react.suspense") : 60113,
+    q$2 = b$1 ? Symbol["for"]("react.suspense_list") : 60120,
+    r$3 = b$1 ? Symbol["for"]("react.memo") : 60115,
+    t$2 = b$1 ? Symbol["for"]("react.lazy") : 60116,
+    v$2 = b$1 ? Symbol["for"]("react.block") : 60121,
+    w$2 = b$1 ? Symbol["for"]("react.fundamental") : 60117,
+    x$2 = b$1 ? Symbol["for"]("react.responder") : 60118,
+    y$2 = b$1 ? Symbol["for"]("react.scope") : 60119;
 
-function z$1(a) {
+function z$2(a) {
   if ("object" === typeof a && null !== a) {
     var u = a.$$typeof;
 
@@ -18888,15 +18894,15 @@ function z$1(a) {
           case e$2:
           case g$1:
           case f$1:
-          case p$1:
+          case p$2:
             return a;
 
           default:
             switch (a = a && a.$$typeof, a) {
               case k$1:
-              case n$2:
-              case t$1:
-              case r$2:
+              case n$3:
+              case t$2:
+              case r$3:
               case h$1:
                 return a;
 
@@ -18912,8 +18918,8 @@ function z$1(a) {
   }
 }
 
-function A$1(a) {
-  return z$1(a) === m$1;
+function A$2(a) {
+  return z$2(a) === m$1;
 }
 
 var AsyncMode = l$1;
@@ -18921,70 +18927,70 @@ var ConcurrentMode = m$1;
 var ContextConsumer$1 = k$1;
 var ContextProvider$1 = h$1;
 var Element$1 = c$1;
-var ForwardRef$1 = n$2;
-var Fragment$1 = e$2;
-var Lazy$1 = t$1;
-var Memo$1 = r$2;
+var ForwardRef$1 = n$3;
+var Fragment$2 = e$2;
+var Lazy$1 = t$2;
+var Memo$1 = r$3;
 var Portal$1 = d$1;
-var Profiler$1 = g$1;
-var StrictMode$1 = f$1;
-var Suspense$1 = p$1;
+var Profiler$2 = g$1;
+var StrictMode$2 = f$1;
+var Suspense$2 = p$2;
 
-var isAsyncMode$1 = function (a) {
-  return A$1(a) || z$1(a) === l$1;
+var isAsyncMode$1 = function isAsyncMode(a) {
+  return A$2(a) || z$2(a) === l$1;
 };
 
-var isConcurrentMode$1 = A$1;
+var isConcurrentMode$1 = A$2;
 
-var isContextConsumer$1 = function (a) {
-  return z$1(a) === k$1;
+var isContextConsumer$1 = function isContextConsumer(a) {
+  return z$2(a) === k$1;
 };
 
-var isContextProvider$1 = function (a) {
-  return z$1(a) === h$1;
+var isContextProvider$1 = function isContextProvider(a) {
+  return z$2(a) === h$1;
 };
 
-var isElement$1 = function (a) {
+var isElement$1 = function isElement(a) {
   return "object" === typeof a && null !== a && a.$$typeof === c$1;
 };
 
-var isForwardRef$1 = function (a) {
-  return z$1(a) === n$2;
+var isForwardRef$1 = function isForwardRef(a) {
+  return z$2(a) === n$3;
 };
 
-var isFragment$1 = function (a) {
-  return z$1(a) === e$2;
+var isFragment$1 = function isFragment(a) {
+  return z$2(a) === e$2;
 };
 
-var isLazy$1 = function (a) {
-  return z$1(a) === t$1;
+var isLazy$1 = function isLazy(a) {
+  return z$2(a) === t$2;
 };
 
-var isMemo$1 = function (a) {
-  return z$1(a) === r$2;
+var isMemo$1 = function isMemo(a) {
+  return z$2(a) === r$3;
 };
 
-var isPortal$1 = function (a) {
-  return z$1(a) === d$1;
+var isPortal$1 = function isPortal(a) {
+  return z$2(a) === d$1;
 };
 
-var isProfiler$1 = function (a) {
-  return z$1(a) === g$1;
+var isProfiler$1 = function isProfiler(a) {
+  return z$2(a) === g$1;
 };
 
-var isStrictMode$1 = function (a) {
-  return z$1(a) === f$1;
+var isStrictMode$1 = function isStrictMode(a) {
+  return z$2(a) === f$1;
 };
 
-var isSuspense$1 = function (a) {
-  return z$1(a) === p$1;
+var isSuspense$1 = function isSuspense(a) {
+  return z$2(a) === p$2;
 };
 
-var isValidElementType$1 = function (a) {
-  return "string" === typeof a || "function" === typeof a || a === e$2 || a === m$1 || a === g$1 || a === f$1 || a === p$1 || a === q$1 || "object" === typeof a && null !== a && (a.$$typeof === t$1 || a.$$typeof === r$2 || a.$$typeof === h$1 || a.$$typeof === k$1 || a.$$typeof === n$2 || a.$$typeof === w$1 || a.$$typeof === x$1 || a.$$typeof === y$1 || a.$$typeof === v$1);
+var isValidElementType$1 = function isValidElementType(a) {
+  return "string" === typeof a || "function" === typeof a || a === e$2 || a === m$1 || a === g$1 || a === f$1 || a === p$2 || a === q$2 || "object" === typeof a && null !== a && (a.$$typeof === t$2 || a.$$typeof === r$3 || a.$$typeof === h$1 || a.$$typeof === k$1 || a.$$typeof === n$3 || a.$$typeof === w$2 || a.$$typeof === x$2 || a.$$typeof === y$2 || a.$$typeof === v$2);
 };
 
-var typeOf$1 = z$1;
+var typeOf$1 = z$2;
 var reactIs_production_min$1 = {
   AsyncMode: AsyncMode,
   ConcurrentMode: ConcurrentMode,
@@ -18992,13 +18998,13 @@ var reactIs_production_min$1 = {
   ContextProvider: ContextProvider$1,
   Element: Element$1,
   ForwardRef: ForwardRef$1,
-  Fragment: Fragment$1,
+  Fragment: Fragment$2,
   Lazy: Lazy$1,
   Memo: Memo$1,
   Portal: Portal$1,
-  Profiler: Profiler$1,
-  StrictMode: StrictMode$1,
-  Suspense: Suspense$1,
+  Profiler: Profiler$2,
+  StrictMode: StrictMode$2,
+  Suspense: Suspense$2,
   isAsyncMode: isAsyncMode$1,
   isConcurrentMode: isConcurrentMode$1,
   isContextConsumer: isContextConsumer$1,
@@ -19066,7 +19072,7 @@ function emptyFunctionWithReset() {}
 
 emptyFunctionWithReset.resetWarningCache = emptyFunction;
 
-var factoryWithThrowingShims = function () {
+var factoryWithThrowingShims = function factoryWithThrowingShims() {
   function shim(props, propName, componentName, location, propFullName, secret) {
     if (secret === ReactPropTypesSecret_1) {
       // It is still safe when called from React.
@@ -19517,6 +19523,465 @@ var disallowNode = {
   ofType: ofType,
   ifNotMatch: ifNotMatch_1
 };
+
+/** @license React v16.14.0
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var n$2 = "function" === typeof Symbol && Symbol.for,
+    p$1 = n$2 ? Symbol.for("react.element") : 60103,
+    q$1 = n$2 ? Symbol.for("react.portal") : 60106,
+    r$2 = n$2 ? Symbol.for("react.fragment") : 60107,
+    t$1 = n$2 ? Symbol.for("react.strict_mode") : 60108,
+    u$1 = n$2 ? Symbol.for("react.profiler") : 60114,
+    v$1 = n$2 ? Symbol.for("react.provider") : 60109,
+    w$1 = n$2 ? Symbol.for("react.context") : 60110,
+    x$1 = n$2 ? Symbol.for("react.forward_ref") : 60112,
+    y$1 = n$2 ? Symbol.for("react.suspense") : 60113,
+    z$1 = n$2 ? Symbol.for("react.memo") : 60115,
+    A$1 = n$2 ? Symbol.for("react.lazy") : 60116,
+    B$1 = "function" === typeof Symbol && Symbol.iterator;
+
+function C$1(a) {
+  for (var b = "https://reactjs.org/docs/error-decoder.html?invariant=" + a, c = 1; c < arguments.length; c++) b += "&args[]=" + encodeURIComponent(arguments[c]);
+
+  return "Minified React error #" + a + "; visit " + b + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
+}
+
+var D$1 = {
+  isMounted: function () {
+    return !1;
+  },
+  enqueueForceUpdate: function () {},
+  enqueueReplaceState: function () {},
+  enqueueSetState: function () {}
+},
+    E$1 = {};
+
+function F$1(a, b, c) {
+  this.props = a;
+  this.context = b;
+  this.refs = E$1;
+  this.updater = c || D$1;
+}
+
+F$1.prototype.isReactComponent = {};
+
+F$1.prototype.setState = function (a, b) {
+  if ("object" !== typeof a && "function" !== typeof a && null != a) throw Error(C$1(85));
+  this.updater.enqueueSetState(this, a, b, "setState");
+};
+
+F$1.prototype.forceUpdate = function (a) {
+  this.updater.enqueueForceUpdate(this, a, "forceUpdate");
+};
+
+function G$1() {}
+
+G$1.prototype = F$1.prototype;
+
+function H$1(a, b, c) {
+  this.props = a;
+  this.context = b;
+  this.refs = E$1;
+  this.updater = c || D$1;
+}
+
+var I$1 = H$1.prototype = new G$1();
+I$1.constructor = H$1;
+objectAssign(I$1, F$1.prototype);
+I$1.isPureReactComponent = !0;
+var J = {
+  current: null
+},
+    K = Object.prototype.hasOwnProperty,
+    L = {
+  key: !0,
+  ref: !0,
+  __self: !0,
+  __source: !0
+};
+
+function M(a, b, c) {
+  var e,
+      d = {},
+      g = null,
+      k = null;
+  if (null != b) for (e in void 0 !== b.ref && (k = b.ref), void 0 !== b.key && (g = "" + b.key), b) K.call(b, e) && !L.hasOwnProperty(e) && (d[e] = b[e]);
+  var f = arguments.length - 2;
+  if (1 === f) d.children = c;else if (1 < f) {
+    for (var h = Array(f), m = 0; m < f; m++) h[m] = arguments[m + 2];
+
+    d.children = h;
+  }
+  if (a && a.defaultProps) for (e in f = a.defaultProps, f) void 0 === d[e] && (d[e] = f[e]);
+  return {
+    $$typeof: p$1,
+    type: a,
+    key: g,
+    ref: k,
+    props: d,
+    _owner: J.current
+  };
+}
+
+function N(a, b) {
+  return {
+    $$typeof: p$1,
+    type: a.type,
+    key: b,
+    ref: a.ref,
+    props: a.props,
+    _owner: a._owner
+  };
+}
+
+function O(a) {
+  return "object" === typeof a && null !== a && a.$$typeof === p$1;
+}
+
+function escape$1(a) {
+  var b = {
+    "=": "=0",
+    ":": "=2"
+  };
+  return "$" + ("" + a).replace(/[=:]/g, function (a) {
+    return b[a];
+  });
+}
+
+var P = /\/+/g,
+    Q = [];
+
+function R(a, b, c, e) {
+  if (Q.length) {
+    var d = Q.pop();
+    d.result = a;
+    d.keyPrefix = b;
+    d.func = c;
+    d.context = e;
+    d.count = 0;
+    return d;
+  }
+
+  return {
+    result: a,
+    keyPrefix: b,
+    func: c,
+    context: e,
+    count: 0
+  };
+}
+
+function S(a) {
+  a.result = null;
+  a.keyPrefix = null;
+  a.func = null;
+  a.context = null;
+  a.count = 0;
+  10 > Q.length && Q.push(a);
+}
+
+function T(a, b, c, e) {
+  var d = typeof a;
+  if ("undefined" === d || "boolean" === d) a = null;
+  var g = !1;
+  if (null === a) g = !0;else switch (d) {
+    case "string":
+    case "number":
+      g = !0;
+      break;
+
+    case "object":
+      switch (a.$$typeof) {
+        case p$1:
+        case q$1:
+          g = !0;
+      }
+
+  }
+  if (g) return c(e, a, "" === b ? "." + U(a, 0) : b), 1;
+  g = 0;
+  b = "" === b ? "." : b + ":";
+  if (Array.isArray(a)) for (var k = 0; k < a.length; k++) {
+    d = a[k];
+    var f = b + U(d, k);
+    g += T(d, f, c, e);
+  } else if (null === a || "object" !== typeof a ? f = null : (f = B$1 && a[B$1] || a["@@iterator"], f = "function" === typeof f ? f : null), "function" === typeof f) for (a = f.call(a), k = 0; !(d = a.next()).done;) d = d.value, f = b + U(d, k++), g += T(d, f, c, e);else if ("object" === d) throw c = "" + a, Error(C$1(31, "[object Object]" === c ? "object with keys {" + Object.keys(a).join(", ") + "}" : c, ""));
+  return g;
+}
+
+function V(a, b, c) {
+  return null == a ? 0 : T(a, "", b, c);
+}
+
+function U(a, b) {
+  return "object" === typeof a && null !== a && null != a.key ? escape$1(a.key) : b.toString(36);
+}
+
+function W(a, b) {
+  a.func.call(a.context, b, a.count++);
+}
+
+function aa(a, b, c) {
+  var e = a.result,
+      d = a.keyPrefix;
+  a = a.func.call(a.context, b, a.count++);
+  Array.isArray(a) ? X(a, e, c, function (a) {
+    return a;
+  }) : null != a && (O(a) && (a = N(a, d + (!a.key || b && b.key === a.key ? "" : ("" + a.key).replace(P, "$&/") + "/") + c)), e.push(a));
+}
+
+function X(a, b, c, e, d) {
+  var g = "";
+  null != c && (g = ("" + c).replace(P, "$&/") + "/");
+  b = R(b, g, e, d);
+  V(a, aa, b);
+  S(b);
+}
+
+var Y = {
+  current: null
+};
+
+function Z() {
+  var a = Y.current;
+  if (null === a) throw Error(C$1(321));
+  return a;
+}
+
+var ba = {
+  ReactCurrentDispatcher: Y,
+  ReactCurrentBatchConfig: {
+    suspense: null
+  },
+  ReactCurrentOwner: J,
+  IsSomeRendererActing: {
+    current: !1
+  },
+  assign: objectAssign
+};
+var Children = {
+  map: function (a, b, c) {
+    if (null == a) return a;
+    var e = [];
+    X(a, e, null, b, c);
+    return e;
+  },
+  forEach: function (a, b, c) {
+    if (null == a) return a;
+    b = R(null, null, b, c);
+    V(a, W, b);
+    S(b);
+  },
+  count: function (a) {
+    return V(a, function () {
+      return null;
+    }, null);
+  },
+  toArray: function (a) {
+    var b = [];
+    X(a, b, null, function (a) {
+      return a;
+    });
+    return b;
+  },
+  only: function (a) {
+    if (!O(a)) throw Error(C$1(143));
+    return a;
+  }
+};
+var Component = F$1;
+var Fragment$1 = r$2;
+var Profiler$1 = u$1;
+var PureComponent = H$1;
+var StrictMode$1 = t$1;
+var Suspense$1 = y$1;
+var __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ba;
+
+var cloneElement = function (a, b, c) {
+  if (null === a || void 0 === a) throw Error(C$1(267, a));
+  var e = objectAssign({}, a.props),
+      d = a.key,
+      g = a.ref,
+      k = a._owner;
+
+  if (null != b) {
+    void 0 !== b.ref && (g = b.ref, k = J.current);
+    void 0 !== b.key && (d = "" + b.key);
+    if (a.type && a.type.defaultProps) var f = a.type.defaultProps;
+
+    for (h in b) K.call(b, h) && !L.hasOwnProperty(h) && (e[h] = void 0 === b[h] && void 0 !== f ? f[h] : b[h]);
+  }
+
+  var h = arguments.length - 2;
+  if (1 === h) e.children = c;else if (1 < h) {
+    f = Array(h);
+
+    for (var m = 0; m < h; m++) f[m] = arguments[m + 2];
+
+    e.children = f;
+  }
+  return {
+    $$typeof: p$1,
+    type: a.type,
+    key: d,
+    ref: g,
+    props: e,
+    _owner: k
+  };
+};
+
+var createContext = function (a, b) {
+  void 0 === b && (b = null);
+  a = {
+    $$typeof: w$1,
+    _calculateChangedBits: b,
+    _currentValue: a,
+    _currentValue2: a,
+    _threadCount: 0,
+    Provider: null,
+    Consumer: null
+  };
+  a.Provider = {
+    $$typeof: v$1,
+    _context: a
+  };
+  return a.Consumer = a;
+};
+
+var createElement$1 = M;
+
+var createFactory = function (a) {
+  var b = M.bind(null, a);
+  b.type = a;
+  return b;
+};
+
+var createRef = function () {
+  return {
+    current: null
+  };
+};
+
+var forwardRef = function (a) {
+  return {
+    $$typeof: x$1,
+    render: a
+  };
+};
+
+var isValidElement = O;
+
+var lazy = function (a) {
+  return {
+    $$typeof: A$1,
+    _ctor: a,
+    _status: -1,
+    _result: null
+  };
+};
+
+var memo = function (a, b) {
+  return {
+    $$typeof: z$1,
+    type: a,
+    compare: void 0 === b ? null : b
+  };
+};
+
+var useCallback = function (a, b) {
+  return Z().useCallback(a, b);
+};
+
+var useContext = function (a, b) {
+  return Z().useContext(a, b);
+};
+
+var useDebugValue = function () {};
+
+var useEffect = function (a, b) {
+  return Z().useEffect(a, b);
+};
+
+var useImperativeHandle = function (a, b, c) {
+  return Z().useImperativeHandle(a, b, c);
+};
+
+var useLayoutEffect = function (a, b) {
+  return Z().useLayoutEffect(a, b);
+};
+
+var useMemo = function (a, b) {
+  return Z().useMemo(a, b);
+};
+
+var useReducer = function (a, b, c) {
+  return Z().useReducer(a, b, c);
+};
+
+var useRef = function (a) {
+  return Z().useRef(a);
+};
+
+var useState = function (a) {
+  return Z().useState(a);
+};
+
+var version = "16.14.0";
+var react_production_min = {
+  Children: Children,
+  Component: Component,
+  Fragment: Fragment$1,
+  Profiler: Profiler$1,
+  PureComponent: PureComponent,
+  StrictMode: StrictMode$1,
+  Suspense: Suspense$1,
+  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED,
+  cloneElement: cloneElement,
+  createContext: createContext,
+  createElement: createElement$1,
+  createFactory: createFactory,
+  createRef: createRef,
+  forwardRef: forwardRef,
+  isValidElement: isValidElement,
+  lazy: lazy,
+  memo: memo,
+  useCallback: useCallback,
+  useContext: useContext,
+  useDebugValue: useDebugValue,
+  useEffect: useEffect,
+  useImperativeHandle: useImperativeHandle,
+  useLayoutEffect: useLayoutEffect,
+  useMemo: useMemo,
+  useReducer: useReducer,
+  useRef: useRef,
+  useState: useState,
+  version: version
+};
+
+/** @license React v16.14.0
+ * react.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+createCommonjsModule(function (module, exports) {
+});
+
+var react = createCommonjsModule(function (module) {
+
+  {
+    module.exports = react_production_min;
+  }
+});
 
 function astToReact(node, options) {
   var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -20136,7 +20601,7 @@ var reactMarkdown = ReactMarkdown;
 
 var cookieName = 'hide_solutions';
 function useSolutions() {
-  var _useState = react.useState(hasHideSolutionsCookie()),
+  var _useState = react$1.useState(hasHideSolutionsCookie()),
       isHidingSolutions = _useState[0],
       setIsHidingSolutions = _useState[1];
 
@@ -20163,27 +20628,29 @@ function useSolutions() {
   };
 }
 
+var _excluded$6 = ["flareErrorSolutions", "className"],
+    _excluded2 = ["page", "lastPage", "onChange"];
 function SolutionCard(_ref) {
   var flareErrorSolutions = _ref.flareErrorSolutions,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["flareErrorSolutions", "className"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$6);
 
   var _useSolutions = useSolutions(),
       isHidingSolutions = _useSolutions.isHidingSolutions,
       toggleHidingSolutions = _useSolutions.toggleHidingSolutions;
 
-  var _useState = react.useState(flareErrorSolutions[0]),
+  var _useState = react$1.useState(flareErrorSolutions[0]),
       solution = _useState[0],
       setSolution = _useState[1];
 
-  var _useState2 = react.useState(1),
+  var _useState2 = react$1.useState(1),
       currentSolutionIndex = _useState2[0],
       setCurrentSolutionIndex = _useState2[1];
 
-  var solutionCard = react.useRef();
+  var solutionCard = react$1.useRef();
   var animationTimeout;
-  react.useEffect(function () {
+  react$1.useEffect(function () {
     if (isHidingSolutions) {
       solutionCard.current.classList.add('solution-hidden');
     }
@@ -20207,68 +20674,68 @@ function SolutionCard(_ref) {
     setCurrentSolutionIndex(page);
   }
 
-  return react.createElement("div", Object.assign({
+  return react$1.createElement("div", _extends$1({
     className: "" + className
-  }, props), react.createElement("div", {
+  }, props), react$1.createElement("div", {
     className: "solution-toggle " + (isHidingSolutions ? 'solution-toggle-show' : '')
-  }, react.createElement("a", {
+  }, react$1.createElement("a", {
     className: "link-solution",
     target: "_blank",
     onClick: clickHidingSolutions
-  }, isHidingSolutions ? react.createElement(react.Fragment, null, react.createElement("i", {
+  }, isHidingSolutions ? react$1.createElement(react$1.Fragment, null, react$1.createElement("i", {
     className: "far fa-lightbulb text-xs mr-1"
-  }), " Show solutions") : 'Hide solutions')), react.createElement("div", {
+  }), " Show solutions") : 'Hide solutions')), react$1.createElement("div", {
     ref: solutionCard,
     className: "solution " + (isHidingSolutions ? 'solution-hidden' : '')
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "solution-main"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "solution-background"
-  }, react.createElement("svg", {
+  }, react$1.createElement("svg", {
     className: "hidden absolute right-0 h-full | md:block",
     x: "0px",
     y: "0px",
     viewBox: "0 0 299 452"
-  }, react.createElement("g", {
+  }, react$1.createElement("g", {
     style: {
       opacity: 0.075
     }
-  }, react.createElement("polygon", {
+  }, react$1.createElement("polygon", {
     style: {
       fill: 'rgb(63,63,63)'
     },
     points: "298.1,451.9 150.9,451.9 21,226.9 298.1,227.1"
-  }), react.createElement("polygon", {
+  }), react$1.createElement("polygon", {
     style: {
       fill: 'rgb(151,151,151)'
     },
     points: "298.1,227.1 21,226.9 150.9,1.9 298.1,1.9"
-  })))), react.createElement("div", {
+  })))), react$1.createElement("div", {
     className: "p-12"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "solution-content"
-  }, react.createElement("h2", {
+  }, react$1.createElement("h2", {
     className: "solution-title"
-  }, solution.title), react.createElement("div", null, react.createElement(reactMarkdown, {
+  }, solution.title), react$1.createElement("div", null, react$1.createElement(reactMarkdown, {
     source: solution.description || solution.action_description || '',
     disallowedTypes: ['image', 'imageReference', 'table', 'html']
-  })), Object.keys(solution.links).length > 0 && react.createElement("div", {
+  })), Object.keys(solution.links).length > 0 && react$1.createElement("div", {
     className: "mt-8 grid justify-start"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "border-t-2 border-gray-700 opacity-25 "
-  }), react.createElement("div", {
+  }), react$1.createElement("div", {
     className: "pt-2 grid grid-cols-auto-1fr gap-x-4 gap-y-2 text-sm"
-  }, react.createElement("label", {
+  }, react$1.createElement("label", {
     className: "font-semibold uppercase tracking-wider"
-  }, "Read more"), react.createElement("ul", null, Object.keys(solution.links).map(function (label) {
-    return react.createElement("li", {
+  }, "Read more"), react$1.createElement("ul", null, Object.keys(solution.links).map(function (label) {
+    return react$1.createElement("li", {
       key: label
-    }, react.createElement("a", {
+    }, react$1.createElement("a", {
       href: solution.links[label],
       className: "link-solution",
       target: "_blank"
     }, label));
-  }))))), flareErrorSolutions.length === 1 && react.createElement(react.Fragment, null, react.createElement(Paginator, {
+  }))))), flareErrorSolutions.length === 1 && react$1.createElement(react$1.Fragment, null, react$1.createElement(Paginator, {
     page: currentSolutionIndex,
     lastPage: flareErrorSolutions.length,
     onChange: updateSolution,
@@ -20280,17 +20747,17 @@ function Paginator(_ref2) {
   var page = _ref2.page,
       lastPage = _ref2.lastPage,
       onChange = _ref2.onChange,
-      props = _objectWithoutPropertiesLoose$1(_ref2, ["page", "lastPage", "onChange"]);
+      props = _objectWithoutPropertiesLoose$1(_ref2, _excluded2);
 
-  return react.createElement("nav", Object.assign({}, props), react.createElement("ul", {
+  return react$1.createElement("nav", _extends$1({}, props), react$1.createElement("ul", {
     className: "grid grid-cols-auto grid-flow-col place-center gap-1"
   }, createPageObjects(page, lastPage, onChange).map(function (pageObject, i) {
-    return react.createElement("li", {
+    return react$1.createElement("li", {
       key: i
-    }, pageObject.value ? react.createElement("a", {
+    }, pageObject.value ? react$1.createElement("a", {
       className: "grid place-center h-8 min-w-8 px-2 rounded-full\n                                    " + (page == pageObject.value ? 'bg-tint-200 font-semibold' : 'hover:bg-tint-100 cursor-pointer') + "\n                                ",
       onClick: pageObject.onClick
-    }, pageObject.label) : react.createElement("span", {
+    }, pageObject.label) : react$1.createElement("span", {
       className: "text-tint-500"
     }, pageObject.label));
   })));
@@ -22177,7 +22644,7 @@ var Downshift = /*#__PURE__*/function () {
       } else if (isDOMElement(element)) {
         // they didn't apply the root props, but we can clone
         // this and apply the props ourselves
-        return /*#__PURE__*/react.cloneElement(element, this.getRootProps(getElementProps(element)));
+        return /*#__PURE__*/react$1.cloneElement(element, this.getRootProps(getElementProps(element)));
       }
       /* istanbul ignore next */
 
@@ -22186,7 +22653,7 @@ var Downshift = /*#__PURE__*/function () {
     };
 
     return Downshift;
-  }(react.Component);
+  }(react$1.Component);
 
   Downshift.defaultProps = {
     defaultHighlightedIndex: null,
@@ -24657,7 +25124,7 @@ var dataViewCtorString = _toSource(_DataView),
 var getTag = _baseGetTag; // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
 
 if (_DataView && getTag(new _DataView(new ArrayBuffer(1))) != dataViewTag || _Map && getTag(new _Map()) != mapTag || _Promise && getTag(_Promise.resolve()) != promiseTag || _Set && getTag(new _Set()) != setTag || _WeakMap && getTag(new _WeakMap()) != weakMapTag) {
-  getTag = function (value) {
+  getTag = function getTag(value) {
     var result = _baseGetTag(value),
         Ctor = result == objectTag$1 ? value.constructor : undefined,
         ctorString = Ctor ? _toSource(Ctor) : '';
@@ -25044,7 +25511,7 @@ function memoize(func, resolver) {
     throw new TypeError(FUNC_ERROR_TEXT);
   }
 
-  var memoized = function () {
+  var memoized = function memoized() {
     var args = arguments,
         key = resolver ? resolver.apply(this, args) : args[0],
         cache = memoized.cache;
@@ -25754,10 +26221,14 @@ var highlight$1 = createCommonjsModule(function (module, exports) {
       var result = {};
       var objects = Array.prototype.slice.call(arguments, 1);
 
-      for (key in parent) result[key] = parent[key];
+      for (key in parent) {
+        result[key] = parent[key];
+      }
 
       objects.forEach(function (obj) {
-        for (key in obj) result[key] = obj[key];
+        for (key in obj) {
+          result[key] = obj[key];
+        }
       });
       return result;
     }
@@ -26825,7 +27296,7 @@ var highlight$1 = createCommonjsModule(function (module, exports) {
   });
 });
 
-var php = function (hljs) {
+var php = function php(hljs) {
   var VARIABLE = {
     begin: '\\$+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
   };
@@ -26949,13 +27420,13 @@ function CopyableCode(_ref) {
       className = _ref$className === void 0 ? '' : _ref$className,
       _ref$codeClassName = _ref.codeClassName,
       codeClassName = _ref$codeClassName === void 0 ? '' : _ref$codeClassName;
-  var codeRef = react.useRef(null);
+  var codeRef = react$1.useRef(null);
 
-  var _useState = react.useState(false),
+  var _useState = react$1.useState(false),
       copied = _useState[0],
       setCopied = _useState[1];
 
-  react.useEffect(function () {
+  react$1.useEffect(function () {
     var timeout;
 
     if (copied) {
@@ -26968,7 +27439,7 @@ function CopyableCode(_ref) {
       return window.clearTimeout(timeout);
     };
   }, [copied]);
-  react.useEffect(function () {
+  react$1.useEffect(function () {
     if (lang && codeRef.current) {
       highlightBlock(codeRef.current);
     }
@@ -26984,23 +27455,23 @@ function CopyableCode(_ref) {
     setCopied(true);
   }
 
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "group grid gap-2 justify-start items-center | sm:grid-flow-col " + className
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "code-inline " + codeClassName + " transition-all pr-8",
     style: {
       color: 'inherit'
     }
-  }, react.createElement("pre", null, react.createElement("code", {
+  }, react$1.createElement("pre", null, react$1.createElement("code", {
     className: lang || '',
     ref: codeRef
-  }, children)), react.createElement("button", {
+  }, children)), react$1.createElement("button", {
     className: "absolute top-0 right-0 mr-2 " + (copied ? 'opacity-100' : 'opacity-75 group-hover:opacity-100 group-hover:transition-opacity'),
     onClick: copy,
     title: "Copy to clipboard"
-  }, react.createElement("i", {
+  }, react$1.createElement("i", {
     className: "" + (copied ? 'fa fa-clipboard-check text-green-500' : 'far fa-clipboard')
-  })), copied && react.createElement("p", {
+  })), copied && react$1.createElement("p", {
     className: "hidden z-10 shadow-md lg:block absolute top-0 right-0 px-2 py-1 -mt-1 ml-1 bg-white text-sm text-green-500 whitespace-nowrap",
     onClick: function onClick() {
       return setCopied(false);
@@ -27008,6 +27479,7 @@ function CopyableCode(_ref) {
   }, "Copied!")));
 }
 
+var _excluded$5 = ["secondary", "link", "children", "type", "size", "className"];
 function Button(_ref) {
   var _ref$secondary = _ref.secondary,
       secondary = _ref$secondary === void 0 ? false : _ref$secondary,
@@ -27019,22 +27491,23 @@ function Button(_ref) {
       size = _ref$size === void 0 ? 'base' : _ref$size,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["secondary", "link", "children", "type", "size", "className"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$5);
 
   var style = link ? secondary ? 'link-dimmed' : 'link' : secondary ? 'button-secondary' : 'button';
-  return react.createElement("button", Object.assign({
+  return react$1.createElement("button", _extends$1({
     type: type,
     className: style + " " + (size ? "button-" + size : '') + " " + className
   }, props), children);
 }
 
+var _excluded$4 = ["label", "htmlFor", "children"];
 function Label(_ref) {
   var label = _ref.label,
       htmlFor = _ref.htmlFor,
       children = _ref.children,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["label", "htmlFor", "children"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$4);
 
-  return react.createElement("label", Object.assign({
+  return react$1.createElement("label", _extends$1({
     htmlFor: htmlFor
   }, props), children, " ", label);
 }
@@ -27053,11 +27526,11 @@ function CheckboxField(_ref) {
       labelClassName = _ref$labelClassName === void 0 ? '' : _ref$labelClassName,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className;
-  return react.createElement(Label, {
+  return react$1.createElement(Label, {
     label: label,
     htmlFor: id || name,
     className: "checkbox-label " + labelClassName
-  }, react.createElement("input", {
+  }, react$1.createElement("input", {
     type: "checkbox",
     id: id || name,
     name: name,
@@ -28476,7 +28949,7 @@ axios$1.isAxiosError = isAxiosError;
 var axios_1 = axios$1; // Allow use of default import syntax in TypeScript
 
 var _default = axios$1;
-axios_1.default = _default;
+axios_1["default"] = _default;
 
 var axios = axios_1;
 
@@ -28484,10 +28957,10 @@ function Icon(_ref) {
   var name = _ref.name,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className;
-  return react.createElement("svg", {
+  return react$1.createElement("svg", {
     className: "icon " + className
-  }, react.createElement("use", {
-    xlinkHref: "#" + name + "-icon'"
+  }, react$1.createElement("use", {
+    xlinkHref: "#" + name + "-icon"
   }));
 }
 
@@ -28543,19 +29016,17 @@ function ShareButton(_ref) {
       errorOccurrence = _ref.errorOccurrence,
       _ref$disabled = _ref.disabled,
       disabled = _ref$disabled === void 0 ? false : _ref$disabled,
-      _ref$className = _ref.className,
-      className = _ref$className === void 0 ? '' : _ref$className,
       manageSharesUrl = _ref.manageSharesUrl;
 
-  var _useState = react.useState(''),
+  var _useState = react$1.useState(''),
       sharedUrl = _useState[0],
       setSharedUrl = _useState[1];
 
-  var _useState2 = react.useState(''),
+  var _useState2 = react$1.useState(''),
       error = _useState2[0],
       setError = _useState2[1];
 
-  var _useState3 = react.useState([{
+  var _useState3 = react$1.useState([{
     name: 'stackTraceTab',
     prettyName: 'Stack trace',
     selected: true
@@ -28597,38 +29068,39 @@ function ShareButton(_ref) {
     }
   }
 
-  return react.createElement(Downshift, null, function (_ref2) {
+  return react$1.createElement(Downshift, null, function (_ref2) {
     var getItemProps = _ref2.getItemProps,
         getMenuProps = _ref2.getMenuProps,
         getLabelProps = _ref2.getLabelProps,
         isOpen = _ref2.isOpen,
         toggleMenu = _ref2.toggleMenu;
-    return react.createElement("div", null, react.createElement("label", Object.assign({}, getLabelProps({
+    return react$1.createElement("div", null, react$1.createElement("label", _extends$1({}, getLabelProps({
       className: 'hidden',
       htmlFor: undefined
-    })), "Share options menu"), react.createElement("div", null, react.createElement("button", {
+    })), "Share options menu"), react$1.createElement("div", null, react$1.createElement("button", {
       disabled: disabled,
-      className: className + " " + (isOpen && 'tab-active') + " ",
+      className: "tab flex items-center " + (isOpen ? 'tab-active' : ''),
       onClick: function onClick() {
         return toggleMenu();
       }
-    }, react.createElement(Icon, {
-      name: "share"
-    }), children), isOpen && react.createElement("ul", Object.assign({}, getMenuProps(), {
+    }, children, react$1.createElement(Icon, {
+      name: "share",
+      className: "ml-2"
+    })), isOpen && react$1.createElement("ul", _extends$1({}, getMenuProps(), {
       className: "dropdown z-10 right-0 top-full bg-gray-700 text-white p-4 overflow-visible",
       style: {
         minWidth: '18rem',
         marginRight: '-1px'
       }
-    }), react.createElement("h5", {
+    }), react$1.createElement("h5", {
       className: "mb-3 text-left text-gray-500 font-semibold uppercase tracking-wider whitespace-nowrap"
-    }, "Share publicly"), react.createElement("div", {
+    }, "Share publicly"), react$1.createElement("div", {
       className: "grid grid-cols-2 justify-start gap-x-6 gap-y-2"
     }, selectedTabs.map(function (_ref3) {
       var selected = _ref3.selected,
           name = _ref3.name,
           prettyName = _ref3.prettyName;
-      return react.createElement(CheckboxField, Object.assign({}, getItemProps({
+      return react$1.createElement(CheckboxField, _extends$1({}, getItemProps({
         item: name,
         key: name
       }), {
@@ -28639,24 +29111,24 @@ function ShareButton(_ref) {
         checked: selected,
         label: prettyName
       }));
-    })), react.createElement("div", {
+    })), react$1.createElement("div", {
       className: "grid grid-cols-auto grid-flow-col justify-between items-center mt-3"
-    }, react.createElement(Button, {
+    }, !sharedUrl && react$1.createElement(Button, {
       secondary: true,
       className: "bg-tint-600 text-white",
       size: "sm",
       onClick: onShareError
-    }, "Create\xA0share"), manageSharesUrl && react.createElement("a", {
+    }, "Create\xA0share"), manageSharesUrl && react$1.createElement("a", {
       className: "link-dimmed-invers underline",
       target: "_blank",
       href: manageSharesUrl
-    }, "Manage shares")), error && react.createElement("p", {
+    }, "Manage shares")), error && react$1.createElement("p", {
       className: "mt-3 text-red-400"
-    }, error), sharedUrl && react.createElement("div", {
+    }, error), sharedUrl && react$1.createElement("div", {
       className: "mt-3 flex"
-    }, react.createElement(CopyableCode, {
+    }, react$1.createElement(CopyableCode, {
       className: "text-white max-w-xs sm:max-w-md overflow-x-auto overflow-y-hidden scrollbar"
-    }, sharedUrl), react.createElement("i", {
+    }, sharedUrl), react$1.createElement("i", {
       className: "cursor-pointer p-2 pr-0 fas fa-external-link-alt text-xs",
       onClick: function onClick() {
         return window.open(sharedUrl);
@@ -28666,7 +29138,7 @@ function ShareButton(_ref) {
 }
 
 function useKeyboardShortcut(key, callback) {
-  react.useEffect(function () {
+  react$1.useEffect(function () {
     function handleKeyPressed(e) {
       if (document.activeElement) {
         if (document.activeElement.tagName === 'INPUT') {
@@ -28718,8 +29190,9 @@ var ErrorBoundary = /*#__PURE__*/function (_React$Component) {
   };
 
   return ErrorBoundary;
-}(react.Component);
+}(react$1.Component);
 
+var _excluded$3 = ["type", "className", "children", "card"];
 function Alert(_ref) {
   var _ref$type = _ref.type,
       type = _ref$type === void 0 ? 'info' : _ref$type,
@@ -28728,7 +29201,7 @@ function Alert(_ref) {
       children = _ref.children,
       _ref$card = _ref.card,
       card = _ref$card === void 0 ? false : _ref$card,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["type", "className", "children", "card"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$3);
 
   var typeClassName = {
     info: 'alert-info',
@@ -28737,9 +29210,9 @@ function Alert(_ref) {
     error: 'alert-error',
     danger: 'alert-danger'
   }[type];
-  return react.createElement("div", Object.assign({
+  return react$1.createElement("div", _extends$1({
     className: "alert " + (card ? 'alert-card' : '') + " " + typeClassName + " " + className
-  }, props), card ? react.createElement("div", {
+  }, props), card ? react$1.createElement("div", {
     className: "alert-card-content"
   }, children) : children);
 }
@@ -28747,13 +29220,13 @@ function Alert(_ref) {
 function OccurrenceTabs(_ref) {
   var errorOccurrence = _ref.errorOccurrence,
       children = _ref.children,
-      _ref$isOnSharedPage = _ref.isOnSharedPage,
-      isOnSharedPage = _ref$isOnSharedPage === void 0 ? false : _ref$isOnSharedPage,
+      _ref$hideShareButton = _ref.hideShareButton,
+      hideShareButton = _ref$hideShareButton === void 0 ? false : _ref$hideShareButton,
       manageSharesUrl = _ref.manageSharesUrl;
   var validChildren = children.filter(function (child) {
     return child !== false;
   });
-  var tabs = react.Children.map(validChildren, function (child) {
+  var tabs = react$1.Children.map(validChildren, function (child) {
     return {
       name: child.props.name,
       component: child.props.component,
@@ -28762,10 +29235,9 @@ function OccurrenceTabs(_ref) {
     };
   });
 
-  var _useState = react.useState(0),
+  var _useState = react$1.useState(0),
       currentTabIndex = _useState[0],
-      setCurrentTabIndex = _useState[1]; // TODO: useHistory ? getFromUrlFragment('tab-index') || 0 : 0
-
+      setCurrentTabIndex = _useState[1];
 
   function changeTab(tabIndex) {
     setCurrentTabIndex(tabIndex);
@@ -28778,40 +29250,37 @@ function OccurrenceTabs(_ref) {
     changeTab(currentTabIndex === tabs.length - 1 ? 0 : currentTabIndex + 1);
   });
   var Tab = tabs[currentTabIndex].component;
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "tabs"
-  }, react.createElement("nav", {
+  }, react$1.createElement("nav", {
     className: "tab-nav"
-  }, react.createElement("ul", {
+  }, react$1.createElement("ul", {
     className: "tab-bar"
   }, tabs.map(function (tab, i) {
-    return react.createElement("li", {
+    return react$1.createElement("li", {
       key: i
-    }, react.createElement("button", {
+    }, react$1.createElement("button", {
       className: "tab " + (i === currentTabIndex ? 'tab-active' : ''),
       onClick: function onClick() {
         return changeTab(i);
       }
     }, tab.name));
-  })), !isOnSharedPage && react.createElement(react.Fragment, null, react.createElement("div", {
+  })), !hideShareButton && react$1.createElement(react$1.Fragment, null, react$1.createElement("div", {
     className: "tab-delimiter"
-  }), react.createElement(ShareButton, {
-    className: "tab",
+  }), react$1.createElement(ShareButton, {
     errorOccurrence: errorOccurrence,
     manageSharesUrl: manageSharesUrl
-  }, "Share", react.createElement("i", {
-    className: "ml-2 fas fa-share"
-  })))), react.createElement("div", {
+  }, "Share"))), react$1.createElement("div", {
     className: "tab-main"
-  }, react.createElement(ErrorBoundary, {
-    fallbackComponent: react.createElement(Fallback, null)
-  }, react.createElement(Tab, {
+  }, react$1.createElement(ErrorBoundary, {
+    fallbackComponent: react$1.createElement(Fallback, null)
+  }, react$1.createElement(Tab, {
     errorOccurrence: errorOccurrence
   }))));
 }
 
 function Fallback() {
-  return react.createElement(Alert, {
+  return react$1.createElement(Alert, {
     className: "text-xs text-center py-12 h-12",
     type: "error"
   }, "Something went wrong");
@@ -28821,23 +29290,24 @@ OccurrenceTabs.Tab = function (_props) {
   return null;
 };
 
+var _excluded$2 = ["children", "title", "className"];
 function DefinitionList(_ref) {
   var children = _ref.children,
       _ref$title = _ref.title,
       title = _ref$title === void 0 ? '' : _ref$title,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["children", "title", "className"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$2);
 
-  return react.createElement(react.Fragment, null, children && react.createElement("div", Object.assign({
+  return react$1.createElement(react$1.Fragment, null, children && react$1.createElement("div", _extends$1({
     className: "" + className
-  }, props), title && react.createElement("h3", {
+  }, props), title && react$1.createElement("h3", {
     className: "definition-list-title"
-  }, title), !!children.length ? react.createElement("dl", {
+  }, title), !!children.length ? react$1.createElement("dl", {
     className: "definition-list"
-  }, children) : react.createElement("div", {
+  }, children) : react$1.createElement("div", {
     className: "definition-list"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "definition-list-empty"
   }, "\u2014"))));
 }
@@ -28850,15 +29320,15 @@ function DefinitionListRow(_ref2) {
       label = _ref2$label === void 0 ? '' : _ref2$label;
   var valueOutput = value;
 
-  if (react.isValidElement(value)) {
+  if (react$1.isValidElement(value)) {
     valueOutput = value;
   } else if (typeof value === 'object') {
-    valueOutput = react.createElement(CopyableCode, null, JSON.stringify(value, null, 4));
+    valueOutput = react$1.createElement(CopyableCode, null, JSON.stringify(value, null, 4));
   }
 
-  return react.createElement(react.Fragment, null, react.createElement("dt", {
+  return react$1.createElement(react$1.Fragment, null, react$1.createElement("dt", {
     className: "definition-label"
-  }, label), react.createElement("dd", {
+  }, label), react$1.createElement("dd", {
     className: "definition-value"
   }, valueOutput));
 }
@@ -28867,52 +29337,52 @@ function AppTab(_ref) {
   var errorOccurrence = _ref.errorOccurrence;
   var route = getContextValues(errorOccurrence, 'route');
   var view = getContextValues(errorOccurrence, 'view');
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "tab-content"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "layout-col"
-  }, react.createElement(DefinitionList, {
+  }, react$1.createElement(DefinitionList, {
     title: "Routing",
     className: "tab-content-section border-none"
-  }, react.createElement(DefinitionList.Row, {
+  }, react$1.createElement(DefinitionList.Row, {
     value: route.controllerAction,
     label: "Controller"
-  }), react.createElement(DefinitionList.Row, {
+  }), react$1.createElement(DefinitionList.Row, {
     value: route.route || 'unknown',
     label: "Route name"
-  }), react.createElement(DefinitionList.Row, {
-    value: react.createElement(DefinitionList, null, Object.entries(route.routeParameters || []).map(function (_ref2) {
+  }), react$1.createElement(DefinitionList.Row, {
+    value: react$1.createElement(DefinitionList, null, Object.entries(route.routeParameters || []).map(function (_ref2) {
       var key = _ref2[0],
           parameter = _ref2[1];
-      return react.createElement(DefinitionList.Row, {
+      return react$1.createElement(DefinitionList.Row, {
         key: key,
         label: key,
         value: parameter
       });
     })),
     label: "Route parameters"
-  }), react.createElement(DefinitionList.Row, {
-    value: react.createElement(DefinitionList, null, (route.middleware || []).map(function (middleware, i) {
-      return react.createElement(DefinitionList.Row, {
+  }), react$1.createElement(DefinitionList.Row, {
+    value: react$1.createElement(DefinitionList, null, (route.middleware || []).map(function (middleware, i) {
+      return react$1.createElement(DefinitionList.Row, {
         key: i,
         value: middleware
       });
     })),
     label: "Middleware"
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "View",
     className: "tab-content-section"
-  }, react.createElement(DefinitionList.Row, {
+  }, react$1.createElement(DefinitionList.Row, {
     value: view.view,
     label: "View name"
-  }), react.createElement(DefinitionList.Row, {
-    value: react.createElement(DefinitionList, null, Object.entries(view.data || {}).map(function (_ref3) {
+  }), react$1.createElement(DefinitionList.Row, {
+    value: react$1.createElement(DefinitionList, null, Object.entries(view.data || {}).map(function (_ref3) {
       var key = _ref3[0],
           dump = _ref3[1];
-      return react.createElement(DefinitionList.Row, {
+      return react$1.createElement(DefinitionList.Row, {
         key: key,
         label: key,
-        value: react.createElement("div", {
+        value: react$1.createElement("div", {
           dangerouslySetInnerHTML: {
             __html: dump
           }
@@ -28944,68 +29414,68 @@ function ContextTab(_ref) {
   var customContextGroups = getCustomContextItemGroups(errorOccurrence);
   /* const gitInfo = getGitInfo(git.remote, git.hash); */
 
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "tab-content"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "layout-col"
-  }, react.createElement("section", {
+  }, react$1.createElement("section", {
     className: "tab-content-section border-none"
-  }, !!Object.keys(git).length ? react.createElement(DefinitionList, {
+  }, !!Object.keys(git).length ? react$1.createElement(DefinitionList, {
     title: "Git"
-  }, react.createElement(DefinitionList.Row, {
+  }, react$1.createElement(DefinitionList.Row, {
     label: "Repository",
     value: {
       /* <a className="underline" href={gitInfo.repoUrl} target="_blank">
       {gitInfo.repoUrl}
       </a> */
     }
-  }), react.createElement(DefinitionList.Row, {
+  }), react$1.createElement(DefinitionList.Row, {
     value: {
       /* <a href={gitInfo.commitUrl} target="_blank">
       "{git.message}" (<code>{git.hash}</code>)
       </a> */
     },
     label: "Message"
-  }), react.createElement(DefinitionList.Row, {
+  }), react$1.createElement(DefinitionList.Row, {
     value: git.tag,
     label: "Tag"
-  }), git.isDirty && react.createElement("div", {
+  }), git.isDirty && react$1.createElement("div", {
     className: "mt-4 sm:col-start-2"
-  }, react.createElement(Alert, {
+  }, react$1.createElement(Alert, {
     className: "inline-block min-h-0",
     type: "warning"
-  }, "This commit is dirty. (Un)staged changes have been made since this commit."))) : react.createElement(DefinitionList, {
+  }, "This commit is dirty. (Un)staged changes have been made since this commit."))) : react$1.createElement(DefinitionList, {
     title: "Git"
   }, Object.entries(env).map(function (_ref3) {
     var key = _ref3[0],
         value = _ref3[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
     });
-  }))), react.createElement(DefinitionList, {
+  }))), react$1.createElement(DefinitionList, {
     title: "Environment information",
     className: "tab-content-section"
-  }, errorOccurrence.application_version && react.createElement(DefinitionList.Row, {
+  }, errorOccurrence.application_version && react$1.createElement(DefinitionList.Row, {
     key: "app_version",
     value: errorOccurrence.application_version,
     label: "app_version"
   }), Object.entries(env).map(function (_ref4) {
     var key = _ref4[0],
         value = _ref4[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
     });
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Generic context",
     className: "tab-content-section"
   }, Object.entries(context).map(function (_ref5) {
     var key = _ref5[0],
         value = _ref5[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
@@ -29013,14 +29483,14 @@ function ContextTab(_ref) {
   })), Object.entries(customContextGroups).map(function (_ref6) {
     var groupName = _ref6[0],
         customGroup = _ref6[1];
-    return react.createElement(DefinitionList, {
+    return react$1.createElement(DefinitionList, {
       key: groupName,
       title: groupName,
       className: "tab-content-section"
     }, Object.entries(customGroup).map(function (_ref7) {
       var key = _ref7[0],
           value = _ref7[1];
-      return react.createElement(DefinitionList.Row, {
+      return react$1.createElement(DefinitionList.Row, {
         key: key,
         value: value.value,
         label: value.name
@@ -29576,15 +30046,16 @@ var sortBy = _baseRest(function (collection, iteratees) {
 });
 var sortBy_1 = sortBy;
 
+var _excluded$1 = ["value", "className"];
 function LineNumber(_ref) {
   var value = _ref.value,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["value", "className"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded$1);
 
-  return react.createElement("span", Object.assign({
+  return react$1.createElement("span", _extends$1({
     className: "ui-line-number " + className
-  }, props), ":", react.createElement("span", {
+  }, props), ":", react$1.createElement("span", {
     className: "font-mono"
   }, value));
 }
@@ -29593,26 +30064,26 @@ function DebugEvent(_ref) {
   var event = _ref.event;
 
   if (event.type === 'dump') {
-    return react.createElement(DumpEvent, Object.assign({}, event));
+    return react$1.createElement(DumpEvent, _extends$1({}, event));
   }
 
   if (event.type === 'glow') {
-    return react.createElement(GlowEvent, Object.assign({}, event));
+    return react$1.createElement(GlowEvent, _extends$1({}, event));
   }
 
   if (event.type === 'log') {
-    return react.createElement(LogEvent, Object.assign({}, event));
+    return react$1.createElement(LogEvent, _extends$1({}, event));
   }
 
   if (event.type === 'query') {
-    return react.createElement(QueryEvent, Object.assign({}, event));
+    return react$1.createElement(QueryEvent, _extends$1({}, event));
   }
 
   return null;
 }
 
 function DumpEvent(props) {
-  react.useEffect(function () {
+  react$1.useEffect(function () {
     /* Symfony dumps, only used in ignition */
     function detectDumpId(dumpHtml) {
       var pattern = /sf-dump-([0-9]+)/gm;
@@ -29626,40 +30097,40 @@ function DumpEvent(props) {
       window.Sfdump(dumpId);
     }
   }, []);
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "mb-2 pb-4 border-b border-dashed border-gray-300"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "mb-2 font-semibold text-xs"
-  }, "Dump"), react.createElement("code", {
+  }, "Dump"), react$1.createElement("code", {
     className: "code-block mb-4",
     dangerouslySetInnerHTML: {
       __html: props.label
     }
-  }), props.metadata.file && react.createElement(react.Fragment, null, react.createElement(FilePath, {
+  }), props.metadata.file && react$1.createElement(react$1.Fragment, null, react$1.createElement(FilePath, {
     path: props.metadata.file
-  }), react.createElement(LineNumber, {
+  }), react$1.createElement(LineNumber, {
     value: props.metadata.line_number
   })));
 }
 
 function GlowEvent(props) {
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "mb-2 pb-4 border-b border-dashed border-gray-300"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "mb-2 font-semibold text-xs"
-  }, "Glow"), react.createElement("code", {
+  }, "Glow"), react$1.createElement("code", {
     className: "code-block mb-4",
     dangerouslySetInnerHTML: {
       __html: props.label
     }
-  }), react.createElement("div", {
+  }), react$1.createElement("div", {
     className: "text-sm"
-  }, "Level: ", props.metadata.message_level), react.createElement(DefinitionList, {
+  }, "Level: ", props.metadata.message_level), react$1.createElement(DefinitionList, {
     title: ""
   }, Object.entries(props.context).map(function (_ref2) {
     var key = _ref2[0],
         value = _ref2[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
@@ -29668,23 +30139,23 @@ function GlowEvent(props) {
 }
 
 function LogEvent(props) {
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "mb-2 pb-4 border-b border-dashed border-gray-300"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "mb-2 font-semibold text-xs"
-  }, "Log", react.createElement("span", {
+  }, "Log", react$1.createElement("span", {
     className: "ml-2 px-1 font-normal level-" + props.metadata.level
-  }, props.metadata.level)), react.createElement("code", {
+  }, props.metadata.level)), react$1.createElement("code", {
     className: "code-block mb-4",
     dangerouslySetInnerHTML: {
       __html: props.label
     }
-  }), react.createElement(DefinitionList, {
+  }), react$1.createElement(DefinitionList, {
     title: ""
   }, Object.entries(props.context).map(function (_ref3) {
     var key = _ref3[0],
         value = _ref3[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       value: value,
       label: key,
       key: key
@@ -29695,54 +30166,54 @@ function LogEvent(props) {
 function formatLabel(label, replaceBindings) {
   var placeholder = "'%#this placeholder is long to force newlines#%'";
   var query = sqlFormatter$1.format(label.replace(/\?/g, placeholder));
-  return react.createElement(react.Fragment, null, query.split(placeholder).reduce(function (prev, current, i) {
+  return react$1.createElement(react$1.Fragment, null, query.split(placeholder).reduce(function (prev, current, i) {
     if (!i) {
       return [current];
     }
 
     var replacement = replaceBindings[i - 1];
-    return prev.concat(react.createElement("span", {
+    return prev.concat(react$1.createElement("span", {
       className: "mt-2 inline-flex group",
       key: i
-    }, react.createElement(CopyableCode, null, react.createElement("span", {
+    }, react$1.createElement(CopyableCode, null, react$1.createElement("span", {
       className: "text-purple-500"
-    }, stringifyOccurrenceData(replacement.value))), react.createElement("span", {
+    }, stringifyOccurrenceData(replacement.value))), react$1.createElement("span", {
       className: "absolute pointer-events-none z-10 right-full bottom-full -mr-2 -mb-1 whitespace-nowrap px-1 bg-white text-gray-700 text-xxs uppercase opacity-0 group-hover:opacity-100 transition-opacity shadow not-italic"
     }, replacement.type)), current);
   }, []));
 }
 
 function QueryEvent(props) {
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "mb-2 pb-4 border-b border-dashed border-gray-300"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "mb-2 font-semibold text-xs"
-  }, "Query"), react.createElement(DefinitionList, {
+  }, "Query"), react$1.createElement(DefinitionList, {
     className: "mb-4"
-  }, react.createElement("dl", {
+  }, react$1.createElement("dl", {
     className: "definition-label"
-  }, "Connection"), react.createElement("dd", {
+  }, "Connection"), react$1.createElement("dd", {
     className: "definition-definition "
-  }, props.metadata.connection_name), react.createElement("dl", {
+  }, props.metadata.connection_name), react$1.createElement("dl", {
     className: "definition-label"
-  }, "Duration"), react.createElement("dd", {
+  }, "Duration"), react$1.createElement("dd", {
     className: "definition-definition "
-  }, props.metadata.time, "ms")), react.createElement("code", {
+  }, props.metadata.time, "ms")), react$1.createElement("code", {
     className: "code-block mb-4"
-  }, !props.replace_bindings ? react.createElement("pre", null, sqlFormatter$1.format(props.label)) : react.createElement("pre", null, formatLabel(props.label, props.context))), !props.replace_bindings && react.createElement(DefinitionList, null, Object.entries(props.context).map(function (_ref4) {
+  }, !props.replace_bindings ? react$1.createElement("pre", null, sqlFormatter$1.format(props.label)) : react$1.createElement("pre", null, formatLabel(props.label, props.context))), !props.replace_bindings && react$1.createElement(DefinitionList, null, Object.entries(props.context).map(function (_ref4) {
     var key = _ref4[0],
         value = _ref4[1];
-    return react.createElement(react.Fragment, {
+    return react$1.createElement(react$1.Fragment, {
       key: key
-    }, react.createElement("dl", {
+    }, react$1.createElement("dl", {
       className: "definition-label"
-    }, key), react.createElement("dd", {
+    }, key), react$1.createElement("dd", {
       className: "flex items-baseline"
-    }, (value.type === 'int' || value.type === 'float') && react.createElement(CopyableCode, null, react.createElement("span", {
+    }, (value.type === 'int' || value.type === 'float') && react$1.createElement(CopyableCode, null, react$1.createElement("span", {
       className: "text-purple-500"
-    }, value.value)), value.type !== 'int' && value.type !== 'float' && react.createElement(CopyableCode, null, react.createElement("span", {
+    }, value.value)), value.type !== 'int' && value.type !== 'float' && react$1.createElement(CopyableCode, null, react$1.createElement("span", {
       className: "text-purple-500"
-    }, stringifyOccurrenceData(value.value))), react.createElement("span", {
+    }, stringifyOccurrenceData(value.value))), react$1.createElement("span", {
       className: "ml-2 mr-auto text-gray-700 text-xxs uppercase"
     }, value.type)));
   })));
@@ -29967,21 +30438,21 @@ function buildFormatLongFn(args) {
 
 var dateFormats = {
   full: 'EEEE, MMMM do, y',
-  long: 'MMMM do, y',
+  "long": 'MMMM do, y',
   medium: 'MMM d, y',
-  short: 'MM/dd/yyyy'
+  "short": 'MM/dd/yyyy'
 };
 var timeFormats = {
   full: 'h:mm:ss a zzzz',
-  long: 'h:mm:ss a z',
+  "long": 'h:mm:ss a z',
   medium: 'h:mm:ss a',
-  short: 'h:mm a'
+  "short": 'h:mm a'
 };
 var dateTimeFormats = {
   full: "{{date}} 'at' {{time}}",
-  long: "{{date}} 'at' {{time}}",
+  "long": "{{date}} 'at' {{time}}",
   medium: '{{date}}, {{time}}',
-  short: '{{date}}, {{time}}'
+  "short": '{{date}}, {{time}}'
 };
 var formatLong = {
   date: buildFormatLongFn({
@@ -30054,7 +30525,7 @@ var monthValues = {
 };
 var dayValues = {
   narrow: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-  short: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+  "short": ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
   abbreviated: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   wide: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 };
@@ -30161,7 +30632,7 @@ var localize = {
   quarter: buildLocalizeFn({
     values: quarterValues,
     defaultWidth: 'wide',
-    argumentCallback: function (quarter) {
+    argumentCallback: function argumentCallback(quarter) {
       return Number(quarter) - 1;
     }
   }),
@@ -30287,7 +30758,7 @@ var parseMonthPatterns = {
 };
 var matchDayPatterns = {
   narrow: /^[smtwf]/i,
-  short: /^(su|mo|tu|we|th|fr|sa)/i,
+  "short": /^(su|mo|tu|we|th|fr|sa)/i,
   abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
   wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
 };
@@ -30315,7 +30786,7 @@ var match = {
   ordinalNumber: buildMatchPatternFn({
     matchPattern: matchOrdinalNumberPattern,
     parsePattern: parseOrdinalNumberPattern,
-    valueCallback: function (value) {
+    valueCallback: function valueCallback(value) {
       return parseInt(value, 10);
     }
   }),
@@ -30330,7 +30801,7 @@ var match = {
     defaultMatchWidth: 'wide',
     parsePatterns: parseQuarterPatterns,
     defaultParseWidth: 'any',
-    valueCallback: function (index) {
+    valueCallback: function valueCallback(index) {
       return index + 1;
     }
   }),
@@ -30478,7 +30949,7 @@ function addLeadingZeros(number, targetLength) {
 
 var formatters$1 = {
   // Year
-  y: function (date, token) {
+  y: function y(date, token) {
     // From http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_tokens
     // | Year     |     y | yy |   yyy |  yyyy | yyyyy |
     // |----------|-------|----|-------|-------|-------|
@@ -30493,16 +30964,16 @@ var formatters$1 = {
     return addLeadingZeros(token === 'yy' ? year % 100 : year, token.length);
   },
   // Month
-  M: function (date, token) {
+  M: function M(date, token) {
     var month = date.getUTCMonth();
     return token === 'M' ? String(month + 1) : addLeadingZeros(month + 1, 2);
   },
   // Day of the month
-  d: function (date, token) {
+  d: function d(date, token) {
     return addLeadingZeros(date.getUTCDate(), token.length);
   },
   // AM or PM
-  a: function (date, token) {
+  a: function a(date, token) {
     var dayPeriodEnumValue = date.getUTCHours() / 12 >= 1 ? 'pm' : 'am';
 
     switch (token) {
@@ -30522,23 +30993,23 @@ var formatters$1 = {
     }
   },
   // Hour [1-12]
-  h: function (date, token) {
+  h: function h(date, token) {
     return addLeadingZeros(date.getUTCHours() % 12 || 12, token.length);
   },
   // Hour [0-23]
-  H: function (date, token) {
+  H: function H(date, token) {
     return addLeadingZeros(date.getUTCHours(), token.length);
   },
   // Minute
-  m: function (date, token) {
+  m: function m(date, token) {
     return addLeadingZeros(date.getUTCMinutes(), token.length);
   },
   // Second
-  s: function (date, token) {
+  s: function s(date, token) {
     return addLeadingZeros(date.getUTCSeconds(), token.length);
   },
   // Fraction of second
-  S: function (date, token) {
+  S: function S(date, token) {
     var numberOfDigits = token.length;
     var milliseconds = date.getUTCMilliseconds();
     var fractionalSeconds = Math.floor(milliseconds * Math.pow(10, numberOfDigits - 3));
@@ -30766,7 +31237,7 @@ var dayPeriodEnum = {
 };
 var formatters = {
   // Era
-  G: function (date, token, localize) {
+  G: function G(date, token, localize) {
     var era = date.getUTCFullYear() > 0 ? 1 : 0;
 
     switch (token) {
@@ -30793,7 +31264,7 @@ var formatters = {
     }
   },
   // Year
-  y: function (date, token, localize) {
+  y: function y(date, token, localize) {
     // Ordinal number
     if (token === 'yo') {
       var signedYear = date.getUTCFullYear(); // Returns 1 for 1 BC (which is year 0 in JavaScript)
@@ -30807,7 +31278,7 @@ var formatters = {
     return formatters$1.y(date, token);
   },
   // Local week-numbering year
-  Y: function (date, token, localize, options) {
+  Y: function Y(date, token, localize, options) {
     var signedWeekYear = getUTCWeekYear(date, options); // Returns 1 for 1 BC (which is year 0 in JavaScript)
 
     var weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear; // Two digit year
@@ -30828,7 +31299,7 @@ var formatters = {
     return addLeadingZeros(weekYear, token.length);
   },
   // ISO week-numbering year
-  R: function (date, token) {
+  R: function R(date, token) {
     var isoWeekYear = getUTCISOWeekYear(date); // Padding
 
     return addLeadingZeros(isoWeekYear, token.length);
@@ -30842,12 +31313,12 @@ var formatters = {
   // | BC 2 |   2 |  -1 |
   // Also `yy` always returns the last two digits of a year,
   // while `uu` pads single digit years to 2 characters and returns other years unchanged.
-  u: function (date, token) {
+  u: function u(date, token) {
     var year = date.getUTCFullYear();
     return addLeadingZeros(year, token.length);
   },
   // Quarter
-  Q: function (date, token, localize) {
+  Q: function Q(date, token, localize) {
     var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
 
     switch (token) {
@@ -30889,7 +31360,7 @@ var formatters = {
     }
   },
   // Stand-alone quarter
-  q: function (date, token, localize) {
+  q: function q(date, token, localize) {
     var quarter = Math.ceil((date.getUTCMonth() + 1) / 3);
 
     switch (token) {
@@ -30931,7 +31402,7 @@ var formatters = {
     }
   },
   // Month
-  M: function (date, token, localize) {
+  M: function M(date, token, localize) {
     var month = date.getUTCMonth();
 
     switch (token) {
@@ -30969,7 +31440,7 @@ var formatters = {
     }
   },
   // Stand-alone month
-  L: function (date, token, localize) {
+  L: function L(date, token, localize) {
     var month = date.getUTCMonth();
 
     switch (token) {
@@ -31011,7 +31482,7 @@ var formatters = {
     }
   },
   // Local week of year
-  w: function (date, token, localize, options) {
+  w: function w(date, token, localize, options) {
     var week = getUTCWeek(date, options);
 
     if (token === 'wo') {
@@ -31023,7 +31494,7 @@ var formatters = {
     return addLeadingZeros(week, token.length);
   },
   // ISO week of year
-  I: function (date, token, localize) {
+  I: function I(date, token, localize) {
     var isoWeek = getUTCISOWeek(date);
 
     if (token === 'Io') {
@@ -31035,7 +31506,7 @@ var formatters = {
     return addLeadingZeros(isoWeek, token.length);
   },
   // Day of the month
-  d: function (date, token, localize) {
+  d: function d(date, token, localize) {
     if (token === 'do') {
       return localize.ordinalNumber(date.getUTCDate(), {
         unit: 'date'
@@ -31045,7 +31516,7 @@ var formatters = {
     return formatters$1.d(date, token);
   },
   // Day of year
-  D: function (date, token, localize) {
+  D: function D(date, token, localize) {
     var dayOfYear = getUTCDayOfYear(date);
 
     if (token === 'Do') {
@@ -31057,7 +31528,7 @@ var formatters = {
     return addLeadingZeros(dayOfYear, token.length);
   },
   // Day of week
-  E: function (date, token, localize) {
+  E: function E(date, token, localize) {
     var dayOfWeek = date.getUTCDay();
 
     switch (token) {
@@ -31094,7 +31565,7 @@ var formatters = {
     }
   },
   // Local day of week
-  e: function (date, token, localize, options) {
+  e: function e(date, token, localize, options) {
     var dayOfWeek = date.getUTCDay();
     var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
 
@@ -31143,7 +31614,7 @@ var formatters = {
     }
   },
   // Stand-alone local day of week
-  c: function (date, token, localize, options) {
+  c: function c(date, token, localize, options) {
     var dayOfWeek = date.getUTCDay();
     var localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
 
@@ -31192,7 +31663,7 @@ var formatters = {
     }
   },
   // ISO day of week
-  i: function (date, token, localize) {
+  i: function i(date, token, localize) {
     var dayOfWeek = date.getUTCDay();
     var isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
 
@@ -31242,7 +31713,7 @@ var formatters = {
     }
   },
   // AM or PM
-  a: function (date, token, localize) {
+  a: function a(date, token, localize) {
     var hours = date.getUTCHours();
     var dayPeriodEnumValue = hours / 12 >= 1 ? 'pm' : 'am';
 
@@ -31275,7 +31746,7 @@ var formatters = {
     }
   },
   // AM, PM, midnight, noon
-  b: function (date, token, localize) {
+  b: function b(date, token, localize) {
     var hours = date.getUTCHours();
     var dayPeriodEnumValue;
 
@@ -31316,7 +31787,7 @@ var formatters = {
     }
   },
   // in the morning, in the afternoon, in the evening, at night
-  B: function (date, token, localize) {
+  B: function B(date, token, localize) {
     var hours = date.getUTCHours();
     var dayPeriodEnumValue;
 
@@ -31354,7 +31825,7 @@ var formatters = {
     }
   },
   // Hour [1-12]
-  h: function (date, token, localize) {
+  h: function h(date, token, localize) {
     if (token === 'ho') {
       var hours = date.getUTCHours() % 12;
       if (hours === 0) hours = 12;
@@ -31366,7 +31837,7 @@ var formatters = {
     return formatters$1.h(date, token);
   },
   // Hour [0-23]
-  H: function (date, token, localize) {
+  H: function H(date, token, localize) {
     if (token === 'Ho') {
       return localize.ordinalNumber(date.getUTCHours(), {
         unit: 'hour'
@@ -31376,7 +31847,7 @@ var formatters = {
     return formatters$1.H(date, token);
   },
   // Hour [0-11]
-  K: function (date, token, localize) {
+  K: function K(date, token, localize) {
     var hours = date.getUTCHours() % 12;
 
     if (token === 'Ko') {
@@ -31388,7 +31859,7 @@ var formatters = {
     return addLeadingZeros(hours, token.length);
   },
   // Hour [1-24]
-  k: function (date, token, localize) {
+  k: function k(date, token, localize) {
     var hours = date.getUTCHours();
     if (hours === 0) hours = 24;
 
@@ -31401,7 +31872,7 @@ var formatters = {
     return addLeadingZeros(hours, token.length);
   },
   // Minute
-  m: function (date, token, localize) {
+  m: function m(date, token, localize) {
     if (token === 'mo') {
       return localize.ordinalNumber(date.getUTCMinutes(), {
         unit: 'minute'
@@ -31411,7 +31882,7 @@ var formatters = {
     return formatters$1.m(date, token);
   },
   // Second
-  s: function (date, token, localize) {
+  s: function s(date, token, localize) {
     if (token === 'so') {
       return localize.ordinalNumber(date.getUTCSeconds(), {
         unit: 'second'
@@ -31421,11 +31892,11 @@ var formatters = {
     return formatters$1.s(date, token);
   },
   // Fraction of second
-  S: function (date, token) {
+  S: function S(date, token) {
     return formatters$1.S(date, token);
   },
   // Timezone (ISO-8601. If offset is 0, output is always `'Z'`)
-  X: function (date, token, _localize, options) {
+  X: function X(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
 
@@ -31457,7 +31928,7 @@ var formatters = {
     }
   },
   // Timezone (ISO-8601. If offset is 0, output is `'+00:00'` or equivalent)
-  x: function (date, token, _localize, options) {
+  x: function x(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
 
@@ -31485,7 +31956,7 @@ var formatters = {
     }
   },
   // Timezone (GMT)
-  O: function (date, token, _localize, options) {
+  O: function O(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
 
@@ -31503,7 +31974,7 @@ var formatters = {
     }
   },
   // Timezone (specific non-location)
-  z: function (date, token, _localize, options) {
+  z: function z(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timezoneOffset = originalDate.getTimezoneOffset();
 
@@ -31521,13 +31992,13 @@ var formatters = {
     }
   },
   // Seconds timestamp
-  t: function (date, token, _localize, options) {
+  t: function t(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timestamp = Math.floor(originalDate.getTime() / 1000);
     return addLeadingZeros(timestamp, token.length);
   },
   // Milliseconds timestamp
-  T: function (date, token, _localize, options) {
+  T: function T(date, token, _localize, options) {
     var originalDate = options._originalDate || date;
     var timestamp = originalDate.getTime();
     return addLeadingZeros(timestamp, token.length);
@@ -33086,14 +33557,15 @@ function isNumber(value) {
 
 var isNumber_1 = isNumber;
 
+var _excluded = ["dateTime", "relative", "format"];
 function LocalTime(_ref) {
   var dateTime = _ref.dateTime,
       _ref$relative = _ref.relative,
       relative = _ref$relative === void 0 ? true : _ref$relative,
       format$1 = _ref.format,
-      props = _objectWithoutPropertiesLoose$1(_ref, ["dateTime", "relative", "format"]);
+      props = _objectWithoutPropertiesLoose$1(_ref, _excluded);
 
-  var formattedTime = react.useMemo(function () {
+  var formattedTime = react$1.useMemo(function () {
     if (dateTime === null || dateTime === undefined) {
       return '';
     }
@@ -33111,9 +33583,9 @@ function LocalTime(_ref) {
 
       return distanceInWords.replace('about', '').replace('minutes', 'min').replace('minute', 'min').replace('seconds', 'sec').replace('second', 'sec');
     } else {
-      return react.createElement("span", {
+      return react$1.createElement("span", {
         className: "variant-tabular"
-      }, format$1 ? format(date, format$1) : react.createElement(react.Fragment, null, format(date, 'yyyy-MM-dd'), ' ', react.createElement("span", {
+      }, format$1 ? format(date, format$1) : react$1.createElement(react$1.Fragment, null, format(date, 'yyyy-MM-dd'), ' ', react$1.createElement("span", {
         className: "text-tint-700"
       }, format(date, 'HH:mm:ss'))));
     }
@@ -33124,7 +33596,7 @@ function LocalTime(_ref) {
   }
 
   var formattedDateTime = format(isNumber_1(dateTime) ? dateTime : parseISO(dateTime), 'yyyy-MM-dd HH:mm:ss zzzz');
-  return react.createElement("time", Object.assign({
+  return react$1.createElement("time", _extends$1({
     dateTime: formattedDateTime,
     title: formattedDateTime
   }, props), formattedTime);
@@ -33133,7 +33605,7 @@ function LocalTime(_ref) {
 function DebugTab(_ref) {
   var errorOccurrence = _ref.errorOccurrence;
 
-  var _useState = react.useState({
+  var _useState = react$1.useState({
     dump: true,
     glow: true,
     log: true,
@@ -33174,54 +33646,54 @@ function DebugTab(_ref) {
   var events = sortBy_1([].concat(map_1(dumps, createDumpEvent), map_1(glows, createGlowEvent), map_1(logs, createLogEvent), map_1(queries, createQueryEvent)), 'microtime').filter(function (event) {
     return visibleTypes.includes(event.type);
   });
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "tab-content"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "sticky top-0 z-10 grid grid-cols-auto grid-flow-col items-center justify-center px-6 py-2 bg-gray-100 border-b border-tint-200 text-xs"
-  }, react.createElement("nav", {
+  }, react$1.createElement("nav", {
     className: "grid grid-cols-auto grid-flow-col items-center gap-x-6 gap-y-2"
-  }, react.createElement(CheckboxField, {
+  }, react$1.createElement(CheckboxField, {
     labelClassName: "text-gray-600",
     checked: visibleTypesMap.dump,
     onChange: toggleVisibleType('dump'),
     label: "Dumps"
-  }), react.createElement(CheckboxField, {
+  }), react$1.createElement(CheckboxField, {
     labelClassName: "text-gray-600",
     checked: visibleTypesMap.glow,
     onChange: toggleVisibleType('glow'),
     label: "Glows"
-  }), react.createElement(CheckboxField, {
+  }), react$1.createElement(CheckboxField, {
     labelClassName: "text-gray-600",
     checked: visibleTypesMap.log,
     onChange: toggleVisibleType('log'),
     label: "Logs"
-  }), react.createElement(CheckboxField, {
+  }), react$1.createElement(CheckboxField, {
     labelClassName: "text-gray-600",
     checked: visibleTypesMap.query,
     onChange: toggleVisibleType('query'),
     label: "Queries"
-  }), visibleTypes.length !== Object.keys(visibleTypesMap).length && react.createElement(Button, {
+  }), visibleTypes.length !== Object.keys(visibleTypesMap).length && react$1.createElement(Button, {
     secondary: true,
     link: true,
     className: "no-underline absolute left-full ml-6 hidden | sm:block",
     onClick: showAllTypes
-  }, "Select\xA0all"))), events.length ? react.createElement("div", {
+  }, "Select\xA0all"))), events.length ? react$1.createElement("div", {
     className: "layout-col"
-  }, react.createElement(DefinitionList, {
+  }, react$1.createElement(DefinitionList, {
     className: "tab-content-section no-border"
   }, events.map(function (event, i) {
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: i,
-      value: react.createElement(DebugEvent, {
+      value: react$1.createElement(DebugEvent, {
         event: event
       }),
-      label: react.createElement(LocalTime, {
+      label: react$1.createElement(LocalTime, {
         dateTime: Math.floor(event.microtime * 1000),
         relative: false,
         format: "yyyy-MM-dd HH:mm:ss"
       })
     });
-  }))) : react.createElement("p", {
+  }))) : react$1.createElement("p", {
     className: "absolute inset-0 grid place-center alert-empty"
   }, "No debug data available."));
 }
@@ -33304,81 +33776,81 @@ function RequestTab(_ref) {
   var headers = getContextValues(errorOccurrence, 'headers');
   var session = getContextValues(errorOccurrence, 'session');
   var cookies = getContextValues(errorOccurrence, 'cookies');
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "tab-content"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "layout-col"
-  }, react.createElement(DefinitionList, {
+  }, react$1.createElement(DefinitionList, {
     title: "Request",
     className: "tab-content-section border-none"
-  }, react.createElement(DefinitionList.Row, {
+  }, react$1.createElement(DefinitionList.Row, {
     value: request.url,
     label: "URL"
-  }), react.createElement(DefinitionList.Row, {
+  }), react$1.createElement(DefinitionList.Row, {
     value: request.method,
     label: "Method"
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Headers",
     className: "tab-content-section"
   }, Object.entries(headers || {}).map(function (_ref2) {
     var key = _ref2[0],
         value = _ref2[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
     });
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Query string",
     className: "tab-content-section"
   }, Object.entries(requestData.queryString || {}).map(function (_ref3) {
     var key = _ref3[0],
         value = _ref3[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
     });
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Body",
     className: "tab-content-section"
   }, Object.entries(requestData.body || {}).map(function (_ref4) {
     var key = _ref4[0],
         value = _ref4[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
     });
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Files",
     className: "tab-content-section"
   }, Object.entries(requestData.files || {}).map(function (_ref5) {
     var key = _ref5[0],
         value = _ref5[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
     });
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Session",
     className: "tab-content-section"
   }, Object.entries(session || {}).map(function (_ref6) {
     var key = _ref6[0],
         value = _ref6[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: stringifyOccurrenceData(value),
       label: key
     });
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Cookies",
     className: "tab-content-section"
   }, Object.entries(cookies || {}).map(function (_ref7) {
     var key = _ref7[0],
         value = _ref7[1];
-    return react.createElement(DefinitionList.Row, {
+    return react$1.createElement(DefinitionList.Row, {
       key: key,
       value: value,
       label: key
@@ -33392,60 +33864,60 @@ function StackFrameGroup(_ref) {
       onSelect = _ref.onSelect;
 
   if (!frameGroup.expanded && frameGroup.type === 'vendor') {
-    return react.createElement("li", {
+    return react$1.createElement("li", {
       className: "stack-frame-group stack-frame-group-vendor",
       onClick: onExpand
-    }, react.createElement("div", {
+    }, react$1.createElement("div", {
       className: "stack-frame | cursor-pointer"
-    }, react.createElement("button", {
+    }, react$1.createElement("button", {
       className: "stack-frame-number"
-    }, react.createElement("i", {
+    }, react$1.createElement("i", {
       className: "fas fa-plus-circle text-gray-500"
-    })), react.createElement("div", {
+    })), react$1.createElement("div", {
       className: "col-span-2 stack-frame-text"
-    }, react.createElement("button", {
+    }, react$1.createElement("button", {
       className: "text-left text-gray-500"
     }, frameGroup.frames.length > 1 ? frameGroup.frames.length + " vendor frames\u2026" : '1 vendor frame…'))));
   }
 
   if (frameGroup.type === 'unknown') {
-    return react.createElement("li", {
+    return react$1.createElement("li", {
       className: "stack-frame-group stack-frame-group-unknown"
-    }, react.createElement("div", {
+    }, react$1.createElement("div", {
       className: "stack-frame"
-    }, react.createElement("button", {
+    }, react$1.createElement("button", {
       className: "stack-frame-number"
-    }), react.createElement("div", {
+    }), react$1.createElement("div", {
       className: "col-span-2 stack-frame-text"
-    }, react.createElement("span", {
+    }, react$1.createElement("span", {
       className: "text-left text-gray-500"
     }, frameGroup.frames.length > 1 ? frameGroup.frames.length + " unknown frames" : '1 unknown frame'))));
   }
 
-  return react.createElement("li", null, react.createElement("ul", {
+  return react$1.createElement("li", null, react$1.createElement("ul", {
     className: "stack-frame-group " + (frameGroup.type === 'vendor' ? 'stack-frame-group-vendor' : '')
   }, frameGroup.frames.map(function (frame, i) {
-    return react.createElement("li", {
+    return react$1.createElement("li", {
       key: i,
       className: "stack-frame " + (frame.selected ? 'stack-frame-selected' : '') + " | cursor-pointer",
       onClick: function onClick() {
         return onSelect(frame.frame_number);
       }
-    }, react.createElement("div", {
+    }, react$1.createElement("div", {
       className: "stack-frame-number"
-    }, frame.frame_number), react.createElement("div", {
+    }, frame.frame_number), react$1.createElement("div", {
       className: "stack-frame-text"
-    }, i === 0 && react.createElement("header", {
+    }, i === 0 && react$1.createElement("header", {
       className: "stack-frame-header " + (frame["class"] ? 'mb-1' : '')
-    }, react.createElement(FilePath, {
+    }, react$1.createElement(FilePath, {
       className: frameGroup.type === 'vendor' ? 'text-gray-800' : 'text-purple-800',
       path: frame.relative_file
-    })), react.createElement(ExceptionClass, {
+    })), react$1.createElement(ExceptionClass, {
       name: frame["class"],
       method: frame.method
-    })), react.createElement("div", {
+    })), react$1.createElement("div", {
       className: "stack-frame-line"
-    }, react.createElement(LineNumber, {
+    }, react$1.createElement(LineNumber, {
       value: frame.line_number
     })));
   })));
@@ -33913,7 +34385,7 @@ function StackSnippet(_ref) {
       selectedRange = _ref.selectedRange,
       onSelectRange = _ref.onSelectRange;
 
-  var _useState = react.useState(selectedRange ? selectedRange[0] : null),
+  var _useState = react$1.useState(selectedRange ? selectedRange[0] : null),
       firstSelectedLineNumber = _useState[0],
       setFirstSelectedLineNumber = _useState[1];
 
@@ -33925,12 +34397,12 @@ function StackSnippet(_ref) {
     return lineNumber >= selectedRange[0] && lineNumber <= selectedRange[1];
   }
 
-  var highlightedCodeSnippet = react.useMemo(function () {
+  var highlightedCodeSnippet = react$1.useMemo(function () {
     var state;
     return Object.keys(code).map(function (lineNumber) {
       var result = highlight('php', code[lineNumber] || '', true, state);
       state = result.top;
-      return react.createElement("p", {
+      return react$1.createElement("p", {
         key: lineNumber,
         className: "stack-code-line " + (withinSelectedRange(parseInt(lineNumber)) ? 'stack-code-line-selected' : '') + " " + (parseInt(lineNumber) === highlightedLineNumber ? 'stack-code-line-highlight' : ''),
         dangerouslySetInnerHTML: {
@@ -33951,21 +34423,21 @@ function StackSnippet(_ref) {
     }
   }
 
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "stack-viewer scrollbar"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "stack-ruler"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "stack-lines"
   }, Object.keys(code).length && Object.keys(code).map(function (lineNumber) {
-    return react.createElement("p", {
+    return react$1.createElement("p", {
       onClick: function onClick(event) {
         return handleLineNumberClick(event, parseInt(lineNumber));
       },
       key: lineNumber,
       className: "cursor-pointer stack-line " + (withinSelectedRange(parseInt(lineNumber)) ? 'stack-line-selected' : '') + " " + (parseInt(lineNumber) === highlightedLineNumber ? 'stack-line-highlight' : '')
     }, lineNumber);
-  }))), react.createElement("pre", {
+  }))), react$1.createElement("pre", {
     className: "stack-code"
   }, highlightedCodeSnippet));
 }
@@ -33973,7 +34445,7 @@ function StackSnippet(_ref) {
 function Stack(_ref) {
   var frames = _ref.frames,
       open_frame_index = _ref.open_frame_index;
-  var initialState = react.useMemo(function () {
+  var initialState = react$1.useMemo(function () {
     var selectedFrame = frames.length;
 
     if (open_frame_index) {
@@ -33989,17 +34461,17 @@ function Stack(_ref) {
     });
   }, [frames]);
 
-  var _useReducer = react.useReducer(stackReducer, initialState),
+  var _useReducer = react$1.useReducer(stackReducer, initialState),
       state = _useReducer[0],
       dispatch = _useReducer[1];
 
-  var vendorFramesExpanded = react.useMemo(function () {
+  var vendorFramesExpanded = react$1.useMemo(function () {
     return allVendorFramesAreExpanded(state);
   }, [state]);
-  var frameGroups = react.useMemo(function () {
+  var frameGroups = react$1.useMemo(function () {
     return createFrameGroups(state);
   }, [state]);
-  var selectedFrame = react.useMemo(function () {
+  var selectedFrame = react$1.useMemo(function () {
     return getSelectedFrame(state);
   }, [state]);
   useKeyboardShortcut('j', function () {
@@ -34013,11 +34485,11 @@ function Stack(_ref) {
     });
   });
 
-  var _useState = react.useState(null),
+  var _useState = react$1.useState(null),
       selectedRange = _useState[0],
       setSelectedRange = _useState[1];
 
-  react.useLayoutEffect(function () {
+  react$1.useLayoutEffect(function () {
     var FramePattern = /F([0-9]+)?/gm;
     var LinePattern = /L([0-9]+)(-([0-9]+))?/gm;
     var frameMatches = FramePattern.exec(window.location.hash);
@@ -34037,48 +34509,48 @@ function Stack(_ref) {
       setSelectedRange([minLineNumber, maxLineNumber]);
     }
   }, []);
-  react.useEffect(function () {
+  react$1.useEffect(function () {
     var lineNumber = selectedRange ? selectedRange[0] === selectedRange[1] ? selectedRange[0] : selectedRange[0] + "-" + selectedRange[1] : null;
     window.history.replaceState(window.history.state, '', "#F" + state.selected + (lineNumber ? 'L' + lineNumber : ''));
   }, [state.selected, selectedRange]);
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "stack"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "stack-nav"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "stack-nav-actions"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "stack-nav-arrows"
-  }, react.createElement("button", {
+  }, react$1.createElement("button", {
     className: "hidden"
-  }, react.createElement("i", {
+  }, react$1.createElement("i", {
     className: "fas fa-arrow-up"
-  })), react.createElement("button", {
+  })), react$1.createElement("button", {
     className: "hidden"
-  }, react.createElement("i", {
+  }, react$1.createElement("i", {
     className: "fas fa-arrow-down"
-  }))), react.createElement("div", {
+  }))), react$1.createElement("div", {
     className: "px-4"
-  }, vendorFramesExpanded ? react.createElement("button", {
+  }, vendorFramesExpanded ? react$1.createElement("button", {
     className: "link-dimmed",
     onClick: function onClick() {
       return dispatch({
         type: 'COLLAPSE_ALL_VENDOR_FRAMES'
       });
     }
-  }, "Collapse vendor frames") : react.createElement("button", {
+  }, "Collapse vendor frames") : react$1.createElement("button", {
     className: "link-dimmed",
     onClick: function onClick() {
       return dispatch({
         type: 'EXPAND_ALL_VENDOR_FRAMES'
       });
     }
-  }, "Expand vendor frames"))), react.createElement("div", {
+  }, "Expand vendor frames"))), react$1.createElement("div", {
     className: "stack-frames"
-  }, react.createElement("ol", {
+  }, react$1.createElement("ol", {
     className: "stack-frames-scroll scrollbar"
   }, frameGroups.map(function (frameGroup, i) {
-    return react.createElement(StackFrameGroup, {
+    return react$1.createElement(StackFrameGroup, {
       key: i,
       frameGroup: frameGroup,
       onExpand: function onExpand() {
@@ -34097,21 +34569,21 @@ function Stack(_ref) {
         setSelectedRange(null);
       }
     });
-  })))), react.createElement("div", {
+  })))), react$1.createElement("div", {
     className: "stack-main"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "stack-main-header"
-  }, react.createElement(ExceptionClass, {
+  }, react$1.createElement(ExceptionClass, {
     name: selectedFrame["class"],
     method: selectedFrame.method
-  }), react.createElement("div", {
+  }), react$1.createElement("div", {
     className: "flex items-baseline justify-start"
-  }, react.createElement(FilePath, {
+  }, react$1.createElement(FilePath, {
     className: "mt-1",
     path: selectedFrame.relative_file
-  }), ":", selectedFrame.line_number)), react.createElement("div", {
+  }), ":", selectedFrame.line_number)), react$1.createElement("div", {
     className: "stack-main-content"
-  }, react.createElement(StackSnippet, {
+  }, react$1.createElement(StackSnippet, {
     code: selectedFrame.code_snippet,
     highlightedLineNumber: selectedFrame.line_number,
     selectedRange: selectedRange,
@@ -34121,7 +34593,7 @@ function Stack(_ref) {
 
 function StackTab(_ref) {
   var errorOccurrence = _ref.errorOccurrence;
-  return react.createElement(Stack, {
+  return react$1.createElement(Stack, {
     frames: errorOccurrence.frames,
     open_frame_index: errorOccurrence.open_frame_index
   });
@@ -34132,45 +34604,53 @@ var crypt = createCommonjsModule(function (module) {
     var base64map = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
         crypt = {
       // Bit-wise rotation left
-      rotl: function (n, b) {
+      rotl: function rotl(n, b) {
         return n << b | n >>> 32 - b;
       },
       // Bit-wise rotation right
-      rotr: function (n, b) {
+      rotr: function rotr(n, b) {
         return n << 32 - b | n >>> b;
       },
       // Swap big-endian to little-endian and vice versa
-      endian: function (n) {
+      endian: function endian(n) {
         // If number given, swap endian
         if (n.constructor == Number) {
           return crypt.rotl(n, 8) & 0x00FF00FF | crypt.rotl(n, 24) & 0xFF00FF00;
         } // Else, assume array and swap all items
 
 
-        for (var i = 0; i < n.length; i++) n[i] = crypt.endian(n[i]);
+        for (var i = 0; i < n.length; i++) {
+          n[i] = crypt.endian(n[i]);
+        }
 
         return n;
       },
       // Generate an array of any length of random bytes
-      randomBytes: function (n) {
-        for (var bytes = []; n > 0; n--) bytes.push(Math.floor(Math.random() * 256));
+      randomBytes: function randomBytes(n) {
+        for (var bytes = []; n > 0; n--) {
+          bytes.push(Math.floor(Math.random() * 256));
+        }
 
         return bytes;
       },
       // Convert a byte array to big-endian 32-bit words
-      bytesToWords: function (bytes) {
-        for (var words = [], i = 0, b = 0; i < bytes.length; i++, b += 8) words[b >>> 5] |= bytes[i] << 24 - b % 32;
+      bytesToWords: function bytesToWords(bytes) {
+        for (var words = [], i = 0, b = 0; i < bytes.length; i++, b += 8) {
+          words[b >>> 5] |= bytes[i] << 24 - b % 32;
+        }
 
         return words;
       },
       // Convert big-endian 32-bit words to a byte array
-      wordsToBytes: function (words) {
-        for (var bytes = [], b = 0; b < words.length * 32; b += 8) bytes.push(words[b >>> 5] >>> 24 - b % 32 & 0xFF);
+      wordsToBytes: function wordsToBytes(words) {
+        for (var bytes = [], b = 0; b < words.length * 32; b += 8) {
+          bytes.push(words[b >>> 5] >>> 24 - b % 32 & 0xFF);
+        }
 
         return bytes;
       },
       // Convert a byte array to a hex string
-      bytesToHex: function (bytes) {
+      bytesToHex: function bytesToHex(bytes) {
         for (var hex = [], i = 0; i < bytes.length; i++) {
           hex.push((bytes[i] >>> 4).toString(16));
           hex.push((bytes[i] & 0xF).toString(16));
@@ -34179,23 +34659,27 @@ var crypt = createCommonjsModule(function (module) {
         return hex.join('');
       },
       // Convert a hex string to a byte array
-      hexToBytes: function (hex) {
-        for (var bytes = [], c = 0; c < hex.length; c += 2) bytes.push(parseInt(hex.substr(c, 2), 16));
+      hexToBytes: function hexToBytes(hex) {
+        for (var bytes = [], c = 0; c < hex.length; c += 2) {
+          bytes.push(parseInt(hex.substr(c, 2), 16));
+        }
 
         return bytes;
       },
       // Convert a byte array to a base-64 string
-      bytesToBase64: function (bytes) {
+      bytesToBase64: function bytesToBase64(bytes) {
         for (var base64 = [], i = 0; i < bytes.length; i += 3) {
           var triplet = bytes[i] << 16 | bytes[i + 1] << 8 | bytes[i + 2];
 
-          for (var j = 0; j < 4; j++) if (i * 8 + j * 6 <= bytes.length * 8) base64.push(base64map.charAt(triplet >>> 6 * (3 - j) & 0x3F));else base64.push('=');
+          for (var j = 0; j < 4; j++) {
+            if (i * 8 + j * 6 <= bytes.length * 8) base64.push(base64map.charAt(triplet >>> 6 * (3 - j) & 0x3F));else base64.push('=');
+          }
         }
 
         return base64.join('');
       },
       // Convert a base-64 string to a byte array
-      base64ToBytes: function (base64) {
+      base64ToBytes: function base64ToBytes(base64) {
         // Remove non-base-64 characters
         base64 = base64.replace(/[^A-Z0-9+\/]/ig, '');
 
@@ -34215,25 +34699,29 @@ var charenc = {
   // UTF-8 encoding
   utf8: {
     // Convert a string to a byte array
-    stringToBytes: function (str) {
+    stringToBytes: function stringToBytes(str) {
       return charenc.bin.stringToBytes(unescape(encodeURIComponent(str)));
     },
     // Convert a byte array to a string
-    bytesToString: function (bytes) {
+    bytesToString: function bytesToString(bytes) {
       return decodeURIComponent(escape(charenc.bin.bytesToString(bytes)));
     }
   },
   // Binary encoding
   bin: {
     // Convert a string to a byte array
-    stringToBytes: function (str) {
-      for (var bytes = [], i = 0; i < str.length; i++) bytes.push(str.charCodeAt(i) & 0xFF);
+    stringToBytes: function stringToBytes(str) {
+      for (var bytes = [], i = 0; i < str.length; i++) {
+        bytes.push(str.charCodeAt(i) & 0xFF);
+      }
 
       return bytes;
     },
     // Convert a byte array to a string
-    bytesToString: function (bytes) {
-      for (var str = [], i = 0; i < bytes.length; i++) str.push(String.fromCharCode(bytes[i]));
+    bytesToString: function bytesToString(bytes) {
+      for (var str = [], i = 0; i < bytes.length; i++) {
+        str.push(String.fromCharCode(bytes[i]));
+      }
 
       return str.join('');
     }
@@ -34249,7 +34737,7 @@ var charenc_1 = charenc;
  */
 // The _isBuffer check is for Safari 5-7 support, because it's missing
 // Object.prototype.constructor. Remove this eventually
-var isBuffer_1 = function (obj) {
+var isBuffer_1 = function isBuffer_1(obj) {
   return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer);
 };
 
@@ -34269,7 +34757,7 @@ var md5 = createCommonjsModule(function (module) {
         isBuffer = isBuffer_1,
         bin = charenc_1.bin,
         // The core
-    md5 = function (message, options) {
+    md5 = function md5(message, options) {
       // Convert to byte array
       if (message.constructor == String) {
         if (options && options.encoding === 'binary') message = bin.stringToBytes(message);else message = utf8.stringToBytes(message);
@@ -34416,123 +34904,127 @@ function UserTab(_ref) {
     gravatar = "https://www.gravatar.com/avatar/" + md5(user.email) + ".jpg?s=80";
   }
 
-  return react.createElement("div", {
+  return react$1.createElement("div", {
     className: "tab-content"
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "layout-col"
-  }, react.createElement(DefinitionList, {
+  }, react$1.createElement(DefinitionList, {
     title: "User Data",
     className: "tab-content-section border-none"
-  }, user.email && react.createElement(DefinitionList.Row, {
-    value: react.createElement("img", {
+  }, user.email && react$1.createElement(DefinitionList.Row, {
+    value: react$1.createElement("img", {
       src: gravatar
     }),
     label: "Gravatar"
-  }), react.createElement(DefinitionList.Row, {
+  }), react$1.createElement(DefinitionList.Row, {
     value: user.email,
     label: "Email"
-  }), react.createElement(DefinitionList.Row, {
-    value: react.createElement(CopyableCode, null, JSON.stringify(user, null, 4)),
+  }), react$1.createElement(DefinitionList.Row, {
+    value: react$1.createElement(CopyableCode, null, JSON.stringify(user, null, 4)),
     label: "User data"
-  })), react.createElement(DefinitionList, {
+  })), react$1.createElement(DefinitionList, {
     title: "Client info",
     className: "tab-content-section"
-  }, react.createElement(DefinitionList.Row, {
+  }, react$1.createElement(DefinitionList.Row, {
     value: request.ip,
     label: "IP address"
-  }), react.createElement(DefinitionList.Row, {
+  }), react$1.createElement(DefinitionList.Row, {
     value: request.useragent,
     label: "User agent"
-  }), request.flare_user_agent_platform && react.createElement(DefinitionList.Row, {
+  }), request.flare_user_agent_platform && react$1.createElement(DefinitionList.Row, {
     value: request.flare_user_agent_platform,
     label: "Platform"
-  }), request.flare_user_agent_device && react.createElement(DefinitionList.Row, {
+  }), request.flare_user_agent_device && react$1.createElement(DefinitionList.Row, {
     value: request.flare_user_agent_device,
     label: "Device"
-  }), request.flare_user_agent_browser && react.createElement(DefinitionList.Row, {
+  }), request.flare_user_agent_browser && react$1.createElement(DefinitionList.Row, {
     value: request.flare_user_agent_browser,
     label: "Browser"
-  }), request.flare_user_agent_browser_version && react.createElement(DefinitionList.Row, {
+  }), request.flare_user_agent_browser_version && react$1.createElement(DefinitionList.Row, {
     value: request.flare_user_agent_browser_version,
     label: "Browser version"
   }))));
 }
 
 function IconSummary() {
-  return react.createElement("svg", {
+  return react$1.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     style: {
       display: 'none'
     }
-  }, react.createElement("symbol", {
+  }, react$1.createElement("symbol", {
     id: "arrow-down-icon",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 448 512"
-  }, react.createElement("path", {
+  }, react$1.createElement("path", {
     d: "M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"
-  })), react.createElement("symbol", {
+  })), react$1.createElement("symbol", {
     id: "arrow-up-icon",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 448 512"
-  }, react.createElement("path", {
+  }, react$1.createElement("path", {
     d: "M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"
-  })), react.createElement("symbol", {
+  })), react$1.createElement("symbol", {
     id: "clipboard-icon",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 384 512"
-  }, react.createElement("path", {
+  }, react$1.createElement("path", {
     d: "M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm144 418c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V118c0-3.3 2.7-6 6-6h42v36c0 6.6 5.4 12 12 12h168c6.6 0 12-5.4 12-12v-36h42c3.3 0 6 2.7 6 6z"
-  })), react.createElement("symbol", {
+  })), react$1.createElement("symbol", {
     id: "lightbulb-icon",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 352 512"
-  }, react.createElement("path", {
+  }, react$1.createElement("path", {
     d: "M176 80c-52.94 0-96 43.06-96 96 0 8.84 7.16 16 16 16s16-7.16 16-16c0-35.3 28.72-64 64-64 8.84 0 16-7.16 16-16s-7.16-16-16-16zM96.06 459.17c0 3.15.93 6.22 2.68 8.84l24.51 36.84c2.97 4.46 7.97 7.14 13.32 7.14h78.85c5.36 0 10.36-2.68 13.32-7.14l24.51-36.84c1.74-2.62 2.67-5.7 2.68-8.84l.05-43.18H96.02l.04 43.18zM176 0C73.72 0 0 82.97 0 176c0 44.37 16.45 84.85 43.56 115.78 16.64 18.99 42.74 58.8 52.42 92.16v.06h48v-.12c-.01-4.77-.72-9.51-2.15-14.07-5.59-17.81-22.82-64.77-62.17-109.67-20.54-23.43-31.52-53.15-31.61-84.14-.2-73.64 59.67-128 127.95-128 70.58 0 128 57.42 128 128 0 30.97-11.24 60.85-31.65 84.14-39.11 44.61-56.42 91.47-62.1 109.46a47.507 47.507 0 0 0-2.22 14.3v.1h48v-.05c9.68-33.37 35.78-73.18 52.42-92.16C335.55 260.85 352 220.37 352 176 352 78.8 273.2 0 176 0z"
-  })), react.createElement("symbol", {
+  })), react$1.createElement("symbol", {
     id: "pencil-icon",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 512 512"
-  }, react.createElement("path", {
+  }, react$1.createElement("path", {
     d: "M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"
-  })), react.createElement("symbol", {
+  })), react$1.createElement("symbol", {
     id: "plus-icon",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 512 512"
-  }, react.createElement("path", {
+  }, react$1.createElement("path", {
     d: "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"
-  })), react.createElement("symbol", {
+  })), react$1.createElement("symbol", {
     id: "share-icon",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 512 512"
-  }, react.createElement("path", {
+  }, react$1.createElement("path", {
     d: "M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"
   })));
 }
 
 function ErrorUI(_ref) {
   var errorOccurrence = _ref.errorOccurrence,
-      manageSharesUrl = _ref.manageSharesUrl;
-  return react.createElement(react.Fragment, null, react.createElement(IconSummary, null), react.createElement(OccurrenceTabs, {
+      manageSharesUrl = _ref.manageSharesUrl,
+      _ref$tabs = _ref.tabs,
+      tabs = _ref$tabs === void 0 ? ['stackTraceTab', 'requestTab', 'appTab', 'userTab', 'contextTab', 'debugTab'] : _ref$tabs,
+      hideShareButton = _ref.hideShareButton;
+  return react$1.createElement(react$1.Fragment, null, react$1.createElement(IconSummary, null), react$1.createElement(OccurrenceTabs, {
     errorOccurrence: errorOccurrence,
-    manageSharesUrl: manageSharesUrl
-  }, react.createElement(OccurrenceTabs.Tab, {
-    name: react.createElement(react.Fragment, null, "Stack", react.createElement("span", {
+    manageSharesUrl: manageSharesUrl,
+    hideShareButton: hideShareButton
+  }, tabs.includes('stackTraceTab') && react$1.createElement(OccurrenceTabs.Tab, {
+    name: react$1.createElement(react$1.Fragment, null, "Stack", react$1.createElement("span", {
       className: "hidden sm:inline"
     }, "\xA0trace")),
     component: StackTab
-  }), react.createElement(OccurrenceTabs.Tab, {
+  }), tabs.includes('requestTab') && react$1.createElement(OccurrenceTabs.Tab, {
     name: "Request",
     component: RequestTab
-  }), react.createElement(OccurrenceTabs.Tab, {
+  }), tabs.includes('appTab') && react$1.createElement(OccurrenceTabs.Tab, {
     name: "App",
     component: AppTab
-  }), react.createElement(OccurrenceTabs.Tab, {
+  }), tabs.includes('userTab') && react$1.createElement(OccurrenceTabs.Tab, {
     name: "User",
     component: UserTab
-  }), react.createElement(OccurrenceTabs.Tab, {
+  }), tabs.includes('contextTab') && react$1.createElement(OccurrenceTabs.Tab, {
     name: "Context",
     component: ContextTab
-  }), react.createElement(OccurrenceTabs.Tab, {
+  }), tabs.includes('debugTab') && react$1.createElement(OccurrenceTabs.Tab, {
     name: "Debug",
     component: DebugTab
   })));
@@ -35046,130 +35538,19 @@ Sfdump = window.Sfdump || function (doc) {
   };
 }(document);
 
-/*
-const report: IgniteData = {
-    "report": {
-        "notifier": "Flare Client",
-        "language": "PHP",
-        "framework_version": null,
-        "language_version": "8.0.1",
-        "exception_class": "Exception",
-        "seen_at": 1621584918,
-        "message": "here",
-        "glows": [],
-        "solutions": [],
-        "stacktrace": [{
-            "line_number": 9,
-            "method": "require",
-            "class": null,
-            "code_snippet": {
-                "1": "\u003C?php",
-                "2": "",
-                "3": "use Flare\\Ignition;",
-                "4": "",
-                "5": "include \u0027vendor\/autoload.php\u0027;",
-                "6": "",
-                "7": "(new Ignition())-\u003Eregister();",
-                "8": "",
-                "9": "throw new Exception(\u0027here\u0027);",
-                "10": ""
-            },
-            "file": "\/Users\/freek\/dev\/code\/ignition-app\/index.php",
-            "is_application_frame": true
-        }, {
-            "line_number": 214,
-            "method": "[top]",
-            "class": null,
-            "code_snippet": {
-                "185": " *\/",
-                "186": "$uri = $valetDriver-\u003EmutateUri($uri);",
-                "187": "",
-                "188": "\/**",
-                "189": " * Determine if the incoming request is for a static file.",
-                "190": " *\/",
-                "191": "$isPhpFile = pathinfo($uri, PATHINFO_EXTENSION) === \u0027php\u0027;",
-                "192": "",
-                "193": "if ($uri !== \u0027\/\u0027 \u0026\u0026 ! $isPhpFile \u0026\u0026 $staticFilePath = $valetDriver-\u003EisStaticFile($valetSitePath, $siteName, $uri)) {",
-                "194": "    return $valetDriver-\u003EserveStaticFile($staticFilePath, $valetSitePath, $siteName, $uri);",
-                "195": "}",
-                "196": "",
-                "197": "\/**",
-                "198": " * Attempt to dispatch to a front controller.",
-                "199": " *\/",
-                "200": "$frontControllerPath = $valetDriver-\u003EfrontControllerPath(",
-                "201": "    $valetSitePath, $siteName, $uri",
-                "202": ");",
-                "203": "",
-                "204": "if (! $frontControllerPath) {",
-                "205": "    if (isset($valetConfig[\u0027directory-listing\u0027]) \u0026\u0026 $valetConfig[\u0027directory-listing\u0027] == \u0027on\u0027) {",
-                "206": "        show_directory_listing($valetSitePath, $uri);",
-                "207": "    }",
-                "208": "",
-                "209": "    show_valet_404();",
-                "210": "}",
-                "211": "",
-                "212": "chdir(dirname($frontControllerPath));",
-                "213": "",
-                "214": "require $frontControllerPath;",
-                "215": ""
-            },
-            "file": "\/Users\/freek\/.composer\/vendor\/laravel\/valet\/server.php",
-            "is_application_frame": false
-        }],
-        "context": {
-            "request": {
-                "url": "http:\/\/ignition-app.test\/",
-                "ip": "127.0.0.1",
-                "method": "GET",
-                "useragent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/14.1 Safari\/605.1.15"
-            },
-            "request_data": {
-                "queryString": [],
-                "body": [],
-                "files": []
-            },
-            "headers": {
-                "connection": ["keep-alive"],
-                "accept-encoding": ["gzip, deflate"],
-                "accept-language": ["en-us"],
-                "user-agent": ["Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/14.1 Safari\/605.1.15"],
-                "accept": ["text\/html,application\/xhtml+xml,application\/xml;q=0.9,*\/*;q=0.8"],
-                "upgrade-insecure-requests": ["1"],
-                "host": ["ignition-app.test"],
-                "content-length": [""],
-                "content-type": [""]
-            },
-            "cookies": [],
-            "session": []
-        },
-        "stage": null,
-        "message_level": null,
-        "open_frame_index": null,
-        "application_path": null,
-        "application_version": null
-    },
-    "config": [],
-    "solutions": [],
-    "telescopeUrl": null,
-    "shareEndpoint": "https:\/\/flareapp.io\/share",
-    "defaultTab": "trace",
-    "defaultTabProps": []
-}
-*/
-
 window.ignite = function (data) {
   var errorOccurrence = transformIgnitionError(data.report);
-  reactDom.render(react.createElement(igniteDataContext.Provider, {
+  reactDom.render(react$1.createElement(igniteDataContext.Provider, {
     value: data
-  }, react.createElement("div", {
+  }, react$1.createElement("div", {
     className: "layout-col mt-12"
-  }, react.createElement(ErrorCard, {
+  }, react$1.createElement(ErrorCard, {
     errorOccurrence: errorOccurrence
-  }), data.report.solutions.length > 0 && react.createElement("div", {
+  }), data.report.solutions.length > 0 && react$1.createElement("div", {
     className: "layout-col z-1"
-  }, react.createElement(SolutionCard, {
+  }, react$1.createElement(SolutionCard, {
     flareErrorSolutions: data.report.solutions
-  })), react.createElement(ErrorUI, {
+  })), react$1.createElement(ErrorUI, {
     errorOccurrence: errorOccurrence
   }))), document.querySelector('#app'));
 };

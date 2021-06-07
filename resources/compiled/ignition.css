@@ -1,6 +1,6 @@
 @charset 'UTF-8';
 
-/*! tailwindcss v2.1.2 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v2.1.4 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
@@ -925,12 +925,12 @@ input:read-only{
 	visibility: visible !important;
 }
 
-.static{
-	position: static !important;
-}
-
 .absolute{
 	position: absolute !important;
+}
+
+.static{
+	position: static !important;
 }
 
 .relative{
