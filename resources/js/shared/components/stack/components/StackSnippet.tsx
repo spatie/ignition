@@ -9,6 +9,9 @@ type Props = {
     onSelectRange: (range: [number, number]) => void;
 };
 
+/* @TODO needs editorUrl in ignition:
+    https://github.com/facade/ignition/blob/508d80f91de953617977e5666f8953669b6e81f2/resources/js/components/Stack/Snippet.vue */
+
 export default function StackSnippet({ code, highlightedLineNumber, selectedRange, onSelectRange }: Props) {
     const [firstSelectedLineNumber, setFirstSelectedLineNumber] = useState<number | null>(
         selectedRange ? selectedRange[0] : null,
