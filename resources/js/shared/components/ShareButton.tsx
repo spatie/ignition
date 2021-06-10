@@ -14,7 +14,9 @@ type Props = {
     manageSharesUrl?: string;
 };
 
-/* @todo share button is different in ignition than in flare */
+/* @TODO: copy share logic from facade/ignition:
+    https://github.com/facade/ignition/blob/main/resources/js/components/Shared/ShareButton.vue */
+/* A shareable error report should be available in the DOM, this should be sent to the flare sharing endpoint */
 
 export default function ShareButton({ children, errorOccurrence, disabled = false, manageSharesUrl }: Props) {
     const [sharedUrl, setSharedUrl] = useState('');

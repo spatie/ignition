@@ -77,7 +77,7 @@ export default function Stack({ frames, open_frame_index }: Props) {
     return (
         <div className="stack">
             <div className="stack-nav">
-                <div className="stack-nav-actions">
+                <div className="stack-nav-actions flex justify-end">
                     <div className="px-4">
                         {vendorFramesExpanded ? (
                             <button
