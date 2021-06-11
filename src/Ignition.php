@@ -39,6 +39,8 @@ class Ignition
 
     protected ?bool $inProductionEnvironment = null;
 
+    protected ?string $solutionProviderClass = null;
+
     public static function make(): self
     {
         return new static();
@@ -55,6 +57,13 @@ class Ignition
         $this->contextProviderDetector = new BaseContextProviderDetector();
 
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
+    }
+
+    public function useSolutionTransformerClass(string $solutionProviderClass): self
+    {
+        $this->solutionProviderClass = $solutionProviderClass;
+
+        return $this;
     }
 
     public function setConfig(IgnitionConfig $ignitionConfig): self
@@ -243,7 +252,8 @@ class Ignition
             $throwable,
             $this->ignitionConfig,
             $report,
-            $this->solutionProviderRepository->getSolutionsForThrowable($throwable)
+            $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
+            $this->solutionProviderClass,
         );
 
         try {
