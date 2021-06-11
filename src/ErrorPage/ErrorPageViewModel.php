@@ -23,11 +23,14 @@ class ErrorPageViewModel implements Arrayable
 
     protected array $defaultTabProps = [];
 
+    protected string $solutionTransformerClass;
+
     public function __construct(
         ?Throwable $throwable,
         IgnitionConfig $ignitionConfig,
         Report $report,
-        array $solutions
+        array $solutions,
+        string $solutionProviderClass = null
     ) {
         $this->throwable = $throwable;
 
@@ -36,6 +39,8 @@ class ErrorPageViewModel implements Arrayable
         $this->report = $report;
 
         $this->solutions = $solutions;
+
+        $this->solutionTransformerClass = $solutionProviderClass ?? SolutionTransformer::class;
     }
 
     public function throwableString(): string
@@ -71,7 +76,7 @@ class ErrorPageViewModel implements Arrayable
     public function solutions(): array
     {
         return array_map(function ($solution) {
-            return (new SolutionTransformer($solution))->toArray();
+            return (new ($this->solutionTransformerClass)($solution))->toArray();
         }, $this->solutions);
     }
 

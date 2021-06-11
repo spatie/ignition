@@ -19,27 +19,12 @@ class SolutionTransformer implements Arrayable
 
     public function toArray(): array
     {
-        $isRunnable = ($this->solution instanceof RunnableSolution);
-
         return [
             'class' => get_class($this->solution),
             'title' => $this->solution->getSolutionTitle(),
             'description' => $this->solution->getSolutionDescription(),
             'links' => $this->solution->getDocumentationLinks(),
-            'is_runnable' => $isRunnable,
-            'run_button_text' => $isRunnable ? $this->solution->getRunButtonText() : '',
-            'run_parameters' => $isRunnable ? $this->solution->getRunParameters() : [],
-            'action_description' => $isRunnable ? $this->solution->getSolutionActionDescription() : '',
-            'execute_endpoint' => $this->executeEndpoint(),
+            'is_runnable' => false,
         ];
-    }
-
-    protected function executeEndpoint(): string
-    {
-        try {
-            return action(ExecuteSolutionController::class);
-        } catch (Throwable $exception) {
-            return '';
-        }
     }
 }
