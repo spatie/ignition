@@ -59,7 +59,7 @@ class Ignition
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
     }
 
-    public function useSolutionTransformerClass(string $solutionProviderClass): self
+    public function setSolutionTransformerClass(string $solutionProviderClass): self
     {
         $this->solutionProviderClass = $solutionProviderClass;
 
