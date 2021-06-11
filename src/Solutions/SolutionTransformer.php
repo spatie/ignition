@@ -3,10 +3,7 @@
 namespace Spatie\Ignition\Solutions;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Spatie\Ignition\Http\Controllers\ExecuteSolutionController;
-use Spatie\IgnitionContracts\RunnableSolution;
 use Spatie\IgnitionContracts\Solution;
-use Throwable;
 
 class SolutionTransformer implements Arrayable
 {
