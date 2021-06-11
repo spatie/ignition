@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ErrorSolution } from 'resources/js/shared/types';
 import useSolutions from 'resources/js/ignition/components/useSolutions';
+import SolutionRunner from 'resources/js/ignition/components/SolutionRunner';
 
 type Props = {
     flareErrorSolutions: ErrorSolution[];
@@ -14,6 +15,8 @@ export default function SolutionCard({ flareErrorSolutions, className = '', ...p
     const [currentSolutionIndex, setCurrentSolutionIndex] = useState(1);
     const solutionCard = useRef() as React.MutableRefObject<HTMLDivElement>;
     let animationTimeout: number;
+
+    console.log(solution);
 
     useEffect(() => {
         if (isHidingSolutions) {
@@ -85,6 +88,8 @@ export default function SolutionCard({ flareErrorSolutions, className = '', ...p
                                     disallowedTypes={['image', 'imageReference', 'table', 'html']}
                                 />
                             </div>
+
+                            {solution.is_runnable && <SolutionRunner solution={solution} />}
 
                             {Object.keys(solution.links).length > 0 && (
                                 <div className="mt-8 grid justify-start">

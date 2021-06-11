@@ -6,6 +6,9 @@ type Props = {
     style?: React.CSSProperties;
 };
 
+/* @TODO needs editorUrl in ignition: 
+    https://github.com/facade/ignition/blob/508d80f91de953617977e5666f8953669b6e81f2/resources/js/components/Shared/FilePath.vue */
+
 export default function FilePath({ path, className = '', ...props }: Props) {
     const segments = path.replace(/^\/Users/, '~').split('/');
     const file = segments.pop() || '';

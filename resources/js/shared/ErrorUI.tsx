@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorOccurrenceWithFrames } from './types';
+import { ErrorOccurrenceWithFrames, Tabname } from './types';
 import OccurrenceTabs from './components/OccurrenceTabs';
 
 import '../../css/app.css';
@@ -15,27 +15,40 @@ import IconSummary from 'resources/js/shared/components/IconSummary';
 type Props = {
     errorOccurrence: ErrorOccurrenceWithFrames;
     manageSharesUrl?: string;
+    tabs?: Array<Tabname>;
+    hideShareButton?: boolean;
 };
 
-export default function ErrorUI({ errorOccurrence, manageSharesUrl }: Props) {
+export default function ErrorUI({
+    errorOccurrence,
+    manageSharesUrl,
+    tabs = ['stackTraceTab', 'requestTab', 'appTab', 'userTab', 'contextTab', 'debugTab'],
+    hideShareButton,
+}: Props) {
     return (
         <>
             <IconSummary />
 
-            <OccurrenceTabs errorOccurrence={errorOccurrence} manageSharesUrl={manageSharesUrl}>
-                <OccurrenceTabs.Tab
-                    name={
-                        <>
-                            Stack<span className="hidden sm:inline">&nbsp;trace</span>
-                        </>
-                    }
-                    component={StackTab}
-                />
-                <OccurrenceTabs.Tab name="Request" component={RequestTab} />
-                <OccurrenceTabs.Tab name="App" component={AppTab} />
-                <OccurrenceTabs.Tab name="User" component={UserTab} />
-                <OccurrenceTabs.Tab name="Context" component={ContextTab} />
-                <OccurrenceTabs.Tab name="Debug" component={DebugTab} />
+            <OccurrenceTabs
+                errorOccurrence={errorOccurrence}
+                manageSharesUrl={manageSharesUrl}
+                hideShareButton={hideShareButton}
+            >
+                {tabs.includes('stackTraceTab') && (
+                    <OccurrenceTabs.Tab
+                        name={
+                            <>
+                                Stack<span className="hidden sm:inline">&nbsp;trace</span>
+                            </>
+                        }
+                        component={StackTab}
+                    />
+                )}
+                {tabs.includes('requestTab') && <OccurrenceTabs.Tab name="Request" component={RequestTab} />}
+                {tabs.includes('appTab') && <OccurrenceTabs.Tab name="App" component={AppTab} />}
+                {tabs.includes('userTab') && <OccurrenceTabs.Tab name="User" component={UserTab} />}
+                {tabs.includes('contextTab') && <OccurrenceTabs.Tab name="Context" component={ContextTab} />}
+                {tabs.includes('debugTab') && <OccurrenceTabs.Tab name="Debug" component={DebugTab} />}
             </OccurrenceTabs>
         </>
     );
