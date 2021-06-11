@@ -5,6 +5,7 @@ namespace Spatie\Ignition\ErrorPage;
 use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Spatie\FlareClient\Report;
+use Spatie\FlareClient\Truncation\ReportTrimmer;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Solutions\SolutionTransformer;
 use Throwable;
@@ -114,6 +115,7 @@ class ErrorPageViewModel implements Arrayable
             'config' => $this->ignitionConfig,
             'solutions' => $this->solutions(),
             'report' => $this->report(),
+            'shareableReport' => (new ReportTrimmer())->trim($this->report()),
             'housekeepingEndpoint' => '',
             'jsonEncode' => Closure::fromCallable([$this, 'jsonEncode']),
             'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
