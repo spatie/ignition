@@ -39,7 +39,7 @@ class Ignition
 
     protected ?bool $inProductionEnvironment = null;
 
-    protected ?string $solutionProviderClass = null;
+    protected ?string $solutionTransformerClass = null;
 
     public static function make(): self
     {
@@ -59,9 +59,9 @@ class Ignition
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
     }
 
-    public function setSolutionTransformerClass(string $solutionProviderClass): self
+    public function setSolutionTransformerClass(string $solutionTransformerClass): self
     {
-        $this->solutionProviderClass = $solutionProviderClass;
+        $this->solutionTransformerClass = $solutionTransformerClass;
 
         return $this;
     }
@@ -253,7 +253,7 @@ class Ignition
             $this->ignitionConfig,
             $report,
             $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
-            $this->solutionProviderClass,
+            $this->solutionTransformerClass,
         );
 
         try {

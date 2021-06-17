@@ -31,7 +31,7 @@ class ErrorPageViewModel implements Arrayable
         IgnitionConfig $ignitionConfig,
         Report $report,
         array $solutions,
-        string $solutionProviderClass = null
+        string $solutionTransformerClass = null
     ) {
         $this->throwable = $throwable;
 
@@ -41,7 +41,8 @@ class ErrorPageViewModel implements Arrayable
 
         $this->solutions = $solutions;
 
-        $this->solutionTransformerClass = $solutionProviderClass ?? SolutionTransformer::class;
+        $this->solutionTransformerClass = $solutionTransformerClass ?? SolutionTransformer::class;
+        ray($this->solutionTransformerClass);
     }
 
     public function throwableString(): string
@@ -76,9 +77,13 @@ class ErrorPageViewModel implements Arrayable
 
     public function solutions(): array
     {
-        return array_map(function ($solution) {
+        ray('building solutions');
+
+        $solutions =  array_map(function ($solution) {
             return (new ($this->solutionTransformerClass)($solution))->toArray();
         }, $this->solutions);
+        ray($solutions);
+        return $solutions;
     }
 
     public function report(): array
