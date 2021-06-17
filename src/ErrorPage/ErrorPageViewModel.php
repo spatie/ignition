@@ -42,7 +42,6 @@ class ErrorPageViewModel implements Arrayable
         $this->solutions = $solutions;
 
         $this->solutionTransformerClass = $solutionTransformerClass ?? SolutionTransformer::class;
-        ray($this->solutionTransformerClass);
     }
 
     public function throwableString(): string
@@ -77,12 +76,10 @@ class ErrorPageViewModel implements Arrayable
 
     public function solutions(): array
     {
-        ray('building solutions');
-
         $solutions =  array_map(function ($solution) {
             return (new ($this->solutionTransformerClass)($solution))->toArray();
         }, $this->solutions);
-        ray($solutions);
+
         return $solutions;
     }
 
