@@ -16,8 +16,6 @@ export default function SolutionCard({ flareErrorSolutions, className = '', ...p
     const solutionCard = useRef() as React.MutableRefObject<HTMLDivElement>;
     let animationTimeout: number;
 
-    console.log(solution);
-
     useEffect(() => {
         if (isHidingSolutions) {
             solutionCard.current.classList.add('solution-hidden');

@@ -17,9 +17,9 @@ window.ignite = (data) => {
             <div className="layout-col mt-12">
                 <ErrorCard errorOccurrence={errorOccurrence} />
 
-                {data.report.solutions.length > 0 && (
+                {data.solutions.length > 0 && (
                     <div className="layout-col z-1">
-                        <SolutionCard flareErrorSolutions={data.report.solutions} />
+                        <SolutionCard flareErrorSolutions={data.solutions} />
                     </div>
                 )}
 
