@@ -30,3 +30,12 @@ export function stringifyOccurrenceData(value: any): string {
 
     return JSON.stringify(value, null, 4);
 }
+
+export function copyToClipboard(text: string) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+}

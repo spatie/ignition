@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { highlightBlock } from '../util';
+import { copyToClipboard, highlightBlock } from '../util';
 
 type Props = {
     children?: React.ReactNode;
@@ -29,13 +29,7 @@ export default function CopyableCode({ children, lang, className = '', codeClass
     }, [lang, children]);
 
     function copy() {
-        const el = document.createElement('textarea');
-        el.value = codeRef.current ? codeRef.current.innerText : '';
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-
+        copyToClipboard(codeRef.current ? codeRef.current.innerText : '');
         setCopied(true);
     }
 

@@ -109,7 +109,7 @@ class ErrorPageViewModel implements Arrayable
 
     protected function shareEndpoint(): string
     {
-        return  'https://flareapp.io/share';
+        return  'https://flareapp.io/api/public-reports';
     }
 
     public function toArray(): array

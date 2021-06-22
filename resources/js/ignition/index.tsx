@@ -10,7 +10,8 @@ import './symfony/symfony';
 import './symfony/symfony.css';
 
 window.ignite = (data) => {
-    const errorOccurrence = transformIgnitionError(data.report);
+    const errorOccurrence = transformIgnitionError(data.report, data.shareEndpoint);
+    window.shareableReport = data.shareableReport;
 
     ReactDOM.render(
         <igniteDataContext.Provider value={data}>
@@ -30,7 +31,10 @@ window.ignite = (data) => {
     );
 };
 
-function transformIgnitionError(ignitionError: IgnitionErrorOccurrence): ErrorOccurrenceWithFrames {
+function transformIgnitionError(
+    ignitionError: IgnitionErrorOccurrence,
+    shareEndpoint: string | null,
+): ErrorOccurrenceWithFrames {
     return {
         frames: ignitionError.stacktrace.map((frame) => ({
             ...frame,
@@ -151,6 +155,6 @@ function transformIgnitionError(ignitionError: IgnitionErrorOccurrence): ErrorOc
         group_identifier: '',
         group_count: 0,
         group_detail_query: '',
-        links: { show: '', share: '' } /* @todo catch these being empty in the UI */,
+        links: { show: '', share: shareEndpoint || '' },
     };
 }

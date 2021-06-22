@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Downshift from 'downshift';
 import { ErrorOccurrence, SharePostData, Tabname } from '../types';
-import CopyableCode from 'resources/js/shared/components/CopyableCode';
 import Button from 'resources/js/shared/components/Button';
 import CheckboxField from 'resources/js/shared/components/CheckboxField';
-import axios from 'axios';
 import Icon from 'resources/js/shared/components/Icon';
+import { copyToClipboard } from 'resources/js/shared/util';
 
 type Props = {
     children: React.ReactChild | Array<React.ReactChild>;
@@ -14,13 +13,12 @@ type Props = {
     manageSharesUrl?: string;
 };
 
-/* @TODO: copy share logic from facade/ignition:
-    https://github.com/facade/ignition/blob/main/resources/js/components/Shared/ShareButton.vue */
-/* A shareable error report should be available in the DOM, this should be sent to the flare sharing endpoint */
-
 export default function ShareButton({ children, errorOccurrence, disabled = false, manageSharesUrl }: Props) {
-    const [sharedUrl, setSharedUrl] = useState('');
+    const [sharedUrl, setSharedUrl] = useState<
+        { type: 'ignition'; owner_url: string; public_url: string } | { type: 'flare'; url: string } | null
+    >(null);
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const [selectedTabs, setSelectedTabs] = useState<Array<{ name: Tabname; prettyName: string; selected: boolean }>>([
         { name: 'stackTraceTab', prettyName: 'Stack trace', selected: true },
@@ -50,16 +48,42 @@ export default function ShareButton({ children, errorOccurrence, disabled = fals
             .filter((selectedTab) => selectedTab.selected)
             .map((selectedTab) => selectedTab.name);
 
-        const data: SharePostData = { selectedTabNames, lineSelection: window.location.hash };
+        const data: SharePostData = { selectedTabNames, tabs: selectedTabNames, lineSelection: window.location.hash };
+
+        if (window.shareableReport) {
+            (data as any).report = window.shareableReport;
+        }
+
+        setIsLoading(true);
 
         try {
-            const { data: response } = await axios.post(endpoint, data);
+            const response = await (
+                await fetch(endpoint, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'x-xsrf-token': getCsrfToken(),
+                    },
+                    credentials: 'include',
+                })
+            ).json();
 
+            // flare
             if (response && response.shared_error && response.shared_error.links && response.shared_error.links.show) {
-                setSharedUrl(response.shared_error.links.show);
+                setSharedUrl({ type: 'flare', url: response.shared_error.links.show });
+            }
+
+            // ignition
+            if (response && response.owner_url && response.public_url) {
+                const { owner_url, public_url } = response;
+                setSharedUrl({ type: 'ignition', owner_url, public_url });
             }
         } catch (error) {
             setError('Something went wrong while sharing, please try again.');
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -84,42 +108,104 @@ export default function ShareButton({ children, errorOccurrence, disabled = fals
                                 className="dropdown z-10 right-0 top-full bg-gray-700 text-white p-4 overflow-visible"
                                 style={{ minWidth: '18rem', marginRight: '-1px' }}
                             >
-                                <h5 className="mb-3 text-left text-gray-500 font-semibold uppercase tracking-wider whitespace-nowrap">
-                                    Share publicly
-                                </h5>
-                                <div className="grid grid-cols-2 justify-start gap-x-6 gap-y-2">
-                                    {selectedTabs.map(({ selected, name, prettyName }) => (
-                                        <CheckboxField
-                                            {...getItemProps({ item: name, key: name })}
-                                            labelClassName="text-gray-200 hover:text-white"
-                                            onChange={() =>
-                                                toggleTabSelected(
-                                                    name as
-                                                        | 'stackTraceTab'
-                                                        | 'requestTab'
-                                                        | 'appTab'
-                                                        | 'userTab'
-                                                        | 'contextTab'
-                                                        | 'debugTab',
-                                                )
-                                            }
-                                            checked={selected}
-                                            label={prettyName}
-                                        />
-                                    ))}
+                                <div className="flex mb-3">
+                                    <svg viewBox="0 0 682 1024" className="w-4 h-5 mr-2">
+                                        <polygon
+                                            points="235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 "
+                                            style={{ fill: 'rgb(81, 219, 158)' }}
+                                        ></polygon>
+                                        <polygon
+                                            points="235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 "
+                                            style={{ fill: 'rgb(121, 0, 245)' }}
+                                        ></polygon>
+                                        <polygon
+                                            points="448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 "
+                                            style={{ fill: 'rgb(148, 242, 200)' }}
+                                        ></polygon>
+                                        <polygon
+                                            points="234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 "
+                                            style={{ fill: 'rgb(164, 117, 244)' }}
+                                        ></polygon>
+                                    </svg>
+
+                                    <h5 className="text-left font-semibold uppercase tracking-wider whitespace-nowrap">
+                                        Share publicly
+                                    </h5>
+
+                                    <a
+                                        title="Flare documentation underline"
+                                        target="_blank"
+                                        href="https://flareapp.io/docs/ignition-for-laravel/sharing-errors"
+                                        className="ml-auto underline"
+                                    >
+                                        Docs
+                                    </a>
                                 </div>
-                                <div className="grid grid-cols-auto grid-flow-col justify-between items-center mt-3">
-                                    {!sharedUrl && (
-                                        <Button
-                                            secondary
-                                            className="bg-tint-600 text-white"
-                                            size="sm"
-                                            onClick={onShareError}
-                                        >
-                                            Create&nbsp;share
-                                        </Button>
-                                    )}
-                                    {manageSharesUrl && (
+
+                                {!sharedUrl && (
+                                    <>
+                                        <div className="grid grid-cols-2 justify-start gap-x-6 gap-y-2">
+                                            {selectedTabs.map(({ selected, name, prettyName }) => (
+                                                <CheckboxField
+                                                    {...getItemProps({ item: name, key: name })}
+                                                    labelClassName="text-gray-200 hover:text-white"
+                                                    onChange={() =>
+                                                        toggleTabSelected(
+                                                            name as
+                                                                | 'stackTraceTab'
+                                                                | 'requestTab'
+                                                                | 'appTab'
+                                                                | 'userTab'
+                                                                | 'contextTab'
+                                                                | 'debugTab',
+                                                        )
+                                                    }
+                                                    checked={selected}
+                                                    label={prettyName}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div className="grid grid-cols-auto grid-flow-col justify-between items-center mt-3">
+                                            <Button
+                                                secondary
+                                                className={`${isLoading ? 'opacity-50' : ''} bg-tint-600 text-white`}
+                                                size="sm"
+                                                disabled={isLoading}
+                                                onClick={onShareError}
+                                            >
+                                                Share
+                                            </Button>
+                                        </div>
+                                    </>
+                                )}
+
+                                {sharedUrl?.type === 'flare' && (
+                                    <div className="mt-3">
+                                        <Url
+                                            url={sharedUrl.url}
+                                            helpText="Share your error with others:"
+                                            openText="Open share"
+                                        />
+                                    </div>
+                                )}
+
+                                {sharedUrl?.type === 'ignition' && (
+                                    <div className="mt-3">
+                                        <Url
+                                            url={sharedUrl.public_url}
+                                            helpText="Share your error with others:"
+                                            openText="Open public share"
+                                        />
+                                        <Url
+                                            url={sharedUrl.owner_url}
+                                            helpText="Administer your shared error here:"
+                                            openText="Open share admin"
+                                        />
+                                    </div>
+                                )}
+
+                                {manageSharesUrl && (
+                                    <div className="mt-2">
                                         <a
                                             className="link-dimmed-invers underline"
                                             target="_blank"
@@ -127,22 +213,10 @@ export default function ShareButton({ children, errorOccurrence, disabled = fals
                                         >
                                             Manage shares
                                         </a>
-                                    )}
-                                </div>
-
-                                {error && <p className="mt-3 text-red-400">{error}</p>}
-
-                                {sharedUrl && (
-                                    <div className="mt-3 flex">
-                                        <CopyableCode className="text-white max-w-xs sm:max-w-md overflow-x-auto overflow-y-hidden scrollbar">
-                                            {sharedUrl}
-                                        </CopyableCode>
-                                        <i
-                                            className="cursor-pointer p-2 pr-0 fas fa-external-link-alt text-xs"
-                                            onClick={() => window.open(sharedUrl)}
-                                        />
                                     </div>
                                 )}
+
+                                {error && <p className="mt-3 text-red-400">{error}</p>}
                             </ul>
                         )}
                     </div>
@@ -150,4 +224,32 @@ export default function ShareButton({ children, errorOccurrence, disabled = fals
             )}
         </Downshift>
     );
+}
+
+function Url({ url, helpText, openText }: { url: string; helpText: string; openText: string }) {
+    return (
+        <>
+            <p className="mt-2 text-gray-300">{helpText}</p>
+            <div className="flex items-center gap-2 mt-2">
+                <Button size="sm" onClick={() => window.open(url)}>
+                    {openText}
+                </Button>
+                <button title="Copy to clipboard" onClick={() => copyToClipboard(url)}>
+                    <svg className="icon fill-gray-200 hover:fill-white">
+                        <use xlinkHref="#clipboard-icon"></use>
+                    </svg>
+                </button>
+            </div>
+        </>
+    );
+}
+
+function getCsrfToken(): string {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; XSRF-TOKEN=`);
+    if (parts.length === 2) {
+        return parts.pop()?.split(';').shift()?.replace('%3D', '') || '';
+    }
+
+    return '';
 }

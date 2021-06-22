@@ -1,4 +1,3 @@
-// @ts-nocheck @TODO: remove
 import React, { useContext, useState, useEffect } from 'react';
 import { igniteDataContext } from 'resources/js/ignition/igniteDataContext';
 import { ErrorSolution } from 'resources/js/shared/types';
@@ -51,8 +50,8 @@ export default function SolutionRunner({ solution }: Props) {
         }
     }
 
+    /* @todo-adriaan, code is already in this repo in `useSolutions.ts`
     function toggleSolutions() {
-        /* @todo-adriaan
         toggleSolutions() {
             if (!this.isHidingSolutions) {
                 this.$refs.solutionCard.classList.add('solution-hiding');
@@ -79,8 +78,8 @@ export default function SolutionRunner({ solution }: Props) {
         hasHideSolutionsCookie() {
             return document.cookie.includes(cookieName);
         },
-        */
     }
+    */
 
     function refresh(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
         e.preventDefault();
@@ -92,10 +91,9 @@ export default function SolutionRunner({ solution }: Props) {
             <div className="mt-4">
                 {canExecuteSolutions && wasExecutionSuccessful === null && (
                     <button
-                        className="mb-4"
                         disabled={isRunningSolution}
                         onClick={executeSolution}
-                        className="button-secondary button-lg bg-tint-300 hover:bg-tint-400"
+                        className="mb-4 button-secondary button-lg bg-tint-300 hover:bg-tint-400"
                     >
                         {isRunningSolution ? (
                             <span>Running...</span>
@@ -108,7 +106,7 @@ export default function SolutionRunner({ solution }: Props) {
                 {wasExecutionSuccessful === true && (
                     <p>
                         <strong className="font-semibold">The solution was executed successfully.</strong>
-                        <a className="ml-2" href="#" onClick={refresh} className="link-solution">
+                        <a className="ml-2 link-solution" href="#" onClick={refresh}>
                             Refresh now.
                         </a>
                     </p>
