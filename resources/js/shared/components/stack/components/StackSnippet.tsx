@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { highlight } from 'resources/js/shared/util';
 import { ICompiledMode } from 'highlight.js';
+import OpenEditor from 'resources/js/shared/components/stack/components/OpenEditor';
 
 type Props = {
+    file: string;
     code: Record<string | number, string>;
     highlightedLineNumber: number;
     selectedRange: [number, number] | null;
@@ -12,7 +14,7 @@ type Props = {
 /* @TODO needs editorUrl in ignition:
     https://github.com/facade/ignition/blob/508d80f91de953617977e5666f8953669b6e81f2/resources/js/components/Stack/Snippet.vue */
 
-export default function StackSnippet({ code, highlightedLineNumber, selectedRange, onSelectRange }: Props) {
+export default function StackSnippet({ file, code, highlightedLineNumber, selectedRange, onSelectRange }: Props) {
     const [firstSelectedLineNumber, setFirstSelectedLineNumber] = useState<number | null>(
         selectedRange ? selectedRange[0] : null,
     );
@@ -35,12 +37,14 @@ export default function StackSnippet({ code, highlightedLineNumber, selectedRang
 
             return (
                 <p
-                    key={lineNumber}
                     className={`stack-code-line ${
                         withinSelectedRange(parseInt(lineNumber)) ? 'stack-code-line-selected' : ''
                     } ${parseInt(lineNumber) === highlightedLineNumber ? 'stack-code-line-highlight' : ''}`}
-                    dangerouslySetInnerHTML={{ __html: result.value || ' ' }}
-                />
+                >
+                    <span key={lineNumber} dangerouslySetInnerHTML={{ __html: result.value || ' ' }} />
+
+                    <OpenEditor file={file} lineNumber={Number(lineNumber)} className="editor-link" />
+                </p>
             );
         });
     }, [code, selectedRange]);

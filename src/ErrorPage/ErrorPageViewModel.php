@@ -118,7 +118,7 @@ class ErrorPageViewModel implements Arrayable
             'throwableString' => $this->throwableString(),
             'shareEndpoint' => $this->shareEndpoint(),
             'title' => $this->title(),
-            'config' => $this->ignitionConfig,
+            'config' => $this->config(),
             'solutions' => $this->solutions(),
             'report' => $this->report(),
             'shareableReport' => (new ReportTrimmer())->trim($this->report()),

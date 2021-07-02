@@ -1,15 +1,15 @@
 import React from 'react';
+import LineNumber from './LineNumber';
 
 type Props = {
     path: string;
     className?: string;
     style?: React.CSSProperties;
+    editable?: boolean;
+    lineNumber?: number;
 };
 
-/* @TODO needs editorUrl in ignition: 
-    https://github.com/facade/ignition/blob/508d80f91de953617977e5666f8953669b6e81f2/resources/js/components/Shared/FilePath.vue */
-
-export default function FilePath({ path, className = '', ...props }: Props) {
+export default function FilePath({ path, className = '', editable = false, lineNumber, ...props }: Props) {
     const segments = path.replace(/^\/Users/, '~').split('/');
     const file = segments.pop() || '';
     const fileSegments = file.split('.');
@@ -27,6 +27,7 @@ export default function FilePath({ path, className = '', ...props }: Props) {
                     {fileSegment}
                 </span>
             ))}
+            {lineNumber && <LineNumber value={lineNumber} />}
         </span>
     );
 }
