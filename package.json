@@ -4,14 +4,14 @@
     "main": "resources/compiled/error-ui.modern.js",
     "scripts": {
         "bundle-ignition": "microbundle -i resources/js/ignition/index.tsx -o resources/compiled/ignition.js --jsx React.createElement -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
-        "ignition-dev": "microbundle watch -i resources/js/ignition/index.tsx -o resources/compiled/ignition.js --jsx React.createElement -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress",
+        "ignition-dev": "NODE_ENV=development concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/ignition/index.tsx -o resources/compiled/ignition.js --jsx React.createElement -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress\" \"yarn typecheck\"",
         "bundle": "microbundle -i resources/js/shared/ErrorUI.tsx -o resources/compiled/error-ui.js --jsx React.createElement -f modern --no-sourcemap --external react,react-dom --define process.env.NODE_ENV='production'",
-        "bundle-dev": "microbundle watch -i resources/js/shared/ErrorUI.tsx -o resources/compiled/error-ui.js --jsx React.createElement -f modern --no-sourcemap --external react,react-dom --define process.env.NODE_ENV='development' --no-compress",
-        "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'"
+        "bundle-dev": "NODE_ENV=development concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/shared/ErrorUI.tsx -o resources/compiled/error-ui.js --jsx React.createElement -f modern --no-sourcemap --external react,react-dom --define process.env.NODE_ENV='development' --no-compress\" \"yarn typecheck\"",
+        "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
+        "typecheck": "tsc -w --preserveWatchOutput"
     },
     "types": "./types/shared/ErrorUI.d.ts",
     "dependencies": {
-        "cross-env": "^7.0.3",
         "date-fns": "^2.21.3",
         "downshift": "^6.1.3",
         "git-url-parse": "^11.4.4",
@@ -32,6 +32,8 @@
         "@types/md5": "^2.3.0",
         "@types/react-dom": "^17.0.5",
         "autoprefixer": "^10.2.5",
+        "concurrently": "^6.2.0",
+        "cross-env": "^7.0.3",
         "husky": "^1.3.1",
         "jest": "^26.6.3",
         "lint-staged": "^11.0.0",
