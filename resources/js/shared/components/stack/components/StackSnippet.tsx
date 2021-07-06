@@ -37,6 +37,7 @@ export default function StackSnippet({ file, code, highlightedLineNumber, select
 
             return (
                 <p
+                    key={lineNumber}
                     className={`stack-code-line ${
                         withinSelectedRange(parseInt(lineNumber)) ? 'stack-code-line-selected' : ''
                     } ${parseInt(lineNumber) === highlightedLineNumber ? 'stack-code-line-highlight' : ''}`}

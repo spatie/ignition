@@ -1,8 +1,7 @@
-import { Frame } from '../../types';
+import { ErrorFrame } from 'resources/js/shared/types';
 
-export default function createFlareErrorFrame(attributes: Partial<Frame>): Frame {
+export default function createFlareErrorFrame(attributes: Partial<ErrorFrame>): ErrorFrame {
     return {
-        id: 541,
         file: '/Users/sebastiandedeyne/Sites/flareapp.io/database/faker/ExceptionProvider.php',
         relative_file: 'database/faker/ExceptionProvider.php',
         line_number: 35,

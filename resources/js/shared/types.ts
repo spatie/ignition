@@ -86,9 +86,9 @@ export type ErrorSolution = {
     links: { [label: string]: string };
     action_description?: string;
     is_runnable: boolean;
-    run_button_text: string;
-    execute_endpoint: string;
-    run_parameters: string;
+    run_button_text?: string;
+    execute_endpoint?: string;
+    run_parameters?: string;
 };
 
 export type IgnitionErrorOccurrence = {

@@ -16,6 +16,10 @@ export default function SolutionRunner({ solution }: Props) {
     useEffect(() => {
         try {
             (async () => {
+                if (!solution.execute_endpoint) {
+                    return;
+                }
+
                 const healthCheck = await (
                     await fetch(solution.execute_endpoint.replace('execute-solution', 'health-check'))
                 ).json();
@@ -34,6 +38,10 @@ export default function SolutionRunner({ solution }: Props) {
 
         try {
             setIsRunningSolution(true);
+
+            if (!solution.execute_endpoint) {
+                return;
+            }
 
             const response = await fetch(solution.execute_endpoint, {
                 method: 'POST',
