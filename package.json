@@ -10,6 +10,7 @@
         "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
         "typecheck": "tsc -w --preserveWatchOutput"
     },
+    "files": ["resources/compiled/error-ui.modern.js", "resources/compiled/error-ui.css"],
     "types": "./types/shared/ErrorUI.d.ts",
     "dependencies": {
         "date-fns": "^2.21.3",
