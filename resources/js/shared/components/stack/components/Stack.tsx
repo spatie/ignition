@@ -7,6 +7,7 @@ import { stackReducer, allVendorFramesAreExpanded, createFrameGroups, getSelecte
 import FilePath from 'resources/js/shared/components/FilePath';
 import { ErrorFrame } from 'resources/js/shared/types';
 import StackSnippet from 'resources/js/shared/components/stack/components/StackSnippet';
+import OpenEditor from 'resources/js/shared/components/stack/components/OpenEditor';
 
 type Props = {
     open_frame_index?: number;
@@ -77,15 +78,7 @@ export default function Stack({ frames, open_frame_index }: Props) {
     return (
         <div className="stack">
             <div className="stack-nav">
-                <div className="stack-nav-actions">
-                    <div className="stack-nav-arrows">
-                        <button className="hidden">
-                            <i className="fas fa-arrow-up" />
-                        </button>
-                        <button className="hidden">
-                            <i className="fas fa-arrow-down" />
-                        </button>
-                    </div>
+                <div className="stack-nav-actions flex justify-end">
                     <div className="px-4">
                         {vendorFramesExpanded ? (
                             <button
@@ -129,11 +122,21 @@ export default function Stack({ frames, open_frame_index }: Props) {
                 <div className="stack-main-header">
                     <ExceptionClass name={selectedFrame.class} method={selectedFrame.method} />
                     <div className="flex items-baseline justify-start">
-                        <FilePath className="mt-1" path={selectedFrame.relative_file} />:{selectedFrame.line_number}
+                        <FilePath
+                            className="mt-1"
+                            path={selectedFrame.relative_file}
+                            lineNumber={selectedFrame.line_number}
+                        />
+                        <OpenEditor
+                            file={selectedFrame.file}
+                            lineNumber={selectedFrame.line_number}
+                            className="ml-2 inline-block text-sm text-purple-400 hover:text-purple-500"
+                        />
                     </div>
                 </div>
                 <div className="stack-main-content">
                     <StackSnippet
+                        file={selectedFrame.file}
                         code={selectedFrame.code_snippet}
                         highlightedLineNumber={selectedFrame.line_number}
                         selectedRange={selectedRange}

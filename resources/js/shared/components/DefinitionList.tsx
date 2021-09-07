@@ -5,7 +5,7 @@ type Props = {
     title?: string;
     className?: string;
     style?: React.CSSProperties;
-    children?: Array<React.ReactNode>;
+    children?: React.ReactNode | Array<React.ReactNode>;
 };
 
 export default function DefinitionList({ children, title = '', className = '', ...props }: Props) {
@@ -14,13 +14,8 @@ export default function DefinitionList({ children, title = '', className = '', .
             {children && (
                 <div className={`${className}`} {...props}>
                     {title && <h3 className="definition-list-title">{title}</h3>}
-                    {!!children.length ? (
-                        <dl className={`definition-list`}>{children}</dl>
-                    ) : (
-                        <div className={`definition-list`}>
-                            <div className="definition-list-empty">—</div>
-                        </div>
-                    )}
+
+                    <dl className={`definition-list`}>{children}</dl>
                 </div>
             )}
         </>

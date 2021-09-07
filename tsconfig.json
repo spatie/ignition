@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "declaration": false,
-        "declarationDir": null,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": false,
+        "declarationDir": "./types",
         "allowSyntheticDefaultImports": true,
         "jsx": "react",
         "lib": ["dom", "es2020"],
@@ -22,5 +24,6 @@
             "*": ["*", "resources/js/*"]
         }
     },
-    "include": ["resources/**/*", "node_modules/microbundle/index.d.ts"]
+    "include": ["resources/**/*", "node_modules/microbundle/index.d.ts"],
+    "exclude": ["**/compiled/**"]
 }

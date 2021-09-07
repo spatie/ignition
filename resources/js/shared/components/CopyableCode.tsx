@@ -1,14 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { highlightBlock } from '../util';
+import { copyToClipboard, highlightBlock } from '../util';
 
 type Props = {
     children?: React.ReactNode;
     lang?: 'php';
     className?: string;
     codeClassName?: string;
+    scrollable?: boolean;
 };
 
-export default function CopyableCode({ children, lang, className = '', codeClassName = '' }: Props) {
+export default function CopyableCode({
+    children,
+    lang,
+    className = '',
+    codeClassName = '',
+    scrollable = false,
+}: Props) {
     const codeRef = useRef<HTMLElement | null>(null);
     const [copied, setCopied] = useState(false);
 
@@ -29,20 +36,14 @@ export default function CopyableCode({ children, lang, className = '', codeClass
     }, [lang, children]);
 
     function copy() {
-        const el = document.createElement('textarea');
-        el.value = codeRef.current ? codeRef.current.innerText : '';
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-
+        copyToClipboard(codeRef.current ? codeRef.current.innerText : '');
         setCopied(true);
     }
 
     return (
         <div className={`group grid gap-2 justify-start items-center | sm:grid-flow-col ${className}`}>
-            <div className={`code-inline ${codeClassName} transition-all pr-8`} style={{ color: 'inherit' }}>
-                <pre>
+            <div className={`code-inline ${codeClassName} transition-all`} style={{ color: 'inherit' }}>
+                <pre className={`pr-8 ${scrollable ? 'max-h-64 overflow-y-scroll' : ''}`}>
                     <code className={lang || ''} ref={codeRef}>
                         {children}
                     </code>

@@ -26,6 +26,7 @@
     window.data = <?=
         $jsonEncode([
             'report' => $report,
+            'shareableReport' => $shareableReport,
             'config' => $config,
             'solutions' => $solutions,
             'shareEndpoint' => $shareEndpoint,

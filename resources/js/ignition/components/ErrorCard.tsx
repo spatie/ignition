@@ -40,7 +40,6 @@ export default function ErrorCard({ errorOccurrence }: Props) {
                 </div>
             </div>
 
-            {/* @todo should probably check if there is a runnable solution? */}
             {!!errorOccurrence.solutions.length && (
                 <span className="card-solution" title="This error has a solution">
                     <i className="far fa-lightbulb text-base" />

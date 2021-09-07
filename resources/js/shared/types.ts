@@ -1,5 +1,6 @@
 export type IgniteData = {
     report: IgnitionErrorOccurrence;
+    shareableReport: IgnitionErrorOccurrence;
     config: {
         editor: string;
         remoteSitesPath: string;
@@ -85,6 +86,9 @@ export type ErrorSolution = {
     links: { [label: string]: string };
     action_description?: string;
     is_runnable: boolean;
+    run_button_text?: string;
+    execute_endpoint?: string;
+    run_parameters?: string;
 };
 
 export type IgnitionErrorOccurrence = {
@@ -180,6 +184,7 @@ export type StackFrameGroupType = {
 export type Tabname = 'stackTraceTab' | 'requestTab' | 'appTab' | 'userTab' | 'contextTab' | 'debugTab';
 
 export type SharePostData = {
+    tabs?: Array<Tabname>;
     selectedTabNames: Array<Tabname>;
     lineSelection: string;
 };

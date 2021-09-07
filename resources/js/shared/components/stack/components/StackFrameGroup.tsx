@@ -1,6 +1,7 @@
 import React from 'react';
 import ExceptionClass from 'resources/js/shared/components/ExceptionClass';
 import FilePath from 'resources/js/shared/components/FilePath';
+import Icon from 'resources/js/shared/components/Icon';
 import LineNumber from 'resources/js/shared/components/LineNumber';
 import { StackFrameGroupType } from 'resources/js/shared/types';
 
@@ -16,7 +17,7 @@ export default function StackFrameGroup({ frameGroup, onExpand, onSelect }: Prop
             <li className="stack-frame-group stack-frame-group-vendor" onClick={onExpand}>
                 <div className="stack-frame | cursor-pointer">
                     <button className="stack-frame-number">
-                        <i className="fas fa-plus-circle text-gray-500" />
+                        <Icon name="plus" />
                     </button>
                     <div className="col-span-2 stack-frame-text">
                         <button className="text-left text-gray-500">

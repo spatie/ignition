@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { DebugEventType, DumpDebugEvent, GlowDebugEvent, QueryDebugEvent, LogDebugEvent } from '../types';
 import DefinitionList from './DefinitionList';
 import CopyableCode from './CopyableCode';
-import LineNumber from './LineNumber';
 import FilePath from './FilePath';
 import { stringifyOccurrenceData } from '../util';
 import sqlFormatter from 'sql-formatter';
@@ -51,10 +50,7 @@ function DumpEvent(props: DumpDebugEvent) {
             <div className="mb-2 font-semibold text-xs">Dump</div>
             <code className="code-block mb-4" dangerouslySetInnerHTML={{ __html: props.label }} />
             {props.metadata.file && (
-                <>
-                    <FilePath path={props.metadata.file} />
-                    <LineNumber value={props.metadata.line_number} />
-                </>
+                <FilePath path={props.metadata.file} lineNumber={props.metadata.line_number} editable />
             )}
         </div>
     );

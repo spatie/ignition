@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 import { ErrorOccurrenceWithFrames } from 'resources/js/shared/types';
-import { stringifyOccurrenceData, getContextValues } from 'resources/js/shared/util';
+import { stringifyOccurrenceData, getContextValues, curlCommand } from 'resources/js/shared/util';
 import DefinitionList from 'resources/js/shared/components/DefinitionList';
+import CopyableCode from 'resources/js/shared/components/CopyableCode';
 
 type Props = {
     errorOccurrence: ErrorOccurrenceWithFrames;
@@ -14,6 +16,8 @@ export default function RequestTab({ errorOccurrence }: Props) {
     const session = getContextValues(errorOccurrence, 'session');
     const cookies = getContextValues(errorOccurrence, 'cookies');
 
+    const curl = useMemo(() => curlCommand(request, requestData, headers), [request, requestData, headers]);
+
     return (
         <div className="tab-content">
             <div className="layout-col">
@@ -21,6 +25,11 @@ export default function RequestTab({ errorOccurrence }: Props) {
                     <DefinitionList.Row value={request.url} label="URL" />
                     <DefinitionList.Row value={request.method} label="Method" />
                 </DefinitionList>
+                {curl && (
+                    <DefinitionList className="tab-content-section border-none">
+                        <DefinitionList.Row value={<CopyableCode scrollable>{curl}</CopyableCode>} label="Curl" />
+                    </DefinitionList>
+                )}
                 <DefinitionList title="Headers" className="tab-content-section">
                     {Object.entries(headers || {}).map(([key, value]) => (
                         <DefinitionList.Row key={key} value={value} label={key} />

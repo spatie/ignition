@@ -5,6 +5,7 @@ namespace Spatie\Ignition\ErrorPage;
 use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Spatie\FlareClient\Report;
+use Spatie\FlareClient\Truncation\ReportTrimmer;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Solutions\SolutionTransformer;
 use Throwable;
@@ -23,11 +24,14 @@ class ErrorPageViewModel implements Arrayable
 
     protected array $defaultTabProps = [];
 
+    protected string $solutionTransformerClass;
+
     public function __construct(
         ?Throwable $throwable,
         IgnitionConfig $ignitionConfig,
         Report $report,
-        array $solutions
+        array $solutions,
+        string $solutionTransformerClass = null
     ) {
         $this->throwable = $throwable;
 
@@ -36,6 +40,8 @@ class ErrorPageViewModel implements Arrayable
         $this->report = $report;
 
         $this->solutions = $solutions;
+
+        $this->solutionTransformerClass = $solutionTransformerClass ?? SolutionTransformer::class;
     }
 
     public function throwableString(): string
@@ -70,9 +76,15 @@ class ErrorPageViewModel implements Arrayable
 
     public function solutions(): array
     {
-        return array_map(function ($solution) {
-            return (new SolutionTransformer($solution))->toArray();
+        $solutions = array_map(function ($solution) {
+            return (new ($this->solutionTransformerClass)($solution))->toArray();
         }, $this->solutions);
+        
+        $solutions = array_map(function ($solution) {
+            return (new ($this->solutionTransformerClass)($solution))->toArray();
+        }, $this->solutions);
+
+        return $solutions;
     }
 
     public function report(): array
@@ -97,7 +109,7 @@ class ErrorPageViewModel implements Arrayable
 
     protected function shareEndpoint(): string
     {
-        return  'https://flareapp.io/share';
+        return  'https://flareapp.io/api/public-reports';
     }
 
     public function toArray(): array
@@ -106,9 +118,10 @@ class ErrorPageViewModel implements Arrayable
             'throwableString' => $this->throwableString(),
             'shareEndpoint' => $this->shareEndpoint(),
             'title' => $this->title(),
-            'config' => $this->ignitionConfig,
+            'config' => $this->config(),
             'solutions' => $this->solutions(),
             'report' => $this->report(),
+            'shareableReport' => (new ReportTrimmer())->trim($this->report()),
             'housekeepingEndpoint' => '',
             'jsonEncode' => Closure::fromCallable([$this, 'jsonEncode']),
             'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
