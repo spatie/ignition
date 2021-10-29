@@ -10,7 +10,7 @@ jobs:
     php-tests:
         runs-on: ${{ matrix.os }}
         strategy:
-            fail-fast: true
+            fail-fast: false
             matrix:
                 os: [ubuntu-latest, windows-latest]
                 php: [7.4, 8.0, 8.1]
