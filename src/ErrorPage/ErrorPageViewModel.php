@@ -77,9 +77,11 @@ class ErrorPageViewModel implements Arrayable
     public function solutions(): array
     {
         $solutions = array_map(function ($solution) {
-            return (new ($this->solutionTransformerClass)($solution))->toArray();
+            $transformer = (new $this->solutionTransformerClass)($solution);
+
+            return $transformer->toArray();
         }, $this->solutions);
-        
+
         $solutions = array_map(function ($solution) {
             return (new ($this->solutionTransformerClass)($solution))->toArray();
         }, $this->solutions);
