@@ -24,7 +24,9 @@ window.ignite = (data) => {
                     </div>
                 )}
 
-                <ErrorUI errorOccurrence={errorOccurrence} />
+                {/* TODO: Use ignition-UI*/}
+                <Stacktrace />
+
             </div>
         </igniteDataContext.Provider>,
         document.querySelector('#app'),
