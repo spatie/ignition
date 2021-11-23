@@ -1,5 +1,5 @@
-/* 
-    Dumps are hidden asap in errorPage.blade 
+/*
+    Dumps are hidden asap in errorPage.blade
     What follows is !important
 */
 
@@ -35,7 +35,7 @@ pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input {
 
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next,
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous {
-    @apply bg-tint-100 !important;
+    @apply bg-gray-100 !important;
 }
 
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-count {

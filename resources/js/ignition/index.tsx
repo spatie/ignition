@@ -1,13 +1,12 @@
+import { ErrorOccurrenceWithFrames, Stacktrace, ErrorCard } from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ErrorCard from 'resources/js/ignition/components/ErrorCard';
-import SolutionCard from 'resources/js/ignition/components/SolutionCard';
 import { igniteDataContext } from 'resources/js/ignition/igniteDataContext';
-import ErrorUI from 'resources/js/shared/ErrorUI';
-import { ErrorOccurrenceWithFrames, IgnitionErrorOccurrence } from 'resources/js/shared/types';
+import { IgnitionErrorOccurrence } from './types';
 
 import './symfony/symfony';
-import './symfony/symfony.css';
+import '../../css/app.css';
+import NavBar from 'ignition/components/NavBar';
 
 window.ignite = (data) => {
     const errorOccurrence = transformIgnitionError(data.report, data.shareEndpoint);
@@ -15,19 +14,14 @@ window.ignite = (data) => {
 
     ReactDOM.render(
         <igniteDataContext.Provider value={data}>
-            <div className="layout-col mt-12">
+            <NavBar />
+
+            <main id='top'
+                  className='mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20'>
                 <ErrorCard errorOccurrence={errorOccurrence} />
 
-                {data.solutions.length > 0 && (
-                    <div className="layout-col z-1">
-                        <SolutionCard flareErrorSolutions={data.solutions} />
-                    </div>
-                )}
-
-                {/* TODO: Use ignition-UI*/}
                 <Stacktrace />
-
-            </div>
+            </main>
         </igniteDataContext.Provider>,
         document.querySelector('#app'),
     );

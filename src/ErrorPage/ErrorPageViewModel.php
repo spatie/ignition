@@ -106,7 +106,6 @@ class ErrorPageViewModel implements Arrayable
         return file_get_contents($assetPath);
     }
 
-
     protected function shareEndpoint(): string
     {
         return  'https://flareapp.io/api/public-reports';

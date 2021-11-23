@@ -1,7 +1,7 @@
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import isString from 'lodash/isString';
-import { ErrorOccurrence } from './types';
+import { ErrorOccurrence } from '@flareapp/ignition-ui';
 
 // @todo upgrade highlight.js and @types/highlight.js to version 10, and update typings (maybe see Ray)
 // @ts-ignore
