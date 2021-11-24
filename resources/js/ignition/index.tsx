@@ -1,4 +1,4 @@
-import { ErrorOccurrenceWithFrames, Stacktrace, ErrorCard } from '@flareapp/ignition-ui';
+import { ErrorOccurrence, Stacktrace, Context, Debug, ErrorOccurrenceContext, ErrorCard } from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { igniteDataContext } from 'resources/js/ignition/igniteDataContext';
@@ -12,16 +12,24 @@ window.ignite = (data) => {
     const errorOccurrence = transformIgnitionError(data.report, data.shareEndpoint);
     window.shareableReport = data.shareableReport;
 
+    console.log(data.report, errorOccurrence);
+
     ReactDOM.render(
         <igniteDataContext.Provider value={data}>
-            <NavBar />
+            <ErrorOccurrenceContext.Provider value={errorOccurrence}>
+                <NavBar />
 
-            <main id='top'
-                  className='mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20'>
-                <ErrorCard errorOccurrence={errorOccurrence} />
+                <main id='top'
+                      className='mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20'>
+                    <ErrorCard />
 
-                <Stacktrace />
-            </main>
+                    <Stacktrace />
+
+                    <Context />
+
+                    <Debug />
+                </main>
+            </ErrorOccurrenceContext.Provider>
         </igniteDataContext.Provider>,
         document.querySelector('#app'),
     );
@@ -30,7 +38,7 @@ window.ignite = (data) => {
 function transformIgnitionError(
     ignitionError: IgnitionErrorOccurrence,
     shareEndpoint: string | null,
-): ErrorOccurrenceWithFrames {
+): ErrorOccurrence {
     return {
         frames: ignitionError.stacktrace.map((frame) => ({
             ...frame,
@@ -146,8 +154,9 @@ function transformIgnitionError(
             ...glow,
             id: 0,
             received_at: '',
-        })) /* @todo are these extra properties needed/used? */,
-        solutions: [],
+        })),
+        solutions: ignitionError.solutions,
+        /* @todo are these extra properties needed/used? */
         group_identifier: '',
         group_count: 0,
         group_detail_query: '',

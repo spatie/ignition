@@ -1,13 +1,10 @@
 module.exports = {
     mode: 'jit',
     purge: [
-        './resources/js/**/*.ts',
-        './resources/js/**/*.tsx',
+        './resources/js/**/*.{js,jsx,ts,tsx}',
         './resources/views/**/*.blade.php',
-        './node_modules/@flareapp/ignition-ui/**/*.ts',
-        './node_modules/@flareapp/ignition-ui/**/*.tsx',
-        '../ignition-ui/**/*.ts',
-        '../ignition-ui/**/*.tsx',
+        './node_modules/@flareapp/ignition-ui/src/**/*.{js,jsx,ts,tsx}',
+        '../ignition-ui/src/**/*.{js,jsx,ts,tsx}',
     ],
     darkMode: 'class', // or 'media' or 'class'
     // important: true,
