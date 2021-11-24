@@ -29,6 +29,7 @@ export default function ContextTab({ errorOccurrence }: Props) {
         'context',
         'logs',
         'dumps',
+        'exception',
     ];
 
     function getCustomContextItemGroups(occurrence: ErrorOccurrence): {
@@ -126,7 +127,7 @@ export default function ContextTab({ errorOccurrence }: Props) {
         </div>
     );
 }
-/* 
+/*
 function getGitInfo(remote?: string, hash?: string): { resource: string; repoUrl: string; commitUrl: string } {
     if (!remote) {
         return {
