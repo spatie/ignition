@@ -6,6 +6,7 @@ import '../../css/app.css';
 
 import AppTab from './components/tabs/AppTab';
 import ContextTab from './components/tabs/ContextTab';
+import LivewireTab from './components/tabs/LivewireTab';
 import DebugTab from './components/tabs/DebugTab';
 import RequestTab from './components/tabs/RequestTab';
 import StackTab from './components/tabs/StackTab';
@@ -45,6 +46,9 @@ export default function ErrorUI({
                     />
                 )}
                 {tabs.includes('requestTab') && <OccurrenceTabs.Tab name="Request" component={RequestTab} />}
+                {tabs.includes('contextTab') && errorOccurrence.context_items.hasOwnProperty('livewire') && (
+                    <OccurrenceTabs.Tab name="Livewire" component={LivewireTab} />
+                )}
                 {tabs.includes('appTab') && <OccurrenceTabs.Tab name="App" component={AppTab} />}
                 {tabs.includes('userTab') && <OccurrenceTabs.Tab name="User" component={UserTab} />}
                 {tabs.includes('contextTab') && <OccurrenceTabs.Tab name="Context" component={ContextTab} />}

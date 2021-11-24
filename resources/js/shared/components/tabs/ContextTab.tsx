@@ -30,6 +30,7 @@ export default function ContextTab({ errorOccurrence }: Props) {
         'logs',
         'dumps',
         'exception',
+        'livewire',
     ];
 
     function getCustomContextItemGroups(occurrence: ErrorOccurrence): {

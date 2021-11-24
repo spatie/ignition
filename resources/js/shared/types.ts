@@ -181,7 +181,7 @@ export type StackFrameGroupType = {
     frames: Array<ErrorFrame & { frame_number: number; selected: boolean }>;
 };
 
-export type Tabname = 'stackTraceTab' | 'requestTab' | 'appTab' | 'userTab' | 'contextTab' | 'debugTab';
+export type Tabname = 'stackTraceTab' | 'requestTab' | 'appTab' | 'userTab' | 'livewireTab' | 'contextTab' | 'debugTab';
 
 export type SharePostData = {
     tabs?: Array<Tabname>;
