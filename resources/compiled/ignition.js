@@ -11230,7 +11230,7 @@ function ErrorMessage() {
     className: "px-4 py-2 mask-fade-x"
   }, /*#__PURE__*/react.createElement("code", {
     className: "font-mono leading-relaxed text-sm font-normal"
-  }, /*#__PURE__*/react.createElement("pre", null, "SQL: select * from `users` where `uuid` =", "\n", "47a4af2e-5156-4277-86a0-b55e773f6d1e limit 1", "\n", "SQL: select * from `users` where `uuid` =", "\n", "47a4af2e-5156-4277-86a0-b55e773f6d1e limit 1")))), /*#__PURE__*/react.createElement("button", {
+  }, /*#__PURE__*/react.createElement("pre", null, "SQL: select * from `users` where `uuid` =", '\n', "47a4af2e-5156-4277-86a0-b55e773f6d1e limit 1", '\n', "SQL: select * from `users` where `uuid` =", '\n', "47a4af2e-5156-4277-86a0-b55e773f6d1e limit 1")))), /*#__PURE__*/react.createElement("button", {
     className: "absolute top-2 right-2 hover:text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
   }, /*#__PURE__*/react.createElement("i", {
     className: "far fa-copy"
@@ -11452,9 +11452,9 @@ function ErrorCard() {
     className: "grid grid-flow-col justify-end gap-4 text-sm ~text-gray-500"
   }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("span", {
     className: "tracking-wider"
-  }, "PHP"), ' ', errorOccurrence.language_version), /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
+  }, "PHP"), " ", errorOccurrence.language_version), /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
     className: "fab fa-laravel"
-  }), ' ', errorOccurrence.framework_version))), /*#__PURE__*/react.createElement(ErrorMessage, null)))), /*#__PURE__*/react.createElement(Solutions, null));
+  }), " ", errorOccurrence.framework_version))), /*#__PURE__*/react.createElement(ErrorMessage, null)))), /*#__PURE__*/react.createElement(Solutions, null));
 }
 
 function Context() {
@@ -11543,7 +11543,7 @@ function Context() {
     className: "px-4 py-2 mask-fade-x"
   }, /*#__PURE__*/react.createElement("code", {
     className: "font-mono leading-relaxed text-sm font-normal"
-  }, /*#__PURE__*/react.createElement("pre", null, "curl \"https://medialibrary.pro/demo-customized-collection\" \\", "\n", "    ", "-X POST \\", "\n", "    ", "-H 'cookie: XSRF-TOKEN=eyJpdiI6IjM1cTRDMzlBUmx2OUw4UXd1MUtoaGc9PSIsInZhbHVlIjoiSGhPejVGTnlTbEY0UFlJYThHUHBKOERoVmU4MDFpUVV4aWdsOW16SnFvUEVvMmZXdlpMci9Sc3hTeDJkSldnTW9xc2IwSWEvWnJLeVpsQWNzVTBROG1rQXkzaExQaU5XWWROeWZYcHJBZkFFM092SXZOd0c0NzZYdEFoUXNZUUYiLCJtYWMiOiIxNzU0ZjViMDljMmEzZTM1YjljYWY2NDk5ZjcwM2UyNzI0MWZkYThkNmZiMmZkNmVlZDZmZmMyNGQ2YWJlYzY2In0%3D; medialibrarypro_session=eyJpdiI6IjlkVUNHQlVQZHc4cUVxa05SN200dEE9PSIsInZhbHVlIjoibXZaMzdjVzk4OXcvQjZTL2V1dVRJbHZuU3p5VmFYbFBUTWVoSVRtYnZ6bDRVS1lmd2QwenVLTERreGh6d2FZZDdmTnl5MU1nR3d3cnNMLzBiL0FtRXVHQ2NYTkdabVB0bXNoc2F4dkZOcUpjRkFUWUZKTDV4ckwwZ04wZmQwTHoiLCJtYWMiOiI0MjA1NzEzOWFjMDhlMWE3MTgwZDdmMmRiYmEzOTQ3MGEwODQ3OWIxYjYyMjRmYTdmOTNmOGU3ZGI5ODY0M2I1In0%3D' \\", "\n", "    ", "-H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,bn;q=0.7,fr;q=0.6' \\", "\n", "    ", "-H 'accept-encoding: gzip, deflate, br' \\", "\n", "    ", "-H 'referer: https://medialibrary.pro/demo-customized-collection' \\", "\n", "    ", "-H 'sec-fetch-dest: document' \\", "\n", "    ", "-H 'sec-fetch-user: ?1' \\", "\n", "    ", "-H 'sec-fetch-mode: navigate' \\", "\n", "    ", "-H 'sec-fetch-site: same-origin' \\", "\n", "    ", "-H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \\", "\n", "    ", "-H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36' \\", "\n", "    ", "-H 'content-type: application/x-www-form-urlencoded' \\", "\n", "    ", "-H 'origin: https://medialibrary.pro' \\", "\n", "    ", "-H 'upgrade-insecure-requests: 1' \\", "\n", "    ", "-H 'sec-ch-ua-platform: \"Windows\"' \\", "\n", "    ", "-H 'sec-ch-ua-mobile: ?0' \\", "\n", "    ", "-H 'sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"' \\", "\n", "    ", "-H 'cache-control: max-age=0' \\", "\n", "    ", "-H 'content-length: 1394' \\", "\n", "    ", "-H 'host: medialibrary.pro' \\", "\n", "    ", "-F '_token=7uzRjLOwiqLEgOvXpKKDXyl70FHlHtblkjY0vkDk' -F 'downloads=[object Object]'")))), /*#__PURE__*/react.createElement("button", {
+  }, /*#__PURE__*/react.createElement("pre", null, "curl \"https://medialibrary.pro/demo-customized-collection\" \\", '\n', '    ', "-X POST \\", '\n', '    ', "-H 'cookie: XSRF-TOKEN=eyJpdiI6IjM1cTRDMzlBUmx2OUw4UXd1MUtoaGc9PSIsInZhbHVlIjoiSGhPejVGTnlTbEY0UFlJYThHUHBKOERoVmU4MDFpUVV4aWdsOW16SnFvUEVvMmZXdlpMci9Sc3hTeDJkSldnTW9xc2IwSWEvWnJLeVpsQWNzVTBROG1rQXkzaExQaU5XWWROeWZYcHJBZkFFM092SXZOd0c0NzZYdEFoUXNZUUYiLCJtYWMiOiIxNzU0ZjViMDljMmEzZTM1YjljYWY2NDk5ZjcwM2UyNzI0MWZkYThkNmZiMmZkNmVlZDZmZmMyNGQ2YWJlYzY2In0%3D; medialibrarypro_session=eyJpdiI6IjlkVUNHQlVQZHc4cUVxa05SN200dEE9PSIsInZhbHVlIjoibXZaMzdjVzk4OXcvQjZTL2V1dVRJbHZuU3p5VmFYbFBUTWVoSVRtYnZ6bDRVS1lmd2QwenVLTERreGh6d2FZZDdmTnl5MU1nR3d3cnNMLzBiL0FtRXVHQ2NYTkdabVB0bXNoc2F4dkZOcUpjRkFUWUZKTDV4ckwwZ04wZmQwTHoiLCJtYWMiOiI0MjA1NzEzOWFjMDhlMWE3MTgwZDdmMmRiYmEzOTQ3MGEwODQ3OWIxYjYyMjRmYTdmOTNmOGU3ZGI5ODY0M2I1In0%3D' \\", '\n', '    ', "-H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,bn;q=0.7,fr;q=0.6' \\", '\n', '    ', "-H 'accept-encoding: gzip, deflate, br' \\", '\n', '    ', "-H 'referer: https://medialibrary.pro/demo-customized-collection' \\", '\n', '    ', "-H 'sec-fetch-dest: document' \\", '\n', '    ', "-H 'sec-fetch-user: ?1' \\", '\n', '    ', "-H 'sec-fetch-mode: navigate' \\", '\n', '    ', "-H 'sec-fetch-site: same-origin' \\", '\n', '    ', "-H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \\", '\n', '    ', "-H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36' \\", '\n', '    ', "-H 'content-type: application/x-www-form-urlencoded' \\", '\n', '    ', "-H 'origin: https://medialibrary.pro' \\", '\n', '    ', "-H 'upgrade-insecure-requests: 1' \\", '\n', '    ', "-H 'sec-ch-ua-platform: \"Windows\"' \\", '\n', '    ', "-H 'sec-ch-ua-mobile: ?0' \\", '\n', '    ', "-H 'sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"' \\", '\n', '    ', "-H 'cache-control: max-age=0' \\", '\n', '    ', "-H 'content-length: 1394' \\", '\n', '    ', "-H 'host: medialibrary.pro' \\", '\n', '    ', "-F '_token=7uzRjLOwiqLEgOvXpKKDXyl70FHlHtblkjY0vkDk' -F 'downloads=[object Object]'")))), /*#__PURE__*/react.createElement("button", {
     className: "absolute top-2 right-2 hover:text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
   }, /*#__PURE__*/react.createElement("i", {
     className: "far fa-copy"
@@ -11801,7 +11801,7 @@ function Debug() {
     className: "px-4 py-2 mask-fade-x"
   }, /*#__PURE__*/react.createElement("code", {
     className: "font-mono leading-relaxed text-sm font-normal"
-  }, /*#__PURE__*/react.createElement("pre", null, "curl \"https://medialibrary.pro/demo-customized-collection\" \\", "\n", "    ", "-X POST \\", "\n", "    ", "-H 'cookie: XSRF-TOKEN=eyJpdiI6IjM1cTRDMzlBUmx2OUw4UXd1MUtoaGc9PSIsInZhbHVlIjoiSGhPejVGTnlTbEY0UFlJYThHUHBKOERoVmU4MDFpUVV4aWdsOW16SnFvUEVvMmZXdlpMci9Sc3hTeDJkSldnTW9xc2IwSWEvWnJLeVpsQWNzVTBROG1rQXkzaExQaU5XWWROeWZYcHJBZkFFM092SXZOd0c0NzZYdEFoUXNZUUYiLCJtYWMiOiIxNzU0ZjViMDljMmEzZTM1YjljYWY2NDk5ZjcwM2UyNzI0MWZkYThkNmZiMmZkNmVlZDZmZmMyNGQ2YWJlYzY2In0%3D; medialibrarypro_session=eyJpdiI6IjlkVUNHQlVQZHc4cUVxa05SN200dEE9PSIsInZhbHVlIjoibXZaMzdjVzk4OXcvQjZTL2V1dVRJbHZuU3p5VmFYbFBUTWVoSVRtYnZ6bDRVS1lmd2QwenVLTERreGh6d2FZZDdmTnl5MU1nR3d3cnNMLzBiL0FtRXVHQ2NYTkdabVB0bXNoc2F4dkZOcUpjRkFUWUZKTDV4ckwwZ04wZmQwTHoiLCJtYWMiOiI0MjA1NzEzOWFjMDhlMWE3MTgwZDdmMmRiYmEzOTQ3MGEwODQ3OWIxYjYyMjRmYTdmOTNmOGU3ZGI5ODY0M2I1In0%3D' \\", "\n", "    ", "-H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,bn;q=0.7,fr;q=0.6' \\", "\n", "    ", "-H 'accept-encoding: gzip, deflate, br' \\", "\n", "    ", "-H 'referer: https://medialibrary.pro/demo-customized-collection' \\", "\n", "    ", "-H 'sec-fetch-dest: document' \\", "\n", "    ", "-H 'sec-fetch-user: ?1' \\", "\n", "    ", "-H 'sec-fetch-mode: navigate' \\", "\n", "    ", "-H 'sec-fetch-site: same-origin' \\", "\n", "    ", "-H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \\", "\n", "    ", "-H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36' \\", "\n", "    ", "-H 'content-type: application/x-www-form-urlencoded' \\", "\n", "    ", "-H 'origin: https://medialibrary.pro' \\", "\n", "    ", "-H 'upgrade-insecure-requests: 1' \\", "\n", "    ", "-H 'sec-ch-ua-platform: \"Windows\"' \\", "\n", "    ", "-H 'sec-ch-ua-mobile: ?0' \\", "\n", "    ", "-H 'sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"' \\", "\n", "    ", "-H 'cache-control: max-age=0' \\", "\n", "    ", "-H 'content-length: 1394' \\", "\n", "    ", "-H 'host: medialibrary.pro' \\", "\n", "    ", "-F '_token=7uzRjLOwiqLEgOvXpKKDXyl70FHlHtblkjY0vkDk' -F 'downloads=[object Object]'")))), /*#__PURE__*/react.createElement("button", {
+  }, /*#__PURE__*/react.createElement("pre", null, "curl \"https://medialibrary.pro/demo-customized-collection\" \\", '\n', '    ', "-X POST \\", '\n', '    ', "-H 'cookie: XSRF-TOKEN=eyJpdiI6IjM1cTRDMzlBUmx2OUw4UXd1MUtoaGc9PSIsInZhbHVlIjoiSGhPejVGTnlTbEY0UFlJYThHUHBKOERoVmU4MDFpUVV4aWdsOW16SnFvUEVvMmZXdlpMci9Sc3hTeDJkSldnTW9xc2IwSWEvWnJLeVpsQWNzVTBROG1rQXkzaExQaU5XWWROeWZYcHJBZkFFM092SXZOd0c0NzZYdEFoUXNZUUYiLCJtYWMiOiIxNzU0ZjViMDljMmEzZTM1YjljYWY2NDk5ZjcwM2UyNzI0MWZkYThkNmZiMmZkNmVlZDZmZmMyNGQ2YWJlYzY2In0%3D; medialibrarypro_session=eyJpdiI6IjlkVUNHQlVQZHc4cUVxa05SN200dEE9PSIsInZhbHVlIjoibXZaMzdjVzk4OXcvQjZTL2V1dVRJbHZuU3p5VmFYbFBUTWVoSVRtYnZ6bDRVS1lmd2QwenVLTERreGh6d2FZZDdmTnl5MU1nR3d3cnNMLzBiL0FtRXVHQ2NYTkdabVB0bXNoc2F4dkZOcUpjRkFUWUZKTDV4ckwwZ04wZmQwTHoiLCJtYWMiOiI0MjA1NzEzOWFjMDhlMWE3MTgwZDdmMmRiYmEzOTQ3MGEwODQ3OWIxYjYyMjRmYTdmOTNmOGU3ZGI5ODY0M2I1In0%3D' \\", '\n', '    ', "-H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,bn;q=0.7,fr;q=0.6' \\", '\n', '    ', "-H 'accept-encoding: gzip, deflate, br' \\", '\n', '    ', "-H 'referer: https://medialibrary.pro/demo-customized-collection' \\", '\n', '    ', "-H 'sec-fetch-dest: document' \\", '\n', '    ', "-H 'sec-fetch-user: ?1' \\", '\n', '    ', "-H 'sec-fetch-mode: navigate' \\", '\n', '    ', "-H 'sec-fetch-site: same-origin' \\", '\n', '    ', "-H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \\", '\n', '    ', "-H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36' \\", '\n', '    ', "-H 'content-type: application/x-www-form-urlencoded' \\", '\n', '    ', "-H 'origin: https://medialibrary.pro' \\", '\n', '    ', "-H 'upgrade-insecure-requests: 1' \\", '\n', '    ', "-H 'sec-ch-ua-platform: \"Windows\"' \\", '\n', '    ', "-H 'sec-ch-ua-mobile: ?0' \\", '\n', '    ', "-H 'sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"' \\", '\n', '    ', "-H 'cache-control: max-age=0' \\", '\n', '    ', "-H 'content-length: 1394' \\", '\n', '    ', "-H 'host: medialibrary.pro' \\", '\n', '    ', "-F '_token=7uzRjLOwiqLEgOvXpKKDXyl70FHlHtblkjY0vkDk' -F 'downloads=[object Object]'")))), /*#__PURE__*/react.createElement("button", {
     className: "absolute top-2 right-2 hover:text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
   }, /*#__PURE__*/react.createElement("i", {
     className: "far fa-copy"
@@ -49872,7 +49872,7 @@ function NavBarItem(_ref) {
     target: href ? '_blank' : '_self',
     onClick: onClick
   }, react.createElement("button", {
-    className: "\n                    group px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium\n                    " + (inView.includes(name) ? 'text-red-500' : '') + "\n                "
+    className: "\n                    group px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium\n                    " + (lodash.last(inView) === name ? 'text-red-500' : '') + "\n                "
   }, react.createElement("i", {
     className: "mr-0.5 group-hover:text-red-500 text-gray-400 " + icon
   }), label && react.createElement("span", {
@@ -50351,11 +50351,13 @@ function useInView(_temp) {
   return result;
 }
 
-function useCardsInView(sectionName) {
+function useSectionInView(sectionName) {
   var _useContext = react.useContext(InViewContext),
       setInView = _useContext.setInView;
 
-  var _useInView = useInView(),
+  var _useInView = useInView({
+    rootMargin: '-40% 0px -40%'
+  }),
       intersectionRef = _useInView.ref,
       isInView = _useInView.inView;
 
@@ -50378,7 +50380,7 @@ function useCardsInView(sectionName) {
 function Section(_ref) {
   var children = _ref.children,
       name = _ref.name;
-  var ref = useCardsInView(name);
+  var ref = useSectionInView(name);
   return react.createElement("section", {
     ref: ref,
     id: name

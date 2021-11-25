@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import InViewContext from 'contexts/InViewContext';
-import { noop } from 'lodash';
+import {last, noop } from 'lodash';
 
 type Props = {
     name: string;
@@ -29,7 +29,7 @@ export default function NavBarItem({
                 <button
                     className={`
                     group px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium
-                    ${inView.includes(name) ? 'text-red-500' : ''}
+                    ${last(inView) === name ? 'text-red-500' : ''}
                 `}
                 >
                     <i className={`mr-0.5 group-hover:text-red-500 text-gray-400 ${icon}`} />
