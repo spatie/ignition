@@ -9,7 +9,6 @@ export type IgniteData = {
         localSitesPath: string;
         theme: 'light' | 'dark';
         enableShareButton: boolean;
-        enableRunnableSolutions: boolean;
         directorySeparator: string;
     };
     solutions: Array<any>;
