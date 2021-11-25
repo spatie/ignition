@@ -1,11 +1,4 @@
-import {
-    ErrorOccurrence,
-    Stacktrace,
-    Context,
-    Debug,
-    ErrorOccurrenceContext,
-    ErrorCard,
-} from '@flareapp/ignition-ui';
+import { ErrorOccurrence, Stacktrace, Context, Debug, ErrorOccurrenceContext, ErrorCard } from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { igniteDataContext } from 'resources/js/igniteDataContext';
@@ -29,19 +22,21 @@ window.ignite = (data) => {
                 <InViewContextProvider>
                     <NavBar />
 
-                    <main id='top'
-                          className='mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20'>
+                    <main
+                        id="top"
+                        className="mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20"
+                    >
                         <ErrorCard />
 
-                        <Section name='stack'>
+                        <Section name="stack">
                             <Stacktrace />
                         </Section>
 
-                        <Section name='context'>
+                        <Section name="context">
                             <Context />
                         </Section>
 
-                        <Section name='debug'>
+                        <Section name="debug">
                             <Debug />
                         </Section>
                     </main>

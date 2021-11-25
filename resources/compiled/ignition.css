@@ -806,15 +806,15 @@ body{
 }
 
 .mask-fade-x {
-    -webkit-mask-image:linear-gradient(to right, rgba(0,0,0,1) calc(100% - 5rem), rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - 5rem), rgba(0, 0, 0, 0) 100%);
 }
 
 .mask-fade-y {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) calc(100% - 2.5rem), rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 2.5rem), rgba(0, 0, 0, 0) 100%);
 }
 
 .mask-fade-frames {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) calc(100% - 4rem), rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 4rem), rgba(0, 0, 0, 0) 100%);
 }
 
 .scrollbar::-webkit-scrollbar,
@@ -1017,6 +1017,10 @@ pre.sf-dump .sf-dump-ellipsis{
 	top: 0px;
 }
 
+.left-0{
+	left: 0px;
+}
+
 .right-2{
 	right: 0.5rem;
 }
@@ -1043,10 +1047,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .left-4{
 	left: 1rem;
-}
-
-.left-0{
-	left: 0px;
 }
 
 .left-1\/2{
@@ -1146,16 +1146,16 @@ pre.sf-dump .sf-dump-ellipsis{
 	margin-right: -0.75rem;
 }
 
+.mr-1{
+	margin-right: 0.25rem;
+}
+
 .mr-0\.5{
 	margin-right: 0.125rem;
 }
 
 .mr-0{
 	margin-right: 0px;
-}
-
-.mr-1{
-	margin-right: 0.25rem;
 }
 
 .mt-2{
@@ -1603,16 +1603,16 @@ pre.sf-dump .sf-dump-ellipsis{
 	border-width: 1px;
 }
 
-.border-t-0{
-	border-top-width: 0px;
-}
-
 .border-b{
 	border-bottom-width: 1px;
 }
 
 .border-t{
 	border-top-width: 1px;
+}
+
+.border-t-0{
+	border-top-width: 0px;
 }
 
 .border-r{
@@ -1850,11 +1850,6 @@ pre.sf-dump .sf-dump-ellipsis{
 	letter-spacing: 0.05em;
 }
 
-.text-white{
-	--tw-text-opacity: 1;
-	color: rgba(255, 255, 255, var(--tw-text-opacity));
-}
-
 .text-red-500{
 	--tw-text-opacity: 1;
 	color: rgba(239, 68, 68, var(--tw-text-opacity));
@@ -1863,6 +1858,11 @@ pre.sf-dump .sf-dump-ellipsis{
 .text-gray-400{
 	--tw-text-opacity: 1;
 	color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+
+.text-white{
+	--tw-text-opacity: 1;
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
 .text-white\/50{
@@ -1939,6 +1939,12 @@ pre.sf-dump .sf-dump-ellipsis{
 	filter: var(--tw-filter);
 }
 
+.transition-nav{
+	transition-property: transform, shadow;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
 .transition-all{
 	transition-property: all;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1957,12 +1963,6 @@ pre.sf-dump .sf-dump-ellipsis{
 	transition-duration: 150ms;
 }
 
-.transition-nav{
-	transition-property: transform, shadow;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 150ms;
-}
-
 .transition-opacity{
 	transition-property: opacity;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1971,6 +1971,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .duration-100{
 	transition-duration: 100ms;
+}
+
+.duration-300{
+	transition-duration: 300ms;
 }
 
 .duration-150{
@@ -1983,10 +1987,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .duration-500{
 	transition-duration: 500ms;
-}
-
-.duration-300{
-	transition-duration: 300ms;
 }
 
 .first-letter\:uppercase::first-letter{

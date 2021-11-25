@@ -49876,9 +49876,9 @@ function NavBarItem(_ref) {
   }, react.createElement("i", {
     className: "mr-0.5 group-hover:text-red-500 text-gray-400 " + icon
   }), label && react.createElement("span", {
-    className: 'group-hover:text-red-500'
+    className: "group-hover:text-red-500"
   }, name.charAt(0).toUpperCase() + name.slice(1)), important && react.createElement("span", {
-    className: 'right-2 top-2.5 absolute w-2 h-2 bg-red-500 rounded-full shadow'
+    className: "right-2 top-2.5 absolute w-2 h-2 bg-red-500 rounded-full shadow"
   }))), children);
 }
 
@@ -49887,85 +49887,85 @@ function ShareDropdown(_ref) {
   return react.createElement("div", {
     className: "absolute mt-2 top-10 left-1/2 transform -translate-x-6 transition-all duration-150 origin\n                 " + (isOpen ? '' : 'opacity-0 pointer-events-none scale-90')
   }, react.createElement("div", {
-    className: 'flex px-4 justify-start'
+    className: "flex px-4 justify-start"
   }, react.createElement("div", {
-    className: 'w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown'
+    className: "w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"
   })), react.createElement("div", {
-    className: '~bg-dropdown px-10 py-8 shadow-2xl'
+    className: "~bg-dropdown px-10 py-8 shadow-2xl"
   }, react.createElement("div", {
-    className: 'flex items-center justify-between'
+    className: "flex items-center justify-between"
   }, react.createElement("h4", {
-    className: 'whitespace-nowrap font-semibold'
+    className: "whitespace-nowrap font-semibold"
   }, "Share with Flare"), react.createElement("div", {
-    className: 'ml-6 text-xs ~text-gray-500'
+    className: "ml-6 text-xs ~text-gray-500"
   }, react.createElement("span", {
-    className: 'whitespace-nowrap flex items-center justify-end'
+    className: "whitespace-nowrap flex items-center justify-end"
   }, react.createElement("a", {
-    className: 'flex items-center underline',
-    href: '#'
+    className: "flex items-center underline",
+    href: "#"
   }, "Docs", react.createElement("svg", {
-    viewBox: '0 0 682 1024',
-    className: 'w-4 h-5 ml-1.5'
+    viewBox: "0 0 682 1024",
+    className: "w-4 h-5 ml-1.5"
   }, react.createElement("polygon", {
-    points: '235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 ',
+    points: "235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 ",
     style: {
       fill: 'rgb(81, 219, 158)'
     }
   }), react.createElement("polygon", {
-    points: '235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 ',
+    points: "235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 ",
     style: {
       fill: 'rgb(121, 0, 245)'
     }
   }), react.createElement("polygon", {
-    points: '448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 ',
+    points: "448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 ",
     style: {
       fill: 'rgb(148, 242, 200)'
     }
   }), react.createElement("polygon", {
-    points: '234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 ',
+    points: "234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 ",
     style: {
       fill: 'rgb(164, 117, 244)'
     }
   })))))), react.createElement("ul", {
-    className: 'mt-6 grid justify-start gap-3'
+    className: "mt-6 grid justify-start gap-3"
   }, react.createElement("li", null, react.createElement("label", {
-    className: 'flex items-center'
+    className: "flex items-center"
   }, react.createElement("input", {
-    type: 'checkbox',
+    type: "checkbox",
     defaultChecked: true,
-    className: 'sr-only peer'
+    className: "sr-only peer"
   }), react.createElement("span", {
-    className: 'mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors'
+    className: "mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors"
   }), react.createElement("span", {
-    className: 'absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform'
+    className: "absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"
   }), react.createElement("span", {
-    className: 'uppercase tracking-wider text-xs font-medium'
+    className: "uppercase tracking-wider text-xs font-medium"
   }, "Stack"))), react.createElement("li", null, react.createElement("label", {
-    className: 'flex items-center'
+    className: "flex items-center"
   }, react.createElement("input", {
-    type: 'checkbox',
+    type: "checkbox",
     defaultChecked: true,
-    className: 'sr-only peer'
+    className: "sr-only peer"
   }), react.createElement("span", {
-    className: 'mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors'
+    className: "mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors"
   }), react.createElement("span", {
-    className: 'absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform'
+    className: "absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"
   }), react.createElement("span", {
-    className: 'uppercase tracking-wider text-xs font-medium'
+    className: "uppercase tracking-wider text-xs font-medium"
   }, "Context"))), react.createElement("li", null, react.createElement("label", {
-    className: 'flex items-center'
+    className: "flex items-center"
   }, react.createElement("input", {
-    type: 'checkbox',
+    type: "checkbox",
     defaultChecked: true,
-    className: 'sr-only peer'
+    className: "sr-only peer"
   }), react.createElement("span", {
-    className: 'mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors'
+    className: "mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors"
   }), react.createElement("span", {
-    className: 'absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform'
+    className: "absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"
   }), react.createElement("span", {
-    className: 'uppercase tracking-wider text-xs font-medium'
+    className: "uppercase tracking-wider text-xs font-medium"
   }, "Debug")))), react.createElement("button", {
-    className: '\n                                          mt-6\n                                          px-4\n                                          h-8\n                                          bg-purple-500\n                                          text-white\n                                          whitespace-nowrap\n                                          border-b border-gray-500/25\n                                          text-xs uppercase tracking-wider\n                                          font-bold\n                                          rounded-sm\n                                          shadow-md\n                                          hover:shadow-lg\n                                          active:shadow-none\n                                      '
+    className: "\n                                          mt-6\n                                          px-4\n                                          h-8\n                                          bg-purple-500\n                                          text-white\n                                          whitespace-nowrap\n                                          border-b border-gray-500/25\n                                          text-xs uppercase tracking-wider\n                                          font-bold\n                                          rounded-sm\n                                          shadow-md\n                                          hover:shadow-lg\n                                          active:shadow-none\n                                      "
   }, "Create Share")));
 }
 
@@ -49974,88 +49974,88 @@ function SettingsDropdown(_ref) {
   return react.createElement("div", {
     className: "absolute mt-2 top-10 right-1/2 transform translate-x-6 transition-all duration-150 origin-top-right\n                " + (isOpen ? '' : 'opacity-0 pointer-events-none scale-90') + "`}\n        "
   }, react.createElement("div", {
-    className: 'flex px-4 justify-end'
+    className: "flex px-4 justify-end"
   }, react.createElement("div", {
-    className: 'w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown'
+    className: "w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"
   })), react.createElement("div", {
-    className: '~bg-dropdown px-10 py-8 shadow-2xl'
+    className: "~bg-dropdown px-10 py-8 shadow-2xl"
   }, react.createElement("div", {
-    className: 'flex items-center justify-between'
+    className: "flex items-center justify-between"
   }, react.createElement("h4", {
-    className: 'whitespace-nowrap font-semibold'
+    className: "whitespace-nowrap font-semibold"
   }, "Ignition Settings"), react.createElement("div", {
-    className: 'ml-6 text-xs ~text-gray-500'
+    className: "ml-6 text-xs ~text-gray-500"
   }, react.createElement("span", {
-    className: 'whitespace-nowrap flex items-center justify-end'
+    className: "whitespace-nowrap flex items-center justify-end"
   }, react.createElement("a", {
-    className: 'flex items-center underline',
-    href: '#'
+    className: "flex items-center underline",
+    href: "#"
   }, "Docs", react.createElement("svg", {
-    id: 'ignition',
-    className: 'w-8 h-8 -ml-1',
-    viewBox: '0 0 500 500'
+    id: "ignition",
+    className: "w-8 h-8 -ml-1",
+    viewBox: "0 0 500 500"
   }, react.createElement("g", null, react.createElement("polygon", {
     style: {
       fill: 'transparent'
     },
-    points: '466.5,375 466.5,125 250,0 33.5,125 33.5,375 250,500 \t'
+    points: "466.5,375 466.5,125 250,0 33.5,125 33.5,375 250,500 \t"
   }), react.createElement("g", null, react.createElement("polygon", {
     style: {
       fill: '#ff4590'
     },
-    points: '314.2,176 314.2,250 250,287 250,212.6 \t\t'
+    points: "314.2,176 314.2,250 250,287 250,212.6 \t\t"
   }), react.createElement("polygon", {
     style: {
       fill: '#ffd000'
     },
-    points: '185.9,398.1 185.9,324.1 250,287 249.9,360.9 \t\t'
+    points: "185.9,398.1 185.9,324.1 250,287 249.9,360.9 \t\t"
   }), react.createElement("polygon", {
     style: {
       fill: '#de075d'
     },
-    points: '250,139.1 250,287 185.9,250 185.8,101.9 \t\t'
+    points: "250,139.1 250,287 185.9,250 185.8,101.9 \t\t"
   }), react.createElement("polygon", {
     style: {
       fill: '#e0b800'
     },
-    points: '249.9,360.9 250,287 314.1,324 314.1,398.1 \t\t'
+    points: "249.9,360.9 250,287 314.1,324 314.1,398.1 \t\t"
   })))))))), react.createElement("h4", {
-    className: 'mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold'
+    className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
   }, "Editor"), react.createElement("div", {
-    className: 'mt-2 relative'
+    className: "mt-2 relative"
   }, react.createElement("select", {
-    className: 'block appearance-none w-full ~bg-gray-100 border ~border-gray-200 h-12 px-4 pr-8 rounded-none leading-tight focus:outline-none focus:bg-white'
+    className: "block appearance-none w-full ~bg-gray-100 border ~border-gray-200 h-12 px-4 pr-8 rounded-none leading-tight focus:outline-none focus:bg-white"
   }, react.createElement("option", null, "VSCode"), react.createElement("option", null, "PHPStorm")), react.createElement("div", {
-    className: 'pointer-events-none absolute inset-y-0 right-0 flex items-center px-4'
+    className: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-4"
   }, react.createElement("i", {
-    className: 'fas fa-angle-down group-hover:text-red-500 text-sm'
+    className: "fas fa-angle-down group-hover:text-red-500 text-sm"
   }))), react.createElement("h4", {
-    className: 'mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold'
+    className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
   }, "Theme"), react.createElement("button", {
-    id: 'theme',
-    className: 'mt-2 w-full ~bg-gray-100 border ~border-gray-200 rounded-none leading-tight'
+    id: "theme",
+    className: "mt-2 w-full ~bg-gray-100 border ~border-gray-200 rounded-none leading-tight"
   }, react.createElement("div", {
-    className: 'group flex items-center',
+    className: "group flex items-center",
     style: {
       WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)'
     }
   }, react.createElement("div", {
-    className: 'px-4'
+    className: "px-4"
   }, react.createElement("div", {
-    id: 'theme-moon',
-    className: 'h-12 flex items-center transform origin-bottom transition-transform duration-1000'
+    id: "theme-moon",
+    className: "h-12 flex items-center transform origin-bottom transition-transform duration-1000"
   }, react.createElement("i", {
-    className: 'fas fa-moon text-sm ~text-gray-500 group-hover:text-yellow-400 transition-colors duration-500'
+    className: "fas fa-moon text-sm ~text-gray-500 group-hover:text-yellow-400 transition-colors duration-500"
   })), react.createElement("div", {
-    id: 'theme-sun',
-    className: 'absolute top-0 left-4 h-12 flex items-center transform -rotate-180 origin-bottom transition-transform duration-1000'
+    id: "theme-sun",
+    className: "absolute top-0 left-4 h-12 flex items-center transform -rotate-180 origin-bottom transition-transform duration-1000"
   }, react.createElement("i", {
-    className: 'fas fa-sun text-sm ~text-gray-500 group-hover:text-yellow-400 transition-colors duration-500'
+    className: "fas fa-sun text-sm ~text-gray-500 group-hover:text-yellow-400 transition-colors duration-500"
   }))), react.createElement("div", {
-    id: 'theme-name',
-    className: '-ml-1 first-letter:uppercase'
+    id: "theme-name",
+    className: "-ml-1 first-letter:uppercase"
   }, "Light"))), react.createElement("button", {
-    className: '\n                                            mt-6\n                                            px-4\n                                            h-8\n                                            bg-red-500\n                                            text-white\n                                            whitespace-nowrap\n                                            border-b border-red-500/25\n                                            text-xs uppercase tracking-wider\n                                            font-bold\n                                            rounded-sm\n                                            shadow-md\n                                            hover:shadow-lg\n                                            active:shadow-none\n                                        '
+    className: "\n                                            mt-6\n                                            px-4\n                                            h-8\n                                            bg-red-500\n                                            text-white\n                                            whitespace-nowrap\n                                            border-b border-red-500/25\n                                            text-xs uppercase tracking-wider\n                                            font-bold\n                                            rounded-sm\n                                            shadow-md\n                                            hover:shadow-lg\n                                            active:shadow-none\n                                        "
   }, "Save Settings")));
 }
 
@@ -50409,14 +50409,14 @@ window.ignite = function (data) {
   }, react.createElement(ErrorOccurrenceContext.Provider, {
     value: errorOccurrence
   }, react.createElement(InViewContextProvider, null, react.createElement(NavBar, null), react.createElement("main", {
-    id: 'top',
-    className: 'mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20'
+    id: "top",
+    className: "mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20"
   }, react.createElement(ErrorCard, null), react.createElement(Section, {
-    name: 'stack'
+    name: "stack"
   }, react.createElement(Stacktrace, null)), react.createElement(Section, {
-    name: 'context'
+    name: "context"
   }, react.createElement(Context, null)), react.createElement(Section, {
-    name: 'debug'
+    name: "debug"
   }, react.createElement(Debug, null)))))), document.querySelector('#app'));
 };
 

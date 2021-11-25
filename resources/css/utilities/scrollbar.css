@@ -8,7 +8,6 @@
     @apply bg-transparent;
 }
 
-
 .scrollbar::-webkit-scrollbar-thumb {
     @apply bg-red-500/90;
 }
@@ -46,4 +45,3 @@
 .scrollbar-hidden-y::-webkit-scrollbar {
     display: none;
 }
-

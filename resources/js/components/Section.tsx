@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function Section({ children, name }: Props) {
-    const ref = useSectionInView(name)
+    const ref = useSectionInView(name);
 
     return (
         <section ref={ref} id={name}>

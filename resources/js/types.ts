@@ -1,4 +1,4 @@
-import { ErrorSolution } from "@flareapp/ignition-ui";
+import { ErrorSolution } from '@flareapp/ignition-ui';
 
 export type IgniteData = {
     report: IgnitionErrorOccurrence;
@@ -19,7 +19,6 @@ export type IgniteData = {
     appEnv: string;
     appDebug: boolean;
 };
-
 
 export type IgnitionErrorOccurrence = {
     notifier: string;
