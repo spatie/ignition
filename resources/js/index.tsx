@@ -1,4 +1,4 @@
-import { ErrorOccurrence, Stacktrace, Context, Debug, ErrorOccurrenceContext, ErrorCard } from '@flareapp/ignition-ui';
+import { ErrorOccurrence, StackTrace, Context, Debug, ErrorOccurrenceContext, ErrorCard } from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { igniteDataContext } from 'resources/js/igniteDataContext';
@@ -29,7 +29,7 @@ window.ignite = (data) => {
                         <ErrorCard />
 
                         <Section name="stack">
-                            <Stacktrace />
+                            <StackTrace />
                         </Section>
 
                         <Section name="context">
