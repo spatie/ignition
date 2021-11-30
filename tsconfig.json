@@ -10,6 +10,7 @@
         "lib": ["dom", "es2020"],
         "noEmit": true,
         "module": "esnext",
+        "esModuleInterop": true,
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,

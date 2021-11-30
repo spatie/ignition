@@ -42,7 +42,7 @@ export type IgnitionErrorOccurrence = {
         class: string;
         code_snippet: Record<number, string>;
         file: string;
-        is_application_frame: boolean;
+        application_frame: boolean;
     }>;
     context: {
         request: {
