@@ -20,13 +20,12 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
             return false;
         }
 
-        $file = file_get_contents($throwable->getFile());
+        $file = (string)file_get_contents($throwable->getFile());
 
-        if (strpos($file, '=======') === false) {
+        if (! str_contains($file, '=======')) {
             return false;
         }
-
-        if (strpos($file, '>>>>>>>') === false) {
+        if (! str_contains($file, '>>>>>>>')) {
             return false;
         }
 
@@ -35,7 +34,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 
     public function getSolutions(Throwable $throwable): array
     {
-        $file = file_get_contents($throwable->getFile());
+        $file = (string)file_get_contents($throwable->getFile());
         preg_match('/\>\>\>\>\>\>\> (.*?)\n/', $file, $matches);
         $source = $matches[1];
 
@@ -49,9 +48,9 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 
     protected function getCurrentBranch(string $directory): string
     {
-        $branch = "'".trim(shell_exec("cd ${directory}; git branch | grep \\* | cut -d ' ' -f2"))."'";
+        $branch = "'".trim((string)shell_exec("cd ${directory}; git branch | grep \\* | cut -d ' ' -f2"))."'";
 
-        if (! isset($branch) || $branch === "''") {
+        if ($branch === "''") {
             $branch = 'current branch';
         }
 
