@@ -86,6 +86,12 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
         ];
     }
 
+    /**
+     * @param class-string $class
+     * @param string $invalidPropertyName
+     *
+     * @return mixed
+     */
     protected function findPossibleProperty(string $class, string $invalidPropertyName): mixed
     {
         return $this->getAvailableProperties($class)
@@ -101,7 +107,12 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
             })->first();
     }
 
-    protected function getAvailableProperties($class): Collection
+    /**
+     * @param class-string $class
+     *
+     * @return Collection<string, string>
+     */
+    protected function getAvailableProperties(string $class): Collection
     {
         $class = new ReflectionClass($class);
 

@@ -11,8 +11,10 @@ use Throwable;
 
 class SolutionProviderRepository implements SolutionProviderRepositoryContract
 {
+    /** @var Collection<int, class-string<HasSolutionsForThrowable>>  */
     protected Collection $solutionProviders;
 
+    /** @param array<int, class-string<HasSolutionsForThrowable>> $solutionProviders */
     public function __construct(array $solutionProviders = [])
     {
         $this->solutionProviders = Collection::make($solutionProviders);
@@ -46,7 +48,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
         $providedSolutions = $this->solutionProviders
             ->filter(function (string $solutionClass) {
-                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass))) {
+                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass) ?: [])) {
                     return false;
                 }
 
@@ -85,7 +87,11 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             return null;
         }
 
-        if (! in_array(Solution::class, class_implements($solutionClass))) {
+        if (! in_array(Solution::class, class_implements($solutionClass) ?: [])) {
+            return null;
+        }
+
+        if (! function_exists('app')) {
             return null;
         }
 
