@@ -85,7 +85,7 @@ class ErrorPageViewModel implements Arrayable
         return $this->ignitionConfig->toArray();
     }
 
-    /** @return array<int, array<int, Solution>> */
+    /** @return array<int, mixed> */
     public function solutions(): array
     {
         return array_map(function (Solution $solution) {

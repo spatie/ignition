@@ -8,8 +8,10 @@ use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\FlareMiddleware\AddSolutions;
+use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
+use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
 use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
@@ -18,6 +20,7 @@ use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
 use Throwable;
+use Spatie\Ignition\Contracts\ProvidesSolution;
 
 class Ignition
 {
@@ -29,6 +32,7 @@ class Ignition
 
     protected string $applicationPath = '';
 
+    /** @var array<int, FlareMiddleware> */
     protected array $middleware = [];
 
     protected IgnitionConfig $ignitionConfig;
@@ -43,7 +47,7 @@ class Ignition
 
     public static function make(): self
     {
-        return new static();
+        return new self();
     }
 
     public function __construct()
@@ -113,6 +117,13 @@ class Ignition
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @param string $messageLevel
+     * @param array<int, mixed> $metaData
+     *
+     * @return $this
+     */
     public function glow(
         string $name,
         string $messageLevel = MessageLevels::INFO,
@@ -123,6 +134,11 @@ class Ignition
         return $this;
     }
 
+    /**
+     * @param array<int, ProvidesSolution> $solutionProviders
+     *
+     * @return $this
+     */
     public function addSolutionProviders(array $solutionProviders): self
     {
         $this->solutionProviderRepository->registerSolutionProviders($solutionProviders);
@@ -158,7 +174,12 @@ class Ignition
         return $this;
     }
 
-    public function registerMiddleware($middleware): self
+    /**
+     * @param FlareMiddleware|array<int, FlareMiddleware> $middleware
+     *
+     * @return $this
+     */
+    public function registerMiddleware(array|FlareMiddleware $middleware): self
     {
         if (! is_array($middleware)) {
             $middleware = [$middleware];
@@ -189,14 +210,32 @@ class Ignition
     {
         error_reporting(-1);
 
+        /** @phpstan-ignore-next-line  */
         set_error_handler([$this, 'renderError']);
 
+        /** @phpstan-ignore-next-line  */
         set_exception_handler([$this, 'handleException']);
 
         return $this;
     }
 
-    public function renderError($level, $message, $file = '', $line = 0, $context = []): void
+    /**
+     * @param int $level
+     * @param string $message
+     * @param string $file
+     * @param int $line
+     * @param array<int, mixed> $context
+     *
+     * @return void
+     * @throws \ErrorException
+     */
+    public function renderError(
+        int $level,
+        string $message,
+        string $file = '',
+        int $line = 0,
+        array $context = []
+    ): void
     {
         throw new ErrorException($message, 0, $level, $file, $line);
     }
@@ -218,6 +257,7 @@ class Ignition
         return $report;
     }
 
+    /** @return array<class-string<HasSolutionsForThrowable>> */
     protected function getDefaultSolutionProviders(): array
     {
         return [
@@ -246,7 +286,7 @@ class Ignition
         return $this;
     }
 
-    public function renderException(Throwable $throwable, Report $report)
+    public function renderException(Throwable $throwable, Report $report): void
     {
         $viewModel = new ErrorPageViewModel(
             $throwable,
