@@ -11,7 +11,7 @@ use Throwable;
 
 class SolutionProviderRepository implements SolutionProviderRepositoryContract
 {
-    /** @var Collection<int, class-string<HasSolutionsForThrowable>>  */
+    /** @var Collection<int, class-string<HasSolutionsForThrowable>> */
     protected Collection $solutionProviders;
 
     /** @param array<int, class-string<HasSolutionsForThrowable>> $solutionProviders */
