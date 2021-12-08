@@ -4,6 +4,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/ignition.svg?style=flat-square)](https://packagist.org/packages/spatie/ignition)
 ![Tests](https://github.com/spatie/ignition/workflows/Run%20tests/badge.svg)
+[![PHPStan](https://github.com/spatie/ignition/actions/workflows/phpstan.yml/badge.svg)](https://github.com/spatie/ignition/actions/workflows/phpstan.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ignition.svg?style=flat-square)](https://packagist.org/packages/spatie/ignition)
 
 [Ignition](https://flareapp.io/docs/ignition-for-laravel/introduction) is a beautiful and customizable error page for
