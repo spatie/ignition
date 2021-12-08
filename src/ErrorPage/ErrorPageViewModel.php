@@ -15,7 +15,7 @@ class ErrorPageViewModel implements Arrayable
 {
     protected ?Throwable $throwable;
 
-    /** @var array<int, \Spatie\Ignition\Contracts\Solution>  */
+    /** @var array<int, \Spatie\Ignition\Contracts\Solution> */
     protected array $solutions = [];
 
     protected IgnitionConfig $ignitionConfig;
@@ -24,7 +24,7 @@ class ErrorPageViewModel implements Arrayable
 
     protected string $defaultTab = 'trace';
 
-    /** @var array<int, string>  */
+    /** @var array<int, string> */
     protected array $defaultTabProps = [];
 
     protected string $solutionTransformerClass;
