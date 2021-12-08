@@ -21,16 +21,15 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "spatie/flare-client-php": "dev-main",
-        "spatie/ignition-contracts": "^0.0.1",
         "monolog/monolog": "^2.0",
-        "symfony/console": "^5.0",
-        "symfony/var-dumper": "^5.0"
+        "symfony/console": "^5.0|^6.0",
+        "symfony/var-dumper": "^5.0|^6.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.4",
         "phpunit/phpunit": "9.5.4",
-        "spatie/ray": "^1.22",
-        "symfony/process": "^5.2"
+        "spatie/ray": "^1.32",
+        "symfony/process": "^5.2|^6.0"
     },
     "config": {
         "sort-packages": true

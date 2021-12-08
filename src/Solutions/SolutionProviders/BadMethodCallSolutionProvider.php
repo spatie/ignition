@@ -6,8 +6,8 @@ use BadMethodCallException;
 use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionMethod;
-use Spatie\IgnitionContracts\BaseSolution;
-use Spatie\IgnitionContracts\HasSolutionsForThrowable;
+use Spatie\Ignition\Contracts\BaseSolution;
+use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
 use Throwable;
 
 class BadMethodCallSolutionProvider implements HasSolutionsForThrowable

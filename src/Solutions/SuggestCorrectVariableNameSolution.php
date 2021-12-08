@@ -2,7 +2,7 @@
 
 namespace Spatie\Ignition\Solutions;
 
-use Spatie\IgnitionContracts\Solution;
+use Spatie\Ignition\Contracts\Solution;
 
 class SuggestCorrectVariableNameSolution implements Solution
 {

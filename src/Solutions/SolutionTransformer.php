@@ -3,7 +3,7 @@
 namespace Spatie\Ignition\Solutions;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Spatie\IgnitionContracts\Solution;
+use Spatie\Ignition\Contracts\Solution;
 
 class SolutionTransformer implements Arrayable
 {

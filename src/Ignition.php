@@ -16,7 +16,7 @@ use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
-use Spatie\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
+use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Throwable;
 
 class Ignition
