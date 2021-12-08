@@ -46,22 +46,34 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
             return '';
         }
 
-        extract($this->getClassAndPropertyFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
+        extract(
+            /** @phpstan-ignore-next-line */
+            $this->getClassAndPropertyFromExceptionMessage($throwable->getMessage()),
+            EXTR_OVERWRITE,
+        );
 
-        $possibleProperty = $this->findPossibleProperty($class, $property);
+        $possibleProperty = $this->findPossibleProperty($class ?? '', $property ?? '');
+
+        $class = $class ?? '';
 
         return "Did you mean {$class}::\${$possibleProperty->name} ?";
     }
 
-    protected function similarPropertyExists(Throwable $throwable)
+    protected function similarPropertyExists(Throwable $throwable): bool
     {
+        /** @phpstan-ignore-next-line  */
         extract($this->getClassAndPropertyFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
 
-        $possibleProperty = $this->findPossibleProperty($class, $property);
+        $possibleProperty = $this->findPossibleProperty($class ?? '', $property ?? '');
 
         return $possibleProperty !== null;
     }
 
+    /**
+     * @param string $message
+     *
+     * @return null|array<string, string>
+     */
     protected function getClassAndPropertyFromExceptionMessage(string $message): ?array
     {
         if (! preg_match(self::REGEX, $message, $matches)) {
@@ -74,7 +86,7 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
         ];
     }
 
-    protected function findPossibleProperty(string $class, string $invalidPropertyName)
+    protected function findPossibleProperty(string $class, string $invalidPropertyName): mixed
     {
         return $this->getAvailableProperties($class)
             ->sortByDesc(function (ReflectionProperty $property) use ($invalidPropertyName) {
