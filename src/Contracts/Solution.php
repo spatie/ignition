@@ -8,5 +8,6 @@ interface Solution
 
     public function getSolutionDescription(): string;
 
+    /** @return array<int, string> */
     public function getDocumentationLinks(): array;
 }

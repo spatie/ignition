@@ -8,11 +8,12 @@ class BaseSolution implements Solution
 
     protected string $description = '';
 
+    /** @var array<int, string>  */
     protected array $links = [];
 
-    public static function create(string $title = '')
+    public static function create(string $title = ''): self
     {
-        return new static($title);
+        return new self($title);
     }
 
     public function __construct(string $title = '')
@@ -44,11 +45,13 @@ class BaseSolution implements Solution
         return $this;
     }
 
+    /** @return array<int, string> */
     public function getDocumentationLinks(): array
     {
         return $this->links;
     }
 
+    /** @param array<int, string> $links */
     public function setDocumentationLinks(array $links): self
     {
         $this->links = $links;

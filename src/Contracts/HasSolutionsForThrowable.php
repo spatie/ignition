@@ -8,6 +8,6 @@ interface HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool;
 
-    /** \Spatie\Ignition\Contracts\Solution[] */
+    /** @return array<int, \Spatie\Ignition\Contracts\Solution> */
     public function getSolutions(Throwable $throwable): array;
 }

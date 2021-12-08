@@ -8,7 +8,9 @@ interface RunnableSolution extends Solution
 
     public function getRunButtonText(): string;
 
-    public function run(array $parameters = []);
+    /** @param array<int, mixed> $parameters */
+    public function run(array $parameters = []): void;
 
+    /** @return array<int, mixed> */
     public function getRunParameters(): array;
 }
