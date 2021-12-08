@@ -8,7 +8,7 @@ class BaseSolution implements Solution
 
     protected string $description = '';
 
-    /** @var array<int, string>  */
+    /** @var array<int, string> */
     protected array $links = [];
 
     public static function create(string $title = ''): self
