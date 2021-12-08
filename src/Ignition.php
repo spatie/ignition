@@ -12,6 +12,7 @@ use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
+use Spatie\Ignition\Contracts\ProvidesSolution;
 use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
@@ -20,7 +21,6 @@ use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
 use Throwable;
-use Spatie\Ignition\Contracts\ProvidesSolution;
 
 class Ignition
 {
@@ -235,8 +235,7 @@ class Ignition
         string $file = '',
         int $line = 0,
         array $context = []
-    ): void
-    {
+    ): void {
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 

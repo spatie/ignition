@@ -44,7 +44,7 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
         /** @phpstan-ignore-next-line  */
         extract($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
 
-        $possibleMethod = $this->findPossibleMethod($class ?? '' , $method ?? '');
+        $possibleMethod = $this->findPossibleMethod($class ?? '', $method ?? '');
 
         $class ??= 'UnknownClass';
 
