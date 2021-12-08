@@ -60,13 +60,15 @@ class ErrorPageViewModel implements Arrayable
             return '';
         }
 
+        $optionalTrace = $this->report->getThrowable() ? $this->report->getThrowable()->getTraceAsString() : null;
+
         $throwableString = sprintf(
             "%s: %s in file %s on line %d\n\n%s\n",
             get_class($this->throwable),
             $this->throwable->getMessage(),
             $this->throwable->getFile(),
             $this->throwable->getLine(),
-            $this->report->getThrowable()?->getTraceAsString()
+            $optionalTrace,
         );
 
         return htmlspecialchars($throwableString);
@@ -105,7 +107,7 @@ class ErrorPageViewModel implements Arrayable
         return $this->report->toArray();
     }
 
-    public function jsonEncode(mixed $data): string
+    public function jsonEncode($data): string
     {
         $jsonOptions = JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 
