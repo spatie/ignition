@@ -8,7 +8,7 @@ class BaseSolution implements Solution
 
     protected string $description = '';
 
-    /** @var array<int, string> */
+    /** @var array<string, string> */
     protected array $links = [];
 
     public static function create(string $title = ''): self
@@ -45,13 +45,13 @@ class BaseSolution implements Solution
         return $this;
     }
 
-    /** @return array<int, string> */
+    /** @return array<string, string> */
     public function getDocumentationLinks(): array
     {
         return $this->links;
     }
 
-    /** @param array<int, string> $links */
+    /** @param array<string, string> $links */
     public function setDocumentationLinks(array $links): self
     {
         $this->links = $links;
