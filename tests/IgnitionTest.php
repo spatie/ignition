@@ -8,6 +8,7 @@ use Spatie\Ignition\Tests\TestClasses\ContextProviderDetector\DummyContextProvid
 use Spatie\Ignition\Tests\TestClasses\DummyFlareMiddleware;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysFalseSolutionProvider;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
+use Throwable;
 
 class IgnitionTest extends TestCase
 {
@@ -44,6 +45,18 @@ class IgnitionTest extends TestCase
             ->handleException(new Exception('Hey'));
 
         $this->assertEquals('My custom solution', $report->toArray()['solutions'][0]['title']);
+    }
+
+    /** @test */
+    public function an_documentation_link_resolver_can_be_added()
+    {
+        $report = $this->ignition
+            ->resolveDocumentationLink(
+                fn(Throwable $throwable) => 'https://spatie.be/docs'
+            )
+            ->handleException(new Exception('hey'));
+
+        $this->assertEquals('https://spatie.be/docs', $report->toArray()['documentation_link']);
     }
 
     /** @test */
