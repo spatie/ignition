@@ -3,6 +3,7 @@
 namespace Spatie\Ignition\Config;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Throwable;
 
 class IgnitionConfig implements Arrayable
 {
@@ -11,9 +12,7 @@ class IgnitionConfig implements Arrayable
 
     public static function loadFromConfigFile(): self
     {
-        $defaultConfigValues = (new DefaultConfigFinder)->getSettingsFromConfig();
-
-        return new self($defaultConfigValues);
+        return (new self())->loadConfigFile();
     }
 
     /** @param array<string, string> $options */
@@ -26,27 +25,61 @@ class IgnitionConfig implements Arrayable
         $this->options = array_merge($defaultOptions, $options);
     }
 
-    /** @param array<string, string> $newDefaults */
-    public function mergeAsDefault(array $newDefaults): self
-    {
-        $this->options = array_merge($newDefaults, $this->options);
-
-        return $this;
-    }
-
-    /** @param array<string, string> $options */
-    public function merge(array $options): self
-    {
-        $this->options = array_merge($this->options, $options);
-
-        return $this;
-    }
-
     public function setOption(string $name, string $value): self
     {
         $this->options[$name] = $value;
 
         return $this;
+    }
+
+    public function loadConfigFile(): self
+    {
+        $this->options = $this->getConfigOptions();
+
+        return $this;
+    }
+
+    /** @return array<string, mixed> */
+    public function getConfigOptions(): array
+    {
+        $configFilePath = (new DefaultConfigFinder())->getConfigFilePath();
+
+        $options = [];
+
+        if (file_exists($configFilePath)) {
+            $content = (string)file_get_contents($configFilePath);
+
+            $options = json_decode($content, true) ?? [];
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param array<string, mixed> $newOptions
+     *
+     * @return bool
+     */
+    public function saveValues(array $newOptions): bool
+    {
+        $options =  array_merge(
+            $this->getConfigOptions(),
+            $newOptions
+        );
+
+        $configFilePath = (new DefaultConfigFinder())->getConfigFilePath();
+
+        if (! $configFilePath) {
+            return false;
+        }
+
+        try {
+            file_put_contents($configFilePath, json_encode($options));
+        } catch(Throwable) {
+            return false;
+        }
+
+        return true;
     }
 
     public function editor(): ?string
