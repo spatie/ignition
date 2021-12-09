@@ -62,7 +62,7 @@ class IgnitionConfig implements Arrayable
      */
     public function saveValues(array $newOptions): bool
     {
-        $options =  array_merge(
+        $options = array_merge(
             $this->getConfigOptions(),
             $newOptions
         );
@@ -75,7 +75,7 @@ class IgnitionConfig implements Arrayable
 
         try {
             file_put_contents($configFilePath, json_encode($options));
-        } catch(Throwable) {
+        } catch (Throwable) {
             return false;
         }
 
