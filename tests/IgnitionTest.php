@@ -52,7 +52,7 @@ class IgnitionTest extends TestCase
     {
         $report = $this->ignition
             ->resolveDocumentationLink(
-                fn(Throwable $throwable) => 'https://spatie.be/docs'
+                fn (Throwable $throwable) => 'https://spatie.be/docs'
             )
             ->handleException(new Exception('hey'));
 
