@@ -47,7 +47,7 @@ class Ignition
 
     protected ?string $solutionTransformerClass = null;
 
-    /** @var ArrayObject<int, callable(Throwable): ?string>  */
+    /** @var ArrayObject<int, callable(Throwable): ?string> */
     protected ArrayObject $documentationLinkResolvers;
 
     public static function make(): self
