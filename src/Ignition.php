@@ -70,7 +70,7 @@ class Ignition
         return $this;
     }
 
-    public function resolveDocumentationLink(Callable $callable): self
+    public function resolveDocumentationLink(callable $callable): self
     {
         // callable returns url, or class<ProvidesDocumentLink>
 
