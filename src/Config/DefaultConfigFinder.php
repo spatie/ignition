@@ -22,6 +22,7 @@ class DefaultConfigFinder
         return $options ?? [];
     }
 
+    /** remove, look in home for unix, windows custom */
     protected function searchConfigFilesOnDisk(string $configDirectory = null): string
     {
         $configNames = [

@@ -11,6 +11,6 @@ interface RunnableSolution extends Solution
     /** @param array<int, mixed> $parameters */
     public function run(array $parameters = []): void;
 
-    /** @return array<int, mixed> */
+    /** @return array<string, mixed> */
     public function getRunParameters(): array;
 }
