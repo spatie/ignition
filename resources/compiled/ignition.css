@@ -1234,10 +1234,6 @@ pre.sf-dump .sf-dump-ellipsis{
 	margin-top: -0.25rem;
 }
 
-.mt-4{
-	margin-top: 1rem;
-}
-
 .-mt-6{
 	margin-top: -1.5rem;
 }
@@ -1559,6 +1555,10 @@ pre.sf-dump .sf-dump-ellipsis{
 	overflow-y: hidden;
 }
 
+.overflow-x-scroll{
+	overflow-x: scroll;
+}
+
 .truncate{
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1861,10 +1861,6 @@ pre.sf-dump .sf-dump-ellipsis{
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
 }
 
-.text-white\/50{
-	color: rgba(255, 255, 255, 0.5);
-}
-
 .text-gray-100{
 	--tw-text-opacity: 1;
 	color: rgba(243, 244, 246, var(--tw-text-opacity));
@@ -1899,10 +1895,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .opacity-50{
 	opacity: 0.5;
-}
-
-.opacity-100{
-	opacity: 1;
 }
 
 .shadow{
@@ -2041,6 +2033,11 @@ pre.sf-dump .sf-dump-ellipsis{
 .group:hover .group-hover\:text-yellow-400{
 	--tw-text-opacity: 1;
 	color: rgba(251, 191, 36, var(--tw-text-opacity));
+}
+
+.group:hover .group-hover\:text-indigo-500{
+	--tw-text-opacity: 1;
+	color: rgba(99, 102, 241, var(--tw-text-opacity));
 }
 
 .group:hover .group-hover\:underline{

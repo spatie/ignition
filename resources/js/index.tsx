@@ -28,17 +28,11 @@ window.ignite = (data) => {
                     >
                         <ErrorCard />
 
-                        <Section name="stack">
-                            <StackTrace />
-                        </Section>
+                        <Section name="stack" children={<StackTrace />} />
 
-                        <Section name="context">
-                            <Context />
-                        </Section>
+                        <Section name="context" children={<Context />} />
 
-                        <Section name="debug">
-                            <Debug />
-                        </Section>
+                        <Section name="debug" children={<Debug />} />
                     </main>
                 </InViewContextProvider>
             </ErrorOccurrenceContext.Provider>
