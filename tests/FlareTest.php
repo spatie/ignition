@@ -5,8 +5,6 @@ use Spatie\FlareClient\Http\Client;
 use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Tests\Mocks\FakeFlare;
 
-uses(TestCase::class);
-
 beforeEach(function () {
     $this->ignition = Ignition::make();
 
@@ -48,16 +46,3 @@ it('will send an exception to flare when an api key is set on flare', function (
 
     expect($this->flare->sentReports)->toHaveCount(1);
 });
-
-// Helpers
-function it_will_not_send_an_exception_to_flare_if_production_mode_was_set_to_false()
-{
-    $exception = new Exception();
-
-    test()->ignition
-        ->runningInProductionEnvironment()
-        ->sendToFlare('fake-api-key')
-        ->handleException($exception);
-
-    expect(test()->flare->sentReports)->toHaveCount(0);
-}

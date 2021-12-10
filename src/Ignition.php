@@ -151,7 +151,7 @@ class Ignition
     }
 
     /**
-     * @param array<int, ProvidesSolution> $solutionProviders
+     * @param array<int, ProvidesSolution|class-string<ProvidesSolution>> $solutionProviders
      *
      * @return $this
      */

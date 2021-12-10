@@ -2,8 +2,6 @@
 
 use Symfony\Component\Process\Process;
 
-uses(TestCase::class);
-
 it('can render the error page for exceptions', function () {
     $output = getOutputOfApp('basic-exception.php');
 

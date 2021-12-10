@@ -6,8 +6,6 @@ use Spatie\Ignition\Tests\TestClasses\DummyFlareMiddleware;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysFalseSolutionProvider;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
 
-uses(TestCase::class);
-
 beforeEach(function () {
     $this->ignition = Ignition::make()
         ->shouldDisplayException(false);
