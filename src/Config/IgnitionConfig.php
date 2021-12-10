@@ -88,7 +88,6 @@ class IgnitionConfig implements Arrayable
     public function hideSolutions(): bool
     {
         return $this->options['hide_solutions'] ?? false;
-
     }
 
     public function editor(): ?string
