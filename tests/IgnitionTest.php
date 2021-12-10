@@ -48,7 +48,7 @@ class IgnitionTest extends TestCase
     }
 
     /** @test */
-    public function an_documentation_link_resolver_can_be_added()
+    public function a_documentation_link_resolver_can_be_added()
     {
         $report = $this->ignition
             ->resolveDocumentationLink(
@@ -56,7 +56,46 @@ class IgnitionTest extends TestCase
             )
             ->handleException(new Exception('hey'));
 
-        $this->assertEquals('https://spatie.be/docs', $report->toArray()['documentation_link']);
+        $this->assertEquals(['https://spatie.be/docs'], $report->toArray()['documentation_links']);
+    }
+
+    /** @test */
+    public function multiple_documentation_resolvers_can_return_both_arrays_and_strings()
+    {
+        $report = $this->ignition
+            ->resolveDocumentationLink(
+                fn (Throwable $throwable) => 'https://one.com'
+            )
+            ->resolveDocumentationLink(
+                fn (Throwable $throwable) => ['https://two.com', 'https://three.com']
+            )
+            ->handleException(new Exception('hey'));
+
+        $this->assertEquals([
+            'https://one.com',
+            'https://two.com',
+            'https://three.com',
+
+        ], $report->toArray()['documentation_links']);
+    }
+
+    /** @test */
+    public function documentation_link_will_only_contain_unique_values()
+    {
+        $report = $this->ignition
+            ->resolveDocumentationLink(
+                fn (Throwable $throwable) => 'https://one.com'
+            )
+            ->resolveDocumentationLink(
+                fn (Throwable $throwable) => ['https://one.com', 'https://two.com']
+            )
+            ->handleException(new Exception('hey'));
+
+        $this->assertEquals([
+            'https://one.com',
+            'https://two.com',
+
+        ], $report->toArray()['documentation_links']);
     }
 
     /** @test */

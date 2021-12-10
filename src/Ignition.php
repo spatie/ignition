@@ -8,7 +8,7 @@ use Spatie\FlareClient\Context\BaseContextProviderDetector;
 use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
-use Spatie\FlareClient\FlareMiddleware\AddDocumentationLink;
+use Spatie\FlareClient\FlareMiddleware\AddDocumentationLinks;
 use Spatie\FlareClient\FlareMiddleware\AddSolutions;
 use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
 use Spatie\FlareClient\Report;
@@ -47,7 +47,7 @@ class Ignition
 
     protected ?string $solutionTransformerClass = null;
 
-    /** @var ArrayObject<int, callable(Throwable): ?string> */
+    /** @var ArrayObject<int, callable(Throwable): mixed> */
     protected ArrayObject $documentationLinkResolvers;
 
     public static function make(): self
@@ -68,7 +68,7 @@ class Ignition
         $this->contextProviderDetector = new BaseContextProviderDetector();
 
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
-        $this->middleware[] = new AddDocumentationLink($this->documentationLinkResolvers);
+        $this->middleware[] = new AddDocumentationLinks($this->documentationLinkResolvers);
     }
 
     public function setSolutionTransformerClass(string $solutionTransformerClass): self
@@ -78,7 +78,7 @@ class Ignition
         return $this;
     }
 
-    /** @param callable(Throwable): ?string $callable */
+    /** @param callable(Throwable): mixed $callable */
     public function resolveDocumentationLink(callable $callable): self
     {
         $this->documentationLinkResolvers[] = $callable;
