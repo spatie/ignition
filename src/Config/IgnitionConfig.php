@@ -18,6 +18,8 @@ class IgnitionConfig implements Arrayable
     /** @param array<string, string> $options */
     public function __construct(array $options = [])
     {
+        // theme {dark, light, auto}, editor, hide solutions (bool),
+        
         $defaultOptions = [
             'theme' => 'light',
         ];
@@ -28,6 +30,14 @@ class IgnitionConfig implements Arrayable
     public function setOption(string $name, string $value): self
     {
         $this->options[$name] = $value;
+
+        return $this;
+    }
+
+    /** @param array<string, string> $options */
+    public function merge(array $options): self
+    {
+        $this->options = array_merge($this->options, $options);
 
         return $this;
     }

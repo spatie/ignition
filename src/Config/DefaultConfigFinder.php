@@ -10,7 +10,7 @@ class DefaultConfigFinder
             return '';
         }
 
-        return "{$homeDirectory}/.ignition";
+        return "{$homeDirectory}/.ignition.json";
     }
 
     protected function findHomeDirectory(): ?string
