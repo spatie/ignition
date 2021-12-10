@@ -1,60 +1,46 @@
 <?php
 
-namespace Spatie\Ignition\Tests;
-
 use Symfony\Component\Process\Process;
 
-class IntegrationTest extends TestCase
+it('can render the error page for exceptions', function () {
+    $output = getOutputOfApp('basic-exception.php');
+
+    expect($output)->toContain('window.ignite');
+});
+
+it('can render the error page for syntax errors', function () {
+    $output = getOutputOfApp('syntax-error.php');
+
+    expect($output)->toContain('window.ignite');
+});
+
+it('will not render if everything ran ok', function () {
+    $output = getOutputOfApp('all-ok.php');
+
+    expect($output)->toEqual('ok');
+});
+
+it('can show a solution', function () {
+    $output = getOutputOfApp('exception-with-solution.php');
+
+    expect($output)->toContain('Did you mean');
+});
+
+it('will not show ignition in a production environment', function () {
+    $output = getOutputOfApp('in-production-environment.php');
+
+    expect($output)->toEqual('');
+});
+
+// Helpers
+function getOutputOfApp(string $script): string
 {
-    /** @test */
-    public function it_can_render_the_error_page_for_exceptions()
-    {
-        $output = $this->getOutputOfApp('basic-exception.php');
+    $process = Process::fromShellCommandline(
+        "php {$script}",
+        test()->getTestDirectory('/stubs/apps')
+    );
 
-        $this->assertStringContainsString('window.ignite', $output);
-    }
+    $process->run();
 
-    /** @test */
-    public function it_can_render_the_error_page_for_syntax_errors()
-    {
-        $output = $this->getOutputOfApp('syntax-error.php');
-
-        $this->assertStringContainsString('window.ignite', $output);
-    }
-
-    /** @test */
-    public function it_will_not_render_if_everything_ran_ok()
-    {
-        $output = $this->getOutputOfApp('all-ok.php');
-
-        $this->assertEquals('ok', $output);
-    }
-
-    /** @test */
-    public function it_can_show_a_solution()
-    {
-        $output = $this->getOutputOfApp('exception-with-solution.php');
-
-        $this->assertStringContainsString('Did you mean', $output);
-    }
-
-    /** @test */
-    public function it_will_not_show_ignition_in_a_production_environment()
-    {
-        $output = $this->getOutputOfApp('in-production-environment.php');
-
-        $this->assertEquals('', $output);
-    }
-
-    protected function getOutputOfApp(string $script): string
-    {
-        $process = Process::fromShellCommandline(
-            "php {$script}",
-            $this->getTestDirectory('/stubs/apps')
-        );
-
-        $process->run();
-
-        return $process->getOutput();
-    }
+    return $process->getOutput();
 }

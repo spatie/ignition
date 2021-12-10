@@ -1,77 +1,48 @@
 <?php
 
-namespace Spatie\Ignition\Tests;
-
-use Exception;
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\Http\Client;
 use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Tests\Mocks\FakeFlare;
 
-class FlareTest extends TestCase
-{
-    protected Ignition $ignition;
+beforeEach(function () {
+    $this->ignition = Ignition::make();
 
-    protected FakeFlare $flare;
+    $this->ignition->shouldDisplayException(false);
 
-    public function setUp(): void
-    {
-        $this->ignition = Ignition::make();
+    $client = new Client();
 
-        $this->ignition->shouldDisplayException(false);
+    $this->flare = new FakeFlare($client);
 
-        $client = new Client();
+    $this->ignition->setFlare($this->flare);
+});
 
-        $this->flare = new FakeFlare($client);
+it('will not send an exception to flare when no api key is set', function () {
+    $exception = new Exception();
 
-        $this->ignition->setFlare($this->flare);
-    }
+    $this->ignition->handleException($exception);
 
-    /** @test */
-    public function it_will_not_send_an_exception_to_flare_when_no_api_key_is_set()
-    {
-        $exception = new Exception();
+    expect($this->flare->sentReports)->toHaveCount(0);
+});
 
-        $this->ignition->handleException($exception);
+it('will send an exception to flare when an api key is set on ignition', function () {
+    $exception = new Exception();
 
-        $this->assertCount(0, $this->flare->sentReports);
-    }
+    $this->ignition
+        ->sendToFlare('fake-api-key')
+        ->handleException($exception);
 
-    /** @test */
-    public function it_will_send_an_exception_to_flare_when_an_api_key_is_set_on_ignition()
-    {
-        $exception = new Exception();
+    expect($this->flare->sentReports)->toHaveCount(1);
+});
 
-        $this->ignition
-            ->sendToFlare('fake-api-key')
-            ->handleException($exception);
+it('will send an exception to flare when an api key is set on flare', function () {
+    $exception = new Exception();
 
-        $this->assertCount(1, $this->flare->sentReports);
-    }
+    $this->ignition
+        ->configureFlare(function (Flare $flare) {
+            $flare->setApiToken('fake-api-token');
+        })
+        ->handleException($exception);
 
-    public function it_will_not_send_an_exception_to_flare_if_production_mode_was_set_to_false()
-    {
-        $exception = new Exception();
-
-        $this->ignition
-            ->runningInProductionEnvironment()
-            ->sendToFlare('fake-api-key')
-            ->handleException($exception);
-
-        $this->assertCount(0, $this->flare->sentReports);
-    }
-
-    /** @test */
-    public function it_will_send_an_exception_to_flare_when_an_api_key_is_set_on_flare()
-    {
-        $exception = new Exception();
-
-        $this->ignition
-            ->configureFlare(function (Flare $flare) {
-                $flare->setApiToken('fake-api-token');
-            })
-            ->handleException($exception);
-
-        $this->assertCount(1, $this->flare->sentReports);
-    }
-}
+    expect($this->flare->sentReports)->toHaveCount(1);
+});
