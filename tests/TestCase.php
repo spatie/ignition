@@ -9,7 +9,7 @@ use Spatie\Ignition\Tests\TestClasses\FakeTime;
 
 class TestCase extends PHPUnitTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
