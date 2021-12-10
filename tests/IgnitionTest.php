@@ -20,7 +20,7 @@ test('flare middleware can be added to ignition', function () {
         ])
         ->handleException(new Exception('Original message'));
 
-    $this->assertEquals('Original message, now modified', $report->getMessage());
+    expect($report->getMessage())->toEqual('Original message, now modified');
 });
 
 test('custom solution providers can be added', function () {
@@ -31,7 +31,7 @@ test('custom solution providers can be added', function () {
         ])
         ->handleException(new Exception('Hey'));
 
-    $this->assertEquals('My custom solution', $report->toArray()['solutions'][0]['title']);
+    expect($report->toArray()['solutions'][0]['title'])->toEqual('My custom solution');
 });
 
 test('a documentation link resolver can be added', function () {
@@ -41,7 +41,7 @@ test('a documentation link resolver can be added', function () {
         )
         ->handleException(new Exception('hey'));
 
-    $this->assertEquals(['https://spatie.be/docs'], $report->toArray()['documentation_links']);
+    expect($report->toArray()['documentation_links'])->toEqual(['https://spatie.be/docs']);
 });
 
 test('multiple documentation resolvers can return both arrays and strings', function () {
@@ -94,5 +94,5 @@ test('a glow can be added', function () {
         ->glow('my glow')
         ->handleException(new Exception('Hey'));
 
-    $this->assertEquals('my glow', $report->toArray()['glows'][0]['name']);
+    expect($report->toArray()['glows'][0]['name'])->toEqual('my glow');
 });

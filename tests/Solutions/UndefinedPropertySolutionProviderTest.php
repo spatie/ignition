@@ -10,7 +10,7 @@ it('can solve an undefined property exception when there is a similar property',
 
     $canSolve = (new $providerClass)->canSolve(getUndefinedPropertyException());
 
-    $this->assertTrue($canSolve);
+    expect($canSolve)->toBeTrue();
 });
 
 it('cannot solve an undefined property exception when there is no similar property', function () {
@@ -18,7 +18,7 @@ it('cannot solve an undefined property exception when there is no similar proper
 
     $canSolve = (new $providerClass)->canSolve(getUndefinedPropertyException('balance'));
 
-    $this->assertFalse($canSolve);
+    expect($canSolve)->toBeFalse();
 });
 
 it('can recommend a property name when there is a similar property', function () {
@@ -26,7 +26,7 @@ it('can recommend a property name when there is a similar property', function ()
 
     $solution = (new $providerClass)->getSolutions(getUndefinedPropertyException())[0];
 
-    $this->assertEquals('Did you mean Spatie\Ignition\Tests\TestClasses\Models\Car::$color ?', $solution->getSolutionDescription());
+    expect($solution->getSolutionDescription())->toEqual('Did you mean Spatie\Ignition\Tests\TestClasses\Models\Car::$color ?');
 });
 
 it('cannot recommend a property name when there is no similar property', function () {
@@ -34,7 +34,7 @@ it('cannot recommend a property name when there is no similar property', functio
 
     $solution = (new $providerClass)->getSolutions(getUndefinedPropertyException('balance'))[0];
 
-    $this->assertEquals('', $solution->getSolutionDescription());
+    expect($solution->getSolutionDescription())->toEqual('');
 });
 
 // Helpers

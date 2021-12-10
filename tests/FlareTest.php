@@ -24,7 +24,7 @@ it('will not send an exception to flare when no api key is set', function () {
 
     $this->ignition->handleException($exception);
 
-    $this->assertCount(0, $this->flare->sentReports);
+    expect($this->flare->sentReports)->toHaveCount(0);
 });
 
 it('will send an exception to flare when an api key is set on ignition', function () {
@@ -34,7 +34,7 @@ it('will send an exception to flare when an api key is set on ignition', functio
         ->sendToFlare('fake-api-key')
         ->handleException($exception);
 
-    $this->assertCount(1, $this->flare->sentReports);
+    expect($this->flare->sentReports)->toHaveCount(1);
 });
 
 it('will send an exception to flare when an api key is set on flare', function () {
@@ -46,7 +46,7 @@ it('will send an exception to flare when an api key is set on flare', function (
         })
         ->handleException($exception);
 
-    $this->assertCount(1, $this->flare->sentReports);
+    expect($this->flare->sentReports)->toHaveCount(1);
 });
 
 // Helpers
@@ -59,5 +59,5 @@ function it_will_not_send_an_exception_to_flare_if_production_mode_was_set_to_fa
         ->sendToFlare('fake-api-key')
         ->handleException($exception);
 
-    test()->assertCount(0, test()->flare->sentReports);
+    expect(test()->flare->sentReports)->toHaveCount(0);
 }

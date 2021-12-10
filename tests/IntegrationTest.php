@@ -7,31 +7,31 @@ uses(TestCase::class);
 it('can render the error page for exceptions', function () {
     $output = getOutputOfApp('basic-exception.php');
 
-    $this->assertStringContainsString('window.ignite', $output);
+    expect($output)->toContain('window.ignite');
 });
 
 it('can render the error page for syntax errors', function () {
     $output = getOutputOfApp('syntax-error.php');
 
-    $this->assertStringContainsString('window.ignite', $output);
+    expect($output)->toContain('window.ignite');
 });
 
 it('will not render if everything ran ok', function () {
     $output = getOutputOfApp('all-ok.php');
 
-    $this->assertEquals('ok', $output);
+    expect($output)->toEqual('ok');
 });
 
 it('can show a solution', function () {
     $output = getOutputOfApp('exception-with-solution.php');
 
-    $this->assertStringContainsString('Did you mean', $output);
+    expect($output)->toContain('Did you mean');
 });
 
 it('will not show ignition in a production environment', function () {
     $output = getOutputOfApp('in-production-environment.php');
 
-    $this->assertEquals('', $output);
+    expect($output)->toEqual('');
 });
 
 // Helpers
