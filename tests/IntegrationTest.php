@@ -37,7 +37,7 @@ function getOutputOfApp(string $script): string
 {
     $process = Process::fromShellCommandline(
         "php {$script}",
-        test()->getTestDirectory('/stubs/apps')
+        getTestDirectory('/stubs/apps')
     );
 
     $process->run();
