@@ -1,29 +1,24 @@
 <?php
 
-namespace Spatie\Ignition\Tests;
-
 use Exception;
 use Spatie\FlareClient\Flare;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 
-class ErrorPageViewModelTest extends TestCase
-{
-    /** @test */
-    public function it_can_encode_invalid_user_data()
-    {
-        $flareClient = Flare::make();
+uses(TestCase::class);
 
-        $exception = new Exception('Test Exception');
+it('can encode invalid user data', function () {
+    $flareClient = Flare::make();
 
-        $report = $flareClient->createReport($exception);
+    $exception = new Exception('Test Exception');
 
-        $report->group('bad-utf8', [
-            'name' => 'JohnDoe'.utf8_decode('ø'),
-        ]);
+    $report = $flareClient->createReport($exception);
 
-        $model = new ErrorPageViewModel($exception, new IgnitionConfig([]), $report, []);
+    $report->group('bad-utf8', [
+        'name' => 'JohnDoe'.utf8_decode('ø'),
+    ]);
 
-        $this->assertNotEmpty($model->jsonEncode($report->toArray()));
-    }
-}
+    $model = new ErrorPageViewModel($exception, new IgnitionConfig([]), $report, []);
+
+    $this->assertNotEmpty($model->jsonEncode($report->toArray()));
+});
