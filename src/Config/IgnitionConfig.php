@@ -18,8 +18,6 @@ class IgnitionConfig implements Arrayable
     /** @param array<string, string> $options */
     public function __construct(array $options = [])
     {
-        // theme {dark, light, auto}, editor, hide solutions (bool),
-        
         $defaultOptions = [
             'theme' => 'light',
         ];
@@ -66,17 +64,12 @@ class IgnitionConfig implements Arrayable
     }
 
     /**
-     * @param array<string, mixed> $newOptions
+     * @param array<string, mixed> $options
      *
      * @return bool
      */
-    public function saveValues(array $newOptions): bool
+    public function saveValues(array $options): bool
     {
-        $options = array_merge(
-            $this->getConfigOptions(),
-            $newOptions
-        );
-
         $configFilePath = (new DefaultConfigFinder())->getConfigFilePath();
 
         if (! $configFilePath) {
@@ -90,6 +83,12 @@ class IgnitionConfig implements Arrayable
         }
 
         return true;
+    }
+    
+    public function hideSolutions(): bool
+    {
+        return $this->options['hide_solutions'] ?? false;
+
     }
 
     public function editor(): ?string
@@ -127,9 +126,10 @@ class IgnitionConfig implements Arrayable
     {
         return [
             'editor' => $this->editor(),
+            'theme' => $this->theme(),
+            'hideSolutions' => $this->hideSolutions(),
             'remoteSitesPath' => $this->remoteSitesPath(),
             'localSitesPath' => $this->localSitesPath(),
-            'theme' => $this->theme(),
             'enableShareButton' => $this->shareButtonEnabled(),
             'enableRunnableSolutions' => $this->runnableSolutionsEnabled(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
