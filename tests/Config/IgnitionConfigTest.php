@@ -1,8 +1,6 @@
 <?php
 
 use Spatie\Ignition\Config\IgnitionConfig;
-use Spatie\Ignition\Tests\TestCase;
-
 
 test('the config can be converted to an array', function () {
     $config = new IgnitionConfig([

@@ -1,8 +1,6 @@
 <?php
 
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
-use Spatie\Ignition\Tests\TestCase;
-
 
 it('can solve an undefined property exception when there is a similar property', function () {
     $providerClass = UndefinedPropertySolutionProvider::class;
