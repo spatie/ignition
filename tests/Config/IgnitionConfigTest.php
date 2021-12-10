@@ -3,7 +3,6 @@
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Tests\TestCase;
 
-uses(TestCase::class);
 
 test('the config can be converted to an array', function () {
     $config = new IgnitionConfig([

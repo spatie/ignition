@@ -1,5 +1,8 @@
 <?php
 
+uses(\Spatie\Ignition\Tests\TestCase::class)->in('Config', 'Solutions');
+uses(\TestCase::class)->in('');
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
