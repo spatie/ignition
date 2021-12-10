@@ -1,6 +1,5 @@
 <?php
 
-use Exception;
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\Http\Client;
 use Spatie\Ignition\Ignition;

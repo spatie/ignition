@@ -1,6 +1,5 @@
 <?php
 
-use Exception;
 use Spatie\FlareClient\Flare;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;

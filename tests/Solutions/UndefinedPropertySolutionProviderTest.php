@@ -1,6 +1,5 @@
 <?php
 
-use ErrorException;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
 use Spatie\Ignition\Tests\TestCase;
 

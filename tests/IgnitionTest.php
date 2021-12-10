@@ -1,12 +1,10 @@
 <?php
 
-use Exception;
 use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Tests\TestClasses\ContextProviderDetector\DummyContextProviderDetector;
 use Spatie\Ignition\Tests\TestClasses\DummyFlareMiddleware;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysFalseSolutionProvider;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
-use Throwable;
 
 uses(TestCase::class);
 
