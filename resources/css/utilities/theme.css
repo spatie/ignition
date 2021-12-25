@@ -13,9 +13,9 @@
     @apply dark:text-gray-200;
 }
 
-.\~text-green-700 {
-    @apply text-green-700;
-    @apply dark:text-green-200;
+.\~text-emerald-700 {
+    @apply text-emerald-700;
+    @apply dark:text-emerald-200;
 }
 
 .\~text-red-700 {

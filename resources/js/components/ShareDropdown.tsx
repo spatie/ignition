@@ -46,7 +46,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                     <li>
                         <label className="flex items-center">
                             <input type="checkbox" defaultChecked className="sr-only peer" />
-                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors"></span>
+                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-emerald-300 rounded-full shadow-inner transition-colors"></span>
                             <span className="absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"></span>
                             <span className="uppercase tracking-wider text-xs font-medium">Stack</span>
                         </label>
@@ -54,7 +54,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                     <li>
                         <label className="flex items-center">
                             <input type="checkbox" defaultChecked className="sr-only peer" />
-                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors"></span>
+                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-emerald-300 rounded-full shadow-inner transition-colors"></span>
                             <span className="absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"></span>
                             <span className="uppercase tracking-wider text-xs font-medium">Context</span>
                         </label>
@@ -62,7 +62,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                     <li>
                         <label className="flex items-center">
                             <input type="checkbox" defaultChecked className="sr-only peer" />
-                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-green-300 rounded-full shadow-inner transition-colors"></span>
+                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-emerald-300 rounded-full shadow-inner transition-colors"></span>
                             <span className="absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"></span>
                             <span className="uppercase tracking-wider text-xs font-medium">Debug</span>
                         </label>
@@ -73,7 +73,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                                           mt-6
                                           px-4
                                           h-8
-                                          bg-purple-500
+                                          bg-violet-500
                                           text-white
                                           whitespace-nowrap
                                           border-b border-gray-500/25

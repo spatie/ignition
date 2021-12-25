@@ -1,6 +1,5 @@
 module.exports = {
-    mode: 'jit',
-    purge: [
+    content: [
         './resources/js/**/*.{js,jsx,ts,tsx}',
         './resources/views/**/*.blade.php',
         './node_modules/@flareapp/ignition-ui/src/**/*.{js,jsx,ts,tsx}',
@@ -29,8 +28,5 @@ module.exports = {
                 'nav': 'transform, shadow'
             }
         },
-    },
-    variants: {
-        extend: {},
     },
 };

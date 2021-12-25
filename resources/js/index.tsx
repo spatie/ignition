@@ -1,42 +1,18 @@
-import { ErrorOccurrence, StackTrace, Context, Debug, ErrorOccurrenceContext, ErrorCard } from '@flareapp/ignition-ui';
+import { ErrorOccurrence } from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { igniteDataContext } from 'resources/js/igniteDataContext';
 import { IgniteData } from './types';
 import './symfony/symfony';
 import '../css/app.css';
-import NavBar from 'components/NavBar';
-import Section from 'components/Section';
-import InViewContextProvider from 'contexts/InViewContextProvider';
+import Ignition from "Ignition";
 
 window.ignite = (data) => {
     const errorOccurrence = transformIgnitionError(data);
 
     window.shareableReport = data.shareableReport;
 
-    console.log(data, errorOccurrence);
-
     ReactDOM.render(
-        <igniteDataContext.Provider value={data}>
-            <ErrorOccurrenceContext.Provider value={errorOccurrence}>
-                <InViewContextProvider>
-                    <NavBar />
-
-                    <main
-                        id="top"
-                        className="mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20"
-                    >
-                        <ErrorCard />
-
-                        <Section name="stack" children={<StackTrace />} />
-
-                        <Section name="context" children={<Context />} />
-
-                        <Section name="debug" children={<Debug />} />
-                    </main>
-                </InViewContextProvider>
-            </ErrorOccurrenceContext.Provider>
-        </igniteDataContext.Provider>,
+        <Ignition errorOccurrence={errorOccurrence} igniteData={data} />,
         document.querySelector('#app'),
     );
 };

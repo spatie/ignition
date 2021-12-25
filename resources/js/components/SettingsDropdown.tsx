@@ -7,7 +7,7 @@ type Props = {
 export default function SettingsDropdown({ isOpen }: Props) {
     return (
         <div
-            className={`absolute mt-2 top-10 right-1/2 transform translate-x-6 transition-all duration-150 origin-top-right
+            className={`absolute mt-2 top-10 right-1/2 translate-x-6 transition-all duration-150 origin-top-right
                 ${isOpen ? '' : 'opacity-0 pointer-events-none scale-90'}\`}
         `}
         >
@@ -73,15 +73,15 @@ export default function SettingsDropdown({ isOpen }: Props) {
                         <div className="px-4">
                             <div
                                 id="theme-moon"
-                                className="h-12 flex items-center transform origin-bottom transition-transform duration-1000"
+                                className="h-12 flex items-center origin-bottom transition-transform duration-1000"
                             >
-                                <i className="fas fa-moon text-sm ~text-gray-500 group-hover:text-yellow-400 transition-colors duration-500" />
+                                <i className="fas fa-moon text-sm ~text-gray-500 group-hover:text-amber-400 transition-colors duration-500" />
                             </div>
                             <div
                                 id="theme-sun"
-                                className="absolute top-0 left-4 h-12 flex items-center transform -rotate-180 origin-bottom transition-transform duration-1000"
+                                className="absolute top-0 left-4 h-12 flex items-center -rotate-180 origin-bottom transition-transform duration-1000"
                             >
-                                <i className="fas fa-sun text-sm ~text-gray-500 group-hover:text-yellow-400 transition-colors duration-500" />
+                                <i className="fas fa-sun text-sm ~text-gray-500 group-hover:text-amber-400 transition-colors duration-500" />
                             </div>
                         </div>
                         <div id="theme-name" className="-ml-1 first-letter:uppercase">
