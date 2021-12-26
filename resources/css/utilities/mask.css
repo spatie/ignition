@@ -1,0 +1,11 @@
+.mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) calc(100% - 5rem), rgba(0, 0, 0, 0) 100%);
+}
+
+.mask-fade-y {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 2.5rem), rgba(0, 0, 0, 0) 100%);
+}
+
+.mask-fade-frames {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 4rem), rgba(0, 0, 0, 0) 100%);
+}

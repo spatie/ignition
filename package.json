@@ -1,18 +1,14 @@
 {
-    "name": "@flareapp/ignition-ui",
+    "name": "@flareapp/ignition",
     "version": "1.0.1",
-    "main": "resources/compiled/error-ui.modern.js",
     "scripts": {
-        "bundle-ignition": "microbundle -i resources/js/ignition/index.tsx -o resources/compiled/ignition.js --jsx React.createElement -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
-        "ignition-dev": "NODE_ENV=development concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/ignition/index.tsx -o resources/compiled/ignition.js --jsx React.createElement -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress\" \"yarn typecheck\"",
-        "bundle": "microbundle -i resources/js/shared/ErrorUI.tsx -o resources/compiled/error-ui.js --jsx React.createElement -f modern --no-sourcemap --external react,react-dom --define process.env.NODE_ENV='production'",
-        "bundle-dev": "NODE_ENV=development concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/shared/ErrorUI.tsx -o resources/compiled/error-ui.js --jsx React.createElement -f modern --no-sourcemap --external react,react-dom --define process.env.NODE_ENV='development' --no-compress\" \"yarn typecheck\"",
+        "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
+        "dev": "NODE_ENV=development concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress\" \"yarn typecheck\"",
         "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
         "typecheck": "tsc -w --preserveWatchOutput"
     },
-    "files": ["resources/compiled/error-ui.modern.js", "resources/compiled/error-ui.css"],
-    "types": "./types/shared/ErrorUI.d.ts",
     "dependencies": {
+        "@flareapp/ignition-ui": "^2.0.0",
         "date-fns": "^2.21.3",
         "downshift": "^6.1.3",
         "git-url-parse": "^11.4.4",
@@ -21,6 +17,7 @@
         "md5": "^2.3.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-intersection-observer": "^8.32.5",
         "react-markdown": "^5.0.0",
         "sql-formatter": "^4.0.2"
     },
@@ -32,31 +29,23 @@
         "@types/lodash": "^4.14.169",
         "@types/md5": "^2.3.0",
         "@types/react-dom": "^17.0.5",
-        "autoprefixer": "^10.2.5",
+        "autoprefixer": "^10.4.0",
         "concurrently": "^6.2.0",
         "cross-env": "^7.0.3",
         "husky": "^1.3.1",
-        "jest": "^26.6.3",
         "lint-staged": "^11.0.0",
         "microbundle": "^0.13.0",
-        "postcss": "^8.2.15",
+        "postcss": "^8.4.4",
         "postcss-easy-import": "^3.0.0",
         "postcss-import": "^14.0.2",
         "postcss-preset-env": "^6.7.0",
-        "prettier": "^2.3.0",
-        "tailwindcss": "^2.1.2",
+        "prettier": "^2.5.0",
+        "tailwindcss": "^3.0.1",
         "typescript": "^4.2.4"
     },
-    "prepublishOnly": "bundle",
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged && yarn bundle-ignition && git add resources/compiled/ignition.js && git add resources/compiled/ignition.css"
+            "pre-commit": "lint-staged && yarn bundle && git add resources/compiled/ignition.js && git add resources/compiled/ignition.css"
         }
-    },
-    "jest": {
-        "testPathIgnorePatterns": [
-            "/node_modules/",
-            "/__helpers__/"
-        ]
     }
 }

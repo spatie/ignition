@@ -20,8 +20,8 @@ class SolutionTransformer implements Arrayable
         return [
             'class' => get_class($this->solution),
             'title' => $this->solution->getSolutionTitle(),
-            'description' => $this->solution->getSolutionDescription(),
             'links' => $this->solution->getDocumentationLinks(),
+            'description' => $this->solution->getSolutionDescription(),
             'is_runnable' => false,
         ];
     }

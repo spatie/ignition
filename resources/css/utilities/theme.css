@@ -1,0 +1,89 @@
+.\~text-gray-500 {
+    @apply text-gray-500;
+    @apply dark:text-gray-400;
+}
+
+.\~text-indigo-600 {
+    @apply text-indigo-600;
+    @apply dark:text-indigo-400;
+}
+
+.\~text-gray-800 {
+    @apply text-gray-800;
+    @apply dark:text-gray-200;
+}
+
+.\~text-emerald-700 {
+    @apply text-emerald-700;
+    @apply dark:text-emerald-200;
+}
+
+.\~text-red-700 {
+    @apply text-red-700;
+    @apply dark:text-red-200;
+}
+
+.\~bg-white {
+    @apply bg-white;
+    @apply dark:bg-gray-800;
+}
+
+.\~bg-body {
+    @apply bg-gray-200;
+    @apply dark:bg-gray-900;
+}
+
+.\~bg-gray-100 {
+    @apply bg-gray-100;
+    @apply dark:bg-gray-800;
+}
+
+.\~bg-gray-200\/50 {
+    @apply bg-gray-200/50;
+    @apply dark:bg-gray-700/10;
+}
+
+.\~bg-gray-500\/5 {
+    @apply bg-gray-500/5;
+    @apply dark:bg-gray-900/20;
+}
+
+.\~bg-gray-500\/10 {
+    @apply bg-gray-500/10;
+    @apply dark:bg-gray-900/40;
+}
+
+.\~bg-red-500\/10 {
+    @apply bg-red-500/10;
+    @apply dark:bg-red-500/20;
+}
+
+.hover\:\~bg-red-500\/10 {
+    @apply hover:bg-red-500/10;
+    @apply dark:hover:bg-red-500/20;
+}
+
+.\~bg-red-500\/20 {
+    @apply bg-red-500/20;
+    @apply dark:bg-red-500/40;
+}
+
+.\~bg-red-500\/30 {
+    @apply bg-red-500/30;
+    @apply dark:bg-red-500/60;
+}
+
+.\~bg-dropdown {
+    @apply bg-white !important;
+    @apply dark:bg-gray-700 !important;
+}
+
+.\~border-gray-200 {
+    @apply border-gray-200;
+    @apply dark:border-gray-500/20;
+}
+
+.\~border-b-dropdown {
+    @apply border-b-white !important;
+    @apply dark:border-b-gray-700 !important;
+}
