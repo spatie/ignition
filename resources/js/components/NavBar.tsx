@@ -26,7 +26,12 @@ export default function NavBar({showException}: Props) {
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
             <div className="relative">
-                <div id="navbar" className="z-10 transform translate-x-0 ~bg-body transition-color duration-100">
+                <div
+                    className={`
+                        ${hasScrolled ? '~bg-gray-100' : '~bg-body'}
+                        z-10 transform translate-x-0 transition-color duration-100
+                    `}
+                >
                     <div
                         className="h-10 flex justify-between px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none"
                     >
@@ -55,7 +60,6 @@ export default function NavBar({showException}: Props) {
                 </div>
 
                 <div
-                    id="navbar-exception"
                     className={`
                         ${hasScrolled ? 'shadow-lg' : ''}
                         ${showException ? 'translate-y-10 ~bg-gray-100' : 'translate-y-0 ~bg-body'}

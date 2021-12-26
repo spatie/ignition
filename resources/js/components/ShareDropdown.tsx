@@ -1,13 +1,85 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {FlareIcon} from '@flareapp/ignition-ui';
+import Checkbox from "components/ui/Checkbox";
+import { useState } from 'react';
+import {IgniteDataContext} from '../contexts/IgniteDataContext';
+import CopyableUrl from './ui/CopyableUrl';
 
 type Props = {
     isOpen: boolean;
 };
 
-export default function ShareDropdown({ isOpen }: Props) {
+type SectionName = 'stackTrace' | 'context' |'debug';
+
+export default function ShareDropdown({isOpen}: Props) {
+    const igniteData = useContext(IgniteDataContext);
+    const [ownerUrl, setOwnerUrl] = useState<string|null>(null);
+    const [publicUrl, setPublicUrl] = useState<string|null>(null);
+    const [error, setError] = useState<string|null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [selectedTabs, setSelectedTabs] = useState<Array<{ name: SectionName; label: string; selected: boolean }>>([
+        { name: 'stackTrace', label: 'Stack', selected: true },
+        { name: 'context', label: 'Context', selected: true },
+        { name: 'debug', label: 'Debug', selected: true },
+    ]);
+
+    function toggleSelected(
+        tabName: SectionName,
+    ) {
+        const tab = selectedTabs.find((tab) => tab.name === tabName);
+
+        if (tab) {
+            setSelectedTabs(
+                selectedTabs.map((tab) => (tab.name === tabName ? { ...tab, selected: !tab.selected } : tab)),
+            );
+        }
+    }
+
+    async function onShareError() {
+        if (! igniteData.shareEndpoint) {
+            return;
+        }
+
+        const selectedTabNames = selectedTabs
+            .filter((selectedTab) => selectedTab.selected)
+            .map((selectedTab) => selectedTab.name);
+
+        const data = {
+            selectedTabNames,
+            tabs: selectedTabNames,
+            lineSelection: window.location.hash,
+            report: igniteData.shareableReport,
+        };
+
+        setIsLoading(true);
+
+        try {
+            const response = await (
+                await fetch(igniteData.shareEndpoint, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    },
+                })
+            ).json();
+
+            if (response && response.owner_url && response.public_url) {
+                setOwnerUrl(response.owner_url)
+                setPublicUrl(response.public_url)
+            }
+        } catch (error) {
+            setError('Something went wrong while sharing, please try again.');
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     return (
         <div
-            className={`absolute mt-2 top-10 left-1/2 transform -translate-x-6 transition-all duration-150 origin
+            className={`block absolute mt-2 top-10 left-1/2 transform -translate-x-6 transition-all duration-150 origin
                  ${isOpen ? '' : 'opacity-0 pointer-events-none scale-90'}`}
         >
             <div className="flex px-4 justify-start">
@@ -18,75 +90,63 @@ export default function ShareDropdown({ isOpen }: Props) {
                     <h4 className="whitespace-nowrap font-semibold">Share with Flare</h4>
                     <div className="ml-6 text-xs ~text-gray-500">
                         <span className="whitespace-nowrap flex items-center justify-end">
-                            <a className="flex items-center underline" href="#">
+                            <a className="flex items-center underline" href="https://flareapp.io/ignition">
                                 Docs
-                                <svg viewBox="0 0 682 1024" className="w-4 h-5 ml-1.5">
-                                    <polygon
-                                        points="235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 "
-                                        style={{ fill: 'rgb(81, 219, 158)' }}
-                                    />
-                                    <polygon
-                                        points="235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 "
-                                        style={{ fill: 'rgb(121, 0, 245)' }}
-                                    />
-                                    <polygon
-                                        points="448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 "
-                                        style={{ fill: 'rgb(148, 242, 200)' }}
-                                    />
-                                    <polygon
-                                        points="234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 "
-                                        style={{ fill: 'rgb(164, 117, 244)' }}
-                                    />
-                                </svg>
+                                <FlareIcon />
                             </a>
                         </span>
                     </div>
                 </div>
-                <ul className="mt-6 grid justify-start gap-3">
-                    <li>
-                        <label className="flex items-center">
-                            <input type="checkbox" defaultChecked className="sr-only peer" />
-                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-emerald-300 rounded-full shadow-inner transition-colors"></span>
-                            <span className="absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"></span>
-                            <span className="uppercase tracking-wider text-xs font-medium">Stack</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label className="flex items-center">
-                            <input type="checkbox" defaultChecked className="sr-only peer" />
-                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-emerald-300 rounded-full shadow-inner transition-colors"></span>
-                            <span className="absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"></span>
-                            <span className="uppercase tracking-wider text-xs font-medium">Context</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label className="flex items-center">
-                            <input type="checkbox" defaultChecked className="sr-only peer" />
-                            <span className="mr-2 flex items-center w-6 h-4 ~bg-gray-100 peer-checked:bg-emerald-300 rounded-full shadow-inner transition-colors"></span>
-                            <span className="absolute left-0.5 top-0.5 w-3 h-3 ~bg-dropdown rounded-full shadow-md transform peer-checked:translate-x-2 transition-transform"></span>
-                            <span className="uppercase tracking-wider text-xs font-medium">Debug</span>
-                        </label>
-                    </li>
-                </ul>
-                <button
-                    className="
-                                          mt-6
-                                          px-4
-                                          h-8
-                                          bg-violet-500
-                                          text-white
-                                          whitespace-nowrap
-                                          border-b border-gray-500/25
-                                          text-xs uppercase tracking-wider
-                                          font-bold
-                                          rounded-sm
-                                          shadow-md
-                                          hover:shadow-lg
-                                          active:shadow-none
-                                      "
-                >
-                    Create Share
-                </button>
+                {!publicUrl && (
+                    <>
+                        <ul className="mt-6 grid justify-start gap-3">
+                            {selectedTabs.map(({ selected, name, label }) => (
+                                <li key={name}>
+                                    <Checkbox onChange={() => toggleSelected(name)} checked={selected} label={label} />
+                                </li>
+                            ))}
+                        </ul>
+                        <button
+                            disabled={isLoading}
+                            className={`
+                                ${isLoading ? 'opacity-50' : ''}
+                                mt-6
+                                px-4
+                                h-8
+                                bg-violet-500
+                                text-white
+                                whitespace-nowrap
+                                border-b border-gray-500/25
+                                text-xs uppercase tracking-wider
+                                font-bold
+                                rounded-sm
+                                shadow-md
+                                hover:shadow-lg
+                                active:shadow-none
+                            `}
+                            onClick={onShareError}
+                        >
+                            Create Share
+                        </button>
+                    </>
+                )}
+
+                {publicUrl && ownerUrl && (
+                    <div className="mt-3">
+                        <CopyableUrl
+                            url={publicUrl}
+                            helpText="Share your error with others:"
+                            openText="Open public share"
+                        />
+                        <CopyableUrl
+                            url={ownerUrl}
+                            helpText="Administer your shared error here:"
+                            openText="Open share admin"
+                        />
+                    </div>
+                )}
+
+                {error && <p className="mt-3 text-red-400">{error}</p>}
             </div>
         </div>
     );

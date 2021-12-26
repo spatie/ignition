@@ -2,7 +2,7 @@ import React from 'react';
 import InViewContextProvider from "contexts/InViewContextProvider";
 import NavBar from "components/NavBar";
 import Section from "components/Section";
-import {igniteDataContext} from "contexts/igniteDataContext";
+import {IgniteDataContext} from "contexts/IgniteDataContext";
 import {ErrorOccurrence, StackTrace, Context, Debug, ErrorOccurrenceContext, ErrorCard} from '@flareapp/ignition-ui';
 import {IgniteData} from "./types";
 import {useInView} from 'react-intersection-observer';
@@ -20,7 +20,7 @@ export default function Ignition({errorOccurrence, igniteData}: Props) {
     });
 
     return (
-        <igniteDataContext.Provider value={igniteData}>
+        <IgniteDataContext.Provider value={igniteData}>
             <ErrorOccurrenceContext.Provider value={errorOccurrence}>
                 <InViewContextProvider>
                     <NavBar showException={!errorCardInView}/>
@@ -41,6 +41,6 @@ export default function Ignition({errorOccurrence, igniteData}: Props) {
                     </main>
                 </InViewContextProvider>
             </ErrorOccurrenceContext.Provider>
-        </igniteDataContext.Provider>
+        </IgniteDataContext.Provider>
     )
 }
