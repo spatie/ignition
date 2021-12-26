@@ -2,21 +2,26 @@
 
 namespace Spatie\Ignition;
 
+use ArrayObject;
 use ErrorException;
 use Spatie\FlareClient\Context\BaseContextProviderDetector;
 use Spatie\FlareClient\Context\ContextProviderDetector;
 use Spatie\FlareClient\Enums\MessageLevels;
 use Spatie\FlareClient\Flare;
+use Spatie\FlareClient\FlareMiddleware\AddDocumentationLinks;
 use Spatie\FlareClient\FlareMiddleware\AddSolutions;
+use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
+use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
+use Spatie\Ignition\Contracts\ProvidesSolution;
+use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
 use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
-use Spatie\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Throwable;
 
 class Ignition
@@ -29,6 +34,7 @@ class Ignition
 
     protected string $applicationPath = '';
 
+    /** @var array<int, FlareMiddleware> */
     protected array $middleware = [];
 
     protected IgnitionConfig $ignitionConfig;
@@ -41,9 +47,12 @@ class Ignition
 
     protected ?string $solutionTransformerClass = null;
 
+    /** @var ArrayObject<int, callable(Throwable): mixed> */
+    protected ArrayObject $documentationLinkResolvers;
+
     public static function make(): self
     {
-        return new static();
+        return new self();
     }
 
     public function __construct()
@@ -54,14 +63,25 @@ class Ignition
 
         $this->solutionProviderRepository = new SolutionProviderRepository($this->getDefaultSolutionProviders());
 
+        $this->documentationLinkResolvers = new ArrayObject();
+
         $this->contextProviderDetector = new BaseContextProviderDetector();
 
         $this->middleware[] = new AddSolutions($this->solutionProviderRepository);
+        $this->middleware[] = new AddDocumentationLinks($this->documentationLinkResolvers);
     }
 
     public function setSolutionTransformerClass(string $solutionTransformerClass): self
     {
         $this->solutionTransformerClass = $solutionTransformerClass;
+
+        return $this;
+    }
+
+    /** @param callable(Throwable): mixed $callable */
+    public function resolveDocumentationLink(callable $callable): self
+    {
+        $this->documentationLinkResolvers[] = $callable;
 
         return $this;
     }
@@ -113,6 +133,13 @@ class Ignition
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @param string $messageLevel
+     * @param array<int, mixed> $metaData
+     *
+     * @return $this
+     */
     public function glow(
         string $name,
         string $messageLevel = MessageLevels::INFO,
@@ -123,6 +150,11 @@ class Ignition
         return $this;
     }
 
+    /**
+     * @param array<int, ProvidesSolution|class-string<ProvidesSolution>> $solutionProviders
+     *
+     * @return $this
+     */
     public function addSolutionProviders(array $solutionProviders): self
     {
         $this->solutionProviderRepository->registerSolutionProviders($solutionProviders);
@@ -158,7 +190,12 @@ class Ignition
         return $this;
     }
 
-    public function registerMiddleware($middleware): self
+    /**
+     * @param FlareMiddleware|array<int, FlareMiddleware> $middleware
+     *
+     * @return $this
+     */
+    public function registerMiddleware(array|FlareMiddleware $middleware): self
     {
         if (! is_array($middleware)) {
             $middleware = [$middleware];
@@ -189,15 +226,32 @@ class Ignition
     {
         error_reporting(-1);
 
+        /** @phpstan-ignore-next-line  */
         set_error_handler([$this, 'renderError']);
 
+        /** @phpstan-ignore-next-line  */
         set_exception_handler([$this, 'handleException']);
 
         return $this;
     }
 
-    public function renderError($level, $message, $file = '', $line = 0, $context = []): void
-    {
+    /**
+     * @param int $level
+     * @param string $message
+     * @param string $file
+     * @param int $line
+     * @param array<int, mixed> $context
+     *
+     * @return void
+     * @throws \ErrorException
+     */
+    public function renderError(
+        int $level,
+        string $message,
+        string $file = '',
+        int $line = 0,
+        array $context = []
+    ): void {
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 
@@ -218,6 +272,7 @@ class Ignition
         return $report;
     }
 
+    /** @return array<class-string<HasSolutionsForThrowable>> */
     protected function getDefaultSolutionProviders(): array
     {
         return [
@@ -246,7 +301,7 @@ class Ignition
         return $this;
     }
 
-    public function renderException(Throwable $throwable, Report $report)
+    public function renderException(Throwable $throwable, Report $report): void
     {
         $viewModel = new ErrorPageViewModel(
             $throwable,

@@ -3,16 +3,18 @@
 namespace Spatie\Ignition\Solutions\SolutionProviders;
 
 use Illuminate\Support\Collection;
-use Spatie\IgnitionContracts\HasSolutionsForThrowable;
-use Spatie\IgnitionContracts\ProvidesSolution;
-use Spatie\IgnitionContracts\Solution;
-use Spatie\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
+use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
+use Spatie\Ignition\Contracts\ProvidesSolution;
+use Spatie\Ignition\Contracts\Solution;
+use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Throwable;
 
 class SolutionProviderRepository implements SolutionProviderRepositoryContract
 {
+    /** @var Collection<int, class-string<HasSolutionsForThrowable>> */
     protected Collection $solutionProviders;
 
+    /** @param array<int, class-string<HasSolutionsForThrowable>> $solutionProviders */
     public function __construct(array $solutionProviders = [])
     {
         $this->solutionProviders = Collection::make($solutionProviders);
@@ -46,7 +48,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
         $providedSolutions = $this->solutionProviders
             ->filter(function (string $solutionClass) {
-                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass))) {
+                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass) ?: [])) {
                     return false;
                 }
 
@@ -85,7 +87,11 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             return null;
         }
 
-        if (! in_array(Solution::class, class_implements($solutionClass))) {
+        if (! in_array(Solution::class, class_implements($solutionClass) ?: [])) {
+            return null;
+        }
+
+        if (! function_exists('app')) {
             return null;
         }
 

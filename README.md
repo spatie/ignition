@@ -3,7 +3,8 @@
 # Ignition: a beautiful error page for PHP apps
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/ignition.svg?style=flat-square)](https://packagist.org/packages/spatie/ignition)
-![Tests](https://github.com/spatie/ignition/workflows/Run%20tests/badge.svg)
+[![Run tests](https://github.com/spatie/ignition/actions/workflows/run-tests.yml/badge.svg)](https://github.com/spatie/ignition/actions/workflows/run-tests.yml)
+[![PHPStan](https://github.com/spatie/ignition/actions/workflows/phpstan.yml/badge.svg)](https://github.com/spatie/ignition/actions/workflows/phpstan.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ignition.svg?style=flat-square)](https://packagist.org/packages/spatie/ignition)
 
 [Ignition](https://flareapp.io/docs/ignition-for-laravel/introduction) is a beautiful and customizable error page for
@@ -93,15 +94,15 @@ properties.
 
 #### Adding a solution directly to an exception
 
-To add a solution text to your exception, let the exception implement the `Spatie\IgnitionContracts\ProvidesSolution`
+To add a solution text to your exception, let the exception implement the `Spatie\Ignition\Contracts\ProvidesSolution`
 interface.
 
 This interface requires you to implement one method, which is going to return the `Solution` that users will see when
 the exception gets thrown.
 
 ```php
-use Spatie\IgnitionContracts\Solution;
-use Spatie\IgnitionContracts\ProvidesSolution;
+use Spatie\Ignition\Contracts\Solution;
+use Spatie\Ignition\Contracts\ProvidesSolution;
 
 class CustomException implements ProvidesSolution
 {
@@ -113,7 +114,7 @@ class CustomException implements ProvidesSolution
 ```
 
 ```php
-use Spatie\IgnitionContracts\Solution;
+use Spatie\Ignition\Contracts\Solution;
 
 class CustomSolution implements Solution
 {
@@ -151,7 +152,7 @@ for a given throwable.
 
 Solution providers can be added by third party packages or within your own application.
 
-A solution provider is any class that implements the \Spatie\IgnitionContracts\HasSolutionsForThrowable interface.
+A solution provider is any class that implements the \Spatie\Ignition\Contracts\HasSolutionsForThrowable interface.
 
 This is how the interface looks like:
 
@@ -160,7 +161,7 @@ interface HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool;
 
-    /** \Facade\IgnitionContracts\Solution[] */
+    /** \Facade\Ignition\Contracts\Solution[] */
     public function getSolutions(Throwable $throwable): array;
 }
 ```

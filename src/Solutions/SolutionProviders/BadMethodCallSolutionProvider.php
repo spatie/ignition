@@ -6,8 +6,8 @@ use BadMethodCallException;
 use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionMethod;
-use Spatie\IgnitionContracts\BaseSolution;
-use Spatie\IgnitionContracts\HasSolutionsForThrowable;
+use Spatie\Ignition\Contracts\BaseSolution;
+use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
 use Throwable;
 
 class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
@@ -41,13 +41,21 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
             return '';
         }
 
+        /** @phpstan-ignore-next-line  */
         extract($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
 
-        $possibleMethod = $this->findPossibleMethod($class, $method);
+        $possibleMethod = $this->findPossibleMethod($class ?? '', $method ?? '');
 
-        return "Did you mean {$class}::{$possibleMethod->name}() ?";
+        $class ??= 'UnknownClass';
+
+        return "Did you mean {$class}::{$possibleMethod?->name}() ?";
     }
 
+    /**
+     * @param string $message
+     *
+     * @return null|array<string, mixed>
+     */
     protected function getClassAndMethodFromExceptionMessage(string $message): ?array
     {
         if (! preg_match(self::REGEX, $message, $matches)) {
@@ -60,7 +68,13 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
         ];
     }
 
-    protected function findPossibleMethod(string $class, string $invalidMethodName)
+    /**
+     * @param class-string $class
+     * @param string $invalidMethodName
+     *
+     * @return \ReflectionMethod|null
+     */
+    protected function findPossibleMethod(string $class, string $invalidMethodName): ?ReflectionMethod
     {
         return $this->getAvailableMethods($class)
             ->sortByDesc(function (ReflectionMethod $method) use ($invalidMethodName) {
@@ -70,7 +84,12 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
             })->first();
     }
 
-    protected function getAvailableMethods($class): Collection
+    /**
+     * @param class-string $class
+     *
+     * @return \Illuminate\Support\Collection<int, ReflectionMethod>
+     */
+    protected function getAvailableMethods(string $class): Collection
     {
         $class = new ReflectionClass($class);
 

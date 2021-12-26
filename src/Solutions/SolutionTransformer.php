@@ -3,7 +3,7 @@
 namespace Spatie\Ignition\Solutions;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Spatie\IgnitionContracts\Solution;
+use Spatie\Ignition\Contracts\Solution;
 
 class SolutionTransformer implements Arrayable
 {
@@ -14,6 +14,7 @@ class SolutionTransformer implements Arrayable
         $this->solution = $solution;
     }
 
+    /** @return array<string, array<string,string>|string|false> */
     public function toArray(): array
     {
         return [

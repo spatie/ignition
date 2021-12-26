@@ -4,46 +4,31 @@ namespace Spatie\Ignition\Config;
 
 class DefaultConfigFinder
 {
-    public function getSettingsFromConfig(string $configDirectory = null): array
+    public function getConfigFilePath(): string
     {
-        $configFilePath = $this->searchConfigFilesOnDisk($configDirectory);
-
-        if (! file_exists($configFilePath)) {
-            return [];
+        if (! $homeDirectory = $this->findHomeDirectory()) {
+            return '';
         }
 
-        $options = include $configFilePath;
-
-        return $options ?? [];
+        return "{$homeDirectory}/.ignition.json";
     }
 
-    protected function searchConfigFilesOnDisk(string $configDirectory = null): string
+    protected function findHomeDirectory(): ?string
     {
-        $configNames = [
-            'ignition.php',
-        ];
-
-        $configDirectory = $configDirectory ?? getcwd();
-        while (@is_dir($configDirectory)) {
-            foreach ($configNames as $configName) {
-                $configFullPath = $configDirectory.DIRECTORY_SEPARATOR.$configName;
-                if (file_exists($configFullPath)) {
-                    return $configFullPath;
-                }
+        if (str_starts_with(PHP_OS, 'WIN')) {
+            if (empty($_SERVER['HOMEDRIVE']) || empty($_SERVER['HOMEPATH'])) {
+                return null;
             }
 
-            $parentDirectory = dirname($configDirectory);
+            $homeDirectory = $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
 
-            // We do a direct comparison here since there's a difference between
-            // the root directories on windows / *nix systems which does not
-            // let us compare it against the DIRECTORY_SEPARATOR directly
-            if ($parentDirectory === $configDirectory) {
-                return '';
-            }
-
-            $configDirectory = $parentDirectory;
+            return rtrim($homeDirectory, DIRECTORY_SEPARATOR);
         }
 
-        return '';
+        if ($homeDirectory = getenv('HOME')) {
+            return rtrim($homeDirectory, DIRECTORY_SEPARATOR);
+        }
+
+        return null;
     }
 }
