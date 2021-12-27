@@ -146,59 +146,59 @@ class IgnitionConfig implements Arrayable
             'editor_options' => [
                 'sublime' => [
                     'label' => 'Sublime',
-                    'url' => 'subl://open?url=file://%path&line=%line'
+                    'url' => 'subl://open?url=file://%path&line=%line',
                 ],
                 'textmate' => [
                     'label' => 'TextMate',
-                    'url' => 'txmt://open?url=file://%path&line=%line'
+                    'url' => 'txmt://open?url=file://%path&line=%line',
                 ],
                 'emacs' => [
                     'label' => 'Emacs',
-                    'url' => 'emacs://open?url=file://%path&line=%line'
+                    'url' => 'emacs://open?url=file://%path&line=%line',
                 ],
                 'macvim' => [
                     'label' => 'MacVim',
-                    'url' => 'mvim://open/?url=file://%path&line=%line'
+                    'url' => 'mvim://open/?url=file://%path&line=%line',
                 ],
                 'phpstorm' => [
                     'label' => 'PhpStorm',
-                    'url' => 'phpstorm://open?file=%path&line=%line'
+                    'url' => 'phpstorm://open?file=%path&line=%line',
                 ],
                 'idea' => [
                     'label' => 'Idea',
-                    'url' => 'idea://open?file=%path&line=%line'
+                    'url' => 'idea://open?file=%path&line=%line',
                 ],
                 'vscode' => [
                     'label' => 'VS Code',
-                    'url' => 'vscode://file/%path:%line'
+                    'url' => 'vscode://file/%path:%line',
                 ],
                 'vscode-insiders' => [
                     'label' => 'VS Code Insiders',
-                    'url' => 'vscode-insiders://file/%path:%line'
+                    'url' => 'vscode-insiders://file/%path:%line',
                 ],
                 'vscode-remote' => [
                     'label' => 'VS Code Remote',
-                    'url' => 'vscode://vscode-remote/%path:%line'
+                    'url' => 'vscode://vscode-remote/%path:%line',
                 ],
                 'vscode-insiders-remote' => [
                     'label' => 'VS Code Insiders Remote',
-                    'url' => 'vscode-insiders://vscode-remote/%path:%line'
+                    'url' => 'vscode-insiders://vscode-remote/%path:%line',
                 ],
                 'atom' => [
                     'label' => 'Atom',
-                    'url' => 'atom://core/open/file?filename=%path&line=%line'
+                    'url' => 'atom://core/open/file?filename=%path&line=%line',
                 ],
                 'nova' => [
                     'label' => 'Nova',
-                    'url' => 'nova://core/open/file?filename=%path&line=%line'
+                    'url' => 'nova://core/open/file?filename=%path&line=%line',
                 ],
                 'netbeans' => [
                     'label' => 'NetBeans',
-                    'url' => 'netbeans://open/?f=%path:%line'
+                    'url' => 'netbeans://open/?f=%path:%line',
                 ],
                 'xdebug' => [
                     'label' => 'Xdebug',
-                    'url' => 'xdebug://%path@%line'
+                    'url' => 'xdebug://%path@%line',
                 ],
             ],
         ];
