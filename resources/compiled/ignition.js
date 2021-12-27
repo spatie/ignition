@@ -10490,23 +10490,99 @@ var IgnitionConfigContext = react.createContext({
   ignitionConfig: {},
   setIgnitionConfig: noop_1
 });
+var PREFERENCES = {
+  DARK: 'dark',
+  LIGHT: 'light',
+  NONE: 'no-preference'
+};
+var values = [PREFERENCES.DARK, PREFERENCES.LIGHT, PREFERENCES.NONE];
+
+var makeQuery = function makeQuery(pref) {
+  return "(prefers-color-scheme: " + pref + ")";
+};
+
+var matchPreference = function matchPreference(pref) {
+  return window.matchMedia(makeQuery(pref));
+};
+
+var getPreference = function getPreference(preferences) {
+  return preferences.map(function (value) {
+    return {
+      preference: value,
+      matchMedia: matchPreference(value)
+    };
+  }).filter(function (pref) {
+    return pref.matchMedia.matches;
+  })[0];
+};
+
+var attachListener = function attachListener(pref, setScheme) {
+  var unbind;
+
+  var listener = function listener() {
+    var newPref = getPreference(values);
+    setScheme(newPref.preference);
+    pref.matchMedia.removeListener(listener); // recursion
+    // NOTE: we need to attach a new listener to ensure it fires on next change
+
+    unbind = attachListener(newPref, setScheme);
+  };
+
+  pref.matchMedia.addListener(listener);
+  return function () {
+    if (unbind) {
+      unbind();
+    } else {
+      pref.matchMedia.removeListener(listener);
+    }
+  };
+}; // NOTE: outside hook to avoid this value recomputing
+
+
+var initialPreference = getPreference(values);
+
+var useColorScheme = function useColorScheme() {
+  if (!('matchMedia' in window)) {
+    // can not detect
+    return {
+      scheme: PREFERENCES.NONE
+    };
+  }
+
+  var _useState = react.useState(initialPreference ? initialPreference.preference : PREFERENCES.NONE),
+      scheme = _useState[0],
+      setScheme = _useState[1];
+
+  react.useEffect(function () {
+    if (!initialPreference) return;
+    return attachListener(initialPreference, setScheme);
+  }, []);
+  return {
+    scheme: scheme
+  };
+};
 
 function IgnitionConfigContextProvider(_ref) {
   var children = _ref.children,
       initialIgnitionConfig = _ref.ignitionConfig;
 
-  var _useState = react.useState(initialIgnitionConfig),
-      ignitionConfig = _useState[0],
-      setIgnitionConfig = _useState[1];
+  var _useState2 = react.useState(initialIgnitionConfig),
+      ignitionConfig = _useState2[0],
+      setIgnitionConfig = _useState2[1];
 
+  var _useColorScheme = useColorScheme(),
+      scheme = _useColorScheme.scheme;
+
+  var theme = ignitionConfig.theme === 'auto' ? scheme !== 'none' ? scheme : 'light' : ignitionConfig.theme;
   react.useEffect(function () {
     document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(ignitionConfig.theme);
-  }, [ignitionConfig.theme]);
+    document.documentElement.classList.add(theme);
+  }, [theme]);
   return /*#__PURE__*/react.createElement(IgnitionConfigContext.Provider, {
     value: {
       ignitionConfig: ignitionConfig,
-      setIgnitionConfig: setIgnitionConfig
+      setIgnitionConfig: setIgnitionConfig,
+      theme: theme
     }
   }, children);
 }
@@ -19454,9 +19530,12 @@ function FrameCodeSnippetLine(_ref3) {
 function FrameCodeSnippet(_ref4) {
   var frame = _ref4.frame;
 
-  var _useState2 = react.useState([]),
-      tokenizedCode = _useState2[0],
-      setTokenizedCode = _useState2[1];
+  var _useContext2 = react.useContext(IgnitionConfigContext),
+      theme = _useContext2.theme;
+
+  var _useState3 = react.useState([]),
+      tokenizedCode = _useState3[0],
+      setTokenizedCode = _useState3[1];
 
   var lineNumbers = Object.keys(frame.code_snippet).map(function (n) {
     return Number(n);
@@ -19475,7 +19554,7 @@ function FrameCodeSnippet(_ref4) {
       };
     }));
     getHighlighter({
-      theme: 'github-light',
+      theme: theme === 'light' ? 'github-light' : 'github-dark',
       langs: ['php'] // TODO: blade?
 
     }).then(function (highlighter) {
@@ -19489,7 +19568,7 @@ function FrameCodeSnippet(_ref4) {
         };
       }));
     });
-  }, [frame]);
+  }, [frame, theme]);
   return /*#__PURE__*/react.createElement("main", {
     className: "flex items-stretch flex-grow overflow-x-auto overflow-y-hidden scrollbar-hidden-x mask-fade-x text-sm"
   }, /*#__PURE__*/react.createElement("nav", {
@@ -20069,8 +20148,8 @@ function RelaxedFilePath(_ref9) {
 function StackTrace(_ref10) {
   var openFrameIndex = _ref10.openFrameIndex;
 
-  var _useContext2 = react.useContext(ErrorOccurrenceContext),
-      frames = _useContext2.frames;
+  var _useContext3 = react.useContext(ErrorOccurrenceContext),
+      frames = _useContext3.frames;
 
   var initialState = react.useMemo(function () {
     var selectedFrame = frames.length;
@@ -20112,9 +20191,9 @@ function StackTrace(_ref10) {
     });
   });
 
-  var _useState3 = react.useState(null),
-      selectedRange = _useState3[0],
-      setSelectedRange = _useState3[1];
+  var _useState4 = react.useState(null),
+      selectedRange = _useState4[0],
+      setSelectedRange = _useState4[1];
 
   react.useLayoutEffect(function () {
     var framePattern = /F([0-9]+)?/gm;
@@ -20415,17 +20494,17 @@ function CodeSnippet(_ref13) {
       _ref13$limitHeight = _ref13.limitHeight,
       limitHeight = _ref13$limitHeight === void 0 ? true : _ref13$limitHeight;
 
-  var _useState4 = react.useState(false),
-      copied = _useState4[0],
-      setCopied = _useState4[1];
+  var _useState5 = react.useState(false),
+      copied = _useState5[0],
+      setCopied = _useState5[1];
 
-  var _useState5 = react.useState(limitHeight),
-      isCollapsed = _useState5[0],
-      setIsCollapsed = _useState5[1];
+  var _useState6 = react.useState(limitHeight),
+      isCollapsed = _useState6[0],
+      setIsCollapsed = _useState6[1];
 
-  var _useState6 = react.useState(false),
-      isOverflowing = _useState6[0],
-      setIsOverflowing = _useState6[1];
+  var _useState7 = react.useState(false),
+      isOverflowing = _useState7[0],
+      setIsOverflowing = _useState7[1];
 
   var ref = react.useRef(null);
   react.useEffect(function () {
@@ -20535,13 +20614,13 @@ function SolutionRunner(_ref14) {
 
   var solution = _ref14.solution;
 
-  var _useState7 = react.useState(false),
-      isRunningSolution = _useState7[0],
-      setIsRunningSolution = _useState7[1];
+  var _useState8 = react.useState(false),
+      isRunningSolution = _useState8[0],
+      setIsRunningSolution = _useState8[1];
 
-  var _useState8 = react.useState(null),
-      wasExecutionSuccessful = _useState8[0],
-      setWasExecutionSuccessful = _useState8[1];
+  var _useState9 = react.useState(null),
+      wasExecutionSuccessful = _useState9[0],
+      setWasExecutionSuccessful = _useState9[1];
 
   function refresh(event) {
     event.preventDefault();
@@ -20574,9 +20653,9 @@ function Solution(_ref15) {
       _ref15$canExecute = _ref15.canExecute,
       canExecute = _ref15$canExecute === void 0 ? false : _ref15$canExecute;
 
-  var _useState9 = react.useState(initialIsOpen),
-      isOpen = _useState9[0],
-      setIsOpen = _useState9[1];
+  var _useState10 = react.useState(initialIsOpen),
+      isOpen = _useState10[0],
+      setIsOpen = _useState10[1];
 
   return /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("button", {
     className: "group mb-4 flex items-center justify-start",
@@ -20611,12 +20690,12 @@ function Solution(_ref15) {
 }
 
 function Solutions() {
-  var _useContext3 = react.useContext(ErrorOccurrenceContext),
-      solutions = _useContext3.solutions;
+  var _useContext4 = react.useContext(ErrorOccurrenceContext),
+      solutions = _useContext4.solutions;
 
-  var _useState10 = react.useState(false),
-      canExecuteSolutions = _useState10[0],
-      setCanExecuteSolutions = _useState10[1];
+  var _useState11 = react.useState(false),
+      canExecuteSolutions = _useState11[0],
+      setCanExecuteSolutions = _useState11[1];
 
   react.useEffect(function () {
     try {
@@ -20923,9 +21002,9 @@ function Context() {
 function DebugTabs(_ref24) {
   var children = _ref24.children;
 
-  var _useState11 = react.useState(0),
-      currentTabIndex = _useState11[0],
-      setCurrentTabIndex = _useState11[1];
+  var _useState12 = react.useState(0),
+      currentTabIndex = _useState12[0],
+      setCurrentTabIndex = _useState12[1];
 
   var validChildren = children.filter(function (child) {
     return child !== false;
@@ -21057,9 +21136,9 @@ function Debug() {
 function CopyButton(_ref25) {
   var value = _ref25.value;
 
-  var _useState12 = react.useState(false),
-      copied = _useState12[0],
-      setCopied = _useState12[1];
+  var _useState13 = react.useState(false),
+      copied = _useState13[0],
+      setCopied = _useState13[1];
 
   react.useEffect(function () {
     var timeout;
