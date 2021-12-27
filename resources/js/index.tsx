@@ -9,6 +9,8 @@ import Ignition from "Ignition";
 window.ignite = (data) => {
     const errorOccurrence = transformIgnitionError(data);
 
+    console.log(data, errorOccurrence);
+
     ReactDOM.render(
         <Ignition errorOccurrence={errorOccurrence} igniteData={data} />,
         document.querySelector('#app'),

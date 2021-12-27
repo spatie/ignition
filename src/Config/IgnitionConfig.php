@@ -18,9 +18,7 @@ class IgnitionConfig implements Arrayable
     /** @param array<string, string> $options */
     public function __construct(array $options = [])
     {
-        $defaultOptions = [
-            'theme' => 'light',
-        ];
+        $defaultOptions = $this->getDefaultOptions();
 
         $this->options = array_merge($defaultOptions, $options);
     }
@@ -42,7 +40,7 @@ class IgnitionConfig implements Arrayable
 
     public function loadConfigFile(): self
     {
-        $this->options = $this->getConfigOptions();
+        $this->merge($this->getConfigOptions());
 
         return $this;
     }
@@ -84,7 +82,7 @@ class IgnitionConfig implements Arrayable
 
         return true;
     }
-    
+
     public function hideSolutions(): bool
     {
         return $this->options['hide_solutions'] ?? false;
@@ -93,6 +91,11 @@ class IgnitionConfig implements Arrayable
     public function editor(): ?string
     {
         return $this->options['editor'] ?? null;
+    }
+
+    public function editorOptions(): array
+    {
+        return $this->options['editor_options'] ?? [];
     }
 
     public function remoteSitesPath(): ?string
@@ -132,6 +135,72 @@ class IgnitionConfig implements Arrayable
             'enableShareButton' => $this->shareButtonEnabled(),
             'enableRunnableSolutions' => $this->runnableSolutionsEnabled(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
+            'editorOptions' => $this->editorOptions(),
+        ];
+    }
+
+    protected function getDefaultOptions(): array
+    {
+        return [
+            'theme' => 'light',
+            'editor_options' => [
+                'sublime' => [
+                    'label' => 'Sublime',
+                    'url' => 'subl://open?url=file://%path&line=%line'
+                ],
+                'textmate' => [
+                    'label' => 'TextMate',
+                    'url' => 'txmt://open?url=file://%path&line=%line'
+                ],
+                'emacs' => [
+                    'label' => 'Emacs',
+                    'url' => 'emacs://open?url=file://%path&line=%line'
+                ],
+                'macvim' => [
+                    'label' => 'MacVim',
+                    'url' => 'mvim://open/?url=file://%path&line=%line'
+                ],
+                'phpstorm' => [
+                    'label' => 'PhpStorm',
+                    'url' => 'phpstorm://open?file=%path&line=%line'
+                ],
+                'idea' => [
+                    'label' => 'Idea',
+                    'url' => 'idea://open?file=%path&line=%line'
+                ],
+                'vscode' => [
+                    'label' => 'VS Code',
+                    'url' => 'vscode://file/%path:%line'
+                ],
+                'vscode-insiders' => [
+                    'label' => 'VS Code Insiders',
+                    'url' => 'vscode-insiders://file/%path:%line'
+                ],
+                'vscode-remote' => [
+                    'label' => 'VS Code Remote',
+                    'url' => 'vscode://vscode-remote/%path:%line'
+                ],
+                'vscode-insiders-remote' => [
+                    'label' => 'VS Code Insiders Remote',
+                    'url' => 'vscode-insiders://vscode-remote/%path:%line'
+                ],
+                'atom' => [
+                    'label' => 'Atom',
+                    'url' => 'atom://core/open/file?filename=%path&line=%line'
+                ],
+                'nova' => [
+                    'label' => 'Nova',
+                    'url' => 'nova://core/open/file?filename=%path&line=%line'
+                ],
+                'netbeans' => [
+                    'label' => 'NetBeans',
+                    'url' => 'netbeans://open/?f=%path:%line'
+                ],
+                'xdebug' => [
+                    'label' => 'Xdebug',
+                    'url' => 'xdebug://%path@%line'
+                ],
+            ],
         ];
     }
 }

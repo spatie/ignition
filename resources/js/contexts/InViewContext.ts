@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 
 export default createContext<{
     inView: Array<string>;

@@ -39,6 +39,7 @@
             'config' => $config,
             'solutions' => $solutions,
             'shareEndpoint' => $shareEndpoint,
+            'updateConfigEndpoint' => $updateConfigEndpoint,
             'defaultTab' => $defaultTab,
             'defaultTabProps' => $defaultTabProps,
         ])

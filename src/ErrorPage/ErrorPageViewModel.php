@@ -121,7 +121,14 @@ class ErrorPageViewModel implements Arrayable
 
     protected function shareEndpoint(): string
     {
+        // TODO: Should be based on Ignition config
         return  'https://flareapp.io/api/public-reports';
+    }
+
+    protected function updateConfigEndpoint(): string
+    {
+        // TODO: Should be based on Ignition config
+        return  '/_ignition/update-config';
     }
 
     /** @phpstan-ignore-next-line */
@@ -130,6 +137,7 @@ class ErrorPageViewModel implements Arrayable
         return [
             'throwableString' => $this->throwableString(),
             'shareEndpoint' => $this->shareEndpoint(),
+            'updateConfigEndpoint' => $this->updateConfigEndpoint(),
             'title' => $this->title(),
             'config' => $this->config(),
             'solutions' => $this->solutions(),

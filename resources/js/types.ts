@@ -1,19 +1,13 @@
-import { ErrorSolution } from '@flareapp/ignition-ui';
+import { ErrorSolution, IgnitionConfig } from '@flareapp/ignition-ui';
 
 export type IgniteData = {
     report: IgnitionErrorOccurrence;
     shareableReport: IgnitionErrorOccurrence;
-    config: {
-        editor: string;
-        remoteSitesPath: string;
-        localSitesPath: string;
-        theme: 'light' | 'dark';
-        enableShareButton: boolean;
-        directorySeparator: string;
-    };
+    config: IgnitionConfig;
     solutions: Array<any>;
     telescopeUrl: string | null;
     shareEndpoint: string | null;
+    updateConfigEndpoint: string | null;
     defaultTab: string;
     defaultTabProps: Array<any> | {};
     appEnv: string;

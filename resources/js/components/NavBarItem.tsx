@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import InViewContext from 'contexts/InViewContext';
-import {last, noop } from 'lodash';
+import noop from 'lodash/noop';
+import last from 'lodash/last';
 
 type Props = {
     name: string;

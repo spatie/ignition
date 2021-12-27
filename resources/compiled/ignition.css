@@ -385,7 +385,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.-translate-x-1\/2, .translate-x-0, .translate-y-10, .translate-y-0, .translate-x-6, .-translate-x-6, .-rotate-180, .scale-90, .transform, .peer-checked\:translate-x-2{
+.-translate-x-1\/2, .translate-x-0, .translate-y-10, .translate-y-0, .translate-x-6, .-translate-x-6, .-rotate-180, .rotate-180, .scale-90, .transform, .peer-checked\:translate-x-2{
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -1038,6 +1038,10 @@ pre.sf-dump .sf-dump-ellipsis{
   margin-left: 0.375rem;
 }
 
+.-ml-1{
+  margin-left: -0.25rem;
+}
+
 .mb-20{
   margin-bottom: 5rem;
 }
@@ -1056,10 +1060,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .ml-6{
   margin-left: 1.5rem;
-}
-
-.-ml-1{
-  margin-left: -0.25rem;
 }
 
 .mt-6{
@@ -1244,6 +1244,11 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .-rotate-180{
   --tw-rotate: -180deg;
+  transform: var(--tw-transform);
+}
+
+.rotate-180{
+  --tw-rotate: 180deg;
   transform: var(--tw-transform);
 }
 
