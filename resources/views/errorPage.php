@@ -46,6 +46,7 @@
         ?>;
 </script>
 
+<!-- The noscript representation is for HTTP client like Postman that have JS disabled. -->
 <noscript><pre><?=$throwableString?></pre></noscript>
 
 <div id="app"></div>

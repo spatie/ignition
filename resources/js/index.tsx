@@ -111,6 +111,7 @@ function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData
                 name,
                 value,
             })),
+            livewire: report.context.livewire || null,
             view: [] /* @todo ? */,
             context: [] /* @todo ? */,
         },

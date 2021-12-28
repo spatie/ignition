@@ -1,4 +1,4 @@
-import { ErrorSolution, IgnitionConfig } from '@flareapp/ignition-ui';
+import { ErrorSolution, IgnitionConfig, LogLevel } from '@flareapp/ignition-ui';
 
 export type IgniteData = {
     report: IgnitionErrorOccurrence;
@@ -25,7 +25,7 @@ export type IgnitionErrorOccurrence = {
     glows: Array<{
         time: number;
         name: string;
-        message_level: string;
+        message_level: LogLevel;
         meta_data: any;
         microtime: number;
     }>;
@@ -86,6 +86,16 @@ export type IgnitionErrorOccurrence = {
             tag: string;
             remote: string;
             isDirty: boolean;
+        };
+        livewire?: {
+            component_alias: string;
+            component_class: string;
+            component_id: string;
+            data: Record<string, any>;
+            updates: Array<{
+                payload: Record<string, any>;
+                type: string;
+            }>;
         };
     };
     stage: string;
