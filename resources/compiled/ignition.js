@@ -19476,7 +19476,7 @@ function mapValues(object, iteratee) {
 
 var mapValues_1 = mapValues;
 
-function useOpenEditorUrl(_ref2) {
+function useEditorUrl(_ref2) {
   var file = _ref2.file,
       _ref2$lineNumber = _ref2.lineNumber,
       lineNumber = _ref2$lineNumber === void 0 ? 1 : _ref2$lineNumber;
@@ -19506,7 +19506,7 @@ function FrameCodeSnippetLine(_ref3) {
       tokens = _ref3.tokens,
       frame = _ref3.frame,
       lineNumber = _ref3.lineNumber;
-  var editorUrl = useOpenEditorUrl({
+  var editorUrl = useEditorUrl({
     file: frame.file,
     lineNumber: lineNumber
   });
@@ -20121,7 +20121,9 @@ function FrameGroup(_ref8) {
 }
 
 function RelaxedFilePath(_ref9) {
-  var path = _ref9.path;
+  var path = _ref9.path,
+      _ref9$lineNumber = _ref9.lineNumber,
+      lineNumber = _ref9$lineNumber === void 0 ? null : _ref9$lineNumber;
 
   var _parts$pop;
 
@@ -20136,17 +20138,38 @@ function RelaxedFilePath(_ref9) {
       key: index,
       className: "group-hover:underline"
     }, part, /*#__PURE__*/react.createElement("span", {
-      className: "mx-0.5"
+      className: "mx-0.5 group-hover:no-underline"
     }, "/"), /*#__PURE__*/react.createElement("wbr", null));
   }), /*#__PURE__*/react.createElement("span", {
     className: "group-hover:underline font-semibold"
   }, fileName), /*#__PURE__*/react.createElement("span", {
     className: "group-hover:underline"
-  }, ".", extension));
+  }, ".", extension), lineNumber && /*#__PURE__*/react.createElement("span", {
+    className: "group-hover:underline"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "mx-0.5 group-hover:no-underline"
+  }, ":"), lineNumber));
 }
 
-function StackTrace(_ref10) {
-  var openFrameIndex = _ref10.openFrameIndex;
+function EditorLink(_ref10) {
+  var path = _ref10.path,
+      lineNumber = _ref10.lineNumber,
+      className = _ref10.className;
+  var editorUrl = useEditorUrl({
+    file: path,
+    lineNumber: lineNumber
+  });
+  return /*#__PURE__*/react.createElement("a", {
+    href: editorUrl || '#',
+    className: className
+  }, /*#__PURE__*/react.createElement(RelaxedFilePath, {
+    path: path,
+    lineNumber: lineNumber
+  }));
+}
+
+function StackTrace(_ref11) {
+  var openFrameIndex = _ref11.openFrameIndex;
 
   var _useContext3 = react.useContext(ErrorOccurrenceContext),
       frames = _useContext3.frames;
@@ -20219,10 +20242,6 @@ function StackTrace(_ref10) {
     var lineNumber = selectedRange ? selectedRange[0] === selectedRange[1] ? selectedRange[0] : selectedRange[0] + "-" + selectedRange[1] : null;
     window.history.replaceState(window.history.state, '', "#F" + state.selected + (lineNumber ? 'L' + lineNumber : ''));
   }, [state.selected, selectedRange]);
-  var openEditorUrl = useOpenEditorUrl({
-    file: selectedFrame.file,
-    lineNumber: selectedFrame.line_number
-  });
   return /*#__PURE__*/react.createElement("section", {
     className: "mt-20 grid 2xl:row-span-3 2xl:row-start-1 2xl:col-start-2"
   }, /*#__PURE__*/react.createElement("a", {
@@ -20279,13 +20298,10 @@ function StackTrace(_ref10) {
     className: "lg:max-h-[calc(100vh-10rem)] 2xl:max-h-[calc(100vh-7.5rem)] flex flex-col lg:col-span-4 border-t lg:border-t-0 ~border-gray-200"
   }, /*#__PURE__*/react.createElement("header", {
     className: "~text-gray-500 flex-none z-30 h-16 px-6 sm:px-10 flex items-center justify-end"
-  }, openEditorUrl && /*#__PURE__*/react.createElement("a", {
-    href: openEditorUrl,
+  }, /*#__PURE__*/react.createElement(EditorLink, {
+    path: selectedFrame == null ? void 0 : selectedFrame.relative_file,
+    lineNumber: selectedFrame == null ? void 0 : selectedFrame.line_number,
     className: "flex items-center text-sm"
-  }, /*#__PURE__*/react.createElement(RelaxedFilePath, {
-    path: selectedFrame == null ? void 0 : selectedFrame.relative_file
-  })), !openEditorUrl && /*#__PURE__*/react.createElement(RelaxedFilePath, {
-    path: selectedFrame == null ? void 0 : selectedFrame.relative_file
   })), /*#__PURE__*/react.createElement(FrameCodeSnippet, {
     frame: selectedFrame
   }))));
@@ -20452,9 +20468,9 @@ function curlCommand(request, requestData, headers) {
 
   var curlLines = ["curl \"" + request.url + "\""];
   curlLines.push("   -X " + request.method);
-  Object.entries(headers || {}).map(function (_ref11) {
-    var key = _ref11[0],
-        value = _ref11[1];
+  Object.entries(headers || {}).map(function (_ref12) {
+    var key = _ref12[0],
+        value = _ref12[1];
     curlLines.push("   -H '" + key + ": " + value + "'");
   });
   var curlBodyString = curlBody(requestData, headers);
@@ -20477,9 +20493,9 @@ function curlBody(requestData, headers) {
     return "   -d " + JSON.stringify(requestData.body);
   }
 
-  var formValues = Object.entries(requestData.body || {}).map(function (_ref12) {
-    var key = _ref12[0],
-        value = _ref12[1];
+  var formValues = Object.entries(requestData.body || {}).map(function (_ref13) {
+    var key = _ref13[0],
+        value = _ref13[1];
     return "-F '" + key + "=" + value + "'";
   });
   return "   " + formValues.join(' ');
@@ -20489,10 +20505,10 @@ function getContextValues(errorOccurrence, group) {
   return mapValues_1(keyBy_1(errorOccurrence.context_items[group] || [], 'name'), 'value');
 }
 
-function CodeSnippet(_ref13) {
-  var value = _ref13.value,
-      _ref13$limitHeight = _ref13.limitHeight,
-      limitHeight = _ref13$limitHeight === void 0 ? true : _ref13$limitHeight;
+function CodeSnippet(_ref14) {
+  var value = _ref14.value,
+      _ref14$limitHeight = _ref14.limitHeight,
+      limitHeight = _ref14$limitHeight === void 0 ? true : _ref14$limitHeight;
 
   var _useState5 = react.useState(false),
       copied = _useState5[0],
@@ -20570,7 +20586,7 @@ function ErrorMessage() {
   }));
 }
 
-function SolutionRunner(_ref14) {
+function SolutionRunner(_ref15) {
   var executeSolution = function executeSolution() {
     try {
       if (isRunningSolution) {
@@ -20612,7 +20628,7 @@ function SolutionRunner(_ref14) {
     }
   };
 
-  var solution = _ref14.solution;
+  var solution = _ref15.solution;
 
   var _useState8 = react.useState(false),
       isRunningSolution = _useState8[0],
@@ -20646,12 +20662,12 @@ function SolutionRunner(_ref14) {
   }, "Refresh now.")));
 }
 
-function Solution(_ref15) {
-  var solution = _ref15.solution,
-      _ref15$isOpen = _ref15.isOpen,
-      initialIsOpen = _ref15$isOpen === void 0 ? false : _ref15$isOpen,
-      _ref15$canExecute = _ref15.canExecute,
-      canExecute = _ref15$canExecute === void 0 ? false : _ref15$canExecute;
+function Solution(_ref16) {
+  var solution = _ref16.solution,
+      _ref16$isOpen = _ref16.isOpen,
+      initialIsOpen = _ref16$isOpen === void 0 ? false : _ref16$isOpen,
+      _ref16$canExecute = _ref16.canExecute,
+      canExecute = _ref16$canExecute === void 0 ? false : _ref16$canExecute;
 
   var _useState10 = react.useState(initialIsOpen),
       isOpen = _useState10[0],
@@ -20676,9 +20692,9 @@ function Solution(_ref15) {
     solution: solution
   })), /*#__PURE__*/react.createElement("ul", {
     className: "grid grid-cols-1 gap-y-1 text-sm"
-  }, Object.entries(solution.links).map(function (_ref16, index) {
-    var title = _ref16[0],
-        link = _ref16[1];
+  }, Object.entries(solution.links).map(function (_ref17, index) {
+    var title = _ref17[0],
+        link = _ref17[1];
     return /*#__PURE__*/react.createElement("li", {
       key: index
     }, /*#__PURE__*/react.createElement("a", {
@@ -20773,16 +20789,16 @@ function ErrorCard() {
   }), errorOccurrence.framework_version))), /*#__PURE__*/react.createElement(ErrorMessage, null)))), hasSolutions && /*#__PURE__*/react.createElement(Solutions, null));
 }
 
-function ContextNav(_ref17) {
-  var children = _ref17.children;
+function ContextNav(_ref18) {
+  var children = _ref18.children;
   return /*#__PURE__*/react.createElement("ul", {
     className: "grid grid-cols-1 gap-10"
   }, children);
 }
 
-function ContextNavGroup(_ref18) {
-  var title = _ref18.title,
-      children = _ref18.children;
+function ContextNavGroup(_ref19) {
+  var title = _ref19.title,
+      children = _ref19.children;
   return /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("h4", {
     className: "uppercase tracking-wider ~text-gray-500 text-xs font-bold"
   }, title), /*#__PURE__*/react.createElement("ul", {
@@ -20790,9 +20806,9 @@ function ContextNavGroup(_ref18) {
   }, children));
 }
 
-function ContextNavItem(_ref19) {
-  var icon = _ref19.icon,
-      children = _ref19.children;
+function ContextNavItem(_ref20) {
+  var icon = _ref20.icon,
+      children = _ref20.children;
   return /*#__PURE__*/react.createElement("li", {
     className: "px-2 py-1 group text-base hover:text-indigo-500"
   }, /*#__PURE__*/react.createElement("i", {
@@ -20800,9 +20816,9 @@ function ContextNavItem(_ref19) {
   }), children);
 }
 
-function ContextGroup(_ref20) {
-  var title = _ref20.title,
-      children = _ref20.children;
+function ContextGroup(_ref21) {
+  var title = _ref21.title,
+      children = _ref21.children;
   return /*#__PURE__*/react.createElement("section", {
     className: "shadow-lg ~bg-white px-6 sm:px-10 pt-8 pb-20 min-w-0 overflow-hidden"
   }, /*#__PURE__*/react.createElement("dl", {
@@ -20812,10 +20828,10 @@ function ContextGroup(_ref20) {
   }, title), children));
 }
 
-function ContextSection(_ref21) {
-  var icon = _ref21.icon,
-      title = _ref21.title,
-      children = _ref21.children;
+function ContextSection(_ref22) {
+  var icon = _ref22.icon,
+      title = _ref22.title,
+      children = _ref22.children;
   return /*#__PURE__*/react.createElement("div", {
     className: "contents"
   }, /*#__PURE__*/react.createElement("h1", {
@@ -20844,11 +20860,11 @@ function Request() {
   })));
 }
 
-function ContextList(_ref22) {
-  var items = _ref22.items;
-  return /*#__PURE__*/react.createElement(react.Fragment, null, Object.entries(items || {}).map(function (_ref23, index) {
-    var key = _ref23[0],
-        value = _ref23[1];
+function ContextList(_ref23) {
+  var items = _ref23.items;
+  return /*#__PURE__*/react.createElement(react.Fragment, null, Object.entries(items || {}).map(function (_ref24, index) {
+    var key = _ref24[0],
+        value = _ref24[1];
     return /*#__PURE__*/react.createElement(react.Fragment, {
       key: index
     }, /*#__PURE__*/react.createElement("dt", {
@@ -20999,8 +21015,8 @@ function Context() {
 } // @ts-ignore
 
 
-function DebugTabs(_ref24) {
-  var children = _ref24.children;
+function DebugTabs(_ref25) {
+  var children = _ref25.children;
 
   var _useState12 = react.useState(0),
       currentTabIndex = _useState12[0],
@@ -21046,20 +21062,70 @@ DebugTabs.Tab = function (_props) {
   return null;
 };
 
+function DebugItem(_ref26) {
+  var children = _ref26.children;
+  return /*#__PURE__*/react.createElement("div", {
+    className: "px-6 py-3 my-3 border-b-2 sm:px-10"
+  }, children);
+}
+
 function Logs() {
   var errorOccurrence = react.useContext(ErrorOccurrenceContext);
   var logs = Object.values(getContextValues(errorOccurrence, 'logs'));
+  var logLevelColors = {
+    error: 'bg-color-red-500',
+    warn: 'bg-color-orange-500',
+    warning: 'bg-color-orange-500',
+    info: 'bg-color-blue-500',
+    debug: 'bg-color-green-500',
+    trace: 'bg-color-gray-500',
+    notice: 'bg-color-purple-500',
+    critical: 'bg-color-red-500',
+    alert: 'bg-color-red-500',
+    emergency: 'bg-color-red-500'
+  };
   return /*#__PURE__*/react.createElement(react.Fragment, null, logs.map(function (log, index) {
-    return /*#__PURE__*/react.createElement("div", {
-      key: index,
-      className: "border-b"
-    }, /*#__PURE__*/react.createElement(CodeSnippet, {
+    return /*#__PURE__*/react.createElement(DebugItem, {
+      key: index
+    }, /*#__PURE__*/react.createElement("span", {
+      className: "\n                            " + (logLevelColors[log.level] || 'bg-color-gray-500') + "\n                            text-white rounded py-1 px-2 shadow-sm\n                        "
+    }, log.level), /*#__PURE__*/react.createElement(CodeSnippet, {
       value: log.message
     }), /*#__PURE__*/react.createElement("div", {
       className: "grid grid-cols-[8rem,minmax(0,1fr)] gap-x-10 gap-y-2"
     }, /*#__PURE__*/react.createElement(ContextList, {
       items: log.context
     })));
+  }));
+}
+
+function Dumps() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var dumps = Object.values(getContextValues(errorOccurrence, 'dumps'));
+  console.log(dumps);
+  return /*#__PURE__*/react.createElement(react.Fragment, null, dumps.map(function (dump) {
+    return /*#__PURE__*/react.createElement(DebugItem, null, /*#__PURE__*/react.createElement("div", {
+      dangerouslySetInnerHTML: {
+        __html: dump.html_dump
+      }
+    }), /*#__PURE__*/react.createElement(EditorLink, {
+      path: dump.file,
+      lineNumber: dump.line_number
+    }));
+  }));
+}
+
+function Queries() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var queries = Object.values(getContextValues(errorOccurrence, 'queries'));
+  return /*#__PURE__*/react.createElement(react.Fragment, null, queries.map(function (query, index) {
+    return /*#__PURE__*/react.createElement(DebugItem, {
+      key: index
+    }, /*#__PURE__*/react.createElement("span", {
+      className: "bg-gray-500 text-white rounded py-1 px-2 shadow-sm"
+    }, query.connection_name), /*#__PURE__*/react.createElement(CodeSnippet, {
+      value: query.sql
+    }), /*#__PURE__*/react.createElement("span", null, "Runtime: ", query.time, "sec"));
   }));
 }
 
@@ -21075,7 +21141,7 @@ function Debug() {
     id: "debug",
     className: "z-50 absolute top-[-7.5rem]"
   }), /*#__PURE__*/react.createElement(DebugTabs, null, /*#__PURE__*/react.createElement(DebugTabs.Tab, {
-    component: Logs,
+    component: Dumps,
     name: "Dumps",
     count: Object.keys(dumps).length
   }), /*#__PURE__*/react.createElement(DebugTabs.Tab, {
@@ -21083,7 +21149,7 @@ function Debug() {
     name: "Glows",
     count: glows.length
   }), /*#__PURE__*/react.createElement(DebugTabs.Tab, {
-    component: Logs,
+    component: Queries,
     name: "Queries",
     count: Object.keys(queries).length
   }), /*#__PURE__*/react.createElement(DebugTabs.Tab, {
@@ -21091,50 +21157,10 @@ function Debug() {
     name: "Logs",
     count: Object.keys(logs).length
   })));
-} // function createQueryEvent({microtime, sql, time, connection_name, bindings, replace_bindings}: any): DebugEventType {
-//     return {
-//         microtime,
-//         type: 'query',
-//         label: sql,
-//         metadata: {time, connection_name},
-//         context: bindings || {},
-//         replace_bindings: replace_bindings,
-//     };
-// }
-//
-// function createDumpEvent({microtime, html_dump, file, line_number}: any): DebugEventType {
-//     return {
-//         microtime,
-//         type: 'dump',
-//         label: html_dump,
-//         metadata: {file, line_number},
-//         context: {},
-//     };
-// }
-//
-// function createLogEvent({microtime, context, level, message}: any): DebugEventType {
-//     return {
-//         microtime,
-//         type: 'log',
-//         label: message,
-//         metadata: {level},
-//         context,
-//     };
-// }
-//
-// function createGlowEvent({microtime, message_level, meta_data, time, name}: any): DebugEventType {
-//     return {
-//         type: 'glow',
-//         label: name,
-//         microtime,
-//         metadata: {time, message_level},
-//         context: meta_data || {},
-//     };
-// }
+}
 
-
-function CopyButton(_ref25) {
-  var value = _ref25.value;
+function CopyButton(_ref27) {
+  var value = _ref27.value;
 
   var _useState13 = react.useState(false),
       copied = _useState13[0],

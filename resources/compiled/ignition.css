@@ -396,12 +396,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.border, .border-\[10px\], .border-t, .border-b, .border-r, .border-t-0, .lg\:border-t-0{
+.border, .border-\[10px\], .border-t, .border-b-2, .border-b, .border-r, .border-t-0, .lg\:border-t-0{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
-.shadow-lg, .shadow-md, .shadow-inner, .shadow, .shadow-2xl, .hover\:shadow-lg, .active\:shadow-none{
+.shadow-lg, .shadow-md, .shadow-inner, .shadow-sm, .shadow, .shadow-2xl, .hover\:shadow-lg, .active\:shadow-none{
   --tw-ring-offset-shadow: 0 0 rgba(0,0,0,0);
   --tw-ring-shadow: 0 0 rgba(0,0,0,0);
   --tw-shadow: 0 0 rgba(0,0,0,0);
@@ -694,7 +694,7 @@ body{
     What follows is !important
 */
 
-.tabs pre.sf-dump {
+main pre.sf-dump {
     display: block !important;
 }
 
@@ -936,6 +936,11 @@ pre.sf-dump .sf-dump-ellipsis{
 .my-2{
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.my-3{
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .mx-0\.5{
@@ -1412,6 +1417,10 @@ pre.sf-dump .sf-dump-ellipsis{
   border-radius: 9999px;
 }
 
+.rounded{
+  border-radius: 0.25rem;
+}
+
 .rounded-none{
   border-radius: 0px;
 }
@@ -1436,6 +1445,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .border-t{
   border-top-width: 1px;
+}
+
+.border-b-2{
+  border-bottom-width: 2px;
 }
 
 .border-b{
@@ -1549,6 +1562,11 @@ pre.sf-dump .sf-dump-ellipsis{
 .py-1{
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+}
+
+.py-3{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .px-3{
@@ -1759,6 +1777,13 @@ pre.sf-dump .sf-dump-ellipsis{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
 }
 
+.shadow-sm{
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: 0 0 rgba(0,0,0,0), 0 0 rgba(0,0,0,0), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
+}
+
 .shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -1898,6 +1923,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .group:hover .group-hover\:underline{
   text-decoration: underline;
+}
+
+.group:hover .group-hover\:no-underline{
+  text-decoration: none;
 }
 
 .group:hover .group-hover\:opacity-100{
