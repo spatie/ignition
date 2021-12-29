@@ -5,6 +5,7 @@
 
 main pre.sf-dump {
     display: block !important;
+    z-index: 0 !important;
 }
 
 .sf-dump-public.sf-dump-highlight,

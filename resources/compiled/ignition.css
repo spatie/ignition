@@ -396,7 +396,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.border, .border-\[10px\], .border-t, .border-b-2, .border-b, .border-r, .border-t-0, .lg\:border-t-0{
+.border, .border-\[10px\], .border-t, .border-b-2, .border-b, .border-l-2, .border-r, .border-t-0, .lg\:border-t-0{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
@@ -696,6 +696,7 @@ body{
 
 main pre.sf-dump {
     display: block !important;
+    z-index: 0 !important;
 }
 
 .sf-dump-public.sf-dump-highlight, .sf-dump-protected.sf-dump-highlight, .sf-dump-private.sf-dump-highlight, .sf-dump-str.sf-dump-highlight, .sf-dump-key.sf-dump-highlight{
@@ -1460,6 +1461,10 @@ pre.sf-dump .sf-dump-ellipsis{
   border-bottom-width: 1px;
 }
 
+.border-l-2{
+  border-left-width: 2px;
+}
+
 .border-r{
   border-right-width: 1px;
 }
@@ -1486,6 +1491,11 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .border-red-500\/25{
   border-color: rgb(239 68 68 / 0.25);
+}
+
+.border-l-gray-300{
+  --tw-border-opacity: 1;
+  border-left-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .bg-red-500{

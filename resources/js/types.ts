@@ -1,4 +1,4 @@
-import { ErrorSolution, IgnitionConfig, LogLevel } from '@flareapp/ignition-ui';
+import { ErrorSolution, IgnitionConfig, LogLevel, ViewContext } from '@flareapp/ignition-ui';
 
 export type IgniteData = {
     report: IgnitionErrorOccurrence;
@@ -97,6 +97,7 @@ export type IgnitionErrorOccurrence = {
                 type: string;
             }>;
         };
+        view: ViewContext | null
     };
     stage: string;
     message_level: null | string;

@@ -10562,9 +10562,9 @@ var useColorScheme = function useColorScheme() {
   };
 };
 
-function IgnitionConfigContextProvider(_ref) {
-  var children = _ref.children,
-      initialIgnitionConfig = _ref.ignitionConfig;
+function IgnitionConfigContextProvider(_ref2) {
+  var children = _ref2.children,
+      initialIgnitionConfig = _ref2.ignitionConfig;
 
   var _useState2 = react.useState(initialIgnitionConfig),
       ignitionConfig = _useState2[0],
@@ -19476,10 +19476,10 @@ function mapValues(object, iteratee) {
 
 var mapValues_1 = mapValues;
 
-function useEditorUrl(_ref2) {
-  var file = _ref2.file,
-      _ref2$lineNumber = _ref2.lineNumber,
-      lineNumber = _ref2$lineNumber === void 0 ? 1 : _ref2$lineNumber;
+function useEditorUrl(_ref3) {
+  var file = _ref3.file,
+      _ref3$lineNumber = _ref3.lineNumber,
+      lineNumber = _ref3$lineNumber === void 0 ? 1 : _ref3$lineNumber;
 
   var _useContext = react.useContext(IgnitionConfigContext),
       ignitionConfig = _useContext.ignitionConfig;
@@ -19501,11 +19501,11 @@ function useEditorUrl(_ref2) {
   return editors[editor].replace('%path', encodeURIComponent(file)).replace('%line', encodeURIComponent(lineNumber));
 }
 
-function FrameCodeSnippetLine(_ref3) {
-  var highlight = _ref3.highlight,
-      tokens = _ref3.tokens,
-      frame = _ref3.frame,
-      lineNumber = _ref3.lineNumber;
+function FrameCodeSnippetLine(_ref4) {
+  var highlight = _ref4.highlight,
+      tokens = _ref4.tokens,
+      frame = _ref4.frame,
+      lineNumber = _ref4.lineNumber;
   var editorUrl = useEditorUrl({
     file: frame.file,
     lineNumber: lineNumber
@@ -19527,8 +19527,8 @@ function FrameCodeSnippetLine(_ref3) {
   })));
 }
 
-function FrameCodeSnippet(_ref4) {
-  var frame = _ref4.frame;
+function FrameCodeSnippet(_ref5) {
+  var frame = _ref5.frame;
 
   var _useContext2 = react.useContext(IgnitionConfigContext),
       theme = _useContext2.theme;
@@ -19584,9 +19584,9 @@ function FrameCodeSnippet(_ref4) {
     }, number));
   }))), /*#__PURE__*/react.createElement("div", {
     className: "flex-grow pr-10"
-  }, /*#__PURE__*/react.createElement("pre", null, /*#__PURE__*/react.createElement("code", null, tokenizedCode.map(function (_ref5, index) {
-    var tokens = _ref5.tokens,
-        lineNumber = _ref5.lineNumber;
+  }, /*#__PURE__*/react.createElement("pre", null, /*#__PURE__*/react.createElement("code", null, tokenizedCode.map(function (_ref6, index) {
+    var tokens = _ref6.tokens,
+        lineNumber = _ref6.lineNumber;
     return /*#__PURE__*/react.createElement(FrameCodeSnippetLine, {
       key: index,
       frame: frame,
@@ -19634,6 +19634,21 @@ function _extends() {
   };
 
   return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
 }
 
 function addFrameNumbers(frames) {
@@ -20001,10 +20016,10 @@ var dummyFrameGroup = {
   frames: []
 };
 
-function getFrameGroups(_ref6) {
-  var frames = _ref6.frames,
-      selected = _ref6.selected,
-      expanded = _ref6.expanded;
+function getFrameGroups(_ref7) {
+  var frames = _ref7.frames,
+      selected = _ref7.selected,
+      expanded = _ref7.expanded;
   return frames.reduce(function (frameGroups, current, i) {
     var context = {
       current: current,
@@ -20073,8 +20088,8 @@ function getSelectedFrame(state) {
   });
 }
 
-function RelaxedFullyQualifiedClassName(_ref7) {
-  var path = _ref7.path;
+function RelaxedFullyQualifiedClassName(_ref8) {
+  var path = _ref8.path;
   var parts = path.split('\\');
   return /*#__PURE__*/react.createElement(react.Fragment, null, parts.map(function (part, index) {
     return /*#__PURE__*/react.createElement("span", {
@@ -20085,10 +20100,10 @@ function RelaxedFullyQualifiedClassName(_ref7) {
   }));
 }
 
-function FrameGroup(_ref8) {
-  var frameGroup = _ref8.frameGroup,
-      onExpand = _ref8.onExpand,
-      onSelect = _ref8.onSelect;
+function FrameGroup(_ref9) {
+  var frameGroup = _ref9.frameGroup,
+      onExpand = _ref9.onExpand,
+      onSelect = _ref9.onSelect;
 
   if (frameGroup.type === 'vendor' && !frameGroup.expanded) {
     return /*#__PURE__*/react.createElement("li", {
@@ -20120,10 +20135,10 @@ function FrameGroup(_ref8) {
   }));
 }
 
-function RelaxedFilePath(_ref9) {
-  var path = _ref9.path,
-      _ref9$lineNumber = _ref9.lineNumber,
-      lineNumber = _ref9$lineNumber === void 0 ? null : _ref9$lineNumber;
+function RelaxedFilePath(_ref10) {
+  var path = _ref10.path,
+      _ref10$lineNumber = _ref10.lineNumber,
+      lineNumber = _ref10$lineNumber === void 0 ? null : _ref10$lineNumber;
 
   var _parts$pop;
 
@@ -20134,27 +20149,25 @@ function RelaxedFilePath(_ref9) {
   return /*#__PURE__*/react.createElement("span", {
     className: "group"
   }, parts.map(function (part, index) {
-    return /*#__PURE__*/react.createElement("span", {
+    return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
       key: index,
       className: "group-hover:underline"
-    }, part, /*#__PURE__*/react.createElement("span", {
-      className: "mx-0.5 group-hover:no-underline"
+    }, part), /*#__PURE__*/react.createElement("span", {
+      className: "mx-0.5"
     }, "/"), /*#__PURE__*/react.createElement("wbr", null));
   }), /*#__PURE__*/react.createElement("span", {
     className: "group-hover:underline font-semibold"
   }, fileName), /*#__PURE__*/react.createElement("span", {
     className: "group-hover:underline"
-  }, ".", extension), lineNumber && /*#__PURE__*/react.createElement("span", {
-    className: "group-hover:underline"
-  }, /*#__PURE__*/react.createElement("span", {
-    className: "mx-0.5 group-hover:no-underline"
-  }, ":"), lineNumber));
+  }, ".", extension), lineNumber && /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
+    className: "mx-0.5"
+  }, ":"), /*#__PURE__*/react.createElement("span", null, lineNumber)));
 }
 
-function EditorLink(_ref10) {
-  var path = _ref10.path,
-      lineNumber = _ref10.lineNumber,
-      className = _ref10.className;
+function EditorLink(_ref11) {
+  var path = _ref11.path,
+      lineNumber = _ref11.lineNumber,
+      className = _ref11.className;
   var editorUrl = useEditorUrl({
     file: path,
     lineNumber: lineNumber
@@ -20168,8 +20181,8 @@ function EditorLink(_ref10) {
   }));
 }
 
-function StackTrace(_ref11) {
-  var openFrameIndex = _ref11.openFrameIndex;
+function StackTrace(_ref12) {
+  var openFrameIndex = _ref12.openFrameIndex;
 
   var _useContext3 = react.useContext(ErrorOccurrenceContext),
       frames = _useContext3.frames;
@@ -20468,9 +20481,9 @@ function curlCommand(request, requestData, headers) {
 
   var curlLines = ["curl \"" + request.url + "\""];
   curlLines.push("   -X " + request.method);
-  Object.entries(headers || {}).map(function (_ref12) {
-    var key = _ref12[0],
-        value = _ref12[1];
+  Object.entries(headers || {}).map(function (_ref13) {
+    var key = _ref13[0],
+        value = _ref13[1];
     curlLines.push("   -H '" + key + ": " + value + "'");
   });
   var curlBodyString = curlBody(requestData, headers);
@@ -20493,9 +20506,9 @@ function curlBody(requestData, headers) {
     return "   -d " + JSON.stringify(requestData.body);
   }
 
-  var formValues = Object.entries(requestData.body || {}).map(function (_ref13) {
-    var key = _ref13[0],
-        value = _ref13[1];
+  var formValues = Object.entries(requestData.body || {}).map(function (_ref14) {
+    var key = _ref14[0],
+        value = _ref14[1];
     return "-F '" + key + "=" + value + "'";
   });
   return "   " + formValues.join(' ');
@@ -20509,10 +20522,10 @@ function unixToDate(timestamp) {
   return new Date(timestamp * 1000);
 }
 
-function CodeSnippet(_ref14) {
-  var value = _ref14.value,
-      _ref14$limitHeight = _ref14.limitHeight,
-      limitHeight = _ref14$limitHeight === void 0 ? true : _ref14$limitHeight;
+function CodeSnippet(_ref15) {
+  var value = _ref15.value,
+      _ref15$limitHeight = _ref15.limitHeight,
+      limitHeight = _ref15$limitHeight === void 0 ? true : _ref15$limitHeight;
 
   var _useState5 = react.useState(false),
       copied = _useState5[0],
@@ -20590,7 +20603,7 @@ function ErrorMessage() {
   }));
 }
 
-function SolutionRunner(_ref15) {
+function SolutionRunner(_ref16) {
   var executeSolution = function executeSolution() {
     try {
       if (isRunningSolution) {
@@ -20632,7 +20645,7 @@ function SolutionRunner(_ref15) {
     }
   };
 
-  var solution = _ref15.solution;
+  var solution = _ref16.solution;
 
   var _useState8 = react.useState(false),
       isRunningSolution = _useState8[0],
@@ -20666,12 +20679,12 @@ function SolutionRunner(_ref15) {
   }, "Refresh now.")));
 }
 
-function Solution(_ref16) {
-  var solution = _ref16.solution,
-      _ref16$isOpen = _ref16.isOpen,
-      initialIsOpen = _ref16$isOpen === void 0 ? false : _ref16$isOpen,
-      _ref16$canExecute = _ref16.canExecute,
-      canExecute = _ref16$canExecute === void 0 ? false : _ref16$canExecute;
+function Solution(_ref17) {
+  var solution = _ref17.solution,
+      _ref17$isOpen = _ref17.isOpen,
+      initialIsOpen = _ref17$isOpen === void 0 ? false : _ref17$isOpen,
+      _ref17$canExecute = _ref17.canExecute,
+      canExecute = _ref17$canExecute === void 0 ? false : _ref17$canExecute;
 
   var _useState10 = react.useState(initialIsOpen),
       isOpen = _useState10[0],
@@ -20696,9 +20709,9 @@ function Solution(_ref16) {
     solution: solution
   })), /*#__PURE__*/react.createElement("ul", {
     className: "grid grid-cols-1 gap-y-1 text-sm"
-  }, Object.entries(solution.links).map(function (_ref17, index) {
-    var title = _ref17[0],
-        link = _ref17[1];
+  }, Object.entries(solution.links).map(function (_ref18, index) {
+    var title = _ref18[0],
+        link = _ref18[1];
     return /*#__PURE__*/react.createElement("li", {
       key: index
     }, /*#__PURE__*/react.createElement("a", {
@@ -20793,16 +20806,16 @@ function ErrorCard() {
   }), errorOccurrence.framework_version))), /*#__PURE__*/react.createElement(ErrorMessage, null)))), hasSolutions && /*#__PURE__*/react.createElement(Solutions, null));
 }
 
-function ContextNav(_ref18) {
-  var children = _ref18.children;
+function ContextNav(_ref19) {
+  var children = _ref19.children;
   return /*#__PURE__*/react.createElement("ul", {
     className: "grid grid-cols-1 gap-10"
   }, children);
 }
 
-function ContextNavGroup(_ref19) {
-  var title = _ref19.title,
-      children = _ref19.children;
+function ContextNavGroup(_ref20) {
+  var title = _ref20.title,
+      children = _ref20.children;
   return /*#__PURE__*/react.createElement("li", null, /*#__PURE__*/react.createElement("h4", {
     className: "uppercase tracking-wider ~text-gray-500 text-xs font-bold"
   }, title), /*#__PURE__*/react.createElement("ul", {
@@ -20810,9 +20823,9 @@ function ContextNavGroup(_ref19) {
   }, children));
 }
 
-function ContextNavItem(_ref20) {
-  var icon = _ref20.icon,
-      children = _ref20.children;
+function ContextNavItem(_ref21) {
+  var icon = _ref21.icon,
+      children = _ref21.children;
   return /*#__PURE__*/react.createElement("li", {
     className: "px-2 py-1 group text-base hover:text-indigo-500"
   }, /*#__PURE__*/react.createElement("i", {
@@ -20820,22 +20833,67 @@ function ContextNavItem(_ref20) {
   }), children);
 }
 
-function ContextGroup(_ref21) {
-  var title = _ref21.title,
-      children = _ref21.children;
-  return /*#__PURE__*/react.createElement("section", {
-    className: "shadow-lg ~bg-white px-6 sm:px-10 pt-8 pb-20 min-w-0 overflow-hidden"
-  }, /*#__PURE__*/react.createElement("dl", {
-    className: "grid grid-cols-[8rem,minmax(0,1fr)] gap-x-10 gap-y-2"
-  }, /*#__PURE__*/react.createElement("h2", {
+var _excluded$2 = ["children", "title", "className"];
+
+function DefinitionList(_ref) {
+  var children = _ref.children,
+      _ref$title = _ref.title,
+      title = _ref$title === void 0 ? '' : _ref$title,
+      _ref$className = _ref.className,
+      className = _ref$className === void 0 ? '' : _ref$className,
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$2);
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, title && /*#__PURE__*/react.createElement("h2", {
     className: "mb-6 col-span-2 font-bold leading-snug text-xl ~text-indigo-600 uppercase tracking-wider"
-  }, title), children));
+  }, title), children && /*#__PURE__*/react.createElement("dl", _extends({
+    className: "grid grid-cols-[8rem,minmax(0,1fr)] gap-x-10 gap-y-2 " + className
+  }, props), children));
 }
 
-function ContextSection(_ref22) {
-  var icon = _ref22.icon,
-      title = _ref22.title,
-      children = _ref22.children;
+DefinitionList.Row = DefinitionListRow;
+
+function DefinitionListRow(_ref22) {
+  var _ref22$value = _ref22.value,
+      value = _ref22$value === void 0 ? '' : _ref22$value,
+      _ref22$label = _ref22.label,
+      label = _ref22$label === void 0 ? '' : _ref22$label,
+      _ref22$className = _ref22.className,
+      className = _ref22$className === void 0 ? '' : _ref22$className;
+  var valueOutput = value;
+
+  if (react.isValidElement(value)) {
+    valueOutput = value;
+  } else if (typeof value === 'object') {
+    valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
+      value: JSON.stringify(value, null, 4)
+    });
+  } else if (typeof value === 'string') {
+    valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
+      value: value
+    });
+  }
+
+  return /*#__PURE__*/react.createElement("div", {
+    className: "contents " + className
+  }, /*#__PURE__*/react.createElement("dt", {
+    className: "py-2 truncate"
+  }, label), /*#__PURE__*/react.createElement("dd", null, valueOutput));
+}
+
+function ContextGroup(_ref23) {
+  var title = _ref23.title,
+      children = _ref23.children;
+  return /*#__PURE__*/react.createElement("section", {
+    className: "shadow-lg ~bg-white px-6 sm:px-10 pt-8 pb-20 min-w-0 overflow-hidden"
+  }, /*#__PURE__*/react.createElement(DefinitionList, {
+    title: title
+  }, children));
+}
+
+function ContextSection(_ref24) {
+  var icon = _ref24.icon,
+      title = _ref24.title,
+      children = _ref24.children;
   return /*#__PURE__*/react.createElement("div", {
     className: "contents"
   }, /*#__PURE__*/react.createElement("h1", {
@@ -20864,20 +20922,16 @@ function Request() {
   })));
 }
 
-function ContextList(_ref23) {
-  var items = _ref23.items;
-  return /*#__PURE__*/react.createElement(react.Fragment, null, Object.entries(items || {}).map(function (_ref24, index) {
-    var key = _ref24[0],
-        value = _ref24[1];
-    return /*#__PURE__*/react.createElement(react.Fragment, {
-      key: index
-    }, /*#__PURE__*/react.createElement("dt", {
-      className: "py-2 truncate"
-    }, key), /*#__PURE__*/react.createElement("dd", null, typeof value === 'string' ? /*#__PURE__*/react.createElement(CodeSnippet, {
+function ContextList(_ref25) {
+  var items = _ref25.items;
+  return /*#__PURE__*/react.createElement(react.Fragment, null, Object.entries(items || {}).map(function (_ref26) {
+    var key = _ref26[0],
+        value = _ref26[1];
+    return /*#__PURE__*/react.createElement(DefinitionList.Row, {
+      key: key,
+      label: key,
       value: value
-    }) : /*#__PURE__*/react.createElement(CodeSnippet, {
-      value: JSON.stringify(value)
-    })));
+    });
   }));
 }
 
@@ -20958,41 +21012,6 @@ function LivewireComponent() {
     }
   });
 }
-/**
- * The opposite of `_.mapValues`; this method creates an object with the
- * same values as `object` and keys generated by running each own enumerable
- * string keyed property of `object` thru `iteratee`. The iteratee is invoked
- * with three arguments: (value, key, object).
- *
- * @static
- * @memberOf _
- * @since 3.8.0
- * @category Object
- * @param {Object} object The object to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @returns {Object} Returns the new mapped object.
- * @see _.mapValues
- * @example
- *
- * _.mapKeys({ 'a': 1, 'b': 2 }, function(value, key) {
- *   return key + value;
- * });
- * // => { 'a1': 1, 'b2': 2 }
- */
-
-
-function mapKeys(object, iteratee) {
-  var result = {};
-  iteratee = _baseIteratee(iteratee);
-
-  _baseForOwn(object, function (value, key, object) {
-    _baseAssignValue(result, iteratee(value, key, object), value);
-  });
-
-  return result;
-}
-
-var mapKeys_1 = mapKeys;
 
 function LivewireUpdates() {
   var errorOccurrence = react.useContext(ErrorOccurrenceContext);
@@ -21002,20 +21021,140 @@ function LivewireUpdates() {
     return null;
   }
 
-  var livewireUpdates = mapValues_1(mapKeys_1(livewire.updates, function (_ref25) {
-    var type = _ref25.type;
-    return type;
-  }), function (_ref26) {
-    var payload = _ref26.payload;
-    return payload;
-  }); // TODO: Better UI?
+  return /*#__PURE__*/react.createElement(react.Fragment, null, livewire.updates.map(function (_ref27, index) {
+    var payload = _ref27.payload,
+        type = _ref27.type;
+    return /*#__PURE__*/react.createElement(DefinitionList.Row, {
+      key: index,
+      label: type,
+      value: payload
+    });
+  }));
+}
 
-  return /*#__PURE__*/react.createElement(ContextList, {
-    items: livewireUpdates
+var _excluded$1 = ["children", "className"];
+
+function UnorderedList(_ref) {
+  var children = _ref.children,
+      _ref$className2 = _ref.className,
+      className = _ref$className2 === void 0 ? '' : _ref$className2,
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, children && /*#__PURE__*/react.createElement("ul", _extends({
+    className: "gap-y-2 flex flex-col border-l-2 border-l-gray-300 " + className
+  }, props), children));
+}
+
+UnorderedList.Item = UnorderedListItem;
+
+function UnorderedListItem(_ref28) {
+  var _ref28$value = _ref28.value,
+      value = _ref28$value === void 0 ? '' : _ref28$value;
+  var valueOutput = value;
+
+  if (react.isValidElement(value)) {
+    valueOutput = value;
+  } else if (typeof value === 'object') {
+    valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
+      value: JSON.stringify(value, null, 4)
+    });
+  } else if (typeof value === 'string') {
+    valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
+      value: value
+    });
+  }
+
+  return /*#__PURE__*/react.createElement("li", null, valueOutput);
+}
+
+function Routing() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var route = getContextValues(errorOccurrence, 'route');
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    value: route.controllerAction,
+    label: "Controller"
+  }), route.route && /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    value: route.route,
+    label: "Route name"
+  }), Object.entries(route.routeParameters).length > 0 && /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    value: /*#__PURE__*/react.createElement(DefinitionList, null, Object.entries(route.routeParameters || []).map(function (_ref29) {
+      var key = _ref29[0],
+          parameter = _ref29[1];
+      return /*#__PURE__*/react.createElement(DefinitionList.Row, {
+        key: key,
+        label: key,
+        value: parameter
+      });
+    })),
+    label: "Route parameters"
+  }), route.middleware && /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    value: /*#__PURE__*/react.createElement(UnorderedList, null, (route.middleware || []).map(function (middleware, i) {
+      return /*#__PURE__*/react.createElement(UnorderedList.Item, {
+        key: i,
+        value: middleware
+      });
+    })),
+    label: "Middleware"
+  }));
+}
+
+var _excluded = ["value"];
+
+function SfDump(_ref) {
+  var value = _ref.value;
+
+  _objectWithoutPropertiesLoose(_ref, _excluded);
+
+  react.useEffect(function () {
+    var match = value.match(/sf-dump-\d+/);
+
+    if (!match) {
+      return;
+    } // @ts-ignore
+
+
+    window.Sfdump(match[0]);
+  }, [value]);
+  return /*#__PURE__*/react.createElement("div", {
+    dangerouslySetInnerHTML: {
+      __html: value
+    }
   });
 }
 
+function View() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var view = errorOccurrence.context_items.view;
+
+  if (!view) {
+    return null;
+  }
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    value: /*#__PURE__*/react.createElement(EditorLink, {
+      path: view.view
+    }),
+    label: "View"
+  }), /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    value: /*#__PURE__*/react.createElement(DefinitionList, null, Object.entries(view.data).map(function (_ref30) {
+      var key = _ref30[0],
+          data = _ref30[1];
+      return /*#__PURE__*/react.createElement(DefinitionList.Row, {
+        key: key,
+        label: key,
+        value: /*#__PURE__*/react.createElement(SfDump, {
+          value: data
+        })
+      });
+    })),
+    label: "Data"
+  }));
+}
+
 function Context() {
+  var _useContext5 = react.useContext(ErrorOccurrenceContext),
+      context = _useContext5.context_items;
+
   return /*#__PURE__*/react.createElement("section", {
     className: "mt-20 2xl:row-span-4"
   }, /*#__PURE__*/react.createElement("a", {
@@ -21047,7 +21186,7 @@ function Context() {
     icon: "fas fa-random"
   }, "Routing"), /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "fas fa-paint-roller"
-  }, "Views")), /*#__PURE__*/react.createElement(ContextNavGroup, {
+  }, "Views")), context.livewire && /*#__PURE__*/react.createElement(ContextNavGroup, {
     title: "Livewire"
   }, /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "fas fa-eye"
@@ -21094,12 +21233,12 @@ function Context() {
   }, /*#__PURE__*/react.createElement(ContextSection, {
     title: "Routing",
     icon: "fas fa-random",
-    children: /*#__PURE__*/react.createElement("div", null, "Routing")
+    children: /*#__PURE__*/react.createElement(Routing, null)
   }), /*#__PURE__*/react.createElement(ContextSection, {
     title: "Views",
     icon: "fas fa-paint-roller",
-    children: /*#__PURE__*/react.createElement("div", null, "Views")
-  })), /*#__PURE__*/react.createElement(ContextGroup, {
+    children: /*#__PURE__*/react.createElement(View, null)
+  })), context.livewire && /*#__PURE__*/react.createElement(ContextGroup, {
     title: "Livewire"
   }, /*#__PURE__*/react.createElement(ContextSection, {
     title: "Component",
@@ -21127,8 +21266,8 @@ function Context() {
 } // @ts-ignore
 
 
-function DebugTabs(_ref27) {
-  var children = _ref27.children;
+function DebugTabs(_ref31) {
+  var children = _ref31.children;
 
   var _useState12 = react.useState(0),
       currentTabIndex = _useState12[0],
@@ -21174,16 +21313,17 @@ DebugTabs.Tab = function (_props) {
   return null;
 };
 
-function DebugItem(_ref28) {
-  var children = _ref28.children,
-      _ref28$context = _ref28.context,
-      context = _ref28$context === void 0 ? null : _ref28$context,
-      _ref28$level = _ref28.level,
-      level = _ref28$level === void 0 ? null : _ref28$level,
-      _ref28$meta = _ref28.meta,
-      meta = _ref28$meta === void 0 ? null : _ref28$meta,
-      time = _ref28.time;
-  react.useState(false);
+function DebugItem(_ref32) {
+  var children = _ref32.children,
+      _ref32$context = _ref32.context,
+      context = _ref32$context === void 0 ? null : _ref32$context,
+      _ref32$level = _ref32.level,
+      level = _ref32$level === void 0 ? null : _ref32$level,
+      _ref32$meta = _ref32.meta,
+      meta = _ref32$meta === void 0 ? null : _ref32$meta,
+      time = _ref32.time;
+  react.useState(false); // TODO: Implement this
+
   var logLevelColors = {
     error: 'bg-red-500',
     warn: 'bg-orange-500',
@@ -21202,9 +21342,9 @@ function DebugItem(_ref28) {
     className: "flex align-baseline text-sm gap-1"
   }, level && /*#__PURE__*/react.createElement("span", {
     className: "\n                            " + (logLevelColors[level] || 'bg-color-gray-500') + "\n                            text-white rounded-full px-2 shadow-sm\n                        "
-  }, level), meta && Object.entries(meta).map(function (_ref29) {
-    var key = _ref29[0],
-        value = _ref29[1];
+  }, level), meta && Object.entries(meta).map(function (_ref33) {
+    var key = _ref33[0],
+        value = _ref33[1];
     return /*#__PURE__*/react.createElement("span", {
       key: key,
       className: "rounded-full px-2 ~bg-white text-gray-500 shadow-sm"
@@ -21239,15 +21379,14 @@ function Dumps() {
   console.log(dumps);
   return /*#__PURE__*/react.createElement(react.Fragment, null, dumps.map(function (dump) {
     return /*#__PURE__*/react.createElement(DebugItem, {
+      key: dump.microtime,
       time: unixToDate(dump.microtime)
     }, /*#__PURE__*/react.createElement(EditorLink, {
       path: dump.file,
       lineNumber: dump.line_number,
       className: "text-sm"
-    }), /*#__PURE__*/react.createElement("div", {
-      dangerouslySetInnerHTML: {
-        __html: dump.html_dump
-      }
+    }), /*#__PURE__*/react.createElement(SfDump, {
+      value: dump.html_dump
     }));
   }));
 }
@@ -21314,8 +21453,8 @@ function Debug() {
   })));
 }
 
-function CopyButton(_ref30) {
-  var value = _ref30.value;
+function CopyButton(_ref34) {
+  var value = _ref34.value;
 
   var _useState13 = react.useState(false),
       copied = _useState13[0],
@@ -22385,9 +22524,7 @@ function transformIgnitionError(_ref) {
         };
       }),
       livewire: report.context.livewire || null,
-      view: []
-      /* @todo ? */
-      ,
+      view: report.context.view || null,
       context: []
       /* @todo ? */
 
