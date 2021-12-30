@@ -20616,6 +20616,26 @@ function jsonStringify(value) {
   return JSON.stringify(value, null, 4);
 }
 
+function hasDebugInfo(errorOccurrence) {
+  if (errorOccurrence.glows.length) {
+    return true;
+  }
+
+  if (errorOccurrence.context_items.dumps.length) {
+    return true;
+  }
+
+  if (errorOccurrence.context_items.logs.length) {
+    return true;
+  }
+
+  if (errorOccurrence.context_items.queries.length) {
+    return true;
+  }
+
+  return false;
+}
+
 function CodeSnippet(_ref15) {
   var value = _ref15.value,
       _ref15$limitHeight = _ref15.limitHeight,
@@ -25091,10 +25111,10 @@ function NavBar(_ref) {
   }), react.createElement(NavBarItem, {
     name: "context",
     icon: "fas fa-info-circle"
-  }), react.createElement(NavBarItem, {
+  }), hasDebugInfo(errorOccurrence) && react.createElement(NavBarItem, {
     name: "debug",
     icon: "fas fa-info-bug",
-    important: true
+    important: !!errorOccurrence.context_items.dumps.length
   }), react.createElement(NavBarItem, {
     name: "share",
     icon: "fas fa-share",
@@ -25412,7 +25432,7 @@ function Ignition(_ref) {
   }), react.createElement(Section, {
     name: "context",
     children: react.createElement(Context, null)
-  }), react.createElement(Section, {
+  }), hasDebugInfo(errorOccurrence) && react.createElement(Section, {
     name: "debug",
     children: react.createElement(Debug, null)
   }))))));

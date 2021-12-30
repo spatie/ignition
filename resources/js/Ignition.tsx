@@ -3,7 +3,16 @@ import InViewContextProvider from 'contexts/InViewContextProvider';
 import NavBar from 'components/NavBar';
 import Section from 'components/Section';
 import { IgniteDataContext } from 'contexts/IgniteDataContext';
-import { ErrorOccurrence, StackTrace, Context, Debug, ErrorOccurrenceContext, ErrorCard, IgnitionConfigContextProvider } from '@flareapp/ignition-ui';
+import {
+    ErrorOccurrence,
+    StackTrace,
+    Context,
+    Debug,
+    ErrorOccurrenceContext,
+    ErrorCard,
+    IgnitionConfigContextProvider,
+    hasDebugInfo,
+} from '@flareapp/ignition-ui';
 import { IgniteData } from './types';
 import { useInView } from 'react-intersection-observer';
 
@@ -37,7 +46,9 @@ export default function Ignition({ errorOccurrence, igniteData }: Props) {
 
                             <Section name="context" children={<Context />} />
 
-                            <Section name="debug" children={<Debug />} />
+                            {hasDebugInfo(errorOccurrence) && (
+                                <Section name="debug" children={<Debug />} />
+                            )}
                         </main>
                     </InViewContextProvider>
                 </ErrorOccurrenceContext.Provider>

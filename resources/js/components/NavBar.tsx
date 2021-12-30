@@ -1,17 +1,17 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import NavBarItem from 'components/NavBarItem';
 import ShareDropdown from 'components/ShareDropdown';
 import SettingsDropdown from 'components/SettingsDropdown';
-import {ErrorOccurrenceContext} from '@flareapp/ignition-ui';
-import useHasScrolled from "hooks/useHasScrolled";
+import { ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
+import useHasScrolled from 'hooks/useHasScrolled';
 
 type Props = { showException: boolean };
 
-export default function NavBar({showException}: Props) {
+export default function NavBar({ showException }: Props) {
     const errorOccurrence = useContext(ErrorOccurrenceContext);
     const [isShareDropdownOpen, setIsShareDropdownOpen] = useState(false);
     const [isSettingsDropdownOpen, setIsSettingsDropdownOpen] = useState(false);
-    const hasScrolled = useHasScrolled({distance: 10});
+    const hasScrolled = useHasScrolled({ distance: 10 });
 
     function toggleShare() {
         setIsSettingsDropdownOpen(false);
@@ -32,21 +32,25 @@ export default function NavBar({showException}: Props) {
                         z-10 transform translate-x-0 transition-color duration-100
                     `}
                 >
-                    <div
-                        className="h-10 flex justify-between px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none"
-                    >
+                    <div className="h-10 flex justify-between px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none">
                         <ul className="-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center">
-                            <NavBarItem name="stack" icon="fas fa-code"/>
-                            <NavBarItem name="context" icon="fas fa-info-circle"/>
-                            <NavBarItem name="debug" icon="fas fa-info-bug" important/>
+                            <NavBarItem name="stack" icon="fas fa-code" />
+                            <NavBarItem name="context" icon="fas fa-info-circle" />
+                            {hasDebugInfo(errorOccurrence) && (
+                                <NavBarItem
+                                    name="debug"
+                                    icon="fas fa-info-bug"
+                                    important={!!errorOccurrence.context_items.dumps.length}
+                                />
+                            )}
                             <NavBarItem name="share" icon="fas fa-share" onClick={toggleShare}>
-                                <ShareDropdown isOpen={isShareDropdownOpen}/>
+                                <ShareDropdown isOpen={isShareDropdownOpen} />
                             </NavBarItem>
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
-                            <NavBarItem name="docs" href="https://laravel.com/docs" icon="fab fa-laravel" important/>
+                            <NavBarItem name="docs" href="https://laravel.com/docs" icon="fab fa-laravel" important />
                             <NavBarItem name="settings" icon="fas fa-cog" label={false} onClick={toggleSettings}>
-                                <SettingsDropdown isOpen={isSettingsDropdownOpen}/>
+                                <SettingsDropdown isOpen={isSettingsDropdownOpen} />
                             </NavBarItem>
 
                             {/* <li class="flex items-center">
