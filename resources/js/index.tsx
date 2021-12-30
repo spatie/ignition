@@ -4,17 +4,14 @@ import ReactDOM from 'react-dom';
 import { IgniteData } from './types';
 import './symfony/symfony';
 import '../css/app.css';
-import Ignition from "Ignition";
+import Ignition from 'Ignition';
 
 window.ignite = (data) => {
     const errorOccurrence = transformIgnitionError(data);
 
     console.log(data, errorOccurrence);
 
-    ReactDOM.render(
-        <Ignition errorOccurrence={errorOccurrence} igniteData={data} />,
-        document.querySelector('#app'),
-    );
+    ReactDOM.render(<Ignition errorOccurrence={errorOccurrence} igniteData={data} />, document.querySelector('#app'));
 };
 
 function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData): ErrorOccurrence {
@@ -82,7 +79,7 @@ function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData
                 value,
             })),
             cookies: Object.entries(report.context.cookies || {}).map(([name, value]) => ({
-                group: 'headers',
+                group: 'cookies',
                 name,
                 value,
             })),
@@ -96,21 +93,27 @@ function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData
                 name,
                 value,
             })),
-            user: Object.entries(report.context.user || {}).map(([name, value]) => ({
+            user: report.context.user
+                ? Object.entries(report.context.user).map(([name, value]) => ({
                 group: 'user',
                 name,
                 value,
-            })),
-            route: Object.entries(report.context.route || {}).map(([name, value]) => ({
-                group: 'route',
-                name,
-                value,
-            })),
-            git: Object.entries(report.context.git || {}).map(([name, value]) => ({
-                group: 'git',
-                name,
-                value,
-            })),
+            }))
+            : null,
+            route: report.context.route
+                ? Object.entries(report.context.route).map(([name, value]) => ({
+                      group: 'route',
+                      name,
+                      value,
+                  }))
+                : null,
+            git: report.context.git
+                ? Object.entries(report.context.git).map(([name, value]) => ({
+                      group: 'git',
+                      name,
+                      value,
+                  }))
+                : null,
             livewire: report.context.livewire || null,
             view: report.context.view || null,
             context: [] /* @todo ? */,
@@ -123,7 +126,7 @@ function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData
         exception_class: report.exception_class,
         exception_message: report.message,
         application_path: report.application_path,
-        application_version: report.application_version || '',
+        application_version: report.application_version,
         language_version: report.language_version,
         framework_version: report.framework_version,
         notifier_client_name: 'Flare',

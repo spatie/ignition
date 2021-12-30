@@ -58,8 +58,8 @@ export type IgnitionErrorOccurrence = {
             routeParameters: Record<string, any>;
             controllerAction: string;
             middleware: Array<string>;
-        };
-        user: Record<string, any>;
+        } | null;
+        user: Record<string, any> | null;
         env: {
             laravel_version: string;
             laravel_locale: string;

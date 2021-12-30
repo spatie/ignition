@@ -2,10 +2,11 @@
 
 @import './bootstrap.css';
 
+@import './vendor/sf-dump.css';
+
+@import './utilities/sf-dump-custom.css';
 @import './utilities/theme.css';
 @import './utilities/mask.css';
 @import './utilities/scrollbar.css';
-
-@import './vendor/sf-dump.css';
 
 @tailwind utilities;

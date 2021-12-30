@@ -36,16 +36,16 @@ function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
 
-  _setPrototypeOf(subClass, superClass);
+  _setPrototypeOf$1(subClass, superClass);
 }
 
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+function _setPrototypeOf$1(o, p) {
+  _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
 
-  return _setPrototypeOf(o, p);
+  return _setPrototypeOf$1(o, p);
 }
 
 function _unsupportedIterableToArray(o, minLen) {
@@ -99,7 +99,7 @@ object-assign
 /* eslint-disable no-unused-vars */
 
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty$9 = Object.prototype.hasOwnProperty;
+var hasOwnProperty$c = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
 function toObject(val) {
@@ -167,7 +167,7 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
     from = Object(arguments[s]);
 
     for (var key in from) {
-      if (hasOwnProperty$9.call(from, key)) {
+      if (hasOwnProperty$c.call(from, key)) {
         to[key] = from[key];
       }
     }
@@ -9322,6 +9322,9 @@ Sfdump = window.Sfdump || function (doc) {
     e.addEventListener(n, cb, false);
   };
 
+  refStyle.innerHTML = 'pre.sf-dump .sf-dump-compact, .sf-dump-str-collapse .sf-dump-str-collapse, .sf-dump-str-expand .sf-dump-str-expand { display: none; }';
+  (doc.documentElement.firstElementChild || doc.documentElement.children[0]).appendChild(refStyle);
+  refStyle = doc.createElement('style');
   (doc.documentElement.firstElementChild || doc.documentElement.children[0]).appendChild(refStyle);
 
   if (!doc.addEventListener) {
@@ -9456,7 +9459,9 @@ Sfdump = window.Sfdump || function (doc) {
     root = doc.getElementById(root);
     var indentRx = new RegExp('^(' + (root.getAttribute('data-indent-pad') || '  ').replace(rxEsc, '\\$1') + ')+', 'm'),
         options = {
-      $options: $options
+      maxDepth: 1,
+      maxStringLength: 160,
+      fileLinkFormat: null
     },
         elt = root.getElementsByTagName('A'),
         len = elt.length,
@@ -9479,12 +9484,16 @@ Sfdump = window.Sfdump || function (doc) {
           f(e.target, e);
         } else if ('A' == e.target.parentNode.tagName) {
           f(e.target.parentNode, e);
-        } else if ((n = e.target.nextElementSibling) && 'A' == n.tagName) {
-          if (!/\bsf-dump-toggle\b/.test(n.className)) {
-            n = n.nextElementSibling;
-          }
+        } else {
+          n = /\bsf-dump-ellipsis\b/.test(e.target.className) ? e.target.parentNode : e.target;
 
-          f(n, e, true);
+          if ((n = n.nextElementSibling) && 'A' == n.tagName) {
+            if (!/\bsf-dump-toggle\b/.test(n.className)) {
+              n = n.nextElementSibling || n;
+            }
+
+            f(n, e, true);
+          }
         }
       });
     }
@@ -9590,20 +9599,12 @@ Sfdump = window.Sfdump || function (doc) {
         }
 
         a.title = (a.title ? a.title + '\n[' : '[') + keyHint + '+click] Expand all children';
-        a.innerHTML += '<span>▼</span>';
+        a.innerHTML += elt.className == 'sf-dump-compact' ? '<span>▶</span>' : '<span>▼</span>';
         a.className += ' sf-dump-toggle';
         x = 1;
 
         if ('sf-dump' != elt.parentNode.className) {
           x += elt.parentNode.getAttribute('data-depth') / 1;
-        }
-
-        elt.setAttribute('data-depth', x);
-        var className = elt.className;
-        elt.className = 'sf-dump-expanded';
-
-        if (className ? 'sf-dump-expanded' !== className : x > options.maxDepth) {
-          toggle(a);
         }
       } else if (/\bsf-dump-ref\b/.test(elt.className) && (a = elt.getAttribute('href'))) {
         a = a.substr(1);
@@ -9703,7 +9704,7 @@ Sfdump = window.Sfdump || function (doc) {
       };
       var search = doc.createElement('div');
       search.className = 'sf-dump-search-wrapper sf-dump-search-hidden';
-      search.innerHTML = "\n                <input type=\"text\" class=\"sf-dump-search-input\">\n                <span class=\"sf-dump-search-count\">0 of 0</span>\n            <button type=\"button\" class=\"sf-dump-search-input-previous\" tabindex=\"-1\">\n                <svg viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1683 1331l-166 165q-19 19-45 19t-45-19L896 965l-531 531q-19 19-45 19t-45-19l-166-165q-19-19-19-45.5t19-45.5l742-741q19-19 45-19t45 19l742 741q19 19 19 45.5t-19 45.5z\"/></svg>\n            </button>\n            <button type=\"button\" class=\"sf-dump-search-input-next\" tabindex=\"-1\">\n                <svg viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1683 808l-742 741q-19 19-45 19t-45-19L109 808q-19-19-19-45.5t19-45.5l166-165q19-19 45-19t45 19l531 531 531-531q19-19 45-19t45 19l166 165q19 19 19 45.5t-19 45.5z\"/></svg>\n            </button>\n            ";
+      search.innerHTML = "\n                    <input type=\"text\" class=\"sf-dump-search-input\">\n                    <span class=\"sf-dump-search-count\">0 of 0</span>\n                    <button type=\"button\" class=\"sf-dump-search-input-previous\" tabindex=\"-1\">\n                        <svg viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1683 1331l-166 165q-19 19-45 19t-45-19L896 965l-531 531q-19 19-45 19t-45-19l-166-165q-19-19-19-45.5t19-45.5l742-741q19-19 45-19t45 19l742 741q19 19 19 45.5t-19 45.5z\"/></svg>\n                    </button>\n                    <button type=\"button\" class=\"sf-dump-search-input-next\" tabindex=\"-1\">\n                        <svg viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1683 808l-742 741q-19 19-45 19t-45-19L109 808q-19-19-19-45.5t19-45.5l166-165q19-19 45-19t45 19l531 531 531-531q19-19 45-19t45 19l166 165q19 19 19 45.5t-19 45.5z\"/></svg>\n                    </button>\n                ";
       root.insertBefore(search, root.firstChild);
       var state = new SearchState();
       var searchInput = search.querySelector('.sf-dump-search-input');
@@ -9814,7 +9815,7 @@ Sfdump = window.Sfdump || function (doc) {
           h = elt.innerHTML;
           elt[elt.innerText ? 'innerText' : 'textContent'] = s.substring(0, options.maxStringLength);
           elt.className += ' sf-dump-str-collapse';
-          elt.innerHTML = '<span class=sf-dump-str-collapse>' + h + '<a class="sf-dump-ref sf-dump-str-toggle" title="Collapse"> ◀</a></span>' + '<span class=sf-dump-str-expand>' + elt.innerHTML + '<a class="sf-dump-ref sf-dump-str-toggle" title="' + x + ' remaining characters"> ▶</a></span>';
+          elt.innerHTML = '<span class="sf-dump-str-collapse">' + h + '<a class="sf-dump-ref sf-dump-str-toggle" title="Collapse"> ◀</a></span>' + '<span class="sf-dump-str-expand">' + elt.innerHTML + '<a class="sf-dump-ref sf-dump-str-toggle" title="' + x + ' remaining characters"> ▶</a></span>';
         }
       }
     } catch (e) {}
@@ -16048,9 +16049,9 @@ var Resolver = /*#__PURE__*/function () {
 
   _proto4.loadGrammar = function loadGrammar(scopeName) {
     try {
-      var _this2 = this;
+      var _this3 = this;
 
-      var lang = _this2.scopeToLangMap[scopeName];
+      var lang = _this3.scopeToLangMap[scopeName];
 
       if (!lang) {
         return Promise.resolve(null);
@@ -16060,7 +16061,7 @@ var Resolver = /*#__PURE__*/function () {
         return Promise.resolve(lang.grammar);
       }
 
-      return Promise.resolve(fetchGrammar(languages.includes(lang) ? "" + _this2.languagesPath + lang.path : lang.path)).then(function (g) {
+      return Promise.resolve(fetchGrammar(languages.includes(lang) ? "" + _this3.languagesPath + lang.path : lang.path)).then(function (g) {
         lang.grammar = g;
         return g;
       });
@@ -16070,13 +16071,13 @@ var Resolver = /*#__PURE__*/function () {
   };
 
   _proto4.addLanguage = function addLanguage(l) {
-    var _this3 = this;
+    var _this4 = this;
 
     this.languageMap[l.id] = l;
 
     if (l.aliases) {
       l.aliases.forEach(function (a) {
-        _this3.languageMap[a] = l;
+        _this4.languageMap[a] = l;
       });
     }
 
@@ -16316,14 +16317,14 @@ var Registry = /*#__PURE__*/function (_main$Registry) {
   _inheritsLoose(Registry, _main$Registry);
 
   function Registry(_resolver) {
-    var _this4;
+    var _this5;
 
-    _this4 = _main$Registry.call(this, _resolver) || this;
-    _this4._resolver = _resolver;
-    _this4.themesPath = 'themes/';
-    _this4._resolvedThemes = {};
-    _this4._resolvedGrammars = {};
-    return _this4;
+    _this5 = _main$Registry.call(this, _resolver) || this;
+    _this5._resolver = _resolver;
+    _this5.themesPath = 'themes/';
+    _this5._resolvedThemes = {};
+    _this5._resolvedGrammars = {};
+    return _this5;
   }
 
   var _proto5 = Registry.prototype;
@@ -16338,17 +16339,17 @@ var Registry = /*#__PURE__*/function (_main$Registry) {
 
   _proto5.loadTheme = function loadTheme(theme) {
     try {
-      var _this6 = this;
+      var _this7 = this;
 
       if (typeof theme === 'string') {
         var _temp3 = function _temp3() {
-          return _this6._resolvedThemes[theme];
+          return _this7._resolvedThemes[theme];
         };
 
         var _temp4 = function () {
-          if (!_this6._resolvedThemes[theme]) {
-            return Promise.resolve(fetchTheme("" + _this6.themesPath + theme + ".json")).then(function (_fetchTheme) {
-              _this6._resolvedThemes[theme] = _fetchTheme;
+          if (!_this7._resolvedThemes[theme]) {
+            return Promise.resolve(fetchTheme("" + _this7.themesPath + theme + ".json")).then(function (_fetchTheme) {
+              _this7._resolvedThemes[theme] = _fetchTheme;
             });
           }
         }();
@@ -16358,7 +16359,7 @@ var Registry = /*#__PURE__*/function (_main$Registry) {
         theme = toShikiTheme(theme);
 
         if (theme.name) {
-          _this6._resolvedThemes[theme.name] = theme;
+          _this7._resolvedThemes[theme.name] = theme;
         }
 
         return Promise.resolve(theme);
@@ -16370,10 +16371,10 @@ var Registry = /*#__PURE__*/function (_main$Registry) {
 
   _proto5.loadThemes = function loadThemes(themes) {
     try {
-      var _this8 = this;
+      var _this9 = this;
 
       return Promise.resolve(Promise.all(themes.map(function (theme) {
-        return _this8.loadTheme(theme);
+        return _this9.loadTheme(theme);
       })));
     } catch (e) {
       return Promise.reject(e);
@@ -16390,14 +16391,14 @@ var Registry = /*#__PURE__*/function (_main$Registry) {
 
   _proto5.loadLanguage = function loadLanguage(lang) {
     try {
-      var _this10 = this;
+      var _this11 = this;
 
-      return Promise.resolve(_this10.loadGrammar(lang.scopeName)).then(function (g) {
-        _this10._resolvedGrammars[lang.id] = g;
+      return Promise.resolve(_this11.loadGrammar(lang.scopeName)).then(function (g) {
+        _this11._resolvedGrammars[lang.id] = g;
 
         if (lang.aliases) {
           lang.aliases.forEach(function (la) {
-            _this10._resolvedGrammars[la] = g;
+            _this11._resolvedGrammars[la] = g;
           });
         }
       });
@@ -16408,16 +16409,16 @@ var Registry = /*#__PURE__*/function (_main$Registry) {
 
   _proto5.loadLanguages = function loadLanguages(langs) {
     try {
-      var _this12 = this;
+      var _this13 = this;
 
       for (var _iterator = _createForOfIteratorHelperLoose(langs), _step; !(_step = _iterator()).done;) {
         var lang = _step.value;
 
-        _this12._resolver.addLanguage(lang);
+        _this13._resolver.addLanguage(lang);
       }
 
       var _temp6 = _forOf(langs, function (lang) {
-        return Promise.resolve(_this12.loadLanguage(lang)).then(function () {});
+        return Promise.resolve(_this13.loadLanguage(lang)).then(function () {});
       });
 
       return Promise.resolve(_temp6 && _temp6.then ? _temp6.then(function () {}) : void 0);
@@ -16487,17 +16488,17 @@ var Symbol$1 = _root.Symbol;
 var _Symbol = Symbol$1;
 /** Used for built-in method references. */
 
-var objectProto$b = Object.prototype;
+var objectProto$e = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$8 = objectProto$b.hasOwnProperty;
+var hasOwnProperty$b = objectProto$e.hasOwnProperty;
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
 
-var nativeObjectToString$1 = objectProto$b.toString;
+var nativeObjectToString$1 = objectProto$e.toString;
 /** Built-in value references. */
 
 var symToStringTag$1 = _Symbol ? _Symbol.toStringTag : undefined;
@@ -16510,7 +16511,7 @@ var symToStringTag$1 = _Symbol ? _Symbol.toStringTag : undefined;
  */
 
 function getRawTag(value) {
-  var isOwn = hasOwnProperty$8.call(value, symToStringTag$1),
+  var isOwn = hasOwnProperty$b.call(value, symToStringTag$1),
       tag = value[symToStringTag$1];
 
   try {
@@ -16534,14 +16535,14 @@ function getRawTag(value) {
 var _getRawTag = getRawTag;
 /** Used for built-in method references. */
 
-var objectProto$a = Object.prototype;
+var objectProto$d = Object.prototype;
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
 
-var nativeObjectToString = objectProto$a.toString;
+var nativeObjectToString = objectProto$d.toString;
 /**
  * Converts `value` to a string using `Object.prototype.toString`.
  *
@@ -16713,16 +16714,16 @@ var reIsHostCtor = /^\[object .+?Constructor\]$/;
 /** Used for built-in method references. */
 
 var funcProto = Function.prototype,
-    objectProto$9 = Object.prototype;
+    objectProto$c = Object.prototype;
 /** Used to resolve the decompiled source of functions. */
 
 var funcToString = funcProto.toString;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$7 = objectProto$9.hasOwnProperty;
+var hasOwnProperty$a = objectProto$c.hasOwnProperty;
 /** Used to detect if a method is native. */
 
-var reIsNative = RegExp('^' + funcToString.call(hasOwnProperty$7).replace(reRegExpChar, '\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
+var reIsNative = RegExp('^' + funcToString.call(hasOwnProperty$a).replace(reRegExpChar, '\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
 /**
  * The base implementation of `_.isNative` without bad shim checks.
  *
@@ -16920,13 +16921,13 @@ function baseIsArguments(value) {
 var _baseIsArguments = baseIsArguments;
 /** Used for built-in method references. */
 
-var objectProto$8 = Object.prototype;
+var objectProto$b = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$6 = objectProto$8.hasOwnProperty;
+var hasOwnProperty$9 = objectProto$b.hasOwnProperty;
 /** Built-in value references. */
 
-var propertyIsEnumerable$1 = objectProto$8.propertyIsEnumerable;
+var propertyIsEnumerable$1 = objectProto$b.propertyIsEnumerable;
 /**
  * Checks if `value` is likely an `arguments` object.
  *
@@ -16949,7 +16950,7 @@ var propertyIsEnumerable$1 = objectProto$8.propertyIsEnumerable;
 var isArguments = _baseIsArguments(function () {
   return arguments;
 }()) ? _baseIsArguments : function (value) {
-  return isObjectLike_1(value) && hasOwnProperty$6.call(value, 'callee') && !propertyIsEnumerable$1.call(value, 'callee');
+  return isObjectLike_1(value) && hasOwnProperty$9.call(value, 'callee') && !propertyIsEnumerable$1.call(value, 'callee');
 };
 var isArguments_1 = isArguments;
 /**
@@ -16997,7 +16998,7 @@ function stubFalse() {
 }
 
 var stubFalse_1 = stubFalse;
-var isBuffer_1 = createCommonjsModule(function (module, exports) {
+var isBuffer_1$1 = createCommonjsModule(function (module, exports) {
   /** Detect free variable `exports`. */
   var freeExports = exports && !exports.nodeType && exports;
   /** Detect free variable `module`. */
@@ -17098,11 +17099,11 @@ var argsTag$1 = '[object Arguments]',
     dateTag$1 = '[object Date]',
     errorTag$1 = '[object Error]',
     funcTag = '[object Function]',
-    mapTag$2 = '[object Map]',
+    mapTag$3 = '[object Map]',
     numberTag$1 = '[object Number]',
     objectTag$2 = '[object Object]',
     regexpTag$1 = '[object RegExp]',
-    setTag$2 = '[object Set]',
+    setTag$3 = '[object Set]',
     stringTag$1 = '[object String]',
     weakMapTag$1 = '[object WeakMap]';
 var arrayBufferTag$1 = '[object ArrayBuffer]',
@@ -17120,7 +17121,7 @@ var arrayBufferTag$1 = '[object ArrayBuffer]',
 
 var typedArrayTags = {};
 typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
-typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$1] = typedArrayTags[boolTag$1] = typedArrayTags[dataViewTag$2] = typedArrayTags[dateTag$1] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag] = typedArrayTags[mapTag$2] = typedArrayTags[numberTag$1] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$1] = typedArrayTags[setTag$2] = typedArrayTags[stringTag$1] = typedArrayTags[weakMapTag$1] = false;
+typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$1] = typedArrayTags[boolTag$1] = typedArrayTags[dataViewTag$2] = typedArrayTags[dateTag$1] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag] = typedArrayTags[mapTag$3] = typedArrayTags[numberTag$1] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$1] = typedArrayTags[setTag$3] = typedArrayTags[stringTag$1] = typedArrayTags[weakMapTag$1] = false;
 /**
  * The base implementation of `_.isTypedArray` without Node.js optimizations.
  *
@@ -17206,10 +17207,10 @@ var isTypedArray = nodeIsTypedArray ? _baseUnary(nodeIsTypedArray) : _baseIsType
 var isTypedArray_1 = isTypedArray;
 /** Used for built-in method references. */
 
-var objectProto$7 = Object.prototype;
+var objectProto$a = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$5 = objectProto$7.hasOwnProperty;
+var hasOwnProperty$8 = objectProto$a.hasOwnProperty;
 /**
  * Creates an array of the enumerable property names of the array-like `value`.
  *
@@ -17222,14 +17223,14 @@ var hasOwnProperty$5 = objectProto$7.hasOwnProperty;
 function arrayLikeKeys(value, inherited) {
   var isArr = isArray_1(value),
       isArg = !isArr && isArguments_1(value),
-      isBuff = !isArr && !isArg && isBuffer_1(value),
+      isBuff = !isArr && !isArg && isBuffer_1$1(value),
       isType = !isArr && !isArg && !isBuff && isTypedArray_1(value),
       skipIndexes = isArr || isArg || isBuff || isType,
       result = skipIndexes ? _baseTimes(value.length, String) : [],
       length = result.length;
 
   for (var key in value) {
-    if ((inherited || hasOwnProperty$5.call(value, key)) && !(skipIndexes && ( // Safari 9 has enumerable `arguments.length` in strict mode.
+    if ((inherited || hasOwnProperty$8.call(value, key)) && !(skipIndexes && ( // Safari 9 has enumerable `arguments.length` in strict mode.
     key == 'length' || // Node.js 0.10 has enumerable non-index properties on buffers.
     isBuff && (key == 'offset' || key == 'parent') || // PhantomJS 2 has enumerable non-index properties on typed arrays.
     isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset') || // Skip index properties.
@@ -17244,7 +17245,7 @@ function arrayLikeKeys(value, inherited) {
 var _arrayLikeKeys = arrayLikeKeys;
 /** Used for built-in method references. */
 
-var objectProto$6 = Object.prototype;
+var objectProto$9 = Object.prototype;
 /**
  * Checks if `value` is likely a prototype object.
  *
@@ -17255,7 +17256,7 @@ var objectProto$6 = Object.prototype;
 
 function isPrototype(value) {
   var Ctor = value && value.constructor,
-      proto = typeof Ctor == 'function' && Ctor.prototype || objectProto$6;
+      proto = typeof Ctor == 'function' && Ctor.prototype || objectProto$9;
   return value === proto;
 }
 
@@ -17283,10 +17284,10 @@ var nativeKeys = _overArg(Object.keys, Object);
 var _nativeKeys = nativeKeys;
 /** Used for built-in method references. */
 
-var objectProto$5 = Object.prototype;
+var objectProto$8 = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$4 = objectProto$5.hasOwnProperty;
+var hasOwnProperty$7 = objectProto$8.hasOwnProperty;
 /**
  * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
  *
@@ -17303,7 +17304,7 @@ function baseKeys(object) {
   var result = [];
 
   for (var key in Object(object)) {
-    if (hasOwnProperty$4.call(object, key) && key != 'constructor') {
+    if (hasOwnProperty$7.call(object, key) && key != 'constructor') {
       result.push(key);
     }
   }
@@ -17696,10 +17697,10 @@ var _hashDelete = hashDelete;
 var HASH_UNDEFINED$2 = '__lodash_hash_undefined__';
 /** Used for built-in method references. */
 
-var objectProto$4 = Object.prototype;
+var objectProto$7 = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
+var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
 /**
  * Gets the hash value for `key`.
  *
@@ -17718,16 +17719,16 @@ function hashGet(key) {
     return result === HASH_UNDEFINED$2 ? undefined : result;
   }
 
-  return hasOwnProperty$3.call(data, key) ? data[key] : undefined;
+  return hasOwnProperty$6.call(data, key) ? data[key] : undefined;
 }
 
 var _hashGet = hashGet;
 /** Used for built-in method references. */
 
-var objectProto$3 = Object.prototype;
+var objectProto$6 = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$2 = objectProto$3.hasOwnProperty;
+var hasOwnProperty$5 = objectProto$6.hasOwnProperty;
 /**
  * Checks if a hash value for `key` exists.
  *
@@ -17740,7 +17741,7 @@ var hasOwnProperty$2 = objectProto$3.hasOwnProperty;
 
 function hashHas(key) {
   var data = this.__data__;
-  return _nativeCreate ? data[key] !== undefined : hasOwnProperty$2.call(data, key);
+  return _nativeCreate ? data[key] !== undefined : hasOwnProperty$5.call(data, key);
 }
 
 var _hashHas = hashHas;
@@ -18216,10 +18217,10 @@ var COMPARE_PARTIAL_FLAG$4 = 1,
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
     errorTag = '[object Error]',
-    mapTag$1 = '[object Map]',
+    mapTag$2 = '[object Map]',
     numberTag = '[object Number]',
     regexpTag = '[object RegExp]',
-    setTag$1 = '[object Set]',
+    setTag$2 = '[object Set]',
     stringTag = '[object String]',
     symbolTag$1 = '[object Symbol]';
 var arrayBufferTag = '[object ArrayBuffer]',
@@ -18280,10 +18281,10 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
       // for more details.
       return object == other + '';
 
-    case mapTag$1:
+    case mapTag$2:
       var convert = _mapToArray;
 
-    case setTag$1:
+    case setTag$2:
       var isPartial = bitmask & COMPARE_PARTIAL_FLAG$4;
       convert || (convert = _setToArray);
 
@@ -18412,13 +18413,13 @@ function stubArray() {
 var stubArray_1 = stubArray;
 /** Used for built-in method references. */
 
-var objectProto$2 = Object.prototype;
+var objectProto$5 = Object.prototype;
 /** Built-in value references. */
 
-var propertyIsEnumerable = objectProto$2.propertyIsEnumerable;
+var propertyIsEnumerable = objectProto$5.propertyIsEnumerable;
 /* Built-in method references for those with the same name as other `lodash` methods. */
 
-var nativeGetSymbols = Object.getOwnPropertySymbols;
+var nativeGetSymbols$1 = Object.getOwnPropertySymbols;
 /**
  * Creates an array of the own enumerable symbols of `object`.
  *
@@ -18427,13 +18428,13 @@ var nativeGetSymbols = Object.getOwnPropertySymbols;
  * @returns {Array} Returns the array of symbols.
  */
 
-var getSymbols = !nativeGetSymbols ? stubArray_1 : function (object) {
+var getSymbols = !nativeGetSymbols$1 ? stubArray_1 : function (object) {
   if (object == null) {
     return [];
   }
 
   object = Object(object);
-  return _arrayFilter(nativeGetSymbols(object), function (symbol) {
+  return _arrayFilter(nativeGetSymbols$1(object), function (symbol) {
     return propertyIsEnumerable.call(object, symbol);
   });
 };
@@ -18456,10 +18457,10 @@ var _getAllKeys = getAllKeys;
 var COMPARE_PARTIAL_FLAG$3 = 1;
 /** Used for built-in method references. */
 
-var objectProto$1 = Object.prototype;
+var objectProto$4 = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty$1 = objectProto$1.hasOwnProperty;
+var hasOwnProperty$4 = objectProto$4.hasOwnProperty;
 /**
  * A specialized version of `baseIsEqualDeep` for objects with support for
  * partial deep comparisons.
@@ -18490,7 +18491,7 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
   while (index--) {
     var key = objProps[index];
 
-    if (!(isPartial ? key in other : hasOwnProperty$1.call(other, key))) {
+    if (!(isPartial ? key in other : hasOwnProperty$4.call(other, key))) {
       return false;
     }
   } // Check that cyclic values are equal.
@@ -18563,10 +18564,10 @@ var WeakMap$1 = _getNative(_root, 'WeakMap');
 var _WeakMap = WeakMap$1;
 /** `Object#toString` result references. */
 
-var mapTag = '[object Map]',
+var mapTag$1 = '[object Map]',
     objectTag$1 = '[object Object]',
     promiseTag = '[object Promise]',
-    setTag = '[object Set]',
+    setTag$1 = '[object Set]',
     weakMapTag = '[object WeakMap]';
 var dataViewTag = '[object DataView]';
 /** Used to detect maps, sets, and weakmaps. */
@@ -18587,7 +18588,7 @@ var dataViewCtorString = _toSource(_DataView),
 
 var getTag = _baseGetTag; // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
 
-if (_DataView && getTag(new _DataView(new ArrayBuffer(1))) != dataViewTag || _Map && getTag(new _Map()) != mapTag || _Promise && getTag(_Promise.resolve()) != promiseTag || _Set && getTag(new _Set()) != setTag || _WeakMap && getTag(new _WeakMap()) != weakMapTag) {
+if (_DataView && getTag(new _DataView(new ArrayBuffer(1))) != dataViewTag || _Map && getTag(new _Map()) != mapTag$1 || _Promise && getTag(_Promise.resolve()) != promiseTag || _Set && getTag(new _Set()) != setTag$1 || _WeakMap && getTag(new _WeakMap()) != weakMapTag) {
   getTag = function getTag(value) {
     var result = _baseGetTag(value),
         Ctor = result == objectTag$1 ? value.constructor : undefined,
@@ -18599,13 +18600,13 @@ if (_DataView && getTag(new _DataView(new ArrayBuffer(1))) != dataViewTag || _Ma
           return dataViewTag;
 
         case mapCtorString:
-          return mapTag;
+          return mapTag$1;
 
         case promiseCtorString:
           return promiseTag;
 
         case setCtorString:
-          return setTag;
+          return setTag$1;
 
         case weakMapCtorString:
           return weakMapTag;
@@ -18627,10 +18628,10 @@ var argsTag = '[object Arguments]',
     objectTag = '[object Object]';
 /** Used for built-in method references. */
 
-var objectProto = Object.prototype;
+var objectProto$3 = Object.prototype;
 /** Used to check objects for own properties. */
 
-var hasOwnProperty = objectProto.hasOwnProperty;
+var hasOwnProperty$3 = objectProto$3.hasOwnProperty;
 /**
  * A specialized version of `baseIsEqual` for arrays and objects which performs
  * deep comparisons and tracks traversed objects enabling objects with circular
@@ -18657,8 +18658,8 @@ function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
       othIsObj = othTag == objectTag,
       isSameTag = objTag == othTag;
 
-  if (isSameTag && isBuffer_1(object)) {
-    if (!isBuffer_1(other)) {
+  if (isSameTag && isBuffer_1$1(object)) {
+    if (!isBuffer_1$1(other)) {
       return false;
     }
 
@@ -18672,8 +18673,8 @@ function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
   }
 
   if (!(bitmask & COMPARE_PARTIAL_FLAG$2)) {
-    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+    var objIsWrapped = objIsObj && hasOwnProperty$3.call(object, '__wrapped__'),
+        othIsWrapped = othIsObj && hasOwnProperty$3.call(other, '__wrapped__');
 
     if (objIsWrapped || othIsWrapped) {
       var objUnwrapped = objIsWrapped ? object.value() : object,
@@ -18915,7 +18916,7 @@ function isKey(value, object) {
 var _isKey = isKey;
 /** Error message constants. */
 
-var FUNC_ERROR_TEXT = 'Expected a function';
+var FUNC_ERROR_TEXT$1 = 'Expected a function';
 /**
  * Creates a function that memoizes the result of `func`. If `resolver` is
  * provided, it determines the cache key for storing the result based on the
@@ -18963,7 +18964,7 @@ var FUNC_ERROR_TEXT = 'Expected a function';
 
 function memoize(func, resolver) {
   if (typeof func != 'function' || resolver != null && typeof resolver != 'function') {
-    throw new TypeError(FUNC_ERROR_TEXT);
+    throw new TypeError(FUNC_ERROR_TEXT$1);
   }
 
   var memoized = function memoized() {
@@ -19618,6 +19619,69 @@ function useKeyboardShortcut(key, callback) {
   }, [key, callback]);
 }
 
+function _wrapRegExp() {
+  _wrapRegExp = function _wrapRegExp(re, groups) {
+    return new BabelRegExp(re, undefined, groups);
+  };
+
+  var _super = RegExp.prototype;
+
+  var _groups = new WeakMap();
+
+  function BabelRegExp(re, flags, groups) {
+    var _this = new RegExp(re, flags);
+
+    _groups.set(_this, groups || _groups.get(re));
+
+    return _setPrototypeOf(_this, BabelRegExp.prototype);
+  }
+
+  _inherits(BabelRegExp, RegExp);
+
+  BabelRegExp.prototype.exec = function (str) {
+    var result = _super.exec.call(this, str);
+
+    if (result) result.groups = buildGroups(result, this);
+    return result;
+  };
+
+  BabelRegExp.prototype[Symbol.replace] = function (str, substitution) {
+    if (typeof substitution === "string") {
+      var groups = _groups.get(this);
+
+      return _super[Symbol.replace].call(this, str, substitution.replace(/\$<([^>]+)>/g, function (_, name) {
+        return "$" + groups[name];
+      }));
+    } else if (typeof substitution === "function") {
+      var _this = this;
+
+      return _super[Symbol.replace].call(this, str, function () {
+        var args = arguments;
+
+        if (typeof args[args.length - 1] !== "object") {
+          args = [].slice.call(args);
+          args.push(buildGroups(args, _this));
+        }
+
+        return substitution.apply(this, args);
+      });
+    } else {
+      return _super[Symbol.replace].call(this, str, substitution);
+    }
+  };
+
+  function buildGroups(result, re) {
+    var g = _groups.get(re);
+
+    return Object.keys(g).reduce(function (groups, name) {
+      groups[name] = result[g[name]];
+      return groups;
+    }, Object.create(null));
+  }
+
+  return _wrapRegExp.apply(this, arguments);
+}
+
 function _extends() {
   _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -19634,6 +19698,30 @@ function _extends() {
   };
 
   return _extends.apply(this, arguments);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
 }
 
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -20149,7 +20237,9 @@ function RelaxedFilePath(_ref10) {
   return /*#__PURE__*/react.createElement("span", {
     className: "group"
   }, parts.map(function (part, index) {
-    return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("span", {
+    return /*#__PURE__*/react.createElement(react.Fragment, {
+      key: index
+    }, /*#__PURE__*/react.createElement("span", {
       key: index,
       className: "group-hover:underline"
     }, part), /*#__PURE__*/react.createElement("span", {
@@ -20522,6 +20612,10 @@ function unixToDate(timestamp) {
   return new Date(timestamp * 1000);
 }
 
+function jsonStringify(value) {
+  return JSON.stringify(value, null, 4);
+}
+
 function CodeSnippet(_ref15) {
   var value = _ref15.value,
       _ref15$limitHeight = _ref15.limitHeight,
@@ -20833,7 +20927,7 @@ function ContextNavItem(_ref21) {
   }), children);
 }
 
-var _excluded$2 = ["children", "title", "className"];
+var _excluded$4 = ["children", "title", "className"];
 
 function DefinitionList(_ref) {
   var children = _ref.children,
@@ -20841,7 +20935,7 @@ function DefinitionList(_ref) {
       title = _ref$title === void 0 ? '' : _ref$title,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
-      props = _objectWithoutPropertiesLoose(_ref, _excluded$2);
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$4);
 
   return /*#__PURE__*/react.createElement(react.Fragment, null, title && /*#__PURE__*/react.createElement("h2", {
     className: "mb-6 col-span-2 font-bold leading-snug text-xl ~text-indigo-600 uppercase tracking-wider"
@@ -20863,9 +20957,15 @@ function DefinitionListRow(_ref22) {
 
   if (react.isValidElement(value)) {
     valueOutput = value;
+  } else if (typeof value === 'boolean') {
+    valueOutput = value ? /*#__PURE__*/react.createElement("i", {
+      className: "fas fa-check"
+    }) : /*#__PURE__*/react.createElement("i", {
+      className: "fas fa-times"
+    });
   } else if (typeof value === 'object') {
     valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
-      value: JSON.stringify(value, null, 4)
+      value: jsonStringify(value)
     });
   } else if (typeof value === 'string') {
     valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
@@ -20934,11 +21034,453 @@ function ContextList(_ref25) {
     });
   }));
 }
+/**
+ * Checks if `value` is `null` or `undefined`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is nullish, else `false`.
+ * @example
+ *
+ * _.isNil(null);
+ * // => true
+ *
+ * _.isNil(void 0);
+ * // => true
+ *
+ * _.isNil(NaN);
+ * // => false
+ */
+
+
+function isNil(value) {
+  return value == null;
+}
+
+var isNil_1 = isNil;
+/** `Object#toString` result references. */
+
+var mapTag = '[object Map]',
+    setTag = '[object Set]';
+/** Used for built-in method references. */
+
+var objectProto$2 = Object.prototype;
+/** Used to check objects for own properties. */
+
+var hasOwnProperty$2 = objectProto$2.hasOwnProperty;
+/**
+ * Checks if `value` is an empty object, collection, map, or set.
+ *
+ * Objects are considered empty if they have no own enumerable string keyed
+ * properties.
+ *
+ * Array-like values such as `arguments` objects, arrays, buffers, strings, or
+ * jQuery-like collections are considered empty if they have a `length` of `0`.
+ * Similarly, maps and sets are considered empty if they have a `size` of `0`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is empty, else `false`.
+ * @example
+ *
+ * _.isEmpty(null);
+ * // => true
+ *
+ * _.isEmpty(true);
+ * // => true
+ *
+ * _.isEmpty(1);
+ * // => true
+ *
+ * _.isEmpty([1, 2, 3]);
+ * // => false
+ *
+ * _.isEmpty({ 'a': 1 });
+ * // => false
+ */
+
+function isEmpty(value) {
+  if (value == null) {
+    return true;
+  }
+
+  if (isArrayLike_1(value) && (isArray_1(value) || typeof value == 'string' || typeof value.splice == 'function' || isBuffer_1$1(value) || isTypedArray_1(value) || isArguments_1(value))) {
+    return !value.length;
+  }
+
+  var tag = _getTag(value);
+
+  if (tag == mapTag || tag == setTag) {
+    return !value.size;
+  }
+
+  if (_isPrototype(value)) {
+    return !_baseKeys(value).length;
+  }
+
+  for (var key in value) {
+    if (hasOwnProperty$2.call(value, key)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+var isEmpty_1 = isEmpty;
+/** Error message constants. */
+
+var FUNC_ERROR_TEXT = 'Expected a function';
+/**
+ * Creates a function that negates the result of the predicate `func`. The
+ * `func` predicate is invoked with the `this` binding and arguments of the
+ * created function.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {Function} predicate The predicate to negate.
+ * @returns {Function} Returns the new negated function.
+ * @example
+ *
+ * function isEven(n) {
+ *   return n % 2 == 0;
+ * }
+ *
+ * _.filter([1, 2, 3, 4, 5, 6], _.negate(isEven));
+ * // => [1, 3, 5]
+ */
+
+function negate(predicate) {
+  if (typeof predicate != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+
+  return function () {
+    var args = arguments;
+
+    switch (args.length) {
+      case 0:
+        return !predicate.call(this);
+
+      case 1:
+        return !predicate.call(this, args[0]);
+
+      case 2:
+        return !predicate.call(this, args[0], args[1]);
+
+      case 3:
+        return !predicate.call(this, args[0], args[1], args[2]);
+    }
+
+    return !predicate.apply(this, args);
+  };
+}
+
+var negate_1 = negate;
+/** Used for built-in method references. */
+
+var objectProto$1 = Object.prototype;
+/** Used to check objects for own properties. */
+
+var hasOwnProperty$1 = objectProto$1.hasOwnProperty;
+/**
+ * Assigns `value` to `key` of `object` if the existing value is not equivalent
+ * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * for equality comparisons.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
+
+function assignValue(object, key, value) {
+  var objValue = object[key];
+
+  if (!(hasOwnProperty$1.call(object, key) && eq_1(objValue, value)) || value === undefined && !(key in object)) {
+    _baseAssignValue(object, key, value);
+  }
+}
+
+var _assignValue = assignValue;
+/**
+ * The base implementation of `_.set`.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {Array|string} path The path of the property to set.
+ * @param {*} value The value to set.
+ * @param {Function} [customizer] The function to customize path creation.
+ * @returns {Object} Returns `object`.
+ */
+
+function baseSet(object, path, value, customizer) {
+  if (!isObject_1(object)) {
+    return object;
+  }
+
+  path = _castPath(path, object);
+  var index = -1,
+      length = path.length,
+      lastIndex = length - 1,
+      nested = object;
+
+  while (nested != null && ++index < length) {
+    var key = _toKey(path[index]),
+        newValue = value;
+
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return object;
+    }
+
+    if (index != lastIndex) {
+      var objValue = nested[key];
+      newValue = customizer ? customizer(objValue, key, nested) : undefined;
+
+      if (newValue === undefined) {
+        newValue = isObject_1(objValue) ? objValue : _isIndex(path[index + 1]) ? [] : {};
+      }
+    }
+
+    _assignValue(nested, key, newValue);
+
+    nested = nested[key];
+  }
+
+  return object;
+}
+
+var _baseSet = baseSet;
+/**
+ * The base implementation of  `_.pickBy` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The source object.
+ * @param {string[]} paths The property paths to pick.
+ * @param {Function} predicate The function invoked per property.
+ * @returns {Object} Returns the new object.
+ */
+
+function basePickBy(object, paths, predicate) {
+  var index = -1,
+      length = paths.length,
+      result = {};
+
+  while (++index < length) {
+    var path = paths[index],
+        value = _baseGet(object, path);
+
+    if (predicate(value, path)) {
+      _baseSet(result, _castPath(path, object), value);
+    }
+  }
+
+  return result;
+}
+
+var _basePickBy = basePickBy;
+/** Built-in value references. */
+
+var getPrototype = _overArg(Object.getPrototypeOf, Object);
+
+var _getPrototype = getPrototype;
+/* Built-in method references for those with the same name as other `lodash` methods. */
+
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+/**
+ * Creates an array of the own and inherited enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+
+var getSymbolsIn = !nativeGetSymbols ? stubArray_1 : function (object) {
+  var result = [];
+
+  while (object) {
+    _arrayPush(result, _getSymbols(object));
+
+    object = _getPrototype(object);
+  }
+
+  return result;
+};
+var _getSymbolsIn = getSymbolsIn;
+/**
+ * This function is like
+ * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * except that it includes inherited enumerable properties.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+
+function nativeKeysIn(object) {
+  var result = [];
+
+  if (object != null) {
+    for (var key in Object(object)) {
+      result.push(key);
+    }
+  }
+
+  return result;
+}
+
+var _nativeKeysIn = nativeKeysIn;
+/** Used for built-in method references. */
+
+var objectProto = Object.prototype;
+/** Used to check objects for own properties. */
+
+var hasOwnProperty = objectProto.hasOwnProperty;
+/**
+ * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+
+function baseKeysIn(object) {
+  if (!isObject_1(object)) {
+    return _nativeKeysIn(object);
+  }
+
+  var isProto = _isPrototype(object),
+      result = [];
+
+  for (var key in object) {
+    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+      result.push(key);
+    }
+  }
+
+  return result;
+}
+
+var _baseKeysIn = baseKeysIn;
+/**
+ * Creates an array of the own and inherited enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keysIn(new Foo);
+ * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+ */
+
+function keysIn(object) {
+  return isArrayLike_1(object) ? _arrayLikeKeys(object, true) : _baseKeysIn(object);
+}
+
+var keysIn_1 = keysIn;
+/**
+ * Creates an array of own and inherited enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+
+function getAllKeysIn(object) {
+  return _baseGetAllKeys(object, keysIn_1, _getSymbolsIn);
+}
+
+var _getAllKeysIn = getAllKeysIn;
+/**
+ * Creates an object composed of the `object` properties `predicate` returns
+ * truthy for. The predicate is invoked with two arguments: (value, key).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {Function} [predicate=_.identity] The function invoked per property.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.pickBy(object, _.isNumber);
+ * // => { 'a': 1, 'c': 3 }
+ */
+
+function pickBy(object, predicate) {
+  if (object == null) {
+    return {};
+  }
+
+  var props = _arrayMap(_getAllKeysIn(object), function (prop) {
+    return [prop];
+  });
+
+  predicate = _baseIteratee(predicate);
+  return _basePickBy(object, props, function (value, path) {
+    return predicate(value, path[0]);
+  });
+}
+
+var pickBy_1 = pickBy;
+/**
+ * The opposite of `_.pickBy`; this method creates an object composed of
+ * the own and inherited enumerable string keyed properties of `object` that
+ * `predicate` doesn't return truthy for. The predicate is invoked with two
+ * arguments: (value, key).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {Function} [predicate=_.identity] The function invoked per property.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.omitBy(object, _.isNumber);
+ * // => { 'b': '2' }
+ */
+
+function omitBy(object, predicate) {
+  return pickBy_1(object, negate_1(_baseIteratee(predicate)));
+}
+
+var omitBy_1 = omitBy;
 
 function Headers() {
   var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var headers = omitBy_1(getContextValues(errorOccurrence, 'headers'), isNil_1);
+  headers = omitBy_1(headers, isEmpty_1);
   return /*#__PURE__*/react.createElement(ContextList, {
-    items: getContextValues(errorOccurrence, 'headers')
+    items: headers
   });
 }
 
@@ -20955,7 +21497,7 @@ function Body() {
   return /*#__PURE__*/react.createElement("div", {
     className: "col-span-2"
   }, /*#__PURE__*/react.createElement(CodeSnippet, {
-    value: JSON.stringify(body)
+    value: jsonStringify(body)
   }));
 }
 
@@ -20965,7 +21507,7 @@ function Files() {
   return /*#__PURE__*/react.createElement("div", {
     className: "col-span-2"
   }, /*#__PURE__*/react.createElement(CodeSnippet, {
-    value: JSON.stringify(files)
+    value: jsonStringify(files)
   }));
 }
 
@@ -21032,13 +21574,13 @@ function LivewireUpdates() {
   }));
 }
 
-var _excluded$1 = ["children", "className"];
+var _excluded$3 = ["children", "className"];
 
 function UnorderedList(_ref) {
   var children = _ref.children,
       _ref$className2 = _ref.className,
       className = _ref$className2 === void 0 ? '' : _ref$className2,
-      props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$3);
 
   return /*#__PURE__*/react.createElement(react.Fragment, null, children && /*#__PURE__*/react.createElement("ul", _extends({
     className: "gap-y-2 flex flex-col border-l-2 border-l-gray-300 " + className
@@ -21056,7 +21598,7 @@ function UnorderedListItem(_ref28) {
     valueOutput = value;
   } else if (typeof value === 'object') {
     valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
-      value: JSON.stringify(value, null, 4)
+      value: jsonStringify(value)
     });
   } else if (typeof value === 'string') {
     valueOutput = /*#__PURE__*/react.createElement(CodeSnippet, {
@@ -21098,12 +21640,11 @@ function Routing() {
   }));
 }
 
-var _excluded = ["value"];
+var _excluded$2 = ["value"];
 
 function SfDump(_ref) {
-  var value = _ref.value;
-
-  _objectWithoutPropertiesLoose(_ref, _excluded);
+  var value = _ref.value,
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$2);
 
   react.useEffect(function () {
     var match = value.match(/sf-dump-\d+/);
@@ -21115,11 +21656,11 @@ function SfDump(_ref) {
 
     window.Sfdump(match[0]);
   }, [value]);
-  return /*#__PURE__*/react.createElement("div", {
+  return /*#__PURE__*/react.createElement("div", _extends({
     dangerouslySetInnerHTML: {
       __html: value
     }
-  });
+  }, props));
 }
 
 function View() {
@@ -21151,10 +21692,2464 @@ function View() {
   }));
 }
 
-function Context() {
-  var _useContext5 = react.useContext(ErrorOccurrenceContext),
-      context = _useContext5.context_items;
+var crypt = createCommonjsModule(function (module) {
+  (function () {
+    var base64map = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+        crypt = {
+      // Bit-wise rotation left
+      rotl: function rotl(n, b) {
+        return n << b | n >>> 32 - b;
+      },
+      // Bit-wise rotation right
+      rotr: function rotr(n, b) {
+        return n << 32 - b | n >>> b;
+      },
+      // Swap big-endian to little-endian and vice versa
+      endian: function endian(n) {
+        // If number given, swap endian
+        if (n.constructor == Number) {
+          return crypt.rotl(n, 8) & 0x00FF00FF | crypt.rotl(n, 24) & 0xFF00FF00;
+        } // Else, assume array and swap all items
 
+
+        for (var i = 0; i < n.length; i++) {
+          n[i] = crypt.endian(n[i]);
+        }
+
+        return n;
+      },
+      // Generate an array of any length of random bytes
+      randomBytes: function randomBytes(n) {
+        for (var bytes = []; n > 0; n--) {
+          bytes.push(Math.floor(Math.random() * 256));
+        }
+
+        return bytes;
+      },
+      // Convert a byte array to big-endian 32-bit words
+      bytesToWords: function bytesToWords(bytes) {
+        for (var words = [], i = 0, b = 0; i < bytes.length; i++, b += 8) {
+          words[b >>> 5] |= bytes[i] << 24 - b % 32;
+        }
+
+        return words;
+      },
+      // Convert big-endian 32-bit words to a byte array
+      wordsToBytes: function wordsToBytes(words) {
+        for (var bytes = [], b = 0; b < words.length * 32; b += 8) {
+          bytes.push(words[b >>> 5] >>> 24 - b % 32 & 0xFF);
+        }
+
+        return bytes;
+      },
+      // Convert a byte array to a hex string
+      bytesToHex: function bytesToHex(bytes) {
+        for (var hex = [], i = 0; i < bytes.length; i++) {
+          hex.push((bytes[i] >>> 4).toString(16));
+          hex.push((bytes[i] & 0xF).toString(16));
+        }
+
+        return hex.join('');
+      },
+      // Convert a hex string to a byte array
+      hexToBytes: function hexToBytes(hex) {
+        for (var bytes = [], c = 0; c < hex.length; c += 2) {
+          bytes.push(parseInt(hex.substr(c, 2), 16));
+        }
+
+        return bytes;
+      },
+      // Convert a byte array to a base-64 string
+      bytesToBase64: function bytesToBase64(bytes) {
+        for (var base64 = [], i = 0; i < bytes.length; i += 3) {
+          var triplet = bytes[i] << 16 | bytes[i + 1] << 8 | bytes[i + 2];
+
+          for (var j = 0; j < 4; j++) {
+            if (i * 8 + j * 6 <= bytes.length * 8) base64.push(base64map.charAt(triplet >>> 6 * (3 - j) & 0x3F));else base64.push('=');
+          }
+        }
+
+        return base64.join('');
+      },
+      // Convert a base-64 string to a byte array
+      base64ToBytes: function base64ToBytes(base64) {
+        // Remove non-base-64 characters
+        base64 = base64.replace(/[^A-Z0-9+\/]/ig, '');
+
+        for (var bytes = [], i = 0, imod4 = 0; i < base64.length; imod4 = ++i % 4) {
+          if (imod4 == 0) continue;
+          bytes.push((base64map.indexOf(base64.charAt(i - 1)) & Math.pow(2, -2 * imod4 + 8) - 1) << imod4 * 2 | base64map.indexOf(base64.charAt(i)) >>> 6 - imod4 * 2);
+        }
+
+        return bytes;
+      }
+    };
+    module.exports = crypt;
+  })();
+});
+var charenc = {
+  // UTF-8 encoding
+  utf8: {
+    // Convert a string to a byte array
+    stringToBytes: function stringToBytes(str) {
+      return charenc.bin.stringToBytes(unescape(encodeURIComponent(str)));
+    },
+    // Convert a byte array to a string
+    bytesToString: function bytesToString(bytes) {
+      return decodeURIComponent(escape(charenc.bin.bytesToString(bytes)));
+    }
+  },
+  // Binary encoding
+  bin: {
+    // Convert a string to a byte array
+    stringToBytes: function stringToBytes(str) {
+      for (var bytes = [], i = 0; i < str.length; i++) {
+        bytes.push(str.charCodeAt(i) & 0xFF);
+      }
+
+      return bytes;
+    },
+    // Convert a byte array to a string
+    bytesToString: function bytesToString(bytes) {
+      for (var str = [], i = 0; i < bytes.length; i++) {
+        str.push(String.fromCharCode(bytes[i]));
+      }
+
+      return str.join('');
+    }
+  }
+};
+var charenc_1 = charenc;
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+
+var isBuffer_1 = function isBuffer_1(obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer);
+};
+
+function isBuffer(obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj);
+} // For Node v0.10 support. Remove this eventually.
+
+
+function isSlowBuffer(obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0));
+}
+
+var md5 = createCommonjsModule(function (module) {
+  (function () {
+    var crypt$1 = crypt,
+        utf8 = charenc_1.utf8,
+        isBuffer = isBuffer_1,
+        bin = charenc_1.bin,
+        // The core
+    md5 = function md5(message, options) {
+      // Convert to byte array
+      if (message.constructor == String) {
+        if (options && options.encoding === 'binary') message = bin.stringToBytes(message);else message = utf8.stringToBytes(message);
+      } else if (isBuffer(message)) message = Array.prototype.slice.call(message, 0);else if (!Array.isArray(message) && message.constructor !== Uint8Array) message = message.toString(); // else, assume byte array already
+
+
+      var m = crypt$1.bytesToWords(message),
+          l = message.length * 8,
+          a = 1732584193,
+          b = -271733879,
+          c = -1732584194,
+          d = 271733878; // Swap endian
+
+      for (var i = 0; i < m.length; i++) {
+        m[i] = (m[i] << 8 | m[i] >>> 24) & 0x00FF00FF | (m[i] << 24 | m[i] >>> 8) & 0xFF00FF00;
+      } // Padding
+
+
+      m[l >>> 5] |= 0x80 << l % 32;
+      m[(l + 64 >>> 9 << 4) + 14] = l; // Method shortcuts
+
+      var FF = md5._ff,
+          GG = md5._gg,
+          HH = md5._hh,
+          II = md5._ii;
+
+      for (var i = 0; i < m.length; i += 16) {
+        var aa = a,
+            bb = b,
+            cc = c,
+            dd = d;
+        a = FF(a, b, c, d, m[i + 0], 7, -680876936);
+        d = FF(d, a, b, c, m[i + 1], 12, -389564586);
+        c = FF(c, d, a, b, m[i + 2], 17, 606105819);
+        b = FF(b, c, d, a, m[i + 3], 22, -1044525330);
+        a = FF(a, b, c, d, m[i + 4], 7, -176418897);
+        d = FF(d, a, b, c, m[i + 5], 12, 1200080426);
+        c = FF(c, d, a, b, m[i + 6], 17, -1473231341);
+        b = FF(b, c, d, a, m[i + 7], 22, -45705983);
+        a = FF(a, b, c, d, m[i + 8], 7, 1770035416);
+        d = FF(d, a, b, c, m[i + 9], 12, -1958414417);
+        c = FF(c, d, a, b, m[i + 10], 17, -42063);
+        b = FF(b, c, d, a, m[i + 11], 22, -1990404162);
+        a = FF(a, b, c, d, m[i + 12], 7, 1804603682);
+        d = FF(d, a, b, c, m[i + 13], 12, -40341101);
+        c = FF(c, d, a, b, m[i + 14], 17, -1502002290);
+        b = FF(b, c, d, a, m[i + 15], 22, 1236535329);
+        a = GG(a, b, c, d, m[i + 1], 5, -165796510);
+        d = GG(d, a, b, c, m[i + 6], 9, -1069501632);
+        c = GG(c, d, a, b, m[i + 11], 14, 643717713);
+        b = GG(b, c, d, a, m[i + 0], 20, -373897302);
+        a = GG(a, b, c, d, m[i + 5], 5, -701558691);
+        d = GG(d, a, b, c, m[i + 10], 9, 38016083);
+        c = GG(c, d, a, b, m[i + 15], 14, -660478335);
+        b = GG(b, c, d, a, m[i + 4], 20, -405537848);
+        a = GG(a, b, c, d, m[i + 9], 5, 568446438);
+        d = GG(d, a, b, c, m[i + 14], 9, -1019803690);
+        c = GG(c, d, a, b, m[i + 3], 14, -187363961);
+        b = GG(b, c, d, a, m[i + 8], 20, 1163531501);
+        a = GG(a, b, c, d, m[i + 13], 5, -1444681467);
+        d = GG(d, a, b, c, m[i + 2], 9, -51403784);
+        c = GG(c, d, a, b, m[i + 7], 14, 1735328473);
+        b = GG(b, c, d, a, m[i + 12], 20, -1926607734);
+        a = HH(a, b, c, d, m[i + 5], 4, -378558);
+        d = HH(d, a, b, c, m[i + 8], 11, -2022574463);
+        c = HH(c, d, a, b, m[i + 11], 16, 1839030562);
+        b = HH(b, c, d, a, m[i + 14], 23, -35309556);
+        a = HH(a, b, c, d, m[i + 1], 4, -1530992060);
+        d = HH(d, a, b, c, m[i + 4], 11, 1272893353);
+        c = HH(c, d, a, b, m[i + 7], 16, -155497632);
+        b = HH(b, c, d, a, m[i + 10], 23, -1094730640);
+        a = HH(a, b, c, d, m[i + 13], 4, 681279174);
+        d = HH(d, a, b, c, m[i + 0], 11, -358537222);
+        c = HH(c, d, a, b, m[i + 3], 16, -722521979);
+        b = HH(b, c, d, a, m[i + 6], 23, 76029189);
+        a = HH(a, b, c, d, m[i + 9], 4, -640364487);
+        d = HH(d, a, b, c, m[i + 12], 11, -421815835);
+        c = HH(c, d, a, b, m[i + 15], 16, 530742520);
+        b = HH(b, c, d, a, m[i + 2], 23, -995338651);
+        a = II(a, b, c, d, m[i + 0], 6, -198630844);
+        d = II(d, a, b, c, m[i + 7], 10, 1126891415);
+        c = II(c, d, a, b, m[i + 14], 15, -1416354905);
+        b = II(b, c, d, a, m[i + 5], 21, -57434055);
+        a = II(a, b, c, d, m[i + 12], 6, 1700485571);
+        d = II(d, a, b, c, m[i + 3], 10, -1894986606);
+        c = II(c, d, a, b, m[i + 10], 15, -1051523);
+        b = II(b, c, d, a, m[i + 1], 21, -2054922799);
+        a = II(a, b, c, d, m[i + 8], 6, 1873313359);
+        d = II(d, a, b, c, m[i + 15], 10, -30611744);
+        c = II(c, d, a, b, m[i + 6], 15, -1560198380);
+        b = II(b, c, d, a, m[i + 13], 21, 1309151649);
+        a = II(a, b, c, d, m[i + 4], 6, -145523070);
+        d = II(d, a, b, c, m[i + 11], 10, -1120210379);
+        c = II(c, d, a, b, m[i + 2], 15, 718787259);
+        b = II(b, c, d, a, m[i + 9], 21, -343485551);
+        a = a + aa >>> 0;
+        b = b + bb >>> 0;
+        c = c + cc >>> 0;
+        d = d + dd >>> 0;
+      }
+
+      return crypt$1.endian([a, b, c, d]);
+    }; // Auxiliary functions
+
+
+    md5._ff = function (a, b, c, d, x, s, t) {
+      var n = a + (b & c | ~b & d) + (x >>> 0) + t;
+      return (n << s | n >>> 32 - s) + b;
+    };
+
+    md5._gg = function (a, b, c, d, x, s, t) {
+      var n = a + (b & d | c & ~d) + (x >>> 0) + t;
+      return (n << s | n >>> 32 - s) + b;
+    };
+
+    md5._hh = function (a, b, c, d, x, s, t) {
+      var n = a + (b ^ c ^ d) + (x >>> 0) + t;
+      return (n << s | n >>> 32 - s) + b;
+    };
+
+    md5._ii = function (a, b, c, d, x, s, t) {
+      var n = a + (c ^ (b | ~d)) + (x >>> 0) + t;
+      return (n << s | n >>> 32 - s) + b;
+    }; // Package private blocksize
+
+
+    md5._blocksize = 16;
+    md5._digestsize = 16;
+
+    module.exports = function (message, options) {
+      if (message === undefined || message === null) throw new Error('Illegal argument ' + message);
+      var digestbytes = crypt$1.wordsToBytes(md5(message, options));
+      return options && options.asBytes ? digestbytes : options && options.asString ? bin.bytesToString(digestbytes) : crypt$1.bytesToHex(digestbytes);
+    };
+  })();
+});
+
+function User() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var user = getContextValues(errorOccurrence, 'user');
+  return /*#__PURE__*/react.createElement(react.Fragment, null, user.email && /*#__PURE__*/react.createElement("div", {
+    className: "flex items-center col-span-2"
+  }, /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("img", {
+    className: "inline-block h-9 w-9 rounded-full",
+    alt: user.email,
+    src: "https://gravatar.com/avatar/" + md5(user.email) + "/?s=240"
+  })), /*#__PURE__*/react.createElement("div", {
+    className: "ml-3"
+  }, user.name && /*#__PURE__*/react.createElement("p", {
+    className: "text-base font-semibold text-gray-700 group-hover:text-gray-900"
+  }, user.name), /*#__PURE__*/react.createElement("p", {
+    className: "text-sm font-semibold text-gray-500 group-hover:text-gray-700"
+  }, user.email))), /*#__PURE__*/react.createElement("div", {
+    className: "col-span-2"
+  }, /*#__PURE__*/react.createElement(CodeSnippet, {
+    value: jsonStringify(user)
+  })));
+}
+
+function Alert(_ref31) {
+  var children = _ref31.children,
+      _ref31$className = _ref31.className,
+      className = _ref31$className === void 0 ? '' : _ref31$className;
+  return /*#__PURE__*/react.createElement("div", {
+    className: "bg-yellow-50 border-l-4 border-yellow-400 p-4 " + className
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "flex"
+  }, /*#__PURE__*/react.createElement("div", {
+    className: "flex-shrink-0"
+  }, /*#__PURE__*/react.createElement("i", {
+    className: "fas fa-exclamation-triangle text-yellow-400",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/react.createElement("div", {
+    className: "ml-3"
+  }, /*#__PURE__*/react.createElement("p", {
+    className: "text-sm text-yellow-700"
+  }, children))));
+}
+
+var _excluded$1 = ["children", "className"];
+
+function LinkButton(_ref) {
+  var children = _ref.children,
+      _ref$className3 = _ref.className,
+      className = _ref$className3 === void 0 ? '' : _ref$className3,
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+
+  return /*#__PURE__*/react.createElement("a", _extends({
+    className: "mt-6 px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                shadow-md hover:shadow-lg active:shadow-none\n                " + className + "\n            "
+  }, props), children);
+}
+/**
+ * protocols
+ * Returns the protocols of an input url.
+ *
+ * @name protocols
+ * @function
+ * @param {String} input The input url.
+ * @param {Boolean|Number} first If `true`, the first protocol will be returned. If number, it will represent the zero-based index of the protocols array.
+ * @return {Array|String} The array of protocols or the specified protocol.
+ */
+
+
+var lib$5 = function protocols(input, first) {
+  if (first === true) {
+    first = 0;
+  }
+
+  var index = input.indexOf("://"),
+      splits = input.substring(0, index).split("+").filter(Boolean);
+
+  if (typeof first === "number") {
+    return splits[first];
+  }
+
+  return splits;
+};
+/**
+ * isSsh
+ * Checks if an input value is a ssh url or not.
+ *
+ * @name isSsh
+ * @function
+ * @param {String|Array} input The input url or an array of protocols.
+ * @return {Boolean} `true` if the input is a ssh url, `false` otherwise.
+ */
+
+
+function isSsh(input) {
+  if (Array.isArray(input)) {
+    return input.indexOf("ssh") !== -1 || input.indexOf("rsync") !== -1;
+  }
+
+  if (typeof input !== "string") {
+    return false;
+  }
+
+  var prots = lib$5(input);
+  input = input.substring(input.indexOf("://") + 3);
+
+  if (isSsh(prots)) {
+    return true;
+  } // TODO This probably could be improved :)
+
+
+  var urlPortPattern = new RegExp('\.([a-zA-Z\\d]+):(\\d+)\/');
+  return !input.match(urlPortPattern) && input.indexOf("@") < input.indexOf(":");
+}
+
+var lib$4 = isSsh;
+
+var strictUriEncode = function strictUriEncode(str) {
+  return encodeURIComponent(str).replace(/[!'()*]/g, function (x) {
+    return "%" + x.charCodeAt(0).toString(16).toUpperCase();
+  });
+};
+
+var token = '%[a-f0-9]{2}';
+var singleMatcher = new RegExp(token, 'gi');
+var multiMatcher = new RegExp('(' + token + ')+', 'gi');
+
+function decodeComponents(components, split) {
+  try {
+    // Try to decode the entire string first
+    return decodeURIComponent(components.join(''));
+  } catch (err) {// Do nothing
+  }
+
+  if (components.length === 1) {
+    return components;
+  }
+
+  split = split || 1; // Split the array in 2 parts
+
+  var left = components.slice(0, split);
+  var right = components.slice(split);
+  return Array.prototype.concat.call([], decodeComponents(left), decodeComponents(right));
+}
+
+function decode(input) {
+  try {
+    return decodeURIComponent(input);
+  } catch (err) {
+    var tokens = input.match(singleMatcher);
+
+    for (var i = 1; i < tokens.length; i++) {
+      input = decodeComponents(tokens, i).join('');
+      tokens = input.match(singleMatcher);
+    }
+
+    return input;
+  }
+}
+
+function customDecodeURIComponent(input) {
+  // Keep track of all the replacements and prefill the map with the `BOM`
+  var replaceMap = {
+    '%FE%FF': "\uFFFD\uFFFD",
+    '%FF%FE': "\uFFFD\uFFFD"
+  };
+  var match = multiMatcher.exec(input);
+
+  while (match) {
+    try {
+      // Decode as big chunks as possible
+      replaceMap[match[0]] = decodeURIComponent(match[0]);
+    } catch (err) {
+      var result = decode(match[0]);
+
+      if (result !== match[0]) {
+        replaceMap[match[0]] = result;
+      }
+    }
+
+    match = multiMatcher.exec(input);
+  } // Add `%C2` at the end of the map to make sure it does not replace the combinator before everything else
+
+
+  replaceMap['%C2'] = "\uFFFD";
+  var entries = Object.keys(replaceMap);
+
+  for (var i = 0; i < entries.length; i++) {
+    // Replace all decoded components
+    var key = entries[i];
+    input = input.replace(new RegExp(key, 'g'), replaceMap[key]);
+  }
+
+  return input;
+}
+
+var decodeUriComponent = function decodeUriComponent(encodedURI) {
+  if (typeof encodedURI !== 'string') {
+    throw new TypeError('Expected `encodedURI` to be of type `string`, got `' + typeof encodedURI + '`');
+  }
+
+  try {
+    encodedURI = encodedURI.replace(/\+/g, ' '); // Try the built in decoder first
+
+    return decodeURIComponent(encodedURI);
+  } catch (err) {
+    // Fallback to a more advanced decoder
+    return customDecodeURIComponent(encodedURI);
+  }
+};
+
+var splitOnFirst = function splitOnFirst(string, separator) {
+  if (!(typeof string === 'string' && typeof separator === 'string')) {
+    throw new TypeError('Expected the arguments to be of type `string`');
+  }
+
+  if (separator === '') {
+    return [string];
+  }
+
+  var separatorIndex = string.indexOf(separator);
+
+  if (separatorIndex === -1) {
+    return [string];
+  }
+
+  return [string.slice(0, separatorIndex), string.slice(separatorIndex + separator.length)];
+};
+
+var filterObj = function filterObj(obj, predicate) {
+  var ret = {};
+  var keys = Object.keys(obj);
+  var isArr = Array.isArray(predicate);
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = obj[key];
+
+    if (isArr ? predicate.indexOf(key) !== -1 : predicate(key, val, obj)) {
+      ret[key] = val;
+    }
+  }
+
+  return ret;
+};
+
+var queryString = createCommonjsModule(function (module, exports) {
+  var isNullOrUndefined = function isNullOrUndefined(value) {
+    return value === null || value === undefined;
+  };
+
+  function encoderForArrayFormat(options) {
+    switch (options.arrayFormat) {
+      case 'index':
+        return function (key) {
+          return function (result, value) {
+            var index = result.length;
+
+            if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+              return result;
+            }
+
+            if (value === null) {
+              return [].concat(result, [[encode(key, options), '[', index, ']'].join('')]);
+            }
+
+            return [].concat(result, [[encode(key, options), '[', encode(index, options), ']=', encode(value, options)].join('')]);
+          };
+        };
+
+      case 'bracket':
+        return function (key) {
+          return function (result, value) {
+            if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+              return result;
+            }
+
+            if (value === null) {
+              return [].concat(result, [[encode(key, options), '[]'].join('')]);
+            }
+
+            return [].concat(result, [[encode(key, options), '[]=', encode(value, options)].join('')]);
+          };
+        };
+
+      case 'comma':
+      case 'separator':
+        return function (key) {
+          return function (result, value) {
+            if (value === null || value === undefined || value.length === 0) {
+              return result;
+            }
+
+            if (result.length === 0) {
+              return [[encode(key, options), '=', encode(value, options)].join('')];
+            }
+
+            return [[result, encode(value, options)].join(options.arrayFormatSeparator)];
+          };
+        };
+
+      default:
+        return function (key) {
+          return function (result, value) {
+            if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+              return result;
+            }
+
+            if (value === null) {
+              return [].concat(result, [encode(key, options)]);
+            }
+
+            return [].concat(result, [[encode(key, options), '=', encode(value, options)].join('')]);
+          };
+        };
+    }
+  }
+
+  function parserForArrayFormat(options) {
+    var result;
+
+    switch (options.arrayFormat) {
+      case 'index':
+        return function (key, value, accumulator) {
+          result = /\[(\d*)\]$/.exec(key);
+          key = key.replace(/\[\d*\]$/, '');
+
+          if (!result) {
+            accumulator[key] = value;
+            return;
+          }
+
+          if (accumulator[key] === undefined) {
+            accumulator[key] = {};
+          }
+
+          accumulator[key][result[1]] = value;
+        };
+
+      case 'bracket':
+        return function (key, value, accumulator) {
+          result = /(\[\])$/.exec(key);
+          key = key.replace(/\[\]$/, '');
+
+          if (!result) {
+            accumulator[key] = value;
+            return;
+          }
+
+          if (accumulator[key] === undefined) {
+            accumulator[key] = [value];
+            return;
+          }
+
+          accumulator[key] = [].concat(accumulator[key], value);
+        };
+
+      case 'comma':
+      case 'separator':
+        return function (key, value, accumulator) {
+          var isArray = typeof value === 'string' && value.includes(options.arrayFormatSeparator);
+          var isEncodedArray = typeof value === 'string' && !isArray && decode(value, options).includes(options.arrayFormatSeparator);
+          value = isEncodedArray ? decode(value, options) : value;
+          var newValue = isArray || isEncodedArray ? value.split(options.arrayFormatSeparator).map(function (item) {
+            return decode(item, options);
+          }) : value === null ? value : decode(value, options);
+          accumulator[key] = newValue;
+        };
+
+      default:
+        return function (key, value, accumulator) {
+          if (accumulator[key] === undefined) {
+            accumulator[key] = value;
+            return;
+          }
+
+          accumulator[key] = [].concat(accumulator[key], value);
+        };
+    }
+  }
+
+  function validateArrayFormatSeparator(value) {
+    if (typeof value !== 'string' || value.length !== 1) {
+      throw new TypeError('arrayFormatSeparator must be single character string');
+    }
+  }
+
+  function encode(value, options) {
+    if (options.encode) {
+      return options.strict ? strictUriEncode(value) : encodeURIComponent(value);
+    }
+
+    return value;
+  }
+
+  function decode(value, options) {
+    if (options.decode) {
+      return decodeUriComponent(value);
+    }
+
+    return value;
+  }
+
+  function keysSorter(input) {
+    if (Array.isArray(input)) {
+      return input.sort();
+    }
+
+    if (typeof input === 'object') {
+      return keysSorter(Object.keys(input)).sort(function (a, b) {
+        return Number(a) - Number(b);
+      }).map(function (key) {
+        return input[key];
+      });
+    }
+
+    return input;
+  }
+
+  function removeHash(input) {
+    var hashStart = input.indexOf('#');
+
+    if (hashStart !== -1) {
+      input = input.slice(0, hashStart);
+    }
+
+    return input;
+  }
+
+  function getHash(url) {
+    var hash = '';
+    var hashStart = url.indexOf('#');
+
+    if (hashStart !== -1) {
+      hash = url.slice(hashStart);
+    }
+
+    return hash;
+  }
+
+  function extract(input) {
+    input = removeHash(input);
+    var queryStart = input.indexOf('?');
+
+    if (queryStart === -1) {
+      return '';
+    }
+
+    return input.slice(queryStart + 1);
+  }
+
+  function parseValue(value, options) {
+    if (options.parseNumbers && !Number.isNaN(Number(value)) && typeof value === 'string' && value.trim() !== '') {
+      value = Number(value);
+    } else if (options.parseBooleans && value !== null && (value.toLowerCase() === 'true' || value.toLowerCase() === 'false')) {
+      value = value.toLowerCase() === 'true';
+    }
+
+    return value;
+  }
+
+  function parse(query, options) {
+    options = Object.assign({
+      decode: true,
+      sort: true,
+      arrayFormat: 'none',
+      arrayFormatSeparator: ',',
+      parseNumbers: false,
+      parseBooleans: false
+    }, options);
+    validateArrayFormatSeparator(options.arrayFormatSeparator);
+    var formatter = parserForArrayFormat(options); // Create an object with no prototype
+
+    var ret = Object.create(null);
+
+    if (typeof query !== 'string') {
+      return ret;
+    }
+
+    query = query.trim().replace(/^[?#&]/, '');
+
+    if (!query) {
+      return ret;
+    }
+
+    for (var _iterator2 = _createForOfIteratorHelperLoose(query.split('&')), _step2; !(_step2 = _iterator2()).done;) {
+      var param = _step2.value;
+
+      if (param === '') {
+        continue;
+      }
+
+      var _splitOnFirst = splitOnFirst(options.decode ? param.replace(/\+/g, ' ') : param, '='),
+          _key = _splitOnFirst[0],
+          _value = _splitOnFirst[1]; // Missing `=` should be `null`:
+      // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+
+
+      _value = _value === undefined ? null : ['comma', 'separator'].includes(options.arrayFormat) ? _value : decode(_value, options);
+      formatter(decode(_key, options), _value, ret);
+    }
+
+    for (var _i4 = 0, _Object$keys = Object.keys(ret); _i4 < _Object$keys.length; _i4++) {
+      var key = _Object$keys[_i4];
+      var value = ret[key];
+
+      if (typeof value === 'object' && value !== null) {
+        for (var _i5 = 0, _Object$keys2 = Object.keys(value); _i5 < _Object$keys2.length; _i5++) {
+          var k = _Object$keys2[_i5];
+          value[k] = parseValue(value[k], options);
+        }
+      } else {
+        ret[key] = parseValue(value, options);
+      }
+    }
+
+    if (options.sort === false) {
+      return ret;
+    }
+
+    return (options.sort === true ? Object.keys(ret).sort() : Object.keys(ret).sort(options.sort)).reduce(function (result, key) {
+      var value = ret[key];
+
+      if (Boolean(value) && typeof value === 'object' && !Array.isArray(value)) {
+        // Sort object keys, not values
+        result[key] = keysSorter(value);
+      } else {
+        result[key] = value;
+      }
+
+      return result;
+    }, Object.create(null));
+  }
+
+  exports.extract = extract;
+  exports.parse = parse;
+
+  exports.stringify = function (object, options) {
+    if (!object) {
+      return '';
+    }
+
+    options = Object.assign({
+      encode: true,
+      strict: true,
+      arrayFormat: 'none',
+      arrayFormatSeparator: ','
+    }, options);
+    validateArrayFormatSeparator(options.arrayFormatSeparator);
+
+    var shouldFilter = function shouldFilter(key) {
+      return options.skipNull && isNullOrUndefined(object[key]) || options.skipEmptyString && object[key] === '';
+    };
+
+    var formatter = encoderForArrayFormat(options);
+    var objectCopy = {};
+
+    for (var _i6 = 0, _Object$keys3 = Object.keys(object); _i6 < _Object$keys3.length; _i6++) {
+      var key = _Object$keys3[_i6];
+
+      if (!shouldFilter(key)) {
+        objectCopy[key] = object[key];
+      }
+    }
+
+    var keys = Object.keys(objectCopy);
+
+    if (options.sort !== false) {
+      keys.sort(options.sort);
+    }
+
+    return keys.map(function (key) {
+      var value = object[key];
+
+      if (value === undefined) {
+        return '';
+      }
+
+      if (value === null) {
+        return encode(key, options);
+      }
+
+      if (Array.isArray(value)) {
+        return value.reduce(formatter(key), []).join('&');
+      }
+
+      return encode(key, options) + '=' + encode(value, options);
+    }).filter(function (x) {
+      return x.length > 0;
+    }).join('&');
+  };
+
+  exports.parseUrl = function (url, options) {
+    options = Object.assign({
+      decode: true
+    }, options);
+
+    var _splitOnFirst2 = splitOnFirst(url, '#'),
+        url_ = _splitOnFirst2[0],
+        hash = _splitOnFirst2[1];
+
+    return Object.assign({
+      url: url_.split('?')[0] || '',
+      query: parse(extract(url), options)
+    }, options && options.parseFragmentIdentifier && hash ? {
+      fragmentIdentifier: decode(hash, options)
+    } : {});
+  };
+
+  exports.stringifyUrl = function (object, options) {
+    options = Object.assign({
+      encode: true,
+      strict: true
+    }, options);
+    var url = removeHash(object.url).split('?')[0] || '';
+    var queryFromUrl = exports.extract(object.url);
+    var parsedQueryFromUrl = exports.parse(queryFromUrl, {
+      sort: false
+    });
+    var query = Object.assign(parsedQueryFromUrl, object.query);
+    var queryString = exports.stringify(query, options);
+
+    if (queryString) {
+      queryString = "?" + queryString;
+    }
+
+    var hash = getHash(object.url);
+
+    if (object.fragmentIdentifier) {
+      hash = "#" + encode(object.fragmentIdentifier, options);
+    }
+
+    return "" + url + queryString + hash;
+  };
+
+  exports.pick = function (input, filter, options) {
+    options = Object.assign({
+      parseFragmentIdentifier: true
+    }, options);
+
+    var _exports$parseUrl = exports.parseUrl(input, options),
+        url = _exports$parseUrl.url,
+        query = _exports$parseUrl.query,
+        fragmentIdentifier = _exports$parseUrl.fragmentIdentifier;
+
+    return exports.stringifyUrl({
+      url: url,
+      query: filterObj(query, filter),
+      fragmentIdentifier: fragmentIdentifier
+    }, options);
+  };
+
+  exports.exclude = function (input, filter, options) {
+    var exclusionFilter = Array.isArray(filter) ? function (key) {
+      return !filter.includes(key);
+    } : function (key, value) {
+      return !filter(key, value);
+    };
+    return exports.pick(input, exclusionFilter, options);
+  };
+});
+/**
+ * parsePath
+ * Parses the input url.
+ *
+ * @name parsePath
+ * @function
+ * @param {String} url The input url.
+ * @return {Object} An object containing the following fields:
+ *
+ *  - `protocols` (Array): An array with the url protocols (usually it has one element).
+ *  - `protocol` (String): The first protocol, `"ssh"` (if the url is a ssh url) or `"file"`.
+ *  - `port` (null|Number): The domain port.
+ *  - `resource` (String): The url domain (including subdomains).
+ *  - `user` (String): The authentication user (usually for ssh urls).
+ *  - `pathname` (String): The url pathname.
+ *  - `hash` (String): The url hash.
+ *  - `search` (String): The url querystring value.
+ *  - `href` (String): The input url.
+ *  - `query` (Object): The url querystring, parsed as object.
+ */
+
+function parsePath(url) {
+  url = (url || "").trim();
+  var output = {
+    protocols: lib$5(url),
+    protocol: null,
+    port: null,
+    resource: "",
+    user: "",
+    pathname: "",
+    hash: "",
+    search: "",
+    href: url,
+    query: Object.create(null)
+  },
+      protocolIndex = url.indexOf("://"),
+      splits = null,
+      parts = null;
+
+  if (url.startsWith(".")) {
+    if (url.startsWith("./")) {
+      url = url.substring(2);
+    }
+
+    output.pathname = url;
+    output.protocol = "file";
+  }
+
+  var firstChar = url.charAt(1);
+
+  if (!output.protocol) {
+    output.protocol = output.protocols[0];
+
+    if (!output.protocol) {
+      if (lib$4(url)) {
+        output.protocol = "ssh";
+      } else if (firstChar === "/" || firstChar === "~") {
+        url = url.substring(2);
+        output.protocol = "file";
+      } else {
+        output.protocol = "file";
+      }
+    }
+  }
+
+  if (protocolIndex !== -1) {
+    url = url.substring(protocolIndex + 3);
+  }
+
+  parts = url.split(/\/|\\/);
+
+  if (output.protocol !== "file") {
+    output.resource = parts.shift();
+  } else {
+    output.resource = "";
+  } // user@domain
+
+
+  splits = output.resource.split("@");
+
+  if (splits.length === 2) {
+    output.user = splits[0];
+    output.resource = splits[1];
+  } // domain.com:port
+
+
+  splits = output.resource.split(":");
+
+  if (splits.length === 2) {
+    output.resource = splits[0];
+
+    if (splits[1]) {
+      output.port = Number(splits[1]);
+
+      if (isNaN(output.port)) {
+        output.port = null;
+        parts.unshift(splits[1]);
+      }
+    } else {
+      output.port = null;
+    }
+  } // Remove empty elements
+
+
+  parts = parts.filter(Boolean); // Stringify the pathname
+
+  if (output.protocol === "file") {
+    output.pathname = output.href;
+  } else {
+    output.pathname = output.pathname || (output.protocol !== "file" || output.href[0] === "/" ? "/" : "") + parts.join("/");
+  } // #some-hash
+
+
+  splits = output.pathname.split("#");
+
+  if (splits.length === 2) {
+    output.pathname = splits[0];
+    output.hash = splits[1];
+  } // ?foo=bar
+
+
+  splits = output.pathname.split("?");
+
+  if (splits.length === 2) {
+    output.pathname = splits[0];
+    output.search = splits[1];
+  }
+
+  output.query = queryString.parse(output.search);
+  output.href = output.href.replace(/\/$/, "");
+  output.pathname = output.pathname.replace(/\/$/, "");
+  return output;
+}
+
+var lib$3 = parsePath;
+var DATA_URL_DEFAULT_MIME_TYPE = 'text/plain';
+var DATA_URL_DEFAULT_CHARSET = 'us-ascii';
+
+var testParameter = function testParameter(name, filters) {
+  return filters.some(function (filter) {
+    return filter instanceof RegExp ? filter.test(name) : filter === name;
+  });
+};
+
+var normalizeDataURL = function normalizeDataURL(urlString, _ref32) {
+  var stripHash = _ref32.stripHash;
+
+  var match = /*#__PURE__*/_wrapRegExp(/^data:((?:(?!,)[\s\S])*?),((?:(?!#)[\s\S])*?)(?:#(.*))?$/, {
+    type: 1,
+    data: 2,
+    hash: 3
+  }).exec(urlString);
+
+  if (!match) {
+    throw new Error("Invalid URL: " + urlString);
+  }
+
+  var _match$groups = match.groups,
+      type = _match$groups.type,
+      data = _match$groups.data,
+      hash = _match$groups.hash;
+  var mediaType = type.split(';');
+  hash = stripHash ? '' : hash;
+  var isBase64 = false;
+
+  if (mediaType[mediaType.length - 1] === 'base64') {
+    mediaType.pop();
+    isBase64 = true;
+  } // Lowercase MIME type
+
+
+  var mimeType = (mediaType.shift() || '').toLowerCase();
+  var attributes = mediaType.map(function (attribute) {
+    var _attribute$split$map = attribute.split('=').map(function (string) {
+      return string.trim();
+    }),
+        key = _attribute$split$map[0],
+        _attribute$split$map$ = _attribute$split$map[1],
+        value = _attribute$split$map$ === void 0 ? '' : _attribute$split$map$; // Lowercase `charset`
+
+
+    if (key === 'charset') {
+      value = value.toLowerCase();
+
+      if (value === DATA_URL_DEFAULT_CHARSET) {
+        return '';
+      }
+    }
+
+    return "" + key + (value ? "=" + value : '');
+  }).filter(Boolean);
+  var normalizedMediaType = [].concat(attributes);
+
+  if (isBase64) {
+    normalizedMediaType.push('base64');
+  }
+
+  if (normalizedMediaType.length !== 0 || mimeType && mimeType !== DATA_URL_DEFAULT_MIME_TYPE) {
+    normalizedMediaType.unshift(mimeType);
+  }
+
+  return "data:" + normalizedMediaType.join(';') + "," + (isBase64 ? data.trim() : data) + (hash ? "#" + hash : '');
+};
+
+var normalizeUrl = function normalizeUrl(urlString, options) {
+  options = _extends({
+    defaultProtocol: 'http:',
+    normalizeProtocol: true,
+    forceHttp: false,
+    forceHttps: false,
+    stripAuthentication: true,
+    stripHash: false,
+    stripTextFragment: true,
+    stripWWW: true,
+    removeQueryParameters: [/^utm_\w+/i],
+    removeTrailingSlash: true,
+    removeSingleSlash: true,
+    removeDirectoryIndex: false,
+    sortQueryParameters: true
+  }, options);
+  urlString = urlString.trim(); // Data URL
+
+  if (/^data:/i.test(urlString)) {
+    return normalizeDataURL(urlString, options);
+  }
+
+  if (/^view-source:/i.test(urlString)) {
+    throw new Error('`view-source:` is not supported as it is a non-standard protocol');
+  }
+
+  var hasRelativeProtocol = urlString.startsWith('//');
+  var isRelativeUrl = !hasRelativeProtocol && /^\.*\//.test(urlString); // Prepend protocol
+
+  if (!isRelativeUrl) {
+    urlString = urlString.replace(/^(?!(?:\w+:)?\/\/)|^\/\//, options.defaultProtocol);
+  }
+
+  var urlObj = new URL(urlString);
+
+  if (options.forceHttp && options.forceHttps) {
+    throw new Error('The `forceHttp` and `forceHttps` options cannot be used together');
+  }
+
+  if (options.forceHttp && urlObj.protocol === 'https:') {
+    urlObj.protocol = 'http:';
+  }
+
+  if (options.forceHttps && urlObj.protocol === 'http:') {
+    urlObj.protocol = 'https:';
+  } // Remove auth
+
+
+  if (options.stripAuthentication) {
+    urlObj.username = '';
+    urlObj.password = '';
+  } // Remove hash
+
+
+  if (options.stripHash) {
+    urlObj.hash = '';
+  } else if (options.stripTextFragment) {
+    urlObj.hash = urlObj.hash.replace(/#?:~:text.*?$/i, '');
+  } // Remove duplicate slashes if not preceded by a protocol
+
+
+  if (urlObj.pathname) {
+    urlObj.pathname = urlObj.pathname.replace(/(?<!\b(?:[a-z][a-z\d+\-.]{1,50}:))\/{2,}/g, '/');
+  } // Decode URI octets
+
+
+  if (urlObj.pathname) {
+    try {
+      urlObj.pathname = decodeURI(urlObj.pathname);
+    } catch (_) {}
+  } // Remove directory index
+
+
+  if (options.removeDirectoryIndex === true) {
+    options.removeDirectoryIndex = [/^index\.[a-z]+$/];
+  }
+
+  if (Array.isArray(options.removeDirectoryIndex) && options.removeDirectoryIndex.length > 0) {
+    var pathComponents = urlObj.pathname.split('/');
+    var lastComponent = pathComponents[pathComponents.length - 1];
+
+    if (testParameter(lastComponent, options.removeDirectoryIndex)) {
+      pathComponents = pathComponents.slice(0, pathComponents.length - 1);
+      urlObj.pathname = pathComponents.slice(1).join('/') + '/';
+    }
+  }
+
+  if (urlObj.hostname) {
+    // Remove trailing dot
+    urlObj.hostname = urlObj.hostname.replace(/\.$/, ''); // Remove `www.`
+
+    if (options.stripWWW && /^www\.(?!www\.)(?:[a-z\-\d]{1,63})\.(?:[a-z.\-\d]{2,63})$/.test(urlObj.hostname)) {
+      // Each label should be max 63 at length (min: 1).
+      // Source: https://en.wikipedia.org/wiki/Hostname#Restrictions_on_valid_host_names
+      // Each TLD should be up to 63 characters long (min: 2).
+      // It is technically possible to have a single character TLD, but none currently exist.
+      urlObj.hostname = urlObj.hostname.replace(/^www\./, '');
+    }
+  } // Remove query unwanted parameters
+
+
+  if (Array.isArray(options.removeQueryParameters)) {
+    for (var _i7 = 0, _arr = [].concat(urlObj.searchParams.keys()); _i7 < _arr.length; _i7++) {
+      var key = _arr[_i7];
+
+      if (testParameter(key, options.removeQueryParameters)) {
+        urlObj.searchParams["delete"](key);
+      }
+    }
+  }
+
+  if (options.removeQueryParameters === true) {
+    urlObj.search = '';
+  } // Sort query parameters
+
+
+  if (options.sortQueryParameters) {
+    urlObj.searchParams.sort();
+  }
+
+  if (options.removeTrailingSlash) {
+    urlObj.pathname = urlObj.pathname.replace(/\/$/, '');
+  }
+
+  var oldUrlString = urlString; // Take advantage of many of the Node `url` normalizations
+
+  urlString = urlObj.toString();
+
+  if (!options.removeSingleSlash && urlObj.pathname === '/' && !oldUrlString.endsWith('/') && urlObj.hash === '') {
+    urlString = urlString.replace(/\/$/, '');
+  } // Remove ending `/` unless removeSingleSlash is false
+
+
+  if ((options.removeTrailingSlash || urlObj.pathname === '/') && urlObj.hash === '' && options.removeSingleSlash) {
+    urlString = urlString.replace(/\/$/, '');
+  } // Restore relative protocol, if applicable
+
+
+  if (hasRelativeProtocol && !options.normalizeProtocol) {
+    urlString = urlString.replace(/^http:\/\//, '//');
+  } // Remove http/https
+
+
+  if (options.stripProtocol) {
+    urlString = urlString.replace(/^(?:https?:)?\/\//, '');
+  }
+
+  return urlString;
+};
+
+var normalizeUrl_1 = normalizeUrl;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+/**
+ * parseUrl
+ * Parses the input url.
+ *
+ * **Note**: This *throws* if invalid urls are provided.
+ *
+ * @name parseUrl
+ * @function
+ * @param {String} url The input url.
+ * @param {Boolean|Object} normalize Wheter to normalize the url or not.
+ *                         Default is `false`. If `true`, the url will
+ *                         be normalized. If an object, it will be the
+ *                         options object sent to [`normalize-url`](https://github.com/sindresorhus/normalize-url).
+ *
+ *                         For SSH urls, normalize won't work.
+ *
+ * @return {Object} An object containing the following fields:
+ *
+ *  - `protocols` (Array): An array with the url protocols (usually it has one element).
+ *  - `protocol` (String): The first protocol, `"ssh"` (if the url is a ssh url) or `"file"`.
+ *  - `port` (null|Number): The domain port.
+ *  - `resource` (String): The url domain (including subdomains).
+ *  - `user` (String): The authentication user (usually for ssh urls).
+ *  - `pathname` (String): The url pathname.
+ *  - `hash` (String): The url hash.
+ *  - `search` (String): The url querystring value.
+ *  - `href` (String): The input url.
+ *  - `query` (Object): The url querystring, parsed as object.
+ */
+
+
+function parseUrl(url) {
+  var normalize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  if (typeof url !== "string" || !url.trim()) {
+    throw new Error("Invalid url.");
+  }
+
+  if (normalize) {
+    if ((typeof normalize === "undefined" ? "undefined" : _typeof(normalize)) !== "object") {
+      normalize = {
+        stripHash: false
+      };
+    }
+
+    url = normalizeUrl_1(url, normalize);
+  }
+
+  var parsed = lib$3(url);
+  return parsed;
+}
+
+var lib$2 = parseUrl;
+/**
+ * gitUp
+ * Parses the input url.
+ *
+ * @name gitUp
+ * @function
+ * @param {String} input The input url.
+ * @return {Object} An object containing the following fields:
+ *
+ *  - `protocols` (Array): An array with the url protocols (usually it has one element).
+ *  - `port` (null|Number): The domain port.
+ *  - `resource` (String): The url domain (including subdomains).
+ *  - `user` (String): The authentication user (usually for ssh urls).
+ *  - `pathname` (String): The url pathname.
+ *  - `hash` (String): The url hash.
+ *  - `search` (String): The url querystring value.
+ *  - `href` (String): The input url.
+ *  - `protocol` (String): The git url protocol.
+ *  - `token` (String): The oauth token (could appear in the https urls).
+ */
+
+function gitUp(input) {
+  var output = lib$2(input);
+  output.token = "";
+  var splits = output.user.split(":");
+
+  if (splits.length === 2) {
+    if (splits[1] === "x-oauth-basic") {
+      output.token = splits[0];
+    } else if (splits[0] === "x-token-auth") {
+      output.token = splits[1];
+    }
+  }
+
+  if (lib$4(output.protocols) || lib$4(input)) {
+    output.protocol = "ssh";
+  } else if (output.protocols.length) {
+    output.protocol = output.protocols[0];
+  } else {
+    output.protocol = "file";
+  }
+
+  output.href = output.href.replace(/\/$/, "");
+  return output;
+}
+
+var lib$1 = gitUp;
+/**
+ * gitUrlParse
+ * Parses a Git url.
+ *
+ * @name gitUrlParse
+ * @function
+ * @param {String} url The Git url to parse.
+ * @return {GitUrl} The `GitUrl` object containing:
+ *
+ *  - `protocols` (Array): An array with the url protocols (usually it has one element).
+ *  - `port` (null|Number): The domain port.
+ *  - `resource` (String): The url domain (including subdomains).
+ *  - `user` (String): The authentication user (usually for ssh urls).
+ *  - `pathname` (String): The url pathname.
+ *  - `hash` (String): The url hash.
+ *  - `search` (String): The url querystring value.
+ *  - `href` (String): The input url.
+ *  - `protocol` (String): The git url protocol.
+ *  - `token` (String): The oauth token (could appear in the https urls).
+ *  - `source` (String): The Git provider (e.g. `"github.com"`).
+ *  - `owner` (String): The repository owner.
+ *  - `name` (String): The repository name.
+ *  - `ref` (String): The repository ref (e.g., "master" or "dev").
+ *  - `filepath` (String): A filepath relative to the repository root.
+ *  - `filepathtype` (String): The type of filepath in the url ("blob" or "tree").
+ *  - `full_name` (String): The owner and name values in the `owner/name` format.
+ *  - `toString` (Function): A function to stringify the parsed url into another url type.
+ *  - `organization` (String): The organization the owner belongs to. This is CloudForge specific.
+ *  - `git_suffix` (Boolean): Whether to add the `.git` suffix or not.
+ *
+ */
+
+function gitUrlParse(url) {
+  if (typeof url !== "string") {
+    throw new Error("The url must be a string.");
+  }
+
+  var urlInfo = lib$1(url),
+      sourceParts = urlInfo.resource.split("."),
+      splits = null;
+
+  urlInfo.toString = function (type) {
+    return gitUrlParse.stringify(this, type);
+  };
+
+  urlInfo.source = sourceParts.length > 2 ? sourceParts.slice(1 - sourceParts.length).join(".") : urlInfo.source = urlInfo.resource; // Note: Some hosting services (e.g. Visual Studio Team Services) allow whitespace characters
+  // in the repository and owner names so we decode the URL pieces to get the correct result
+
+  urlInfo.git_suffix = /\.git$/.test(urlInfo.pathname);
+  urlInfo.name = decodeURIComponent(urlInfo.pathname.replace(/^\//, '').replace(/\.git$/, ""));
+  urlInfo.owner = decodeURIComponent(urlInfo.user);
+
+  switch (urlInfo.source) {
+    case "git.cloudforge.com":
+      urlInfo.owner = urlInfo.user;
+      urlInfo.organization = sourceParts[0];
+      urlInfo.source = "cloudforge.com";
+      break;
+
+    case "visualstudio.com":
+      // Handle VSTS SSH URLs
+      if (urlInfo.resource === 'vs-ssh.visualstudio.com') {
+        splits = urlInfo.name.split("/");
+
+        if (splits.length === 4) {
+          urlInfo.organization = splits[1];
+          urlInfo.owner = splits[2];
+          urlInfo.name = splits[3];
+          urlInfo.full_name = splits[2] + '/' + splits[3];
+        }
+
+        break;
+      } else {
+        splits = urlInfo.name.split("/");
+
+        if (splits.length === 2) {
+          urlInfo.owner = splits[1];
+          urlInfo.name = splits[1];
+          urlInfo.full_name = '_git/' + urlInfo.name;
+        } else if (splits.length === 3) {
+          urlInfo.name = splits[2];
+
+          if (splits[0] === 'DefaultCollection') {
+            urlInfo.owner = splits[2];
+            urlInfo.organization = splits[0];
+            urlInfo.full_name = urlInfo.organization + '/_git/' + urlInfo.name;
+          } else {
+            urlInfo.owner = splits[0];
+            urlInfo.full_name = urlInfo.owner + '/_git/' + urlInfo.name;
+          }
+        } else if (splits.length === 4) {
+          urlInfo.organization = splits[0];
+          urlInfo.owner = splits[1];
+          urlInfo.name = splits[3];
+          urlInfo.full_name = urlInfo.organization + '/' + urlInfo.owner + '/_git/' + urlInfo.name;
+        }
+
+        break;
+      }
+
+    // Azure DevOps (formerly Visual Studio Team Services)
+
+    case "dev.azure.com":
+    case "azure.com":
+      if (urlInfo.resource === 'ssh.dev.azure.com') {
+        splits = urlInfo.name.split("/");
+
+        if (splits.length === 4) {
+          urlInfo.organization = splits[1];
+          urlInfo.owner = splits[2];
+          urlInfo.name = splits[3];
+        }
+
+        break;
+      } else {
+        splits = urlInfo.name.split("/");
+
+        if (splits.length === 5) {
+          urlInfo.organization = splits[0];
+          urlInfo.owner = splits[1];
+          urlInfo.name = splits[4];
+          urlInfo.full_name = '_git/' + urlInfo.name;
+        } else if (splits.length === 3) {
+          urlInfo.name = splits[2];
+
+          if (splits[0] === 'DefaultCollection') {
+            urlInfo.owner = splits[2];
+            urlInfo.organization = splits[0];
+            urlInfo.full_name = urlInfo.organization + '/_git/' + urlInfo.name;
+          } else {
+            urlInfo.owner = splits[0];
+            urlInfo.full_name = urlInfo.owner + '/_git/' + urlInfo.name;
+          }
+        } else if (splits.length === 4) {
+          urlInfo.organization = splits[0];
+          urlInfo.owner = splits[1];
+          urlInfo.name = splits[3];
+          urlInfo.full_name = urlInfo.organization + '/' + urlInfo.owner + '/_git/' + urlInfo.name;
+        }
+
+        if (urlInfo.query && urlInfo.query['path']) {
+          urlInfo.filepath = urlInfo.query['path'].replace(/^\/+/g, ''); // Strip leading slash (/)
+        }
+
+        if (urlInfo.query && urlInfo.query['version']) {
+          // version=GB<branch>
+          urlInfo.ref = urlInfo.query['version'].replace(/^GB/, ''); // remove GB
+        }
+
+        break;
+      }
+
+    default:
+      splits = urlInfo.name.split("/");
+      var nameIndex = splits.length - 1;
+
+      if (splits.length >= 2) {
+        var dashIndex = splits.indexOf("-", 2);
+        var blobIndex = splits.indexOf("blob", 2);
+        var treeIndex = splits.indexOf("tree", 2);
+        var commitIndex = splits.indexOf("commit", 2);
+        var srcIndex = splits.indexOf("src", 2);
+        var rawIndex = splits.indexOf("raw", 2);
+        nameIndex = dashIndex > 0 ? dashIndex - 1 : blobIndex > 0 ? blobIndex - 1 : treeIndex > 0 ? treeIndex - 1 : commitIndex > 0 ? commitIndex - 1 : srcIndex > 0 ? srcIndex - 1 : rawIndex > 0 ? rawIndex - 1 : nameIndex;
+        urlInfo.owner = splits.slice(0, nameIndex).join('/');
+        urlInfo.name = splits[nameIndex];
+
+        if (commitIndex) {
+          urlInfo.commit = splits[nameIndex + 2];
+        }
+      }
+
+      urlInfo.ref = "";
+      urlInfo.filepathtype = "";
+      urlInfo.filepath = "";
+      var offsetNameIndex = splits.length > nameIndex && splits[nameIndex + 1] === "-" ? nameIndex + 1 : nameIndex;
+
+      if (splits.length > offsetNameIndex + 2 && ["raw", "src", "blob", "tree"].indexOf(splits[offsetNameIndex + 1]) >= 0) {
+        urlInfo.filepathtype = splits[offsetNameIndex + 1];
+        urlInfo.ref = splits[offsetNameIndex + 2];
+
+        if (splits.length > offsetNameIndex + 3) {
+          urlInfo.filepath = splits.slice(offsetNameIndex + 3).join('/');
+        }
+      }
+
+      urlInfo.organization = urlInfo.owner;
+      break;
+  }
+
+  if (!urlInfo.full_name) {
+    urlInfo.full_name = urlInfo.owner;
+
+    if (urlInfo.name) {
+      urlInfo.full_name && (urlInfo.full_name += "/");
+      urlInfo.full_name += urlInfo.name;
+    }
+  } // Bitbucket Server
+
+
+  if (urlInfo.owner.startsWith("scm/")) {
+    urlInfo.source = "bitbucket-server";
+    urlInfo.owner = urlInfo.owner.replace("scm/", "");
+    urlInfo.organization = urlInfo.owner;
+    urlInfo.full_name = urlInfo.owner + "/" + urlInfo.name;
+  }
+
+  var bitbucket = /(projects|users)\/(.*?)\/repos\/(.*?)((\/.*$)|$)/;
+  var matches = bitbucket.exec(urlInfo.pathname);
+
+  if (matches != null) {
+    urlInfo.source = "bitbucket-server";
+
+    if (matches[1] === "users") {
+      urlInfo.owner = "~" + matches[2];
+    } else {
+      urlInfo.owner = matches[2];
+    }
+
+    urlInfo.organization = urlInfo.owner;
+    urlInfo.name = matches[3];
+    splits = matches[4].split("/");
+
+    if (splits.length > 1) {
+      if (["raw", "browse"].indexOf(splits[1]) >= 0) {
+        urlInfo.filepathtype = splits[1];
+
+        if (splits.length > 2) {
+          urlInfo.filepath = splits.slice(2).join('/');
+        }
+      } else if (splits[1] === "commits" && splits.length > 2) {
+        urlInfo.commit = splits[2];
+      }
+    }
+
+    urlInfo.full_name = urlInfo.owner + "/" + urlInfo.name;
+
+    if (urlInfo.query.at) {
+      urlInfo.ref = urlInfo.query.at;
+    } else {
+      urlInfo.ref = "";
+    }
+  }
+
+  return urlInfo;
+}
+/**
+ * stringify
+ * Stringifies a `GitUrl` object.
+ *
+ * @name stringify
+ * @function
+ * @param {GitUrl} obj The parsed Git url object.
+ * @param {String} type The type of the stringified url (default `obj.protocol`).
+ * @return {String} The stringified url.
+ */
+
+
+gitUrlParse.stringify = function (obj, type) {
+  type = type || (obj.protocols && obj.protocols.length ? obj.protocols.join('+') : obj.protocol);
+  var port = obj.port ? ":" + obj.port : '';
+  var user = obj.user || 'git';
+  var maybeGitSuffix = obj.git_suffix ? ".git" : "";
+
+  switch (type) {
+    case "ssh":
+      if (port) return "ssh://" + user + "@" + obj.resource + port + "/" + obj.full_name + maybeGitSuffix;else return user + "@" + obj.resource + ":" + obj.full_name + maybeGitSuffix;
+
+    case "git+ssh":
+    case "ssh+git":
+    case "ftp":
+    case "ftps":
+      return type + "://" + user + "@" + obj.resource + port + "/" + obj.full_name + maybeGitSuffix;
+
+    case "http":
+    case "https":
+      var auth = obj.token ? buildToken(obj) : obj.user && (obj.protocols.includes('http') || obj.protocols.includes('https')) ? obj.user + "@" : "";
+      return type + "://" + auth + obj.resource + port + "/" + buildPath(obj) + maybeGitSuffix;
+
+    default:
+      return obj.href;
+  }
+};
+/*!
+ * buildToken
+ * Builds OAuth token prefix (helper function)
+ *
+ * @name buildToken
+ * @function
+ * @param {GitUrl} obj The parsed Git url object.
+ * @return {String} token prefix
+ */
+
+
+function buildToken(obj) {
+  switch (obj.source) {
+    case "bitbucket.org":
+      return "x-token-auth:" + obj.token + "@";
+
+    default:
+      return obj.token + "@";
+  }
+}
+
+function buildPath(obj) {
+  switch (obj.source) {
+    case "bitbucket-server":
+      return "scm/" + obj.full_name;
+
+    default:
+      return "" + obj.full_name;
+  }
+}
+
+var lib = gitUrlParse;
+
+function getGitInfo(remote, hash) {
+  if (!remote) {
+    return {
+      resource: null,
+      repoUrl: null,
+      commitUrl: null
+    };
+  }
+
+  var repoInfo = lib(remote);
+  var repoUrl = lib.stringify(_extends({}, repoInfo, {
+    git_suffix: false
+  }), 'https');
+  return {
+    repoUrl: repoUrl,
+    resource: repoInfo.resource,
+    commitUrl: repoUrl + "/commit/" + hash
+  };
+}
+
+function Git() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var git = getContextValues(errorOccurrence, 'git');
+
+  var _getGitInfo = getGitInfo(git.remote, git.hash),
+      commitUrl = _getGitInfo.commitUrl;
+
+  return /*#__PURE__*/react.createElement(react.Fragment, null, git.hash && git.message && /*#__PURE__*/react.createElement("div", {
+    className: "col-span-2 flex space-between"
+  }, /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement("span", {
+    className: "text-gray-700"
+  }, git.message), /*#__PURE__*/react.createElement("span", {
+    className: "text-sm text-gray-500"
+  }, /*#__PURE__*/react.createElement(CodeSnippet, {
+    value: git.hash
+  }))), commitUrl && /*#__PURE__*/react.createElement("div", null, /*#__PURE__*/react.createElement(LinkButton, {
+    href: commitUrl,
+    target: "_blank"
+  }, git.hash.substr(0, 7), /*#__PURE__*/react.createElement("i", {
+    className: "fas fa-external-link-square"
+  })))), git.isDirty && /*#__PURE__*/react.createElement("div", {
+    className: "col-span-2"
+  }, /*#__PURE__*/react.createElement(Alert, {
+    className: "inline-block"
+  }, "Last commit is dirty. (Un)staged changes have been made since this commit.")), git.tag && /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    label: "Latest tag",
+    value: git.tag
+  }));
+}
+/**
+ * A specialized version of `_.reduce` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @param {*} [accumulator] The initial value.
+ * @param {boolean} [initAccum] Specify using the first element of `array` as
+ *  the initial value.
+ * @returns {*} Returns the accumulated value.
+ */
+
+
+function arrayReduce(array, iteratee, accumulator, initAccum) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  if (initAccum && length) {
+    accumulator = array[++index];
+  }
+
+  while (++index < length) {
+    accumulator = iteratee(accumulator, array[index], index, array);
+  }
+
+  return accumulator;
+}
+
+var _arrayReduce = arrayReduce;
+/**
+ * The base implementation of `_.propertyOf` without support for deep paths.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Function} Returns the new accessor function.
+ */
+
+function basePropertyOf(object) {
+  return function (key) {
+    return object == null ? undefined : object[key];
+  };
+}
+
+var _basePropertyOf = basePropertyOf;
+/** Used to map Latin Unicode letters to basic Latin letters. */
+
+var deburredLetters = {
+  // Latin-1 Supplement block.
+  '\xc0': 'A',
+  '\xc1': 'A',
+  '\xc2': 'A',
+  '\xc3': 'A',
+  '\xc4': 'A',
+  '\xc5': 'A',
+  '\xe0': 'a',
+  '\xe1': 'a',
+  '\xe2': 'a',
+  '\xe3': 'a',
+  '\xe4': 'a',
+  '\xe5': 'a',
+  '\xc7': 'C',
+  '\xe7': 'c',
+  '\xd0': 'D',
+  '\xf0': 'd',
+  '\xc8': 'E',
+  '\xc9': 'E',
+  '\xca': 'E',
+  '\xcb': 'E',
+  '\xe8': 'e',
+  '\xe9': 'e',
+  '\xea': 'e',
+  '\xeb': 'e',
+  '\xcc': 'I',
+  '\xcd': 'I',
+  '\xce': 'I',
+  '\xcf': 'I',
+  '\xec': 'i',
+  '\xed': 'i',
+  '\xee': 'i',
+  '\xef': 'i',
+  '\xd1': 'N',
+  '\xf1': 'n',
+  '\xd2': 'O',
+  '\xd3': 'O',
+  '\xd4': 'O',
+  '\xd5': 'O',
+  '\xd6': 'O',
+  '\xd8': 'O',
+  '\xf2': 'o',
+  '\xf3': 'o',
+  '\xf4': 'o',
+  '\xf5': 'o',
+  '\xf6': 'o',
+  '\xf8': 'o',
+  '\xd9': 'U',
+  '\xda': 'U',
+  '\xdb': 'U',
+  '\xdc': 'U',
+  '\xf9': 'u',
+  '\xfa': 'u',
+  '\xfb': 'u',
+  '\xfc': 'u',
+  '\xdd': 'Y',
+  '\xfd': 'y',
+  '\xff': 'y',
+  '\xc6': 'Ae',
+  '\xe6': 'ae',
+  '\xde': 'Th',
+  '\xfe': 'th',
+  '\xdf': 'ss',
+  // Latin Extended-A block.
+  "\u0100": 'A',
+  "\u0102": 'A',
+  "\u0104": 'A',
+  "\u0101": 'a',
+  "\u0103": 'a',
+  "\u0105": 'a',
+  "\u0106": 'C',
+  "\u0108": 'C',
+  "\u010A": 'C',
+  "\u010C": 'C',
+  "\u0107": 'c',
+  "\u0109": 'c',
+  "\u010B": 'c',
+  "\u010D": 'c',
+  "\u010E": 'D',
+  "\u0110": 'D',
+  "\u010F": 'd',
+  "\u0111": 'd',
+  "\u0112": 'E',
+  "\u0114": 'E',
+  "\u0116": 'E',
+  "\u0118": 'E',
+  "\u011A": 'E',
+  "\u0113": 'e',
+  "\u0115": 'e',
+  "\u0117": 'e',
+  "\u0119": 'e',
+  "\u011B": 'e',
+  "\u011C": 'G',
+  "\u011E": 'G',
+  "\u0120": 'G',
+  "\u0122": 'G',
+  "\u011D": 'g',
+  "\u011F": 'g',
+  "\u0121": 'g',
+  "\u0123": 'g',
+  "\u0124": 'H',
+  "\u0126": 'H',
+  "\u0125": 'h',
+  "\u0127": 'h',
+  "\u0128": 'I',
+  "\u012A": 'I',
+  "\u012C": 'I',
+  "\u012E": 'I',
+  "\u0130": 'I',
+  "\u0129": 'i',
+  "\u012B": 'i',
+  "\u012D": 'i',
+  "\u012F": 'i',
+  "\u0131": 'i',
+  "\u0134": 'J',
+  "\u0135": 'j',
+  "\u0136": 'K',
+  "\u0137": 'k',
+  "\u0138": 'k',
+  "\u0139": 'L',
+  "\u013B": 'L',
+  "\u013D": 'L',
+  "\u013F": 'L',
+  "\u0141": 'L',
+  "\u013A": 'l',
+  "\u013C": 'l',
+  "\u013E": 'l',
+  "\u0140": 'l',
+  "\u0142": 'l',
+  "\u0143": 'N',
+  "\u0145": 'N',
+  "\u0147": 'N',
+  "\u014A": 'N',
+  "\u0144": 'n',
+  "\u0146": 'n',
+  "\u0148": 'n',
+  "\u014B": 'n',
+  "\u014C": 'O',
+  "\u014E": 'O',
+  "\u0150": 'O',
+  "\u014D": 'o',
+  "\u014F": 'o',
+  "\u0151": 'o',
+  "\u0154": 'R',
+  "\u0156": 'R',
+  "\u0158": 'R',
+  "\u0155": 'r',
+  "\u0157": 'r',
+  "\u0159": 'r',
+  "\u015A": 'S',
+  "\u015C": 'S',
+  "\u015E": 'S',
+  "\u0160": 'S',
+  "\u015B": 's',
+  "\u015D": 's',
+  "\u015F": 's',
+  "\u0161": 's',
+  "\u0162": 'T',
+  "\u0164": 'T',
+  "\u0166": 'T',
+  "\u0163": 't',
+  "\u0165": 't',
+  "\u0167": 't',
+  "\u0168": 'U',
+  "\u016A": 'U',
+  "\u016C": 'U',
+  "\u016E": 'U',
+  "\u0170": 'U',
+  "\u0172": 'U',
+  "\u0169": 'u',
+  "\u016B": 'u',
+  "\u016D": 'u',
+  "\u016F": 'u',
+  "\u0171": 'u',
+  "\u0173": 'u',
+  "\u0174": 'W',
+  "\u0175": 'w',
+  "\u0176": 'Y',
+  "\u0177": 'y',
+  "\u0178": 'Y',
+  "\u0179": 'Z',
+  "\u017B": 'Z',
+  "\u017D": 'Z',
+  "\u017A": 'z',
+  "\u017C": 'z',
+  "\u017E": 'z',
+  "\u0132": 'IJ',
+  "\u0133": 'ij',
+  "\u0152": 'Oe',
+  "\u0153": 'oe',
+  "\u0149": "'n",
+  "\u017F": 's'
+};
+/**
+ * Used by `_.deburr` to convert Latin-1 Supplement and Latin Extended-A
+ * letters to basic Latin letters.
+ *
+ * @private
+ * @param {string} letter The matched letter to deburr.
+ * @returns {string} Returns the deburred letter.
+ */
+
+var deburrLetter = _basePropertyOf(deburredLetters);
+
+var _deburrLetter = deburrLetter;
+/** Used to match Latin Unicode letters (excluding mathematical operators). */
+
+var reLatin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
+/** Used to compose unicode character classes. */
+
+var rsComboMarksRange$3 = "\\u0300-\\u036f",
+    reComboHalfMarksRange$3 = "\\ufe20-\\ufe2f",
+    rsComboSymbolsRange$3 = "\\u20d0-\\u20ff",
+    rsComboRange$3 = rsComboMarksRange$3 + reComboHalfMarksRange$3 + rsComboSymbolsRange$3;
+/** Used to compose unicode capture groups. */
+
+var rsCombo$2 = '[' + rsComboRange$3 + ']';
+/**
+ * Used to match [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks) and
+ * [combining diacritical marks for symbols](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks_for_Symbols).
+ */
+
+var reComboMark = RegExp(rsCombo$2, 'g');
+/**
+ * Deburrs `string` by converting
+ * [Latin-1 Supplement](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
+ * and [Latin Extended-A](https://en.wikipedia.org/wiki/Latin_Extended-A)
+ * letters to basic Latin letters and removing
+ * [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks).
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to deburr.
+ * @returns {string} Returns the deburred string.
+ * @example
+ *
+ * _.deburr('déjà vu');
+ * // => 'deja vu'
+ */
+
+function deburr(string) {
+  string = toString_1(string);
+  return string && string.replace(reLatin, _deburrLetter).replace(reComboMark, '');
+}
+
+var deburr_1 = deburr;
+/** Used to match words composed of alphanumeric characters. */
+
+var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+/**
+ * Splits an ASCII `string` into an array of its words.
+ *
+ * @private
+ * @param {string} The string to inspect.
+ * @returns {Array} Returns the words of `string`.
+ */
+
+function asciiWords(string) {
+  return string.match(reAsciiWord) || [];
+}
+
+var _asciiWords = asciiWords;
+/** Used to detect strings that need a more robust regexp to match words. */
+
+var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
+/**
+ * Checks if `string` contains a word composed of Unicode symbols.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {boolean} Returns `true` if a word is found, else `false`.
+ */
+
+function hasUnicodeWord(string) {
+  return reHasUnicodeWord.test(string);
+}
+
+var _hasUnicodeWord = hasUnicodeWord;
+/** Used to compose unicode character classes. */
+
+var rsAstralRange$2 = "\\ud800-\\udfff",
+    rsComboMarksRange$2 = "\\u0300-\\u036f",
+    reComboHalfMarksRange$2 = "\\ufe20-\\ufe2f",
+    rsComboSymbolsRange$2 = "\\u20d0-\\u20ff",
+    rsComboRange$2 = rsComboMarksRange$2 + reComboHalfMarksRange$2 + rsComboSymbolsRange$2,
+    rsDingbatRange = "\\u2700-\\u27bf",
+    rsLowerRange = 'a-z\\xdf-\\xf6\\xf8-\\xff',
+    rsMathOpRange = '\\xac\\xb1\\xd7\\xf7',
+    rsNonCharRange = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf',
+    rsPunctuationRange = "\\u2000-\\u206f",
+    rsSpaceRange = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000",
+    rsUpperRange = 'A-Z\\xc0-\\xd6\\xd8-\\xde',
+    rsVarRange$2 = "\\ufe0e\\ufe0f",
+    rsBreakRange = rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
+/** Used to compose unicode capture groups. */
+
+var rsApos$1 = "['\u2019]",
+    rsBreak = '[' + rsBreakRange + ']',
+    rsCombo$1 = '[' + rsComboRange$2 + ']',
+    rsDigits = '\\d+',
+    rsDingbat = '[' + rsDingbatRange + ']',
+    rsLower = '[' + rsLowerRange + ']',
+    rsMisc = '[^' + rsAstralRange$2 + rsBreakRange + rsDigits + rsDingbatRange + rsLowerRange + rsUpperRange + ']',
+    rsFitz$1 = "\\ud83c[\\udffb-\\udfff]",
+    rsModifier$1 = '(?:' + rsCombo$1 + '|' + rsFitz$1 + ')',
+    rsNonAstral$1 = '[^' + rsAstralRange$2 + ']',
+    rsRegional$1 = "(?:\\ud83c[\\udde6-\\uddff]){2}",
+    rsSurrPair$1 = "[\\ud800-\\udbff][\\udc00-\\udfff]",
+    rsUpper = '[' + rsUpperRange + ']',
+    rsZWJ$2 = "\\u200d";
+/** Used to compose unicode regexes. */
+
+var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
+    rsMiscUpper = '(?:' + rsUpper + '|' + rsMisc + ')',
+    rsOptContrLower = '(?:' + rsApos$1 + '(?:d|ll|m|re|s|t|ve))?',
+    rsOptContrUpper = '(?:' + rsApos$1 + '(?:D|LL|M|RE|S|T|VE))?',
+    reOptMod$1 = rsModifier$1 + '?',
+    rsOptVar$1 = '[' + rsVarRange$2 + ']?',
+    rsOptJoin$1 = '(?:' + rsZWJ$2 + '(?:' + [rsNonAstral$1, rsRegional$1, rsSurrPair$1].join('|') + ')' + rsOptVar$1 + reOptMod$1 + ')*',
+    rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
+    rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
+    rsSeq$1 = rsOptVar$1 + reOptMod$1 + rsOptJoin$1,
+    rsEmoji = '(?:' + [rsDingbat, rsRegional$1, rsSurrPair$1].join('|') + ')' + rsSeq$1;
+/** Used to match complex or compound words. */
+
+var reUnicodeWord = RegExp([rsUpper + '?' + rsLower + '+' + rsOptContrLower + '(?=' + [rsBreak, rsUpper, '$'].join('|') + ')', rsMiscUpper + '+' + rsOptContrUpper + '(?=' + [rsBreak, rsUpper + rsMiscLower, '$'].join('|') + ')', rsUpper + '?' + rsMiscLower + '+' + rsOptContrLower, rsUpper + '+' + rsOptContrUpper, rsOrdUpper, rsOrdLower, rsDigits, rsEmoji].join('|'), 'g');
+/**
+ * Splits a Unicode `string` into an array of its words.
+ *
+ * @private
+ * @param {string} The string to inspect.
+ * @returns {Array} Returns the words of `string`.
+ */
+
+function unicodeWords(string) {
+  return string.match(reUnicodeWord) || [];
+}
+
+var _unicodeWords = unicodeWords;
+/**
+ * Splits `string` into an array of its words.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to inspect.
+ * @param {RegExp|string} [pattern] The pattern to match words.
+ * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+ * @returns {Array} Returns the words of `string`.
+ * @example
+ *
+ * _.words('fred, barney, & pebbles');
+ * // => ['fred', 'barney', 'pebbles']
+ *
+ * _.words('fred, barney, & pebbles', /[^, ]+/g);
+ * // => ['fred', 'barney', '&', 'pebbles']
+ */
+
+function words(string, pattern, guard) {
+  string = toString_1(string);
+  pattern = guard ? undefined : pattern;
+
+  if (pattern === undefined) {
+    return _hasUnicodeWord(string) ? _unicodeWords(string) : _asciiWords(string);
+  }
+
+  return string.match(pattern) || [];
+}
+
+var words_1 = words;
+/** Used to compose unicode capture groups. */
+
+var rsApos = "['\u2019]";
+/** Used to match apostrophes. */
+
+var reApos = RegExp(rsApos, 'g');
+/**
+ * Creates a function like `_.camelCase`.
+ *
+ * @private
+ * @param {Function} callback The function to combine each word.
+ * @returns {Function} Returns the new compounder function.
+ */
+
+function createCompounder(callback) {
+  return function (string) {
+    return _arrayReduce(words_1(deburr_1(string).replace(reApos, '')), callback, '');
+  };
+}
+
+var _createCompounder = createCompounder;
+/**
+ * The base implementation of `_.slice` without an iteratee call guard.
+ *
+ * @private
+ * @param {Array} array The array to slice.
+ * @param {number} [start=0] The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the slice of `array`.
+ */
+
+function baseSlice(array, start, end) {
+  var index = -1,
+      length = array.length;
+
+  if (start < 0) {
+    start = -start > length ? 0 : length + start;
+  }
+
+  end = end > length ? length : end;
+
+  if (end < 0) {
+    end += length;
+  }
+
+  length = start > end ? 0 : end - start >>> 0;
+  start >>>= 0;
+  var result = Array(length);
+
+  while (++index < length) {
+    result[index] = array[index + start];
+  }
+
+  return result;
+}
+
+var _baseSlice = baseSlice;
+/**
+ * Casts `array` to a slice if it's needed.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {number} start The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the cast slice.
+ */
+
+function castSlice(array, start, end) {
+  var length = array.length;
+  end = end === undefined ? length : end;
+  return !start && end >= length ? array : _baseSlice(array, start, end);
+}
+
+var _castSlice = castSlice;
+/** Used to compose unicode character classes. */
+
+var rsAstralRange$1 = "\\ud800-\\udfff",
+    rsComboMarksRange$1 = "\\u0300-\\u036f",
+    reComboHalfMarksRange$1 = "\\ufe20-\\ufe2f",
+    rsComboSymbolsRange$1 = "\\u20d0-\\u20ff",
+    rsComboRange$1 = rsComboMarksRange$1 + reComboHalfMarksRange$1 + rsComboSymbolsRange$1,
+    rsVarRange$1 = "\\ufe0e\\ufe0f";
+/** Used to compose unicode capture groups. */
+
+var rsZWJ$1 = "\\u200d";
+/** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
+
+var reHasUnicode = RegExp('[' + rsZWJ$1 + rsAstralRange$1 + rsComboRange$1 + rsVarRange$1 + ']');
+/**
+ * Checks if `string` contains Unicode symbols.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {boolean} Returns `true` if a symbol is found, else `false`.
+ */
+
+function hasUnicode(string) {
+  return reHasUnicode.test(string);
+}
+
+var _hasUnicode = hasUnicode;
+/**
+ * Converts an ASCII `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+
+function asciiToArray(string) {
+  return string.split('');
+}
+
+var _asciiToArray = asciiToArray;
+/** Used to compose unicode character classes. */
+
+var rsAstralRange = "\\ud800-\\udfff",
+    rsComboMarksRange = "\\u0300-\\u036f",
+    reComboHalfMarksRange = "\\ufe20-\\ufe2f",
+    rsComboSymbolsRange = "\\u20d0-\\u20ff",
+    rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange,
+    rsVarRange = "\\ufe0e\\ufe0f";
+/** Used to compose unicode capture groups. */
+
+var rsAstral = '[' + rsAstralRange + ']',
+    rsCombo = '[' + rsComboRange + ']',
+    rsFitz = "\\ud83c[\\udffb-\\udfff]",
+    rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')',
+    rsNonAstral = '[^' + rsAstralRange + ']',
+    rsRegional = "(?:\\ud83c[\\udde6-\\uddff]){2}",
+    rsSurrPair = "[\\ud800-\\udbff][\\udc00-\\udfff]",
+    rsZWJ = "\\u200d";
+/** Used to compose unicode regexes. */
+
+var reOptMod = rsModifier + '?',
+    rsOptVar = '[' + rsVarRange + ']?',
+    rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
+    rsSeq = rsOptVar + reOptMod + rsOptJoin,
+    rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
+/** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
+
+var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+/**
+ * Converts a Unicode `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+
+function unicodeToArray(string) {
+  return string.match(reUnicode) || [];
+}
+
+var _unicodeToArray = unicodeToArray;
+/**
+ * Converts `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+
+function stringToArray(string) {
+  return _hasUnicode(string) ? _unicodeToArray(string) : _asciiToArray(string);
+}
+
+var _stringToArray = stringToArray;
+/**
+ * Creates a function like `_.lowerFirst`.
+ *
+ * @private
+ * @param {string} methodName The name of the `String` case method to use.
+ * @returns {Function} Returns the new case function.
+ */
+
+function createCaseFirst(methodName) {
+  return function (string) {
+    string = toString_1(string);
+    var strSymbols = _hasUnicode(string) ? _stringToArray(string) : undefined;
+    var chr = strSymbols ? strSymbols[0] : string.charAt(0);
+    var trailing = strSymbols ? _castSlice(strSymbols, 1).join('') : string.slice(1);
+    return chr[methodName]() + trailing;
+  };
+}
+
+var _createCaseFirst = createCaseFirst;
+/**
+ * Converts the first character of `string` to upper case.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category String
+ * @param {string} [string=''] The string to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.upperFirst('fred');
+ * // => 'Fred'
+ *
+ * _.upperFirst('FRED');
+ * // => 'FRED'
+ */
+
+var upperFirst = _createCaseFirst('toUpperCase');
+
+var upperFirst_1 = upperFirst;
+/**
+ * Converts `string` to
+ * [start case](https://en.wikipedia.org/wiki/Letter_case#Stylistic_or_specialised_usage).
+ *
+ * @static
+ * @memberOf _
+ * @since 3.1.0
+ * @category String
+ * @param {string} [string=''] The string to convert.
+ * @returns {string} Returns the start cased string.
+ * @example
+ *
+ * _.startCase('--foo-bar--');
+ * // => 'Foo Bar'
+ *
+ * _.startCase('fooBar');
+ * // => 'Foo Bar'
+ *
+ * _.startCase('__FOO_BAR__');
+ * // => 'FOO BAR'
+ */
+
+var startCase = _createCompounder(function (result, word, index) {
+  return result + (index ? ' ' : '') + upperFirst_1(word);
+});
+
+var startCase_1 = startCase;
+
+function Versions() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var env = getContextValues(errorOccurrence, 'env');
+  return /*#__PURE__*/react.createElement(react.Fragment, null, errorOccurrence.application_version && /*#__PURE__*/react.createElement(DefinitionList.Row, {
+    key: "app_version",
+    value: errorOccurrence.application_version,
+    label: "App Version"
+  }), Object.entries(env).map(function (_ref33) {
+    var key = _ref33[0],
+        value = _ref33[1];
+    return /*#__PURE__*/react.createElement(DefinitionList.Row, {
+      key: key,
+      value: value,
+      label: startCase_1(key)
+    });
+  }));
+}
+
+function Context() {
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+  var context = errorOccurrence.context_items;
+  var files = getContextValues(errorOccurrence, 'files');
   return /*#__PURE__*/react.createElement("section", {
     className: "mt-20 2xl:row-span-4"
   }, /*#__PURE__*/react.createElement("a", {
@@ -21174,7 +24169,7 @@ function Context() {
     icon: "far fa-question-circle"
   }, "Query String"), /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "fas fa-code"
-  }, "Body"), /*#__PURE__*/react.createElement(ContextNavItem, {
+  }, "Body"), files.length && /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "far fa-file"
   }, "Files"), /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "fas fa-hourglass-half"
@@ -21182,7 +24177,7 @@ function Context() {
     icon: "fas fa-cookie-bite"
   }, "Cookies")), /*#__PURE__*/react.createElement(ContextNavGroup, {
     title: "App"
-  }, /*#__PURE__*/react.createElement(ContextNavItem, {
+  }, context.route && /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "fas fa-random"
   }, "Routing"), /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "fas fa-paint-roller"
@@ -21196,11 +24191,17 @@ function Context() {
     icon: "fas fa-eye"
   }, "Data")), /*#__PURE__*/react.createElement(ContextNavGroup, {
     title: "User"
-  }, /*#__PURE__*/react.createElement(ContextNavItem, {
+  }, context.user && /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "fas fa-user"
   }, "User"), /*#__PURE__*/react.createElement(ContextNavItem, {
     icon: "far fa-window-maximize"
-  }, "Client"))))), /*#__PURE__*/react.createElement("div", {
+  }, "Client")), /*#__PURE__*/react.createElement(ContextNavGroup, {
+    title: "Context"
+  }, context.git && /*#__PURE__*/react.createElement(ContextNavItem, {
+    icon: "fas fa-code-branch"
+  }, "Git"), /*#__PURE__*/react.createElement(ContextNavItem, {
+    icon: "far fa-info-circle"
+  }, "Versions"))))), /*#__PURE__*/react.createElement("div", {
     className: "overflow-hidden grid grid-cols-1 gap-px flex-grow"
   }, /*#__PURE__*/react.createElement(ContextGroup, {
     title: "Request"
@@ -21216,7 +24217,7 @@ function Context() {
     title: "Body",
     icon: "fas fa-code",
     children: /*#__PURE__*/react.createElement(Body, null)
-  }), /*#__PURE__*/react.createElement(ContextSection, {
+  }), files.length && /*#__PURE__*/react.createElement(ContextSection, {
     title: "Files",
     icon: "far fa-file",
     children: /*#__PURE__*/react.createElement(Files, null)
@@ -21230,7 +24231,7 @@ function Context() {
     children: /*#__PURE__*/react.createElement(Cookies, null)
   })), /*#__PURE__*/react.createElement(ContextGroup, {
     title: "App"
-  }, /*#__PURE__*/react.createElement(ContextSection, {
+  }, context.route && /*#__PURE__*/react.createElement(ContextSection, {
     title: "Routing",
     icon: "fas fa-random",
     children: /*#__PURE__*/react.createElement(Routing, null)
@@ -21254,20 +24255,29 @@ function Context() {
     children: /*#__PURE__*/react.createElement(LivewireData, null)
   })), /*#__PURE__*/react.createElement(ContextGroup, {
     title: "User"
-  }, /*#__PURE__*/react.createElement(ContextSection, {
+  }, context.user && /*#__PURE__*/react.createElement(ContextSection, {
     title: "User",
     icon: "fas fa-user",
-    children: /*#__PURE__*/react.createElement("div", null, "User")
+    children: /*#__PURE__*/react.createElement(User, null)
   }), /*#__PURE__*/react.createElement(ContextSection, {
     title: "Client",
     icon: "far fa-window-maximize",
     children: /*#__PURE__*/react.createElement("div", null, "Client")
+  })), /*#__PURE__*/react.createElement(ContextGroup, {
+    title: "Context"
+  }, context.git && /*#__PURE__*/react.createElement(ContextSection, {
+    title: "Git",
+    icon: "fas fa-code-branch",
+    children: /*#__PURE__*/react.createElement(Git, null)
+  }), /*#__PURE__*/react.createElement(ContextSection, {
+    title: "Versions",
+    icon: "far fa-info-circle",
+    children: /*#__PURE__*/react.createElement(Versions, null)
   })))));
-} // @ts-ignore
+}
 
-
-function DebugTabs(_ref31) {
-  var children = _ref31.children;
+function DebugTabs(_ref34) {
+  var children = _ref34.children;
 
   var _useState12 = react.useState(0),
       currentTabIndex = _useState12[0],
@@ -21284,6 +24294,8 @@ function DebugTabs(_ref31) {
       checked: child.props.checked,
       onChange: child.props.onChange
     };
+  }).filter(function (tab) {
+    return tab.count;
   });
   var Tab = tabs[currentTabIndex].component;
   return /*#__PURE__*/react.createElement("div", {
@@ -21313,16 +24325,34 @@ DebugTabs.Tab = function (_props) {
   return null;
 };
 
-function DebugItem(_ref32) {
-  var children = _ref32.children,
-      _ref32$context = _ref32.context,
-      context = _ref32$context === void 0 ? null : _ref32$context,
-      _ref32$level = _ref32.level,
-      level = _ref32$level === void 0 ? null : _ref32$level,
-      _ref32$meta = _ref32.meta,
-      meta = _ref32$meta === void 0 ? null : _ref32$meta,
-      time = _ref32.time;
-  react.useState(false); // TODO: Implement this
+var _excluded = ["children", "className"];
+
+function Button(_ref) {
+  var children = _ref.children,
+      _ref$className4 = _ref.className,
+      className = _ref$className4 === void 0 ? '' : _ref$className4,
+      props = _objectWithoutPropertiesLoose(_ref, _excluded);
+
+  return /*#__PURE__*/react.createElement("button", _extends({
+    type: props.type || 'button',
+    className: "mt-6 px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                shadow-md hover:shadow-lg active:shadow-none\n                " + className + "\n            "
+  }, props), children);
+}
+
+function DebugItem(_ref35) {
+  var children = _ref35.children,
+      _ref35$context = _ref35.context,
+      context = _ref35$context === void 0 ? null : _ref35$context,
+      _ref35$level = _ref35.level,
+      level = _ref35$level === void 0 ? null : _ref35$level,
+      _ref35$meta = _ref35.meta,
+      meta = _ref35$meta === void 0 ? null : _ref35$meta,
+      time = _ref35.time;
+
+  var _useState13 = react.useState(false),
+      showRawContext = _useState13[0],
+      setShowRawContext = _useState13[1]; // TODO: Implement this
+
 
   var logLevelColors = {
     error: 'bg-red-500',
@@ -21342,9 +24372,9 @@ function DebugItem(_ref32) {
     className: "flex align-baseline text-sm gap-1"
   }, level && /*#__PURE__*/react.createElement("span", {
     className: "\n                            " + (logLevelColors[level] || 'bg-color-gray-500') + "\n                            text-white rounded-full px-2 shadow-sm\n                        "
-  }, level), meta && Object.entries(meta).map(function (_ref33) {
-    var key = _ref33[0],
-        value = _ref33[1];
+  }, level), meta && Object.entries(meta).map(function (_ref36) {
+    var key = _ref36[0],
+        value = _ref36[1];
     return /*#__PURE__*/react.createElement("span", {
       key: key,
       className: "rounded-full px-2 ~bg-white text-gray-500 shadow-sm"
@@ -21352,10 +24382,22 @@ function DebugItem(_ref32) {
   }), /*#__PURE__*/react.createElement("span", {
     className: "ml-auto text-sm text-gray-700"
   }, time.toLocaleTimeString())), context && /*#__PURE__*/react.createElement("div", {
+    className: "mt-2"
+  }, /*#__PURE__*/react.createElement(Button, {
+    onClick: function onClick() {
+      return setShowRawContext(!showRawContext);
+    }
+  }, showRawContext ? /*#__PURE__*/react.createElement("i", {
+    className: "fas fa-th-list"
+  }) : /*#__PURE__*/react.createElement("i", {
+    className: "fas fa-code"
+  })), showRawContext ? /*#__PURE__*/react.createElement(CodeSnippet, {
+    value: jsonStringify(context)
+  }) : /*#__PURE__*/react.createElement("div", {
     className: "grid grid-cols-[8rem,minmax(0,1fr)] gap-x-10 gap-y-2"
   }, /*#__PURE__*/react.createElement(ContextList, {
     items: context
-  })));
+  }))));
 }
 
 function Logs() {
@@ -21376,7 +24418,6 @@ function Logs() {
 function Dumps() {
   var errorOccurrence = react.useContext(ErrorOccurrenceContext);
   var dumps = Object.values(getContextValues(errorOccurrence, 'dumps'));
-  console.log(dumps);
   return /*#__PURE__*/react.createElement(react.Fragment, null, dumps.map(function (dump) {
     return /*#__PURE__*/react.createElement(DebugItem, {
       key: dump.microtime,
@@ -21399,7 +24440,7 @@ function Queries() {
       key: index,
       time: unixToDate(query.microtime),
       meta: {
-        runtime: query.time + "sec",
+        runtime: query.time + "ms",
         connection: query.connection_name
       }
     }, /*#__PURE__*/react.createElement(CodeSnippet, {
@@ -21453,12 +24494,12 @@ function Debug() {
   })));
 }
 
-function CopyButton(_ref34) {
-  var value = _ref34.value;
+function CopyButton(_ref37) {
+  var value = _ref37.value;
 
-  var _useState13 = react.useState(false),
-      copied = _useState13[0],
-      setCopied = _useState13[1];
+  var _useState14 = react.useState(false),
+      copied = _useState14[0],
+      setCopied = _useState14[1];
 
   react.useEffect(function () {
     var timeout;
@@ -22473,7 +25514,7 @@ function transformIgnitionError(_ref) {
         var name = _ref3[0],
             value = _ref3[1];
         return {
-          group: 'headers',
+          group: 'cookies',
           name: name,
           value: value
         };
@@ -22496,7 +25537,7 @@ function transformIgnitionError(_ref) {
           value: value
         };
       }),
-      user: Object.entries(report.context.user || {}).map(function (_ref6) {
+      user: report.context.user ? Object.entries(report.context.user).map(function (_ref6) {
         var name = _ref6[0],
             value = _ref6[1];
         return {
@@ -22504,8 +25545,8 @@ function transformIgnitionError(_ref) {
           name: name,
           value: value
         };
-      }),
-      route: Object.entries(report.context.route || {}).map(function (_ref7) {
+      }) : null,
+      route: report.context.route ? Object.entries(report.context.route).map(function (_ref7) {
         var name = _ref7[0],
             value = _ref7[1];
         return {
@@ -22513,8 +25554,8 @@ function transformIgnitionError(_ref) {
           name: name,
           value: value
         };
-      }),
-      git: Object.entries(report.context.git || {}).map(function (_ref8) {
+      }) : null,
+      git: report.context.git ? Object.entries(report.context.git).map(function (_ref8) {
         var name = _ref8[0],
             value = _ref8[1];
         return {
@@ -22522,7 +25563,7 @@ function transformIgnitionError(_ref) {
           name: name,
           value: value
         };
-      }),
+      }) : null,
       livewire: report.context.livewire || null,
       view: report.context.view || null,
       context: []
@@ -22537,7 +25578,7 @@ function transformIgnitionError(_ref) {
     exception_class: report.exception_class,
     exception_message: report.message,
     application_path: report.application_path,
-    application_version: report.application_version || '',
+    application_version: report.application_version,
     language_version: report.language_version,
     framework_version: report.framework_version,
     notifier_client_name: 'Flare',

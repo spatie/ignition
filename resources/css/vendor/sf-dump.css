@@ -1,94 +1,129 @@
 /*
-    Dumps are hidden asap in errorPage.blade
-    What follows is !important
+    Base styles for Symfony dumps.
+    https://github.com/symfony/var-dumper/blob/5.4/Dumper/HtmlDumper.php#L649
 */
 
-main pre.sf-dump {
-    display: block !important;
-    z-index: 0 !important;
+pre.sf-dump {
+    display: block;
+    white-space: pre;
+    padding: 5px;
+    overflow: initial !important;
 }
-
+pre.sf-dump:after {
+    content: "";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+pre.sf-dump span {
+    display: inline;
+}
+pre.sf-dump a {
+    text-decoration: none;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    color: inherit;
+}
+pre.sf-dump img {
+    max-width: 50em;
+    max-height: 50em;
+    margin: .5em 0 0 0;
+    padding: 0;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAHUlEQVQY02O8zAABilCaiQEN0EeA8QuUcX9g3QEAAjcC5piyhyEAAAAASUVORK5CYII=) #D3D3D3;
+}
+pre.sf-dump .sf-dump-ellipsis {
+    display: inline-block;
+    overflow: visible;
+    text-overflow: ellipsis;
+    max-width: 5em;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+}
+pre.sf-dump .sf-dump-ellipsis+.sf-dump-ellipsis {
+    max-width: none;
+}
+pre.sf-dump code {
+    display:inline;
+    padding:0;
+    background:none;
+}
 .sf-dump-public.sf-dump-highlight,
 .sf-dump-protected.sf-dump-highlight,
 .sf-dump-private.sf-dump-highlight,
 .sf-dump-str.sf-dump-highlight,
 .sf-dump-key.sf-dump-highlight {
-    @apply bg-violet-100 !important;
-    @apply border-violet-200 !important;
+    background: rgba(111, 172, 204, 0.3);
+    border: 1px solid #7DA0B1;
+    border-radius: 3px;
 }
 .sf-dump-public.sf-dump-highlight-active,
 .sf-dump-protected.sf-dump-highlight-active,
 .sf-dump-private.sf-dump-highlight-active,
 .sf-dump-str.sf-dump-highlight-active,
 .sf-dump-key.sf-dump-highlight-active {
-    @apply bg-amber-100 !important;
-    @apply border-amber-200 !important;
+    background: rgba(253, 175, 0, 0.4);
+    border: 1px solid #ffa500;
+    border-radius: 3px;
 }
-
+pre.sf-dump .sf-dump-search-hidden {
+    display: none !important;
+}
+pre.sf-dump .sf-dump-search-wrapper {
+    font-size: 0;
+    white-space: nowrap;
+    margin-bottom: 5px;
+    display: flex;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5px;
+}
 pre.sf-dump .sf-dump-search-wrapper > * {
-    @apply border-gray-300 !important;
+    vertical-align: top;
+    box-sizing: border-box;
+    height: 21px;
+    font-weight: normal;
+    border-radius: 0;
+    background: #FFF;
+    color: #757575;
+    border: 1px solid #BBB;
 }
-
 pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input {
-    @apply text-xs !important;
-    @apply bg-gray-800 !important;
+    padding: 3px;
+    height: 21px;
+    font-size: 12px;
+    border-right: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    color: #000;
+    min-width: 15px;
+    width: 100%;
 }
-
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next,
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous {
-    @apply bg-gray-100 !important;
+    background: #F2F2F2;
+    outline: none;
+    border-left: none;
+    font-size: 0;
+    line-height: 0;
 }
-
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next > svg,
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous > svg {
+    pointer-events: none;
+    width: 12px;
+    height: 12px;
+}
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-count {
-    @apply text-sm !important;
-}
-
-pre.sf-dump,
-pre.sf-dump .sf-dump-default {
-    @apply font-mono !important;
-    @apply bg-gray-100 !important;
-    @apply text-gray-800 !important;
-}
-
-pre.sf-dump .sf-dump-num {
-    @apply text-red-300 !important;
-}
-
-pre.sf-dump .sf-dump-const {
-    @apply font-normal !important;
-}
-
-pre.sf-dump .sf-dump-str {
-    @apply font-normal !important;
-    @apply text-gray-600 !important;
-}
-
-pre.sf-dump .sf-dump-note {
-    @apply text-blue-400 !important;
-}
-
-pre.sf-dump .sf-dump-ref {
-    @apply text-gray-600 !important;
-}
-
-pre.sf-dump .sf-dump-public,
-pre.sf-dump .sf-dump-protected,
-pre.sf-dump .sf-dump-private {
-    @apply text-violet-500 !important;
-}
-
-pre.sf-dump .sf-dump-meta {
-    @apply text-violet-500 !important;
-}
-
-pre.sf-dump .sf-dump-key {
-    @apply text-violet-600 !important;
-}
-
-pre.sf-dump .sf-dump-index {
-    @apply text-blue-400 !important;
-}
-
-pre.sf-dump .sf-dump-ellipsis {
-    @apply text-violet-600 !important;
+    display: inline-block;
+    padding: 0 5px;
+    margin: 0;
+    border-left: none;
+    line-height: 21px;
+    font-size: 12px;
 }
