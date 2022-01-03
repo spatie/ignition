@@ -49,8 +49,11 @@ on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 }
 ```
 - run `yarn install` in the `~/code/flare` directory
-- run `composer update` in the `~/code/flare/ignition-test` directory
-- http://ignition-test.test/ should now work (= show the new UI)
+- in the `~/code/flare/ignition-test` directory
+    - run `composer update` 
+    - run `cp .env.example .env`
+    - run `php artisan key:generate`
+- http://ignition-test.test/ should now work (= show the new UI). If you use valet, you might want to run `valet park` inside the `~/code/flare` directory.
   - http://ignition-test.test/ has a bit of everything
   - http://ignition-test.test/sql-error has a solution and SQL exception
 
