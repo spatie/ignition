@@ -1017,16 +1017,20 @@ pre.sf-dump .sf-dump-ellipsis{
   left: 50%;
 }
 
+.top-0{
+  top: 0px;
+}
+
+.right-0{
+  right: 0px;
+}
+
 .left-0{
   left: 0px;
 }
 
 .left-8{
   left: 2rem;
-}
-
-.top-0{
-  top: 0px;
 }
 
 .top-2\.5{
@@ -1039,10 +1043,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .right-1\/2{
   right: 50%;
-}
-
-.right-0{
-  right: 0px;
 }
 
 .left-4{
@@ -1182,6 +1182,14 @@ pre.sf-dump .sf-dump-ellipsis{
   margin-bottom: 1.5rem;
 }
 
+.mt-1{
+  margin-top: 0.25rem;
+}
+
+.mr-2{
+  margin-right: 0.5rem;
+}
+
 .-mt-6{
   margin-top: -1.5rem;
 }
@@ -1212,10 +1220,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .ml-6{
   margin-left: 1.5rem;
-}
-
-.mr-2{
-  margin-right: 0.5rem;
 }
 
 .mt-4{
@@ -1428,6 +1432,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .transform{
   transform: var(--tw-transform);
+}
+
+.cursor-default{
+  cursor: default;
 }
 
 .cursor-pointer{
@@ -1821,6 +1829,10 @@ pre.sf-dump .sf-dump-ellipsis{
   padding-right: 0.5rem;
 }
 
+.pr-12{
+  padding-right: 3rem;
+}
+
 .pr-10{
   padding-right: 2.5rem;
 }
@@ -2085,6 +2097,24 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .duration-500{
   transition-duration: 500ms;
+}
+
+.line-clamp-2{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.line-clamp-none{
+  -webkit-line-clamp: unset;
 }
 
 .first-letter\:uppercase::first-letter{
