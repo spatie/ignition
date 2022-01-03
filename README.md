@@ -35,6 +35,25 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards
 on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
+## Dev setup
+
+- clone (or move) `spatie/ignition`, `spatie/ignition-ui`, `spatie/laravel-ignition`, `spatie/flare-client-php` and `spatie/ignition-test` into the same directory (e.g. `~/code/flare`)
+- create a new `package.json` file in `~/code/flare` directory:
+```json
+{
+    "private": true,
+    "workspaces": [
+        "ignition-ui",
+        "ignition"
+    ]
+}
+```
+- run `yarn install` in the `~/code/flare` directory
+- run `composer update` in the `~/code/flare/ignition-test` directory
+- http://ignition-test.test/ should now work (= show the new UI)
+  - http://ignition-test.test/ has a bit of everything
+  - http://ignition-test.test/sql-error has a solution and SQL exception
+
 ## Installation
 
 You can install the package via composer:
