@@ -24834,244 +24834,6 @@ function ShareDropdown(_ref) {
   }, error)));
 }
 
-function _catch(body, recover) {
-  try {
-    var result = body();
-  } catch (e) {
-    return recover(e);
-  }
-
-  if (result && result.then) {
-    return result.then(void 0, recover);
-  }
-
-  return result;
-}
-
-function _finallyRethrows(body, finalizer) {
-  try {
-    var result = body();
-  } catch (e) {
-    return finalizer(true, e);
-  }
-
-  if (result && result.then) {
-    return result.then(finalizer.bind(null, false), finalizer.bind(null, true));
-  }
-
-  return finalizer(false, result);
-}
-
-function SettingsDropdown(_ref) {
-  var _themeOptions$find;
-
-  var updateConfig = function updateConfig() {
-    try {
-      if (isUpdatingConfig) {
-        return Promise.resolve();
-      }
-
-      return Promise.resolve(_finallyRethrows(function () {
-        return _catch(function () {
-          var _themeOptions$find2;
-
-          setUpdateWasSuccessful(false);
-          setIsUpdatingConfig(true);
-
-          if (!igniteData.updateConfigEndpoint) {
-            return;
-          }
-
-          return Promise.resolve(fetch(igniteData.updateConfigEndpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json'
-            },
-            body: JSON.stringify({
-              editor: editor,
-              theme: (_themeOptions$find2 = themeOptions.find(function (option) {
-                return option.selected;
-              })) == null ? void 0 : _themeOptions$find2.value,
-              hide_solutions: false // TODO
-
-            })
-          })).then(function (response) {
-            setUpdateWasSuccessful(response.status >= 200 && response.status < 300);
-            setTimeout(function () {
-              setUpdateWasSuccessful(false);
-            }, 3000);
-          });
-        }, function (error) {
-          console.error(error);
-          setUpdateWasSuccessful(false);
-        });
-      }, function (_wasThrown, _result) {
-        setIsUpdatingConfig(false);
-        if (_wasThrown) throw _result;
-        return _result;
-      }));
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  };
-
-  var isOpen = _ref.isOpen;
-  var igniteData = react.useContext(IgniteDataContext);
-
-  var _useContext = react.useContext(IgnitionConfigContext),
-      ignitionConfig = _useContext.ignitionConfig,
-      setIgnitionConfig = _useContext.setIgnitionConfig;
-
-  var _useState = react.useState(ignitionConfig.editor),
-      editor = _useState[0],
-      setEditor = _useState[1];
-
-  var _useState2 = react.useState(null),
-      previousTheme = _useState2[0],
-      setPreviousTheme = _useState2[1];
-
-  var _useState3 = react.useState(false),
-      isUpdatingConfig = _useState3[0],
-      setIsUpdatingConfig = _useState3[1];
-
-  var _useState4 = react.useState(false),
-      updateWasSuccessful = _useState4[0],
-      setUpdateWasSuccessful = _useState4[1];
-
-  var _useState5 = react.useState([{
-    value: 'light',
-    icon: 'fas fa-sun group-hover:text-amber-400',
-    selected: ignitionConfig.theme === 'light'
-  }, {
-    value: 'dark',
-    icon: 'fas fa-moon group-hover:text-amber-300',
-    selected: ignitionConfig.theme === 'dark'
-  }, {
-    value: 'auto',
-    icon: 'fas fa-adjust group-hover:text-indigo-500',
-    selected: ignitionConfig.theme === 'auto'
-  }]),
-      themeOptions = _useState5[0],
-      setThemeOptions = _useState5[1];
-
-  function handleEditorChange(editor) {
-    setEditor(editor);
-    setIgnitionConfig(_extends$1({}, ignitionConfig, {
-      editor: editor
-    }));
-  }
-
-  function handleThemeChange() {
-    var currentThemeIndex = themeOptions.findIndex(function (option) {
-      return option.selected;
-    });
-    var newIndex = currentThemeIndex === -1 || currentThemeIndex === themeOptions.length - 1 ? 0 : currentThemeIndex + 1;
-    setPreviousTheme(themeOptions[currentThemeIndex].value);
-    setThemeOptions([].concat(themeOptions.map(function (option, index) {
-      option.selected = index === newIndex;
-      return option;
-    })));
-    setIgnitionConfig(_extends$1({}, ignitionConfig, {
-      theme: themeOptions[newIndex].value
-    }));
-  }
-
-  return react.createElement("div", {
-    className: "\n                absolute mt-2 top-10 right-1/2 translate-x-6 transition-all duration-150 origin-top-right\n                " + (isOpen ? '' : 'opacity-0 pointer-events-none scale-90') + "\n            "
-  }, react.createElement("div", {
-    className: "flex px-4 justify-end"
-  }, react.createElement("div", {
-    className: "w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"
-  })), react.createElement("div", {
-    className: "~bg-dropdown px-10 py-8 shadow-2xl"
-  }, react.createElement("div", {
-    className: "flex items-center justify-between gap-6"
-  }, react.createElement("h4", {
-    className: "whitespace-nowrap font-semibold"
-  }, "Ignition Settings"), react.createElement("a", {
-    className: "text-xs ~text-gray-500 hover:text-red-500 flex items-center underline transition-colors",
-    href: "https://flareapp.io/ignition"
-  }, "Docs", react.createElement(IgnitionIcon, null))), react.createElement("h4", {
-    className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
-  }, "Editor"), react.createElement("div", {
-    className: "group mt-2 relative"
-  }, react.createElement("select", {
-    className: "block appearance-none w-full ~bg-gray-500/5 h-12 px-4 pr-8 rounded-none leading-tight",
-    value: editor,
-    onChange: function onChange(event) {
-      return handleEditorChange(event.target.value);
-    }
-  }, Object.entries(ignitionConfig.editorOptions).map(function (_ref2) {
-    var editor = _ref2[0],
-        label = _ref2[1].label;
-    return react.createElement("option", {
-      key: editor,
-      value: editor
-    }, label);
-  })), react.createElement("div", {
-    className: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-4"
-  }, react.createElement("i", {
-    className: "fas fa-angle-down group-hover:text-indigo-500 text-sm"
-  }))), react.createElement("h4", {
-    className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
-  }, "Theme"), react.createElement("button", {
-    className: "mt-2 w-full ~bg-gray-500/5 rounded-none leading-tight",
-    onClick: handleThemeChange
-  }, react.createElement("div", {
-    className: "group flex items-center",
-    style: {
-      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)'
-    }
-  }, react.createElement("div", {
-    className: "px-4"
-  }, themeOptions.map(function (_ref3) {
-    var icon = _ref3.icon,
-        value = _ref3.value,
-        selected = _ref3.selected;
-    return react.createElement("div", {
-      key: value,
-      className: "\n                                        h-12 flex items-center origin-bottom\n                                        " + (selected ? 'transition-transform duration-1000' : '') + "\n                                        " + (value === previousTheme ? 'transition-transform duration-1000 absolute top-0 left-4 rotate-180' : '') + "\n                                        " + (!selected && value !== previousTheme ? 'absolute top-0 left-4 -rotate-180' : '') + "\n                                    "
-    }, react.createElement("i", {
-      className: icon + " text-sm ~text-gray-500 transition-colors duration-500"
-    }));
-  })), react.createElement("div", {
-    id: "theme-name",
-    className: "-ml-1 first-letter:uppercase"
-  }, (_themeOptions$find = themeOptions.find(function (t) {
-    return t.selected;
-  })) == null ? void 0 : _themeOptions$find.value))), react.createElement("div", {
-    className: "mt-6 flex items-center gap-4"
-  }, react.createElement("button", {
-    onClick: updateConfig,
-    disabled: isUpdatingConfig,
-    className: "px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                        border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                        shadow-md\n                        transform\n                        transition-animation\n                        hover:shadow-lg\n                        active:shadow-inner\n                        active:translate-y-px\n                        " + (isUpdatingConfig ? 'opacity-50' : 'opacity-100') + "\n                    "
-  }, "Save settings"), updateWasSuccessful && react.createElement("p", {
-    className: "text-emerald-500 text-sm"
-  }, "Saved!"))));
-}
-
-var useWindowScrollPosition = function useWindowScrollPosition(_ref) {
-  var _ref$distance = _ref.distance,
-      distance = _ref$distance === void 0 ? 0 : _ref$distance;
-
-  var _useState = react.useState(window.pageYOffset),
-      scrollPosition = _useState[0],
-      setScrollPosition = _useState[1];
-
-  react.useEffect(function () {
-    var handleScroll = function handleScroll() {
-      setScrollPosition(window.pageYOffset);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return function () {
-      return window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  return scrollPosition >= distance;
-};
-
 /*!
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -27551,7 +27313,255 @@ FontAwesomeIcon.defaultProps = {
 };
 var convertCurry = convert.bind(null, react.createElement);
 
-var faBars={prefix:'fas',iconName:'bars',icon:[448,512,[],"f0c9","M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"]};var faBug={prefix:'fas',iconName:'bug',icon:[512,512,[],"f188","M511.988 288.9c-.478 17.43-15.217 31.1-32.653 31.1H424v16c0 21.864-4.882 42.584-13.6 61.145l60.228 60.228c12.496 12.497 12.496 32.758 0 45.255-12.498 12.497-32.759 12.496-45.256 0l-54.736-54.736C345.886 467.965 314.351 480 280 480V236c0-6.627-5.373-12-12-12h-24c-6.627 0-12 5.373-12 12v244c-34.351 0-65.886-12.035-90.636-32.108l-54.736 54.736c-12.498 12.497-32.759 12.496-45.256 0-12.496-12.497-12.496-32.758 0-45.255l60.228-60.228C92.882 378.584 88 357.864 88 336v-16H32.666C15.23 320 .491 306.33.013 288.9-.484 270.816 14.028 256 32 256h56v-58.745l-46.628-46.628c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0L141.255 160h229.489l54.627-54.627c12.498-12.497 32.758-12.497 45.256 0 12.496 12.497 12.496 32.758 0 45.255L424 197.255V256h56c17.972 0 32.484 14.816 31.988 32.9zM257 0c-61.856 0-112 50.144-112 112h224C369 50.144 318.856 0 257 0z"]};var faCog={prefix:'fas',iconName:'cog',icon:[512,512,[],"f013","M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"]};var faInfoCircle={prefix:'fas',iconName:'info-circle',icon:[512,512,[],"f05a","M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"]};var faShare={prefix:'fas',iconName:'share',icon:[512,512,[],"f064","M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"]};
+var faAdjust={prefix:'fas',iconName:'adjust',icon:[512,512,[],"f042","M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705 0 184 82.311 184 184 0 101.705-82.311 184-184 184z"]};var faAngleDown={prefix:'fas',iconName:'angle-down',icon:[320,512,[],"f107","M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"]};var faBug={prefix:'fas',iconName:'bug',icon:[512,512,[],"f188","M511.988 288.9c-.478 17.43-15.217 31.1-32.653 31.1H424v16c0 21.864-4.882 42.584-13.6 61.145l60.228 60.228c12.496 12.497 12.496 32.758 0 45.255-12.498 12.497-32.759 12.496-45.256 0l-54.736-54.736C345.886 467.965 314.351 480 280 480V236c0-6.627-5.373-12-12-12h-24c-6.627 0-12 5.373-12 12v244c-34.351 0-65.886-12.035-90.636-32.108l-54.736 54.736c-12.498 12.497-32.759 12.496-45.256 0-12.496-12.497-12.496-32.758 0-45.255l60.228-60.228C92.882 378.584 88 357.864 88 336v-16H32.666C15.23 320 .491 306.33.013 288.9-.484 270.816 14.028 256 32 256h56v-58.745l-46.628-46.628c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0L141.255 160h229.489l54.627-54.627c12.498-12.497 32.758-12.497 45.256 0 12.496 12.497 12.496 32.758 0 45.255L424 197.255V256h56c17.972 0 32.484 14.816 31.988 32.9zM257 0c-61.856 0-112 50.144-112 112h224C369 50.144 318.856 0 257 0z"]};var faCode={prefix:'fas',iconName:'code',icon:[640,512,[],"f121","M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"]};var faCog={prefix:'fas',iconName:'cog',icon:[512,512,[],"f013","M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"]};var faFingerprint={prefix:'fas',iconName:'fingerprint',icon:[512,512,[],"f577","M256.12 245.96c-13.25 0-24 10.74-24 24 1.14 72.25-8.14 141.9-27.7 211.55-2.73 9.72 2.15 30.49 23.12 30.49 10.48 0 20.11-6.92 23.09-17.52 13.53-47.91 31.04-125.41 29.48-224.52.01-13.25-10.73-24-23.99-24zm-.86-81.73C194 164.16 151.25 211.3 152.1 265.32c.75 47.94-3.75 95.91-13.37 142.55-2.69 12.98 5.67 25.69 18.64 28.36 13.05 2.67 25.67-5.66 28.36-18.64 10.34-50.09 15.17-101.58 14.37-153.02-.41-25.95 19.92-52.49 54.45-52.34 31.31.47 57.15 25.34 57.62 55.47.77 48.05-2.81 96.33-10.61 143.55-2.17 13.06 6.69 25.42 19.76 27.58 19.97 3.33 26.81-15.1 27.58-19.77 8.28-50.03 12.06-101.21 11.27-152.11-.88-55.8-47.94-101.88-104.91-102.72zm-110.69-19.78c-10.3-8.34-25.37-6.8-33.76 3.48-25.62 31.5-39.39 71.28-38.75 112 .59 37.58-2.47 75.27-9.11 112.05-2.34 13.05 6.31 25.53 19.36 27.89 20.11 3.5 27.07-14.81 27.89-19.36 7.19-39.84 10.5-80.66 9.86-121.33-.47-29.88 9.2-57.88 28-80.97 8.35-10.28 6.79-25.39-3.49-33.76zm109.47-62.33c-15.41-.41-30.87 1.44-45.78 4.97-12.89 3.06-20.87 15.98-17.83 28.89 3.06 12.89 16 20.83 28.89 17.83 11.05-2.61 22.47-3.77 34-3.69 75.43 1.13 137.73 61.5 138.88 134.58.59 37.88-1.28 76.11-5.58 113.63-1.5 13.17 7.95 25.08 21.11 26.58 16.72 1.95 25.51-11.88 26.58-21.11a929.06 929.06 0 0 0 5.89-119.85c-1.56-98.75-85.07-180.33-186.16-181.83zm252.07 121.45c-2.86-12.92-15.51-21.2-28.61-18.27-12.94 2.86-21.12 15.66-18.26 28.61 4.71 21.41 4.91 37.41 4.7 61.6-.11 13.27 10.55 24.09 23.8 24.2h.2c13.17 0 23.89-10.61 24-23.8.18-22.18.4-44.11-5.83-72.34zm-40.12-90.72C417.29 43.46 337.6 1.29 252.81.02 183.02-.82 118.47 24.91 70.46 72.94 24.09 119.37-.9 181.04.14 246.65l-.12 21.47c-.39 13.25 10.03 24.31 23.28 24.69.23.02.48.02.72.02 12.92 0 23.59-10.3 23.97-23.3l.16-23.64c-.83-52.5 19.16-101.86 56.28-139 38.76-38.8 91.34-59.67 147.68-58.86 69.45 1.03 134.73 35.56 174.62 92.39 7.61 10.86 22.56 13.45 33.42 5.86 10.84-7.62 13.46-22.59 5.84-33.43z"]};var faMoon={prefix:'fas',iconName:'moon',icon:[512,512,[],"f186","M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"]};var faShare={prefix:'fas',iconName:'share',icon:[512,512,[],"f064","M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"]};var faSun={prefix:'fas',iconName:'sun',icon:[512,512,[],"f185","M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"]};
+
+function _catch(body, recover) {
+  try {
+    var result = body();
+  } catch (e) {
+    return recover(e);
+  }
+
+  if (result && result.then) {
+    return result.then(void 0, recover);
+  }
+
+  return result;
+}
+
+function _finallyRethrows(body, finalizer) {
+  try {
+    var result = body();
+  } catch (e) {
+    return finalizer(true, e);
+  }
+
+  if (result && result.then) {
+    return result.then(finalizer.bind(null, false), finalizer.bind(null, true));
+  }
+
+  return finalizer(false, result);
+}
+
+function SettingsDropdown(_ref) {
+  var _themeOptions$find;
+
+  var updateConfig = function updateConfig() {
+    try {
+      if (isUpdatingConfig) {
+        return Promise.resolve();
+      }
+
+      return Promise.resolve(_finallyRethrows(function () {
+        return _catch(function () {
+          var _themeOptions$find2;
+
+          setUpdateWasSuccessful(false);
+          setIsUpdatingConfig(true);
+
+          if (!igniteData.updateConfigEndpoint) {
+            return;
+          }
+
+          return Promise.resolve(fetch(igniteData.updateConfigEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({
+              editor: editor,
+              theme: (_themeOptions$find2 = themeOptions.find(function (option) {
+                return option.selected;
+              })) == null ? void 0 : _themeOptions$find2.value,
+              hide_solutions: false // TODO
+
+            })
+          })).then(function (response) {
+            setUpdateWasSuccessful(response.status >= 200 && response.status < 300);
+            setTimeout(function () {
+              setUpdateWasSuccessful(false);
+            }, 3000);
+          });
+        }, function (error) {
+          console.error(error);
+          setUpdateWasSuccessful(false);
+        });
+      }, function (_wasThrown, _result) {
+        setIsUpdatingConfig(false);
+        if (_wasThrown) throw _result;
+        return _result;
+      }));
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+
+  var isOpen = _ref.isOpen;
+  var igniteData = react.useContext(IgniteDataContext);
+
+  var _useContext = react.useContext(IgnitionConfigContext),
+      ignitionConfig = _useContext.ignitionConfig,
+      setIgnitionConfig = _useContext.setIgnitionConfig;
+
+  var _useState = react.useState(ignitionConfig.editor),
+      editor = _useState[0],
+      setEditor = _useState[1];
+
+  var _useState2 = react.useState(null),
+      previousTheme = _useState2[0],
+      setPreviousTheme = _useState2[1];
+
+  var _useState3 = react.useState(false),
+      isUpdatingConfig = _useState3[0],
+      setIsUpdatingConfig = _useState3[1];
+
+  var _useState4 = react.useState(false),
+      updateWasSuccessful = _useState4[0],
+      setUpdateWasSuccessful = _useState4[1];
+
+  var _useState5 = react.useState([{
+    value: 'light',
+    icon: react.createElement(FontAwesomeIcon, {
+      icon: faSun,
+      className: "group-hover:text-amber-400"
+    }),
+    selected: ignitionConfig.theme === 'light'
+  }, {
+    value: 'dark',
+    icon: react.createElement(FontAwesomeIcon, {
+      icon: faMoon,
+      className: "group-hover:text-amber-300"
+    }),
+    selected: ignitionConfig.theme === 'dark'
+  }, {
+    value: 'auto',
+    icon: react.createElement(FontAwesomeIcon, {
+      icon: faAdjust,
+      className: "group-hover:text-indigo-500"
+    }),
+    selected: ignitionConfig.theme === 'auto'
+  }]),
+      themeOptions = _useState5[0],
+      setThemeOptions = _useState5[1];
+
+  function handleEditorChange(editor) {
+    setEditor(editor);
+    setIgnitionConfig(_extends$1({}, ignitionConfig, {
+      editor: editor
+    }));
+  }
+
+  function handleThemeChange() {
+    var currentThemeIndex = themeOptions.findIndex(function (option) {
+      return option.selected;
+    });
+    var newIndex = currentThemeIndex === -1 || currentThemeIndex === themeOptions.length - 1 ? 0 : currentThemeIndex + 1;
+    setPreviousTheme(themeOptions[currentThemeIndex].value);
+    setThemeOptions([].concat(themeOptions.map(function (option, index) {
+      option.selected = index === newIndex;
+      return option;
+    })));
+    setIgnitionConfig(_extends$1({}, ignitionConfig, {
+      theme: themeOptions[newIndex].value
+    }));
+  }
+
+  return react.createElement("div", {
+    className: "\n                absolute mt-2 top-10 right-1/2 translate-x-6 transition-all duration-150 origin-top-right\n                " + (isOpen ? '' : 'opacity-0 pointer-events-none scale-90') + "\n            "
+  }, react.createElement("div", {
+    className: "flex px-4 justify-end"
+  }, react.createElement("div", {
+    className: "w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"
+  })), react.createElement("div", {
+    className: "~bg-dropdown px-10 py-8 shadow-2xl"
+  }, react.createElement("div", {
+    className: "flex items-center justify-between gap-6"
+  }, react.createElement("h4", {
+    className: "whitespace-nowrap font-semibold"
+  }, "Ignition Settings"), react.createElement("a", {
+    className: "text-xs ~text-gray-500 hover:text-red-500 flex items-center underline transition-colors",
+    href: "https://flareapp.io/ignition"
+  }, "Docs", react.createElement(IgnitionIcon, null))), react.createElement("h4", {
+    className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
+  }, "Editor"), react.createElement("div", {
+    className: "group mt-2 relative"
+  }, react.createElement("select", {
+    className: "block appearance-none w-full ~bg-gray-500/5 h-12 px-4 pr-8 rounded-none leading-tight",
+    value: editor,
+    onChange: function onChange(event) {
+      return handleEditorChange(event.target.value);
+    }
+  }, Object.entries(ignitionConfig.editorOptions).map(function (_ref2) {
+    var editor = _ref2[0],
+        label = _ref2[1].label;
+    return react.createElement("option", {
+      key: editor,
+      value: editor
+    }, label);
+  })), react.createElement("div", {
+    className: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-4"
+  }, react.createElement(FontAwesomeIcon, {
+    icon: faAngleDown,
+    className: "group-hover:text-indigo-500 text-sm"
+  }))), react.createElement("h4", {
+    className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
+  }, "Theme"), react.createElement("button", {
+    className: "mt-2 w-full ~bg-gray-500/5 rounded-none leading-tight",
+    onClick: handleThemeChange
+  }, react.createElement("div", {
+    className: "group flex items-center",
+    style: {
+      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)'
+    }
+  }, react.createElement("div", {
+    className: "px-4"
+  }, themeOptions.map(function (_ref3) {
+    var icon = _ref3.icon,
+        value = _ref3.value,
+        selected = _ref3.selected;
+    return react.createElement("div", {
+      key: value,
+      className: "\n                                        h-12 flex items-center origin-bottom\n                                        " + (selected ? 'transition-transform duration-1000' : '') + "\n                                        " + (value === previousTheme ? 'transition-transform duration-1000 absolute top-0 left-4 rotate-180' : '') + "\n                                        " + (!selected && value !== previousTheme ? 'absolute top-0 left-4 -rotate-180' : '') + "\n                                    "
+    }, react.createElement("span", {
+      className: "text-sm ~text-gray-500 transition-colors duration-500"
+    }, icon));
+  })), react.createElement("div", {
+    id: "theme-name",
+    className: "-ml-1 first-letter:uppercase"
+  }, (_themeOptions$find = themeOptions.find(function (t) {
+    return t.selected;
+  })) == null ? void 0 : _themeOptions$find.value))), react.createElement("div", {
+    className: "mt-6 flex items-center gap-4"
+  }, react.createElement("button", {
+    onClick: updateConfig,
+    disabled: isUpdatingConfig,
+    className: "px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                        border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                        shadow-md\n                        transform\n                        transition-animation\n                        hover:shadow-lg\n                        active:shadow-inner\n                        active:translate-y-px\n                        " + (isUpdatingConfig ? 'opacity-50' : 'opacity-100') + "\n                    "
+  }, "Save settings"), updateWasSuccessful && react.createElement("p", {
+    className: "text-emerald-500 text-sm"
+  }, "Saved!"))));
+}
+
+var useWindowScrollPosition = function useWindowScrollPosition(_ref) {
+  var _ref$distance = _ref.distance,
+      distance = _ref$distance === void 0 ? 0 : _ref$distance;
+
+  var _useState = react.useState(window.pageYOffset),
+      scrollPosition = _useState[0],
+      setScrollPosition = _useState[1];
+
+  react.useEffect(function () {
+    var handleScroll = function handleScroll() {
+      setScrollPosition(window.pageYOffset);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return function () {
+      return window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  return scrollPosition >= distance;
+};
 
 /*!
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
@@ -27602,12 +27612,12 @@ function NavBar(_ref) {
   }, react.createElement(NavBarItem, {
     name: "stack",
     icon: react.createElement(FontAwesomeIcon, {
-      icon: faBars
+      icon: faCode
     })
   }), react.createElement(NavBarItem, {
     name: "context",
     icon: react.createElement(FontAwesomeIcon, {
-      icon: faInfoCircle
+      icon: faFingerprint
     })
   }), hasDebugInfo(errorOccurrence) && react.createElement(NavBarItem, {
     name: "debug",

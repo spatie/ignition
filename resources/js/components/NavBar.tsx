@@ -5,7 +5,7 @@ import SettingsDropdown from 'components/SettingsDropdown';
 import { ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faInfoCircle, faBug, faShare, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faFingerprint, faCode, faBug, faShare, faCog } from '@fortawesome/free-solid-svg-icons';
 import { faLaravel } from '@fortawesome/free-brands-svg-icons';
 
 type Props = { showException: boolean };
@@ -39,10 +39,10 @@ export default function NavBar({ showException }: Props) {
                     <div className="h-10 flex justify-between px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none">
                         <ul className="-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center">
                             <NavBarItem name="stack" icon={
-                                <FontAwesomeIcon icon={faBars} />
+                                <FontAwesomeIcon icon={faCode} />
                             } />
                             <NavBarItem name="context" icon={
-                                <FontAwesomeIcon icon={faInfoCircle} />
+                                <FontAwesomeIcon icon={faFingerprint} />
                             } />
                             {hasDebugInfo(errorOccurrence) && (
                                 <NavBarItem
