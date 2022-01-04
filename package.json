@@ -5,7 +5,8 @@
         "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
         "dev": "NODE_ENV=development TAILWIND_MODE=watch concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
         "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
-        "typecheck": "tsc -w --preserveWatchOutput"
+        "typecheck": "tsc -w --preserveWatchOutput",
+        "postinstall": "sed -i '' '/For example <script/d' ./node_modules/@fortawesome/fontawesome-svg-core/index.es.js; sed -i '' '/For example <script/d' ../node_modules/@fortawesome/fontawesome-svg-core/index.es.js; exit 0"
     },
     "dependencies": {
         "@flareapp/ignition-ui": "^2.0.0",

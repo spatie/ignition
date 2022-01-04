@@ -26,7 +26,6 @@ export default function NavBar({ showException }: Props) {
         setIsSettingsDropdownOpen(!isSettingsDropdownOpen);
     }
 
-    
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
             <div className="relative">
