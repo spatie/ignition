@@ -6,6 +6,7 @@ import { ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faInfoCircle, faBug, faShare, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faLaravel } from '@fortawesome/free-brands-svg-icons';
 
 type Props = { showException: boolean };
 
@@ -60,10 +61,10 @@ export default function NavBar({ showException }: Props) {
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
                             <NavBarItem name="docs" href="https://laravel.com/docs" icon={
-                                <FontAwesomeIcon icon={faCog} />
+                                <FontAwesomeIcon className='text-sm' icon={faLaravel} />
                             } important />
                             <NavBarItem name="settings" icon={
-                                <FontAwesomeIcon icon={faCog} />
+                                <FontAwesomeIcon className='text-sm' icon={faCog} />
                             } label={false} onClick={toggleSettings}>
                                 <SettingsDropdown isOpen={isSettingsDropdownOpen} />
                             </NavBarItem>

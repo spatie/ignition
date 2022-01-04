@@ -43,7 +43,16 @@
 <div id="app"></div>
 
 <style><?= $getAssetContents('ignition.css') ?></style>
-<script><?= $getAssetContents('ignition.js') ?></script>
+
+<!-- 
+    Use HTML comments inside script tag to prevent parsing of </script> inside FontAwesome comments 
+    See: https://github.com/FortAwesome/Font-Awesome/issues/18473
+-->
+<script>
+<!-- 
+<?= $getAssetContents('ignition.js') ?> 
+//-->
+</script>
 <script>
     window.ignite(window.data);
 </script>
