@@ -25,7 +25,7 @@ module.exports = {
                 '2xl': '1920px',
             },
             transitionProperty: {
-                'nav': 'transform, shadow'
+                'nav': 'transform, box-shadow'
             }
         },
     },

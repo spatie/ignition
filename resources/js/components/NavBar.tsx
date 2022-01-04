@@ -48,8 +48,8 @@ export default function NavBar({ showException }: Props) {
                             </NavBarItem>
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
-                            <NavBarItem name="docs" href="https://laravel.com/docs" icon="fab fa-laravel" important />
-                            <NavBarItem name="settings" icon="fas fa-cog" label={false} onClick={toggleSettings}>
+                            <NavBarItem name="docs" href="https://laravel.com/docs" icon="fab fa-laravel text-sm" important />
+                            <NavBarItem name="settings" icon="fas fa-cog text-sm" label={false} onClick={toggleSettings}>
                                 <SettingsDropdown isOpen={isSettingsDropdownOpen} />
                             </NavBarItem>
 

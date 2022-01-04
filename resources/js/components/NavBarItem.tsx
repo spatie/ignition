@@ -33,7 +33,7 @@ export default function NavBarItem({
                     ${last(inView) === name ? 'text-red-500' : ''}
                 `}
                 >
-                    <i className={`mr-0.5 group-hover:text-red-500 text-gray-400 ${icon}`} />
+                    <i className={`mr-1.5 group-hover:text-red-500 ~text-gray-500 ${icon}`} />
                     {label && (
                         <span className="group-hover:text-red-500">{name.charAt(0).toUpperCase() + name.slice(1)}</span>
                     )}
