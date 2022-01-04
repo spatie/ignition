@@ -5,7 +5,7 @@ import last from 'lodash/last';
 
 type Props = {
     name: string;
-    icon: string;
+    icon?: React.ReactNode;
     href?: null | string;
     important?: boolean;
     children?: React.ReactNode;
@@ -33,7 +33,11 @@ export default function NavBarItem({
                     ${last(inView) === name ? 'text-red-500' : ''}
                 `}
                 >
-                    <i className={`mr-1.5 group-hover:text-red-500 ~text-gray-500 ${icon}`} />
+                    {icon && 
+                        <span className={`mr-1.5 group-hover:text-red-500 ~text-gray-500`} >
+                            {icon}
+                        </span>
+                    }
                     {label && (
                         <span className="group-hover:text-red-500">{name.charAt(0).toUpperCase() + name.slice(1)}</span>
                     )}

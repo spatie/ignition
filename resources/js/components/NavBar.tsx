@@ -4,6 +4,8 @@ import ShareDropdown from 'components/ShareDropdown';
 import SettingsDropdown from 'components/SettingsDropdown';
 import { ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faInfoCircle, faBug, faShare, faCog } from '@fortawesome/free-solid-svg-icons';
 
 type Props = { showException: boolean };
 
@@ -35,22 +37,34 @@ export default function NavBar({ showException }: Props) {
                 >
                     <div className="h-10 flex justify-between px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none">
                         <ul className="-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center">
-                            <NavBarItem name="stack" icon="fas fa-code" />
-                            <NavBarItem name="context" icon="fas fa-info-circle" />
+                            <NavBarItem name="stack" icon={
+                                <FontAwesomeIcon icon={faBars} />
+                            } />
+                            <NavBarItem name="context" icon={
+                                <FontAwesomeIcon icon={faInfoCircle} />
+                            } />
                             {hasDebugInfo(errorOccurrence) && (
                                 <NavBarItem
                                     name="debug"
-                                    icon="fas fa-info-bug"
+                                    icon={
+                                        <FontAwesomeIcon icon={faBug} />
+                                    }
                                     important={!!errorOccurrence.context_items.dumps.length}
                                 />
                             )}
-                            <NavBarItem name="share" icon="fas fa-share" onClick={toggleShare}>
+                            <NavBarItem name="share" icon={
+                                <FontAwesomeIcon icon={faShare} />
+                            } onClick={toggleShare}>
                                 <ShareDropdown isOpen={isShareDropdownOpen} />
                             </NavBarItem>
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
-                            <NavBarItem name="docs" href="https://laravel.com/docs" icon="fab fa-laravel text-sm" important />
-                            <NavBarItem name="settings" icon="fas fa-cog text-sm" label={false} onClick={toggleSettings}>
+                            <NavBarItem name="docs" href="https://laravel.com/docs" icon={
+                                <FontAwesomeIcon icon={faCog} />
+                            } important />
+                            <NavBarItem name="settings" icon={
+                                <FontAwesomeIcon icon={faCog} />
+                            } label={false} onClick={toggleSettings}>
                                 <SettingsDropdown isOpen={isSettingsDropdownOpen} />
                             </NavBarItem>
 
