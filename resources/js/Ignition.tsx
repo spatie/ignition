@@ -42,12 +42,12 @@ export default function Ignition({ errorOccurrence, igniteData }: Props) {
                                 <ErrorCard />
                             </div>
 
-                            <Section name="stack" children={<StackTrace />} />
+                            <Section className="mt-10" name="stack" children={<StackTrace />} />
 
-                            <Section name="context" children={<Context />} />
+                            <Section className="mt-10" name="context" children={<Context />} />
 
                             {hasDebugInfo(errorOccurrence) && (
-                                <Section name="debug" children={<Debug />} />
+                                <Section className="mt-10" name="debug" children={<Debug />} />
                             )}
                         </main>
                     </InViewContextProvider>

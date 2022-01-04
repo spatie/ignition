@@ -1219,6 +1219,14 @@ pre.sf-dump .sf-dump-ellipsis{
   margin-top: 1rem;
 }
 
+.mt-10{
+  margin-top: 2.5rem;
+}
+
+.mt-\[-4px\]{
+  margin-top: -4px;
+}
+
 .block{
   display: block;
 }
@@ -1293,6 +1301,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .h-3{
   height: 0.75rem;
+}
+
+.h-\[4px\]{
+  height: 4px;
 }
 
 .max-h-32{
@@ -1835,6 +1847,10 @@ pre.sf-dump .sf-dump-ellipsis{
   padding-right: 2rem;
 }
 
+.pl-1{
+  padding-left: 0.25rem;
+}
+
 .align-baseline{
   vertical-align: baseline;
 }
@@ -2103,6 +2119,17 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .duration-500{
   transition-duration: 500ms;
+}
+
+.line-clamp-2{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-none{
+  -webkit-line-clamp: unset;
 }
 
 .first-letter\:uppercase::first-letter{
