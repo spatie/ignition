@@ -17,17 +17,17 @@ export default function SettingsDropdown({ isOpen }: Props) {
     const [themeOptions, setThemeOptions] = useState([
         {
             value: 'light',
-            icon: 'fas fa-sun',
+            icon: 'fas fa-sun group-hover:text-amber-400',
             selected: ignitionConfig.theme === 'light',
         },
         {
             value: 'dark',
-            icon: 'fas fa-moon',
+            icon: 'fas fa-moon group-hover:text-amber-300',
             selected: ignitionConfig.theme === 'dark',
         },
         {
             value: 'auto',
-            icon: 'fas fa-adjust',
+            icon: 'fas fa-adjust group-hover:text-indigo-500',
             selected: ignitionConfig.theme === 'auto',
         }
     ]);
@@ -121,7 +121,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                         ))}
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                        <i className="fas fa-angle-down group-hover:text-red-500 text-sm" />
+                        <i className="fas fa-angle-down group-hover:text-indigo-500 text-sm" />
                     </div>
                 </div>
                 <h4 className="mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold">Theme</h4>
@@ -144,7 +144,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                                         ${(!selected && value !== previousTheme) ? 'absolute top-0 left-4 -rotate-180' : ''}
                                     `}
                                 >
-                                    <i className={`${icon} text-sm ~text-gray-500 group-hover:text-amber-400 transition-colors duration-500`} />
+                                    <i className={`${icon} text-sm ~text-gray-500 transition-colors duration-500`} />
                                 </div>
                             ))}
                         </div>
@@ -170,7 +170,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                 >
                     Save settings
                 </button>
-                {updateWasSuccessful && <p className="~text-gray-500 text-sm">Saved!</p>}
+                {updateWasSuccessful && <p className="text-emerald-500 text-sm">Saved!</p>}
                 </div>
             </div>
         </div>

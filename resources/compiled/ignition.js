@@ -20684,13 +20684,16 @@ function CodeSnippet(_ref15) {
     className: "group ~bg-gray-500/5"
   }, /*#__PURE__*/react.createElement("pre", {
     ref: ref,
-    className: "px-4 py-2 mask-fade-x overflow-x-scroll scrollbar-hidden-x\n                    " + (isCollapsed ? 'overflow-y-hidden max-h-32' : '') + "\n                    " + (isOverflowing ? 'mask-fade-y' : '') + "\n                "
+    className: "px-4 py-2 mask-fade-x overflow-x-scroll scrollbar-hidden-x\n                    " + (isCollapsed ? 'overflow-y-hidden max-h-32' : '') + "\n                    " + (isOverflowing ? 'mask-fade-y cursor-pointer' : '') + "\n                ",
+    onClick: function onClick() {
+      isOverflowing ? setIsCollapsed(false) : null;
+    }
   }, /*#__PURE__*/react.createElement("code", {
     className: "font-mono leading-relaxed text-sm font-normal"
   }, value)), /*#__PURE__*/react.createElement("button", {
     onClick: copy,
     title: "Copy to clipboard",
-    className: "absolute top-2 right-2 hover:text-indigo-500 opacity-0 transition-opacity duration-150 " + (copied ? '' : 'group-hover:opacity-100')
+    className: "absolute top-2 right-2 ~text-gray-500 hover:text-indigo-500 opacity-0 transform scale-80 transition-animation delay-100 " + (copied ? '' : 'group-hover:opacity-100 group-hover:scale-100')
   }, /*#__PURE__*/react.createElement("i", {
     className: "far fa-copy"
   })), copied && /*#__PURE__*/react.createElement("p", {
@@ -20702,7 +20705,7 @@ function CodeSnippet(_ref15) {
     onClick: function onClick() {
       return setIsCollapsed(false);
     },
-    className: "absolute -bottom-3 left-1/2 -translate-x-1/2 opacity-0 shadow-md ~bg-white ~text-gray-500 hover:text-indigo-500 group-hover:opacity-100 w-6 h-6 rounded-full flex items-center justify-center text-xs "
+    className: "absolute -bottom-3 left-1/2 w-6 h-6 -translate-x-1/2 rounded-full flex items-center justify-center  text-xs ~bg-white text-indigo-500 hover:shadow-lg opacity-0 transform scale-80 transition-animation delay-100 shadow-md  group-hover:opacity-100 group-hover:scale-100  active:shadow-sm active:translate-y-px"
   }, /*#__PURE__*/react.createElement("i", {
     className: "fas fa-angle-down"
   })));
@@ -20894,7 +20897,7 @@ function ErrorCard() {
   var errorOccurrence = react.useContext(ErrorOccurrenceContext);
   var hasSolutions = errorOccurrence.solutions.length > 0;
   return /*#__PURE__*/react.createElement("section", {
-    className: "mt-20 grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-1 items-stretch ~bg-white shadow-lg"
+    className: "grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-1 items-stretch ~bg-white shadow-lg"
   }, /*#__PURE__*/react.createElement("main", {
     id: "exception",
     className: "z-10 " + (hasSolutions ? 'lg:col-span-3 2xl:col-span-1' : 'col-span-full')
@@ -20904,19 +20907,21 @@ function ErrorCard() {
     className: "px-6 sm:px-10 py-8 overflow-x-auto"
   }, /*#__PURE__*/react.createElement("header", {
     className: "flex items-center justify-between"
-  }, /*#__PURE__*/react.createElement("nav", {
+  }, /*#__PURE__*/react.createElement("button", {
     className: "group h-10 px-4 items-center flex rounded-sm ~bg-gray-500/5"
   }, /*#__PURE__*/react.createElement("p", {
     className: "flex flex-wrap leading-tight"
   }, /*#__PURE__*/react.createElement(RelaxedFullyQualifiedClassName, {
     path: errorOccurrence.exception_class
-  })), /*#__PURE__*/react.createElement("button", null, /*#__PURE__*/react.createElement("i", {
-    className: "ml-3 fas fa-angle-down group-hover:text-red-500 text-sm"
-  }))), /*#__PURE__*/react.createElement("div", {
+  })), /*#__PURE__*/react.createElement("i", {
+    className: "ml-3 fas fa-angle-down group-hover:text-indigo-500 text-sm"
+  })), /*#__PURE__*/react.createElement("div", {
     className: "grid grid-flow-col justify-end gap-4 text-sm ~text-gray-500"
   }, /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("span", {
     className: "tracking-wider"
-  }, "PHP"), errorOccurrence.language_version), /*#__PURE__*/react.createElement("span", null, /*#__PURE__*/react.createElement("i", {
+  }, "PHP"), "\xA0", errorOccurrence.language_version), /*#__PURE__*/react.createElement("span", {
+    className: "inline-flex items-center gap-1"
+  }, /*#__PURE__*/react.createElement("i", {
     className: "fab fa-laravel"
   }), errorOccurrence.framework_version))), /*#__PURE__*/react.createElement(ErrorMessage, null)))), hasSolutions && /*#__PURE__*/react.createElement(Solutions, null));
 }
@@ -24936,15 +24941,15 @@ function SettingsDropdown(_ref) {
 
   var _useState5 = react.useState([{
     value: 'light',
-    icon: 'fas fa-sun',
+    icon: 'fas fa-sun group-hover:text-amber-400',
     selected: ignitionConfig.theme === 'light'
   }, {
     value: 'dark',
-    icon: 'fas fa-moon',
+    icon: 'fas fa-moon group-hover:text-amber-300',
     selected: ignitionConfig.theme === 'dark'
   }, {
     value: 'auto',
-    icon: 'fas fa-adjust',
+    icon: 'fas fa-adjust group-hover:text-indigo-500',
     selected: ignitionConfig.theme === 'auto'
   }]),
       themeOptions = _useState5[0],
@@ -25007,7 +25012,7 @@ function SettingsDropdown(_ref) {
   })), react.createElement("div", {
     className: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-4"
   }, react.createElement("i", {
-    className: "fas fa-angle-down group-hover:text-red-500 text-sm"
+    className: "fas fa-angle-down group-hover:text-indigo-500 text-sm"
   }))), react.createElement("h4", {
     className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
   }, "Theme"), react.createElement("button", {
@@ -25028,7 +25033,7 @@ function SettingsDropdown(_ref) {
       key: value,
       className: "\n                                        h-12 flex items-center origin-bottom\n                                        " + (selected ? 'transition-transform duration-1000' : '') + "\n                                        " + (value === previousTheme ? 'transition-transform duration-1000 absolute top-0 left-4 rotate-180' : '') + "\n                                        " + (!selected && value !== previousTheme ? 'absolute top-0 left-4 -rotate-180' : '') + "\n                                    "
     }, react.createElement("i", {
-      className: icon + " text-sm ~text-gray-500 group-hover:text-amber-400 transition-colors duration-500"
+      className: icon + " text-sm ~text-gray-500 transition-colors duration-500"
     }));
   })), react.createElement("div", {
     id: "theme-name",
@@ -25042,7 +25047,7 @@ function SettingsDropdown(_ref) {
     disabled: isUpdatingConfig,
     className: "px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                        border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                        shadow-md\n                        transform\n                        transition-animation\n                        hover:shadow-lg\n                        active:shadow-inner\n                        active:translate-y-px\n                        " + (isUpdatingConfig ? 'opacity-50' : 'opacity-100') + "\n                    "
   }, "Save settings"), updateWasSuccessful && react.createElement("p", {
-    className: "~text-gray-500 text-sm"
+    className: "text-emerald-500 text-sm"
   }, "Saved!"))));
 }
 
@@ -25445,7 +25450,8 @@ function Ignition(_ref) {
   }), react.createElement("main", {
     className: "mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20"
   }, react.createElement("div", {
-    ref: intersectionRef
+    ref: intersectionRef,
+    className: "mt-20"
   }, react.createElement(ErrorCard, null)), react.createElement(Section, {
     name: "stack",
     children: react.createElement(StackTrace, null)

@@ -38,7 +38,7 @@ export default function Ignition({ errorOccurrence, igniteData }: Props) {
                         <main
                             className="mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20"
                         >
-                            <div ref={intersectionRef}>
+                            <div ref={intersectionRef} className="mt-20">
                                 <ErrorCard />
                             </div>
 

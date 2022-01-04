@@ -1977,6 +1977,11 @@ pre.sf-dump .sf-dump-ellipsis{
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
+.text-indigo-500{
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+
 .text-opacity-75{
   --tw-text-opacity: 0.75;
 }
@@ -2080,6 +2085,14 @@ pre.sf-dump .sf-dump-ellipsis{
   transition-duration: 150ms;
 }
 
+.delay-500{
+  transition-delay: 500ms;
+}
+
+.delay-100{
+  transition-delay: 100ms;
+}
+
 .duration-150{
   transition-duration: 150ms;
 }
@@ -2164,6 +2177,19 @@ pre.sf-dump .sf-dump-ellipsis{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
 }
 
+.active\:shadow-sm:active{
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: 0 0 rgba(0,0,0,0), 0 0 rgba(0,0,0,0), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
+}
+
+.group:hover .group-hover\:scale-100{
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: var(--tw-transform);
+}
+
 .group:hover .group-hover\:text-indigo-500{
   --tw-text-opacity: 1;
   color: rgb(99 102 241 / var(--tw-text-opacity));
@@ -2187,6 +2213,16 @@ pre.sf-dump .sf-dump-ellipsis{
 .group:hover .group-hover\:text-amber-400{
   --tw-text-opacity: 1;
   color: rgb(251 191 36 / var(--tw-text-opacity));
+}
+
+.group:hover .group-hover\:text-amber-200{
+  --tw-text-opacity: 1;
+  color: rgb(253 230 138 / var(--tw-text-opacity));
+}
+
+.group:hover .group-hover\:text-amber-300{
+  --tw-text-opacity: 1;
+  color: rgb(252 211 77 / var(--tw-text-opacity));
 }
 
 .group:hover .group-hover\:underline{
