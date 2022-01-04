@@ -28,6 +28,11 @@
     @apply dark:bg-gray-800;
 }
 
+.focus\:\~bg-white {
+    @apply focus:bg-white;
+    @apply dark:focus:bg-gray-900;
+}
+
 .\~bg-body {
     @apply bg-gray-200;
     @apply dark:bg-gray-900;

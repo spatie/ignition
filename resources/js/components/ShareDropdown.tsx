@@ -86,16 +86,12 @@ export default function ShareDropdown({isOpen}: Props) {
                 <div className="w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"></div>
             </div>
             <div className="~bg-dropdown px-10 py-8 shadow-2xl">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-6">
                     <h4 className="whitespace-nowrap font-semibold">Share with Flare</h4>
-                    <div className="ml-6 text-xs ~text-gray-500">
-                        <span className="whitespace-nowrap flex items-center justify-end">
-                            <a className="flex items-center underline" href="https://flareapp.io/ignition">
-                                Docs
-                                <FlareIcon />
-                            </a>
-                        </span>
-                    </div>
+                    <a className="text-xs ~text-gray-500 hover:text-violet-500 flex items-center underline transition-colors" href="https://flareapp.io/ignition">
+                        Docs
+                        <FlareIcon />
+                    </a>
                 </div>
                 {!publicUrl && (
                     <>
@@ -121,8 +117,11 @@ export default function ShareDropdown({isOpen}: Props) {
                                 font-bold
                                 rounded-sm
                                 shadow-md
+                                transform
+                                transition-animation
                                 hover:shadow-lg
-                                active:shadow-none
+                                active:shadow-inner
+                                active:translate-y-px
                             `}
                             onClick={onShareError}
                         >

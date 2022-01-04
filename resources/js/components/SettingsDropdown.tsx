@@ -79,6 +79,10 @@ export default function SettingsDropdown({ isOpen }: Props) {
             });
 
             setUpdateWasSuccessful(response.status >= 200 && response.status < 300);
+
+            setTimeout(() => {
+                setUpdateWasSuccessful(false);
+            }, 3000);
         } catch (error) {
             console.error(error);
             setUpdateWasSuccessful(false);
@@ -98,21 +102,17 @@ export default function SettingsDropdown({ isOpen }: Props) {
                 <div className="w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"/>
             </div>
             <div className="~bg-dropdown px-10 py-8 shadow-2xl">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-6">
                     <h4 className="whitespace-nowrap font-semibold">Ignition Settings</h4>
-                    <div className="ml-6 text-xs ~text-gray-500">
-                        <span className="whitespace-nowrap flex items-center justify-end">
-                            <a className="flex items-center underline" href="https://flareapp.io/ignition">
-                                Docs
-                                <IgnitionIcon />
-                            </a>
-                        </span>
-                    </div>
+                    <a className="text-xs ~text-gray-500 hover:text-red-500 flex items-center underline transition-colors" href="https://flareapp.io/ignition">
+                        Docs
+                        <IgnitionIcon />
+                    </a>
                 </div>
                 <h4 className="mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold">Editor</h4>
-                <div className="mt-2 relative">
+                <div className="group mt-2 relative">
                     <select
-                        className="block appearance-none w-full ~bg-gray-100 border ~border-gray-200 h-12 px-4 pr-8 rounded-none leading-tight focus:outline-none focus:bg-white"
+                        className="block appearance-none w-full ~bg-gray-500/5 h-12 px-4 pr-8 rounded-none leading-tight"
                         value={editor}
                         onChange={event => handleEditorChange(event.target.value)}
                     >
@@ -126,7 +126,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                 </div>
                 <h4 className="mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold">Theme</h4>
                 <button
-                    className="mt-2 w-full ~bg-gray-100 border ~border-gray-200 rounded-none leading-tight"
+                    className="mt-2 w-full ~bg-gray-500/5 rounded-none leading-tight"
                     onClick={handleThemeChange}
                 >
                     <div
@@ -140,8 +140,8 @@ export default function SettingsDropdown({ isOpen }: Props) {
                                     className={`
                                         h-12 flex items-center origin-bottom
                                         ${selected ? 'transition-transform duration-1000' : ''}
-                                        ${value === previousTheme ? 'transition-transform duration-1000 absolute top-0 left-4 -rotate-180' : ''}
-                                        ${(!selected && value !== previousTheme) ? 'absolute top-0 left-4 rotate-180' : ''}
+                                        ${value === previousTheme ? 'transition-transform duration-1000 absolute top-0 left-4 rotate-180' : ''}
+                                        ${(!selected && value !== previousTheme) ? 'absolute top-0 left-4 -rotate-180' : ''}
                                     `}
                                 >
                                     <i className={`${icon} text-sm ~text-gray-500 group-hover:text-amber-400 transition-colors duration-500`} />
@@ -153,17 +153,25 @@ export default function SettingsDropdown({ isOpen }: Props) {
                         </div>
                     </div>
                 </button>
+                <div className="mt-6 flex items-center gap-4">
                 <button
                     onClick={updateConfig}
                     disabled={isUpdatingConfig}
-                    className="mt-6 px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b
+                    className={`px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b
                         border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm
-                        shadow-md hover:shadow-lg active:shadow-none
-                    "
+                        shadow-md
+                        transform
+                        transition-animation
+                        hover:shadow-lg
+                        active:shadow-inner
+                        active:translate-y-px
+                        ${isUpdatingConfig ? 'opacity-50' : 'opacity-100'}
+                    `}
                 >
-                    {isUpdatingConfig ? 'Saving...' : 'Save settings'}
+                    Save settings
                 </button>
-                {updateWasSuccessful && <p className="mt-3">Settings saved.</p>}
+                {updateWasSuccessful && <p className="~text-gray-500 text-sm">Saved!</p>}
+                </div>
             </div>
         </div>
     );

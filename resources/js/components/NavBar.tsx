@@ -23,6 +23,7 @@ export default function NavBar({ showException }: Props) {
         setIsSettingsDropdownOpen(!isSettingsDropdownOpen);
     }
 
+    
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
             <div className="relative">
@@ -70,7 +71,7 @@ export default function NavBar({ showException }: Props) {
                         absolute top-0 left-0 w-full
                         ~bg-gray-100 border-b ~border-gray-200
                         transform
-                        transition-nav
+                        transition-animation
                         duration-300
                     `}
                 >

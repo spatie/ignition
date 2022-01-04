@@ -24789,17 +24789,13 @@ function ShareDropdown(_ref) {
   })), react.createElement("div", {
     className: "~bg-dropdown px-10 py-8 shadow-2xl"
   }, react.createElement("div", {
-    className: "flex items-center justify-between"
+    className: "flex items-center justify-between gap-6"
   }, react.createElement("h4", {
     className: "whitespace-nowrap font-semibold"
-  }, "Share with Flare"), react.createElement("div", {
-    className: "ml-6 text-xs ~text-gray-500"
-  }, react.createElement("span", {
-    className: "whitespace-nowrap flex items-center justify-end"
-  }, react.createElement("a", {
-    className: "flex items-center underline",
+  }, "Share with Flare"), react.createElement("a", {
+    className: "text-xs ~text-gray-500 hover:text-violet-500 flex items-center underline transition-colors",
     href: "https://flareapp.io/ignition"
-  }, "Docs", react.createElement(FlareIcon, null))))), !publicUrl && react.createElement(react.Fragment, null, react.createElement("ul", {
+  }, "Docs", react.createElement(FlareIcon, null))), !publicUrl && react.createElement(react.Fragment, null, react.createElement("ul", {
     className: "mt-6 grid justify-start gap-3"
   }, selectedTabs.map(function (_ref2) {
     var selected = _ref2.selected,
@@ -24816,7 +24812,7 @@ function ShareDropdown(_ref) {
     }));
   })), react.createElement("button", {
     disabled: isLoading,
-    className: "\n                                " + (isLoading ? 'opacity-50' : '') + "\n                                mt-6\n                                px-4\n                                h-8\n                                bg-violet-500\n                                text-white\n                                whitespace-nowrap\n                                border-b border-gray-500/25\n                                text-xs uppercase tracking-wider\n                                font-bold\n                                rounded-sm\n                                shadow-md\n                                hover:shadow-lg\n                                active:shadow-none\n                            ",
+    className: "\n                                " + (isLoading ? 'opacity-50' : '') + "\n                                mt-6\n                                px-4\n                                h-8\n                                bg-violet-500\n                                text-white\n                                whitespace-nowrap\n                                border-b border-gray-500/25\n                                text-xs uppercase tracking-wider\n                                font-bold\n                                rounded-sm\n                                shadow-md\n                                transform\n                                transition-animation\n                                hover:shadow-lg\n                                active:shadow-inner\n                                active:translate-y-px\n                            ",
     onClick: onShareError
   }, "Create Share")), publicUrl && ownerUrl && react.createElement("div", {
     className: "mt-3"
@@ -24897,6 +24893,9 @@ function SettingsDropdown(_ref) {
             })
           })).then(function (response) {
             setUpdateWasSuccessful(response.status >= 200 && response.status < 300);
+            setTimeout(function () {
+              setUpdateWasSuccessful(false);
+            }, 3000);
           });
         }, function (error) {
           console.error(error);
@@ -24982,22 +24981,18 @@ function SettingsDropdown(_ref) {
   })), react.createElement("div", {
     className: "~bg-dropdown px-10 py-8 shadow-2xl"
   }, react.createElement("div", {
-    className: "flex items-center justify-between"
+    className: "flex items-center justify-between gap-6"
   }, react.createElement("h4", {
     className: "whitespace-nowrap font-semibold"
-  }, "Ignition Settings"), react.createElement("div", {
-    className: "ml-6 text-xs ~text-gray-500"
-  }, react.createElement("span", {
-    className: "whitespace-nowrap flex items-center justify-end"
-  }, react.createElement("a", {
-    className: "flex items-center underline",
+  }, "Ignition Settings"), react.createElement("a", {
+    className: "text-xs ~text-gray-500 hover:text-red-500 flex items-center underline transition-colors",
     href: "https://flareapp.io/ignition"
-  }, "Docs", react.createElement(IgnitionIcon, null))))), react.createElement("h4", {
+  }, "Docs", react.createElement(IgnitionIcon, null))), react.createElement("h4", {
     className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
   }, "Editor"), react.createElement("div", {
-    className: "mt-2 relative"
+    className: "group mt-2 relative"
   }, react.createElement("select", {
-    className: "block appearance-none w-full ~bg-gray-100 border ~border-gray-200 h-12 px-4 pr-8 rounded-none leading-tight focus:outline-none focus:bg-white",
+    className: "block appearance-none w-full ~bg-gray-500/5 h-12 px-4 pr-8 rounded-none leading-tight",
     value: editor,
     onChange: function onChange(event) {
       return handleEditorChange(event.target.value);
@@ -25016,7 +25011,7 @@ function SettingsDropdown(_ref) {
   }))), react.createElement("h4", {
     className: "mt-6 uppercase tracking-wider ~text-gray-500 text-xs font-bold"
   }, "Theme"), react.createElement("button", {
-    className: "mt-2 w-full ~bg-gray-100 border ~border-gray-200 rounded-none leading-tight",
+    className: "mt-2 w-full ~bg-gray-500/5 rounded-none leading-tight",
     onClick: handleThemeChange
   }, react.createElement("div", {
     className: "group flex items-center",
@@ -25031,7 +25026,7 @@ function SettingsDropdown(_ref) {
         selected = _ref3.selected;
     return react.createElement("div", {
       key: value,
-      className: "\n                                        h-12 flex items-center origin-bottom\n                                        " + (selected ? 'transition-transform duration-1000' : '') + "\n                                        " + (value === previousTheme ? 'transition-transform duration-1000 absolute top-0 left-4 -rotate-180' : '') + "\n                                        " + (!selected && value !== previousTheme ? 'absolute top-0 left-4 rotate-180' : '') + "\n                                    "
+      className: "\n                                        h-12 flex items-center origin-bottom\n                                        " + (selected ? 'transition-transform duration-1000' : '') + "\n                                        " + (value === previousTheme ? 'transition-transform duration-1000 absolute top-0 left-4 rotate-180' : '') + "\n                                        " + (!selected && value !== previousTheme ? 'absolute top-0 left-4 -rotate-180' : '') + "\n                                    "
     }, react.createElement("i", {
       className: icon + " text-sm ~text-gray-500 group-hover:text-amber-400 transition-colors duration-500"
     }));
@@ -25040,13 +25035,15 @@ function SettingsDropdown(_ref) {
     className: "-ml-1 first-letter:uppercase"
   }, (_themeOptions$find = themeOptions.find(function (t) {
     return t.selected;
-  })) == null ? void 0 : _themeOptions$find.value))), react.createElement("button", {
+  })) == null ? void 0 : _themeOptions$find.value))), react.createElement("div", {
+    className: "mt-6 flex items-center gap-4"
+  }, react.createElement("button", {
     onClick: updateConfig,
     disabled: isUpdatingConfig,
-    className: "mt-6 px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                        border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                        shadow-md hover:shadow-lg active:shadow-none\n                    "
-  }, isUpdatingConfig ? 'Saving...' : 'Save settings'), updateWasSuccessful && react.createElement("p", {
-    className: "mt-3"
-  }, "Settings saved.")));
+    className: "px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                        border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                        shadow-md\n                        transform\n                        transition-animation\n                        hover:shadow-lg\n                        active:shadow-inner\n                        active:translate-y-px\n                        " + (isUpdatingConfig ? 'opacity-50' : 'opacity-100') + "\n                    "
+  }, "Save settings"), updateWasSuccessful && react.createElement("p", {
+    className: "~text-gray-500 text-sm"
+  }, "Saved!"))));
 }
 
 var useWindowScrollPosition = function useWindowScrollPosition(_ref) {
@@ -25137,7 +25134,7 @@ function NavBar(_ref) {
   }, react.createElement(SettingsDropdown, {
     isOpen: isSettingsDropdownOpen
   }))))), react.createElement("div", {
-    className: "\n                        " + (hasScrolled ? 'shadow-lg' : '') + "\n                        " + (showException ? 'translate-y-10 ~bg-gray-100' : 'translate-y-0 ~bg-body') + "\n                        absolute top-0 left-0 w-full\n                        ~bg-gray-100 border-b ~border-gray-200\n                        transform\n                        transition-nav\n                        duration-300\n                    "
+    className: "\n                        " + (hasScrolled ? 'shadow-lg' : '') + "\n                        " + (showException ? 'translate-y-10 ~bg-gray-100' : 'translate-y-0 ~bg-body') + "\n                        absolute top-0 left-0 w-full\n                        ~bg-gray-100 border-b ~border-gray-200\n                        transform\n                        transition-animation\n                        duration-300\n                    "
   }, react.createElement("div", {
     className: "\n                        px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none\n                        h-10 flex items-center justify-start\n                        border-t ~border-gray-200"
   }, react.createElement("div", {
