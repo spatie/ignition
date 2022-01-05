@@ -4,6 +4,7 @@ import Checkbox from "components/ui/Checkbox";
 import { useState } from 'react';
 import {IgniteDataContext} from '../contexts/IgniteDataContext';
 import CopyableUrl from './ui/CopyableUrl';
+import SubmitButton from './ui/SubmitButton';
 
 type Props = {
     isOpen: boolean;
@@ -85,7 +86,7 @@ export default function ShareDropdown({isOpen}: Props) {
             <div className="flex px-4 justify-start">
                 <div className="w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"></div>
             </div>
-            <div className="~bg-dropdown px-10 py-8 shadow-2xl">
+            <div className="flex flex-col gap-6 ~bg-dropdown px-10 py-8 shadow-2xl">
                 <div className="flex items-center justify-between gap-6">
                     <h4 className="whitespace-nowrap font-semibold">Share with Flare</h4>
                     <a className="text-xs ~text-gray-500 hover:text-violet-500 flex items-center underline transition-colors" href="https://flareapp.io/ignition">
@@ -95,43 +96,28 @@ export default function ShareDropdown({isOpen}: Props) {
                 </div>
                 {!publicUrl && (
                     <>
-                        <ul className="mt-6 grid justify-start gap-3">
+                        <ul className="grid justify-start gap-3">
                             {selectedTabs.map(({ selected, name, label }) => (
                                 <li key={name}>
                                     <Checkbox onChange={() => toggleSelected(name)} checked={selected} label={label} />
                                 </li>
                             ))}
                         </ul>
-                        <button
-                            disabled={isLoading}
-                            className={`
-                                ${isLoading ? 'opacity-50' : ''}
-                                mt-6
-                                px-4
-                                h-8
-                                bg-violet-500
-                                text-white
-                                whitespace-nowrap
-                                border-b border-gray-500/25
-                                text-xs uppercase tracking-wider
-                                font-bold
-                                rounded-sm
-                                shadow-md
-                                transform
-                                transition-animation
-                                hover:shadow-lg
-                                active:shadow-inner
-                                active:translate-y-px
-                            `}
-                            onClick={onShareError}
-                        >
-                            Create Share
-                        </button>
+                        
+                        <div className="flex items-center gap-4">
+                            <SubmitButton
+                                disabled={isLoading}
+                                className={"bg-violet-500 text-white"}
+                                onClick={onShareError}
+                            >
+                                Create Share
+                            </SubmitButton>
+                        </div>
                     </>
                 )}
 
                 {publicUrl && ownerUrl && (
-                    <div className="mt-3">
+                    <div>
                         <CopyableUrl
                             url={publicUrl}
                             helpText="Share your error with others:"
@@ -145,7 +131,7 @@ export default function ShareDropdown({isOpen}: Props) {
                     </div>
                 )}
 
-                {error && <p className="mt-3 text-red-400">{error}</p>}
+                {error && <p className="text-red-500">{error}</p>}
             </div>
         </div>
     );

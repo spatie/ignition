@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { IgniteDataContext } from 'contexts/IgniteDataContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon, faAdjust, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import SubmitButton from './ui/SubmitButton';
 
 type Props = {
     isOpen: boolean;
@@ -182,26 +183,18 @@ export default function SettingsDropdown({ isOpen }: Props) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <button
+                    <SubmitButton
                         onClick={updateConfig}
                         disabled={isUpdatingConfig}
-                        className={`px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b
-                        border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm
-                        shadow-md
-                        transform
-                        transition-animation
-                        hover:shadow-lg
-                        active:shadow-inner
-                        active:translate-y-px
-                        ${isUpdatingConfig ? 'opacity-50' : 'opacity-100'}
-                    `}
+                        className={"bg-red-500 text-white"} 
                     >
                         Save settings
-                    </button>
+                    </SubmitButton>
+
                     {updateWasSuccessful && <p className="text-emerald-500 text-sm">Saved!</p>}
                 </div>
                 <p className="text-xs">
-                    Settings saved will be saved locally in <InlineCodeSnippet>~/.ignition.json</InlineCodeSnippet>.
+                    Settings will be saved locally in <InlineCodeSnippet>~/.ignition.json</InlineCodeSnippet>.
                 </p>
             </div>
         </div>

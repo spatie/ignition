@@ -13306,6 +13306,20 @@ function CopyableUrl(_ref) {
   })));
 }
 
+function SubmitButton(_ref) {
+  var children = _ref.children,
+      _ref$className = _ref.className,
+      className = _ref$className === void 0 ? '' : _ref$className,
+      _ref$disabled = _ref.disabled,
+      disabled = _ref$disabled === void 0 ? false : _ref$disabled,
+      onClick = _ref.onClick;
+  return react.createElement("button", {
+    onClick: onClick,
+    disabled: disabled,
+    className: "px-4 h-8 whitespace-nowrap border-b\n            border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n            shadow-md\n            transform\n            transition-animation\n            hover:shadow-lg\n            active:shadow-inner\n            active:translate-y-px\n            " + (disabled ? 'opacity-50' : 'opacity-100') + "\n            " + className + "\n        "
+  }, children);
+}
+
 function _catch$1(body, recover) {
   try {
     var result = body();
@@ -13442,7 +13456,7 @@ function ShareDropdown(_ref) {
   }, react.createElement("div", {
     className: "w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown"
   })), react.createElement("div", {
-    className: "~bg-dropdown px-10 py-8 shadow-2xl"
+    className: "flex flex-col gap-6 ~bg-dropdown px-10 py-8 shadow-2xl"
   }, react.createElement("div", {
     className: "flex items-center justify-between gap-6"
   }, react.createElement("h4", {
@@ -13451,7 +13465,7 @@ function ShareDropdown(_ref) {
     className: "text-xs ~text-gray-500 hover:text-violet-500 flex items-center underline transition-colors",
     href: "https://flareapp.io/ignition"
   }, "Docs", react.createElement(FlareIcon, null))), !publicUrl && react.createElement(react.Fragment, null, react.createElement("ul", {
-    className: "mt-6 grid justify-start gap-3"
+    className: "grid justify-start gap-3"
   }, selectedTabs.map(function (_ref2) {
     var selected = _ref2.selected,
         name = _ref2.name,
@@ -13465,13 +13479,13 @@ function ShareDropdown(_ref) {
       checked: selected,
       label: label
     }));
-  })), react.createElement("button", {
+  })), react.createElement("div", {
+    className: "flex items-center gap-4"
+  }, react.createElement(SubmitButton, {
     disabled: isLoading,
-    className: "\n                                " + (isLoading ? 'opacity-50' : '') + "\n                                mt-6\n                                px-4\n                                h-8\n                                bg-violet-500\n                                text-white\n                                whitespace-nowrap\n                                border-b border-gray-500/25\n                                text-xs uppercase tracking-wider\n                                font-bold\n                                rounded-sm\n                                shadow-md\n                                transform\n                                transition-animation\n                                hover:shadow-lg\n                                active:shadow-inner\n                                active:translate-y-px\n                            ",
+    className: "bg-violet-500 text-white",
     onClick: onShareError
-  }, "Create Share")), publicUrl && ownerUrl && react.createElement("div", {
-    className: "mt-3"
-  }, react.createElement(CopyableUrl, {
+  }, "Create Share"))), publicUrl && ownerUrl && react.createElement("div", null, react.createElement(CopyableUrl, {
     url: publicUrl,
     helpText: "Share your error with others:",
     openText: "Open public share"
@@ -13480,7 +13494,7 @@ function ShareDropdown(_ref) {
     helpText: "Administer your shared error here:",
     openText: "Open share admin"
   })), error && react.createElement("p", {
-    className: "mt-3 text-red-400"
+    className: "text-red-500"
   }, error)));
 }
 
@@ -16185,15 +16199,15 @@ function SettingsDropdown(_ref) {
     return t.selected;
   })) == null ? void 0 : _themeOptions$find.value)))), react.createElement("div", {
     className: "flex items-center gap-4"
-  }, react.createElement("button", {
+  }, react.createElement(SubmitButton, {
     onClick: updateConfig,
     disabled: isUpdatingConfig,
-    className: "px-4 h-8 bg-red-500 text-white whitespace-nowrap border-b\n                        border-red-500/25 text-xs uppercase tracking-wider font-bold rounded-sm\n                        shadow-md\n                        transform\n                        transition-animation\n                        hover:shadow-lg\n                        active:shadow-inner\n                        active:translate-y-px\n                        " + (isUpdatingConfig ? 'opacity-50' : 'opacity-100') + "\n                    "
+    className: "bg-red-500 text-white"
   }, "Save settings"), updateWasSuccessful && react.createElement("p", {
     className: "text-emerald-500 text-sm"
   }, "Saved!")), react.createElement("p", {
     className: "text-xs"
-  }, "Settings saved will be saved locally in ", react.createElement(InlineCodeSnippet, null, "~/.ignition.json"), ".")));
+  }, "Settings will be saved locally in ", react.createElement(InlineCodeSnippet, null, "~/.ignition.json"), ".")));
 }
 
 var useWindowScrollPosition = function useWindowScrollPosition(_ref) {
