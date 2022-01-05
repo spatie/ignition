@@ -79,7 +79,7 @@ export default function ShareDropdown({isOpen}: Props) {
 
     return (
         <div
-            className={`block absolute mt-2 top-10 left-1/2 transform -translate-x-6 transition-all duration-150 origin
+            className={`block absolute mt-2 top-10 left-1/2 transform -translate-x-6 transition-all duration-150 origin-top-left
                  ${isOpen ? '' : 'opacity-0 pointer-events-none scale-90'}`}
         >
             <div className="flex px-4 justify-start">

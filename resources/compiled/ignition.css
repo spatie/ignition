@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 
 /*
-! tailwindcss v3.0.1 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.8 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -65,7 +65,7 @@ hr {
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
-abbr[title] {
+abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
 }
@@ -152,7 +152,7 @@ sup {
 table {
   text-indent: 0; /* 1 */
   border-color: inherit; /* 2 */
-  border-collapse: collapse;  /* 3 */
+  border-collapse: collapse; /* 3 */
 }
 
 /*
@@ -317,18 +317,18 @@ textarea {
 */
 
 input::-moz-placeholder, textarea::-moz-placeholder {
-  opacity: 1;  /* 1 */
+  opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;  /* 1 */
+  opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
 input::placeholder,
 textarea::placeholder {
-  opacity: 1;  /* 1 */
+  opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
@@ -385,7 +385,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.-translate-x-1\/2, .translate-x-0, .translate-y-10, .translate-y-0, .translate-x-6, .-translate-x-6, .rotate-180, .-rotate-180, .scale-90, .transform, .active\:translate-y-px, .group-hover\:scale-100, .peer-checked\:translate-x-2{
+*, ::before, ::after{
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -394,21 +394,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-scale-x: 1;
   --tw-scale-y: 1;
   --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.border, .border-\[10px\], .border-b-2, .border-b, .border-t, .border-l-4, .border-l-2, .border-r, .border-t-0, .lg\:border-t-0{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
-}
-
-.shadow-lg, .shadow-sm, .shadow-inner, .shadow-md, .shadow, .shadow-2xl, .hover\:shadow-lg, .active\:shadow-none, .active\:shadow-sm, .active\:shadow-inner{
   --tw-ring-offset-shadow: 0 0 rgba(0,0,0,0);
   --tw-ring-shadow: 0 0 rgba(0,0,0,0);
   --tw-shadow: 0 0 rgba(0,0,0,0);
   --tw-shadow-colored: 0 0 rgba(0,0,0,0);
-}
-
-.filter{
   --tw-blur: var(--tw-empty,/*!*/ /*!*/);
   --tw-brightness: var(--tw-empty,/*!*/ /*!*/);
   --tw-contrast: var(--tw-empty,/*!*/ /*!*/);
@@ -821,6 +812,14 @@ pre.sf-dump .sf-dump-ellipsis{
   background-color: rgb(17 24 39 / 0.2);
 }
 
+.hover\:\~bg-gray-500\/5:hover{
+  background-color: rgb(107 114 128 / 0.05);
+}
+
+.dark .hover\:\~bg-gray-500\/5:hover{
+  background-color: rgb(17 24 39 / 0.2);
+}
+
 .\~bg-gray-500\/10{
   background-color: rgb(107 114 128 / 0.1);
 }
@@ -1031,8 +1030,8 @@ pre.sf-dump .sf-dump-ellipsis{
   left: 0px;
 }
 
-.left-8{
-  left: 2rem;
+.left-10{
+  left: 2.5rem;
 }
 
 .top-0{
@@ -1109,6 +1108,11 @@ pre.sf-dump .sf-dump-ellipsis{
 .my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.-my-px{
+  margin-top: -1px;
+  margin-bottom: -1px;
 }
 
 .mx-auto{
@@ -1188,12 +1192,12 @@ pre.sf-dump .sf-dump-ellipsis{
   margin-bottom: 1.5rem;
 }
 
-.-mt-6{
-  margin-top: -1.5rem;
+.-ml-4{
+  margin-left: -1rem;
 }
 
-.-ml-5{
-  margin-left: -1.25rem;
+.-ml-3{
+  margin-left: -0.75rem;
 }
 
 .mt-\[-4px\]{
@@ -1218,10 +1222,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .mt-10{
   margin-top: 2.5rem;
-}
-
-.-ml-3{
-  margin-left: -0.75rem;
 }
 
 .-mr-3{
@@ -1284,6 +1284,10 @@ pre.sf-dump .sf-dump-ellipsis{
   height: 2.25rem;
 }
 
+.h-full{
+  height: 100%;
+}
+
 .h-\[4px\]{
   height: 4px;
 }
@@ -1336,6 +1340,10 @@ pre.sf-dump .sf-dump-ellipsis{
   width: 2.25rem;
 }
 
+.w-0{
+  width: 0px;
+}
+
 .w-4{
   width: 1rem;
 }
@@ -1346,10 +1354,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .w-2{
   width: 0.5rem;
-}
-
-.w-0{
-  width: 0px;
 }
 
 .w-3{
@@ -1396,6 +1400,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .origin-bottom{
   transform-origin: bottom;
+}
+
+.origin-top-left{
+  transform-origin: top left;
 }
 
 .-translate-x-1\/2{
@@ -1479,6 +1487,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .flex-col{
   flex-direction: column;
+}
+
+.flex-col-reverse{
+  flex-direction: column-reverse;
 }
 
 .flex-wrap{
@@ -1764,16 +1776,8 @@ pre.sf-dump .sf-dump-ellipsis{
   background-color: rgb(139 92 246 / var(--tw-bg-opacity));
 }
 
-.bg-gray-500\/5{
-  background-color: rgb(107 114 128 / 0.05);
-}
-
 .p-4{
   padding: 1rem;
-}
-
-.p-1{
-  padding: 0.25rem;
 }
 
 .px-6{
@@ -1856,8 +1860,8 @@ pre.sf-dump .sf-dump-ellipsis{
   padding-right: 2.5rem;
 }
 
-.pl-3{
-  padding-left: 0.75rem;
+.pb-16{
+  padding-bottom: 4rem;
 }
 
 .pr-8{
@@ -1895,6 +1899,10 @@ pre.sf-dump .sf-dump-ellipsis{
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-\[8px\]{
+  font-size: 8px;
 }
 
 .font-bold{
@@ -2016,7 +2024,8 @@ pre.sf-dump .sf-dump-ellipsis{
 }
 
 .underline{
-  text-decoration: underline;
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
 }
 
 .opacity-50{
@@ -2102,7 +2111,9 @@ pre.sf-dump .sf-dump-ellipsis{
 }
 
 .transition-colors{
-  transition-property: background-color, border-color, color, fill, stroke;
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -2162,7 +2173,8 @@ pre.sf-dump .sf-dump-ellipsis{
 }
 
 .hover\:underline:hover{
-  text-decoration: underline;
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
 }
 
 .hover\:opacity-75:hover{
@@ -2176,12 +2188,11 @@ pre.sf-dump .sf-dump-ellipsis{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
 }
 
-.hover\:\~bg-red-500\/10:hover{
-  background-color: rgb(239 68 68 / 0.1);
-}
-
-.dark .hover\:\~bg-red-500\/10:hover{
-  background-color: rgb(239 68 68 / 0.2);
+.hover\:shadow-md:hover{
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: 0 0 rgba(0,0,0,0), 0 0 rgba(0,0,0,0), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
 }
 
 .active\:translate-y-px:active{
@@ -2244,10 +2255,6 @@ pre.sf-dump .sf-dump-ellipsis{
 .group:hover .group-hover\:text-amber-300{
   --tw-text-opacity: 1;
   color: rgb(252 211 77 / var(--tw-text-opacity));
-}
-
-.group:hover .group-hover\:underline{
-  text-decoration: underline;
 }
 
 .group:hover .group-hover\:opacity-40{
@@ -2378,6 +2385,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
   .\32xl\:row-start-1{
     grid-row-start: 1;
+  }
+
+  .\32xl\:mt-20{
+    margin-top: 5rem;
   }
 
   .\32xl\:max-h-\[calc\(100vh-7\.5rem\)\]{

@@ -53,6 +53,11 @@
     @apply dark:bg-gray-900/20;
 }
 
+.hover\:\~bg-gray-500\/5 {
+    @apply hover:bg-gray-500/5;
+    @apply dark:hover:bg-gray-900/20;
+}
+
 .\~bg-gray-500\/10 {
     @apply bg-gray-500/10;
     @apply dark:bg-gray-900/40;
