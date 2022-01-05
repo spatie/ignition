@@ -139,6 +139,7 @@ function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData
             received_at: '',
         })),
         solutions,
+        documentation_links: report.documentation_links,
         /* @todo are these extra properties needed/used? */
         group_identifier: '',
         group_count: 0,

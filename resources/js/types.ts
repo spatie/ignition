@@ -104,4 +104,5 @@ export type IgnitionErrorOccurrence = {
     open_frame_index: null | number;
     application_path: string;
     application_version: null | string;
+    documentation_links: Array<string>;
 };

@@ -16097,6 +16097,9 @@ function NavBar(_ref) {
   var hasScrolled = useWindowScrollPosition({
     distance: 10
   });
+  var laravelDocs = errorOccurrence.documentation_links.find(function (link) {
+    return link.startsWith('https://laravel.com/');
+  });
 
   function toggleShare() {
     setIsSettingsDropdownOpen(false);
@@ -16146,12 +16149,12 @@ function NavBar(_ref) {
     className: "-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center"
   }, react.createElement(NavBarItem, {
     name: "docs",
-    href: "https://laravel.com/docs",
+    href: laravelDocs || 'https://laravel.com/docs/',
     icon: react.createElement(FontAwesomeIcon, {
       className: 'text-sm',
       icon: faLaravel
     }),
-    important: true
+    important: !!laravelDocs
   }), react.createElement(NavBarItem, {
     name: "settings",
     icon: react.createElement(FontAwesomeIcon, {
@@ -16646,6 +16649,7 @@ function transformIgnitionError(_ref) {
       });
     }),
     solutions: solutions,
+    documentation_links: report.documentation_links,
 
     /* @todo are these extra properties needed/used? */
     group_identifier: '',

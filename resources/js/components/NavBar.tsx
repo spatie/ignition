@@ -16,6 +16,8 @@ export default function NavBar({ showException }: Props) {
     const [isSettingsDropdownOpen, setIsSettingsDropdownOpen] = useState(false);
     const hasScrolled = useHasScrolled({ distance: 10 });
 
+    const laravelDocs = errorOccurrence.documentation_links.find(link => link.startsWith('https://laravel.com/'));
+
     function toggleShare() {
         setIsSettingsDropdownOpen(false);
         setIsShareDropdownOpen(!isShareDropdownOpen);
@@ -59,9 +61,9 @@ export default function NavBar({ showException }: Props) {
                             </NavBarItem>
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
-                            <NavBarItem name="docs" href="https://laravel.com/docs" icon={
+                            <NavBarItem name="docs" href={laravelDocs || 'https://laravel.com/docs/'} icon={
                                 <FontAwesomeIcon className='text-sm' icon={faLaravel} />
-                            } important />
+                            } important={!!laravelDocs} />
                             <NavBarItem name="settings" icon={
                                 <FontAwesomeIcon className='text-sm' icon={faCog} />
                             } label={false} onClick={toggleSettings}>
