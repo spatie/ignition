@@ -311,10 +311,6 @@ class Ignition
             $this->solutionTransformerClass,
         );
 
-        try {
-            (new Renderer())->render($viewModel->toArray());
-        } catch (Throwable $e) {
-            throw $e;
-        }
+        (new Renderer())->render(['viewModel' => $viewModel]);
     }
 }

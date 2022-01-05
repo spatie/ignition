@@ -1,7 +1,8 @@
+<?php /** @var \Spatie\Ignition\ErrorPage\ErrorPageViewModel $viewModel */ ?>
 <!doctype html>
-<html class="theme-<?= $theme ?>">
+<html lang="en">
 <!--
-<?=$throwableString?>
+<?= $viewModel->throwableString() ?>
 -->
 <head>
     <!-- Hide dumps asap -->
@@ -12,51 +13,50 @@
     </style>
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex, nofollow">
 
-    <title><?= $title ?></title>
+    <title><?= $viewModel->title() ?></title>
 
 </head>
 <body class="scrollbar-lg">
 
 <script>
     window.data = <?=
-        $jsonEncode([
-            'report' => $report,
-            'shareableReport' => $shareableReport,
-            'config' => $config,
-            'solutions' => $solutions,
-            'updateConfigEndpoint' => $updateConfigEndpoint,
-            'defaultTab' => $defaultTab,
-            'defaultTabProps' => $defaultTabProps,
+        $viewModel->jsonEncode([
+            'report' => $viewModel->report(),
+            'shareableReport' => $viewModel->shareableReport(),
+            'config' => $viewModel->config(),
+            'solutions' => $viewModel->solutions(),
+            'updateConfigEndpoint' => $viewModel->updateConfigEndpoint(),
         ])
         ?>;
 </script>
 
 <!-- The noscript representation is for HTTP client like Postman that have JS disabled. -->
-<noscript><pre><?=$throwableString?></pre></noscript>
+<noscript>
+    <pre><?= $viewModel->throwableString() ?></pre>
+</noscript>
 
 <div id="app"></div>
 
-<style><?= $getAssetContents('ignition.css') ?></style>
+<style><?= $viewModel->getAssetContents('ignition.css') ?></style>
 
 <!--
     Use HTML comments inside script tag to prevent parsing of </script> inside FontAwesome comments
     See: https://github.com/FortAwesome/Font-Awesome/issues/18473
 -->
 <script>
-<!--
-<?= $getAssetContents('ignition.js') ?>
-//-->
+    <!--
+    <?= $viewModel->getAssetContents('ignition.js') ?>
+    //-->
 </script>
 <script>
     window.ignite(window.data);
 </script>
 <!--
-<?=$throwableString?>
+<?= $viewModel->throwableString() ?>
 -->
 </body>
 </html>

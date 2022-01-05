@@ -11,47 +11,16 @@ use Spatie\Ignition\Contracts\Solution;
 use Spatie\Ignition\Solutions\SolutionTransformer;
 use Throwable;
 
-class ErrorPageViewModel implements Arrayable
+class ErrorPageViewModel
 {
-    protected ?Throwable $throwable;
-
-    /** @var array<int, \Spatie\Ignition\Contracts\Solution> */
-    protected array $solutions = [];
-
-    protected IgnitionConfig $ignitionConfig;
-
-    protected Report $report;
-
-    protected string $defaultTab = 'trace';
-
-    /** @var array<int, string> */
-    protected array $defaultTabProps = [];
-
-    protected string $solutionTransformerClass;
-
-    /**
-     * @param \Throwable|null $throwable
-     * @param \Spatie\Ignition\Config\IgnitionConfig $ignitionConfig
-     * @param \Spatie\FlareClient\Report $report
-     * @param array<int, Solution> $solutions
-     * @param string|null $solutionTransformerClass
-     */
     public function __construct(
-        ?Throwable $throwable,
-        IgnitionConfig $ignitionConfig,
-        Report $report,
-        array $solutions,
-        string $solutionTransformerClass = null
+        protected ?Throwable $throwable,
+        protected IgnitionConfig $ignitionConfig,
+        protected Report $report,
+        protected array $solutions,
+        protected ?string $solutionTransformerClass = null
     ) {
-        $this->throwable = $throwable;
-
-        $this->ignitionConfig = $ignitionConfig;
-
-        $this->report = $report;
-
-        $this->solutions = $solutions;
-
-        $this->solutionTransformerClass = $solutionTransformerClass ?? SolutionTransformer::class;
+        $this->solutionTransformerClass ??= SolutionTransformer::class;
     }
 
     public function throwableString(): string
@@ -79,13 +48,11 @@ class ErrorPageViewModel implements Arrayable
         return "🧨 {$message}";
     }
 
-    /** @return array<string, mixed> */
     public function config(): array
     {
         return $this->ignitionConfig->toArray();
     }
 
-    /** @return array<int, mixed> */
     public function solutions(): array
     {
         return array_map(function (Solution $solution) {
@@ -99,7 +66,6 @@ class ErrorPageViewModel implements Arrayable
         }, $this->solutions);
     }
 
-    /** @return array<int, mixed> */
     public function report(): array
     {
         return $this->report->toArray();
@@ -119,29 +85,14 @@ class ErrorPageViewModel implements Arrayable
         return (string)file_get_contents($assetPath);
     }
 
-    protected function updateConfigEndpoint(): string
+    public function shareableReport(): array
+    {
+        return (new ReportTrimmer())->trim($this->report());
+    }
+
+    public function updateConfigEndpoint(): string
     {
         // TODO: Should be based on Ignition config
         return  '/_ignition/update-config';
-    }
-
-    /** @phpstan-ignore-next-line */
-    public function toArray(): array
-    {
-        return [
-            'throwableString' => $this->throwableString(),
-            'updateConfigEndpoint' => $this->updateConfigEndpoint(),
-            'title' => $this->title(),
-            'config' => $this->config(),
-            'solutions' => $this->solutions(),
-            'report' => $this->report(),
-            'shareableReport' => (new ReportTrimmer())->trim($this->report()),
-            'housekeepingEndpoint' => '',
-            'jsonEncode' => Closure::fromCallable([$this, 'jsonEncode']),
-            'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
-            'defaultTab' => $this->defaultTab,
-            'defaultTabProps' => $this->defaultTabProps,
-            'theme' => $this->ignitionConfig->theme(),
-        ];
     }
 }
