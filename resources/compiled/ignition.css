@@ -1129,6 +1129,11 @@ pre.sf-dump .sf-dump-ellipsis{
   margin-right: auto;
 }
 
+.my-6{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 .mr-10{
   margin-right: 2.5rem;
 }
@@ -1785,6 +1790,11 @@ pre.sf-dump .sf-dump-ellipsis{
   background-color: rgb(139 92 246 / var(--tw-bg-opacity));
 }
 
+.bg-yellow-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity));
+}
+
 .p-4{
   padding: 1rem;
 }
@@ -1875,6 +1885,10 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .pr-8{
   padding-right: 2rem;
+}
+
+.pl-6{
+  padding-left: 1.5rem;
 }
 
 .align-baseline{
@@ -2300,6 +2314,11 @@ pre.sf-dump .sf-dump-ellipsis{
   background-color: rgb(0 0 0 / 0.2);
 }
 
+.dark .dark\:bg-yellow-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
 .dark .dark\:text-emerald-800{
   --tw-text-opacity: 1;
   color: rgb(6 95 70 / var(--tw-text-opacity));
@@ -2370,6 +2389,14 @@ pre.sf-dump .sf-dump-ellipsis{
 
   .lg\:grid-cols-6{
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-\[33\.33\%\2c 66\.66\%\]{
+    grid-template-columns: 33.33% 66.66%;
+  }
+
+  .lg\:grid-rows-\[57rem\2c 1fr\]{
+    grid-template-rows: 57rem 1fr;
   }
 
   .lg\:justify-start{
