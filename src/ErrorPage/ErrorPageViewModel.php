@@ -2,8 +2,6 @@
 
 namespace Spatie\Ignition\ErrorPage;
 
-use Closure;
-use Illuminate\Contracts\Support\Arrayable;
 use Spatie\FlareClient\Report;
 use Spatie\FlareClient\Truncation\ReportTrimmer;
 use Spatie\Ignition\Config\IgnitionConfig;
