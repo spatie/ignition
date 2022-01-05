@@ -1216,6 +1216,10 @@ pre.sf-dump .sf-dump-ellipsis{
   margin-top: 5rem;
 }
 
+.mt-10{
+  margin-top: 2.5rem;
+}
+
 .-ml-3{
   margin-left: -0.75rem;
 }
@@ -1230,14 +1234,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .mt-4{
   margin-top: 1rem;
-}
-
-.mt-10{
-  margin-top: 2.5rem;
-}
-
-.mt-\[-4px\]{
-  margin-top: -4px;
 }
 
 .block{
@@ -1318,10 +1314,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .h-3{
   height: 0.75rem;
-}
-
-.h-\[4px\]{
-  height: 4px;
 }
 
 .max-h-32{
@@ -1864,10 +1856,6 @@ pre.sf-dump .sf-dump-ellipsis{
   padding-right: 2rem;
 }
 
-.pl-1{
-  padding-left: 0.25rem;
-}
-
 .align-baseline{
   vertical-align: baseline;
 }
@@ -2087,6 +2075,12 @@ pre.sf-dump .sf-dump-ellipsis{
   transition-duration: 150ms;
 }
 
+.transition-transform{
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-opacity{
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2105,14 +2099,12 @@ pre.sf-dump .sf-dump-ellipsis{
   transition-duration: 150ms;
 }
 
-.transition-transform{
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .delay-100{
   transition-delay: 100ms;
+}
+
+.duration-300{
+  transition-duration: 300ms;
 }
 
 .duration-150{
@@ -2121,10 +2113,6 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .duration-100{
   transition-duration: 100ms;
-}
-
-.duration-300{
-  transition-duration: 300ms;
 }
 
 .duration-1000{
