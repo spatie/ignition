@@ -14,7 +14,7 @@ window.ignite = (data) => {
     ReactDOM.render(<Ignition errorOccurrence={errorOccurrence} igniteData={data} />, document.querySelector('#app'));
 };
 
-function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData): ErrorOccurrence {
+function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurrence {
     return {
         frames: report.stacktrace.map((frame) => ({
             ...frame,
@@ -139,11 +139,6 @@ function transformIgnitionError({ report, shareEndpoint, solutions }: IgniteData
             received_at: '',
         })),
         solutions,
-        documentation_links: report.documentation_links,
-        /* @todo are these extra properties needed/used? */
-        group_identifier: '',
-        group_count: 0,
-        group_detail_query: '',
-        links: { show: '', share: shareEndpoint || '' },
+        documentation_links: report.documentation_links
     };
 }

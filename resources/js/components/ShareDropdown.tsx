@@ -38,7 +38,7 @@ export default function ShareDropdown({isOpen}: Props) {
     }
 
     async function onShareError() {
-        if (! igniteData.shareEndpoint) {
+        if (! igniteData.config.shareEndpoint) {
             return;
         }
 
@@ -57,7 +57,7 @@ export default function ShareDropdown({isOpen}: Props) {
 
         try {
             const response = await (
-                await fetch(igniteData.shareEndpoint, {
+                await fetch(igniteData.config.shareEndpoint, {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {
@@ -103,7 +103,7 @@ export default function ShareDropdown({isOpen}: Props) {
                                 </li>
                             ))}
                         </ul>
-                        
+
                         <div className="flex items-center gap-4">
                             <SubmitButton
                                 disabled={isLoading}

@@ -7,16 +7,12 @@ use Throwable;
 
 class IgnitionConfig implements Arrayable
 {
-    /** @var array<string, string> */
-    protected array $options = [];
-
     public static function loadFromConfigFile(): self
     {
         return (new self())->loadConfigFile();
     }
 
-    /** @param array<string, string> $options */
-    public function __construct(array $options = [])
+    public function __construct(protected array $options = [])
     {
         $defaultOptions = $this->getDefaultOptions();
 
@@ -118,6 +114,12 @@ class IgnitionConfig implements Arrayable
         return (bool)($this->options['enable_share_button'] ?? false);
     }
 
+    public function shareEndpoint(): string
+    {
+        return $this->options['share_endpoint']
+            ?? $this->getDefaultOptions()['share_endpoint'];
+    }
+
     public function runnableSolutionsEnabled(): bool
     {
         return (bool)($this->options['enable_runnable_solutions'] ?? false);
@@ -136,12 +138,14 @@ class IgnitionConfig implements Arrayable
             'enableRunnableSolutions' => $this->runnableSolutionsEnabled(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
             'editorOptions' => $this->editorOptions(),
+            'shareEndpoint' => $this->shareEndpoint(),
         ];
     }
 
     protected function getDefaultOptions(): array
     {
         return [
+            'share_endpoint' => 'https://flareapp.io/api/public-reports',
             'theme' => 'light',
             'editor_options' => [
                 'sublime' => [

@@ -119,12 +119,6 @@ class ErrorPageViewModel implements Arrayable
         return (string)file_get_contents($assetPath);
     }
 
-    protected function shareEndpoint(): string
-    {
-        // TODO: Should be based on Ignition config
-        return  'https://flareapp.io/api/public-reports';
-    }
-
     protected function updateConfigEndpoint(): string
     {
         // TODO: Should be based on Ignition config
@@ -136,7 +130,6 @@ class ErrorPageViewModel implements Arrayable
     {
         return [
             'throwableString' => $this->throwableString(),
-            'shareEndpoint' => $this->shareEndpoint(),
             'updateConfigEndpoint' => $this->updateConfigEndpoint(),
             'title' => $this->title(),
             'config' => $this->config(),
