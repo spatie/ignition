@@ -1764,8 +1764,16 @@ pre.sf-dump .sf-dump-ellipsis{
   background-color: rgb(139 92 246 / var(--tw-bg-opacity));
 }
 
+.bg-gray-500\/5{
+  background-color: rgb(107 114 128 / 0.05);
+}
+
 .p-4{
   padding: 1rem;
+}
+
+.p-1{
+  padding: 0.25rem;
 }
 
 .px-6{
