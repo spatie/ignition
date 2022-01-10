@@ -36,18 +36,18 @@ export default function Ignition({ errorOccurrence, igniteData }: Props) {
                         <NavBar showException={!errorCardInView} />
 
                         <main
-                            className="mx-auto mb-20 px-6 lg:px-10 2xl:px-20 max-w-4xl lg:max-w-[90rem] 2xl:max-w-none grid grid-cols-1 2xl:grid-cols-2 2xl:gap-x-20"
+                            className="mx-auto mb-20 px-6 lg:px-10 max-w-4xl lg:max-w-[90rem] grid grid-cols-1"
                         >
                             <div ref={intersectionRef} className="mt-20">
                                 <ErrorCard />
                             </div>
 
-                            <Section className="mt-10 2xl:mt-20" name="stack" children={<StackTrace />} />
+                            <Section className="mt-10" name="stack" children={<StackTrace />} />
 
-                            <Section className="mt-10 2xl:mt-20" name="context" children={<Context />} />
+                            <Section className="mt-10" name="context" children={<Context />} />
 
                             {hasDebugInfo(errorOccurrence) && (
-                                <Section className="mt-10 2xl:mt-20" name="debug" children={<Debug />} />
+                                <Section className="mt-10" name="debug" children={<Debug />} />
                             )}
                         </main>
                     </InViewContextProvider>

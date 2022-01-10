@@ -37,7 +37,7 @@ export default function NavBar({ showException }: Props) {
                         z-10 transform translate-x-0 transition-color duration-100
                     `}
                 >
-                    <div className="h-10 flex justify-between px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none">
+                    <div className="h-10 flex justify-between px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]">
                         <ul className="-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center">
                             <NavBarItem name="stack" icon={
                                 <FontAwesomeIcon icon={faCode} />
@@ -93,7 +93,7 @@ export default function NavBar({ showException }: Props) {
                 >
                     <div
                         className="
-                        px-6 lg:px-10 2xl:px-20 mx-auto max-w-4xl lg:max-w-[90rem] 2xl:max-w-none
+                        px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]
                         h-10 flex items-center justify-start
                         border-t ~border-gray-200"
                     >
