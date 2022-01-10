@@ -3,14 +3,34 @@
     @apply dark:text-gray-400;
 }
 
+.\~text-gray-800 {
+    @apply text-gray-800;
+    @apply dark:text-gray-200;
+}
+
 .\~text-indigo-600 {
     @apply text-indigo-600;
     @apply dark:text-indigo-400;
 }
 
-.\~text-gray-800 {
-    @apply text-gray-800;
-    @apply dark:text-gray-200;
+.\~text-violet-600 {
+    @apply text-violet-600;
+    @apply dark:text-violet-400;
+}
+
+.\~text-emerald-600 {
+    @apply text-emerald-600;
+    @apply dark:text-emerald-400;
+}
+
+.\~text-red-600 {
+    @apply text-red-600;
+    @apply dark:text-red-400;
+}
+
+.\~text-orange-600 {
+    @apply text-orange-600;
+    @apply dark:text-orange-400;
 }
 
 .\~text-emerald-700 {
