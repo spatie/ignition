@@ -11,6 +11,7 @@ type Props = {
     children?: React.ReactNode;
     onClick?: () => void;
     label?: boolean;
+    navRef?: React.MutableRefObject<null>;
 };
 
 export default function NavBarItem({
@@ -21,11 +22,12 @@ export default function NavBarItem({
     children = null,
     onClick = noop,
     label = true,
+    navRef
 }: Props) {
     const { inView } = useContext(InViewContext);
 
     return (
-        <li>
+        <li ref={navRef}>
             <a href={href || `#${name}`} target={href ? '_blank' : '_self'} onClick={onClick}>
                 <button
                     className={`

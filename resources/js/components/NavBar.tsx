@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import NavBarItem from 'components/NavBarItem';
 import ShareDropdown from 'components/ShareDropdown';
 import SettingsDropdown from 'components/SettingsDropdown';
@@ -10,6 +10,22 @@ import { faLaravel } from '@fortawesome/free-brands-svg-icons';
 
 type Props = { showException: boolean };
 
+function clickOutsideListener(ref: React.MutableRefObject<any>, handler: React.Dispatch<React.SetStateAction<boolean>> ) {
+    useEffect(() => {
+
+        function handleClickOutside(event: any ) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                handler(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
+}
+
 export default function NavBar({ showException }: Props) {
     const errorOccurrence = useContext(ErrorOccurrenceContext);
     const [isShareDropdownOpen, setIsShareDropdownOpen] = useState(false);
@@ -18,15 +34,11 @@ export default function NavBar({ showException }: Props) {
 
     const laravelDocs = errorOccurrence.documentation_links.find(link => link.startsWith('https://laravel.com/'));
 
-    function toggleShare() {
-        setIsSettingsDropdownOpen(false);
-        setIsShareDropdownOpen(!isShareDropdownOpen);
-    }
+    const shareRef = useRef(null);
+    const settingsRef = useRef(null);
 
-    function toggleSettings() {
-        setIsShareDropdownOpen(false);
-        setIsSettingsDropdownOpen(!isSettingsDropdownOpen);
-    }
+    clickOutsideListener(shareRef, setIsShareDropdownOpen);
+    clickOutsideListener(settingsRef, setIsSettingsDropdownOpen);
 
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
@@ -54,28 +66,23 @@ export default function NavBar({ showException }: Props) {
                                     important={!!errorOccurrence.context_items.dumps.length}
                                 />
                             )}
-                            <NavBarItem name="share" icon={
-                                <FontAwesomeIcon icon={faShare} />
-                            } onClick={toggleShare}>
-                                <ShareDropdown isOpen={isShareDropdownOpen} />
-                            </NavBarItem>
+
+                                <NavBarItem navRef={shareRef} name="share" icon={
+                                    <FontAwesomeIcon icon={faShare} />
+                                } onClick={()=>{setIsShareDropdownOpen(!isShareDropdownOpen)}}>
+                                        <ShareDropdown isOpen={isShareDropdownOpen} />
+                                </NavBarItem>
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
                             <NavBarItem name="docs" href={laravelDocs || 'https://laravel.com/docs/'} icon={
                                 <FontAwesomeIcon className='text-sm' icon={faLaravel} />
                             } important={!!laravelDocs} />
-                            <NavBarItem name="settings" icon={
+                            
+                            <NavBarItem navRef={settingsRef} name="settings" icon={
                                 <FontAwesomeIcon className='text-sm' icon={faCog} />
-                            } label={false} onClick={toggleSettings}>
-                                <SettingsDropdown isOpen={isSettingsDropdownOpen} />
+                            } label={false} onClick={()=>{setIsSettingsDropdownOpen(!isSettingsDropdownOpen)}}>
+                                    <SettingsDropdown isOpen={isSettingsDropdownOpen} />
                             </NavBarItem>
-
-                            {/* <li class="flex items-center">
-                  <button class="group px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium">
-                      <i class="mr-1 fab fa-github ~text-gray-500 group-hover:text-red-500"></i>
-                      GitHub
-                  </button>
-              </li> */}
                         </ul>
                     </div>
                 </div>
