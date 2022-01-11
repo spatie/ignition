@@ -1,6 +1,5 @@
 {
     "name": "@flareapp/ignition",
-    "version": "1.0.1",
     "scripts": {
         "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
         "dev": "NODE_ENV=development TAILWIND_MODE=watch concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
