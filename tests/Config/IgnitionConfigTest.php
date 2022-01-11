@@ -9,16 +9,9 @@ test('the config can be converted to an array', function () {
         'local_sites_path' => 'local',
     ]);
 
+    $configArray = $config->toArray();
 
-
-    $this->assertEquals([
-        'editor' => 'phpstorm',
-        'remoteSitesPath' => 'remote',
-        'localSitesPath' => 'local',
-        'theme' => 'light',
-        'enableShareButton' => false,
-        'enableRunnableSolutions' => false,
-        'directorySeparator' => DIRECTORY_SEPARATOR,
-        'hideSolutions' => false,
-    ], $config->toArray());
+    $this->assertEquals('phpstorm', $configArray['editor']);
+    $this->assertEquals('remote', $configArray['remoteSitesPath']);
+    $this->assertEquals('local', $configArray['localSitesPath']);
 });
