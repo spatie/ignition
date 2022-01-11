@@ -11,7 +11,8 @@ export default function Section({ children, className = '', name }: Props) {
     const ref = useSectionInView(name);
 
     return (
-        <section ref={ref} id={name} className={className}>
+        <section ref={ref} className={className}>
+            <a id={name} className="scroll-target" />
             {children}
         </section>
     );
