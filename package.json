@@ -1,5 +1,6 @@
 {
     "name": "@flareapp/ignition",
+    "version": "0.0.1",
     "scripts": {
         "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
         "dev": "NODE_ENV=development TAILWIND_MODE=watch concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
@@ -23,7 +24,8 @@
         "react-dom": "^17.0.2",
         "react-intersection-observer": "^8.32.5",
         "react-markdown": "^5.0.0",
-        "sql-formatter": "^4.0.2"
+        "sql-formatter": "^4.0.2",
+        "tailwindcss": "^3.0.13"
     },
     "devDependencies": {
         "@flareapp/flare-client": "^1.0.12",
