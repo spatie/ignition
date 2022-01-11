@@ -41,9 +41,7 @@ class ErrorPageViewModel
 
     public function title(): string
     {
-        $message = htmlspecialchars($this->report->getMessage());
-
-        return "🧨 {$message}";
+        return htmlspecialchars($this->report->getMessage());
     }
 
     public function config(): array
