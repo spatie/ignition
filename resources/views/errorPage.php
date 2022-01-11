@@ -43,14 +43,8 @@
 
 <style><?= $viewModel->getAssetContents('ignition.css') ?></style>
 
-<!--
-    Use HTML comments inside script tag to prevent parsing of </script> inside FontAwesome comments
-    See: https://github.com/FortAwesome/Font-Awesome/issues/18473
--->
 <script>
-    <!--
-    <?= $viewModel->getAssetContents('ignition.js') ?>
-    //-->
+<?= $viewModel->getAssetContents('ignition.js') ?>
 </script>
 <script>
     window.ignite(window.data);
