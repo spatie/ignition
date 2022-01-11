@@ -10,20 +10,20 @@ import { faLaravel } from '@fortawesome/free-brands-svg-icons';
 
 type Props = { showException: boolean };
 
-function clickOutsideListener(ref: React.MutableRefObject<any>, handler: React.Dispatch<React.SetStateAction<boolean>> ) {
+function useClickOutsideListener(ref: React.MutableRefObject<any>, handler: () => void ) {
     useEffect(() => {
 
         function handleClickOutside(event: any ) {
             if (ref.current && !ref.current.contains(event.target)) {
-                handler(false);
+                handler();
             }
         }
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("click", handleClickOutside);
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("click", handleClickOutside);
         };
-    }, [ref]);
+    }, []);
 }
 
 export default function NavBar({ showException }: Props) {
@@ -37,8 +37,8 @@ export default function NavBar({ showException }: Props) {
     const shareRef = useRef(null);
     const settingsRef = useRef(null);
 
-    clickOutsideListener(shareRef, setIsShareDropdownOpen);
-    clickOutsideListener(settingsRef, setIsSettingsDropdownOpen);
+    useClickOutsideListener(shareRef, () => setIsShareDropdownOpen(false));
+    useClickOutsideListener(settingsRef, () => setIsSettingsDropdownOpen(false));
 
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
