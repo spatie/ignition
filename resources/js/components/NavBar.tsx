@@ -5,7 +5,7 @@ import SettingsDropdown from 'components/SettingsDropdown';
 import { ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFingerprint, faCode, faBug, faShare, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faBug, faShare, faCog, faAlignLeft, faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faLaravel } from '@fortawesome/free-brands-svg-icons';
 
 type Props = { showException: boolean };
@@ -52,10 +52,10 @@ export default function NavBar({ showException }: Props) {
                     <div className="h-10 flex justify-between px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]">
                         <ul className="-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center">
                             <NavBarItem name="stack" icon={
-                                <FontAwesomeIcon icon={faCode} />
+                                <FontAwesomeIcon icon={faAlignLeft} />
                             } />
                             <NavBarItem name="context" icon={
-                                <FontAwesomeIcon icon={faFingerprint} />
+                                <FontAwesomeIcon icon={faExpand} />
                             } />
                             {hasDebugInfo(errorOccurrence) && (
                                 <NavBarItem
@@ -76,7 +76,7 @@ export default function NavBar({ showException }: Props) {
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
                             <NavBarItem name="docs" href={laravelDocs || 'https://laravel.com/docs/'} icon={
                                 <FontAwesomeIcon className='text-sm' icon={faLaravel} />
-                            } important={!!laravelDocs} />
+                            } iconOpacity="opacity-80" important={!!laravelDocs} />
                             
                             <NavBarItem navRef={settingsRef} name="settings" icon={
                                 <FontAwesomeIcon className='text-sm' icon={faCog} />
