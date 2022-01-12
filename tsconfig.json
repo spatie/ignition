@@ -2,9 +2,6 @@
     "compilerOptions": {
         "allowJs": true,
         "declaration": false,
-        "declarationMap": false,
-        "emitDeclarationOnly": false,
-        "declarationDir": "./types",
         "allowSyntheticDefaultImports": true,
         "jsx": "react",
         "lib": ["dom", "es2020"],
