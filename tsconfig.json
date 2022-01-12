@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "declaration": true,
-        "declarationMap": true,
+        "declaration": false,
+        "declarationMap": false,
         "emitDeclarationOnly": false,
         "declarationDir": "./types",
         "allowSyntheticDefaultImports": true,
@@ -17,7 +17,7 @@
         "preserveConstEnums": true,
         "removeComments": false,
         "skipLibCheck": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "strict": true,
         "target": "esnext",
         "baseUrl": ".",
