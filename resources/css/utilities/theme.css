@@ -70,7 +70,7 @@
 
 .\~bg-gray-500\/5 {
     @apply bg-gray-500/5;
-    @apply dark:bg-gray-900/20;
+    @apply dark:bg-black/10;
 }
 
 .hover\:\~bg-gray-500\/5 {
