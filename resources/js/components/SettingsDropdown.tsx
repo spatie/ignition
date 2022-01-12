@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { IgnitionConfigContext, IgnitionIcon, InlineCodeSnippet } from '@flareapp/ignition-ui';
-import { useContext } from 'react';
+import React, { useState, useContext } from 'react';
+import { Button, IgnitionConfigContext, IgnitionIcon, InlineCodeSnippet } from '@flareapp/ignition-ui';
 import { IgniteDataContext } from 'contexts/IgniteDataContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon, faAdjust, faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import SubmitButton from './ui/SubmitButton';
 
 type Props = {
     isOpen: boolean;
@@ -183,13 +181,13 @@ export default function SettingsDropdown({ isOpen }: Props) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <SubmitButton
+                    <Button
                         onClick={updateConfig}
                         disabled={isUpdatingConfig}
-                        className={"bg-red-500 text-white"} 
+                        className={"bg-red-500 border-red-500/25 text-white"} 
                     >
                         Save settings
-                    </SubmitButton>
+                    </Button>
 
                     {updateWasSuccessful && <p className="text-emerald-500 text-sm">Saved!</p>}
                 </div>

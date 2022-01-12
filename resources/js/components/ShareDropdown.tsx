@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import {FlareIcon} from '@flareapp/ignition-ui';
+import React, { useContext, useState } from 'react';
+import { Button, FlareIcon} from '@flareapp/ignition-ui';
 import Checkbox from "components/ui/Checkbox";
-import { useState } from 'react';
 import {IgniteDataContext} from '../contexts/IgniteDataContext';
 import CopyableUrl from './ui/CopyableUrl';
-import SubmitButton from './ui/SubmitButton';
 
 type Props = {
     isOpen: boolean;
@@ -105,13 +103,13 @@ export default function ShareDropdown({isOpen}: Props) {
                         </ul>
 
                         <div className="flex items-center gap-4">
-                            <SubmitButton
+                            <Button
                                 disabled={isLoading}
-                                className={"bg-violet-500 text-white"}
+                                className={"bg-violet-500 border-violet-500/25 CopyButton text-white"}
                                 onClick={onShareError}
                             >
                                 Create Share
-                            </SubmitButton>
+                            </Button>
                         </div>
                     </>
                 )}

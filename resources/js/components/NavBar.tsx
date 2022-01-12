@@ -80,7 +80,7 @@ export default function NavBar({ showException }: Props) {
                             
                             <NavBarItem navRef={settingsRef} name="settings" icon={
                                 <FontAwesomeIcon className='text-sm' icon={faCog} />
-                            } label={false} onClick={()=>{setIsSettingsDropdownOpen(!isSettingsDropdownOpen)}}>
+                            } iconOpacity="opacity-80" label={false} onClick={()=>{setIsSettingsDropdownOpen(!isSettingsDropdownOpen)}}>
                                     <SettingsDropdown isOpen={isSettingsDropdownOpen} />
                             </NavBarItem>
                         </ul>
