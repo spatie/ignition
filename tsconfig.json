@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "declaration": false,
         "allowSyntheticDefaultImports": true,
         "jsx": "react",
         "lib": ["dom", "es2020"],
