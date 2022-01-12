@@ -1563,6 +1563,10 @@ pre.sf-dump .sf-dump-ellipsis{
   flex-wrap: wrap;
 }
 
+.items-start{
+  align-items: flex-start;
+}
+
 .items-center{
   align-items: center;
 }
@@ -1646,6 +1650,10 @@ pre.sf-dump .sf-dump-ellipsis{
   --tw-space-x-reverse: 0;
   margin-right: calc(1px * var(--tw-space-x-reverse));
   margin-left: calc(1px * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.self-start{
+  align-self: flex-start;
 }
 
 .overflow-auto{
@@ -1982,6 +1990,18 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .pb-16{
   padding-bottom: 4rem;
+}
+
+.pt-2{
+  padding-top: 0.5rem;
+}
+
+.pb-0\.5{
+  padding-bottom: 0.125rem;
+}
+
+.pb-0{
+  padding-bottom: 0px;
 }
 
 .font-mono{
