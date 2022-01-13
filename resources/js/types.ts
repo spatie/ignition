@@ -5,7 +5,6 @@ export type IgniteData = {
     shareableReport: IgnitionErrorOccurrence;
     config: IgnitionConfig;
     solutions: Array<any>;
-    telescopeUrl: string | null;
     shareEndpoint: string | null;
     updateConfigEndpoint: string | null;
     defaultTab: string;
@@ -97,7 +96,7 @@ export type IgnitionErrorOccurrence = {
                 type: string;
             }>;
         };
-        view: ViewContext | null
+        view: ViewContext | null;
     };
     stage: string;
     message_level: null | string;
