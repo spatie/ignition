@@ -15,6 +15,7 @@ import {
 } from '@flareapp/ignition-ui';
 import { IgniteData } from './types';
 import { useInView } from 'react-intersection-observer';
+import AppDebugWarning from 'components/AppDebugWarning';
 
 type Props = {
     errorOccurrence: ErrorOccurrence;
@@ -34,21 +35,18 @@ export default function Ignition({ errorOccurrence, igniteData }: Props) {
                 <ErrorOccurrenceContext.Provider value={errorOccurrence}>
                     <InViewContextProvider>
                         <NavBar showException={!errorCardInView} />
+                        <main className="mx-auto my-20 px-6 lg:px-10 max-w-4xl lg:max-w-[90rem] grid grid-cols-1 gap-10">
+                            <AppDebugWarning />
 
-                        <main
-                            className="mx-auto mb-20 px-6 lg:px-10 max-w-4xl lg:max-w-[90rem] grid grid-cols-1"
-                        >
-                            <div ref={intersectionRef} className="mt-20">
+                            <div ref={intersectionRef}>
                                 <ErrorCard />
                             </div>
 
-                            <Section className="mt-10" name="stack" children={<StackTrace />} />
+                            <Section name="stack" children={<StackTrace />} />
 
-                            <Section className="mt-10" name="context" children={<Context />} />
+                            <Section name="context" children={<Context />} />
 
-                            {hasDebugInfo(errorOccurrence) && (
-                                <Section className="mt-10" name="debug" children={<Debug />} />
-                            )}
+                            {hasDebugInfo(errorOccurrence) && <Section name="debug" children={<Debug />} />}
                         </main>
                     </InViewContextProvider>
                 </ErrorOccurrenceContext.Provider>

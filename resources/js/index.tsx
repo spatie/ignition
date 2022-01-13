@@ -1,7 +1,7 @@
 import { ErrorOccurrence } from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IgniteData } from './types';
+import { IgniteData } from 'types';
 import './vendor/symfony';
 import '../css/app.css';
 import Ignition from 'Ignition';
@@ -95,11 +95,11 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
             })),
             user: report.context.user
                 ? Object.entries(report.context.user).map(([name, value]) => ({
-                group: 'user',
-                name,
-                value,
-            }))
-            : null,
+                      group: 'user',
+                      name,
+                      value,
+                  }))
+                : null,
             route: report.context.route
                 ? Object.entries(report.context.route).map(([name, value]) => ({
                       group: 'route',
@@ -139,6 +139,6 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
             received_at: '',
         })),
         solutions,
-        documentation_links: report.documentation_links
+        documentation_links: report.documentation_links,
     };
 }

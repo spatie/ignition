@@ -31,7 +31,7 @@
             'solutions' => $viewModel->solutions(),
             'updateConfigEndpoint' => $viewModel->updateConfigEndpoint(),
         ])
-        ?>;
+    ?>;
 </script>
 
 <!-- The noscript representation is for HTTP client like Postman that have JS disabled. -->
