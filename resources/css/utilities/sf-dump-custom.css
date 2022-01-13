@@ -133,6 +133,7 @@ pre.sf-dump .sf-dump-toggle span {
     @apply shadow-sm;
     @apply hover:shadow;
     @apply hover:text-indigo-500 !important;
+    top: -2px;
 
 }
 

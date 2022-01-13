@@ -893,6 +893,11 @@ pre.sf-dump .sf-dump-toggle span:hover{
   color: rgb(99 102 241 / var(--tw-text-opacity)) !important;
 }
 
+pre.sf-dump .sf-dump-toggle span {
+    top: -2px;
+
+}
+
 pre.sf-dump .sf-dump-toggle:hover span{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
