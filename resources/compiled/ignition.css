@@ -1827,6 +1827,11 @@ pre.sf-dump .sf-dump-ellipsis{
   padding-bottom: 2rem;
 }
 
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1840,11 +1845,6 @@ pre.sf-dump .sf-dump-ellipsis{
 .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-}
-
-.py-1{
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
 }
 
 .px-1\.5{
@@ -2185,6 +2185,14 @@ pre.sf-dump .sf-dump-ellipsis{
 
 .first-letter\:uppercase::first-letter{
   text-transform: uppercase;
+}
+
+.hover\:flex:hover{
+  display: flex;
+}
+
+.hover\:w-auto:hover{
+  width: auto;
 }
 
 .hover\:text-indigo-500:hover{
