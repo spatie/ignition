@@ -46,7 +46,7 @@ pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-count {
 pre.sf-dump,
 pre.sf-dump .sf-dump-default {
     @apply font-mono !important;
-    @apply bg-gray-100 !important;
+    @apply bg-transparent !important;
     @apply text-gray-800 !important;
 }
 
