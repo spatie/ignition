@@ -1,7 +1,7 @@
 import { ErrorOccurrence } from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IgniteData } from 'types';
+import { IgniteData } from './types';
 import './vendor/symfony';
 import '../css/app.css';
 import Ignition from 'Ignition';
