@@ -1402,6 +1402,11 @@ pre.sf-dump .sf-dump-toggle:hover span{
   margin-right: auto;
 }
 
+.my-20{
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
 .mt-3{
   margin-top: 0.75rem;
 }
@@ -1468,18 +1473,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 .-ml-1{
   margin-left: -0.25rem;
-}
-
-.mb-20{
-  margin-bottom: 5rem;
-}
-
-.mt-20{
-  margin-top: 5rem;
-}
-
-.mt-10{
-  margin-top: 2.5rem;
 }
 
 .-mr-3{
@@ -1624,12 +1617,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 .min-w-\[1rem\]{
   min-width: 1rem;
-}
-
-.max-w-max{
-  max-width: -webkit-max-content;
-  max-width: -moz-max-content;
-  max-width: max-content;
 }
 
 .max-w-4xl{
@@ -2105,14 +2092,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 .pt-2{
   padding-top: 0.5rem;
-}
-
-.pb-1\.5{
-  padding-bottom: 0.375rem;
-}
-
-.pb-1{
-  padding-bottom: 0.25rem;
 }
 
 .pr-10{
