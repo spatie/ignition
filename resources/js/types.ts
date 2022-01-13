@@ -79,7 +79,7 @@ export type IgnitionErrorOccurrence = {
             bindings: Array<any>;
             microtime: number;
         }>;
-        git: {
+        git?: {
             hash: string;
             message: string;
             tag: string;

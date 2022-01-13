@@ -3,12 +3,11 @@ import { Button, FlareIcon } from '@flareapp/ignition-ui';
 import Checkbox from 'components/ui/Checkbox';
 import { IgniteDataContext } from '../contexts/IgniteDataContext';
 import CopyableUrl from './ui/CopyableUrl';
+import shareClient, { SectionName } from '../shareClient';
 
 type Props = {
     isOpen: boolean;
 };
-
-type SectionName = 'stackTrace' | 'context' | 'debug';
 
 export default function ShareDropdown({ isOpen }: Props) {
     const igniteData = useContext(IgniteDataContext);
@@ -17,18 +16,22 @@ export default function ShareDropdown({ isOpen }: Props) {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [selectedTabs, setSelectedTabs] = useState<Array<{ name: SectionName; label: string; selected: boolean }>>([
+    const [selectedSections, setSelectedSections] = useState<
+        Array<{ name: SectionName; label: string; selected: boolean }>
+    >([
         { name: 'stackTrace', label: 'Stack', selected: true },
         { name: 'context', label: 'Context', selected: true },
         { name: 'debug', label: 'Debug', selected: true },
     ]);
 
-    function toggleSelected(tabName: SectionName) {
-        const tab = selectedTabs.find((tab) => tab.name === tabName);
+    function toggleSelected(sectionName: SectionName) {
+        const section = selectedSections.find((section) => section.name === sectionName);
 
-        if (tab) {
-            setSelectedTabs(
-                selectedTabs.map((tab) => (tab.name === tabName ? { ...tab, selected: !tab.selected } : tab)),
+        if (section) {
+            setSelectedSections(
+                selectedSections.map((section) =>
+                    section.name === sectionName ? { ...section, selected: !section.selected } : section,
+                ),
             );
         }
     }
@@ -38,40 +41,23 @@ export default function ShareDropdown({ isOpen }: Props) {
             return;
         }
 
-        const selectedTabNames = selectedTabs
-            .filter((selectedTab) => selectedTab.selected)
-            .map((selectedTab) => selectedTab.name);
-
-        const data = {
-            selectedTabNames,
-            tabs: selectedTabNames,
-            lineSelection: window.location.hash,
-            report: igniteData.shareableReport,
-        };
-
+        setError(null);
         setIsLoading(true);
 
-        try {
-            const response = await (
-                await fetch(igniteData.config.shareEndpoint, {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Accept: 'application/json',
-                    },
-                })
-            ).json();
+        const selectedSectionNames = selectedSections
+            .filter((selectedSection) => selectedSection.selected)
+            .map((selectedSection) => selectedSection.name);
 
-            if (response && response.owner_url && response.public_url) {
-                setOwnerUrl(response.owner_url);
-                setPublicUrl(response.public_url);
-            }
-        } catch (error) {
+        try {
+            const response = await shareClient(igniteData, selectedSectionNames);
+
+            setOwnerUrl(response.owner_url);
+            setPublicUrl(response.public_url);
+        } catch (e) {
             setError('Something went wrong while sharing, please try again.');
-        } finally {
-            setIsLoading(false);
         }
+
+        setIsLoading(false);
     }
 
     return (
@@ -97,7 +83,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                 {!publicUrl && (
                     <>
                         <ul className="grid justify-start gap-3">
-                            {selectedTabs.map(({ selected, name, label }) => (
+                            {selectedSections.map(({ selected, name, label }) => (
                                 <li key={name}>
                                     <Checkbox onChange={() => toggleSelected(name)} checked={selected} label={label} />
                                 </li>
@@ -106,7 +92,7 @@ export default function ShareDropdown({ isOpen }: Props) {
 
                         <div className="flex items-center gap-4">
                             <Button
-                                disabled={isLoading}
+                                disabled={isLoading || !selectedSections.some((section) => section.selected)}
                                 className={'bg-violet-500 border-violet-500/25 CopyButton text-white'}
                                 onClick={onShareError}
                             >
