@@ -4,8 +4,10 @@
 */
 
 main pre.sf-dump {
-    display: block !important;
-    z-index: 0 !important;
+    @apply block !important;
+    @apply z-0 !important;
+    @apply p-0 !important;
+    @apply text-sm !important;
 }
 
 .sf-dump-public.sf-dump-highlight,
@@ -25,33 +27,52 @@ main pre.sf-dump {
     @apply border-amber-200 !important;
 }
 
+
+pre.sf-dump .sf-dump-search-wrapper {
+    @apply items-center;
+}
+
 pre.sf-dump .sf-dump-search-wrapper > * {
-    @apply border-gray-300 !important;
+    @apply border-0 !important;
 }
 
 pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input {
     @apply text-xs !important;
-    @apply bg-gray-800 !important;
+    @apply ~bg-white !important;
+    @apply ~text-gray-800 !important;
+    @apply h-8 !important;
+    @apply px-2 !important;
 }
 
-pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next,
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next, 
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous {
-    @apply bg-gray-100 !important;
+    @apply bg-transparent !important;
+    @apply ~text-gray-500 !important;
+    @apply hover:text-indigo-500 !important;
+    @apply px-1;
+}
+
+pre.sf-dump .sf-dump-search-wrapper svg path {
+    @apply fill-current;
 }
 
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-count {
-    @apply text-sm !important;
+    @apply text-xs !important;
+    @apply leading-normal !important;
+    @apply px-4 !important;
+    @apply ~text-gray-500 !important;
+    @apply bg-transparent !important;
 }
 
 pre.sf-dump,
 pre.sf-dump .sf-dump-default {
     @apply font-mono !important;
     @apply bg-transparent !important;
-    @apply text-gray-800 !important;
+    @apply ~text-gray-800 !important;
 }
 
 pre.sf-dump .sf-dump-num {
-    @apply text-red-300 !important;
+    @apply text-red-500 !important;
 }
 
 pre.sf-dump .sf-dump-const {
@@ -60,35 +81,62 @@ pre.sf-dump .sf-dump-const {
 
 pre.sf-dump .sf-dump-str {
     @apply font-normal !important;
-    @apply text-gray-600 !important;
+    @apply ~text-gray-500 !important;
 }
 
 pre.sf-dump .sf-dump-note {
-    @apply text-blue-400 !important;
+    @apply ~text-blue-600 !important;
 }
 
 pre.sf-dump .sf-dump-ref {
-    @apply text-gray-600 !important;
+    @apply ~text-gray-500 !important;
 }
 
 pre.sf-dump .sf-dump-public,
 pre.sf-dump .sf-dump-protected,
 pre.sf-dump .sf-dump-private {
-    @apply text-violet-500 !important;
+    @apply ~text-violet-600 !important;
 }
 
 pre.sf-dump .sf-dump-meta {
-    @apply text-violet-500 !important;
+    @apply ~text-violet-600 !important;
 }
 
 pre.sf-dump .sf-dump-key {
-    @apply text-violet-600 !important;
+    @apply ~text-violet-600 !important;
 }
 
 pre.sf-dump .sf-dump-index {
-    @apply text-blue-400 !important;
+    @apply ~text-blue-600 !important;
 }
 
 pre.sf-dump .sf-dump-ellipsis {
-    @apply text-violet-600 !important;
+    @apply ~text-violet-600 !important;
+}
+
+pre.sf-dump .sf-dump-toggle {
+    @apply ~text-gray-500 !important;
+    @apply hover:text-indigo-500 !important;
+}
+
+pre.sf-dump .sf-dump-toggle span {
+    @apply inline-flex !important;
+    @apply items-center !important;
+    @apply justify-center !important;
+    @apply w-4 !important;
+    @apply h-4 !important;
+    font-size: 9px;
+    @apply ~bg-gray-500/5 !important;
+    @apply hover:bg-white !important;
+    @apply dark:hover:bg-gray-900 !important;
+    @apply rounded-full;
+    @apply shadow-sm;
+    @apply hover:shadow;
+    @apply hover:text-indigo-500 !important;
+
+}
+
+pre.sf-dump .sf-dump-toggle:hover span {
+    @apply bg-white !important;
+    @apply dark:bg-gray-900 !important;
 }

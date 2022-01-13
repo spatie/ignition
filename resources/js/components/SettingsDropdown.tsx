@@ -117,7 +117,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
 
                 <label htmlFor="editor-select">
                     <span className="uppercase tracking-wider ~text-gray-500 text-xs font-bold">Editor</span>
-                    <div className="group mt-2 relative">
+                    <div className="group mt-2">
                         <select
                             id="editor-select"
                             className="block appearance-none w-full ~bg-gray-500/5 h-12 px-4 pr-8 rounded-none leading-tight"

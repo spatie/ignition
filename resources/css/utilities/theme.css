@@ -3,14 +3,14 @@
     @apply dark:text-gray-400;
 }
 
-.\~text-gray-800 {
-    @apply text-gray-800;
-    @apply dark:text-gray-200;
-}
-
 .\~text-indigo-600 {
     @apply text-indigo-600;
     @apply dark:text-indigo-400;
+}
+
+.\~text-blue-600 {
+    @apply text-blue-600;
+    @apply dark:text-blue-400;
 }
 
 .\~text-violet-600 {
@@ -33,6 +33,21 @@
     @apply dark:text-orange-400;
 }
 
+.\~text-indigo-700 {
+    @apply text-indigo-700;
+    @apply dark:text-indigo-200;
+}
+
+.\~text-blue-700 {
+    @apply text-blue-700;
+    @apply dark:text-blue-200;
+}
+
+.\~text-violet-700 {
+    @apply text-violet-700;
+    @apply dark:text-violet-200;
+}
+
 .\~text-emerald-700 {
     @apply text-emerald-700;
     @apply dark:text-emerald-200;
@@ -43,14 +58,19 @@
     @apply dark:text-red-200;
 }
 
+.\~text-orange-700 {
+    @apply text-orange-700;
+    @apply dark:text-orange-200;
+}
+
+.\~text-gray-800 {
+    @apply text-gray-800;
+    @apply dark:text-gray-200;
+}
+
 .\~bg-white {
     @apply bg-white;
     @apply dark:bg-gray-800;
-}
-
-.focus\:\~bg-white {
-    @apply focus:bg-white;
-    @apply dark:focus:bg-gray-900;
 }
 
 .\~bg-body {

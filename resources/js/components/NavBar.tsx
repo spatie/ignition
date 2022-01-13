@@ -42,7 +42,7 @@ export default function NavBar({ showException }: Props) {
 
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
-            <div className="relative">
+            <div>
                 <div
                     className={`
                         ${hasScrolled ? '~bg-gray-100' : '~bg-body'}
