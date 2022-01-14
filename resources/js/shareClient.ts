@@ -1,4 +1,4 @@
-import { IgniteData, IgnitionErrorOccurrence } from 'types';
+import { IgniteData, IgnitionErrorOccurrence } from './types';
 
 type ShareResponse = {
     owner_url: string;

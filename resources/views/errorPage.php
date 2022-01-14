@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <?php /** @var \Spatie\Ignition\ErrorPage\ErrorPageViewModel $viewModel */ ?>
-<!doctype html>
 <html lang="en">
 <!--
 <?= $viewModel->throwableString() ?>
