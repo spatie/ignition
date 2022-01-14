@@ -12,18 +12,17 @@ import keyBy from 'lodash/keyBy';
 
 type Props = { showException: boolean };
 
-function useClickOutsideListener(ref: React.MutableRefObject<any>, handler: () => void ) {
+function useClickOutsideListener(ref: React.MutableRefObject<any>, handler: () => void) {
     useEffect(() => {
-
-        function handleClickOutside(event: any ) {
+        function handleClickOutside(event: any) {
             if (ref.current && !ref.current.contains(event.target)) {
                 handler();
             }
         }
 
-        document.addEventListener("click", handleClickOutside);
+        document.addEventListener('click', handleClickOutside);
         return () => {
-            document.removeEventListener("click", handleClickOutside);
+            document.removeEventListener('click', handleClickOutside);
         };
     }, []);
 }
@@ -34,7 +33,7 @@ export default function NavBar({ showException }: Props) {
     const [isSettingsDropdownOpen, setIsSettingsDropdownOpen] = useState(false);
     const hasScrolled = useHasScrolled({ distance: 10 });
 
-    const laravelDocs = errorOccurrence.documentation_links.find(link => link.startsWith('https://laravel.com/'));
+    const laravelDocs = errorOccurrence.documentation_links.find((link) => link.startsWith('https://laravel.com/'));
 
     const shareRef = useRef(null);
     const settingsRef = useRef(null);
@@ -44,7 +43,7 @@ export default function NavBar({ showException }: Props) {
 
     const env = mapValues(keyBy(errorOccurrence.context_items['env'] || [], 'name'), 'value');
 
-    const showEnvWarning =  env.app_env !== 'local' && env.app_debug;
+    const showEnvWarning = env.app_env !== 'local' && env.app_debug;
 
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
@@ -57,37 +56,47 @@ export default function NavBar({ showException }: Props) {
                 >
                     <div className="h-10 flex justify-between px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]">
                         <ul className="-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center">
-                            <NavBarItem name="stack" icon={
-                                <FontAwesomeIcon icon={faAlignLeft} />
-                            } />
-                            <NavBarItem name="context" icon={
-                                <FontAwesomeIcon icon={faExpand} />
-                            } />
+                            <NavBarItem name="stack" icon={<FontAwesomeIcon icon={faAlignLeft} />} />
+                            <NavBarItem name="context" icon={<FontAwesomeIcon icon={faExpand} />} />
                             {hasDebugInfo(errorOccurrence) && (
                                 <NavBarItem
                                     name="debug"
-                                    icon={
-                                        <FontAwesomeIcon icon={faBug} />
-                                    }
-                                    important={!!errorOccurrence.context_items.dumps.length}
+                                    icon={<FontAwesomeIcon icon={faBug} />}
+                                    important={!!errorOccurrence.context_items.dumps?.length}
                                 />
                             )}
 
-                                <NavBarItem navRef={shareRef} name="share" icon={
-                                    <FontAwesomeIcon icon={faShare} />
-                                } onClick={()=>{setIsShareDropdownOpen(!isShareDropdownOpen)}}>
-                                        <ShareDropdown isOpen={isShareDropdownOpen} />
-                                </NavBarItem>
+                            <NavBarItem
+                                navRef={shareRef}
+                                name="share"
+                                icon={<FontAwesomeIcon icon={faShare} />}
+                                onClick={() => {
+                                    setIsShareDropdownOpen(!isShareDropdownOpen);
+                                }}
+                            >
+                                <ShareDropdown isOpen={isShareDropdownOpen} />
+                            </NavBarItem>
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
-                            <NavBarItem name="docs" href={laravelDocs || 'https://laravel.com/docs/'} icon={
-                                <FontAwesomeIcon className='text-sm' icon={faLaravel} />
-                            } iconOpacity="opacity-80" important={!!laravelDocs} />
-                            
-                            <NavBarItem navRef={settingsRef} name="settings" icon={
-                                <FontAwesomeIcon className='text-sm' icon={faCog} />
-                            } iconOpacity="opacity-80" label={false} onClick={()=>{setIsSettingsDropdownOpen(!isSettingsDropdownOpen)}}>
-                                    <SettingsDropdown isOpen={isSettingsDropdownOpen} />
+                            <NavBarItem
+                                name="docs"
+                                href={laravelDocs || 'https://laravel.com/docs/'}
+                                icon={<FontAwesomeIcon className="text-sm" icon={faLaravel} />}
+                                iconOpacity="opacity-80"
+                                important={!!laravelDocs}
+                            />
+
+                            <NavBarItem
+                                navRef={settingsRef}
+                                name="settings"
+                                icon={<FontAwesomeIcon className="text-sm" icon={faCog} />}
+                                iconOpacity="opacity-80"
+                                label={false}
+                                onClick={() => {
+                                    setIsSettingsDropdownOpen(!isSettingsDropdownOpen);
+                                }}
+                            >
+                                <SettingsDropdown isOpen={isSettingsDropdownOpen} />
                             </NavBarItem>
                         </ul>
                     </div>
@@ -105,13 +114,16 @@ export default function NavBar({ showException }: Props) {
                     `}
                 >
                     <div className="flex items-center px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem] h-10 border-t ~border-gray-200">
-                        <a href="#top"
-                            className="min-w-0 inline-flex items-center justify-start gap-2"
-                        >   
-                            {showEnvWarning &&
-                            <FontAwesomeIcon title="You have a security issue" icon={faShieldAlt} className="text-red-500"/>}
+                        <a href="#top" className="min-w-0 inline-flex items-center justify-start gap-2">
+                            {showEnvWarning && (
+                                <FontAwesomeIcon
+                                    title="You have a security issue"
+                                    icon={faShieldAlt}
+                                    className="text-red-500"
+                                />
+                            )}
                             <div className="font-semibold min-w-0 truncate hover:text-red-500">
-                                    {errorOccurrence.exception_message}
+                                {errorOccurrence.exception_message}
                             </div>
                         </a>
                     </div>

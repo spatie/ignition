@@ -52,27 +52,27 @@ export type IgnitionErrorOccurrence = {
         headers: Record<string, string>;
         cookies: Record<string, string>;
         session: Record<string, string>;
-        route: {
+        route?: {
             route: string | null;
             routeParameters: Record<string, any>;
             controllerAction: string;
             middleware: Array<string>;
         } | null;
-        user: Record<string, any> | null;
-        env: {
+        user?: Record<string, any> | null;
+        env?: {
             laravel_version: string;
             laravel_locale: string;
             laravel_config_cached: boolean;
             php_version: string;
         };
-        logs: Array<{ message: string; level: string; context: any; microtime: number }>;
-        dumps: Array<{
+        logs?: Array<{ message: string; level: string; context: any; microtime: number }>;
+        dumps?: Array<{
             html_dump: string;
             file: string;
             line_number: number;
             microtime: number;
         }>;
-        queries: Array<{
+        queries?: Array<{
             sql: string;
             time: number;
             connection_name: string;

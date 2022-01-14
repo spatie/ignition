@@ -51,28 +51,34 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
                     value: report.context.request_data.files,
                 },
             ],
-            queries: report.context?.queries?.map((query, i) => ({
-                group: 'queries',
-                name: String(i),
-                value: {
-                    ...query,
-                    replace_bindings: true,
-                    bindings: query.bindings.map((binding) => ({
-                        type: typeof binding,
-                        value: binding,
-                    })),
-                },
-            })),
-            dumps: report.context?.dumps?.map((value, i) => ({
-                group: 'dumps',
-                name: String(i),
-                value,
-            })),
-            logs: report.context?.logs?.map((value, i) => ({
-                group: 'logs',
-                name: String(i),
-                value,
-            })),
+            queries: report.context.queries
+                ? report.context?.queries?.map((query, i) => ({
+                      group: 'queries',
+                      name: String(i),
+                      value: {
+                          ...query,
+                          replace_bindings: true,
+                          bindings: query.bindings.map((binding) => ({
+                              type: typeof binding,
+                              value: binding,
+                          })),
+                      },
+                  }))
+                : null,
+            dumps: report.context.dumps
+                ? report.context?.dumps?.map((value, i) => ({
+                      group: 'dumps',
+                      name: String(i),
+                      value,
+                  }))
+                : null,
+            logs: report.context.logs
+                ? report.context?.logs?.map((value, i) => ({
+                      group: 'logs',
+                      name: String(i),
+                      value,
+                  }))
+                : null,
             headers: Object.entries(report.context.headers || {}).map(([name, [value]]) => ({
                 group: 'headers',
                 name,
