@@ -5,8 +5,10 @@ import SettingsDropdown from 'components/SettingsDropdown';
 import { ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBug, faShare, faCog, faAlignLeft, faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faBug, faShare, faCog, faAlignLeft, faExpand, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLaravel } from '@fortawesome/free-brands-svg-icons';
+import mapValues from 'lodash/mapValues';
+import keyBy from 'lodash/keyBy';
 
 type Props = { showException: boolean };
 
@@ -39,6 +41,10 @@ export default function NavBar({ showException }: Props) {
 
     useClickOutsideListener(shareRef, () => setIsShareDropdownOpen(false));
     useClickOutsideListener(settingsRef, () => setIsSettingsDropdownOpen(false));
+
+    const env = mapValues(keyBy(errorOccurrence.context_items['env'] || [], 'name'), 'value');
+
+    const showEnvWarning =  env.app_env !== 'local' && env.app_debug;
 
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
@@ -98,17 +104,16 @@ export default function NavBar({ showException }: Props) {
                         duration-300
                     `}
                 >
-                    <div
-                        className="
-                        px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]
-                        h-10 flex items-center justify-start
-                        border-t ~border-gray-200"
-                    >
-                        <div className="font-semibold min-w-0 truncate">
-                            <a href="#top" className="hover:text-red-500">
-                                {errorOccurrence.exception_message}
-                            </a>
-                        </div>
+                    <div className="flex items-center px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem] h-10 border-t ~border-gray-200">
+                        <a href="#top"
+                            className="min-w-0 inline-flex items-center justify-start gap-2"
+                        >   
+                            {showEnvWarning &&
+                            <FontAwesomeIcon title="You have a security issue" icon={faShieldAlt} className="text-red-500"/>}
+                            <div className="font-semibold min-w-0 truncate hover:text-red-500">
+                                    {errorOccurrence.exception_message}
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

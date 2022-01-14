@@ -12429,9 +12429,7 @@ if(Array.isArray(merged)&&isObject$2(merged[0])){return merged.concat(value1);}/
 if(Array.isArray(value1)&&isObject$2(value1[0])&&isObject$2(merged)){return [merged].concat(value1);}// Override arrays (for example for font-families, box-shadows, ...)
 if(Array.isArray(value1)){return value1;}// Execute default behaviour
 return undefined;}function mergeExtensions(_ref){var extend=_ref.extend,theme=_objectWithoutPropertiesLoose$3(_ref,_excluded$5);return mergeWith(theme,extend,function(themeValue,extensions){// The `extend` property is an array, so we need to check if it contains any functions
-if(!isFunction$2(themeValue)&&!extensions.some(isFunction$2)){return mergeWith.apply(void 0,[{},themeValue].concat(extensions,[mergeExtensionCustomizer]));}return function(resolveThemePath,utils){return mergeWith.apply(void 0,[{}].concat([themeValue].concat(extensions).map(function(e){return value(e,resolveThemePath,utils);}),[mergeExtensionCustomizer]));};});}function resolveFunctionKeys(object){var resolvePath=function resolvePath(key,defaultValue){var path=toPath_1.toPath(key);var index=0;var val=object;while(val!==undefined&&val!==null&&index<path.length){val=val[path[index++]];val=isFunction$2(val)?val(resolvePath,configUtils):val;}if(val===undefined){return defaultValue;}if(_isPlainObject["default"](val)){return cloneDeep_1.cloneDeep(val);}return val;};resolvePath.theme=resolvePath;for(var key1 in configUtils){resolvePath[key1]=configUtils[key1];}return Object.keys(object).reduce(function(resolved,key){var _extends3;return _extends({},resolved,(_extends3={},_extends3[key]=isFunction$2(object[key])?object[key](resolvePath,configUtils):object[key],_extends3));},{});}function extractPluginConfigs(configs){var allConfigs=[];configs.forEach(function(config){allConfigs=[].concat(allConfigs,[config]);var ref1;var plugins=(ref1=config===null||config===void 0?void 0:config.plugins)!==null&&ref1!==void 0?ref1:[];if(plugins.length===0){return;}plugins.forEach(function(plugin){if(plugin.__isOptionsFunction){plugin=plugin();}var ref;allConfigs=[].concat(allConfigs,extractPluginConfigs([(ref=plugin===null||plugin===void 0?void 0:plugin.config)!==null&&ref!==void 0?ref:{}]));});});return allConfigs;}function resolveCorePlugins(corePluginConfigs){var result=[].concat(corePluginConfigs).reduceRight(function(resolved,corePluginConfig){if(isFunction$2(corePluginConfig)){return corePluginConfig({corePlugins:resolved});}return _configurePlugins["default"](corePluginConfig,resolved);},_corePluginList["default"]);return result;}function resolvePluginLists(pluginLists){var result=[].concat(pluginLists).reduceRight(function(resolved,pluginList){return [].concat(resolved,pluginList);},[]);return result;}function resolveConfig$1(configs){var allConfigs=[].concat(extractPluginConfigs(configs),[{prefix:'',important:false,separator:':',variantOrder:_defaultConfigStub["default"].variantOrder}]);var ref,ref2;return normalizeConfig_1.normalizeConfig(defaults_1.defaults.apply(defaults_1,[{theme:resolveFunctionKeys(mergeExtensions(mergeThemes(allConfigs.map(function(t){return (ref=t===null||t===void 0?void 0:t.theme)!==null&&ref!==void 0?ref:{};})))),corePlugins:resolveCorePlugins(allConfigs.map(function(c){return c.corePlugins;})),plugins:resolvePluginLists(configs.map(function(c){return (ref2=c===null||c===void 0?void 0:c.plugins)!==null&&ref2!==void 0?ref2:[];}))}].concat(allConfigs)));}var resolveConfig_1$2=/*#__PURE__*/Object.defineProperty({"default":_default$2},'__esModule',{value:true});var featureFlags_1=createCommonjsModule(function(module,exports){Object.defineProperty(exports,"__esModule",{value:true});exports.flagEnabled=flagEnabled;exports.issueFlagNotices=issueFlagNotices;exports["default"]=void 0;var _chalk=_interopRequireDefault(source);var _log=_interopRequireDefault(log_1);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj};}var defaults={// TODO: Drop this once we can safely rely on optimizeUniversalDefaults being
-// the default.
-optimizeUniversalDefaults:false};var featureFlags={future:[],experimental:['optimizeUniversalDefaults']};function flagEnabled(config,flag){if(featureFlags.future.includes(flag)){var ref;var ref1,ref2;return config.future==='all'||((ref2=(ref1=config===null||config===void 0?void 0:(ref=config.future)===null||ref===void 0?void 0:ref[flag])!==null&&ref1!==void 0?ref1:defaults[flag])!==null&&ref2!==void 0?ref2:false);}if(featureFlags.experimental.includes(flag)){var ref3;var ref4,ref5;return config.experimental==='all'||((ref5=(ref4=config===null||config===void 0?void 0:(ref3=config.experimental)===null||ref3===void 0?void 0:ref3[flag])!==null&&ref4!==void 0?ref4:defaults[flag])!==null&&ref5!==void 0?ref5:false);}return false;}function experimentalFlagsEnabled(config){if(config.experimental==='all'){return featureFlags.experimental;}var ref;return Object.keys((ref=config===null||config===void 0?void 0:config.experimental)!==null&&ref!==void 0?ref:{}).filter(function(flag){return featureFlags.experimental.includes(flag)&&config.experimental[flag];});}function issueFlagNotices(config){if(process.env.JEST_WORKER_ID!==undefined){return;}if(experimentalFlagsEnabled(config).length>0){var changes=experimentalFlagsEnabled(config).map(function(s){return _chalk["default"].yellow(s);}).join(', ');_log["default"].warn('experimental-flags-enabled',["You have enabled experimental features: "+changes,'Experimental features in Tailwind CSS are not covered by semver, may introduce breaking changes, and can change at any time.']);}}var _default=featureFlags;exports["default"]=_default;});var _default$1=getAllConfigs;var _defaultConfigStubJs=_interopRequireDefault$1(defaultConfig_stub);function _interopRequireDefault$1(obj){return obj&&obj.__esModule?obj:{"default":obj};}function getAllConfigs(config){var ref;var configs=((ref=config===null||config===void 0?void 0:config.presets)!==null&&ref!==void 0?ref:[_defaultConfigStubJs["default"]]).slice().reverse().flatMap(function(preset){return getAllConfigs(preset instanceof Function?preset():preset);});var features={};var experimentals=Object.keys(features).filter(function(feature){return featureFlags_1.flagEnabled(config,feature);}).map(function(feature){return features[feature];});return [config].concat(experimentals,configs);}var getAllConfigs_1=/*#__PURE__*/Object.defineProperty({"default":_default$1},'__esModule',{value:true});var _default$8=resolveConfig;var _resolveConfig=_interopRequireDefault(resolveConfig_1$2);var _getAllConfigs=_interopRequireDefault(getAllConfigs_1);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj};}function resolveConfig(){var configs=[].slice.call(arguments);var _getAllConfigs$defaul=_getAllConfigs["default"](configs[0]),defaultConfigs=_getAllConfigs$defaul.slice(1);return _resolveConfig["default"]([].concat(configs,defaultConfigs));}var resolveConfig_1$1=/*#__PURE__*/Object.defineProperty({"default":_default$8},'__esModule',{value:true});var resolveConfig_1=(resolveConfig_1$1.__esModule?resolveConfig_1$1:{"default":resolveConfig_1$1})["default"];var defaultConfig=createCommonjsModule(function(module,exports){Object.defineProperty(exports,"__esModule",{value:true});exports["default"]=void 0;var _defaultConfigStub=_interopRequireDefault(defaultConfig_stub);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj};}var _default=cloneDeep_1.cloneDeep(_defaultConfigStub["default"]);exports["default"]=_default;});var defaultConfig_1=(defaultConfig.__esModule?defaultConfig:{"default":defaultConfig})["default"];var _resolveConfig_=resolveConfig_1(defaultConfig_1),colors$1=_resolveConfig_.theme.colors;var light={hljs:{},'hljs-subst':{color:colors$1.gray['800']},'hljs-comment':{color:colors$1.gray['500']},'hljs-keyword':{fontWeight:'bold',color:colors$1.indigo['600']},'hljs-attribute':{fontWeight:'bold',color:colors$1.red['500']},'hljs-selector-tag':{fontWeight:'bold'},'hljs-meta-keyword':{fontWeight:'bold',color:colors$1.indigo['600']},'hljs-doctag':{fontWeight:'bold'},'hljs-name':{fontWeight:'bold'},'hljs-type':{color:colors$1.emerald['800']},'hljs-string':{color:colors$1.red['700']},'hljs-number':{color:colors$1.emerald['800']},'hljs-selector-id':{color:colors$1.red['700']},'hljs-selector-class':{color:colors$1.red['700']},'hljs-quote':{color:colors$1.emerald['800']},'hljs-template-tag':{color:colors$1.emerald['800']},'hljs-deletion':{color:colors$1.emerald['800']},'hljs-title':{color:colors$1.emerald['800'],fontWeight:'bold'},'hljs-section':{color:colors$1.emerald['800'],fontWeight:'bold'},'hljs-regexp':{color:colors$1.emerald['600']},'hljs-symbol':{color:colors$1.gray['800']},'hljs-variable':{color:colors$1.emerald['600']},'hljs-template-variable':{color:colors$1.emerald['600']},'hljs-link':{color:colors$1.emerald['600']},'hljs-selector-attr':{color:colors$1.emerald['600']},'hljs-selector-pseudo':{color:colors$1.emerald['600']},'hljs-literal':{color:colors$1.violet['700']},'hljs-built_in':{color:colors$1.indigo['400']},'hljs-bullet':{color:colors$1.indigo['400']},'hljs-code':{color:colors$1.indigo['400']},'hljs-addition':{color:colors$1.indigo['400']},'hljs-meta':{color:colors$1.blue['600']},'hljs-meta-string':{color:colors$1.blue['400']},'hljs-emphasis':{fontStyle:'italic'},'hljs-strong':{fontWeight:'bold'}};var _resolveConfig_2=resolveConfig_1(defaultConfig_1),colors=_resolveConfig_2.theme.colors;var dark={hljs:{},'hljs-subst':{color:colors.gray[100]},'hljs-comment':{color:colors.gray[500]},'hljs-keyword':{fontWeight:'bold',color:colors.blue[300]},'hljs-attribute':{fontWeight:'bold'},'hljs-selector-tag':{fontWeight:'bold'},'hljs-meta-keyword':{fontWeight:'bold',color:colors.blue[300]},'hljs-doctag':{fontWeight:'bold'},'hljs-name':{fontWeight:'bold'},'hljs-type':{color:colors.emerald[300]},'hljs-string':{color:colors.red[300]},'hljs-number':{color:colors.emerald[300]},'hljs-selector-id':{color:colors.yellow[200]},'hljs-selector-class':{color:colors.yellow[200]},'hljs-quote':{color:colors.emerald[300]},'hljs-template-tag':{color:colors.emerald[300]},'hljs-deletion':{color:colors.emerald[300]},'hljs-title':{color:colors.emerald[300],fontWeight:'bold'},'hljs-section':{color:colors.emerald[300],fontWeight:'bold'},'hljs-regexp':{color:colors.blue[200]},'hljs-symbol':{color:colors.blue[200]},'hljs-variable':{color:colors.blue[200]},'hljs-template-variable':{color:colors.blue[200]},'hljs-link':{color:colors.blue[200]},'hljs-selector-attr':{color:colors.blue[200]},'hljs-selector-pseudo':{color:colors.blue[200]},'hljs-literal':{color:colors.violet[400]},'hljs-built_in':{color:colors.blue[300]},'hljs-bullet':{color:colors.blue[300]},'hljs-code':{color:colors.blue[300]},'hljs-addition':{color:colors.blue[300]},'hljs-meta':{color:colors.blue[400]},'hljs-meta-string':{color:colors.blue[200]},'hljs-emphasis':{fontStyle:'italic'},'hljs-strong':{fontWeight:'bold'}};// export of the SyntaxHighlighter. Including all sub-languages used in e.g. Blade:
+if(!isFunction$2(themeValue)&&!extensions.some(isFunction$2)){return mergeWith.apply(void 0,[{},themeValue].concat(extensions,[mergeExtensionCustomizer]));}return function(resolveThemePath,utils){return mergeWith.apply(void 0,[{}].concat([themeValue].concat(extensions).map(function(e){return value(e,resolveThemePath,utils);}),[mergeExtensionCustomizer]));};});}function resolveFunctionKeys(object){var resolvePath=function resolvePath(key,defaultValue){var path=toPath_1.toPath(key);var index=0;var val=object;while(val!==undefined&&val!==null&&index<path.length){val=val[path[index++]];val=isFunction$2(val)?val(resolvePath,configUtils):val;}if(val===undefined){return defaultValue;}if(_isPlainObject["default"](val)){return cloneDeep_1.cloneDeep(val);}return val;};resolvePath.theme=resolvePath;for(var key1 in configUtils){resolvePath[key1]=configUtils[key1];}return Object.keys(object).reduce(function(resolved,key){var _extends3;return _extends({},resolved,(_extends3={},_extends3[key]=isFunction$2(object[key])?object[key](resolvePath,configUtils):object[key],_extends3));},{});}function extractPluginConfigs(configs){var allConfigs=[];configs.forEach(function(config){allConfigs=[].concat(allConfigs,[config]);var ref1;var plugins=(ref1=config===null||config===void 0?void 0:config.plugins)!==null&&ref1!==void 0?ref1:[];if(plugins.length===0){return;}plugins.forEach(function(plugin){if(plugin.__isOptionsFunction){plugin=plugin();}var ref;allConfigs=[].concat(allConfigs,extractPluginConfigs([(ref=plugin===null||plugin===void 0?void 0:plugin.config)!==null&&ref!==void 0?ref:{}]));});});return allConfigs;}function resolveCorePlugins(corePluginConfigs){var result=[].concat(corePluginConfigs).reduceRight(function(resolved,corePluginConfig){if(isFunction$2(corePluginConfig)){return corePluginConfig({corePlugins:resolved});}return _configurePlugins["default"](corePluginConfig,resolved);},_corePluginList["default"]);return result;}function resolvePluginLists(pluginLists){var result=[].concat(pluginLists).reduceRight(function(resolved,pluginList){return [].concat(resolved,pluginList);},[]);return result;}function resolveConfig$1(configs){var allConfigs=[].concat(extractPluginConfigs(configs),[{prefix:'',important:false,separator:':',variantOrder:_defaultConfigStub["default"].variantOrder}]);var ref,ref2;return normalizeConfig_1.normalizeConfig(defaults_1.defaults.apply(defaults_1,[{theme:resolveFunctionKeys(mergeExtensions(mergeThemes(allConfigs.map(function(t){return (ref=t===null||t===void 0?void 0:t.theme)!==null&&ref!==void 0?ref:{};})))),corePlugins:resolveCorePlugins(allConfigs.map(function(c){return c.corePlugins;})),plugins:resolvePluginLists(configs.map(function(c){return (ref2=c===null||c===void 0?void 0:c.plugins)!==null&&ref2!==void 0?ref2:[];}))}].concat(allConfigs)));}var resolveConfig_1$2=/*#__PURE__*/Object.defineProperty({"default":_default$2},'__esModule',{value:true});var featureFlags_1=createCommonjsModule(function(module,exports){Object.defineProperty(exports,"__esModule",{value:true});exports.flagEnabled=flagEnabled;exports.issueFlagNotices=issueFlagNotices;exports["default"]=void 0;var _chalk=_interopRequireDefault(source);var _log=_interopRequireDefault(log_1);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj};}var defaults={optimizeUniversalDefaults:false};var featureFlags={future:[],experimental:['optimizeUniversalDefaults']};function flagEnabled(config,flag){if(featureFlags.future.includes(flag)){var ref;var ref1,ref2;return config.future==='all'||((ref2=(ref1=config===null||config===void 0?void 0:(ref=config.future)===null||ref===void 0?void 0:ref[flag])!==null&&ref1!==void 0?ref1:defaults[flag])!==null&&ref2!==void 0?ref2:false);}if(featureFlags.experimental.includes(flag)){var ref3;var ref4,ref5;return config.experimental==='all'||((ref5=(ref4=config===null||config===void 0?void 0:(ref3=config.experimental)===null||ref3===void 0?void 0:ref3[flag])!==null&&ref4!==void 0?ref4:defaults[flag])!==null&&ref5!==void 0?ref5:false);}return false;}function experimentalFlagsEnabled(config){if(config.experimental==='all'){return featureFlags.experimental;}var ref;return Object.keys((ref=config===null||config===void 0?void 0:config.experimental)!==null&&ref!==void 0?ref:{}).filter(function(flag){return featureFlags.experimental.includes(flag)&&config.experimental[flag];});}function issueFlagNotices(config){if(process.env.JEST_WORKER_ID!==undefined){return;}if(experimentalFlagsEnabled(config).length>0){var changes=experimentalFlagsEnabled(config).map(function(s){return _chalk["default"].yellow(s);}).join(', ');_log["default"].warn('experimental-flags-enabled',["You have enabled experimental features: "+changes,'Experimental features in Tailwind CSS are not covered by semver, may introduce breaking changes, and can change at any time.']);}}var _default=featureFlags;exports["default"]=_default;});var _default$1=getAllConfigs;var _defaultConfigStubJs=_interopRequireDefault$1(defaultConfig_stub);function _interopRequireDefault$1(obj){return obj&&obj.__esModule?obj:{"default":obj};}function getAllConfigs(config){var ref;var configs=((ref=config===null||config===void 0?void 0:config.presets)!==null&&ref!==void 0?ref:[_defaultConfigStubJs["default"]]).slice().reverse().flatMap(function(preset){return getAllConfigs(preset instanceof Function?preset():preset);});var features={};var experimentals=Object.keys(features).filter(function(feature){return featureFlags_1.flagEnabled(config,feature);}).map(function(feature){return features[feature];});return [config].concat(experimentals,configs);}var getAllConfigs_1=/*#__PURE__*/Object.defineProperty({"default":_default$1},'__esModule',{value:true});var _default$8=resolveConfig;var _resolveConfig=_interopRequireDefault(resolveConfig_1$2);var _getAllConfigs=_interopRequireDefault(getAllConfigs_1);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj};}function resolveConfig(){var configs=[].slice.call(arguments);var _getAllConfigs$defaul=_getAllConfigs["default"](configs[0]),defaultConfigs=_getAllConfigs$defaul.slice(1);return _resolveConfig["default"]([].concat(configs,defaultConfigs));}var resolveConfig_1$1=/*#__PURE__*/Object.defineProperty({"default":_default$8},'__esModule',{value:true});var resolveConfig_1=(resolveConfig_1$1.__esModule?resolveConfig_1$1:{"default":resolveConfig_1$1})["default"];var defaultConfig=createCommonjsModule(function(module,exports){Object.defineProperty(exports,"__esModule",{value:true});exports["default"]=void 0;var _defaultConfigStub=_interopRequireDefault(defaultConfig_stub);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{"default":obj};}var _default=cloneDeep_1.cloneDeep(_defaultConfigStub["default"]);exports["default"]=_default;});var defaultConfig_1=(defaultConfig.__esModule?defaultConfig:{"default":defaultConfig})["default"];var _resolveConfig_=resolveConfig_1(defaultConfig_1),colors$1=_resolveConfig_.theme.colors;var light={hljs:{},'hljs-subst':{color:colors$1.gray['800']},'hljs-comment':{color:colors$1.gray['500']},'hljs-keyword':{fontWeight:'bold',color:colors$1.indigo['600']},'hljs-attribute':{fontWeight:'bold',color:colors$1.red['500']},'hljs-selector-tag':{fontWeight:'bold'},'hljs-meta-keyword':{fontWeight:'bold',color:colors$1.indigo['600']},'hljs-doctag':{fontWeight:'bold'},'hljs-name':{fontWeight:'bold'},'hljs-type':{color:colors$1.emerald['800']},'hljs-string':{color:colors$1.red['700']},'hljs-number':{color:colors$1.emerald['800']},'hljs-selector-id':{color:colors$1.red['700']},'hljs-selector-class':{color:colors$1.red['700']},'hljs-quote':{color:colors$1.emerald['800']},'hljs-template-tag':{color:colors$1.emerald['800']},'hljs-deletion':{color:colors$1.emerald['800']},'hljs-title':{color:colors$1.emerald['800'],fontWeight:'bold'},'hljs-section':{color:colors$1.emerald['800'],fontWeight:'bold'},'hljs-regexp':{color:colors$1.emerald['600']},'hljs-symbol':{color:colors$1.gray['800']},'hljs-variable':{color:colors$1.emerald['600']},'hljs-template-variable':{color:colors$1.emerald['600']},'hljs-link':{color:colors$1.emerald['600']},'hljs-selector-attr':{color:colors$1.emerald['600']},'hljs-selector-pseudo':{color:colors$1.emerald['600']},'hljs-literal':{color:colors$1.violet['700']},'hljs-built_in':{color:colors$1.indigo['400']},'hljs-bullet':{color:colors$1.indigo['400']},'hljs-code':{color:colors$1.indigo['400']},'hljs-addition':{color:colors$1.indigo['400']},'hljs-meta':{color:colors$1.blue['600']},'hljs-meta-string':{color:colors$1.blue['400']},'hljs-emphasis':{fontStyle:'italic'},'hljs-strong':{fontWeight:'bold'}};var _resolveConfig_2=resolveConfig_1(defaultConfig_1),colors=_resolveConfig_2.theme.colors;var dark={hljs:{},'hljs-subst':{color:colors.gray[100]},'hljs-comment':{color:colors.gray[500]},'hljs-keyword':{fontWeight:'bold',color:colors.blue[300]},'hljs-attribute':{fontWeight:'bold'},'hljs-selector-tag':{fontWeight:'bold'},'hljs-meta-keyword':{fontWeight:'bold',color:colors.blue[300]},'hljs-doctag':{fontWeight:'bold'},'hljs-name':{fontWeight:'bold'},'hljs-type':{color:colors.emerald[300]},'hljs-string':{color:colors.red[300]},'hljs-number':{color:colors.emerald[300]},'hljs-selector-id':{color:colors.yellow[200]},'hljs-selector-class':{color:colors.yellow[200]},'hljs-quote':{color:colors.emerald[300]},'hljs-template-tag':{color:colors.emerald[300]},'hljs-deletion':{color:colors.emerald[300]},'hljs-title':{color:colors.emerald[300],fontWeight:'bold'},'hljs-section':{color:colors.emerald[300],fontWeight:'bold'},'hljs-regexp':{color:colors.blue[200]},'hljs-symbol':{color:colors.blue[200]},'hljs-variable':{color:colors.blue[200]},'hljs-template-variable':{color:colors.blue[200]},'hljs-link':{color:colors.blue[200]},'hljs-selector-attr':{color:colors.blue[200]},'hljs-selector-pseudo':{color:colors.blue[200]},'hljs-literal':{color:colors.violet[400]},'hljs-built_in':{color:colors.blue[300]},'hljs-bullet':{color:colors.blue[300]},'hljs-code':{color:colors.blue[300]},'hljs-addition':{color:colors.blue[300]},'hljs-meta':{color:colors.blue[400]},'hljs-meta-string':{color:colors.blue[200]},'hljs-emphasis':{fontStyle:'italic'},'hljs-strong':{fontWeight:'bold'}};// export of the SyntaxHighlighter. Including all sub-languages used in e.g. Blade:
 SyntaxHighlighter$1.registerLanguage('php',php$1);SyntaxHighlighter$1.registerLanguage('php-template',phpTemplate$1);SyntaxHighlighter$1.registerLanguage('blade',blade);SyntaxHighlighter$1.registerLanguage('xml',xml$1);SyntaxHighlighter$1.registerLanguage('css',css$1$1);SyntaxHighlighter$1.registerLanguage('javascript',javascript$1);SyntaxHighlighter$1.registerLanguage('handlebars',handlebars$1);function getLanguage(filename){if(filename.endsWith('.blade.php')){return 'blade';}if(filename.match(/^resources\/views\//)){return 'php-template';}return 'php';}function FrameCodeSnippet(_ref69){var frame=_ref69.frame;var _useContext2=react.useContext(IgnitionConfigContext),theme=_useContext2.theme;var code=Object.values(frame.code_snippet).join('\n');var lineNumbers=Object.keys(frame.code_snippet).map(function(n){return Number(n);});var highlightedIndex=lineNumbers.indexOf(frame.line_number);var codeRenderer=react.useMemo(function(){return function(_ref70){var rows=_ref70.rows,stylesheet=_ref70.stylesheet,useInlineStyles=_ref70.useInlineStyles;return rows.map(function(row,index){return/*#__PURE__*/react.createElement(FrameCodeSnippetLine,{key:lineNumbers[index],frame:frame,highlight:index===highlightedIndex,row:row,stylesheet:stylesheet,useInlineStyles:useInlineStyles,lineNumber:lineNumbers[index]});});};},[frame]);return/*#__PURE__*/react.createElement("main",{className:"flex items-stretch flex-grow overflow-x-auto overflow-y-hidden scrollbar-hidden-x mask-fade-r text-sm"},/*#__PURE__*/react.createElement("nav",{className:"sticky left-0 flex flex-none z-20 ~bg-white"},/*#__PURE__*/react.createElement("div",{className:"select-none"},lineNumbers.map(function(number){return/*#__PURE__*/react.createElement("p",{key:number,className:"\n                                px-2 font-mono leading-loose select-none cursor-pointer\n                                "+(Number(number)===frame.line_number?' text-opacity-75 ~text-red-700 ~bg-red-500/30':'')+"\n                            "},/*#__PURE__*/react.createElement("span",{className:"~text-gray-500"},number));}))),/*#__PURE__*/react.createElement("div",{className:"flex-grow pr-10"},/*#__PURE__*/react.createElement(SyntaxHighlighter$1,{style:theme==='light'?light:dark,language:getLanguage(frame.relative_file),renderer:codeRenderer},code)));}function useKeyboardShortcut(key,callback){react.useEffect(function(){function handleKeyPressed(e){if(document.activeElement){if(document.activeElement.tagName==='INPUT'){return;}}if(e.key===key){callback(e);}}window.addEventListener('keyup',handleKeyPressed);return function(){window.removeEventListener('keyup',handleKeyPressed);};},[key,callback]);}function addFrameNumbers(frames){return frames.map(function(frame,i){return _extends({},frame,{frame_number:frames.length-i});});}function getFrameType(frame){if(frame.relative_file.startsWith('vendor/')){return 'vendor';}if(frame.relative_file==='unknown'){return 'unknown';}return 'application';}/**
  * The base implementation of `_.findIndex` and `_.findLastIndex` without
  * support for iteratee shorthands.
@@ -12630,7 +12628,7 @@ context.previous.frames.push(_extends({},context.current,{selected:false,frame_n
  * // The `_.property` iteratee shorthand.
  * _.findIndex(users, 'active');
  * // => 2
- */function findIndex(array,predicate,fromIndex){var length=array==null?0:array.length;if(!length){return -1;}var index=fromIndex==null?0:toInteger_1(fromIndex);if(index<0){index=nativeMax(length+index,0);}return _baseFindIndex(array,_baseIteratee$1(predicate),index);}var findIndex_1=findIndex;var _excluded$4=["children","className"];function SmallButton(_ref){var children=_ref.children,_ref$className=_ref.className,className=_ref$className===void 0?'':_ref$className,props=_objectWithoutPropertiesLoose$3(_ref,_excluded$4);return/*#__PURE__*/react.createElement("button",_extends({type:props.type||'button',className:"group inline-flex gap-2 items-center h-6 px-2 rounded-sm ~bg-white shadow text-xs font-medium whitespace-nowrap\n            transform\n            transition-animation\n            hover:shadow-md\n            active:shadow-inner\n            active:translate-y-px\n                "+className+"\n            "},props),children);}function StackTrace(_ref76){var openFrameIndex=_ref76.openFrameIndex;var _useContext4=react.useContext(ErrorOccurrenceContext),frames=_useContext4.frames;var initialState=react.useMemo(function(){var selectedFrame=0;var firstAppFrameIndex=findIndex_1(frames,function(frame){return getFrameType(frame)==='application';});if(firstAppFrameIndex!==-1){selectedFrame=frames.length-firstAppFrameIndex;}if(openFrameIndex){selectedFrame=frames.length-openFrameIndex;}return stackReducer({frames:frames,expanded:[],selected:selectedFrame},{type:'COLLAPSE_ALL_VENDOR_FRAMES'});},[frames]);var _useReducer=react.useReducer(stackReducer,initialState),state=_useReducer[0],dispatch=_useReducer[1];var vendorFramesExpanded=react.useMemo(function(){return allVendorFramesAreExpanded(state);},[state]);var frameGroups=react.useMemo(function(){return getFrameGroups(state);},[state]);var selectedFrame=react.useMemo(function(){return getSelectedFrame(state);},[state]);useKeyboardShortcut('j',function(){dispatch({type:'SELECT_NEXT_FRAME'});});useKeyboardShortcut('k',function(){dispatch({type:'SELECT_PREVIOUS_FRAME'});});var _useState3=react.useState(null),selectedRange=_useState3[0],setSelectedRange=_useState3[1];react.useLayoutEffect(function(){var framePattern=/F([0-9]+)?/gm;var linePattern=/L([0-9]+)(-([0-9]+))?/gm;var frameMatches=framePattern.exec(window.location.hash);var lineMatches=linePattern.exec(window.location.hash);if(frameMatches){var frameNumber=parseInt(frameMatches[1]);dispatch({type:'SELECT_FRAME',frame:frameNumber});}if(lineMatches){var minLineNumber=parseInt(lineMatches[1]);var maxLineNumber=lineMatches[3]?parseInt(lineMatches[3]):minLineNumber;setSelectedRange([minLineNumber,maxLineNumber]);}},[]);react.useEffect(function(){var lineNumber=selectedRange?selectedRange[0]===selectedRange[1]?selectedRange[0]:selectedRange[0]+"-"+selectedRange[1]:null;window.history.replaceState(window.history.state,'',"#F"+state.selected+(lineNumber?'L'+lineNumber:''));},[state.selected,selectedRange]);return/*#__PURE__*/react.createElement("div",{className:"grid grid-cols-1 lg:grid-cols-[33.33%,66.66%] lg:grid-rows-[57rem,1fr] items-stretch shadow-lg ~bg-white overflow-hidden"},/*#__PURE__*/react.createElement("aside",{className:"z-30 flex flex-col border-r ~border-gray-200"},/*#__PURE__*/react.createElement("div",{className:"max-h-[33vh] lg:max-h-[none] lg:absolute inset-0 flex flex-col overflow-hidden ~bg-white"},/*#__PURE__*/react.createElement("header",{className:"flex-none px-6 sm:px-10 h-16 flex items-center justify-start ~bg-white border-b ~border-gray-200"},/*#__PURE__*/react.createElement(SmallButton,{onClick:function onClick(){return dispatch({type:vendorFramesExpanded?'COLLAPSE_ALL_VENDOR_FRAMES':'EXPAND_ALL_VENDOR_FRAMES'});}},/*#__PURE__*/react.createElement("div",{className:"flex "+(vendorFramesExpanded?'flex-col-reverse':'flex-col')},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faAngleUp,className:"-my-px text-[8px] ~text-gray-500 group-hover:text-indigo-500"}),/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faAngleDown$1,className:"-my-px text-[8px] ~text-gray-500 group-hover:text-indigo-500"})),vendorFramesExpanded?'Collapse vendor frames':' Expand vendor frames')),/*#__PURE__*/react.createElement("div",{id:"frames",className:"flex-grow overflow-auto scrollbar-hidden-y mask-fade-frames"},/*#__PURE__*/react.createElement("ol",{className:"text-sm pb-16"},frameGroups.map(function(frameGroup,i){return/*#__PURE__*/react.createElement(FrameGroup,{key:i,frameGroup:frameGroup,onExpand:function onExpand(){return dispatch({type:'EXPAND_FRAMES',frames:frameGroup.frames.map(function(frame){return frame.frame_number;})});},onSelect:function onSelect(frameNumber){dispatch({type:'SELECT_FRAME',frame:frameNumber});setSelectedRange(null);}});}))))),/*#__PURE__*/react.createElement("section",{className:"flex flex-col border-t lg:border-t-0 ~border-gray-200"},/*#__PURE__*/react.createElement("header",{className:"~text-gray-500 flex-none z-30 h-16 px-6 sm:px-10 flex items-center justify-end"},/*#__PURE__*/react.createElement(EditorLink,{path:selectedFrame==null?void 0:selectedFrame.relative_file,lineNumber:selectedFrame==null?void 0:selectedFrame.line_number,className:"flex items-center text-sm"})),/*#__PURE__*/react.createElement(FrameCodeSnippet,{frame:selectedFrame})));}function ExceptionMessage(_ref77){var message=_ref77.message,_ref77$className=_ref77.className,className=_ref77$className===void 0?'':_ref77$className;var _useState4=react.useState(false),fullException=_useState4[0],setFullException=_useState4[1];return/*#__PURE__*/react.createElement("div",{className:"\n                my-4 font-semibold leading-snug text-xl\n                "+className+"\n            ",onClick:function onClick(){return setFullException(!fullException);}},/*#__PURE__*/react.createElement("div",{className:fullException?'line-clamp-none':'line-clamp-2'},message));}/**
+ */function findIndex(array,predicate,fromIndex){var length=array==null?0:array.length;if(!length){return -1;}var index=fromIndex==null?0:toInteger_1(fromIndex);if(index<0){index=nativeMax(length+index,0);}return _baseFindIndex(array,_baseIteratee$1(predicate),index);}var findIndex_1=findIndex;var _excluded$4=["children","className"];function SmallButton(_ref){var children=_ref.children,_ref$className=_ref.className,className=_ref$className===void 0?'':_ref$className,props=_objectWithoutPropertiesLoose$3(_ref,_excluded$4);return/*#__PURE__*/react.createElement("button",_extends({type:props.type||'button',className:"group inline-flex gap-2 items-center h-6 px-2 rounded-sm ~bg-white shadow text-xs font-medium whitespace-nowrap\n            transform\n            transition-animation\n            hover:shadow-md\n            active:shadow-inner\n            active:translate-y-px\n                "+className+"\n            "},props),children);}function StackTrace(_ref76){var openFrameIndex=_ref76.openFrameIndex;var _useContext4=react.useContext(ErrorOccurrenceContext),frames=_useContext4.frames;var initialState=react.useMemo(function(){var selectedFrame=0;var firstAppFrameIndex=findIndex_1(frames,function(frame){return getFrameType(frame)==='application';});if(firstAppFrameIndex!==-1){selectedFrame=frames.length-firstAppFrameIndex;}if(openFrameIndex){selectedFrame=frames.length-openFrameIndex;}return stackReducer({frames:frames,expanded:[],selected:selectedFrame},{type:'COLLAPSE_ALL_VENDOR_FRAMES'});},[frames]);var _useReducer=react.useReducer(stackReducer,initialState),state=_useReducer[0],dispatch=_useReducer[1];var vendorFramesExpanded=react.useMemo(function(){return allVendorFramesAreExpanded(state);},[state]);var frameGroups=react.useMemo(function(){return getFrameGroups(state);},[state]);var selectedFrame=react.useMemo(function(){return getSelectedFrame(state);},[state]);useKeyboardShortcut('j',function(){dispatch({type:'SELECT_NEXT_FRAME'});});useKeyboardShortcut('k',function(){dispatch({type:'SELECT_PREVIOUS_FRAME'});});var _useState3=react.useState(null),selectedRange=_useState3[0],setSelectedRange=_useState3[1];react.useLayoutEffect(function(){var framePattern=/F([0-9]+)?/gm;var linePattern=/L([0-9]+)(-([0-9]+))?/gm;var frameMatches=framePattern.exec(window.location.hash);var lineMatches=linePattern.exec(window.location.hash);if(frameMatches){var frameNumber=parseInt(frameMatches[1]);dispatch({type:'SELECT_FRAME',frame:frameNumber});}if(lineMatches){var minLineNumber=parseInt(lineMatches[1]);var maxLineNumber=lineMatches[3]?parseInt(lineMatches[3]):minLineNumber;setSelectedRange([minLineNumber,maxLineNumber]);}},[]);react.useEffect(function(){var lineNumber=selectedRange?selectedRange[0]===selectedRange[1]?selectedRange[0]:selectedRange[0]+"-"+selectedRange[1]:null;window.history.replaceState(window.history.state,'',"#F"+state.selected+(lineNumber?'L'+lineNumber:''));},[state.selected,selectedRange]);return/*#__PURE__*/react.createElement("div",{className:"grid grid-cols-1 lg:grid-cols-[33.33%,66.66%] lg:grid-rows-[57rem] items-stretch shadow-lg ~bg-white overflow-hidden"},/*#__PURE__*/react.createElement("aside",{className:"z-30 flex flex-col border-r ~border-gray-200"},/*#__PURE__*/react.createElement("div",{className:"max-h-[33vh] lg:max-h-[none] lg:absolute inset-0 flex flex-col overflow-hidden ~bg-white"},/*#__PURE__*/react.createElement("header",{className:"flex-none px-6 sm:px-10 h-16 flex items-center justify-start ~bg-white border-b ~border-gray-200"},/*#__PURE__*/react.createElement(SmallButton,{onClick:function onClick(){return dispatch({type:vendorFramesExpanded?'COLLAPSE_ALL_VENDOR_FRAMES':'EXPAND_ALL_VENDOR_FRAMES'});}},/*#__PURE__*/react.createElement("div",{className:"flex "+(vendorFramesExpanded?'flex-col-reverse':'flex-col')},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faAngleUp,className:"-my-px text-[8px] ~text-gray-500 group-hover:text-indigo-500"}),/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faAngleDown$1,className:"-my-px text-[8px] ~text-gray-500 group-hover:text-indigo-500"})),vendorFramesExpanded?'Collapse vendor frames':' Expand vendor frames')),/*#__PURE__*/react.createElement("div",{id:"frames",className:"flex-grow overflow-auto scrollbar-hidden-y mask-fade-frames"},/*#__PURE__*/react.createElement("ol",{className:"text-sm pb-16"},frameGroups.map(function(frameGroup,i){return/*#__PURE__*/react.createElement(FrameGroup,{key:i,frameGroup:frameGroup,onExpand:function onExpand(){return dispatch({type:'EXPAND_FRAMES',frames:frameGroup.frames.map(function(frame){return frame.frame_number;})});},onSelect:function onSelect(frameNumber){dispatch({type:'SELECT_FRAME',frame:frameNumber});setSelectedRange(null);}});}))))),/*#__PURE__*/react.createElement("section",{className:"flex flex-col border-t lg:border-t-0 ~border-gray-200"},/*#__PURE__*/react.createElement("header",{className:"~text-gray-500 flex-none z-30 h-16 px-6 sm:px-10 flex items-center justify-end"},/*#__PURE__*/react.createElement(EditorLink,{path:selectedFrame==null?void 0:selectedFrame.relative_file,lineNumber:selectedFrame==null?void 0:selectedFrame.line_number,className:"flex items-center text-sm"})),/*#__PURE__*/react.createElement(FrameCodeSnippet,{frame:selectedFrame})));}function ExceptionMessage(_ref77){var message=_ref77.message,_ref77$className=_ref77.className,className=_ref77$className===void 0?'':_ref77$className;var _useState4=react.useState(false),fullException=_useState4[0],setFullException=_useState4[1];return/*#__PURE__*/react.createElement("div",{className:"\n                my-4 font-semibold leading-snug text-xl\n                "+className+"\n            ",onClick:function onClick(){return setFullException(!fullException);}},/*#__PURE__*/react.createElement("div",{className:fullException?'line-clamp-none':'line-clamp-2'},message));}/**
  * A specialized version of `baseAggregator` for arrays.
  *
  * @private
@@ -12871,7 +12869,7 @@ var reservedWords=['ABS','ALL','ALLOCATE','ALTER','AND','ANY','ARE','ARRAY','AS'
 });});}catch(e){Promise.reject(e);}})();}catch(error){setCanExecuteSolutions(false);}},[]);return/*#__PURE__*/react.createElement(react.Fragment,null,showSolutions?/*#__PURE__*/react.createElement("aside",{id:"solution",className:"flex flex-col lg:w-2/5 flex-none"},/*#__PURE__*/react.createElement("div",{className:"flex-grow px-6 sm:px-10 py-8 bg-emerald-300 text-gray-800"},/*#__PURE__*/react.createElement("button",{onClick:function onClick(){return setShowSolutions(false);},className:"absolute top-3 right-4 leading-none text-emerald-500 hover:text-emerald-700 text-sm"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faTimes})),solutions.map(function(solution,index){return/*#__PURE__*/react.createElement("div",{key:index},/*#__PURE__*/react.createElement(Solution,{solution:solution,canExecute:canExecuteSolutions,isOpen:index===0,isCollapsible:solutions.length>1}),index!==solutions.length-1&&/*#__PURE__*/react.createElement("hr",{className:"my-4 border-t border-gray-800/20"}));}))):/*#__PURE__*/react.createElement("button",{onClick:function onClick(){return setShowSolutions(true);},className:" absolute -top-3 -right-3 z-20 w-6 h-6 rounded-full flex items-center justify-center text-xs bg-emerald-500 text-white hover:shadow-lg shadow-md active:shadow-sm active:translate-y-px"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faLightbulb})));}/*!
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- */var faLaravel$1={prefix:'fab',iconName:'laravel',icon:[512,512,[],"f3bd","M504.4,115.83a5.72,5.72,0,0,0-.28-.68,8.52,8.52,0,0,0-.53-1.25,6,6,0,0,0-.54-.71,9.36,9.36,0,0,0-.72-.94c-.23-.22-.52-.4-.77-.6a8.84,8.84,0,0,0-.9-.68L404.4,55.55a8,8,0,0,0-8,0L300.12,111h0a8.07,8.07,0,0,0-.88.69,7.68,7.68,0,0,0-.78.6,8.23,8.23,0,0,0-.72.93c-.17.24-.39.45-.54.71a9.7,9.7,0,0,0-.52,1.25c-.08.23-.21.44-.28.68a8.08,8.08,0,0,0-.28,2.08V223.18l-80.22,46.19V63.44a7.8,7.8,0,0,0-.28-2.09c-.06-.24-.2-.45-.28-.68a8.35,8.35,0,0,0-.52-1.24c-.14-.26-.37-.47-.54-.72a9.36,9.36,0,0,0-.72-.94,9.46,9.46,0,0,0-.78-.6,9.8,9.8,0,0,0-.88-.68h0L115.61,1.07a8,8,0,0,0-8,0L11.34,56.49h0a6.52,6.52,0,0,0-.88.69,7.81,7.81,0,0,0-.79.6,8.15,8.15,0,0,0-.71.93c-.18.25-.4.46-.55.72a7.88,7.88,0,0,0-.51,1.24,6.46,6.46,0,0,0-.29.67,8.18,8.18,0,0,0-.28,2.1v329.7a8,8,0,0,0,4,6.95l192.5,110.84a8.83,8.83,0,0,0,1.33.54c.21.08.41.2.63.26a7.92,7.92,0,0,0,4.1,0c.2-.05.37-.16.55-.22a8.6,8.6,0,0,0,1.4-.58L404.4,400.09a8,8,0,0,0,4-6.95V287.88l92.24-53.11a8,8,0,0,0,4-7V117.92A8.63,8.63,0,0,0,504.4,115.83ZM111.6,17.28h0l80.19,46.15-80.2,46.18L31.41,63.44Zm88.25,60V278.6l-46.53,26.79-33.69,19.4V123.5l46.53-26.79Zm0,412.78L23.37,388.5V77.32L57.06,96.7l46.52,26.8V338.68a6.94,6.94,0,0,0,.12.9,8,8,0,0,0,.16,1.18h0a5.92,5.92,0,0,0,.38.9,6.38,6.38,0,0,0,.42,1v0a8.54,8.54,0,0,0,.6.78,7.62,7.62,0,0,0,.66.84l0,0c.23.22.52.38.77.58a8.93,8.93,0,0,0,.86.66l0,0,0,0,92.19,52.18Zm8-106.17-80.06-45.32,84.09-48.41,92.26-53.11,80.13,46.13-58.8,33.56Zm184.52,4.57L215.88,490.11V397.8L346.6,323.2l45.77-26.15Zm0-119.13L358.68,250l-46.53-26.79V131.79l33.69,19.4L392.37,178Zm8-105.28-80.2-46.17,80.2-46.16,80.18,46.15Zm8,105.28V178L455,151.19l33.68-19.4v91.39h0Z"]};function ExceptionSelector(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);{return/*#__PURE__*/react.createElement("span",{className:"py-1 px-4 items-center flex gap-3 rounded-sm ~bg-gray-500/5"},/*#__PURE__*/react.createElement(RelaxedFullyQualifiedClassName,{path:errorOccurrence.exception_class}));}}function ErrorCard(_ref87){var warning=_ref87.warning;var errorOccurrence=react.useContext(ErrorOccurrenceContext);var hasSolutions=errorOccurrence.solutions.length>0;return/*#__PURE__*/react.createElement("section",{className:"lg:flex items-stretch ~bg-white shadow-lg"},warning&&/*#__PURE__*/react.createElement("aside",{id:"warning",className:"lg:w-2/5 flex-none empty:hidden"},warning),/*#__PURE__*/react.createElement("main",{id:"exception",className:"z-10 flex-grow min-w-0"},/*#__PURE__*/react.createElement("div",{className:"overflow-hidden"},/*#__PURE__*/react.createElement("div",{className:"px-6 sm:px-10 py-8 overflow-x-auto"},/*#__PURE__*/react.createElement("header",{className:"flex items-center justify-between gap-2"},/*#__PURE__*/react.createElement(ExceptionSelector,null),/*#__PURE__*/react.createElement("div",{className:"grid grid-flow-col justify-end gap-4 text-sm ~text-gray-500"},/*#__PURE__*/react.createElement("span",null,/*#__PURE__*/react.createElement("span",{className:"tracking-wider"},"PHP"),"\xA0",errorOccurrence.language_version),/*#__PURE__*/react.createElement("span",{className:"inline-flex items-center gap-1"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faLaravel$1}),errorOccurrence.framework_version))),/*#__PURE__*/react.createElement(FormattedExceptionMessage,{exceptionClass:errorOccurrence.exception_class,message:errorOccurrence.exception_message})))),hasSolutions&&/*#__PURE__*/react.createElement(Solutions,null));}function ContextGroup(_ref88){var title=_ref88.title,children=_ref88.children,anchor=_ref88.anchor;return/*#__PURE__*/react.createElement("section",{className:"py-10 ~bg-white px-6 sm:px-10 min-w-0"},/*#__PURE__*/react.createElement("a",{id:"context-"+anchor,className:"scroll-target"}),/*#__PURE__*/react.createElement("h2",{className:"font-bold text-xs ~text-gray-500 uppercase tracking-wider"},title),/*#__PURE__*/react.createElement("div",{className:"mt-3 grid grid-cols-1 gap-10"},children));}var observerMap$1=new Map();var RootIds$1=new WeakMap();var rootId$1=0;var unsupportedValue$1=undefined;/**
+ */var faLaravel$1={prefix:'fab',iconName:'laravel',icon:[512,512,[],"f3bd","M504.4,115.83a5.72,5.72,0,0,0-.28-.68,8.52,8.52,0,0,0-.53-1.25,6,6,0,0,0-.54-.71,9.36,9.36,0,0,0-.72-.94c-.23-.22-.52-.4-.77-.6a8.84,8.84,0,0,0-.9-.68L404.4,55.55a8,8,0,0,0-8,0L300.12,111h0a8.07,8.07,0,0,0-.88.69,7.68,7.68,0,0,0-.78.6,8.23,8.23,0,0,0-.72.93c-.17.24-.39.45-.54.71a9.7,9.7,0,0,0-.52,1.25c-.08.23-.21.44-.28.68a8.08,8.08,0,0,0-.28,2.08V223.18l-80.22,46.19V63.44a7.8,7.8,0,0,0-.28-2.09c-.06-.24-.2-.45-.28-.68a8.35,8.35,0,0,0-.52-1.24c-.14-.26-.37-.47-.54-.72a9.36,9.36,0,0,0-.72-.94,9.46,9.46,0,0,0-.78-.6,9.8,9.8,0,0,0-.88-.68h0L115.61,1.07a8,8,0,0,0-8,0L11.34,56.49h0a6.52,6.52,0,0,0-.88.69,7.81,7.81,0,0,0-.79.6,8.15,8.15,0,0,0-.71.93c-.18.25-.4.46-.55.72a7.88,7.88,0,0,0-.51,1.24,6.46,6.46,0,0,0-.29.67,8.18,8.18,0,0,0-.28,2.1v329.7a8,8,0,0,0,4,6.95l192.5,110.84a8.83,8.83,0,0,0,1.33.54c.21.08.41.2.63.26a7.92,7.92,0,0,0,4.1,0c.2-.05.37-.16.55-.22a8.6,8.6,0,0,0,1.4-.58L404.4,400.09a8,8,0,0,0,4-6.95V287.88l92.24-53.11a8,8,0,0,0,4-7V117.92A8.63,8.63,0,0,0,504.4,115.83ZM111.6,17.28h0l80.19,46.15-80.2,46.18L31.41,63.44Zm88.25,60V278.6l-46.53,26.79-33.69,19.4V123.5l46.53-26.79Zm0,412.78L23.37,388.5V77.32L57.06,96.7l46.52,26.8V338.68a6.94,6.94,0,0,0,.12.9,8,8,0,0,0,.16,1.18h0a5.92,5.92,0,0,0,.38.9,6.38,6.38,0,0,0,.42,1v0a8.54,8.54,0,0,0,.6.78,7.62,7.62,0,0,0,.66.84l0,0c.23.22.52.38.77.58a8.93,8.93,0,0,0,.86.66l0,0,0,0,92.19,52.18Zm8-106.17-80.06-45.32,84.09-48.41,92.26-53.11,80.13,46.13-58.8,33.56Zm184.52,4.57L215.88,490.11V397.8L346.6,323.2l45.77-26.15Zm0-119.13L358.68,250l-46.53-26.79V131.79l33.69,19.4L392.37,178Zm8-105.28-80.2-46.17,80.2-46.16,80.18,46.15Zm8,105.28V178L455,151.19l33.68-19.4v91.39h0Z"]};function ExceptionSelector(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);{return/*#__PURE__*/react.createElement("span",{className:"py-1 px-4 items-center flex gap-3 rounded-sm ~bg-gray-500/5"},/*#__PURE__*/react.createElement(RelaxedFullyQualifiedClassName,{path:errorOccurrence.exception_class}));}}function ErrorCard(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var hasSolutions=errorOccurrence.solutions.length>0;return/*#__PURE__*/react.createElement("section",{className:"lg:flex items-stretch ~bg-white shadow-lg"},/*#__PURE__*/react.createElement("main",{id:"exception",className:"z-10 flex-grow min-w-0"},/*#__PURE__*/react.createElement("div",{className:"overflow-hidden"},/*#__PURE__*/react.createElement("div",{className:"px-6 sm:px-10 py-8 overflow-x-auto"},/*#__PURE__*/react.createElement("header",{className:"flex items-center justify-between gap-2"},/*#__PURE__*/react.createElement(ExceptionSelector,null),/*#__PURE__*/react.createElement("div",{className:"grid grid-flow-col justify-end gap-4 text-sm ~text-gray-500"},/*#__PURE__*/react.createElement("span",null,/*#__PURE__*/react.createElement("span",{className:"tracking-wider"},"PHP"),"\xA0",errorOccurrence.language_version),/*#__PURE__*/react.createElement("span",{className:"inline-flex items-center gap-1"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:faLaravel$1}),errorOccurrence.framework_version))),/*#__PURE__*/react.createElement(FormattedExceptionMessage,{exceptionClass:errorOccurrence.exception_class,message:errorOccurrence.exception_message})))),hasSolutions&&/*#__PURE__*/react.createElement(Solutions,null));}function ContextGroup(_ref87){var title=_ref87.title,children=_ref87.children,anchor=_ref87.anchor;return/*#__PURE__*/react.createElement("section",{className:"py-10 ~bg-white px-6 sm:px-10 min-w-0"},/*#__PURE__*/react.createElement("a",{id:"context-"+anchor,className:"scroll-target"}),/*#__PURE__*/react.createElement("h2",{className:"font-bold text-xs ~text-gray-500 uppercase tracking-wider"},title),/*#__PURE__*/react.createElement("div",{className:"mt-3 grid grid-cols-1 gap-10"},children));}var observerMap$1=new Map();var RootIds$1=new WeakMap();var rootId$1=0;var unsupportedValue$1=undefined;/**
  * Generate a unique ID for the root element
  * @param root
  */function getRootId$1(root){if(!root)return '0';if(RootIds$1.has(root))return RootIds$1.get(root);rootId$1+=1;RootIds$1.set(root,rootId$1.toString());return RootIds$1.get(root);}/**
@@ -12934,7 +12932,7 @@ delay:delay},fallbackInView);}},// We break the rule here, because we aren't inc
 Array.isArray(threshold)?threshold.toString():threshold,root,rootMargin,triggerOnce,skip,trackVisibility,fallbackInView,delay]);/* eslint-disable-next-line */react.useEffect(function(){if(!unobserve.current&&state.entry&&!triggerOnce&&!skip){// If we don't have a ref, then reset the state (unless the hook is set to only `triggerOnce` or `skip`)
 // This ensures we correctly reflect the current state - If you aren't observing anything, then nothing is inView
 setState({inView:!!initialInView});}});var result=[setRef,state.inView,state.entry];// Support object destructuring, by adding the specific values.
-result.ref=result[0];result.inView=result[1];result.entry=result[2];return result;}var InViewContext=react.createContext({inView:[],setInView:noop_1});function useSectionInView$1(sectionName){var _useContext6=react.useContext(InViewContext),setInView=_useContext6.setInView;var _useInView=useInView$1({rootMargin:'-45% 0px -45%'}),intersectionRef=_useInView.ref,isInView=_useInView.inView;react.useEffect(function(){if(isInView){setInView(function(inView){return [].concat(inView,[sectionName]);});}else {setInView(function(inView){return inView.filter(function(v){return v!==sectionName;});});}},[isInView]);return intersectionRef;}function ContextSection(_ref89){var icon=_ref89.icon,title=_ref89.title,children=_ref89.children,anchor=_ref89.anchor;var ref=useSectionInView$1(title);return/*#__PURE__*/react.createElement("div",{ref:ref},/*#__PURE__*/react.createElement("a",{id:"context-"+anchor,className:"scroll-target"}),/*#__PURE__*/react.createElement("h1",{className:"mb-2 flex items-center gap-2 font-semibold text-lg ~text-indigo-600"},title,/*#__PURE__*/react.createElement("span",{className:"opacity-50 ~text-indigo-600 text-sm"},icon)),children);}function Tag(_ref90){var children=_ref90.children,_ref90$className=_ref90.className,className=_ref90$className===void 0?'':_ref90$className,_ref90$color=_ref90.color,color=_ref90$color===void 0?'gray':_ref90$color;var tagColors={red:'~text-red-600 border-red-500/50',orange:'~text-orange-600 border-orange-500/50',green:'~text-emerald-600 border-emerald-500/50',blue:'~text-indigo-600 border-indigo-500/50',purple:'~text-violet-600 border-violet-600/50',gray:'~text-gray-500 border-gray-500/50'}[color];return/*#__PURE__*/react.createElement("div",{className:className+" "+tagColors+" px-1.5 py-0.5 rounded-sm bg-opacity-20 border text-xs font-medium uppercase tracking-wider"},children);}function Request(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var request=getContextValues(errorOccurrence,'request');var requestData=getContextValues(errorOccurrence,'request_data');var headers=getContextValues(errorOccurrence,'headers');var curl=react.useMemo(function(){return curlCommand(request,requestData,headers);},[request,requestData,headers]);return/*#__PURE__*/react.createElement("div",null,/*#__PURE__*/react.createElement("div",{className:"text-lg font-semibold flex items-center gap-2"},/*#__PURE__*/react.createElement("span",{className:"~text-indigo-600"},request.url),/*#__PURE__*/react.createElement(Tag,{color:request.method.toUpperCase()=='DELETE'?'red':'blue'},request.method.toUpperCase())),curl&&/*#__PURE__*/react.createElement("div",{className:"mt-2"},/*#__PURE__*/react.createElement(CodeSnippet,{value:curl})));}var _excluded$2=["children","className"];function DefinitionList(_ref){var children=_ref.children,_ref$className3=_ref.className,className=_ref$className3===void 0?'':_ref$className3,props=_objectWithoutPropertiesLoose$3(_ref,_excluded$2);if(!children){return null;}return/*#__PURE__*/react.createElement("dl",_extends({className:"grid grid-cols-1 gap-2 "+className},props),children);}DefinitionList.Row=DefinitionListRow;function DefinitionListRow(_ref91){var _ref91$value=_ref91.value,value=_ref91$value===void 0?'':_ref91$value,_ref91$label=_ref91.label,label=_ref91$label===void 0?'':_ref91$label,_ref91$className=_ref91.className,className=_ref91$className===void 0?'':_ref91$className,_ref91$stacked=_ref91.stacked,stacked=_ref91$stacked===void 0?false:_ref91$stacked;var valueOutput=value;var _useState15=react.useState(false),expandLabel=_useState15[0],setExpandLabel=_useState15[1];var timeout;function startExpandLabel(){timeout=setTimeout(function(){return setExpandLabel(true);},500);}function stopExpandLabel(){clearTimeout(timeout);setExpandLabel(false);}if(react.isValidElement(value)){valueOutput=value;}else if(typeof value==='boolean'){valueOutput=/*#__PURE__*/react.createElement("span",{className:(value?'text-green-500 bg-green-500/5':'text-red-500 bg-red-500/5')+" text-sm px-3 py-2 inline-flex gap-2 items-center justify-center"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{className:value+" ? 'text-emerald-500' : 'text-red-500",icon:value?faCheck:faTimes}),/*#__PURE__*/react.createElement("span",{className:"font-mono"},value?'true':'false'));}else if(typeof value==='object'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(value)});}else if(typeof value==='string'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:value});}else if(typeof value==='number'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:String(value)});}return/*#__PURE__*/react.createElement("div",{className:(stacked?'flex flex-col':'flex items-baseline gap-10')+"  "+className},/*#__PURE__*/react.createElement("dt",{className:"\n                "+(stacked?'self-start pt-2 pb-1.5 leading-tight':expandLabel?'flex-grow truncate min-w-[8rem] max-w-max':'flex-none truncate w-32')+"\n            ",onMouseOver:function onMouseOver(){startExpandLabel();},onMouseOut:function onMouseOut(){stopExpandLabel();}},label),/*#__PURE__*/react.createElement("dd",{className:"flex-grow min-w-0"},valueOutput));}function ContextList(_ref92){var items=_ref92.items;return/*#__PURE__*/react.createElement(DefinitionList,null,Object.entries(items||{}).map(function(_ref93){var key=_ref93[0],value=_ref93[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{key:key,label:key,value:value});}));}/**
+result.ref=result[0];result.inView=result[1];result.entry=result[2];return result;}var InViewContext=react.createContext({inView:[],setInView:noop_1});function useSectionInView$1(sectionName){var _useContext6=react.useContext(InViewContext),setInView=_useContext6.setInView;var _useInView=useInView$1({rootMargin:'-45% 0px -45%'}),intersectionRef=_useInView.ref,isInView=_useInView.inView;react.useEffect(function(){if(isInView){setInView(function(inView){return [].concat(inView,[sectionName]);});}else {setInView(function(inView){return inView.filter(function(v){return v!==sectionName;});});}},[isInView]);return intersectionRef;}function ContextSection(_ref88){var icon=_ref88.icon,title=_ref88.title,children=_ref88.children,anchor=_ref88.anchor;var ref=useSectionInView$1(title);return/*#__PURE__*/react.createElement("div",{ref:ref},/*#__PURE__*/react.createElement("a",{id:"context-"+anchor,className:"scroll-target"}),/*#__PURE__*/react.createElement("h1",{className:"mb-2 flex items-center gap-2 font-semibold text-lg ~text-indigo-600"},title,/*#__PURE__*/react.createElement("span",{className:"opacity-50 ~text-indigo-600 text-sm"},icon)),children);}function Tag(_ref89){var children=_ref89.children,_ref89$className=_ref89.className,className=_ref89$className===void 0?'':_ref89$className,_ref89$color=_ref89.color,color=_ref89$color===void 0?'gray':_ref89$color;var tagColors={red:'~text-red-600 border-red-500/50',orange:'~text-orange-600 border-orange-500/50',green:'~text-emerald-600 border-emerald-500/50',blue:'~text-indigo-600 border-indigo-500/50',purple:'~text-violet-600 border-violet-600/50',gray:'~text-gray-500 border-gray-500/50'}[color];return/*#__PURE__*/react.createElement("div",{className:className+" "+tagColors+" px-1.5 py-0.5 rounded-sm bg-opacity-20 border text-xs font-medium uppercase tracking-wider"},children);}function Request(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var request=getContextValues(errorOccurrence,'request');var requestData=getContextValues(errorOccurrence,'request_data');var headers=getContextValues(errorOccurrence,'headers');var curl=react.useMemo(function(){return curlCommand(request,requestData,headers);},[request,requestData,headers]);return/*#__PURE__*/react.createElement("div",null,/*#__PURE__*/react.createElement("div",{className:"text-lg font-semibold flex items-center gap-2"},/*#__PURE__*/react.createElement("span",{className:"~text-indigo-600"},request.url),/*#__PURE__*/react.createElement(Tag,{color:request.method.toUpperCase()=='DELETE'?'red':'blue'},request.method.toUpperCase())),curl&&/*#__PURE__*/react.createElement("div",{className:"mt-2"},/*#__PURE__*/react.createElement(CodeSnippet,{value:curl})));}var _excluded$2=["children","className"];function DefinitionList(_ref){var children=_ref.children,_ref$className3=_ref.className,className=_ref$className3===void 0?'':_ref$className3,props=_objectWithoutPropertiesLoose$3(_ref,_excluded$2);if(!children){return null;}return/*#__PURE__*/react.createElement("dl",_extends({className:"grid grid-cols-1 gap-2 "+className},props),children);}DefinitionList.Row=DefinitionListRow;function DefinitionListRow(_ref90){var _ref90$value=_ref90.value,value=_ref90$value===void 0?'':_ref90$value,_ref90$label=_ref90.label,label=_ref90$label===void 0?'':_ref90$label,_ref90$className=_ref90.className,className=_ref90$className===void 0?'':_ref90$className,_ref90$stacked=_ref90.stacked,stacked=_ref90$stacked===void 0?false:_ref90$stacked;var valueOutput=value;var _useState15=react.useState(false),expandLabel=_useState15[0],setExpandLabel=_useState15[1];var timeout;function startExpandLabel(){timeout=setTimeout(function(){return setExpandLabel(true);},500);}function stopExpandLabel(){clearTimeout(timeout);setExpandLabel(false);}if(react.isValidElement(value)){valueOutput=value;}else if(typeof value==='boolean'){valueOutput=/*#__PURE__*/react.createElement("span",{className:(value?'text-green-500 bg-green-500/5':'text-red-500 bg-red-500/5')+" text-sm px-3 py-2 inline-flex gap-2 items-center justify-center"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{className:value+" ? 'text-emerald-500' : 'text-red-500",icon:value?faCheck:faTimes}),/*#__PURE__*/react.createElement("span",{className:"font-mono"},value?'true':'false'));}else if(typeof value==='object'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(value)});}else if(typeof value==='string'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:value});}else if(typeof value==='number'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:String(value)});}return/*#__PURE__*/react.createElement("div",{className:(stacked?'flex flex-col':'flex items-baseline gap-10')+"  "+className},/*#__PURE__*/react.createElement("dt",{className:"\n                "+(stacked?'self-start pt-2 pb-1.5 leading-tight':expandLabel?'flex-grow truncate min-w-[8rem] max-w-max':'flex-none truncate w-32')+"\n            ",onMouseOver:function onMouseOver(){startExpandLabel();},onMouseOut:function onMouseOut(){stopExpandLabel();}},label),/*#__PURE__*/react.createElement("dd",{className:"flex-grow min-w-0"},valueOutput));}function ContextList(_ref91){var items=_ref91.items;return/*#__PURE__*/react.createElement(DefinitionList,null,Object.entries(items||{}).map(function(_ref92){var key=_ref92[0],value=_ref92[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{key:key,label:key,value:value});}));}/**
  * Checks if `value` is `null` or `undefined`.
  *
  * @static
@@ -13115,8 +13113,8 @@ result.ref=result[0];result.inView=result[1];result.entry=result[2];return resul
  *
  * _.omitBy(object, _.isNumber);
  * // => { 'b': '2' }
- */function omitBy(object,predicate){return pickBy_1(object,negate_1(_baseIteratee$1(predicate)));}var omitBy_1=omitBy;function Headers(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var headers=omitBy_1(getContextValues(errorOccurrence,'headers'),isNil_1);headers=omitBy_1(headers,isEmpty_1);return/*#__PURE__*/react.createElement(ContextList,{items:headers});}function QueryString(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);return/*#__PURE__*/react.createElement(ContextList,{items:getContextValues(errorOccurrence,'request').queryString});}function Body(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var body=getContextValues(errorOccurrence,'request_data').body;return/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(body)});}function Files(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var files=getContextValues(errorOccurrence,'request_data').files;return/*#__PURE__*/react.createElement("div",{className:"col-span-2"},/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(files)}));}function Session(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);return/*#__PURE__*/react.createElement(ContextList,{items:getContextValues(errorOccurrence,'session')});}function Cookies(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);return/*#__PURE__*/react.createElement(ContextList,{items:getContextValues(errorOccurrence,'cookies')});}function LivewireData(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var livewire=errorOccurrence.context_items.livewire;if(!livewire){return null;}return/*#__PURE__*/react.createElement(ContextList,{items:livewire.data});}function LivewireComponent(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var livewire=errorOccurrence.context_items.livewire;if(!livewire){return null;}return/*#__PURE__*/react.createElement(ContextList,{items:{Component:livewire.component_class,Alias:livewire.component_alias,ID:livewire.component_id}});}function LivewireUpdates(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var livewire=errorOccurrence.context_items.livewire;if(!livewire){return null;}return/*#__PURE__*/react.createElement(DefinitionList,null,livewire.updates.map(function(_ref94,index){var payload=_ref94.payload,type=_ref94.type;return/*#__PURE__*/react.createElement(DefinitionList.Row,{key:index,label:type,value:payload});}));}var _excluded$1=["children","className"];function UnorderedList(_ref){var children=_ref.children,_ref$className4=_ref.className,className=_ref$className4===void 0?'':_ref$className4,props=_objectWithoutPropertiesLoose$3(_ref,_excluded$1);return/*#__PURE__*/react.createElement(react.Fragment,null,children&&/*#__PURE__*/react.createElement("ul",_extends({className:"gap-y-2 flex flex-col "+className},props),children));}UnorderedList.Item=UnorderedListItem;function UnorderedListItem(_ref95){var _ref95$value=_ref95.value,value=_ref95$value===void 0?'':_ref95$value;var valueOutput=value;if(react.isValidElement(value)){valueOutput=value;}else if(typeof value==='object'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(value)});}else if(typeof value==='string'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:value});}return/*#__PURE__*/react.createElement("li",null,valueOutput);}function Routing(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var route=getContextValues(errorOccurrence,'route');return/*#__PURE__*/react.createElement(DefinitionList,null,/*#__PURE__*/react.createElement(DefinitionList.Row,{value:route.controllerAction,label:"Controller"}),route.route&&/*#__PURE__*/react.createElement(DefinitionList.Row,{value:route.route,label:"Route name"}),Object.entries(route.routeParameters).length>0&&/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(DefinitionList,null,Object.entries(route.routeParameters||[]).map(function(_ref96){var key=_ref96[0],parameter=_ref96[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{stacked:true,key:key,label:key,value:parameter});})),label:"Route parameters"}),route.middleware&&/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(UnorderedList,null,(route.middleware||[]).map(function(middleware,i){return/*#__PURE__*/react.createElement(UnorderedList.Item,{key:i,value:middleware});})),label:"Middleware"}));}var _excluded=["value"];function SfDump(_ref){var value=_ref.value,props=_objectWithoutPropertiesLoose$3(_ref,_excluded);react.useEffect(function(){var match=value.match(/sf-dump-\d+/);if(!match){return;}// @ts-ignore
-window.Sfdump(match[0]);},[value]);return/*#__PURE__*/react.createElement("div",_extends({className:"~bg-gray-500/5 px-4 py-2",dangerouslySetInnerHTML:{__html:value}},props));}function View(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var view=errorOccurrence.context_items.view;if(!view){return null;}return/*#__PURE__*/react.createElement(DefinitionList,null,/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(EditorLink,{path:view.view}),label:"View"}),/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(DefinitionList,null,Object.entries(view.data).map(function(_ref97){var key=_ref97[0],data=_ref97[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{stacked:true,key:key,label:key,value:/*#__PURE__*/react.createElement(SfDump,{value:data})});})),label:"Data"}));}var crypt=createCommonjsModule(function(module){(function(){var base64map='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',crypt={// Bit-wise rotation left
+ */function omitBy(object,predicate){return pickBy_1(object,negate_1(_baseIteratee$1(predicate)));}var omitBy_1=omitBy;function Headers(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var headers=omitBy_1(getContextValues(errorOccurrence,'headers'),isNil_1);headers=omitBy_1(headers,isEmpty_1);return/*#__PURE__*/react.createElement(ContextList,{items:headers});}function QueryString(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);return/*#__PURE__*/react.createElement(ContextList,{items:getContextValues(errorOccurrence,'request').queryString});}function Body(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var body=getContextValues(errorOccurrence,'request_data').body;return/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(body)});}function Files(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var files=getContextValues(errorOccurrence,'request_data').files;return/*#__PURE__*/react.createElement("div",{className:"col-span-2"},/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(files)}));}function Session(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);return/*#__PURE__*/react.createElement(ContextList,{items:getContextValues(errorOccurrence,'session')});}function Cookies(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);return/*#__PURE__*/react.createElement(ContextList,{items:getContextValues(errorOccurrence,'cookies')});}function LivewireData(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var livewire=errorOccurrence.context_items.livewire;if(!livewire){return null;}return/*#__PURE__*/react.createElement(ContextList,{items:livewire.data});}function LivewireComponent(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var livewire=errorOccurrence.context_items.livewire;if(!livewire){return null;}return/*#__PURE__*/react.createElement(ContextList,{items:{Component:livewire.component_class,Alias:livewire.component_alias,ID:livewire.component_id}});}function LivewireUpdates(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var livewire=errorOccurrence.context_items.livewire;if(!livewire){return null;}return/*#__PURE__*/react.createElement(DefinitionList,null,livewire.updates.map(function(_ref93,index){var payload=_ref93.payload,type=_ref93.type;return/*#__PURE__*/react.createElement(DefinitionList.Row,{key:index,label:type,value:payload});}));}var _excluded$1=["children","className"];function UnorderedList(_ref){var children=_ref.children,_ref$className4=_ref.className,className=_ref$className4===void 0?'':_ref$className4,props=_objectWithoutPropertiesLoose$3(_ref,_excluded$1);return/*#__PURE__*/react.createElement(react.Fragment,null,children&&/*#__PURE__*/react.createElement("ul",_extends({className:"gap-y-2 flex flex-col "+className},props),children));}UnorderedList.Item=UnorderedListItem;function UnorderedListItem(_ref94){var _ref94$value=_ref94.value,value=_ref94$value===void 0?'':_ref94$value;var valueOutput=value;if(react.isValidElement(value)){valueOutput=value;}else if(typeof value==='object'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(value)});}else if(typeof value==='string'){valueOutput=/*#__PURE__*/react.createElement(CodeSnippet,{value:value});}return/*#__PURE__*/react.createElement("li",null,valueOutput);}function Routing(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var route=getContextValues(errorOccurrence,'route');return/*#__PURE__*/react.createElement(DefinitionList,null,/*#__PURE__*/react.createElement(DefinitionList.Row,{value:route.controllerAction,label:"Controller"}),route.route&&/*#__PURE__*/react.createElement(DefinitionList.Row,{value:route.route,label:"Route name"}),Object.entries(route.routeParameters).length>0&&/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(DefinitionList,null,Object.entries(route.routeParameters||[]).map(function(_ref95){var key=_ref95[0],parameter=_ref95[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{stacked:true,key:key,label:key,value:parameter});})),label:"Route parameters"}),route.middleware&&/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(UnorderedList,null,(route.middleware||[]).map(function(middleware,i){return/*#__PURE__*/react.createElement(UnorderedList.Item,{key:i,value:middleware});})),label:"Middleware"}));}var _excluded=["value"];function SfDump(_ref){var value=_ref.value,props=_objectWithoutPropertiesLoose$3(_ref,_excluded);react.useEffect(function(){var match=value.match(/sf-dump-\d+/);if(!match){return;}// @ts-ignore
+window.Sfdump(match[0]);},[value]);return/*#__PURE__*/react.createElement("div",_extends({className:"~bg-gray-500/5 px-4 py-2",dangerouslySetInnerHTML:{__html:value}},props));}function View(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var view=errorOccurrence.context_items.view;if(!view){return null;}return/*#__PURE__*/react.createElement(DefinitionList,null,/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(EditorLink,{path:view.view}),label:"View"}),/*#__PURE__*/react.createElement(DefinitionList.Row,{value:/*#__PURE__*/react.createElement(DefinitionList,null,Object.entries(view.data).map(function(_ref96){var key=_ref96[0],data=_ref96[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{stacked:true,key:key,label:key,value:/*#__PURE__*/react.createElement(SfDump,{value:data})});})),label:"Data"}));}var crypt=createCommonjsModule(function(module){(function(){var base64map='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',crypt={// Bit-wise rotation left
 rotl:function rotl(n,b){return n<<b|n>>>32-b;},// Bit-wise rotation right
 rotr:function rotr(n,b){return n<<32-b|n>>>b;},// Swap big-endian to little-endian and vice versa
 endian:function endian(n){// If number given, swap endian
@@ -13151,7 +13149,7 @@ for(var i=0;i<m.length;i++){m[i]=(m[i]<<8|m[i]>>>24)&0x00FF00FF|(m[i]<<24|m[i]>>
 m[l>>>5]|=0x80<<l%32;m[(l+64>>>9<<4)+14]=l;// Method shortcuts
 var FF=md5._ff,GG=md5._gg,HH=md5._hh,II=md5._ii;for(var i=0;i<m.length;i+=16){var aa=a,bb=b,cc=c,dd=d;a=FF(a,b,c,d,m[i+0],7,-680876936);d=FF(d,a,b,c,m[i+1],12,-389564586);c=FF(c,d,a,b,m[i+2],17,606105819);b=FF(b,c,d,a,m[i+3],22,-1044525330);a=FF(a,b,c,d,m[i+4],7,-176418897);d=FF(d,a,b,c,m[i+5],12,1200080426);c=FF(c,d,a,b,m[i+6],17,-1473231341);b=FF(b,c,d,a,m[i+7],22,-45705983);a=FF(a,b,c,d,m[i+8],7,1770035416);d=FF(d,a,b,c,m[i+9],12,-1958414417);c=FF(c,d,a,b,m[i+10],17,-42063);b=FF(b,c,d,a,m[i+11],22,-1990404162);a=FF(a,b,c,d,m[i+12],7,1804603682);d=FF(d,a,b,c,m[i+13],12,-40341101);c=FF(c,d,a,b,m[i+14],17,-1502002290);b=FF(b,c,d,a,m[i+15],22,1236535329);a=GG(a,b,c,d,m[i+1],5,-165796510);d=GG(d,a,b,c,m[i+6],9,-1069501632);c=GG(c,d,a,b,m[i+11],14,643717713);b=GG(b,c,d,a,m[i+0],20,-373897302);a=GG(a,b,c,d,m[i+5],5,-701558691);d=GG(d,a,b,c,m[i+10],9,38016083);c=GG(c,d,a,b,m[i+15],14,-660478335);b=GG(b,c,d,a,m[i+4],20,-405537848);a=GG(a,b,c,d,m[i+9],5,568446438);d=GG(d,a,b,c,m[i+14],9,-1019803690);c=GG(c,d,a,b,m[i+3],14,-187363961);b=GG(b,c,d,a,m[i+8],20,1163531501);a=GG(a,b,c,d,m[i+13],5,-1444681467);d=GG(d,a,b,c,m[i+2],9,-51403784);c=GG(c,d,a,b,m[i+7],14,1735328473);b=GG(b,c,d,a,m[i+12],20,-1926607734);a=HH(a,b,c,d,m[i+5],4,-378558);d=HH(d,a,b,c,m[i+8],11,-2022574463);c=HH(c,d,a,b,m[i+11],16,1839030562);b=HH(b,c,d,a,m[i+14],23,-35309556);a=HH(a,b,c,d,m[i+1],4,-1530992060);d=HH(d,a,b,c,m[i+4],11,1272893353);c=HH(c,d,a,b,m[i+7],16,-155497632);b=HH(b,c,d,a,m[i+10],23,-1094730640);a=HH(a,b,c,d,m[i+13],4,681279174);d=HH(d,a,b,c,m[i+0],11,-358537222);c=HH(c,d,a,b,m[i+3],16,-722521979);b=HH(b,c,d,a,m[i+6],23,76029189);a=HH(a,b,c,d,m[i+9],4,-640364487);d=HH(d,a,b,c,m[i+12],11,-421815835);c=HH(c,d,a,b,m[i+15],16,530742520);b=HH(b,c,d,a,m[i+2],23,-995338651);a=II(a,b,c,d,m[i+0],6,-198630844);d=II(d,a,b,c,m[i+7],10,1126891415);c=II(c,d,a,b,m[i+14],15,-1416354905);b=II(b,c,d,a,m[i+5],21,-57434055);a=II(a,b,c,d,m[i+12],6,1700485571);d=II(d,a,b,c,m[i+3],10,-1894986606);c=II(c,d,a,b,m[i+10],15,-1051523);b=II(b,c,d,a,m[i+1],21,-2054922799);a=II(a,b,c,d,m[i+8],6,1873313359);d=II(d,a,b,c,m[i+15],10,-30611744);c=II(c,d,a,b,m[i+6],15,-1560198380);b=II(b,c,d,a,m[i+13],21,1309151649);a=II(a,b,c,d,m[i+4],6,-145523070);d=II(d,a,b,c,m[i+11],10,-1120210379);c=II(c,d,a,b,m[i+2],15,718787259);b=II(b,c,d,a,m[i+9],21,-343485551);a=a+aa>>>0;b=b+bb>>>0;c=c+cc>>>0;d=d+dd>>>0;}return crypt$1.endian([a,b,c,d]);};// Auxiliary functions
 md5._ff=function(a,b,c,d,x,s,t){var n=a+(b&c|~b&d)+(x>>>0)+t;return (n<<s|n>>>32-s)+b;};md5._gg=function(a,b,c,d,x,s,t){var n=a+(b&d|c&~d)+(x>>>0)+t;return (n<<s|n>>>32-s)+b;};md5._hh=function(a,b,c,d,x,s,t){var n=a+(b^c^d)+(x>>>0)+t;return (n<<s|n>>>32-s)+b;};md5._ii=function(a,b,c,d,x,s,t){var n=a+(c^(b|~d))+(x>>>0)+t;return (n<<s|n>>>32-s)+b;};// Package private blocksize
-md5._blocksize=16;md5._digestsize=16;module.exports=function(message,options){if(message===undefined||message===null)throw new Error('Illegal argument '+message);var digestbytes=crypt$1.wordsToBytes(md5(message,options));return options&&options.asBytes?digestbytes:options&&options.asString?bin.bytesToString(digestbytes):crypt$1.bytesToHex(digestbytes);};})();});function User(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var user=getContextValues(errorOccurrence,'user');return/*#__PURE__*/react.createElement(react.Fragment,null,user.email&&/*#__PURE__*/react.createElement("div",{className:"mb-2 flex items-center gap-3"},/*#__PURE__*/react.createElement("div",null,/*#__PURE__*/react.createElement("img",{className:"inline-block h-9 w-9 rounded-full",alt:user.email,src:"https://gravatar.com/avatar/"+md5(user.email)+"/?s=240"})),/*#__PURE__*/react.createElement("div",{className:"leading-tight"},user.name&&/*#__PURE__*/react.createElement("p",{className:"font-semibold"},user.name),/*#__PURE__*/react.createElement("p",{className:"text-sm"},user.email))),/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(user)}));}function Alert(_ref98){var children=_ref98.children,_ref98$className=_ref98.className,className=_ref98$className===void 0?'':_ref98$className;return/*#__PURE__*/react.createElement("div",{className:""+className},/*#__PURE__*/react.createElement("div",{className:"flex items-center gap-2 bg-yellow-50 dark:bg-yellow-500/10 px-4 py-2"},/*#__PURE__*/react.createElement("div",{className:"flex-shrink-0","aria-hidden":"true"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{className:"text-yellow-500 ",icon:faExclamationTriangle})),/*#__PURE__*/react.createElement("p",{className:"text-sm"},children)));}/**
+md5._blocksize=16;md5._digestsize=16;module.exports=function(message,options){if(message===undefined||message===null)throw new Error('Illegal argument '+message);var digestbytes=crypt$1.wordsToBytes(md5(message,options));return options&&options.asBytes?digestbytes:options&&options.asString?bin.bytesToString(digestbytes):crypt$1.bytesToHex(digestbytes);};})();});function User(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var user=getContextValues(errorOccurrence,'user');return/*#__PURE__*/react.createElement(react.Fragment,null,user.email&&/*#__PURE__*/react.createElement("div",{className:"mb-2 flex items-center gap-3"},/*#__PURE__*/react.createElement("div",null,/*#__PURE__*/react.createElement("img",{className:"inline-block h-9 w-9 rounded-full",alt:user.email,src:"https://gravatar.com/avatar/"+md5(user.email)+"/?s=240"})),/*#__PURE__*/react.createElement("div",{className:"leading-tight"},user.name&&/*#__PURE__*/react.createElement("p",{className:"font-semibold"},user.name),/*#__PURE__*/react.createElement("p",{className:"text-sm"},user.email))),/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(user)}));}function Alert(_ref97){var children=_ref97.children,_ref97$className=_ref97.className,className=_ref97$className===void 0?'':_ref97$className;return/*#__PURE__*/react.createElement("div",{className:""+className},/*#__PURE__*/react.createElement("div",{className:"flex items-center gap-2 bg-yellow-50 dark:bg-yellow-500/10 px-4 py-2"},/*#__PURE__*/react.createElement("div",{className:"flex-shrink-0","aria-hidden":"true"},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{className:"text-yellow-500 ",icon:faExclamationTriangle})),/*#__PURE__*/react.createElement("p",{className:"text-sm"},children)));}/**
  * protocols
  * Returns the protocols of an input url.
  *
@@ -13411,8 +13409,8 @@ function gitUp(input){var output=parseUrl(input);output.token='';var splits=outp
  *
  * _.startCase('__FOO_BAR__');
  * // => 'FOO BAR'
- */var startCase=_createCompounder(function(result,word,index){return result+(index?' ':'')+upperFirst_1(word);});var startCase_1=startCase;function Versions(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var env=getContextValues(errorOccurrence,'env');return/*#__PURE__*/react.createElement(DefinitionList,null,errorOccurrence.application_version&&/*#__PURE__*/react.createElement(DefinitionList.Row,{key:"app_version",value:errorOccurrence.application_version,label:"App Version"}),Object.entries(env).map(function(_ref99){var key=_ref99[0],value=_ref99[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{key:key,value:value,label:startCase_1(key)});}));}function ContextNav(_ref100){var children=_ref100.children;return/*#__PURE__*/react.createElement("ul",{className:"grid grid-cols-1 gap-10"},children);}function ContextNavGroup(_ref101){var title=_ref101.title,children=_ref101.children,anchor=_ref101.anchor;return/*#__PURE__*/react.createElement("li",null,/*#__PURE__*/react.createElement("a",{href:"#context-"+anchor,className:"uppercase tracking-wider ~text-gray-500 text-xs font-bold"},title),/*#__PURE__*/react.createElement("ul",{className:"mt-3 grid grid-cols-1 gap-3"},children));}function ContextNavItem(_ref102){var icon=_ref102.icon,title=_ref102.title,anchor=_ref102.anchor,_ref102$active=_ref102.active,active=_ref102$active===void 0?false:_ref102$active;return/*#__PURE__*/react.createElement("li",null,/*#__PURE__*/react.createElement("a",{href:"#context-"+anchor,className:"\n                flex items-center gap-3\n                group text-base hover:text-indigo-500\n                "+(active?'~text-indigo-600':'')+"\n            "},/*#__PURE__*/react.createElement("span",{className:"opacity-50"},icon),/*#__PURE__*/react.createElement("span",null,title)));}function ContextSections(_ref103){var children=_ref103.children;var _useContext7=react.useContext(InViewContext),inView=_useContext7.inView;return/*#__PURE__*/react.createElement(react.Fragment,null,/*#__PURE__*/react.createElement("nav",{className:"hidden sm:block min-w-[8rem] flex-none mr-10 lg:mr-20"},/*#__PURE__*/react.createElement("div",{className:"sticky top-[7.5rem]"},/*#__PURE__*/react.createElement(ContextNav,null,react.Children.map(children,function(group){return/*#__PURE__*/react.createElement(react.Fragment,null,group&&/*#__PURE__*/react.createElement(ContextNavGroup,{title:group.props.title,anchor:group.props.anchor},react.Children.map(group.props.children,function(section){return/*#__PURE__*/react.createElement(react.Fragment,null,section&&section.type===ContextSection&&/*#__PURE__*/react.createElement(ContextNavItem,{icon:section.props.icon,active:inView[inView.length-1]===section.props.title,title:section.props.title,anchor:section.props.anchor}));})));})))),/*#__PURE__*/react.createElement("div",{className:"overflow-hidden grid grid-cols-1 gap-px shadow-lg flex-grow"},children));}function InViewContextProvider(_ref104){var children=_ref104.children;var _useState16=react.useState([]),inView=_useState16[0],setInView=_useState16[1];return/*#__PURE__*/react.createElement(InViewContext.Provider,{value:{inView:inView,setInView:setInView}},children);}function LiveWireIcon(_ref105){var _ref105$className=_ref105.className,className=_ref105$className===void 0?'':_ref105$className;return/*#__PURE__*/react.createElement("svg",{version:"1.1",xmlns:"http://www.w3.org/2000/svg",x:"0px",y:"0px",viewBox:"0 0 512 512","enable-background":"new 0 0 512 512",className:""+className},/*#__PURE__*/react.createElement("path",{fill:"currentcolor",d:"M381.6,334.8c-24.7,0-27.7,33.6-45.2,44.6v52c0,17.6,14.2,31.8,31.8,31.8c17.6,0,31.8-14.2,31.8-31.8v-88.6 C395,338.1,389.2,334.8,381.6,334.8z"}),/*#__PURE__*/react.createElement("path",{fill:"currentcolor",d:"M263.2,334.8c-25.5,0-27.8,35.8-46.9,45.7v96.2c0,19.5,15.8,35.3,35.3,35.3s35.3-15.8,35.3-35.3V349.1 C280.9,341.1,273.9,334.8,263.2,334.8z"}),/*#__PURE__*/react.createElement("path",{fill:"currentcolor",d:"M144.8,334.8c-22.9,0-27.1,28.9-41.6,41.9l0,38c0,17.6,14.2,31.8,31.8,31.8c17.6,0,31.8-14.2,31.8-31.8v-67.9 C161.2,339.9,154.5,334.8,144.8,334.8z"}),/*#__PURE__*/react.createElement("path",{id:"Body-Copy-4",fill:"currentcolor","fill-rule":"evenodd","clip-rule":"evenodd",d:"M458.9,340.2c-8.3,12.6-14.7,28.2-31.7,28.2 c-28.6,0-30.1-44-58.7-44c-28.6,0-27,44-55.6,44c-28.6,0-30.1-44-58.7-44s-27,44-55.6,44s-30.1-44-58.7-44s-27,44-55.6,44 c-9,0-15.3-4.4-20.6-10.3c-20.4-35.6-32.2-77.2-32.2-121.8C31.6,105.8,132.4,0,256.7,0s225.1,105.8,225.1,236.2 C481.8,273.5,473.6,308.8,458.9,340.2z"}),/*#__PURE__*/react.createElement("path",{id:"Oval","fill-rule":"evenodd","clip-rule":"evenodd",fill:"#FFFFFF",d:"M244.6,295.1c78.3,0,111.2-45.4,111.2-109.9 S306.1,61.4,244.6,61.4s-111.2,59.4-111.2,123.9S166.4,295.1,244.6,295.1z"}),/*#__PURE__*/react.createElement("ellipse",{id:"Oval_1_",fill:"currentcolor","fill-rule":"evenodd","clip-rule":"evenodd",cx:"214.7",cy:"142.9",rx:"41.7",ry:"46"}),/*#__PURE__*/react.createElement("ellipse",{id:"Oval_2_","fill-rule":"evenodd","clip-rule":"evenodd",fill:"#FFFFFF",cx:"207.8",cy:"132.2",rx:"20.9",ry:"21.3"}));}function Context(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var context=errorOccurrence.context_items;var files=getContextValues(errorOccurrence,'files');var requestData=getContextValues(errorOccurrence,'request_data');return/*#__PURE__*/react.createElement("div",{className:"flex items-stretch"},/*#__PURE__*/react.createElement(InViewContextProvider,null,/*#__PURE__*/react.createElement(ContextSections,null,/*#__PURE__*/react.createElement(ContextGroup,{title:"Request",anchor:"request"},/*#__PURE__*/react.createElement(Request,null),/*#__PURE__*/react.createElement(ContextSection,{title:"Headers",anchor:"request-headers",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faExchangeAlt}),children:/*#__PURE__*/react.createElement(Headers,null)}),!!requestData.queryString.length&&/*#__PURE__*/react.createElement(ContextSection,{title:"Query String",anchor:"request-query-string",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faQuestionCircle}),children:/*#__PURE__*/react.createElement(QueryString,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Body",anchor:"request-body",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faCode}),children:/*#__PURE__*/react.createElement(Body,null)}),!!files.length&&/*#__PURE__*/react.createElement(ContextSection,{title:"Files",anchor:"request-files",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faFile}),children:/*#__PURE__*/react.createElement(Files,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Session",anchor:"request-session",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faHourglassHalf}),children:/*#__PURE__*/react.createElement(Session,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Cookies",anchor:"request-cookies",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faCookieBite}),children:/*#__PURE__*/react.createElement(Cookies,null)})),/*#__PURE__*/react.createElement(ContextGroup,{title:"App",anchor:"app"},context.route&&/*#__PURE__*/react.createElement(ContextSection,{title:"Routing",anchor:"app-routing",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faRandom}),children:/*#__PURE__*/react.createElement(Routing,null)}),context.view&&/*#__PURE__*/react.createElement(ContextSection,{title:"Views",anchor:"app-views",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faPaintRoller}),children:/*#__PURE__*/react.createElement(View,null)})),context.livewire&&/*#__PURE__*/react.createElement(ContextGroup,{title:"Livewire",anchor:"livewire"},/*#__PURE__*/react.createElement(ContextSection,{title:"Component",anchor:"livewire-component",icon:/*#__PURE__*/react.createElement(LiveWireIcon,{className:"svg-inline--fa fa-w-16 fa-fw"}),children:/*#__PURE__*/react.createElement(LivewireComponent,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Updates",anchor:"livewire-updates",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faSatelliteDish}),children:/*#__PURE__*/react.createElement(LivewireUpdates,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Data",anchor:"livewire-data",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faTh}),children:/*#__PURE__*/react.createElement(LivewireData,null)})),/*#__PURE__*/react.createElement(ContextGroup,{title:"User",anchor:"user"},context.user&&/*#__PURE__*/react.createElement(ContextSection,{title:"User",anchor:"user-user",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faUser}),children:/*#__PURE__*/react.createElement(User,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Client",anchor:"user-client",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faWindowMaximize}),children:/*#__PURE__*/react.createElement("div",null,"Client")})),/*#__PURE__*/react.createElement(ContextGroup,{title:"Context",anchor:"context"},context.git&&/*#__PURE__*/react.createElement(ContextSection,{title:"Git",anchor:"context-git",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faCodeBranch}),children:/*#__PURE__*/react.createElement(Git,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Versions",anchor:"context-versions",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faSlidersH}),children:/*#__PURE__*/react.createElement(Versions,null)})))));}function DebugTabs(_ref106){var children=_ref106.children;var _useState17=react.useState(0),currentTabIndex=_useState17[0],setCurrentTabIndex=_useState17[1];var validChildren=children.filter(function(child){return child!==false;});var tabs=react.Children.map(validChildren,function(child){return {name:child.props.name,component:child.props.component,count:child.props.count,checked:child.props.checked,onChange:child.props.onChange};}).filter(function(tab){return tab.count;});var Tab=tabs[currentTabIndex].component;return/*#__PURE__*/react.createElement("div",{className:"bg-gray-300/50 dark:bg-black/10 shadow-inner"},/*#__PURE__*/react.createElement("nav",{className:"z-10 flex justify-center items-center"},/*#__PURE__*/react.createElement("ul",{className:"-my-5 flex justify-start items-center rounded-full shadow-lg bg-indigo-500 text-white space-x-px"},tabs.map(function(tab,i){return/*#__PURE__*/react.createElement("li",{key:i,className:"\n                                    "+(i===currentTabIndex?'bg-indigo-600':'bg-indigo-500 text-indigo-100')+"\n                                    "+(i===0?'rounded-l-full':'')+"\n                                    "+(i===tabs.length-1?'rounded-r-full':'')+"\n                                    hover:text-white\n                                "},/*#__PURE__*/react.createElement("button",{onClick:function onClick(){return setCurrentTabIndex(i);},className:"group flex items-center px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium "},/*#__PURE__*/react.createElement("span",{className:"mr-1.5 inline-flex items-center justify-center px-1 min-w-[1rem] h-4 bg-gray-900/30 text-white rounded-full text-xs"},tab.count),/*#__PURE__*/react.createElement("span",null,tab.name)));}))),/*#__PURE__*/react.createElement("div",{className:"grid grid-cols-1 gap-10 py-10 px-6 sm:px-10"},/*#__PURE__*/react.createElement(Tab,null)));}DebugTabs.Tab=function(_props){return null;};function DebugItem(_ref107){var children=_ref107.children,_ref107$context=_ref107.context,context=_ref107$context===void 0?null:_ref107$context,_ref107$level=_ref107.level,level=_ref107$level===void 0?null:_ref107$level,_ref107$meta=_ref107.meta,meta=_ref107$meta===void 0?null:_ref107$meta,time=_ref107.time;var _useState18=react.useState(false),showRawContext=_useState18[0],setShowRawContext=_useState18[1];// TODO: Implement this
-var logLevelColors={error:'red',warn:'orange',warning:'orange',info:'blue',debug:'green',trace:'gray',notice:'purple',critical:'red',alert:'red',emergency:'red'};return/*#__PURE__*/react.createElement("div",{className:"min-w-0 overflow-hidden grid grid-cols-1 gap-2"},/*#__PURE__*/react.createElement("div",{className:"flex items-center gap-1"},/*#__PURE__*/react.createElement(Tag,{color:level?logLevelColors[level]:'gray',className:"font-mono"},time.toLocaleTimeString()),level&&/*#__PURE__*/react.createElement(Tag,{color:logLevelColors[level]},level),meta&&Object.entries(meta).map(function(_ref108){var key=_ref108[0],value=_ref108[1];return/*#__PURE__*/react.createElement(react.Fragment,null,key==='runtime'&&/*#__PURE__*/react.createElement(Tag,{className:"inline-flex items-center gap-2",key:key},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{title:"Runtime",className:"opacity-50",icon:faStopwatch})," ",value),key==='connection'&&/*#__PURE__*/react.createElement(Tag,{className:"inline-flex items-center gap-2",key:key},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{title:"Connection",className:"opacity-50",icon:faDatabase})," ",value),key!=='runtime'&&key!=='connection'&&/*#__PURE__*/react.createElement(Tag,{key:key},key,": ",value));}),context&&/*#__PURE__*/react.createElement(react.Fragment,null,/*#__PURE__*/react.createElement("div",{className:"ml-auto"},/*#__PURE__*/react.createElement(SmallButton,{onClick:function onClick(){return setShowRawContext(!showRawContext);}},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:showRawContext?faListUl:faCode,className:"text-[8px] ~text-gray-500 group-hover:text-indigo-500"}),showRawContext?'As list':'Raw')))),/*#__PURE__*/react.createElement("div",null,children),context&&/*#__PURE__*/react.createElement(react.Fragment,null,showRawContext?/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(context)}):/*#__PURE__*/react.createElement("div",{className:"pl-4"},/*#__PURE__*/react.createElement(ContextList,{items:context}))));}function Logs(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var logs=Object.values(getContextValues(errorOccurrence,'logs'));return/*#__PURE__*/react.createElement(react.Fragment,null,logs.map(function(log,index){return/*#__PURE__*/react.createElement(DebugItem,{key:index,context:log.context,level:log.level,time:unixToDate(log.microtime)},/*#__PURE__*/react.createElement(CodeSnippet,{value:log.message}));}));}function Dumps(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var dumps=Object.values(getContextValues(errorOccurrence,'dumps'));return/*#__PURE__*/react.createElement(react.Fragment,null,dumps.map(function(dump){return/*#__PURE__*/react.createElement(DebugItem,{key:dump.microtime,time:unixToDate(dump.microtime)},/*#__PURE__*/react.createElement("div",{className:"mb-2"},/*#__PURE__*/react.createElement(EditorLink,{path:dump.file,lineNumber:dump.line_number,className:"text-sm"})),/*#__PURE__*/react.createElement(SfDump,{value:dump.html_dump}));}));}function Queries(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var queries=Object.values(getContextValues(errorOccurrence,'queries'));return/*#__PURE__*/react.createElement(react.Fragment,null,queries.map(function(query,index){return/*#__PURE__*/react.createElement(DebugItem,{key:index,time:unixToDate(query.microtime),meta:{runtime:query.time+"ms",connection:query.connection_name}},/*#__PURE__*/react.createElement(CodeSnippet,{value:query.sql}));}));}function Glows(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var glows=errorOccurrence.glows;return/*#__PURE__*/react.createElement(react.Fragment,null,glows.map(function(glow,index){return/*#__PURE__*/react.createElement(DebugItem,{key:index,level:glow.message_level,context:glow.meta_data,time:unixToDate(glow.microtime)},/*#__PURE__*/react.createElement(CodeSnippet,{value:glow.name}));}));}function Debug(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var dumps=getContextValues(errorOccurrence,'dumps');var glows=errorOccurrence.glows;var queries=getContextValues(errorOccurrence,'queries');var logs=getContextValues(errorOccurrence,'logs');return/*#__PURE__*/react.createElement(DebugTabs,null,/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Dumps,name:"Dumps",count:Object.keys(dumps).length}),/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Glows,name:"Glows",count:glows.length}),/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Queries,name:"Queries",count:Object.keys(queries).length}),/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Logs,name:"Logs",count:Object.keys(logs).length}));}function CopyButton(_ref109){var value=_ref109.value;var _useState19=react.useState(false),copied=_useState19[0],setCopied=_useState19[1];react.useEffect(function(){var timeout;if(copied){timeout=window.setTimeout(function(){return setCopied(false);},3000);}return function(){return window.clearTimeout(timeout);};},[copied]);function copy(){copyToClipboard(value);setCopied(true);}return/*#__PURE__*/react.createElement("button",{onClick:copy,title:"Copy to clipboard",className:"hover:text-indigo-500 opacity-0 transition-opacity duration-150 "+(copied?'':'group-hover:opacity-100')},/*#__PURE__*/react.createElement("i",{className:"far fa-copy"}));}function InlineCodeSnippet(_ref110){var children=_ref110.children,_ref110$className=_ref110.className,className=_ref110$className===void 0?'':_ref110$className;return/*#__PURE__*/react.createElement("code",{className:"font-mono leading-relaxed font-normal ~bg-gray-500/5 px-1 py-1 "+className},children);}function FlareIcon(){return/*#__PURE__*/react.createElement("svg",{viewBox:"0 0 682 1024",className:"w-4 h-5 ml-1.5"},/*#__PURE__*/react.createElement("polygon",{points:"235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 ",style:{fill:'rgb(81, 219, 158)'}}),/*#__PURE__*/react.createElement("polygon",{points:"235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 ",style:{fill:'rgb(121, 0, 245)'}}),/*#__PURE__*/react.createElement("polygon",{points:"448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 ",style:{fill:'rgb(148, 242, 200)'}}),/*#__PURE__*/react.createElement("polygon",{points:"234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 ",style:{fill:'rgb(164, 117, 244)'}}));}function IgnitionIcon(){return/*#__PURE__*/react.createElement("svg",{id:"ignition",className:"w-8 h-8 -ml-1",viewBox:"0 0 500 500"},/*#__PURE__*/react.createElement("g",null,/*#__PURE__*/react.createElement("polygon",{style:{fill:'transparent'},points:"466.5,375 466.5,125 250,0 33.5,125 33.5,375 250,500 \t"}),/*#__PURE__*/react.createElement("g",null,/*#__PURE__*/react.createElement("polygon",{style:{fill:'#ff4590'},points:"314.2,176 314.2,250 250,287 250,212.6 \t\t"}),/*#__PURE__*/react.createElement("polygon",{style:{fill:'#ffd000'},points:"185.9,398.1 185.9,324.1 250,287 249.9,360.9 \t\t"}),/*#__PURE__*/react.createElement("polygon",{style:{fill:'#de075d'},points:"250,139.1 250,287 185.9,250 185.8,101.9 \t\t"}),/*#__PURE__*/react.createElement("polygon",{style:{fill:'#e0b800'},points:"249.9,360.9 250,287 314.1,324 314.1,398.1 \t\t"}))));}
+ */var startCase=_createCompounder(function(result,word,index){return result+(index?' ':'')+upperFirst_1(word);});var startCase_1=startCase;function Versions(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var env=getContextValues(errorOccurrence,'env');return/*#__PURE__*/react.createElement(DefinitionList,null,errorOccurrence.application_version&&/*#__PURE__*/react.createElement(DefinitionList.Row,{key:"app_version",value:errorOccurrence.application_version,label:"App Version"}),Object.entries(env).map(function(_ref98){var key=_ref98[0],value=_ref98[1];return/*#__PURE__*/react.createElement(DefinitionList.Row,{key:key,value:value,label:startCase_1(key)});}));}function ContextNav(_ref99){var children=_ref99.children;return/*#__PURE__*/react.createElement("ul",{className:"grid grid-cols-1 gap-10"},children);}function ContextNavGroup(_ref100){var title=_ref100.title,children=_ref100.children,anchor=_ref100.anchor;return/*#__PURE__*/react.createElement("li",null,/*#__PURE__*/react.createElement("a",{href:"#context-"+anchor,className:"uppercase tracking-wider ~text-gray-500 text-xs font-bold"},title),/*#__PURE__*/react.createElement("ul",{className:"mt-3 grid grid-cols-1 gap-3"},children));}function ContextNavItem(_ref101){var icon=_ref101.icon,title=_ref101.title,anchor=_ref101.anchor,_ref101$active=_ref101.active,active=_ref101$active===void 0?false:_ref101$active;return/*#__PURE__*/react.createElement("li",null,/*#__PURE__*/react.createElement("a",{href:"#context-"+anchor,className:"\n                flex items-center gap-3\n                group text-base hover:text-indigo-500\n                "+(active?'~text-indigo-600':'')+"\n            "},/*#__PURE__*/react.createElement("span",{className:"opacity-50"},icon),/*#__PURE__*/react.createElement("span",null,title)));}function ContextSections(_ref102){var children=_ref102.children;var _useContext7=react.useContext(InViewContext),inView=_useContext7.inView;return/*#__PURE__*/react.createElement(react.Fragment,null,/*#__PURE__*/react.createElement("nav",{className:"hidden sm:block min-w-[8rem] flex-none mr-10 lg:mr-20"},/*#__PURE__*/react.createElement("div",{className:"sticky top-[7.5rem]"},/*#__PURE__*/react.createElement(ContextNav,null,react.Children.map(children,function(group){return/*#__PURE__*/react.createElement(react.Fragment,null,group&&/*#__PURE__*/react.createElement(ContextNavGroup,{title:group.props.title,anchor:group.props.anchor},react.Children.map(group.props.children,function(section){return/*#__PURE__*/react.createElement(react.Fragment,null,section&&section.type===ContextSection&&/*#__PURE__*/react.createElement(ContextNavItem,{icon:section.props.icon,active:inView[inView.length-1]===section.props.title,title:section.props.title,anchor:section.props.anchor}));})));})))),/*#__PURE__*/react.createElement("div",{className:"overflow-hidden grid grid-cols-1 gap-px shadow-lg flex-grow"},children));}function InViewContextProvider(_ref103){var children=_ref103.children;var _useState16=react.useState([]),inView=_useState16[0],setInView=_useState16[1];return/*#__PURE__*/react.createElement(InViewContext.Provider,{value:{inView:inView,setInView:setInView}},children);}function LiveWireIcon(_ref104){var _ref104$className=_ref104.className,className=_ref104$className===void 0?'':_ref104$className;return/*#__PURE__*/react.createElement("svg",{version:"1.1",xmlns:"http://www.w3.org/2000/svg",x:"0px",y:"0px",viewBox:"0 0 512 512","enable-background":"new 0 0 512 512",className:""+className},/*#__PURE__*/react.createElement("path",{fill:"currentcolor",d:"M381.6,334.8c-24.7,0-27.7,33.6-45.2,44.6v52c0,17.6,14.2,31.8,31.8,31.8c17.6,0,31.8-14.2,31.8-31.8v-88.6 C395,338.1,389.2,334.8,381.6,334.8z"}),/*#__PURE__*/react.createElement("path",{fill:"currentcolor",d:"M263.2,334.8c-25.5,0-27.8,35.8-46.9,45.7v96.2c0,19.5,15.8,35.3,35.3,35.3s35.3-15.8,35.3-35.3V349.1 C280.9,341.1,273.9,334.8,263.2,334.8z"}),/*#__PURE__*/react.createElement("path",{fill:"currentcolor",d:"M144.8,334.8c-22.9,0-27.1,28.9-41.6,41.9l0,38c0,17.6,14.2,31.8,31.8,31.8c17.6,0,31.8-14.2,31.8-31.8v-67.9 C161.2,339.9,154.5,334.8,144.8,334.8z"}),/*#__PURE__*/react.createElement("path",{id:"Body-Copy-4",fill:"currentcolor","fill-rule":"evenodd","clip-rule":"evenodd",d:"M458.9,340.2c-8.3,12.6-14.7,28.2-31.7,28.2 c-28.6,0-30.1-44-58.7-44c-28.6,0-27,44-55.6,44c-28.6,0-30.1-44-58.7-44s-27,44-55.6,44s-30.1-44-58.7-44s-27,44-55.6,44 c-9,0-15.3-4.4-20.6-10.3c-20.4-35.6-32.2-77.2-32.2-121.8C31.6,105.8,132.4,0,256.7,0s225.1,105.8,225.1,236.2 C481.8,273.5,473.6,308.8,458.9,340.2z"}),/*#__PURE__*/react.createElement("path",{id:"Oval","fill-rule":"evenodd","clip-rule":"evenodd",fill:"#FFFFFF",d:"M244.6,295.1c78.3,0,111.2-45.4,111.2-109.9 S306.1,61.4,244.6,61.4s-111.2,59.4-111.2,123.9S166.4,295.1,244.6,295.1z"}),/*#__PURE__*/react.createElement("ellipse",{id:"Oval_1_",fill:"currentcolor","fill-rule":"evenodd","clip-rule":"evenodd",cx:"214.7",cy:"142.9",rx:"41.7",ry:"46"}),/*#__PURE__*/react.createElement("ellipse",{id:"Oval_2_","fill-rule":"evenodd","clip-rule":"evenodd",fill:"#FFFFFF",cx:"207.8",cy:"132.2",rx:"20.9",ry:"21.3"}));}function Context(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var context=errorOccurrence.context_items;var files=getContextValues(errorOccurrence,'files');var requestData=getContextValues(errorOccurrence,'request_data');return/*#__PURE__*/react.createElement("div",{className:"flex items-stretch"},/*#__PURE__*/react.createElement(InViewContextProvider,null,/*#__PURE__*/react.createElement(ContextSections,null,/*#__PURE__*/react.createElement(ContextGroup,{title:"Request",anchor:"request"},/*#__PURE__*/react.createElement(Request,null),/*#__PURE__*/react.createElement(ContextSection,{title:"Headers",anchor:"request-headers",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faExchangeAlt}),children:/*#__PURE__*/react.createElement(Headers,null)}),!!requestData.queryString.length&&/*#__PURE__*/react.createElement(ContextSection,{title:"Query String",anchor:"request-query-string",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faQuestionCircle}),children:/*#__PURE__*/react.createElement(QueryString,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Body",anchor:"request-body",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faCode}),children:/*#__PURE__*/react.createElement(Body,null)}),!!files.length&&/*#__PURE__*/react.createElement(ContextSection,{title:"Files",anchor:"request-files",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faFile}),children:/*#__PURE__*/react.createElement(Files,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Session",anchor:"request-session",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faHourglassHalf}),children:/*#__PURE__*/react.createElement(Session,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Cookies",anchor:"request-cookies",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faCookieBite}),children:/*#__PURE__*/react.createElement(Cookies,null)})),/*#__PURE__*/react.createElement(ContextGroup,{title:"App",anchor:"app"},context.route&&/*#__PURE__*/react.createElement(ContextSection,{title:"Routing",anchor:"app-routing",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faRandom}),children:/*#__PURE__*/react.createElement(Routing,null)}),context.view&&/*#__PURE__*/react.createElement(ContextSection,{title:"Views",anchor:"app-views",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faPaintRoller}),children:/*#__PURE__*/react.createElement(View,null)})),context.livewire&&/*#__PURE__*/react.createElement(ContextGroup,{title:"Livewire",anchor:"livewire"},/*#__PURE__*/react.createElement(ContextSection,{title:"Component",anchor:"livewire-component",icon:/*#__PURE__*/react.createElement(LiveWireIcon,{className:"svg-inline--fa fa-w-16 fa-fw"}),children:/*#__PURE__*/react.createElement(LivewireComponent,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Updates",anchor:"livewire-updates",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faSatelliteDish}),children:/*#__PURE__*/react.createElement(LivewireUpdates,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Data",anchor:"livewire-data",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faTh}),children:/*#__PURE__*/react.createElement(LivewireData,null)})),/*#__PURE__*/react.createElement(ContextGroup,{title:"User",anchor:"user"},context.user&&/*#__PURE__*/react.createElement(ContextSection,{title:"User",anchor:"user-user",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faUser}),children:/*#__PURE__*/react.createElement(User,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Client",anchor:"user-client",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faWindowMaximize}),children:/*#__PURE__*/react.createElement("div",null,"Client")})),/*#__PURE__*/react.createElement(ContextGroup,{title:"Context",anchor:"context"},context.git&&/*#__PURE__*/react.createElement(ContextSection,{title:"Git",anchor:"context-git",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faCodeBranch}),children:/*#__PURE__*/react.createElement(Git,null)}),/*#__PURE__*/react.createElement(ContextSection,{title:"Versions",anchor:"context-versions",icon:/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{fixedWidth:true,icon:faSlidersH}),children:/*#__PURE__*/react.createElement(Versions,null)})))));}function DebugTabs(_ref105){var children=_ref105.children;var _useState17=react.useState(0),currentTabIndex=_useState17[0],setCurrentTabIndex=_useState17[1];var validChildren=children.filter(function(child){return child!==false;});var tabs=react.Children.map(validChildren,function(child){return {name:child.props.name,component:child.props.component,count:child.props.count,checked:child.props.checked,onChange:child.props.onChange};}).filter(function(tab){return tab.count;});var Tab=tabs[currentTabIndex].component;return/*#__PURE__*/react.createElement("div",{className:"bg-gray-300/50 dark:bg-black/10 shadow-inner"},/*#__PURE__*/react.createElement("nav",{className:"z-10 flex justify-center items-center"},/*#__PURE__*/react.createElement("ul",{className:"-my-5 flex justify-start items-center rounded-full shadow-lg bg-indigo-500 text-white space-x-px"},tabs.map(function(tab,i){return/*#__PURE__*/react.createElement("li",{key:i,className:"\n                                    "+(i===currentTabIndex?'bg-indigo-600':'bg-indigo-500 text-indigo-100')+"\n                                    "+(i===0?'rounded-l-full':'')+"\n                                    "+(i===tabs.length-1?'rounded-r-full':'')+"\n                                    hover:text-white\n                                "},/*#__PURE__*/react.createElement("button",{onClick:function onClick(){return setCurrentTabIndex(i);},className:"group flex items-center px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium "},/*#__PURE__*/react.createElement("span",{className:"mr-1.5 inline-flex items-center justify-center px-1 min-w-[1rem] h-4 bg-gray-900/30 text-white rounded-full text-xs"},tab.count),/*#__PURE__*/react.createElement("span",null,tab.name)));}))),/*#__PURE__*/react.createElement("div",{className:"grid grid-cols-1 gap-10 py-10 px-6 sm:px-10"},/*#__PURE__*/react.createElement(Tab,null)));}DebugTabs.Tab=function(_props){return null;};function DebugItem(_ref106){var children=_ref106.children,_ref106$context=_ref106.context,context=_ref106$context===void 0?null:_ref106$context,_ref106$level=_ref106.level,level=_ref106$level===void 0?null:_ref106$level,_ref106$meta=_ref106.meta,meta=_ref106$meta===void 0?null:_ref106$meta,time=_ref106.time;var _useState18=react.useState(false),showRawContext=_useState18[0],setShowRawContext=_useState18[1];// TODO: Implement this
+var logLevelColors={error:'red',warn:'orange',warning:'orange',info:'blue',debug:'green',trace:'gray',notice:'purple',critical:'red',alert:'red',emergency:'red'};return/*#__PURE__*/react.createElement("div",{className:"min-w-0 overflow-hidden grid grid-cols-1 gap-2"},/*#__PURE__*/react.createElement("div",{className:"flex items-center gap-1"},/*#__PURE__*/react.createElement(Tag,{color:level?logLevelColors[level]:'gray',className:"font-mono"},time.toLocaleTimeString()),level&&/*#__PURE__*/react.createElement(Tag,{color:logLevelColors[level]},level),meta&&Object.entries(meta).map(function(_ref107){var key=_ref107[0],value=_ref107[1];return/*#__PURE__*/react.createElement(react.Fragment,null,key==='runtime'&&/*#__PURE__*/react.createElement(Tag,{className:"inline-flex items-center gap-2",key:key},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{title:"Runtime",className:"opacity-50",icon:faStopwatch})," ",value),key==='connection'&&/*#__PURE__*/react.createElement(Tag,{className:"inline-flex items-center gap-2",key:key},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{title:"Connection",className:"opacity-50",icon:faDatabase})," ",value),key!=='runtime'&&key!=='connection'&&/*#__PURE__*/react.createElement(Tag,{key:key},key,": ",value));}),context&&/*#__PURE__*/react.createElement(react.Fragment,null,/*#__PURE__*/react.createElement("div",{className:"ml-auto"},/*#__PURE__*/react.createElement(SmallButton,{onClick:function onClick(){return setShowRawContext(!showRawContext);}},/*#__PURE__*/react.createElement(FontAwesomeIcon$1,{icon:showRawContext?faListUl:faCode,className:"text-[8px] ~text-gray-500 group-hover:text-indigo-500"}),showRawContext?'As list':'Raw')))),/*#__PURE__*/react.createElement("div",null,children),context&&/*#__PURE__*/react.createElement(react.Fragment,null,showRawContext?/*#__PURE__*/react.createElement(CodeSnippet,{value:jsonStringify(context)}):/*#__PURE__*/react.createElement("div",{className:"pl-4"},/*#__PURE__*/react.createElement(ContextList,{items:context}))));}function Logs(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var logs=Object.values(getContextValues(errorOccurrence,'logs'));return/*#__PURE__*/react.createElement(react.Fragment,null,logs.map(function(log,index){return/*#__PURE__*/react.createElement(DebugItem,{key:index,context:log.context,level:log.level,time:unixToDate(log.microtime)},/*#__PURE__*/react.createElement(CodeSnippet,{value:log.message}));}));}function Dumps(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var dumps=Object.values(getContextValues(errorOccurrence,'dumps'));return/*#__PURE__*/react.createElement(react.Fragment,null,dumps.map(function(dump){return/*#__PURE__*/react.createElement(DebugItem,{key:dump.microtime,time:unixToDate(dump.microtime)},/*#__PURE__*/react.createElement("div",{className:"mb-2"},/*#__PURE__*/react.createElement(EditorLink,{path:dump.file,lineNumber:dump.line_number,className:"text-sm"})),/*#__PURE__*/react.createElement(SfDump,{value:dump.html_dump}));}));}function Queries(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var queries=Object.values(getContextValues(errorOccurrence,'queries'));return/*#__PURE__*/react.createElement(react.Fragment,null,queries.map(function(query,index){return/*#__PURE__*/react.createElement(DebugItem,{key:index,time:unixToDate(query.microtime),meta:{runtime:query.time+"ms",connection:query.connection_name}},/*#__PURE__*/react.createElement(CodeSnippet,{value:query.sql}));}));}function Glows(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var glows=errorOccurrence.glows;return/*#__PURE__*/react.createElement(react.Fragment,null,glows.map(function(glow,index){return/*#__PURE__*/react.createElement(DebugItem,{key:index,level:glow.message_level,context:glow.meta_data,time:unixToDate(glow.microtime)},/*#__PURE__*/react.createElement(CodeSnippet,{value:glow.name}));}));}function Debug(){var errorOccurrence=react.useContext(ErrorOccurrenceContext);var dumps=getContextValues(errorOccurrence,'dumps');var glows=errorOccurrence.glows;var queries=getContextValues(errorOccurrence,'queries');var logs=getContextValues(errorOccurrence,'logs');return/*#__PURE__*/react.createElement(DebugTabs,null,/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Dumps,name:"Dumps",count:Object.keys(dumps).length}),/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Glows,name:"Glows",count:glows.length}),/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Queries,name:"Queries",count:Object.keys(queries).length}),/*#__PURE__*/react.createElement(DebugTabs.Tab,{component:Logs,name:"Logs",count:Object.keys(logs).length}));}function CopyButton(_ref108){var value=_ref108.value;var _useState19=react.useState(false),copied=_useState19[0],setCopied=_useState19[1];react.useEffect(function(){var timeout;if(copied){timeout=window.setTimeout(function(){return setCopied(false);},3000);}return function(){return window.clearTimeout(timeout);};},[copied]);function copy(){copyToClipboard(value);setCopied(true);}return/*#__PURE__*/react.createElement("button",{onClick:copy,title:"Copy to clipboard",className:"hover:text-indigo-500 opacity-0 transition-opacity duration-150 "+(copied?'':'group-hover:opacity-100')},/*#__PURE__*/react.createElement("i",{className:"far fa-copy"}));}function InlineCodeSnippet(_ref109){var children=_ref109.children,_ref109$className=_ref109.className,className=_ref109$className===void 0?'':_ref109$className;return/*#__PURE__*/react.createElement("code",{className:"font-mono leading-relaxed font-normal ~bg-gray-500/5 px-1 py-1 "+className},children);}function FlareIcon(){return/*#__PURE__*/react.createElement("svg",{viewBox:"0 0 682 1024",className:"w-4 h-5 ml-1.5"},/*#__PURE__*/react.createElement("polygon",{points:"235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 ",style:{fill:'rgb(81, 219, 158)'}}),/*#__PURE__*/react.createElement("polygon",{points:"235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 ",style:{fill:'rgb(121, 0, 245)'}}),/*#__PURE__*/react.createElement("polygon",{points:"448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 ",style:{fill:'rgb(148, 242, 200)'}}),/*#__PURE__*/react.createElement("polygon",{points:"234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 ",style:{fill:'rgb(164, 117, 244)'}}));}function IgnitionIcon(){return/*#__PURE__*/react.createElement("svg",{id:"ignition",className:"w-8 h-8 -ml-1",viewBox:"0 0 500 500"},/*#__PURE__*/react.createElement("g",null,/*#__PURE__*/react.createElement("polygon",{style:{fill:'transparent'},points:"466.5,375 466.5,125 250,0 33.5,125 33.5,375 250,500 \t"}),/*#__PURE__*/react.createElement("g",null,/*#__PURE__*/react.createElement("polygon",{style:{fill:'#ff4590'},points:"314.2,176 314.2,250 250,287 250,212.6 \t\t"}),/*#__PURE__*/react.createElement("polygon",{style:{fill:'#ffd000'},points:"185.9,398.1 185.9,324.1 250,287 249.9,360.9 \t\t"}),/*#__PURE__*/react.createElement("polygon",{style:{fill:'#de075d'},points:"250,139.1 250,287 185.9,250 185.8,101.9 \t\t"}),/*#__PURE__*/react.createElement("polygon",{style:{fill:'#e0b800'},points:"249.9,360.9 250,287 314.1,324 314.1,398.1 \t\t"}))));}
 
 function Checkbox(_ref) {
   var label = _ref.label,
@@ -16447,401 +16445,6 @@ var faLaravel = {
   iconName: 'laravel',
   icon: [512, 512, [], "f3bd", "M504.4,115.83a5.72,5.72,0,0,0-.28-.68,8.52,8.52,0,0,0-.53-1.25,6,6,0,0,0-.54-.71,9.36,9.36,0,0,0-.72-.94c-.23-.22-.52-.4-.77-.6a8.84,8.84,0,0,0-.9-.68L404.4,55.55a8,8,0,0,0-8,0L300.12,111h0a8.07,8.07,0,0,0-.88.69,7.68,7.68,0,0,0-.78.6,8.23,8.23,0,0,0-.72.93c-.17.24-.39.45-.54.71a9.7,9.7,0,0,0-.52,1.25c-.08.23-.21.44-.28.68a8.08,8.08,0,0,0-.28,2.08V223.18l-80.22,46.19V63.44a7.8,7.8,0,0,0-.28-2.09c-.06-.24-.2-.45-.28-.68a8.35,8.35,0,0,0-.52-1.24c-.14-.26-.37-.47-.54-.72a9.36,9.36,0,0,0-.72-.94,9.46,9.46,0,0,0-.78-.6,9.8,9.8,0,0,0-.88-.68h0L115.61,1.07a8,8,0,0,0-8,0L11.34,56.49h0a6.52,6.52,0,0,0-.88.69,7.81,7.81,0,0,0-.79.6,8.15,8.15,0,0,0-.71.93c-.18.25-.4.46-.55.72a7.88,7.88,0,0,0-.51,1.24,6.46,6.46,0,0,0-.29.67,8.18,8.18,0,0,0-.28,2.1v329.7a8,8,0,0,0,4,6.95l192.5,110.84a8.83,8.83,0,0,0,1.33.54c.21.08.41.2.63.26a7.92,7.92,0,0,0,4.1,0c.2-.05.37-.16.55-.22a8.6,8.6,0,0,0,1.4-.58L404.4,400.09a8,8,0,0,0,4-6.95V287.88l92.24-53.11a8,8,0,0,0,4-7V117.92A8.63,8.63,0,0,0,504.4,115.83ZM111.6,17.28h0l80.19,46.15-80.2,46.18L31.41,63.44Zm88.25,60V278.6l-46.53,26.79-33.69,19.4V123.5l46.53-26.79Zm0,412.78L23.37,388.5V77.32L57.06,96.7l46.52,26.8V338.68a6.94,6.94,0,0,0,.12.9,8,8,0,0,0,.16,1.18h0a5.92,5.92,0,0,0,.38.9,6.38,6.38,0,0,0,.42,1v0a8.54,8.54,0,0,0,.6.78,7.62,7.62,0,0,0,.66.84l0,0c.23.22.52.38.77.58a8.93,8.93,0,0,0,.86.66l0,0,0,0,92.19,52.18Zm8-106.17-80.06-45.32,84.09-48.41,92.26-53.11,80.13,46.13-58.8,33.56Zm184.52,4.57L215.88,490.11V397.8L346.6,323.2l45.77-26.15Zm0-119.13L358.68,250l-46.53-26.79V131.79l33.69,19.4L392.37,178Zm8-105.28-80.2-46.17,80.2-46.16,80.18,46.15Zm8,105.28V178L455,151.19l33.68-19.4v91.39h0Z"]
 };
-
-function useClickOutsideListener(ref, handler) {
-  react.useEffect(function () {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        handler();
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-    return function () {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-}
-
-function NavBar(_ref) {
-  var showException = _ref.showException;
-  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
-
-  var _useState = react.useState(false),
-      isShareDropdownOpen = _useState[0],
-      setIsShareDropdownOpen = _useState[1];
-
-  var _useState2 = react.useState(false),
-      isSettingsDropdownOpen = _useState2[0],
-      setIsSettingsDropdownOpen = _useState2[1];
-
-  var hasScrolled = useWindowScrollPosition({
-    distance: 10
-  });
-  var laravelDocs = errorOccurrence.documentation_links.find(function (link) {
-    return link.startsWith('https://laravel.com/');
-  });
-  var shareRef = react.useRef(null);
-  var settingsRef = react.useRef(null);
-  useClickOutsideListener(shareRef, function () {
-    return setIsShareDropdownOpen(false);
-  });
-  useClickOutsideListener(settingsRef, function () {
-    return setIsSettingsDropdownOpen(false);
-  });
-  return react.createElement("nav", {
-    className: "z-50 fixed top-0 h-20 w-full"
-  }, react.createElement("div", null, react.createElement("div", {
-    className: "\n                        " + (hasScrolled ? '~bg-gray-100' : '~bg-body') + "\n                        z-10 transform translate-x-0 transition-color duration-100\n                    "
-  }, react.createElement("div", {
-    className: "h-10 flex justify-between px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]"
-  }, react.createElement("ul", {
-    className: "-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center"
-  }, react.createElement(NavBarItem, {
-    name: "stack",
-    icon: react.createElement(FontAwesomeIcon, {
-      icon: faAlignLeft
-    })
-  }), react.createElement(NavBarItem, {
-    name: "context",
-    icon: react.createElement(FontAwesomeIcon, {
-      icon: faExpand
-    })
-  }), hasDebugInfo(errorOccurrence) && react.createElement(NavBarItem, {
-    name: "debug",
-    icon: react.createElement(FontAwesomeIcon, {
-      icon: faBug
-    }),
-    important: !!errorOccurrence.context_items.dumps.length
-  }), react.createElement(NavBarItem, {
-    navRef: shareRef,
-    name: "share",
-    icon: react.createElement(FontAwesomeIcon, {
-      icon: faShare
-    }),
-    onClick: function onClick() {
-      setIsShareDropdownOpen(!isShareDropdownOpen);
-    }
-  }, react.createElement(ShareDropdown, {
-    isOpen: isShareDropdownOpen
-  }))), react.createElement("ul", {
-    className: "-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center"
-  }, react.createElement(NavBarItem, {
-    name: "docs",
-    href: laravelDocs || 'https://laravel.com/docs/',
-    icon: react.createElement(FontAwesomeIcon, {
-      className: 'text-sm',
-      icon: faLaravel
-    }),
-    iconOpacity: "opacity-80",
-    important: !!laravelDocs
-  }), react.createElement(NavBarItem, {
-    navRef: settingsRef,
-    name: "settings",
-    icon: react.createElement(FontAwesomeIcon, {
-      className: 'text-sm',
-      icon: faCog
-    }),
-    iconOpacity: "opacity-80",
-    label: false,
-    onClick: function onClick() {
-      setIsSettingsDropdownOpen(!isSettingsDropdownOpen);
-    }
-  }, react.createElement(SettingsDropdown, {
-    isOpen: isSettingsDropdownOpen
-  }))))), react.createElement("div", {
-    className: "\n                        " + (hasScrolled ? 'shadow-lg' : '') + "\n                        " + (showException ? 'translate-y-10 ~bg-gray-100' : 'translate-y-0 ~bg-body') + "\n                        absolute top-0 left-0 w-full\n                        ~bg-gray-100 border-b ~border-gray-200\n                        transform\n                        transition-animation\n                        duration-300\n                    "
-  }, react.createElement("div", {
-    className: "\n                        px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]\n                        h-10 flex items-center justify-start\n                        border-t ~border-gray-200"
-  }, react.createElement("div", {
-    className: "font-semibold min-w-0 truncate"
-  }, react.createElement("a", {
-    href: "#top",
-    className: "hover:text-red-500"
-  }, errorOccurrence.exception_message))))));
-}
-
-var observerMap = new Map();
-var RootIds = new WeakMap();
-var rootId = 0;
-var unsupportedValue = undefined;
-/**
- * Generate a unique ID for the root element
- * @param root
- */
-
-
-function getRootId(root) {
-  if (!root) return '0';
-  if (RootIds.has(root)) return RootIds.get(root);
-  rootId += 1;
-  RootIds.set(root, rootId.toString());
-  return RootIds.get(root);
-}
-/**
- * Convert the options to a string Id, based on the values.
- * Ensures we can reuse the same observer when observing elements with the same options.
- * @param options
- */
-
-
-function optionsToId(options) {
-  return Object.keys(options).sort().filter(function (key) {
-    return options[key] !== undefined;
-  }).map(function (key) {
-    return key + "_" + (key === 'root' ? getRootId(options.root) : options[key]);
-  }).toString();
-}
-
-function createObserver(options) {
-  // Create a unique ID for this observer instance, based on the root, root margin and threshold.
-  var id = optionsToId(options);
-  var instance = observerMap.get(id);
-
-  if (!instance) {
-    // Create a map of elements this observer is going to observe. Each element has a list of callbacks that should be triggered, once it comes into view.
-    var elements = new Map();
-    var thresholds;
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var _elements$get; // While it would be nice if you could just look at isIntersecting to determine if the component is inside the viewport, browsers can't agree on how to use it.
-        // -Firefox ignores `threshold` when considering `isIntersecting`, so it will never be false again if `threshold` is > 0
-
-
-        var inView = entry.isIntersecting && thresholds.some(function (threshold) {
-          return entry.intersectionRatio >= threshold;
-        }); // @ts-ignore support IntersectionObserver v2
-
-        if (options.trackVisibility && typeof entry.isVisible === 'undefined') {
-          // The browser doesn't support Intersection Observer v2, falling back to v1 behavior.
-          // @ts-ignore
-          entry.isVisible = inView;
-        }
-
-        (_elements$get = elements.get(entry.target)) == null ? void 0 : _elements$get.forEach(function (callback) {
-          callback(inView, entry);
-        });
-      });
-    }, options); // Ensure we have a valid thresholds array. If not, use the threshold from the options
-
-    thresholds = observer.thresholds || (Array.isArray(options.threshold) ? options.threshold : [options.threshold || 0]);
-    instance = {
-      id: id,
-      observer: observer,
-      elements: elements
-    };
-    observerMap.set(id, instance);
-  }
-
-  return instance;
-}
-/**
- * @param element - DOM Element to observe
- * @param callback - Callback function to trigger when intersection status changes
- * @param options - Intersection Observer options
- * @param fallbackInView - Fallback inView value.
- * @return Function - Cleanup function that should be triggered to unregister the observer
- */
-
-
-function observe(element, callback, options, fallbackInView) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  if (fallbackInView === void 0) {
-    fallbackInView = unsupportedValue;
-  }
-
-  if (typeof window.IntersectionObserver === 'undefined' && fallbackInView !== undefined) {
-    var bounds = element.getBoundingClientRect();
-    callback(fallbackInView, {
-      isIntersecting: fallbackInView,
-      target: element,
-      intersectionRatio: typeof options.threshold === 'number' ? options.threshold : 0,
-      time: 0,
-      boundingClientRect: bounds,
-      intersectionRect: bounds,
-      rootBounds: bounds
-    });
-    return function () {// Nothing to cleanup
-    };
-  } // An observer with the same options can be reused, so lets use this fact
-
-
-  var _createObserver = createObserver(options),
-      id = _createObserver.id,
-      observer = _createObserver.observer,
-      elements = _createObserver.elements; // Register the callback listener for this element
-
-
-  var callbacks = elements.get(element) || [];
-
-  if (!elements.has(element)) {
-    elements.set(element, callbacks);
-  }
-
-  callbacks.push(callback);
-  observer.observe(element);
-  return function unobserve() {
-    // Remove the callback from the callback list
-    callbacks.splice(callbacks.indexOf(callback), 1);
-
-    if (callbacks.length === 0) {
-      // No more callback exists for element, so destroy it
-      elements["delete"](element);
-      observer.unobserve(element);
-    }
-
-    if (elements.size === 0) {
-      // No more elements are being observer by this instance, so destroy it
-      observer.disconnect();
-      observerMap["delete"](id);
-    }
-  };
-}
-/**
- * React Hooks make it easy to monitor the `inView` state of your components. Call
- * the `useInView` hook with the (optional) [options](#options) you need. It will
- * return an array containing a `ref`, the `inView` status and the current
- * [`entry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry).
- * Assign the `ref` to the DOM element you want to monitor, and the hook will
- * report the status.
- *
- * @example
- * ```jsx
- * import React from 'react';
- * import { useInView } from 'react-intersection-observer';
- *
- * const Component = () => {
- *   const { ref, inView, entry } = useInView({
- *       threshold: 0,
- *   });
- *
- *   return (
- *     <div ref={ref}>
- *       <h2>{`Header inside viewport ${inView}.`}</h2>
- *     </div>
- *   );
- * };
- * ```
- */
-
-function useInView(_temp) {
-  var _ref = _temp === void 0 ? {} : _temp,
-      threshold = _ref.threshold,
-      delay = _ref.delay,
-      trackVisibility = _ref.trackVisibility,
-      rootMargin = _ref.rootMargin,
-      root = _ref.root,
-      triggerOnce = _ref.triggerOnce,
-      skip = _ref.skip,
-      initialInView = _ref.initialInView,
-      fallbackInView = _ref.fallbackInView;
-
-  var unobserve = react.useRef();
-
-  var _React$useState = react.useState({
-    inView: !!initialInView
-  }),
-      state = _React$useState[0],
-      setState = _React$useState[1];
-
-  var setRef = react.useCallback(function (node) {
-    if (unobserve.current !== undefined) {
-      unobserve.current();
-      unobserve.current = undefined;
-    } // Skip creating the observer
-
-
-    if (skip) return;
-
-    if (node) {
-      unobserve.current = observe(node, function (inView, entry) {
-        setState({
-          inView: inView,
-          entry: entry
-        });
-
-        if (entry.isIntersecting && triggerOnce && unobserve.current) {
-          // If it should only trigger once, unobserve the element after it's inView
-          unobserve.current();
-          unobserve.current = undefined;
-        }
-      }, {
-        root: root,
-        rootMargin: rootMargin,
-        threshold: threshold,
-        // @ts-ignore
-        trackVisibility: trackVisibility,
-        // @ts-ignore
-        delay: delay
-      }, fallbackInView);
-    }
-  }, // We break the rule here, because we aren't including the actual `threshold` variable
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [// If the threshold is an array, convert it to a string so it won't change between renders.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  Array.isArray(threshold) ? threshold.toString() : threshold, root, rootMargin, triggerOnce, skip, trackVisibility, fallbackInView, delay]);
-  /* eslint-disable-next-line */
-
-  react.useEffect(function () {
-    if (!unobserve.current && state.entry && !triggerOnce && !skip) {
-      // If we don't have a ref, then reset the state (unless the hook is set to only `triggerOnce` or `skip`)
-      // This ensures we correctly reflect the current state - If you aren't observing anything, then nothing is inView
-      setState({
-        inView: !!initialInView
-      });
-    }
-  });
-  var result = [setRef, state.inView, state.entry]; // Support object destructuring, by adding the specific values.
-
-  result.ref = result[0];
-  result.inView = result[1];
-  result.entry = result[2];
-  return result;
-}
-
-function useSectionInView(sectionName) {
-  var _useContext = react.useContext(InViewContext$1),
-      setInView = _useContext.setInView;
-
-  var _useInView = useInView({
-    rootMargin: '-40% 0px -40%'
-  }),
-      intersectionRef = _useInView.ref,
-      isInView = _useInView.inView;
-
-  react.useEffect(function () {
-    if (isInView) {
-      setInView(function (inView) {
-        return [].concat(inView, [sectionName]);
-      });
-    } else {
-      setInView(function (inView) {
-        return inView.filter(function (v) {
-          return v !== sectionName;
-        });
-      });
-    }
-  }, [isInView]);
-  return intersectionRef;
-}
-
-function Section(_ref) {
-  var children = _ref.children,
-      _ref$className = _ref.className,
-      className = _ref$className === void 0 ? '' : _ref$className,
-      name = _ref.name;
-  var ref = useSectionInView(name);
-  return react.createElement("section", {
-    ref: ref,
-    className: className
-  }, react.createElement("a", {
-    id: name,
-    className: "scroll-target"
-  }), children);
-}
 
 /** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof commonjsGlobal$1 == 'object' && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
@@ -20054,6 +19657,407 @@ var keyBy = _createAggregator(function (result, value, key) {
 });
 var keyBy_1 = keyBy;
 
+function useClickOutsideListener(ref, handler) {
+  react.useEffect(function () {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        handler();
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+    return function () {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+}
+
+function NavBar(_ref) {
+  var showException = _ref.showException;
+  var errorOccurrence = react.useContext(ErrorOccurrenceContext);
+
+  var _useState = react.useState(false),
+      isShareDropdownOpen = _useState[0],
+      setIsShareDropdownOpen = _useState[1];
+
+  var _useState2 = react.useState(false),
+      isSettingsDropdownOpen = _useState2[0],
+      setIsSettingsDropdownOpen = _useState2[1];
+
+  var hasScrolled = useWindowScrollPosition({
+    distance: 10
+  });
+  var laravelDocs = errorOccurrence.documentation_links.find(function (link) {
+    return link.startsWith('https://laravel.com/');
+  });
+  var shareRef = react.useRef(null);
+  var settingsRef = react.useRef(null);
+  useClickOutsideListener(shareRef, function () {
+    return setIsShareDropdownOpen(false);
+  });
+  useClickOutsideListener(settingsRef, function () {
+    return setIsSettingsDropdownOpen(false);
+  });
+  var env = mapValues_1(keyBy_1(errorOccurrence.context_items['env'] || [], 'name'), 'value');
+  var showEnvWarning = env.app_env !== 'local' && env.app_debug;
+  return react.createElement("nav", {
+    className: "z-50 fixed top-0 h-20 w-full"
+  }, react.createElement("div", null, react.createElement("div", {
+    className: "\n                        " + (hasScrolled ? '~bg-gray-100' : '~bg-body') + "\n                        z-10 transform translate-x-0 transition-color duration-100\n                    "
+  }, react.createElement("div", {
+    className: "h-10 flex justify-between px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem]"
+  }, react.createElement("ul", {
+    className: "-ml-3 sm:-ml-5 grid grid-flow-col justify-start items-center"
+  }, react.createElement(NavBarItem, {
+    name: "stack",
+    icon: react.createElement(FontAwesomeIcon, {
+      icon: faAlignLeft
+    })
+  }), react.createElement(NavBarItem, {
+    name: "context",
+    icon: react.createElement(FontAwesomeIcon, {
+      icon: faExpand
+    })
+  }), hasDebugInfo(errorOccurrence) && react.createElement(NavBarItem, {
+    name: "debug",
+    icon: react.createElement(FontAwesomeIcon, {
+      icon: faBug
+    }),
+    important: !!errorOccurrence.context_items.dumps.length
+  }), react.createElement(NavBarItem, {
+    navRef: shareRef,
+    name: "share",
+    icon: react.createElement(FontAwesomeIcon, {
+      icon: faShare
+    }),
+    onClick: function onClick() {
+      setIsShareDropdownOpen(!isShareDropdownOpen);
+    }
+  }, react.createElement(ShareDropdown, {
+    isOpen: isShareDropdownOpen
+  }))), react.createElement("ul", {
+    className: "-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center"
+  }, react.createElement(NavBarItem, {
+    name: "docs",
+    href: laravelDocs || 'https://laravel.com/docs/',
+    icon: react.createElement(FontAwesomeIcon, {
+      className: 'text-sm',
+      icon: faLaravel
+    }),
+    iconOpacity: "opacity-80",
+    important: !!laravelDocs
+  }), react.createElement(NavBarItem, {
+    navRef: settingsRef,
+    name: "settings",
+    icon: react.createElement(FontAwesomeIcon, {
+      className: 'text-sm',
+      icon: faCog
+    }),
+    iconOpacity: "opacity-80",
+    label: false,
+    onClick: function onClick() {
+      setIsSettingsDropdownOpen(!isSettingsDropdownOpen);
+    }
+  }, react.createElement(SettingsDropdown, {
+    isOpen: isSettingsDropdownOpen
+  }))))), react.createElement("div", {
+    className: "\n                        " + (hasScrolled ? 'shadow-lg' : '') + "\n                        " + (showException ? 'translate-y-10 ~bg-gray-100' : 'translate-y-0 ~bg-body') + "\n                        absolute top-0 left-0 w-full\n                        ~bg-gray-100 border-b ~border-gray-200\n                        transform\n                        transition-animation\n                        duration-300\n                    "
+  }, react.createElement("div", {
+    className: "flex items-center px-6 lg:px-10 mx-auto max-w-4xl lg:max-w-[90rem] h-10 border-t ~border-gray-200"
+  }, react.createElement("a", {
+    href: "#top",
+    className: "min-w-0 inline-flex items-center justify-start gap-2"
+  }, showEnvWarning && react.createElement(FontAwesomeIcon, {
+    title: "You have a security issue",
+    icon: faShieldAlt,
+    className: "text-red-500"
+  }), react.createElement("div", {
+    className: "font-semibold min-w-0 truncate hover:text-red-500"
+  }, errorOccurrence.exception_message))))));
+}
+
+var observerMap = new Map();
+var RootIds = new WeakMap();
+var rootId = 0;
+var unsupportedValue = undefined;
+/**
+ * Generate a unique ID for the root element
+ * @param root
+ */
+
+
+function getRootId(root) {
+  if (!root) return '0';
+  if (RootIds.has(root)) return RootIds.get(root);
+  rootId += 1;
+  RootIds.set(root, rootId.toString());
+  return RootIds.get(root);
+}
+/**
+ * Convert the options to a string Id, based on the values.
+ * Ensures we can reuse the same observer when observing elements with the same options.
+ * @param options
+ */
+
+
+function optionsToId(options) {
+  return Object.keys(options).sort().filter(function (key) {
+    return options[key] !== undefined;
+  }).map(function (key) {
+    return key + "_" + (key === 'root' ? getRootId(options.root) : options[key]);
+  }).toString();
+}
+
+function createObserver(options) {
+  // Create a unique ID for this observer instance, based on the root, root margin and threshold.
+  var id = optionsToId(options);
+  var instance = observerMap.get(id);
+
+  if (!instance) {
+    // Create a map of elements this observer is going to observe. Each element has a list of callbacks that should be triggered, once it comes into view.
+    var elements = new Map();
+    var thresholds;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var _elements$get; // While it would be nice if you could just look at isIntersecting to determine if the component is inside the viewport, browsers can't agree on how to use it.
+        // -Firefox ignores `threshold` when considering `isIntersecting`, so it will never be false again if `threshold` is > 0
+
+
+        var inView = entry.isIntersecting && thresholds.some(function (threshold) {
+          return entry.intersectionRatio >= threshold;
+        }); // @ts-ignore support IntersectionObserver v2
+
+        if (options.trackVisibility && typeof entry.isVisible === 'undefined') {
+          // The browser doesn't support Intersection Observer v2, falling back to v1 behavior.
+          // @ts-ignore
+          entry.isVisible = inView;
+        }
+
+        (_elements$get = elements.get(entry.target)) == null ? void 0 : _elements$get.forEach(function (callback) {
+          callback(inView, entry);
+        });
+      });
+    }, options); // Ensure we have a valid thresholds array. If not, use the threshold from the options
+
+    thresholds = observer.thresholds || (Array.isArray(options.threshold) ? options.threshold : [options.threshold || 0]);
+    instance = {
+      id: id,
+      observer: observer,
+      elements: elements
+    };
+    observerMap.set(id, instance);
+  }
+
+  return instance;
+}
+/**
+ * @param element - DOM Element to observe
+ * @param callback - Callback function to trigger when intersection status changes
+ * @param options - Intersection Observer options
+ * @param fallbackInView - Fallback inView value.
+ * @return Function - Cleanup function that should be triggered to unregister the observer
+ */
+
+
+function observe(element, callback, options, fallbackInView) {
+  if (options === void 0) {
+    options = {};
+  }
+
+  if (fallbackInView === void 0) {
+    fallbackInView = unsupportedValue;
+  }
+
+  if (typeof window.IntersectionObserver === 'undefined' && fallbackInView !== undefined) {
+    var bounds = element.getBoundingClientRect();
+    callback(fallbackInView, {
+      isIntersecting: fallbackInView,
+      target: element,
+      intersectionRatio: typeof options.threshold === 'number' ? options.threshold : 0,
+      time: 0,
+      boundingClientRect: bounds,
+      intersectionRect: bounds,
+      rootBounds: bounds
+    });
+    return function () {// Nothing to cleanup
+    };
+  } // An observer with the same options can be reused, so lets use this fact
+
+
+  var _createObserver = createObserver(options),
+      id = _createObserver.id,
+      observer = _createObserver.observer,
+      elements = _createObserver.elements; // Register the callback listener for this element
+
+
+  var callbacks = elements.get(element) || [];
+
+  if (!elements.has(element)) {
+    elements.set(element, callbacks);
+  }
+
+  callbacks.push(callback);
+  observer.observe(element);
+  return function unobserve() {
+    // Remove the callback from the callback list
+    callbacks.splice(callbacks.indexOf(callback), 1);
+
+    if (callbacks.length === 0) {
+      // No more callback exists for element, so destroy it
+      elements["delete"](element);
+      observer.unobserve(element);
+    }
+
+    if (elements.size === 0) {
+      // No more elements are being observer by this instance, so destroy it
+      observer.disconnect();
+      observerMap["delete"](id);
+    }
+  };
+}
+/**
+ * React Hooks make it easy to monitor the `inView` state of your components. Call
+ * the `useInView` hook with the (optional) [options](#options) you need. It will
+ * return an array containing a `ref`, the `inView` status and the current
+ * [`entry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry).
+ * Assign the `ref` to the DOM element you want to monitor, and the hook will
+ * report the status.
+ *
+ * @example
+ * ```jsx
+ * import React from 'react';
+ * import { useInView } from 'react-intersection-observer';
+ *
+ * const Component = () => {
+ *   const { ref, inView, entry } = useInView({
+ *       threshold: 0,
+ *   });
+ *
+ *   return (
+ *     <div ref={ref}>
+ *       <h2>{`Header inside viewport ${inView}.`}</h2>
+ *     </div>
+ *   );
+ * };
+ * ```
+ */
+
+function useInView(_temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
+      threshold = _ref.threshold,
+      delay = _ref.delay,
+      trackVisibility = _ref.trackVisibility,
+      rootMargin = _ref.rootMargin,
+      root = _ref.root,
+      triggerOnce = _ref.triggerOnce,
+      skip = _ref.skip,
+      initialInView = _ref.initialInView,
+      fallbackInView = _ref.fallbackInView;
+
+  var unobserve = react.useRef();
+
+  var _React$useState = react.useState({
+    inView: !!initialInView
+  }),
+      state = _React$useState[0],
+      setState = _React$useState[1];
+
+  var setRef = react.useCallback(function (node) {
+    if (unobserve.current !== undefined) {
+      unobserve.current();
+      unobserve.current = undefined;
+    } // Skip creating the observer
+
+
+    if (skip) return;
+
+    if (node) {
+      unobserve.current = observe(node, function (inView, entry) {
+        setState({
+          inView: inView,
+          entry: entry
+        });
+
+        if (entry.isIntersecting && triggerOnce && unobserve.current) {
+          // If it should only trigger once, unobserve the element after it's inView
+          unobserve.current();
+          unobserve.current = undefined;
+        }
+      }, {
+        root: root,
+        rootMargin: rootMargin,
+        threshold: threshold,
+        // @ts-ignore
+        trackVisibility: trackVisibility,
+        // @ts-ignore
+        delay: delay
+      }, fallbackInView);
+    }
+  }, // We break the rule here, because we aren't including the actual `threshold` variable
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [// If the threshold is an array, convert it to a string so it won't change between renders.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  Array.isArray(threshold) ? threshold.toString() : threshold, root, rootMargin, triggerOnce, skip, trackVisibility, fallbackInView, delay]);
+  /* eslint-disable-next-line */
+
+  react.useEffect(function () {
+    if (!unobserve.current && state.entry && !triggerOnce && !skip) {
+      // If we don't have a ref, then reset the state (unless the hook is set to only `triggerOnce` or `skip`)
+      // This ensures we correctly reflect the current state - If you aren't observing anything, then nothing is inView
+      setState({
+        inView: !!initialInView
+      });
+    }
+  });
+  var result = [setRef, state.inView, state.entry]; // Support object destructuring, by adding the specific values.
+
+  result.ref = result[0];
+  result.inView = result[1];
+  result.entry = result[2];
+  return result;
+}
+
+function useSectionInView(sectionName) {
+  var _useContext = react.useContext(InViewContext$1),
+      setInView = _useContext.setInView;
+
+  var _useInView = useInView({
+    rootMargin: '-40% 0px -40%'
+  }),
+      intersectionRef = _useInView.ref,
+      isInView = _useInView.inView;
+
+  react.useEffect(function () {
+    if (isInView) {
+      setInView(function (inView) {
+        return [].concat(inView, [sectionName]);
+      });
+    } else {
+      setInView(function (inView) {
+        return inView.filter(function (v) {
+          return v !== sectionName;
+        });
+      });
+    }
+  }, [isInView]);
+  return intersectionRef;
+}
+
+function Section(_ref) {
+  var children = _ref.children,
+      _ref$className = _ref.className,
+      className = _ref$className === void 0 ? '' : _ref$className,
+      name = _ref.name;
+  var ref = useSectionInView(name);
+  return react.createElement("section", {
+    ref: ref,
+    className: className
+  }, react.createElement("a", {
+    id: name,
+    className: "scroll-target"
+  }), children);
+}
+
 function AppDebugWarning() {
   var errorOccurrence = react.useContext(ErrorOccurrenceContext);
   var env = mapValues_1(keyBy_1(errorOccurrence.context_items['env'] || [], 'name'), 'value');
@@ -20063,20 +20067,32 @@ function AppDebugWarning() {
   }
 
   return react.createElement("section", {
-    className: "bg-red-500 text-white px-6 sm:px-10 py-8 "
+    className: "lg:flex items-stretch ~bg-white shadow-lg"
+  }, react.createElement("div", {
+    className: 'lg:w-1/3 flex-none flex items-center min-w-0 px-6 sm:px-10 py-8 bg-red-500 text-red-50'
   }, react.createElement("h2", {
-    className: "mb-4 min-w-0 truncate font-bold leading-snug"
-  }, react.createElement("code", null, "APP_DEBUG"), " is set to ", react.createElement("code", null, "true"), " while ", react.createElement("code", null, "APP_ENV"), " is not ", react.createElement("code", null, "local")), react.createElement("p", {
+    className: "min-w-0 truncate text-xl font-semibold leading-snug"
+  }, react.createElement("code", {
+    className: "mr-0.5"
+  }, "APP_DEBUG"), " is set to ", react.createElement("code", {
+    className: "mx-0.5"
+  }, "true"), " while", react.createElement("br", null), react.createElement("code", {
+    className: "mr-0.5"
+  }, "APP_ENV"), " is not ", react.createElement("code", {
+    className: "mx-0.5"
+  }, "local"))), react.createElement("div", {
+    className: "flex-grow px-6 sm:px-10 py-8 bg-red-600 text-red-100"
+  }, react.createElement("p", {
     className: "text-base"
   }, "This could make your application vulnerable to remote execution.\xA0", react.createElement("br", null), react.createElement("a", {
-    className: "mt-2 underline inline-flex items-center gap-2",
+    className: "mt-1.5 underline inline-flex items-center gap-2",
     target: "_blank",
     rel: "noopener",
     href: "https://flareapp.io/docs/ignition-for-laravel/security"
   }, react.createElement(FontAwesomeIcon, {
     icon: faShieldAlt,
     className: "text-sm opacity-50"
-  }), "Read more about Ignition security")));
+  }), "Read more about Ignition security"))));
 }
 
 function Ignition(_ref) {
@@ -20101,11 +20117,9 @@ function Ignition(_ref) {
     showException: !errorCardInView
   }), react.createElement("main", {
     className: "mx-auto my-20 px-6 lg:px-10 max-w-4xl lg:max-w-[90rem] grid grid-cols-1 gap-10"
-  }, react.createElement("div", {
+  }, react.createElement(AppDebugWarning, null), react.createElement("div", {
     ref: intersectionRef
-  }, react.createElement(ErrorCard, {
-    warning: react.createElement(AppDebugWarning, null)
-  })), react.createElement(Section, {
+  }, react.createElement(ErrorCard, null)), react.createElement(Section, {
     name: "stack",
     children: react.createElement(StackTrace, null)
   }), react.createElement(Section, {

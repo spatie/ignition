@@ -15,23 +15,29 @@ export default function AppDebugWarning() {
     }
 
     return (
-        <section className="bg-red-500 text-white px-6 sm:px-10 py-8 ">
-            <h2 className="mb-4 min-w-0 truncate font-bold leading-snug">
-                <code>APP_DEBUG</code> is set to <code>true</code> while <code>APP_ENV</code> is not <code>local</code>
-            </h2>
-            <p className="text-base">
-                This could make your application vulnerable to remote execution.&nbsp;
-                <br/>
-                <a
-                    className="mt-2 underline inline-flex items-center gap-2"
-                    target="_blank"
-                    rel="noopener"
-                    href="https://flareapp.io/docs/ignition-for-laravel/security"
-                >
-                    <FontAwesomeIcon icon={faShieldAlt} className="text-sm opacity-50" />
-                    Read more about Ignition security
-                </a>
-            </p>
+        <section className="lg:flex items-stretch ~bg-white shadow-lg">
+            <div className='lg:w-1/3 flex-none flex items-center min-w-0 px-6 sm:px-10 py-8 bg-red-500 text-red-50'>
+                <h2 className="min-w-0 truncate text-xl font-semibold leading-snug">
+                    <code className="mr-0.5">APP_DEBUG</code> is set to <code className="mx-0.5">true</code> while 
+                    <br/>
+                    <code className="mr-0.5">APP_ENV</code> is not <code className="mx-0.5">local</code>
+                </h2>
+            </div>
+            <div className="flex-grow px-6 sm:px-10 py-8 bg-red-600 text-red-100">
+                <p className="text-base">
+                    This could make your application vulnerable to remote execution.&nbsp;
+                    <br/>
+                    <a
+                        className="mt-1.5 underline inline-flex items-center gap-2"
+                        target="_blank"
+                        rel="noopener"
+                        href="https://flareapp.io/docs/ignition-for-laravel/security"
+                    >
+                        <FontAwesomeIcon icon={faShieldAlt} className="text-sm opacity-50" />
+                        Read more about Ignition security
+                    </a>
+                </p>
+            </div>
         </section>
     );
 }
