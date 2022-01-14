@@ -103,16 +103,16 @@ export default function ShareDropdown({ isOpen }: Props) {
                 )}
 
                 {publicUrl && ownerUrl && (
-                    <div>
+                    <div className="grid grid-cols-1 gap-4">
                         <CopyableUrl
                             url={publicUrl}
-                            helpText="Share your error with others:"
-                            openText="Open public share"
+                            helpText="Share your error with others"
+                            openText="Visit public share"
                         />
                         <CopyableUrl
                             url={ownerUrl}
-                            helpText="Administer your shared error here:"
-                            openText="Open share admin"
+                            helpText="Administer your shared error"
+                            openText="Visit share admin"
                         />
                     </div>
                 )}
