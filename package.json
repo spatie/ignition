@@ -20,7 +20,7 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-intersection-observer": "^8.32.5",
-        "tailwindcss": "3.0.8"
+        "tailwindcss": "^3.0.8"
     },
     "devDependencies": {
         "@flareapp/flare-client": "^1.0.12",
