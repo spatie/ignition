@@ -3,6 +3,12 @@
     @apply dark:text-gray-400;
 }
 
+.\~text-violet-500 {
+    @apply text-violet-500;
+    @apply dark:text-violet-400;
+}
+
+
 .\~text-indigo-600 {
     @apply text-indigo-600;
     @apply dark:text-indigo-400;
@@ -16,6 +22,11 @@
 .\~text-violet-600 {
     @apply text-violet-600;
     @apply dark:text-violet-400;
+}
+
+.hover\:\~text-violet-600 {
+    @apply hover:text-violet-600;
+    @apply hover:dark:text-violet-300;
 }
 
 .\~text-emerald-600 {

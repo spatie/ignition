@@ -1,5 +1,7 @@
 import React from 'react';
 import {CopyButton} from '@flareapp/ignition-ui';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
     url: string;
@@ -9,18 +11,19 @@ type Props = {
 
 export default function CopyableUrl({url, openText, helpText}: Props) {
     return (
-        <>
-            <p className="mt-4 text-gray-300">{helpText}</p>
-            <div className="grid cols-auto items-center justify-start gap-2 mt-2">
+        <div>
+            <p className="text-sm mb-1">{helpText}</p>
+            <div className="flex gap-3">
                 <a
                     href={url}
                     target="_blank"
-                    className="button-secondary button-sm bg-tint-600 hover:bg-tint-700 text-white"
+                    className="underline ~text-violet-500 hover:~text-violet-600"
                 >
+                    <FontAwesomeIcon icon={faExternalLinkAlt} className="opacity-50 text-xs mr-1"/>
                     {openText}
                 </a>
-                <CopyButton value={url}/>
+                <CopyButton alwaysVisible direction="left" value={url}/>
             </div>
-        </>
+        </div>
     )
 }
