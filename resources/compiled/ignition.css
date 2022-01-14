@@ -938,6 +938,16 @@ pre.sf-dump .sf-dump-toggle:hover span{
   color: rgb(129 140 248 / var(--tw-text-opacity));
 }
 
+.hover\:\~text-indigo-600:hover{
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+
+.dark .hover\:\~text-indigo-600:hover{
+  --tw-text-opacity: 1;
+  color: rgb(129 140 248 / var(--tw-text-opacity));
+}
+
 .\~text-blue-600{
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
@@ -1320,8 +1330,8 @@ pre.sf-dump .sf-dump-toggle:hover span{
   top: 0.5rem;
 }
 
-.right-2{
-  right: 0.5rem;
+.right-3{
+  right: 0.75rem;
 }
 
 .-bottom-3{
@@ -1332,6 +1342,14 @@ pre.sf-dump .sf-dump-toggle:hover span{
   left: 50%;
 }
 
+.top-0{
+  top: 0px;
+}
+
+.right-0{
+  right: 0px;
+}
+
 .left-0{
   left: 0px;
 }
@@ -1340,8 +1358,8 @@ pre.sf-dump .sf-dump-toggle:hover span{
   left: 2.5rem;
 }
 
-.top-0{
-  top: 0px;
+.right-2{
+  right: 0.5rem;
 }
 
 .top-2\.5{
@@ -1356,10 +1374,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
   right: 50%;
 }
 
-.right-0{
-  right: 0px;
-}
-
 .left-4{
   left: 1rem;
 }
@@ -1370,10 +1384,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 .top-0\.5{
   top: 0.125rem;
-}
-
-.right-3{
-  right: 0.75rem;
 }
 
 .z-10{
@@ -2030,8 +2040,8 @@ pre.sf-dump .sf-dump-toggle:hover span{
   background-color: rgb(254 252 232 / var(--tw-bg-opacity));
 }
 
-.bg-green-500\/5{
-  background-color: rgb(34 197 94 / 0.05);
+.bg-emerald-500\/5{
+  background-color: rgb(16 185 129 / 0.05);
 }
 
 .bg-red-500\/5{
@@ -2051,10 +2061,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
 .bg-violet-500{
   --tw-bg-opacity: 1;
   background-color: rgb(139 92 246 / var(--tw-bg-opacity));
-}
-
-.bg-emerald-500\/5{
-  background-color: rgb(16 185 129 / 0.05);
 }
 
 .bg-opacity-20{
@@ -2283,19 +2289,14 @@ pre.sf-dump .sf-dump-toggle:hover span{
   color: rgb(234 179 8 / var(--tw-text-opacity));
 }
 
-.text-indigo-500{
-  --tw-text-opacity: 1;
-  color: rgb(99 102 241 / var(--tw-text-opacity));
-}
-
-.text-green-500{
-  --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
-}
-
 .text-red-500{
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-indigo-500{
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
 }
 
 .text-red-50{
@@ -2392,12 +2393,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
   transition-duration: 150ms;
 }
 
-.transition-opacity{
-  transition-property: opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .transition-all{
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2420,12 +2415,12 @@ pre.sf-dump .sf-dump-toggle:hover span{
   transition-duration: 300ms;
 }
 
-.duration-150{
-  transition-duration: 150ms;
-}
-
 .duration-100{
   transition-duration: 100ms;
+}
+
+.duration-150{
+  transition-duration: 150ms;
 }
 
 .duration-1000{
