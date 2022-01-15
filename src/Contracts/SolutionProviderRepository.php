@@ -9,7 +9,7 @@ interface SolutionProviderRepository
     public function registerSolutionProvider(string $solutionProviderClass): self;
 
     /**
-     * @param array<int, ProvidesSolution> $solutionProviderClasses
+     * @param array<int,class-string<ProvidesSolution>|ProvidesSolution> $solutionProviderClasses
      *
      * @return $this
      */
