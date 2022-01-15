@@ -152,7 +152,6 @@ This is how the exception would be displayed if you were to throw it.
 
 ![Screenshot of solution](https://spatie.github.io/ignition/solution.png)
 
-
 #### Using solution providers
 
 Instead of adding solutions to exceptions directly, you can also create a solution provider. While exceptions that
