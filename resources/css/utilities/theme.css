@@ -8,10 +8,14 @@
     @apply dark:text-violet-400;
 }
 
-
 .\~text-indigo-600 {
     @apply text-indigo-600;
     @apply dark:text-indigo-400;
+}
+
+.hover\:\~text-indigo-600 {
+    @apply hover:text-indigo-600;
+    @apply hover:dark:text-indigo-400;
 }
 
 .\~text-blue-600 {
