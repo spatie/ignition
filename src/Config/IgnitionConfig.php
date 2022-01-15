@@ -12,6 +12,9 @@ class IgnitionConfig implements Arrayable
         return (new self())->loadConfigFile();
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function __construct(protected array $options = [])
     {
         $defaultOptions = $this->getDefaultOptions();
@@ -89,6 +92,9 @@ class IgnitionConfig implements Arrayable
         return $this->options['editor'] ?? null;
     }
 
+    /**
+     * @return array<string, mixed> $options
+     */
     public function editorOptions(): array
     {
         return $this->options['editor_options'] ?? [];
@@ -142,6 +148,10 @@ class IgnitionConfig implements Arrayable
         ];
     }
 
+
+    /**
+     * @return array<string, mixed> $options
+     */
     protected function getDefaultOptions(): array
     {
         return [

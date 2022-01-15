@@ -11,6 +11,13 @@ use Throwable;
 
 class ErrorPageViewModel
 {
+    /**
+     * @param \Throwable|null $throwable
+     * @param \Spatie\Ignition\Config\IgnitionConfig $ignitionConfig
+     * @param \Spatie\FlareClient\Report $report
+     * @param array<int, Solution> $solutions
+     * @param string|null $solutionTransformerClass
+     */
     public function __construct(
         protected ?Throwable $throwable,
         protected IgnitionConfig $ignitionConfig,
@@ -44,11 +51,17 @@ class ErrorPageViewModel
         return htmlspecialchars($this->report->getMessage());
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function config(): array
     {
         return $this->ignitionConfig->toArray();
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function solutions(): array
     {
         return array_map(function (Solution $solution) {
@@ -62,6 +75,9 @@ class ErrorPageViewModel
         }, $this->solutions);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function report(): array
     {
         return $this->report->toArray();
@@ -81,6 +97,9 @@ class ErrorPageViewModel
         return (string)file_get_contents($assetPath);
     }
 
+    /**
+     * @return array<int|string, mixed>
+     */
     public function shareableReport(): array
     {
         return (new ReportTrimmer())->trim($this->report());
