@@ -8,9 +8,7 @@
 [Ignition](https://flareapp.io/docs/ignition-for-laravel/introduction) is a beautiful and customizable error page for
 PHP applications
 
-![Screenshot of ignition](https://spatie.github.io/ignition/screenshot.png)
-
-Here's a minimal example.
+Here's a minimal example on how to register ignition.
 
 ```php
 use Spatie\Ignition\Ignition;
@@ -18,9 +16,22 @@ use Spatie\Ignition\Ignition;
 include 'vendor/autoload.php';
 
 Ignition::make()->register();
+```
 
+Let's now throw an exception during a web request.
+
+```php
 throw new Exception('Bye world');
 ```
+
+This is what you'll see in the browser.
+
+![Screenshot of ignition](https://spatie.github.io/ignition/ignition.png)
+
+There's also a beautiful dark mode.
+
+![Screenshot of ignition in dark mode](https://spatie.github.io/ignition/ignition-dark.png)
+
 
 ## Support us
 
@@ -139,7 +150,8 @@ class CustomSolution implements Solution
 
 This is how the exception would be displayed if you were to throw it.
 
-TODO: insert image
+![Screenshot of solution](https://spatie.github.io/ignition/solution.png)
+
 
 #### Using solution providers
 
