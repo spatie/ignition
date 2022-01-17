@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
-        "dev": "NODE_ENV=development concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
+        "dev": "NODE_ENV=development ROLLUP_WATCH=true concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
         "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
         "typecheck": "tsc -w --preserveWatchOutput",
         "postinstall": "sed -i '' '/For example <script/d' ./node_modules/@fortawesome/fontawesome-svg-core/index.es.js; sed -i '' '/For example <script/d' ../node_modules/@fortawesome/fontawesome-svg-core/index.es.js; exit 0"
@@ -20,7 +20,7 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-intersection-observer": "^8.32.5",
-        "tailwindcss": "^3.0.8"
+        "tailwindcss": "^3.0.15"
     },
     "devDependencies": {
         "@flareapp/flare-client": "^1.0.12",
