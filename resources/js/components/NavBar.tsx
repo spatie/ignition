@@ -2,11 +2,11 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import NavBarItem from 'components/NavBarItem';
 import ShareDropdown from 'components/ShareDropdown';
 import SettingsDropdown from 'components/SettingsDropdown';
-import { ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
+import { ErrorOccurrence, ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faShare, faCog, faAlignLeft, faExpand, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
-import { faLaravel } from '@fortawesome/free-brands-svg-icons';
+import { faLaravel, faPhp } from '@fortawesome/free-brands-svg-icons';
 import mapValues from 'lodash/mapValues';
 import keyBy from 'lodash/keyBy';
 
@@ -27,13 +27,48 @@ function useClickOutsideListener(ref: React.MutableRefObject<any>, handler: () =
     }, []);
 }
 
+function resolveDocs(
+    errorOccurrence: ErrorOccurrence,
+): null | { type: 'generic' | 'php' | 'laravel'; url: string; tailored: boolean } {
+    if (errorOccurrence.context_items.env?.find((env) => env.name === 'laravel_version')) {
+        const laravelDocs = errorOccurrence.documentation_links.find((link) => link.startsWith('https://laravel.com/'));
+
+        if (laravelDocs) {
+            return {
+                type: 'laravel',
+                url: laravelDocs,
+                tailored: true,
+            };
+        } else {
+            return {
+                type: 'laravel',
+                url: 'https://laravel.com/docs/',
+                tailored: false,
+            };
+        }
+    }
+
+    const phpDocs = errorOccurrence.documentation_links.find((link) => link.startsWith('https://php.net/'));
+    if (phpDocs) {
+        return {
+            type: 'php',
+            url: phpDocs,
+            tailored: true,
+        };
+    }
+
+    return {
+        type: 'generic',
+        url: 'https://php.net/docs',
+        tailored: false,
+    };
+}
+
 export default function NavBar({ showException }: Props) {
     const errorOccurrence = useContext(ErrorOccurrenceContext);
     const [isShareDropdownOpen, setIsShareDropdownOpen] = useState(false);
     const [isSettingsDropdownOpen, setIsSettingsDropdownOpen] = useState(false);
     const hasScrolled = useHasScrolled({ distance: 10 });
-
-    const laravelDocs = errorOccurrence.documentation_links.find((link) => link.startsWith('https://laravel.com/'));
 
     const shareRef = useRef(null);
     const settingsRef = useRef(null);
@@ -44,6 +79,8 @@ export default function NavBar({ showException }: Props) {
     const env = mapValues(keyBy(errorOccurrence.context_items['env'] || [], 'name'), 'value');
 
     const showEnvWarning = env.app_env !== 'local' && env.app_debug;
+
+    const docs = resolveDocs(errorOccurrence);
 
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
@@ -78,13 +115,20 @@ export default function NavBar({ showException }: Props) {
                             </NavBarItem>
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
-                            <NavBarItem
-                                name="docs"
-                                href={laravelDocs || 'https://laravel.com/docs/'}
-                                icon={<FontAwesomeIcon className="text-sm" icon={faLaravel} />}
-                                iconOpacity="opacity-80"
-                                important={!!laravelDocs}
-                            />
+                            {docs && (
+                                <NavBarItem
+                                    name="docs"
+                                    href={docs.url}
+                                    icon={
+                                        <FontAwesomeIcon
+                                            className="text-sm"
+                                            icon={docs.type === 'laravel' ? faLaravel : faPhp}
+                                        />
+                                    }
+                                    iconOpacity="opacity-80"
+                                    important={docs.tailored}
+                                />
+                            )}
 
                             <NavBarItem
                                 navRef={settingsRef}
