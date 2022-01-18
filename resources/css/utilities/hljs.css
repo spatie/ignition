@@ -1,0 +1,76 @@
+/* 
+    Code classes for highlight.js, SFDumps, …  
+*/
+
+.hljs-comment,
+.hljs-quote {
+  @apply ~text-gray-500;
+}
+
+.hljs-comment.hljs-doctag {
+  @apply ~text-gray-600;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula,
+.hljs-name {
+    @apply ~text-red-600;
+}
+
+.hljs-attr,
+.hljs-section,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-function.hljs-keyword,
+.hljs-literal  {
+  @apply text-violet-500;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string {
+  @apply ~text-blue-600;
+}
+
+.hljs-built_in,
+.hljs-class .hljs-title,
+.hljs-template-tag,
+.hljs-template-variable {
+  @apply text-orange-500;
+}
+
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number,
+.hljs-string.hljs-subst {
+    @apply ~text-emerald-600;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title,
+.hljs-variable,
+.hljs-operator {
+    @apply ~text-indigo-600;
+}
+
+.hljs-title,
+.hljs-strong  {
+    @apply font-bold;
+}
+
+.hljs-emphasis {
+    @apply italic;
+}
+
+.hljs-link {
+    @apply underline;
+}

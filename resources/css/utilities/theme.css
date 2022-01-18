@@ -1,3 +1,7 @@
+/* 
+    Light & dark colors in one class 
+*/
+
 .\~text-gray-500 {
     @apply text-gray-500;
     @apply dark:text-gray-400;
@@ -6,6 +10,11 @@
 .\~text-violet-500 {
     @apply text-violet-500;
     @apply dark:text-violet-400;
+}
+
+.\~text-gray-600 {
+    @apply text-gray-600;
+    @apply dark:text-gray-300;
 }
 
 .\~text-indigo-600 {
@@ -46,6 +55,11 @@
 .\~text-orange-600 {
     @apply text-orange-600;
     @apply dark:text-orange-400;
+}
+
+.\~text-gray-700 {
+    @apply text-gray-700;
+    @apply dark:text-gray-300;
 }
 
 .\~text-indigo-700 {
