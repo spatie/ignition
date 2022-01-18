@@ -32,6 +32,12 @@ There's also a beautiful dark mode.
 
 ![Screenshot of ignition in dark mode](https://spatie.github.io/ignition/ignition-dark.png)
 
+## Are you a visual learner?
+
+In [this video on YouTube](https://youtu.be/LEY0N0Bteew?t=739), you'll see a demo of all of the features.
+
+Do know more about the design decisions we made, read [this blog post](https://freek.dev/2168-ignition-the-most-beautiful-error-page-for-laravel-and-php-got-a-major-redesign).
+
 
 ## Support us
 
@@ -43,8 +49,6 @@ support us by [buying one of our paid products](https://spatie.be/open-source/su
 We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
 You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards
 on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
-
 
 ## Installation
 
