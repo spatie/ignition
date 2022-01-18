@@ -64,10 +64,5 @@
         "forum": "https://twitter.com/flareappio",
         "source": "https://github.com/spatie/ignition",
         "docs": "https://flareapp.io/docs/ignition-for-laravel/introduction"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-main": "1.x-dev"
-        }
     }
 }
