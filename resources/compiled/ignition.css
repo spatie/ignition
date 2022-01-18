@@ -628,6 +628,157 @@ pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-count {
     font-size: 12px;
 }
 
+/* 
+    Code classes for highlight.js, SFDumps, …  
+*/
+
+.hljs-comment, .hljs-quote{
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.dark .hljs-comment, .dark .hljs-quote{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.hljs-comment.hljs-doctag{
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.dark .hljs-comment.hljs-doctag{
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
+.hljs-doctag, .hljs-keyword, .hljs-formula, .hljs-name{
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
+.dark .hljs-doctag, .dark .hljs-keyword, .dark .hljs-formula, .dark .hljs-name{
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity));
+}
+
+.hljs-attr, .hljs-section, .hljs-selector-tag, .hljs-deletion, .hljs-function.hljs-keyword, .hljs-literal{
+  --tw-text-opacity: 1;
+  color: rgb(139 92 246 / var(--tw-text-opacity));
+}
+
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta-string{
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.dark .hljs-string, .dark .hljs-regexp, .dark .hljs-addition, .dark .hljs-attribute, .dark .hljs-meta-string{
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity));
+}
+
+.hljs-built_in, .hljs-class .hljs-title, .hljs-template-tag, .hljs-template-variable{
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity));
+}
+
+.hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number, .hljs-string.hljs-subst{
+  --tw-text-opacity: 1;
+  color: rgb(5 150 105 / var(--tw-text-opacity));
+}
+
+.dark .hljs-type, .dark .hljs-selector-class, .dark .hljs-selector-attr, .dark .hljs-selector-pseudo, .dark .hljs-number, .dark .hljs-string.hljs-subst{
+  --tw-text-opacity: 1;
+  color: rgb(52 211 153 / var(--tw-text-opacity));
+}
+
+.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-title, .hljs-variable, .hljs-operator{
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+
+.dark .hljs-symbol, .dark .hljs-bullet, .dark .hljs-link, .dark .hljs-meta, .dark .hljs-selector-id, .dark .hljs-title, .dark .hljs-variable, .dark .hljs-operator{
+  --tw-text-opacity: 1;
+  color: rgb(129 140 248 / var(--tw-text-opacity));
+}
+
+.hljs-title, .hljs-strong{
+  font-weight: 700;
+}
+
+.hljs-emphasis{
+  font-style: italic;
+}
+
+.hljs-link{
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
+.mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) 1rem, rgba(0, 0, 0, 1) calc(100% - 3rem), rgba(0, 0, 0, 0) calc(100% - 1rem));
+}
+
+.mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) calc(100% - 3rem), rgba(0, 0, 0, 0) calc(100% - 1rem));
+}
+
+.mask-fade-y {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 2.5rem), rgba(0, 0, 0, 0) 100%);
+}
+
+.mask-fade-frames {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 4rem), rgba(0, 0, 0, 0) 100%);
+}
+
+.scrollbar::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar-corner {
+    width: 2px;
+    height: 2px;
+}
+
+.scrollbar::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb{
+  background-color: rgb(239 68 68 / 0.9);
+}
+
+.scrollbar-lg::-webkit-scrollbar,
+.scrollbar-lg::-webkit-scrollbar-corner {
+    width: 4px;
+    height: 4px;
+}
+
+.scrollbar-lg::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+
+.scrollbar-lg::-webkit-scrollbar-thumb{
+  background-color: rgb(239 68 68 / 0.9);
+}
+
+.scrollbar-hidden-x {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: scroll;
+}
+
+.scrollbar-hidden-x::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hidden-y {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: scroll;
+}
+
+.scrollbar-hidden-y::-webkit-scrollbar {
+    display: none;
+}
+
 /*
     Dumps are hidden asap in errorPage.blade
     What follows is !important
@@ -642,17 +793,11 @@ main pre.sf-dump{
 }
 
 .sf-dump-public.sf-dump-highlight, .sf-dump-protected.sf-dump-highlight, .sf-dump-private.sf-dump-highlight, .sf-dump-str.sf-dump-highlight, .sf-dump-key.sf-dump-highlight{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(237 233 254 / var(--tw-bg-opacity)) !important;
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(221 214 254 / var(--tw-border-opacity)) !important;
+  background-color: rgb(139 92 246 / 0.1) !important;
 }
 
 .sf-dump-public.sf-dump-highlight-active, .sf-dump-protected.sf-dump-highlight-active, .sf-dump-private.sf-dump-highlight-active, .sf-dump-str.sf-dump-highlight-active, .sf-dump-key.sf-dump-highlight-active{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(254 243 199 / var(--tw-bg-opacity)) !important;
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(253 230 138 / var(--tw-border-opacity)) !important;
+  background-color: rgb(245 158 11 / 0.1) !important;
 }
 
 pre.sf-dump .sf-dump-search-wrapper{
@@ -748,33 +893,40 @@ pre.sf-dump, pre.sf-dump .sf-dump-default{
 }
 
 pre.sf-dump .sf-dump-num{
-  --tw-text-opacity: 1 !important;
-  color: rgb(239 68 68 / var(--tw-text-opacity)) !important;
+  --tw-text-opacity: 1;
+  color: rgb(5 150 105 / var(--tw-text-opacity));
+}
+
+.dark pre.sf-dump .sf-dump-num{
+  --tw-text-opacity: 1;
+  color: rgb(52 211 153 / var(--tw-text-opacity));
 }
 
 pre.sf-dump .sf-dump-const{
   font-weight: 400 !important;
+  --tw-text-opacity: 1 !important;
+  color: rgb(139 92 246 / var(--tw-text-opacity)) !important;
 }
 
 pre.sf-dump .sf-dump-str{
   font-weight: 400 !important;
   --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
 .dark pre.sf-dump .sf-dump-str{
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  color: rgb(96 165 250 / var(--tw-text-opacity));
 }
 
 pre.sf-dump .sf-dump-note{
   --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
+  color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 
 .dark pre.sf-dump .sf-dump-note{
   --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
+  color: rgb(129 140 248 / var(--tw-text-opacity));
 }
 
 pre.sf-dump .sf-dump-ref{
@@ -789,22 +941,22 @@ pre.sf-dump .sf-dump-ref{
 
 pre.sf-dump .sf-dump-public, pre.sf-dump .sf-dump-protected, pre.sf-dump .sf-dump-private{
   --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity));
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
 .dark pre.sf-dump .sf-dump-public, .dark pre.sf-dump .sf-dump-protected, .dark pre.sf-dump .sf-dump-private{
   --tw-text-opacity: 1;
-  color: rgb(167 139 250 / var(--tw-text-opacity));
+  color: rgb(248 113 113 / var(--tw-text-opacity));
 }
 
 pre.sf-dump .sf-dump-meta{
   --tw-text-opacity: 1;
-  color: rgb(124 58 237 / var(--tw-text-opacity));
+  color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 
 .dark pre.sf-dump .sf-dump-meta{
   --tw-text-opacity: 1;
-  color: rgb(167 139 250 / var(--tw-text-opacity));
+  color: rgb(129 140 248 / var(--tw-text-opacity));
 }
 
 pre.sf-dump .sf-dump-key{
@@ -819,12 +971,12 @@ pre.sf-dump .sf-dump-key{
 
 pre.sf-dump .sf-dump-index{
   --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
+  color: rgb(5 150 105 / var(--tw-text-opacity));
 }
 
 .dark pre.sf-dump .sf-dump-index{
   --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
+  color: rgb(52 211 153 / var(--tw-text-opacity));
 }
 
 pre.sf-dump .sf-dump-ellipsis{
@@ -908,6 +1060,10 @@ pre.sf-dump .sf-dump-toggle:hover span{
   background-color: rgb(17 24 39 / var(--tw-bg-opacity)) !important;
 }
 
+/* 
+    Light & dark colors in one class 
+*/
+
 .\~text-gray-500{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -926,6 +1082,16 @@ pre.sf-dump .sf-dump-toggle:hover span{
 .dark .\~text-violet-500{
   --tw-text-opacity: 1;
   color: rgb(167 139 250 / var(--tw-text-opacity));
+}
+
+.\~text-gray-600{
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.dark .\~text-gray-600{
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
 .\~text-indigo-600{
@@ -1006,6 +1172,16 @@ pre.sf-dump .sf-dump-toggle:hover span{
 .dark .\~text-orange-600{
   --tw-text-opacity: 1;
   color: rgb(251 146 60 / var(--tw-text-opacity));
+}
+
+.\~text-gray-700{
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.dark .\~text-gray-700{
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
 .\~text-indigo-700{
@@ -1199,70 +1375,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
 .dark .\~border-b-dropdown{
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(55 65 81 / var(--tw-border-opacity)) !important;
-}
-
-.mask-fade-x {
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 1) 1rem, rgba(0, 0, 0, 1) calc(100% - 3rem), rgba(0, 0, 0, 0) calc(100% - 1rem));
-}
-
-.mask-fade-r {
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) calc(100% - 3rem), rgba(0, 0, 0, 0) calc(100% - 1rem));
-}
-
-.mask-fade-y {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 2.5rem), rgba(0, 0, 0, 0) 100%);
-}
-
-.mask-fade-frames {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 4rem), rgba(0, 0, 0, 0) 100%);
-}
-
-.scrollbar::-webkit-scrollbar,
-.scrollbar::-webkit-scrollbar-corner {
-    width: 2px;
-    height: 2px;
-}
-
-.scrollbar::-webkit-scrollbar-track{
-  background-color: transparent;
-}
-
-.scrollbar::-webkit-scrollbar-thumb{
-  background-color: rgb(239 68 68 / 0.9);
-}
-
-.scrollbar-lg::-webkit-scrollbar,
-.scrollbar-lg::-webkit-scrollbar-corner {
-    width: 4px;
-    height: 4px;
-}
-
-.scrollbar-lg::-webkit-scrollbar-track{
-  background-color: transparent;
-}
-
-.scrollbar-lg::-webkit-scrollbar-thumb{
-  background-color: rgb(239 68 68 / 0.9);
-}
-
-.scrollbar-hidden-x {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    overflow-x: scroll;
-}
-
-.scrollbar-hidden-x::-webkit-scrollbar {
-    display: none;
-}
-
-.scrollbar-hidden-y {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    overflow-y: scroll;
-}
-
-.scrollbar-hidden-y::-webkit-scrollbar {
-    display: none;
 }
 
 .sr-only{
