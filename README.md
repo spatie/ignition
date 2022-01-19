@@ -38,7 +38,6 @@ In [this video on YouTube](https://youtu.be/LEY0N0Bteew?t=739), you'll see a dem
 
 Do know more about the design decisions we made, read [this blog post](https://freek.dev/2168-ignition-the-most-beautiful-error-page-for-laravel-and-php-got-a-major-redesign).
 
-
 ## Support us
 
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/ignition.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/ignition)
