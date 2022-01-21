@@ -175,7 +175,7 @@ interface HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool;
 
-    /** \Facade\Ignition\Contracts\Solution[] */
+    /** @return \Spatie\Ignition\Contracts\Solution[] */
     public function getSolutions(Throwable $throwable): array;
 }
 ```
