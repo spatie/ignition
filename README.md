@@ -118,7 +118,7 @@ the exception gets thrown.
 use Spatie\Ignition\Contracts\Solution;
 use Spatie\Ignition\Contracts\ProvidesSolution;
 
-class CustomException implements ProvidesSolution
+class CustomException extends Exception implements ProvidesSolution
 {
     public function getSolution(): Solution
     {
