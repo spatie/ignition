@@ -51,8 +51,9 @@ on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
-For Laravel apps, head over to [laravel-ignition](https://github.com/spatie/laravel-ignition)
-For Symfony apps, go to [symfony-ignition-bundle](https://github.com/spatie/symfony-ignition-bundle)
+For Laravel apps, head over to [laravel-ignition](https://github.com/spatie/laravel-ignition).
+
+For Symfony apps, go to [symfony-ignition-bundle](https://github.com/spatie/symfony-ignition-bundle).
 
 For all other PHP projects, install the package via composer:
 
