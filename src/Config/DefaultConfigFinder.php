@@ -4,13 +4,14 @@ namespace Spatie\Ignition\Config;
 
 class DefaultConfigFinder
 {
+    public const CONFIG_FILE_NAME = '.ignition.json';
     public function getConfigFilePath(): string
     {
         if (! $homeDirectory = $this->findHomeDirectory()) {
             return '';
         }
 
-        return "{$homeDirectory}/.ignition.json";
+        return "{$homeDirectory}/".self::CONFIG_FILE_NAME;
     }
 
     protected function findHomeDirectory(): ?string
