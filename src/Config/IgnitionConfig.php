@@ -50,16 +50,16 @@ class IgnitionConfig implements Arrayable
         $configFilePath = (new DefaultConfigFinder())->getConfigFilePath();
 
         $options = [];
-        $file_exists = false;
+        $configFileExists = false;
 
         try{
-            $file_exists = file_exists($configFilePath);
+            $configFileExists = file_exists($configFilePath);
         }catch(Throwable $e){
             $configFilePath = base_path(DefaultConfigFinder::CONFIG_FILE_NAME);
-            $file_exists = file_exists($configFilePath);
+            $configFileExists = file_exists($configFilePath);
         }
 
-        if ($file_exists) {
+        if ($configFileExists) {
             $content = (string)file_get_contents($configFilePath);
 
             $options = json_decode($content, true) ?? [];
