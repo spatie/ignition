@@ -10,7 +10,9 @@ class DefaultConfigFinder
             return '';
         }
 
-        return "{$homeDirectory}/.ignition.json";
+        $filepath = "{$homeDirectory}/.ignition.json";
+        
+        return @is_readable($filepath) ? $filepath : '';
     }
 
     protected function findHomeDirectory(): ?string
