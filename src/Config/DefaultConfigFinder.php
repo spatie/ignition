@@ -11,6 +11,7 @@ class DefaultConfigFinder
         }
 
         $filepath = "{$homeDirectory}/.ignition.json";
+        
         return @is_readable($filepath) ? $filepath : '';
     }
 
