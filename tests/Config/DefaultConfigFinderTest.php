@@ -3,6 +3,7 @@
 use Spatie\Ignition\Config\DefaultConfigFinder;
 
 const SETTINGS_FILE_DIRECTORY = __DIR__ . '/../temp/';
+const SETTINGS_FILE_NAME = '.ignition.json';
 
 test('the config finder can run without a filepath on linux', function () {
     putenv('HOME=' . realpath(SETTINGS_FILE_DIRECTORY));
@@ -42,4 +43,12 @@ test('the config finder can accept a filepath', function () {
 function isWindows(): bool
 {
     return str_starts_with('WIN', PHP_OS);
+}
+
+function retrieveSettingsFilePath(): string
+{
+    $path = rtrim(SETTINGS_FILE_DIRECTORY, DIRECTORY_SEPARATOR);
+    $file = SETTINGS_FILE_NAME;
+
+    return realpath($path . DIRECTORY_SEPARATOR . $file);
 }
