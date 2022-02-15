@@ -12,7 +12,7 @@ class DefaultConfigFinder
             return '';
         }
 
-        $filepath = "{$homeDirectory}/" . self::SETTINGS_FILE_NAME;
+        $filepath = $this->generateFilePath($homeDirectory);
 
         return @is_readable($filepath) ? $filepath : '';
     }
