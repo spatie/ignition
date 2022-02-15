@@ -35,9 +35,7 @@ class DefaultConfigFinder
             return '';
         }
 
-        $filepath = $this->generateFilePath($homeDirectory);
-
-        return @is_readable($filepath) ? $filepath : '';
+        return $this->generateFilePath($homeDirectory);
     }
 
     private function generateFilePath(string $path): string
@@ -48,7 +46,7 @@ class DefaultConfigFinder
             file_put_contents($filepath, '');
         }
 
-        return $filepath;
+        return @is_readable($filepath) ? $filepath : '';
     }
 
     protected function findHomeDirectory(): ?string
