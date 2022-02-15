@@ -58,14 +58,19 @@ class DefaultConfigFinder
 
             $homeDirectory = $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
 
-            return rtrim($homeDirectory, DIRECTORY_SEPARATOR);
+            return $this->formatHomeDirectory($homeDirectory);
         }
 
         if ($homeDirectory = getenv('HOME')) {
-            return rtrim($homeDirectory, DIRECTORY_SEPARATOR);
+            return $this->formatHomeDirectory($homeDirectory);
         }
 
         return null;
+    }
+
+    private function formatHomeDirectory(string $homeDirectory): string
+    {
+        return rtrim($homeDirectory, DIRECTORY_SEPARATOR);
     }
 
     private function isWindows(): bool
