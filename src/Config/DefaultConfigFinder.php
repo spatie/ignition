@@ -27,6 +27,10 @@ class DefaultConfigFinder
 
     public function getConfigFilePath(): string
     {
+        if ($this->path !== '') {
+            return $this->generateFilePath($this->path);
+        }
+
         if (! $homeDirectory = $this->findHomeDirectory()) {
             return '';
         }
