@@ -17,6 +17,11 @@ class DefaultConfigFinder
         return @is_readable($filepath) ? $filepath : '';
     }
 
+    private function generateFilePath(string $path): string
+    {
+        return $path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
+    }
+
     protected function findHomeDirectory(): ?string
     {
         if ($this->isWindows()) {
