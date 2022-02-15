@@ -4,6 +4,16 @@ use Spatie\Ignition\Config\DefaultConfigFinder;
 
 const SETTINGS_FILE_DIRECTORY = __DIR__ . '/../temp/';
 
+test('the config finder can run without a filepath on linux', function () {
+    putenv('HOME=' . realpath(SETTINGS_FILE_DIRECTORY));
+
+    $configFinder = new DefaultConfigFinder();
+
+    $configFilePath = $configFinder->getConfigFilePath();
+
+    $this->assertNotEmpty($configFilePath);
+})->skip(fn() => isWindows() === false, 'This test runs only in non-Windows environment.');
+
 test('the config finder can run without a filepath on windows', function () {
     [$disk, $path] = explode(':', realpath(SETTINGS_FILE_DIRECTORY), 2);
 
