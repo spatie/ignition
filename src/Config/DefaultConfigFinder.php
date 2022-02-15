@@ -42,7 +42,13 @@ class DefaultConfigFinder
 
     private function generateFilePath(string $path): string
     {
-        return $path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
+        $path = $path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
+
+        if (! file_exists($path)) {
+            file_put_contents($path, '');
+        }
+
+        return $path;
     }
 
     protected function findHomeDirectory(): ?string
