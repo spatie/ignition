@@ -6,6 +6,25 @@ class DefaultConfigFinder
 {
     private const SETTINGS_FILE_NAME = '.ignition.json';
 
+    public function __construct(private string $path = '')
+    {
+        $this->path = $this->initPath($path);
+    }
+
+    private function initPath(string $path): string
+    {
+        if ($this->isValidPath($path)) {
+            return $path;
+        }
+
+        return '';
+    }
+
+    private function isValidPath(string $path): bool
+    {
+        return ($path !== '') && file_exists($path) && is_writable($path);
+    }
+
     public function getConfigFilePath(): string
     {
         if (! $homeDirectory = $this->findHomeDirectory()) {
