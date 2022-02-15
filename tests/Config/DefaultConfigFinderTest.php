@@ -5,6 +5,14 @@ use Spatie\Ignition\Config\DefaultConfigFinder;
 const SETTINGS_FILE_DIRECTORY = __DIR__ . '/../temp/';
 const SETTINGS_FILE_NAME = '.ignition.json';
 
+afterEach(function () {
+    $settingsFile = retrieveSettingsFilePath();
+
+    if (file_exists($settingsFile)) {
+        unlink(realpath($settingsFile));
+    }
+});
+
 test('the config finder can run without a filepath on linux', function () {
     putenv('HOME=' . realpath(SETTINGS_FILE_DIRECTORY));
 
