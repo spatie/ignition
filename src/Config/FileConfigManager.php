@@ -21,7 +21,7 @@ class FileConfigManager implements ConfigManager
             return $this->initPathFromArgument($path);
         }
 
-        return $this->findHomeDirectory();
+        return $this->initPathFromEnvironment();
     }
 
     private function initPathFromArgument(string $path): string
@@ -40,7 +40,7 @@ class FileConfigManager implements ConfigManager
         return ($path !== '') && file_exists($path) && is_writable($path);
     }
 
-    protected function findHomeDirectory(): string
+    protected function initPathFromEnvironment(): string
     {
         if ($this->isWindows()) {
             if (empty($_SERVER['HOMEDRIVE']) || empty($_SERVER['HOMEPATH'])) {
