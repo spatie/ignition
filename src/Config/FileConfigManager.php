@@ -122,8 +122,14 @@ class FileConfigManager implements ConfigManager
 
     public function createSource(): bool
     {
+        $file = $this->generateFullFilePath();
+
+        if (file_exists($file)) {
+            return true;
+        }
+
         try {
-            file_put_contents($this->generateFullFilePath(), '');
+            file_put_contents($file, '');
         } catch (\Throwable) {
             return false;
         }
