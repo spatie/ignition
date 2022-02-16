@@ -22,7 +22,7 @@ test('the config finder can run without a filepath on linux', function () {
 
     $this->assertNotEmpty($configFilePath);
     $this->assertStringContainsString(SETTINGS_FILE_NAME, $configFilePath);
-})->skip(fn() => isWindows() === false, 'This test runs only in non-Windows environment.');
+})->skip(fn() => isWindows() === true, 'This test runs only in non-Windows environment.');
 
 test('the config finder can run without a filepath on windows', function () {
     [$disk, $path] = explode(':', realpath(SETTINGS_FILE_DIRECTORY), 2);
@@ -36,7 +36,7 @@ test('the config finder can run without a filepath on windows', function () {
 
     $this->assertNotEmpty($configFilePath);
     $this->assertStringContainsString(SETTINGS_FILE_NAME, $configFilePath);
-})->skip(fn() => isWindows() === true, 'This test runs only in Windows environment.');
+})->skip(fn() => isWindows() === false, 'This test runs only in Windows environment.');
 
 test('the config finder can accept a filepath', function () {
     $path = __DIR__ . '/../temp/';
