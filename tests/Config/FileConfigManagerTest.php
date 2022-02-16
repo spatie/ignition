@@ -69,6 +69,25 @@ test('the file config manager can create config file form a filepath', function 
     $this->assertFileExists($configSource['file']);
 });
 
+test('the file config manager can save to the config file form a filepath', function () {
+    $settings = [
+        'path' => __DIR__ . '/../temp/'
+    ];
+
+    $configManager = new FileConfigManager();
+    $configManager->updateSource($settings);
+    $configManager->createSource();
+    $configManager->save([
+        'test' => 'saved',
+    ]);
+
+    $configSource = $configManager->getSource();
+
+    $this->assertArrayHasKey('file', $configSource);
+    $this->assertFileExists($configSource['file']);
+    $this->assertStringContainsString('saved', file_get_contents($configSource['file']));
+});
+
 // Helpers
 function isWindows(): bool
 {
