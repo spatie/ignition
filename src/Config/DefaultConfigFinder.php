@@ -68,6 +68,11 @@ class DefaultConfigFinder
         return null;
     }
 
+    private function isWindows(): bool
+    {
+        return str_starts_with(strtoupper(PHP_OS), 'WIN');
+    }
+
     private function formatHomeDirectory(string $homeDirectory): string
     {
         return rtrim($homeDirectory, DIRECTORY_SEPARATOR);
