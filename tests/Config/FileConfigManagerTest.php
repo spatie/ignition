@@ -33,5 +33,5 @@ test('the file config manager can create config file form a filepath', function 
 
     $this->assertNotEmpty($configSource);
     $this->assertArrayHasKey('file', $configSource);
-    $this->assertTrue(file_exists($configSource['file']));
+    $this->assertFileExists($configSource['file']);
 });
