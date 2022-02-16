@@ -7,7 +7,8 @@ interface ConfigManager
     /** @return array<string, mixed> */
     public function load(): array;
 
-    public function save(): bool;
+    /** @param array<string, mixed> $options */
+    public function save(array $options): bool;
 
     /** @return array<string, mixed> */
     public function getSource(): array;
