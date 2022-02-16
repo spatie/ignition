@@ -2,6 +2,18 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.0.4 - 2022-02-16
+
+## What's Changed
+
+- Refine the Windows OS check by @kudashevs in https://github.com/spatie/ignition/pull/40
+
+## New Contributors
+
+- @kudashevs made their first contribution in https://github.com/spatie/ignition/pull/40
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.0.3...1.0.4
+
 ## 1.0.3 - 2022-02-13
 
 ## What's Changed
