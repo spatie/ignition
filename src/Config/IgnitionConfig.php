@@ -3,10 +3,13 @@
 namespace Spatie\Ignition\Config;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Spatie\Ignition\Contracts\ConfigManager;
 use Throwable;
 
 class IgnitionConfig implements Arrayable
 {
+    private ConfigManager $manager;
+
     public static function loadFromConfigFile(): self
     {
         return (new self())->loadConfigFile();
@@ -20,6 +23,7 @@ class IgnitionConfig implements Arrayable
         $defaultOptions = $this->getDefaultOptions();
 
         $this->options = array_merge($defaultOptions, $options);
+        $this->manager = $this->initConfigManager();
     }
 
     public function setOption(string $name, string $value): self
@@ -27,6 +31,15 @@ class IgnitionConfig implements Arrayable
         $this->options[$name] = $value;
 
         return $this;
+    }
+
+    private function initConfigManager(): ConfigManager
+    {
+        if (! function_exists('app')) {
+            return new FileConfigManager();
+        }
+
+        return app(ConfigManager::class);
     }
 
     /** @param array<string, string> $options */
