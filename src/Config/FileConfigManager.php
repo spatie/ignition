@@ -72,7 +72,7 @@ class FileConfigManager implements ConfigManager
     {
         $file = $this->generateFullFilePath();
 
-        if (!$this->isValidFile($file)) {
+        if (! $this->isValidFile($file)) {
             return [];
         }
 
