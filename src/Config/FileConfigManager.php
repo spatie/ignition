@@ -41,6 +41,18 @@ class FileConfigManager implements ConfigManager
 
     public function save(array $options): bool
     {
+        $file = $this->generateFullFilePath();
+
+        if (! $this->isValidFile($file)) {
+            return false;
+        }
+
+        try {
+            file_put_contents($file, json_encode($options));
+        } catch (\Throwable) {
+            return false;
+        }
+
         return true;
     }
 
