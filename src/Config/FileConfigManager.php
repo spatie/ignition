@@ -36,12 +36,17 @@ class FileConfigManager implements ConfigManager
         }
 
         if ($path = $this->initPath($settings['path'])) {
-            $this->path = rtrim($path, DIRECTORY_SEPARATOR);
+            $this->path = $this->preparePath($path);
 
             return true;
         }
 
         return false;
+    }
+
+    protected function preparePath(string $path): string
+    {
+        return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
     private function initPath(string $path): string
