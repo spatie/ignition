@@ -17,7 +17,7 @@ class DefaultConfigFinder
 
     protected function findHomeDirectory(): ?string
     {
-        if (str_starts_with(PHP_OS, 'WIN')) {
+        if (str_starts_with(strtoupper(PHP_OS), 'WIN')) {
             if (empty($_SERVER['HOMEDRIVE']) || empty($_SERVER['HOMEPATH'])) {
                 return null;
             }
