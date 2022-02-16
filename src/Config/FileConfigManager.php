@@ -58,7 +58,16 @@ class FileConfigManager implements ConfigManager
 
     public function load(): array
     {
-        return [];
+        $file = $this->generateFullFilePath();
+
+        if (!$this->isValidFile($file)) {
+            return [];
+        }
+
+        $content = (string)file_get_contents($file);
+        $options = json_decode($content, true) ?? [];
+
+        return $options;
     }
 
     protected function isValidFile(string $file): bool
