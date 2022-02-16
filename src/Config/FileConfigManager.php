@@ -84,21 +84,6 @@ class FileConfigManager implements ConfigManager
         ];
     }
 
-    public function updateSource(array $settings): bool
-    {
-        if (!array_key_exists('path', $settings)) {
-            return false;
-        }
-
-        if ($path = $this->initPath($settings['path'])) {
-            $this->path = $this->preparePath($path);
-
-            return true;
-        }
-
-        return false;
-    }
-
     protected function preparePath(string $path): string
     {
         return rtrim($path, DIRECTORY_SEPARATOR);

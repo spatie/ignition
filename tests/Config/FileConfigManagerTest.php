@@ -46,8 +46,6 @@ test('the file config manager can process a filepath', function () {
     ];
 
     $configManager = new FileConfigManager();
-    $configManager->updateSource($settings);
-
     $configSource = $configManager->getSource();
 
     $this->assertArrayHasKey('path', $configSource);
@@ -60,7 +58,6 @@ test('the file config manager can create config file form a filepath', function 
     ];
 
     $configManager = new FileConfigManager();
-    $configManager->updateSource($settings);
     $configManager->createSource();
 
     $configSource = $configManager->getSource();
@@ -75,7 +72,6 @@ test('the file config manager can save to the config file form a filepath', func
     ];
 
     $configManager = new FileConfigManager();
-    $configManager->updateSource($settings);
     $configManager->createSource();
     $configManager->save([
         'test' => 'saved',
@@ -94,7 +90,6 @@ test('the file config manager can load from the config file form a filepath', fu
     ];
 
     $configManager = new FileConfigManager();
-    $configManager->updateSource($settings);
     $configManager->createSource();
     $configManager->save([
         'test' => 'saved',

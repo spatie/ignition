@@ -37,7 +37,6 @@ if (! function_exists('app')) {
         $path = __DIR__ . '/../temp/';
 
         $manager = new FileConfigManager();
-        $manager->updateSource(['path' => __DIR__ . '/../temp/']);
 
         return $manager;
     }
