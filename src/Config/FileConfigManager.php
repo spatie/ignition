@@ -10,12 +10,21 @@ class FileConfigManager implements ConfigManager
 
     private string $path;
 
-    public function __construct()
+    public function __construct(string $path = '')
     {
-        $this->path = $this->findHomeDirectory();
+        $this->path = $this->initPath($path);
     }
 
     private function initPath(string $path): string
+    {
+        if ($path !== '') {
+            return $this->initPathFromArgument($path);
+        }
+
+        return $this->findHomeDirectory();
+    }
+
+    private function initPathFromArgument(string $path): string
     {
         $path = realpath($path);
 

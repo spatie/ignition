@@ -41,11 +41,7 @@ test('the file config manager can use a default file in Windows environment', fu
 })->skip(fn () => isWindows() === false, 'This test can be run only in the Windows environment.');
 
 test('the file config manager can process a filepath', function () {
-    $settings = [
-        'path' => __DIR__ . '/../temp/'
-    ];
-
-    $configManager = new FileConfigManager();
+    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
     $configSource = $configManager->getSource();
 
     $this->assertArrayHasKey('path', $configSource);
@@ -53,11 +49,7 @@ test('the file config manager can process a filepath', function () {
 });
 
 test('the file config manager can create config file form a filepath', function () {
-    $settings = [
-        'path' => __DIR__ . '/../temp/'
-    ];
-
-    $configManager = new FileConfigManager();
+    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
     $configManager->createSource();
 
     $configSource = $configManager->getSource();
@@ -67,11 +59,7 @@ test('the file config manager can create config file form a filepath', function 
 });
 
 test('the file config manager can save to the config file form a filepath', function () {
-    $settings = [
-        'path' => __DIR__ . '/../temp/'
-    ];
-
-    $configManager = new FileConfigManager();
+    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
     $configManager->createSource();
     $configManager->save([
         'test' => 'saved',
@@ -85,11 +73,7 @@ test('the file config manager can save to the config file form a filepath', func
 });
 
 test('the file config manager can load from the config file form a filepath', function () {
-    $settings = [
-        'path' => __DIR__ . '/../temp/'
-    ];
-
-    $configManager = new FileConfigManager();
+    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
     $configManager->createSource();
     $configManager->save([
         'test' => 'saved',
