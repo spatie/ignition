@@ -39,7 +39,7 @@ class FileConfigManager implements ConfigManager
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
-    public function save(): bool
+    public function save(array $options): bool
     {
         return true;
     }
