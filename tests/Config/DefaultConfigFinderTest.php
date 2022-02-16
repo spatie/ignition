@@ -38,7 +38,6 @@ test('the config finder can run without a filepath on windows', function () {
     $this->assertStringContainsString(SETTINGS_FILE_NAME, $configFilePath);
 })->skip(fn() => isWindows() === true, 'This test runs only in Windows environment.');
 
-
 test('the config finder can accept a filepath', function () {
     $path = __DIR__ . '/../temp/';
 
