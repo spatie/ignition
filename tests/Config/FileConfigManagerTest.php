@@ -88,6 +88,24 @@ test('the file config manager can save to the config file form a filepath', func
     $this->assertStringContainsString('saved', file_get_contents($configSource['file']));
 });
 
+test('the file config manager can load from the config file form a filepath', function () {
+    $settings = [
+        'path' => __DIR__ . '/../temp/'
+    ];
+
+    $configManager = new FileConfigManager();
+    $configManager->updateSource($settings);
+    $configManager->createSource();
+    $configManager->save([
+        'test' => 'saved',
+    ]);
+
+    $result = $configManager->load();
+
+    $this->assertNotEmpty($result);
+    $this->assertArrayHasKey('test', $result);
+});
+
 // Helpers
 function isWindows(): bool
 {
