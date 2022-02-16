@@ -39,6 +39,20 @@ class FileConfigManager implements ConfigManager
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
+    public function load(): array
+    {
+        $file = $this->generateFullFilePath();
+
+        if (!$this->isValidFile($file)) {
+            return [];
+        }
+
+        $content = (string)file_get_contents($file);
+        $options = json_decode($content, true) ?? [];
+
+        return $options;
+    }
+
     public function save(array $options): bool
     {
         $file = $this->generateFullFilePath();
@@ -54,20 +68,6 @@ class FileConfigManager implements ConfigManager
         }
 
         return true;
-    }
-
-    public function load(): array
-    {
-        $file = $this->generateFullFilePath();
-
-        if (!$this->isValidFile($file)) {
-            return [];
-        }
-
-        $content = (string)file_get_contents($file);
-        $options = json_decode($content, true) ?? [];
-
-        return $options;
     }
 
     protected function isValidFile(string $file): bool
