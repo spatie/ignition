@@ -52,7 +52,7 @@ test('the config finder can accept a filepath', function () {
 // Helpers
 function isWindows(): bool
 {
-    return str_starts_with('WIN', PHP_OS);
+    return str_starts_with(strtoupper(PHP_OS), 'WIN');
 }
 
 function retrieveSettingsFilePath(): string
