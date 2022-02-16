@@ -4,7 +4,6 @@ namespace Spatie\Ignition\Config;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Spatie\Ignition\Contracts\ConfigManager;
-use Throwable;
 
 class IgnitionConfig implements Arrayable
 {
@@ -60,17 +59,7 @@ class IgnitionConfig implements Arrayable
     /** @return array<string, mixed> */
     public function getConfigOptions(): array
     {
-        $configFilePath = (new DefaultConfigFinder())->getConfigFilePath();
-
-        $options = [];
-
-        if (file_exists($configFilePath)) {
-            $content = (string)file_get_contents($configFilePath);
-
-            $options = json_decode($content, true) ?? [];
-        }
-
-        return $options;
+        return $this->manager->load();
     }
 
     /**
@@ -80,19 +69,9 @@ class IgnitionConfig implements Arrayable
      */
     public function saveValues(array $options): bool
     {
-        $configFilePath = (new DefaultConfigFinder())->getConfigFilePath();
+        $this->manager->createSource();
 
-        if (! $configFilePath) {
-            return false;
-        }
-
-        try {
-            file_put_contents($configFilePath, json_encode($options));
-        } catch (Throwable) {
-            return false;
-        }
-
-        return true;
+        return $this->manager->save($options);
     }
 
     public function hideSolutions(): bool
