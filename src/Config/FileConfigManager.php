@@ -26,8 +26,6 @@ class FileConfigManager implements ConfigManager
 
     private function initPathFromArgument(string $path): string
     {
-        $path = realpath($path);
-
         if ($this->isValidPath($path)) {
             return $path;
         }
@@ -37,7 +35,13 @@ class FileConfigManager implements ConfigManager
 
     private function isValidPath(string $path): bool
     {
-        return ($path !== '') && file_exists($path) && is_writable($path);
+        if ($path === '') {
+            return false;
+        }
+
+        $path = realpath($path) ?: $path;
+
+        return file_exists($path) && is_writable($path);
     }
 
     protected function initPathFromEnvironment(): string
