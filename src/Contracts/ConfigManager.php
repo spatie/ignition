@@ -13,8 +13,5 @@ interface ConfigManager
     /** @return array<string, mixed> */
     public function getSource(): array;
 
-    /** @param array<string, mixed> $settings */
-    public function updateSource(array $settings): bool;
-
     public function createSource(): bool;
 }
