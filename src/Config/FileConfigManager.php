@@ -10,6 +10,20 @@ class FileConfigManager implements ConfigManager
 
     private string $path;
 
+    public function __construct()
+    {
+        $this->path = $this->findHomeDirectory();
+    }
+
+    protected function findHomeDirectory(): string
+    {
+        if ($homeDirectory = getenv('HOME')) {
+            return $this->preparePath($homeDirectory);
+        }
+
+        return '';
+    }
+
     public function save(): bool
     {
         return true;
