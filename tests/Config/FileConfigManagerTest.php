@@ -21,7 +21,6 @@ test('the file config manager can use a default file in Unix-like environment', 
 
     $configSource = $configManager->getSource();
 
-    $this->assertNotEmpty($configSource);
     $this->assertArrayHasKey('file', $configSource);
     $this->assertFileExists($configSource['file']);
 })->skip(fn () => isWindows() === true, 'This test can be run only in the non-Windows environment.');
@@ -37,7 +36,6 @@ test('the file config manager can use a default file in Windows environment', fu
 
     $configSource = $configManager->getSource();
 
-    $this->assertNotEmpty($configSource);
     $this->assertArrayHasKey('file', $configSource);
     $this->assertFileExists($configSource['file']);
 })->skip(fn () => isWindows() === false, 'This test can be run only in the Windows environment.');
@@ -52,7 +50,6 @@ test('the file config manager can process a filepath', function () {
 
     $configSource = $configManager->getSource();
 
-    $this->assertNotEmpty($configSource);
     $this->assertArrayHasKey('path', $configSource);
     $this->assertStringContainsString('temp', $configSource['path']);
 });
@@ -68,7 +65,6 @@ test('the file config manager can create config file form a filepath', function 
 
     $configSource = $configManager->getSource();
 
-    $this->assertNotEmpty($configSource);
     $this->assertArrayHasKey('file', $configSource);
     $this->assertFileExists($configSource['file']);
 });
