@@ -17,11 +17,26 @@ class FileConfigManager implements ConfigManager
 
     protected function findHomeDirectory(): string
     {
+        if ($this->isWindows()) {
+            if (empty($_SERVER['HOMEDRIVE']) || empty($_SERVER['HOMEPATH'])) {
+                return '';
+            }
+
+            $homeDirectory = $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
+
+            return $this->preparePath($homeDirectory);
+        }
+
         if ($homeDirectory = getenv('HOME')) {
             return $this->preparePath($homeDirectory);
         }
 
         return '';
+    }
+
+    private function isWindows(): bool
+    {
+        return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
     public function save(): bool
