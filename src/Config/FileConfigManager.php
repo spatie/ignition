@@ -15,6 +15,22 @@ class FileConfigManager implements ConfigManager
         $this->path = $this->findHomeDirectory();
     }
 
+    private function initPath(string $path): string
+    {
+        $path = realpath($path);
+
+        if ($this->isValidPath($path)) {
+            return $path;
+        }
+
+        return '';
+    }
+
+    private function isValidPath(string $path): bool
+    {
+        return ($path !== '') && file_exists($path) && is_writable($path);
+    }
+
     protected function findHomeDirectory(): string
     {
         if ($this->isWindows()) {
@@ -87,22 +103,6 @@ class FileConfigManager implements ConfigManager
     protected function preparePath(string $path): string
     {
         return rtrim($path, DIRECTORY_SEPARATOR);
-    }
-
-    private function initPath(string $path): string
-    {
-        $path = realpath($path);
-
-        if ($this->isValidPath($path)) {
-            return $path;
-        }
-
-        return '';
-    }
-
-    private function isValidPath(string $path): bool
-    {
-        return ($path !== '') && file_exists($path) && is_writable($path);
     }
 
     public function createSource(): bool
