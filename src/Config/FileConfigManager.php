@@ -44,6 +44,11 @@ class FileConfigManager implements ConfigManager
         return true;
     }
 
+    protected function isValidFile(string $file): bool
+    {
+        return file_exists($file) && @is_writable($file);
+    }
+
     public function load(): array
     {
         return [];
