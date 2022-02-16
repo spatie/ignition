@@ -36,8 +36,6 @@ if (! function_exists('app')) {
     {
         $path = __DIR__ . '/../temp/';
 
-        $manager = new FileConfigManager();
-
-        return $manager;
+        return new FileConfigManager(__DIR__ . '/../temp/');
     }
 }
