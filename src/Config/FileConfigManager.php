@@ -64,7 +64,7 @@ class FileConfigManager implements ConfigManager
     {
         try {
             file_put_contents($this->generateFullFilePath(), '');
-        } catch (Throwable) {
+        } catch (\Throwable) {
             return false;
         }
 
