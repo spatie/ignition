@@ -3,6 +3,7 @@
 namespace Spatie\Ignition\Config;
 
 use Spatie\Ignition\Contracts\ConfigManager;
+use Throwable;
 
 class FileConfigManager implements ConfigManager
 {
@@ -88,7 +89,7 @@ class FileConfigManager implements ConfigManager
 
         try {
             file_put_contents($file, json_encode($options));
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return false;
         }
 
@@ -126,7 +127,7 @@ class FileConfigManager implements ConfigManager
 
         try {
             file_put_contents($file, '');
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return false;
         }
 
