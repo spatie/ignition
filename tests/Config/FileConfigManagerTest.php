@@ -85,7 +85,6 @@ test('the file config manager can load from the config file form a filepath', fu
     $this->assertArrayHasKey('test', $result);
 });
 
-// Helpers
 function isWindows(): bool
 {
     return str_starts_with(strtoupper(PHP_OS), 'WIN');
