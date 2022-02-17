@@ -4,6 +4,8 @@ import Checkbox from 'components/ui/Checkbox';
 import { IgniteDataContext } from '../contexts/IgniteDataContext';
 import CopyableUrl from './ui/CopyableUrl';
 import shareClient, { SectionName } from '../shareClient';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
     isOpen: boolean;
@@ -11,7 +13,6 @@ type Props = {
 
 export default function ShareDropdown({ isOpen }: Props) {
     const igniteData = useContext(IgniteDataContext);
-    const [ownerUrl, setOwnerUrl] = useState<string | null>(null);
     const [publicUrl, setPublicUrl] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +52,8 @@ export default function ShareDropdown({ isOpen }: Props) {
         try {
             const response = await shareClient(igniteData, selectedSectionNames);
 
-            setOwnerUrl(response.owner_url);
+            window.open(response.owner_url);
+
             setPublicUrl(response.public_url);
         } catch (e) {
             setError('Something went wrong while sharing, please try again.');
@@ -96,23 +98,19 @@ export default function ShareDropdown({ isOpen }: Props) {
                                 className={'bg-violet-500 border-violet-500/25 CopyButton text-white'}
                                 onClick={onShareError}
                             >
+                                <FontAwesomeIcon icon={faExternalLinkAlt} className="opacity-50 text-xs mr-1"/>
                                 Create Share
                             </Button>
                         </div>
                     </>
                 )}
 
-                {publicUrl && ownerUrl && (
+                {publicUrl && (
                     <div className="grid grid-cols-1 gap-4">
                         <CopyableUrl
                             url={publicUrl}
                             helpText="Share your error with others"
                             openText="Visit public share"
-                        />
-                        <CopyableUrl
-                            url={ownerUrl}
-                            helpText="Administer your shared error"
-                            openText="Visit share admin"
                         />
                     </div>
                 )}
