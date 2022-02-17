@@ -62,6 +62,7 @@ class FileConfigManager implements ConfigManager
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
+    /** {@inheritDoc} */
     public function load(): array
     {
         $file = $this->generateFullFilePath();
@@ -76,6 +77,7 @@ class FileConfigManager implements ConfigManager
         return $options;
     }
 
+    /** {@inheritDoc} */
     public function save(array $options): bool
     {
         $file = $this->generateFullFilePath();
@@ -98,6 +100,7 @@ class FileConfigManager implements ConfigManager
         return file_exists($file) && @is_writable($file);
     }
 
+    /** {@inheritDoc} */
     public function getSource(): array
     {
         return [
@@ -112,6 +115,7 @@ class FileConfigManager implements ConfigManager
         return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
+    /** {@inheritDoc} */
     public function createSource(): bool
     {
         $file = $this->generateFullFilePath();
