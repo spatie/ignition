@@ -140,7 +140,6 @@ class IgnitionConfig implements Arrayable
         ];
     }
 
-
     /**
      * @return array<string, mixed> $options
      */
