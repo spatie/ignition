@@ -15,7 +15,7 @@ class FileConfigManager implements ConfigManager
         $this->path = $this->initPath($path);
     }
 
-    private function initPath(string $path): string
+    protected function initPath(string $path): string
     {
         if ($path !== '') {
             return $this->initPathFromArgument($path);
