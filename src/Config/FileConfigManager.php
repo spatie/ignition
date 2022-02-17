@@ -35,17 +35,6 @@ class FileConfigManager implements ConfigManager
 
     private function isValidPath(string $path): bool
     {
-        /**
-         * This guard clause could seem exceeding, however, it is left here in case if the initPath() logic
-         * changes in the future. This check is important because realpath() function returns a current path
-         * on empty string and this is not what we want to occur.
-         */
-        if ($path === '') {
-            return false;
-        }
-
-        $path = realpath($path) ?: $path;
-
         return file_exists($path) && is_writable($path);
     }
 
