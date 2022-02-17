@@ -58,7 +58,7 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
                       value: {
                           ...query,
                           replace_bindings: true,
-                          bindings: query.bindings.map((binding) => ({
+                          bindings: Object.values(query.bindings).map((binding) => ({
                               type: typeof binding,
                               value: binding,
                           })),
