@@ -66,6 +66,11 @@ class FileConfigManager implements ConfigManager
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
+    protected function preparePath(string $path): string
+    {
+        return rtrim($path, DIRECTORY_SEPARATOR);
+    }
+
     /** {@inheritDoc} */
     public function load(): array
     {
@@ -135,11 +140,6 @@ class FileConfigManager implements ConfigManager
             'path' => $this->path,
             'file' => $this->generateFullFilePath(),
         ];
-    }
-
-    protected function preparePath(string $path): string
-    {
-        return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
     /** {@inheritDoc} */
