@@ -105,15 +105,15 @@ class FileConfigManager implements ConfigManager
     /** {@inheritDoc} */
     public function save(array $options): bool
     {
-        if (! $this->isFileCreated()) {
-            return false;
-        }
-
         return $this->saveToFile($options);
     }
 
     private function saveToFile(array $options): bool
     {
+        if (! $this->isFileCreated()) {
+            return false;
+        }
+
         if (! $this->isValidFile()) {
             return false;
         }
