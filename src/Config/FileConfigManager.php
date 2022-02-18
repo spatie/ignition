@@ -156,13 +156,7 @@ class FileConfigManager implements ConfigManager
             return true;
         }
 
-        try {
-            file_put_contents($file, '');
-        } catch (Throwable) {
-            return false;
-        }
-
-        return true;
+        return (file_put_contents($file, '') !== false);
     }
 
     private function generateFullFilePath(): string
