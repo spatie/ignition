@@ -130,7 +130,7 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
         received_at: new Date(report.seen_at * 1000).toISOString(),
         seen_at_url: report?.context?.request?.url,
         exception_class: report.exception_class,
-        exception_message: report.message,
+        exception_message: report.message || '',
         application_path: report.application_path,
         application_version: report.application_version,
         language_version: report.language_version,
