@@ -150,6 +150,10 @@ class FileConfigManager implements ConfigManager
     /** {@inheritDoc} */
     public function createSource(): bool
     {
+        if ($this->isEmptyPath()) {
+            return false;
+        }
+
         $file = $this->generateFullFilePath();
 
         if (file_exists($file)) {
@@ -157,6 +161,11 @@ class FileConfigManager implements ConfigManager
         }
 
         return (file_put_contents($file, '') !== false);
+    }
+
+    private function isEmptyPath(): bool
+    {
+        return trim($this->path) === '';
     }
 
     private function generateFullFilePath(): string
