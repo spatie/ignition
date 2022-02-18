@@ -138,16 +138,6 @@ class FileConfigManager implements ConfigManager
     }
 
     /** {@inheritDoc} */
-    public function getPersistentInfo(): array
-    {
-        return [
-            'name' => self::SETTINGS_FILE_NAME,
-            'path' => $this->path,
-            'file' => $this->file,
-        ];
-    }
-
-    /** {@inheritDoc} */
     public function createPersistent(): bool
     {
         if ($this->isEmptyPath()) {
@@ -171,5 +161,15 @@ class FileConfigManager implements ConfigManager
     private function generateFullFilePath(): string
     {
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
+    }
+
+    /** {@inheritDoc} */
+    public function getPersistentInfo(): array
+    {
+        return [
+            'name' => self::SETTINGS_FILE_NAME,
+            'path' => $this->path,
+            'file' => $this->file,
+        ];
     }
 }
