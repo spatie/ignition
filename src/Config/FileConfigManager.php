@@ -66,7 +66,7 @@ class FileConfigManager implements ConfigManager
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
-    protected function preparePath(string $path): string
+    private function preparePath(string $path): string
     {
         return rtrim($path, DIRECTORY_SEPARATOR);
     }
