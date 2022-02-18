@@ -11,9 +11,12 @@ class FileConfigManager implements ConfigManager
 
     private string $path;
 
+    private bool $created;
+
     public function __construct(string $path = '')
     {
         $this->path = $this->initPath($path);
+        $this->created = $this->createSource();
     }
 
     protected function initPath(string $path): string
