@@ -30,7 +30,6 @@ test('the config can be retrieved from a file', function () {
     $this->assertEquals('test', $configArray['editor']);
 });
 
-// Helpers
 if (! function_exists('app')) {
     function app()
     {
