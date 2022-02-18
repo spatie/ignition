@@ -34,24 +34,11 @@ class IgnitionConfig implements Arrayable
 
     private function initConfigManager(): ConfigManager
     {
-        if ($this->isInContainer()) {
+        if (function_exists('app')) {
             return app(ConfigManager::class);
         }
 
         return new FileConfigManager();
-    }
-
-    private function isInContainer(): bool
-    {
-        if (function_exists('app')) {
-            $possibleContainer = app();
-
-            return is_object($possibleContainer) &&
-                method_exists($possibleContainer, 'has') &&
-                $possibleContainer->has(ConfigManager::class);
-        }
-
-        return false;
     }
 
     /** @param array<string, string> $options */
