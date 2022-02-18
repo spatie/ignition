@@ -69,9 +69,7 @@ class FileConfigManager implements ConfigManager
     /** {@inheritDoc} */
     public function load(): array
     {
-        $file = $this->generateFullFilePath();
-
-        if (! $this->isValidFile($file)) {
+        if (! $this->created) {
             return [];
         }
 
