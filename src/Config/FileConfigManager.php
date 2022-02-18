@@ -80,6 +80,11 @@ class FileConfigManager implements ConfigManager
         return '';
     }
 
+    private function generateFullFilePath(): string
+    {
+        return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
+    }
+
     /** {@inheritDoc} */
     public function load(): array
     {
@@ -156,11 +161,6 @@ class FileConfigManager implements ConfigManager
     private function isEmptyPath(): bool
     {
         return trim($this->path) === '';
-    }
-
-    private function generateFullFilePath(): string
-    {
-        return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
     }
 
     /** {@inheritDoc} */
