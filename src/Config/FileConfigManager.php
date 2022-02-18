@@ -109,7 +109,7 @@ class FileConfigManager implements ConfigManager
         }
 
         try {
-            file_put_contents($file, json_encode($options));
+            file_put_contents($file, json_encode($options, JSON_THROW_ON_ERROR));
         } catch (Throwable) {
             return false;
         }
