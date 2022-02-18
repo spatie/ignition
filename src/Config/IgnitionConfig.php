@@ -71,7 +71,6 @@ class IgnitionConfig implements Arrayable
 
     /**
      * @param array<string, mixed> $options
-     *
      * @return bool
      */
     public function saveValues(array $options): bool
