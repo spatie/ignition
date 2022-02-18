@@ -96,7 +96,7 @@ class FileConfigManager implements ConfigManager
             return [];
         }
 
-        $content = (string)file_get_contents($file);
+        $content = (string)file_get_contents($this->file);
         $settings = json_decode($content, true) ?? [];
 
         return $settings;
@@ -119,7 +119,7 @@ class FileConfigManager implements ConfigManager
         }
 
         try {
-            file_put_contents($file, json_encode($options, JSON_THROW_ON_ERROR));
+            file_put_contents($this->file, json_encode($options, JSON_THROW_ON_ERROR));
         } catch (Throwable) {
             return false;
         }
