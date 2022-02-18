@@ -11,7 +11,7 @@ interface ConfigManager
     public function save(array $options): bool;
 
     /** @return array<string, mixed> */
-    public function getSource(): array;
+    public function getPersistentInfo(): array;
 
     public function createPersistent(): bool;
 }

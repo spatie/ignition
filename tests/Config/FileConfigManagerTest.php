@@ -18,7 +18,7 @@ test('the file config manager can use a default file in Unix-like environment', 
 
     $configManager = new FileConfigManager();
 
-    $configSource = $configManager->getSource();
+    $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('file', $configSource);
     $this->assertFileExists($configSource['file']);
@@ -32,7 +32,7 @@ test('the file config manager can use a default file in Windows environment', fu
 
     $configManager = new FileConfigManager();
 
-    $configSource = $configManager->getSource();
+    $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('file', $configSource);
     $this->assertFileExists($configSource['file']);
@@ -40,7 +40,7 @@ test('the file config manager can use a default file in Windows environment', fu
 
 test('the file config manager cannot process an empty filepath', function () {
     $configManager = new FileConfigManager('   ');
-    $configSource = $configManager->getSource();
+    $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('file', $configSource);
     $this->assertEmpty($configSource['file']);
@@ -48,7 +48,7 @@ test('the file config manager cannot process an empty filepath', function () {
 
 test('the file config manager cannot process a wrong filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/wrong_file_path');
-    $configSource = $configManager->getSource();
+    $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('file', $configSource);
     $this->assertEmpty($configSource['file']);
@@ -56,7 +56,7 @@ test('the file config manager cannot process a wrong filepath', function () {
 
 test('the file config manager can process a filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/../temp/');
-    $configSource = $configManager->getSource();
+    $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('path', $configSource);
     $this->assertStringContainsString('temp', $configSource['path']);
@@ -65,7 +65,7 @@ test('the file config manager can process a filepath', function () {
 test('the file config manager can create config file form a filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/../temp/');
 
-    $configSource = $configManager->getSource();
+    $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('file', $configSource);
     $this->assertFileExists($configSource['file']);
@@ -77,7 +77,7 @@ test('the file config manager can save to the config file form a filepath', func
         'test' => 'saved',
     ]);
 
-    $configSource = $configManager->getSource();
+    $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('file', $configSource);
     $this->assertFileExists($configSource['file']);

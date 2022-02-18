@@ -138,7 +138,7 @@ class FileConfigManager implements ConfigManager
     }
 
     /** {@inheritDoc} */
-    public function getSource(): array
+    public function getPersistentInfo(): array
     {
         return [
             'name' => self::SETTINGS_FILE_NAME,
