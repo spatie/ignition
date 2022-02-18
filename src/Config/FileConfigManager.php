@@ -133,7 +133,7 @@ class FileConfigManager implements ConfigManager
 
     protected function isFileCreated(): bool
     {
-        return $this->created;
+        return $this->file !== '';
     }
 
     protected function isValidFile(string $file): bool
