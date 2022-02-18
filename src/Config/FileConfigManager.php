@@ -92,9 +92,7 @@ class FileConfigManager implements ConfigManager
 
     private function readFromFile()
     {
-        $file = $this->generateFullFilePath();
-
-        if (! $this->isValidFile($file)) {
+        if (! $this->isValidFile($this->file)) {
             return [];
         }
 
@@ -116,9 +114,7 @@ class FileConfigManager implements ConfigManager
 
     private function saveToFile(array $options): bool
     {
-        $file = $this->generateFullFilePath();
-
-        if (! $this->isValidFile($file)) {
+        if (! $this->isValidFile($this->file)) {
             return false;
         }
 
@@ -147,7 +143,7 @@ class FileConfigManager implements ConfigManager
         return [
             'name' => self::SETTINGS_FILE_NAME,
             'path' => $this->path,
-            'file' => $this->generateFullFilePath(),
+            'file' => $this->file,
         ];
     }
 
