@@ -93,6 +93,10 @@ class FileConfigManager implements ConfigManager
     /** {@inheritDoc} */
     public function save(array $options): bool
     {
+        if (! $this->isFileCreated()) {
+            return false;
+        }
+
         $file = $this->generateFullFilePath();
 
         if (! $this->isValidFile($file)) {
