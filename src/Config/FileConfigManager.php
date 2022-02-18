@@ -69,7 +69,7 @@ class FileConfigManager implements ConfigManager
     /** {@inheritDoc} */
     public function load(): array
     {
-        if (! $this->created) {
+        if (! $this->isFileCreated()) {
             return [];
         }
 
@@ -106,6 +106,11 @@ class FileConfigManager implements ConfigManager
         }
 
         return true;
+    }
+
+    protected function isFileCreated(): bool
+    {
+        return $this->created;
     }
 
     protected function isValidFile(string $file): bool
