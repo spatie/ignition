@@ -43,9 +43,15 @@ class IgnitionConfig implements Arrayable
 
     private function isInContainer(): bool
     {
-        return function_exists('app') &&
-            method_exists(app(), 'has') &&
-            app()->has(ConfigManager::class);
+        if (function_exists('app')) {
+            $possibleContainer = app();
+
+            return is_object($possibleContainer) &&
+                method_exists($possibleContainer, 'has') &&
+                $possibleContainer->has(ConfigManager::class);
+        }
+
+        return false;
     }
 
     /** @param array<string, string> $options */
