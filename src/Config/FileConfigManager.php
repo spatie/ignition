@@ -85,9 +85,9 @@ class FileConfigManager implements ConfigManager
         }
 
         $content = (string)file_get_contents($file);
-        $options = json_decode($content, true) ?? [];
+        $settings = json_decode($content, true) ?? [];
 
-        return $options;
+        return $settings;
     }
 
     /** {@inheritDoc} */
