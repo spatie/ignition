@@ -40,6 +40,14 @@ test('the file config manager can use a default file in Windows environment', fu
     $this->assertFileExists($configSource['file']);
 })->skip(fn () => isWindows() === false, 'This test can be run only in the Windows environment.');
 
+test('the file config manager cannot process a wrong filepath', function () {
+    $configManager = new FileConfigManager(__DIR__ . '/wrong_file_path');
+    $configSource = $configManager->getSource();
+
+    $this->assertArrayHasKey('file', $configSource);
+    $this->assertEmpty($configSource['file']);
+});
+
 test('the file config manager can process a filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/../temp/');
     $configSource = $configManager->getSource();
