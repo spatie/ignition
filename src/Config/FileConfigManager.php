@@ -92,7 +92,7 @@ class FileConfigManager implements ConfigManager
             return [];
         }
 
-        if (! $this->isValidFile()) {
+        if (! $this->isFileValid()) {
             return [];
         }
 
@@ -114,7 +114,7 @@ class FileConfigManager implements ConfigManager
             return false;
         }
 
-        if (! $this->isValidFile()) {
+        if (! $this->isFileValid()) {
             return false;
         }
 
@@ -132,7 +132,7 @@ class FileConfigManager implements ConfigManager
         return $this->file !== '';
     }
 
-    protected function isValidFile(): bool
+    protected function isFileValid(): bool
     {
         return file_exists($this->file) && @is_writable($this->file);
     }
