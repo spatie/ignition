@@ -161,6 +161,6 @@ class FileConfigManager implements ConfigManager
 
     private function generateFullFilePath(): string
     {
-        return $this->preparePath($this->path) . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
+        return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
     }
 }
