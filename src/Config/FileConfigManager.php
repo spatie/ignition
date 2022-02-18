@@ -42,7 +42,7 @@ class FileConfigManager implements ConfigManager
         return file_exists($path) && is_writable($path);
     }
 
-    protected function initPathFromEnvironment(): string
+    private function initPathFromEnvironment(): string
     {
         if ($this->isWindows()) {
             if (empty($_SERVER['HOMEDRIVE']) || empty($_SERVER['HOMEPATH'])) {
