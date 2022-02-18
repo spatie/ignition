@@ -10,8 +10,8 @@ interface ConfigManager
     /** @param array<string, mixed> $options */
     public function save(array $options): bool;
 
+    public function createPersistent(): bool;
+
     /** @return array<string, mixed> */
     public function getPersistentInfo(): array;
-
-    public function createPersistent(): bool;
 }
