@@ -76,8 +76,6 @@ class IgnitionConfig implements Arrayable
      */
     public function saveValues(array $options): bool
     {
-        $this->manager->createSource();
-
         return $this->manager->save($options);
     }
 
