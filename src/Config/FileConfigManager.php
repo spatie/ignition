@@ -97,6 +97,11 @@ class FileConfigManager implements ConfigManager
             return false;
         }
 
+        return $this->saveToFile($options);
+    }
+
+    private function saveToFile(array $options): bool
+    {
         $file = $this->generateFullFilePath();
 
         if (! $this->isValidFile($file)) {
