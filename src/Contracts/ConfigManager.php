@@ -13,5 +13,5 @@ interface ConfigManager
     /** @return array<string, mixed> */
     public function getSource(): array;
 
-    public function createSource(): bool;
+    public function createPersistent(): bool;
 }

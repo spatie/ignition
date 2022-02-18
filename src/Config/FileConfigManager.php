@@ -73,7 +73,7 @@ class FileConfigManager implements ConfigManager
 
     protected function createFile(): string
     {
-        if ($this->createSource()) {
+        if ($this->createPersistent()) {
             return $this->generateFullFilePath();
         }
 
@@ -148,7 +148,7 @@ class FileConfigManager implements ConfigManager
     }
 
     /** {@inheritDoc} */
-    public function createSource(): bool
+    public function createPersistent(): bool
     {
         if ($this->isEmptyPath()) {
             return false;
