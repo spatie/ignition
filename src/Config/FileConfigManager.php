@@ -71,6 +71,15 @@ class FileConfigManager implements ConfigManager
         return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
+    protected function createFile(): string
+    {
+        if ($this->createSource()) {
+            return $this->generateFullFilePath();
+        }
+
+        return '';
+    }
+
     /** {@inheritDoc} */
     public function load(): array
     {
