@@ -73,6 +73,17 @@ class FileConfigManager implements ConfigManager
             return [];
         }
 
+        return $this->readFromFile();
+    }
+
+    private function readFromFile()
+    {
+        $file = $this->generateFullFilePath();
+
+        if (! $this->isValidFile($file)) {
+            return [];
+        }
+
         $content = (string)file_get_contents($file);
         $options = json_decode($content, true) ?? [];
 
