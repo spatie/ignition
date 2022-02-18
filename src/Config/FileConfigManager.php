@@ -31,7 +31,7 @@ class FileConfigManager implements ConfigManager
     private function initPathFromArgument(string $path): string
     {
         if ($this->isValidPath($path)) {
-            return $path;
+            return $this->preparePath($path);
         }
 
         return '';
