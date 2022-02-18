@@ -83,15 +83,15 @@ class FileConfigManager implements ConfigManager
     /** {@inheritDoc} */
     public function load(): array
     {
-        if (! $this->isFileCreated()) {
-            return [];
-        }
-
         return $this->readFromFile();
     }
 
     private function readFromFile()
     {
+        if (! $this->isFileCreated()) {
+            return [];
+        }
+
         if (! $this->isValidFile()) {
             return [];
         }
