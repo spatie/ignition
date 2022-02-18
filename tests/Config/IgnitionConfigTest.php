@@ -17,7 +17,7 @@ test('the config can be converted to an array', function () {
     $this->assertEquals('local', $configArray['localSitesPath']);
 });
 
-test('the config can be retrieved from a file', function () {
+test('the config can be retrieved data from a file', function () {
     $config = new IgnitionConfig();
 
     $config->saveValues([
