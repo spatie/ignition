@@ -92,7 +92,7 @@ class FileConfigManager implements ConfigManager
 
     private function readFromFile()
     {
-        if (! $this->isValidFile($this->file)) {
+        if (! $this->isValidFile()) {
             return [];
         }
 
@@ -114,7 +114,7 @@ class FileConfigManager implements ConfigManager
 
     private function saveToFile(array $options): bool
     {
-        if (! $this->isValidFile($this->file)) {
+        if (! $this->isValidFile()) {
             return false;
         }
 
@@ -132,9 +132,9 @@ class FileConfigManager implements ConfigManager
         return $this->file !== '';
     }
 
-    protected function isValidFile(string $file): bool
+    protected function isValidFile(): bool
     {
-        return file_exists($file) && @is_writable($file);
+        return file_exists($this->file) && @is_writable($this->file);
     }
 
     /** {@inheritDoc} */
