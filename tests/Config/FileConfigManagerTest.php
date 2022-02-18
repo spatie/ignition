@@ -17,7 +17,6 @@ test('the file config manager can use a default file in Unix-like environment', 
     putenv('HOME=' . realpath(SETTINGS_FILE_DIRECTORY));
 
     $configManager = new FileConfigManager();
-    $configManager->createSource();
 
     $configSource = $configManager->getSource();
 
@@ -32,7 +31,6 @@ test('the file config manager can use a default file in Windows environment', fu
     $_SERVER['HOMEPATH'] = "{$path}";
 
     $configManager = new FileConfigManager();
-    $configManager->createSource();
 
     $configSource = $configManager->getSource();
 
@@ -66,7 +64,6 @@ test('the file config manager can process a filepath', function () {
 
 test('the file config manager can create config file form a filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/../temp/');
-    $configManager->createSource();
 
     $configSource = $configManager->getSource();
 
@@ -76,7 +73,6 @@ test('the file config manager can create config file form a filepath', function 
 
 test('the file config manager can save to the config file form a filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/../temp/');
-    $configManager->createSource();
     $configManager->save([
         'test' => 'saved',
     ]);
@@ -90,7 +86,6 @@ test('the file config manager can save to the config file form a filepath', func
 
 test('the file config manager can load from the config file form a filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/../temp/');
-    $configManager->createSource();
     $configManager->save([
         'test' => 'saved',
     ]);
