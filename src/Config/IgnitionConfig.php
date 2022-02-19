@@ -4,6 +4,7 @@ namespace Spatie\Ignition\Config;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Spatie\Ignition\Contracts\ConfigManager;
+use Throwable;
 
 class IgnitionConfig implements Arrayable
 {
@@ -34,11 +35,11 @@ class IgnitionConfig implements Arrayable
 
     private function initConfigManager(): ConfigManager
     {
-        if (function_exists('app')) {
+        try {
             return app(ConfigManager::class);
+        } catch (Throwable) {
+            return new FileConfigManager();
         }
-
-        return new FileConfigManager();
     }
 
     /** @param array<string, string> $options */
