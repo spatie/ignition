@@ -74,13 +74,13 @@ class FileConfigManager implements ConfigManager
     protected function createFile(): string
     {
         if ($this->createPersistent()) {
-            return $this->generateFullFilePath();
+            return $this->generateFullFileName();
         }
 
         return '';
     }
 
-    private function generateFullFilePath(): string
+    private function generateFullFileName(): string
     {
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
     }
@@ -149,7 +149,7 @@ class FileConfigManager implements ConfigManager
             return false;
         }
 
-        $file = $this->generateFullFilePath();
+        $file = $this->generateFullFileName();
 
         if (file_exists($file)) {
             return true;
