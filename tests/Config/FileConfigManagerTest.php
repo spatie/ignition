@@ -62,7 +62,7 @@ test('the file config manager can process a filepath', function () {
     $this->assertStringContainsString('temp', $configSource['path']);
 });
 
-test('the file config manager can create config file form a filepath', function () {
+test('the file config manager can create config file from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
 
     $configSource = $configManager->getPersistentInfo();
@@ -71,7 +71,7 @@ test('the file config manager can create config file form a filepath', function 
     $this->assertFileExists($configSource['file']);
 });
 
-test('the file config manager can save to the config file form a filepath', function () {
+test('the file config manager can save to the config file from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configManager->save([
         'test' => 'saved',
@@ -84,7 +84,7 @@ test('the file config manager can save to the config file form a filepath', func
     $this->assertStringContainsString('saved', file_get_contents($configSource['file']));
 });
 
-test('the file config manager can load from the config file form a filepath', function () {
+test('the file config manager can load from the config file from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configManager->save([
         'test' => 'saved',
