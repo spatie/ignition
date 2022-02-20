@@ -84,7 +84,7 @@ test('the file config manager can save to a config file created from a filepath'
     $this->assertStringContainsString('saved', file_get_contents($configSource['file']));
 });
 
-test('the file config manager can load from the config file from a filepath', function () {
+test('the file config manager can load from a config file created from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configManager->save([
         'test' => 'saved',
