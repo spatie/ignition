@@ -55,7 +55,7 @@ test('the file config manager cannot process a wrong filepath', function () {
 });
 
 test('the file config manager can process a filepath', function () {
-    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
+    $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('path', $configSource);
@@ -63,7 +63,7 @@ test('the file config manager can process a filepath', function () {
 });
 
 test('the file config manager can create config file form a filepath', function () {
-    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
+    $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
 
     $configSource = $configManager->getPersistentInfo();
 
@@ -72,7 +72,7 @@ test('the file config manager can create config file form a filepath', function 
 });
 
 test('the file config manager can save to the config file form a filepath', function () {
-    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
+    $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configManager->save([
         'test' => 'saved',
     ]);
@@ -85,7 +85,7 @@ test('the file config manager can save to the config file form a filepath', func
 });
 
 test('the file config manager can load from the config file form a filepath', function () {
-    $configManager = new FileConfigManager(__DIR__ . '/../temp/');
+    $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configManager->save([
         'test' => 'saved',
     ]);
