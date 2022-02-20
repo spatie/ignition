@@ -62,7 +62,7 @@ test('the file config manager can process a filepath', function () {
     $this->assertStringContainsString('temp', $configSource['path']);
 });
 
-test('the file config manager can create config file from a filepath', function () {
+test('the file config manager can create a config file from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
 
     $configSource = $configManager->getPersistentInfo();
