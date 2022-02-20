@@ -71,7 +71,7 @@ test('the file config manager can create a config file from a filepath', functio
     $this->assertFileExists($configSource['file']);
 });
 
-test('the file config manager can save to the config file from a filepath', function () {
+test('the file config manager can save to a config file created from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configManager->save([
         'test' => 'saved',
