@@ -85,7 +85,30 @@ class ErrorPageViewModel
      */
     public function report(): array
     {
-        return $this->report->toArray();
+        $report = $this->report->toArray();
+        $this->recursiveConvertToArray($report);
+
+        return $report;
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @return void
+     */
+    private function recursiveConvertToArray(array &$data) : void
+    {
+        foreach ($data as &$value)
+        {
+            switch(true)
+            {
+                case is_array($value):
+                    $this->recursiveConvertToArray($value);
+                    break;
+                case is_object($value):
+                    $value = (array)$value;
+                    break;
+            }
+        }
     }
 
     public function jsonEncode(mixed $data): string
