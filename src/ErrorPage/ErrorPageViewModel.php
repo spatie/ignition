@@ -99,15 +99,23 @@ class ErrorPageViewModel
     {
         foreach ($data as &$value)
         {
-            switch(true)
+            if(is_object($value))
             {
-                case is_array($value):
+                try
+                {
+                    $temp = json_encode($value);
+                    $value = json_decode($temp, true);
+
                     $this->recursiveConvertToArray($value);
-                    break;
-                case is_object($value):
-                    $value = (array)$value;
-                    break;
+                }
+                catch (\Exception $e)
+                {
+                    $value = null;
+                }
+                continue;
             }
+            if (is_array($value))
+                $this->recursiveConvertToArray($value);
         }
     }
 
