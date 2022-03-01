@@ -5,11 +5,7 @@ require_once __DIR__ . '/helpers.php';
 use Spatie\Ignition\Config\FileConfigManager;
 
 afterEach(function () {
-    $settingsFile = retrieveSettingsFilePath();
-
-    if (file_exists($settingsFile)) {
-        unlink(realpath($settingsFile));
-    }
+    removeTempSettingsFile();
 });
 
 test('the file config manager can use a default file in Unix-like environment', function () {

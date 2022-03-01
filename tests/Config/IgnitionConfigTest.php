@@ -6,11 +6,7 @@ use Spatie\Ignition\Config\FileConfigManager;
 use Spatie\Ignition\Config\IgnitionConfig;
 
 afterEach(function () {
-    $settingsFile = retrieveSettingsFilePath();
-
-    if (file_exists($settingsFile)) {
-        unlink(realpath($settingsFile));
-    }
+    removeTempSettingsFile();
 });
 
 test('the config can be converted to an array', function () {
