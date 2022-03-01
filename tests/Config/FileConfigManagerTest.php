@@ -100,11 +100,3 @@ function isWindows(): bool
 {
     return str_starts_with(strtoupper(PHP_OS), 'WIN');
 }
-
-function retrieveSettingsFilePath(): string
-{
-    $path = rtrim(SETTINGS_FILE_DIRECTORY, DIRECTORY_SEPARATOR);
-    $file = SETTINGS_FILE_NAME;
-
-    return realpath($path . DIRECTORY_SEPARATOR . $file);
-}
