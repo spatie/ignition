@@ -18,7 +18,7 @@ export default function AppDebugWarning() {
         <section className="lg:flex items-stretch ~bg-white shadow-lg">
             <div className='lg:w-1/3 flex-none flex items-center min-w-0 px-6 sm:px-10 py-8 bg-red-500 text-red-50'>
                 <h2 className="min-w-0 truncate text-xl font-semibold leading-snug">
-                    <code className="mr-0.5">APP_DEBUG</code> is set to <code className="mx-0.5">true</code> while 
+                    <code className="mr-0.5">APP_DEBUG</code> is set to <code className="mx-0.5">true</code> while
                     <br/>
                     <code className="mr-0.5">APP_ENV</code> is not <code className="mx-0.5">local</code>
                 </h2>
