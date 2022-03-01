@@ -5,6 +5,14 @@ require_once __DIR__ . '/helpers.php';
 use Spatie\Ignition\Config\FileConfigManager;
 use Spatie\Ignition\Config\IgnitionConfig;
 
+afterEach(function () {
+    $settingsFile = retrieveSettingsFilePath();
+
+    if (file_exists($settingsFile)) {
+        unlink(realpath($settingsFile));
+    }
+});
+
 test('the config can be converted to an array', function () {
     $config = new IgnitionConfig([
         'editor' => 'phpstorm',
