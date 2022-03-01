@@ -1,9 +1,8 @@
 <?php
 
-use Spatie\Ignition\Config\FileConfigManager;
+require_once __DIR__ . '/helpers.php';
 
-const SETTINGS_FILE_DIRECTORY = __DIR__ . '/../temp/';
-const SETTINGS_FILE_NAME = '.ignition.json';
+use Spatie\Ignition\Config\FileConfigManager;
 
 afterEach(function () {
     $settingsFile = retrieveSettingsFilePath();
