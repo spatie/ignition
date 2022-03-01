@@ -39,8 +39,6 @@ test('the config can be retrieved data from a file', function () {
 if (! function_exists('app')) {
     function app()
     {
-        $path = __DIR__ . '/../temp/';
-
-        return new FileConfigManager($path);
+        return new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     }
 }
