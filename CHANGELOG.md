@@ -2,6 +2,21 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.1.0 - 2022-03-01
+
+## What's Changed
+
+- fix: don't let `exception_message` be `null` by @innocenzi in https://github.com/spatie/ignition/pull/45
+- Update .gitattributes by @PaolaRuby in https://github.com/spatie/ignition/pull/46
+- Set `vscode` as default editor by @AlexVanderbist in https://github.com/spatie/ignition/pull/53
+- Add error boundaries
+
+## New Contributors
+
+- @PaolaRuby made their first contribution in https://github.com/spatie/ignition/pull/46
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.0.5...1.1.0
+
 ## 1.0.5 - 2022-02-17
 
 ## What's Changed
