@@ -82,7 +82,7 @@ more cleaner.
 
 ### Using dark mode
 
-By default, Ignition uses a nice white based them. If this is too bright for your eyes, you can use dark mode.
+By default, Ignition uses a nice white based theme. If this is too bright for your eyes, you can use dark mode.
 
 ```php
 \Spatie\Ignition\Ignition::make()
