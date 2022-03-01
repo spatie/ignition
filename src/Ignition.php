@@ -162,16 +162,28 @@ class Ignition
         return $this;
     }
 
+    /** @deprecated Use `setTheme('dark')` instead */
     public function useDarkMode(): self
     {
-        $this->theme('dark');
+        return $this->setTheme('dark');
+    }
+
+    /** @deprecated Use `setTheme($theme)` instead */
+    public function theme(string $theme): self
+    {
+        return $this->setTheme($theme);
+    }
+
+    public function setTheme(string $theme): self
+    {
+        $this->ignitionConfig->setOption('theme', $theme);
 
         return $this;
     }
 
-    public function theme(string $theme): self
+    public function setEditor(string $editor): self
     {
-        $this->ignitionConfig->setOption('theme', $theme);
+        $this->ignitionConfig->setOption('editor', $editor);
 
         return $this;
     }

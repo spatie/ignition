@@ -11,7 +11,7 @@ type Props = {
 export default function SettingsDropdown({ isOpen }: Props) {
     const igniteData = useContext(IgniteDataContext);
     const { ignitionConfig, setIgnitionConfig } = useContext(IgnitionConfigContext);
-    const [editor, setEditor] = useState(ignitionConfig.editor);
+    const [editor, setEditor] = useState(ignitionConfig.editor || '');
     const [previousTheme, setPreviousTheme] = useState<string | null>(null);
     const [isUpdatingConfig, setIsUpdatingConfig] = useState(false);
     const [updateWasSuccessful, setUpdateWasSuccessful] = useState(false);
@@ -184,7 +184,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                     <Button
                         onClick={updateConfig}
                         disabled={isUpdatingConfig}
-                        className={"bg-red-500 border-red-500/25 text-white"} 
+                        className={"bg-red-500 border-red-500/25 text-white"}
                     >
                         Save settings
                     </Button>
