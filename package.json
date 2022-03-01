@@ -28,7 +28,7 @@
         "@types/react-dom": "^17.0.5",
         "autoprefixer": "^10.4.0",
         "concurrently": "^6.2.0",
-        "husky": "^1.3.1",
+        "husky": "^7.0.4",
         "lint-staged": "^11.0.0",
         "postcss": "^8.4.5",
         "postcss-easy-import": "^3.0.0",
