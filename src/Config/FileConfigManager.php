@@ -144,16 +144,16 @@ class FileConfigManager implements ConfigManager
             return false;
         }
 
-        return $this->writeToFile($this->file, $content);
+        return $this->writeToFile($content);
     }
 
-    private function writeToFile(string $file, string $content): bool
+    private function writeToFile(string $content): bool
     {
         if (! $this->isFileValid()) {
             return false;
         }
 
-        return (file_put_contents($file, $content) !== false);
+        return (file_put_contents($this->file, $content) !== false);
     }
 
     /** {@inheritDoc} */
