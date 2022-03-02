@@ -147,7 +147,7 @@ class FileConfigManager implements ConfigManager
         return $this->writeToFile($content);
     }
 
-    private function writeToFile(string $content): bool
+    protected function writeToFile(string $content): bool
     {
         if (! $this->isFileValid()) {
             return false;
