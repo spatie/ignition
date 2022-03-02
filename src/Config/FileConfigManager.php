@@ -83,11 +83,11 @@ class FileConfigManager implements ConfigManager
             return $file;
         }
 
-        if (! $this->writeToFile($file, '')) {
-            return '';
+        if (file_put_contents($file, '') !== false) {
+            return $file;
         }
 
-        return $file;
+        return '';
     }
 
     private function isEmptyPath(): bool
