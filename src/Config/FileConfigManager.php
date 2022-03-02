@@ -138,10 +138,6 @@ class FileConfigManager implements ConfigManager
 
     private function saveToFile(array $options): bool
     {
-        if (! $this->isFileValid()) {
-            return false;
-        }
-
         try {
             $content = json_encode($options, JSON_THROW_ON_ERROR);
         } catch (Throwable) {
@@ -153,6 +149,10 @@ class FileConfigManager implements ConfigManager
 
     private function writeToFile(string $file, string $content): bool
     {
+        if (! $this->isFileValid()) {
+            return false;
+        }
+
         return (file_put_contents($file, $content) !== false);
     }
 
