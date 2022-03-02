@@ -73,26 +73,26 @@ class FileConfigManager implements ConfigManager
 
     protected function createFile(): string
     {
-        if ($this->createPersistent()) {
-            return $this->generateFullFileName();
-        }
-
-        return '';
-    }
-
-    private function createPersistent(): bool
-    {
         if ($this->isEmptyPath()) {
-            return false;
+            return '';
         }
 
         $file = $this->generateFullFileName();
 
         if (file_exists($file)) {
-            return true;
+            return $file;
         }
 
-        return $this->writeToFile($file, '');
+        if (! $this->writeToFile($file, '')) {
+            return '';
+        }
+
+        return $file;
+    }
+
+    private function isEmptyPath(): bool
+    {
+        return trim($this->path) === '';
     }
 
     private function generateFullFileName(): string
@@ -160,11 +160,6 @@ class FileConfigManager implements ConfigManager
     private function writeToFile(string $file, string $content): bool
     {
         return (file_put_contents($file, $content) !== false);
-    }
-
-    private function isEmptyPath(): bool
-    {
-        return trim($this->path) === '';
     }
 
     /** {@inheritDoc} */
