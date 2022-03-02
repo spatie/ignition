@@ -155,12 +155,17 @@ class FileConfigManager implements ConfigManager
             return true;
         }
 
-        return (file_put_contents($file, '') !== false);
+        return $this->writeToFile($file, '');
     }
 
     private function isEmptyPath(): bool
     {
         return trim($this->path) === '';
+    }
+
+    private function writeToFile(string $file, string $content): bool
+    {
+        return (file_put_contents($file, $content) !== false);
     }
 
     /** {@inheritDoc} */
