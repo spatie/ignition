@@ -2,6 +2,19 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.1.1 - 2022-03-02
+
+## What's Changed
+
+- Create new build for Ignition-UI changes
+- Update README.md by @biscuit-deluxe in https://github.com/spatie/ignition/pull/54
+
+## New Contributors
+
+- @biscuit-deluxe made their first contribution in https://github.com/spatie/ignition/pull/54
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.1.0...1.1.1
+
 ## 1.1.0 - 2022-03-01
 
 ## What's Changed
