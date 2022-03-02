@@ -39,7 +39,7 @@ class FileConfigManager implements ConfigManager
 
     private function isValidPath(string $path): bool
     {
-        return file_exists($path) && is_writable($path);
+        return file_exists($path) && @is_writable($path);
     }
 
     private function preparePath(string $path): string
