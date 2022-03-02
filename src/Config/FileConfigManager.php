@@ -125,7 +125,7 @@ class FileConfigManager implements ConfigManager
             @is_writable($this->file);
     }
 
-    protected function isFileCreated(): bool
+    private function isFileCreated(): bool
     {
         return $this->file !== '';
     }
