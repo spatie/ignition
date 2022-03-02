@@ -80,7 +80,7 @@ class FileConfigManager implements ConfigManager
         return '';
     }
 
-    public function createPersistent(): bool
+    private function createPersistent(): bool
     {
         if ($this->isEmptyPath()) {
             return false;
