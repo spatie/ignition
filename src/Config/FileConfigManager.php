@@ -95,7 +95,7 @@ class FileConfigManager implements ConfigManager
         return trim($this->path) === '';
     }
 
-    private function generateFullFileName(): string
+    protected function generateFullFileName(): string
     {
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
     }
