@@ -142,6 +142,11 @@ class FileConfigManager implements ConfigManager
         return file_exists($this->file) && @is_writable($this->file);
     }
 
+    private function writeToFile(string $file, string $content): bool
+    {
+        return (file_put_contents($file, $content) !== false);
+    }
+
     /** {@inheritDoc} */
     public function createPersistent(): bool
     {
@@ -161,11 +166,6 @@ class FileConfigManager implements ConfigManager
     private function isEmptyPath(): bool
     {
         return trim($this->path) === '';
-    }
-
-    private function writeToFile(string $file, string $content): bool
-    {
-        return (file_put_contents($file, $content) !== false);
     }
 
     /** {@inheritDoc} */
