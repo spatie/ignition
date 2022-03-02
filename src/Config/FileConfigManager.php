@@ -42,6 +42,11 @@ class FileConfigManager implements ConfigManager
         return file_exists($path) && is_writable($path);
     }
 
+    private function preparePath(string $path): string
+    {
+        return rtrim($path, DIRECTORY_SEPARATOR);
+    }
+
     private function initPathFromEnvironment(): string
     {
         if ($this->isWindows()) {
@@ -64,11 +69,6 @@ class FileConfigManager implements ConfigManager
     private function isWindows(): bool
     {
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
-    }
-
-    private function preparePath(string $path): string
-    {
-        return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
     protected function createFile(): string
