@@ -1,0 +1,39 @@
+name: Build
+
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '12.x'
+
+            - name: Restoring Yarn cache
+              uses: actions/cache@v2
+              with:
+                  path: '**/node_modules'
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+            - name: Installing NPM dependencies
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
+              run: yarn install
+
+            - name: Create bundle
+              run: yarn run bundle
+
+            - name: Commit changes
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: Add new JS bundle build
