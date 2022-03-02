@@ -108,10 +108,6 @@ class FileConfigManager implements ConfigManager
 
     private function readFromFile()
     {
-        if (! $this->isFileCreated()) {
-            return [];
-        }
-
         if (! $this->isFileValid()) {
             return [];
         }
@@ -122,14 +118,16 @@ class FileConfigManager implements ConfigManager
         return $settings;
     }
 
+    protected function isFileValid(): bool
+    {
+        return $this->isFileCreated() &&
+            file_exists($this->file) &&
+            @is_writable($this->file);
+    }
+
     protected function isFileCreated(): bool
     {
         return $this->file !== '';
-    }
-
-    protected function isFileValid(): bool
-    {
-        return file_exists($this->file) && @is_writable($this->file);
     }
 
     /** {@inheritDoc} */
@@ -140,10 +138,6 @@ class FileConfigManager implements ConfigManager
 
     private function saveToFile(array $options): bool
     {
-        if (! $this->isFileCreated()) {
-            return false;
-        }
-
         if (! $this->isFileValid()) {
             return false;
         }
