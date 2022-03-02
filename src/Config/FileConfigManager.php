@@ -147,7 +147,6 @@ class FileConfigManager implements ConfigManager
         return (file_put_contents($file, $content) !== false);
     }
 
-    /** {@inheritDoc} */
     public function createPersistent(): bool
     {
         if ($this->isEmptyPath()) {
