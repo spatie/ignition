@@ -124,12 +124,12 @@ class FileConfigManager implements ConfigManager
         }
 
         try {
-            file_put_contents($this->file, json_encode($options, JSON_THROW_ON_ERROR));
+            $content = json_encode($options, JSON_THROW_ON_ERROR);
         } catch (Throwable) {
             return false;
         }
 
-        return true;
+        return $this->writeToFile($this->file, $content);
     }
 
     protected function isFileCreated(): bool
