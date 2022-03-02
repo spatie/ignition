@@ -80,6 +80,21 @@ class FileConfigManager implements ConfigManager
         return '';
     }
 
+    public function createPersistent(): bool
+    {
+        if ($this->isEmptyPath()) {
+            return false;
+        }
+
+        $file = $this->generateFullFileName();
+
+        if (file_exists($file)) {
+            return true;
+        }
+
+        return $this->writeToFile($file, '');
+    }
+
     private function generateFullFileName(): string
     {
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
@@ -145,21 +160,6 @@ class FileConfigManager implements ConfigManager
     private function writeToFile(string $file, string $content): bool
     {
         return (file_put_contents($file, $content) !== false);
-    }
-
-    public function createPersistent(): bool
-    {
-        if ($this->isEmptyPath()) {
-            return false;
-        }
-
-        $file = $this->generateFullFileName();
-
-        if (file_exists($file)) {
-            return true;
-        }
-
-        return $this->writeToFile($file, '');
     }
 
     private function isEmptyPath(): bool
