@@ -116,7 +116,7 @@ class FileConfigManager implements ConfigManager
         return $this->saveToFile($options);
     }
 
-    private function createFile(): bool
+    protected function createFile(): bool
     {
         if ($this->isEmptyPath()) {
             return false;
