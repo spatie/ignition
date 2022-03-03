@@ -12,6 +12,7 @@ it('can use a default file in Unix-like environment', function () {
     putenv('HOME=' . realpath(SETTINGS_FILE_DIRECTORY));
 
     $configManager = new FileConfigManager();
+    $configManager->save([]);
 
     $configSource = $configManager->getPersistentInfo();
 
@@ -26,6 +27,7 @@ it('can use a default file in Windows environment', function () {
     $_SERVER['HOMEPATH'] = "{$path}";
 
     $configManager = new FileConfigManager();
+    $configManager->save([]);
 
     $configSource = $configManager->getPersistentInfo();
 
@@ -59,6 +61,7 @@ it('can process a filepath', function () {
 
 it('can create a config file from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
+    $configManager->save([]);
 
     $configSource = $configManager->getPersistentInfo();
 
