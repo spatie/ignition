@@ -30,7 +30,7 @@ class FileConfigManager implements ConfigManager
         return $this->preparePath($path);
     }
 
-    private function retrievePath(string $path): string
+    protected function retrievePath(string $path): string
     {
         if ($path !== '') {
             return $path;
