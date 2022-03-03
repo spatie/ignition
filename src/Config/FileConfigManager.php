@@ -117,23 +117,17 @@ class FileConfigManager implements ConfigManager
         return $this->saveToFile($options);
     }
 
-    private function createFile(): string
+    private function createFile(): bool
     {
         if ($this->isEmptyPath()) {
-            return '';
+            return false;
         }
 
-        $file = $this->generateFullFileName();
-
-        if (file_exists($file)) {
-            return $file;
+        if (file_exists($this->file)) {
+            return false;
         }
 
-        if (file_put_contents($file, '') !== false) {
-            return $file;
-        }
-
-        return '';
+        return (file_put_contents($this->file, '') !== false);
     }
 
     private function isEmptyPath(): bool
