@@ -28,15 +28,6 @@ class FileConfigManager implements ConfigManager
         return $this->initPathFromEnvironment();
     }
 
-    private function initPathFromArgument(string $path): string
-    {
-        if ($this->isValidPathArgument($path)) {
-            return $this->preparePath($path);
-        }
-
-        return '';
-    }
-
     private function retrievePath(string $path): string
     {
         if ($path !== '') {
