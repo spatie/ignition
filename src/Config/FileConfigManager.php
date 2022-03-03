@@ -84,7 +84,7 @@ class FileConfigManager implements ConfigManager
 
     protected function readFromFile()
     {
-        if (! $this->isFileValid()) {
+        if (! $this->isValidFile()) {
             return [];
         }
 
@@ -94,7 +94,7 @@ class FileConfigManager implements ConfigManager
         return $settings;
     }
 
-    protected function isFileValid(): bool
+    protected function isValidFile(): bool
     {
         return ! $this->isEmptyPath() &&
             file_exists($this->file) &&
@@ -142,7 +142,7 @@ class FileConfigManager implements ConfigManager
 
     protected function writeToFile(string $content): bool
     {
-        if (! $this->isFileValid()) {
+        if (! $this->isValidFile()) {
             return false;
         }
 
