@@ -82,7 +82,7 @@ class FileConfigManager implements ConfigManager
         return $this->readFromFile();
     }
 
-    private function readFromFile()
+    protected function readFromFile()
     {
         if (! $this->isFileValid()) {
             return [];
