@@ -30,14 +30,14 @@ class FileConfigManager implements ConfigManager
 
     private function initPathFromArgument(string $path): string
     {
-        if ($this->isValidPath($path)) {
+        if ($this->isValidPathArgument($path)) {
             return $this->preparePath($path);
         }
 
         return '';
     }
 
-    private function isValidPath(string $path): bool
+    private function isValidPathArgument(string $path): bool
     {
         return file_exists($path) && @is_writable($path);
     }
