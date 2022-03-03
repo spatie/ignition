@@ -16,7 +16,7 @@ class FileConfigManager implements ConfigManager
     public function __construct(string $path = '')
     {
         $this->path = $this->initPath($path);
-        $this->file = $this->createFile();
+        $this->file = $this->initFile();
     }
 
     protected function initPath(string $path): string
@@ -69,6 +69,11 @@ class FileConfigManager implements ConfigManager
     private function isWindows(): bool
     {
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
+    }
+
+    private function initFile(): string
+    {
+        return $this->generateFullFileName();
     }
 
     protected function generateFullFileName(): string
