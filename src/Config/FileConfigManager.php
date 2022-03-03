@@ -73,11 +73,6 @@ class FileConfigManager implements ConfigManager
 
     private function initFile(): string
     {
-        return $this->generateFullFileName();
-    }
-
-    protected function generateFullFileName(): string
-    {
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
     }
 
