@@ -92,6 +92,11 @@ class FileConfigManager implements ConfigManager
             @is_writable($this->file);
     }
 
+    protected function isValidPath(): bool
+    {
+        return trim($this->path) !== '';
+    }
+
     /** {@inheritDoc} */
     public function save(array $options): bool
     {
@@ -113,11 +118,6 @@ class FileConfigManager implements ConfigManager
         }
 
         return (file_put_contents($this->file, '') !== false);
-    }
-
-    protected function isValidPath(): bool
-    {
-        return trim($this->path) !== '';
     }
 
     protected function saveToFile(array $options): bool
