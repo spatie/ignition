@@ -49,14 +49,8 @@ class FileConfigManager implements ConfigManager
 
     private function initPathFromEnvironment(): string
     {
-        if ($this->isWindows()) {
-            if (empty($_SERVER['HOMEDRIVE']) || empty($_SERVER['HOMEPATH'])) {
-                return '';
-            }
-
-            $homeDirectory = $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
-
-            return $this->preparePath($homeDirectory);
+        if (! empty($_SERVER['HOMEDRIVE']) && ! empty($_SERVER['HOMEPATH'])) {
+            return $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
         }
 
         if ($homeDirectory = getenv('HOME')) {
@@ -64,11 +58,6 @@ class FileConfigManager implements ConfigManager
         }
 
         return '';
-    }
-
-    private function isWindows(): bool
-    {
-        return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
     protected function initFile(): string
