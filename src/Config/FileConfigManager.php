@@ -87,7 +87,7 @@ class FileConfigManager implements ConfigManager
 
     protected function isValidFile(): bool
     {
-        return ! $this->isEmptyPath() &&
+        return ! $this->isValidPath() &&
             file_exists($this->file) &&
             @is_writable($this->file);
     }
@@ -104,7 +104,7 @@ class FileConfigManager implements ConfigManager
 
     protected function createFile(): bool
     {
-        if ($this->isEmptyPath()) {
+        if ($this->isValidPath()) {
             return false;
         }
 
@@ -115,7 +115,7 @@ class FileConfigManager implements ConfigManager
         return (file_put_contents($this->file, '') !== false);
     }
 
-    private function isEmptyPath(): bool
+    private function isValidPath(): bool
     {
         return trim($this->path) === '';
     }
