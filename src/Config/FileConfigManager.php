@@ -115,7 +115,7 @@ class FileConfigManager implements ConfigManager
         return (file_put_contents($this->file, '') !== false);
     }
 
-    private function isValidPath(): bool
+    protected function isValidPath(): bool
     {
         return trim($this->path) !== '';
     }
