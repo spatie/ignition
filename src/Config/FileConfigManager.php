@@ -134,7 +134,7 @@ class FileConfigManager implements ConfigManager
         return trim($this->path) === '';
     }
 
-    private function saveToFile(array $options): bool
+    protected function saveToFile(array $options): bool
     {
         try {
             $content = json_encode($options, JSON_THROW_ON_ERROR);
