@@ -53,8 +53,8 @@ class FileConfigManager implements ConfigManager
             return $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
         }
 
-        if ($homeDirectory = getenv('HOME')) {
-            return $this->preparePath($homeDirectory);
+        if (! empty(getenv('HOME'))) {
+            return getenv('HOME');
         }
 
         return '';
