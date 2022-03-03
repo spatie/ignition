@@ -39,16 +39,16 @@ it('cannot process an empty filepath', function () {
     $configManager = new FileConfigManager('   ');
     $configSource = $configManager->getPersistentInfo();
 
-    $this->assertArrayHasKey('file', $configSource);
-    $this->assertEmpty($configSource['file']);
+    $this->assertArrayHasKey('path', $configSource);
+    $this->assertEmpty($configSource['path']);
 });
 
 it('cannot process a wrong filepath', function () {
     $configManager = new FileConfigManager(__DIR__ . '/wrong_file_path');
     $configSource = $configManager->getPersistentInfo();
 
-    $this->assertArrayHasKey('file', $configSource);
-    $this->assertEmpty($configSource['file']);
+    $this->assertArrayHasKey('path', $configSource);
+    $this->assertEmpty($configSource['path']);
 });
 
 it('can process a filepath', function () {
