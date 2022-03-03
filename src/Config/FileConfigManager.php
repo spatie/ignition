@@ -39,17 +39,17 @@ class FileConfigManager implements ConfigManager
         return $this->initPathFromEnvironment();
     }
 
-    private function isValidPathArgument(string $path): bool
+    protected function isValidPathArgument(string $path): bool
     {
         return file_exists($path) && @is_writable($path);
     }
 
-    private function preparePath(string $path): string
+    protected function preparePath(string $path): string
     {
         return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
-    private function initPathFromEnvironment(): string
+    protected function initPathFromEnvironment(): string
     {
         if (! empty($_SERVER['HOMEDRIVE']) && ! empty($_SERVER['HOMEPATH'])) {
             return $_SERVER['HOMEDRIVE'] . $_SERVER['HOMEPATH'];
