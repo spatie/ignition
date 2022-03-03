@@ -21,11 +21,13 @@ class FileConfigManager implements ConfigManager
 
     protected function initPath(string $path): string
     {
-        if ($path !== '') {
-            return $this->initPathFromArgument($path);
+        $path = $this->retrievePath($path);
+
+        if (! $this->isValidPathArgument($path)) {
+            return '';
         }
 
-        return $this->initPathFromEnvironment();
+        return $this->preparePath($path);
     }
 
     private function retrievePath(string $path): string
