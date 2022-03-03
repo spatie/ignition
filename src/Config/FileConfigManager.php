@@ -37,6 +37,15 @@ class FileConfigManager implements ConfigManager
         return '';
     }
 
+    private function retrievePath(string $path): string
+    {
+        if ($path !== '') {
+            return $path;
+        }
+
+        return $this->initPathFromEnvironment();
+    }
+
     private function isValidPathArgument(string $path): bool
     {
         return file_exists($path) && @is_writable($path);
