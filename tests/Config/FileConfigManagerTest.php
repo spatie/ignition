@@ -59,14 +59,13 @@ it('can process a filepath', function () {
     $this->assertStringContainsString('temp', $configSource['path']);
 });
 
-it('can create a config file from a filepath', function () {
+it('cannot create a config file at the initialization', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
-    $configManager->save([]);
 
     $configSource = $configManager->getPersistentInfo();
 
     $this->assertArrayHasKey('file', $configSource);
-    $this->assertFileExists($configSource['file']);
+    $this->assertFileDoesNotExist($configSource['file']);
 });
 
 it('can save to a config file created from a filepath', function () {
