@@ -96,14 +96,9 @@ class FileConfigManager implements ConfigManager
 
     protected function isFileValid(): bool
     {
-        return $this->isFileCreated() &&
+        return ! $this->isEmptyPath() &&
             file_exists($this->file) &&
             @is_writable($this->file);
-    }
-
-    private function isFileCreated(): bool
-    {
-        return $this->file !== '';
     }
 
     /** {@inheritDoc} */
