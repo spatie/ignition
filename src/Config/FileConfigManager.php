@@ -23,7 +23,7 @@ class FileConfigManager implements ConfigManager
     {
         $path = $this->retrievePath($path);
 
-        if (! $this->isValidPathArgument($path)) {
+        if (! $this->isValidWritablePath($path)) {
             return '';
         }
 
@@ -39,7 +39,7 @@ class FileConfigManager implements ConfigManager
         return $this->initPathFromEnvironment();
     }
 
-    protected function isValidPathArgument(string $path): bool
+    protected function isValidWritablePath(string $path): bool
     {
         return file_exists($path) && @is_writable($path);
     }
