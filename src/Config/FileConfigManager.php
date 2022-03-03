@@ -71,30 +71,6 @@ class FileConfigManager implements ConfigManager
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
-    protected function createFile(): string
-    {
-        if ($this->isEmptyPath()) {
-            return '';
-        }
-
-        $file = $this->generateFullFileName();
-
-        if (file_exists($file)) {
-            return $file;
-        }
-
-        if (file_put_contents($file, '') !== false) {
-            return $file;
-        }
-
-        return '';
-    }
-
-    private function isEmptyPath(): bool
-    {
-        return trim($this->path) === '';
-    }
-
     protected function generateFullFileName(): string
     {
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
@@ -134,6 +110,30 @@ class FileConfigManager implements ConfigManager
     public function save(array $options): bool
     {
         return $this->saveToFile($options);
+    }
+
+    private function createFile(): string
+    {
+        if ($this->isEmptyPath()) {
+            return '';
+        }
+
+        $file = $this->generateFullFileName();
+
+        if (file_exists($file)) {
+            return $file;
+        }
+
+        if (file_put_contents($file, '') !== false) {
+            return $file;
+        }
+
+        return '';
+    }
+
+    private function isEmptyPath(): bool
+    {
+        return trim($this->path) === '';
     }
 
     private function saveToFile(array $options): bool
