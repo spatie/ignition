@@ -71,7 +71,7 @@ class FileConfigManager implements ConfigManager
         return str_starts_with(strtoupper(PHP_OS), 'WIN');
     }
 
-    private function initFile(): string
+    protected function initFile(): string
     {
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
     }
