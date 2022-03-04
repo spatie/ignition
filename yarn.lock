@@ -977,10 +977,10 @@
   dependencies:
     error-stack-parser "^2.0.2"
 
-"@flareapp/ignition-ui@^3.3.2":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@flareapp/ignition-ui/-/ignition-ui-3.3.2.tgz#a87861feb4b41d0875881ff0e215aef5e1e1bff6"
-  integrity sha512-+7MAJ/kXzk/JTVcqcK+4730mRzfbHUn/XQ5bx61jny7iQ97zQTy0w7PdHles9cZzHm+COUyVN0PrjH/b65l8nQ==
+"@flareapp/ignition-ui@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@flareapp/ignition-ui/-/ignition-ui-3.3.3.tgz#4ca018225208edb2a3a1c676644c3a819fd858e9"
+  integrity sha512-9ldDPmhS4Snx1uRDzkq5pJyRg3Hcjp0EUYsdhMlVQBlbIlGdwehmvUCOlWmW1dcPB9Pe9kz0rd+W1iGAp1vvdg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.36"
     "@fortawesome/free-brands-svg-icons" "^5.15.4"
