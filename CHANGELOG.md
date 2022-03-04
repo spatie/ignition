@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.1 - 2022-03-04
+
+- Ignition UI bugfix: stacktrace with only one vendor frame no longer crashes Ignition
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.0...1.2.1
+
 ## 1.2.0 - 2022-03-04
 
 ## What's Changed
