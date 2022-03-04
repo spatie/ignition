@@ -81,6 +81,20 @@ it('can save to a config file created from a filepath', function () {
     $this->assertStringContainsString('saved', file_get_contents($configSource['file']));
 });
 
+it('can save to an existing config file', function () {
+    $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
+
+    $success = $configManager->save([
+        'test' => 'saved',
+    ]);
+    $this->assertTrue($success);
+
+    $success = $configManager->save([
+        'test' => 'changed',
+    ]);
+    $this->assertTrue($success);
+});
+
 it('can load from a config file created from a filepath', function () {
     $configManager = new FileConfigManager(SETTINGS_FILE_DIRECTORY);
     $configManager->save([

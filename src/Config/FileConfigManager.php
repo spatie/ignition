@@ -114,7 +114,7 @@ class FileConfigManager implements ConfigManager
         }
 
         if (file_exists($this->file)) {
-            return false;
+            return true;
         }
 
         return (file_put_contents($this->file, '') !== false);
