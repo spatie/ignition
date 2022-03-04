@@ -2,6 +2,14 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.0 - 2022-03-04
+
+## What's Changed
+
+- The possibility to specify a path to the settings file using a new `ConfigManager` interface by @kudashevs in https://github.com/spatie/ignition/pull/57
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.1.1...1.2.0
+
 ## 1.1.1 - 2022-03-02
 
 ## What's Changed
