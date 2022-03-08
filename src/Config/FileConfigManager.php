@@ -88,7 +88,7 @@ class FileConfigManager implements ConfigManager
     protected function isValidFile(): bool
     {
         return $this->isValidPath() &&
-            file_exists($this->file) &&
+            @file_exists($this->file) &&
             @is_writable($this->file);
     }
 
@@ -113,7 +113,7 @@ class FileConfigManager implements ConfigManager
             return false;
         }
 
-        if (file_exists($this->file)) {
+        if (@file_exists($this->file)) {
             return true;
         }
 
