@@ -2,6 +2,18 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.2 - 2022-03-08
+
+## What's Changed
+
+- fix exception caused by file_exists by @dianfishekqi in https://github.com/spatie/ignition/pull/90
+
+## New Contributors
+
+- @dianfishekqi made their first contribution in https://github.com/spatie/ignition/pull/90
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.1...1.2.2
+
 ## 1.2.1 - 2022-03-04
 
 - Ignition UI bugfix: stacktrace with only one vendor frame no longer crashes Ignition
