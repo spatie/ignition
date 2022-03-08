@@ -2,6 +2,14 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.3 - 2022-03-08
+
+## What's Changed
+
+- Suppress file check by @kudashevs in https://github.com/spatie/ignition/pull/91
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.2...1.2.3
+
 ## 1.2.2 - 2022-03-08
 
 ## What's Changed
