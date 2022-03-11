@@ -282,7 +282,7 @@ class Ignition
         }
 
         if ($this->flare->apiTokenSet() && $this->inProductionEnvironment !== false) {
-            $this->flare->report($throwable);
+            $this->flare->report($throwable, report: $report);
         }
 
         return $report;
