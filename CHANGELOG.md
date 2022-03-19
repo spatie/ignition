@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.5 - 2022-03-19
+
+- Disable "Share to Flare" feature based on Ignition config value
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.4...1.2.5
+
 ## 1.2.4 - 2022-03-11
 
 - Pass an already initialised `Report` object to Flare client (instead of creating a new instance)
