@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import NavBarItem from 'components/NavBarItem';
 import ShareDropdown from 'components/ShareDropdown';
 import SettingsDropdown from 'components/SettingsDropdown';
-import { ErrorOccurrence, ErrorOccurrenceContext, hasDebugInfo } from '@flareapp/ignition-ui';
+import { ErrorOccurrence, ErrorOccurrenceContext, hasDebugInfo, IgnitionConfigContext } from '@flareapp/ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faShare, faCog, faAlignLeft, faExpand, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
@@ -69,6 +69,7 @@ export default function NavBar({ showException }: Props) {
     const [isShareDropdownOpen, setIsShareDropdownOpen] = useState(false);
     const [isSettingsDropdownOpen, setIsSettingsDropdownOpen] = useState(false);
     const hasScrolled = useHasScrolled({ distance: 10 });
+    const { ignitionConfig } = useContext(IgnitionConfigContext);
 
     const shareRef = useRef(null);
     const settingsRef = useRef(null);
@@ -103,16 +104,18 @@ export default function NavBar({ showException }: Props) {
                                 />
                             )}
 
-                            <NavBarItem
-                                navRef={shareRef}
-                                name="share"
-                                icon={<FontAwesomeIcon icon={faShare} />}
-                                onClick={() => {
-                                    setIsShareDropdownOpen(!isShareDropdownOpen);
-                                }}
-                            >
-                                <ShareDropdown isOpen={isShareDropdownOpen} />
-                            </NavBarItem>
+                            {ignitionConfig.enableShareButton && (
+                                <NavBarItem
+                                    navRef={shareRef}
+                                    name="share"
+                                    icon={<FontAwesomeIcon icon={faShare} />}
+                                    onClick={() => {
+                                        setIsShareDropdownOpen(!isShareDropdownOpen);
+                                    }}
+                                >
+                                    <ShareDropdown isOpen={isShareDropdownOpen} />
+                                </NavBarItem>
+                            )}
                         </ul>
                         <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
                             {docs && (

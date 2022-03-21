@@ -267,31 +267,46 @@ class Ignition
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 
+    /**
+     * This is the main entry point for the framework agnostic Ignition package.
+     * Displays the Ignition page and optionally sends a report to Flare.
+     */
     public function handleException(Throwable $throwable): Report
     {
         $this->setUpFlare();
 
-        $report = $this->flare->createReport($throwable);
+        $report = $this->createReport($throwable);
 
         if ($this->shouldDisplayException && $this->inProductionEnvironment !== true) {
             $this->renderException($throwable, $report);
         }
 
         if ($this->flare->apiTokenSet() && $this->inProductionEnvironment !== false) {
-            $this->flare->report($throwable);
+            $this->flare->report($throwable, report: $report);
         }
 
         return $report;
     }
 
-    /** @return array<class-string<HasSolutionsForThrowable>> */
-    protected function getDefaultSolutionProviders(): array
+    /**
+     * This is the main entrypoint for laravel-ignition. It only renders the exception.
+     * Sending the report to Flare is handled in the laravel-ignition log handler.
+     */
+    public function renderException(Throwable $throwable, ?Report $report = null): void
     {
-        return [
-            BadMethodCallSolutionProvider::class,
-            MergeConflictSolutionProvider::class,
-            UndefinedPropertySolutionProvider::class,
-        ];
+        $this->setUpFlare();
+
+        $report ??= $this->createReport($throwable);
+
+        $viewModel = new ErrorPageViewModel(
+            $throwable,
+            $this->ignitionConfig,
+            $report,
+            $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
+            $this->solutionTransformerClass,
+        );
+
+        (new Renderer())->render(['viewModel' => $viewModel]);
     }
 
     protected function setUpFlare(): self
@@ -313,16 +328,18 @@ class Ignition
         return $this;
     }
 
-    public function renderException(Throwable $throwable, Report $report): void
+    /** @return array<class-string<HasSolutionsForThrowable>> */
+    protected function getDefaultSolutionProviders(): array
     {
-        $viewModel = new ErrorPageViewModel(
-            $throwable,
-            $this->ignitionConfig,
-            $report,
-            $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
-            $this->solutionTransformerClass,
-        );
+        return [
+            BadMethodCallSolutionProvider::class,
+            MergeConflictSolutionProvider::class,
+            UndefinedPropertySolutionProvider::class,
+        ];
+    }
 
-        (new Renderer())->render(['viewModel' => $viewModel]);
+    protected function createReport(Throwable $throwable): Report
+    {
+        return $this->flare->createReport($throwable);
     }
 }
