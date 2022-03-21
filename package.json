@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
-        "bundle-temp": "NODE_ENV=development ROLLUP_WATCH=true concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' \" \"yarn typecheck\"",
+        "bundle-temp": "NODE_ENV=development microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development'",
         "dev": "NODE_ENV=development ROLLUP_WATCH=true concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
         "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
         "typecheck": "tsc -w --preserveWatchOutput",
