@@ -31,7 +31,7 @@ jobs:
               run: yarn install
 
             - name: Create bundle
-              run: yarn run bundle
+              run: yarn run bundle-temp
 
             - name: Commit changes
               uses: stefanzweifel/git-auto-commit-action@v4
