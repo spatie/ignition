@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.7 - 2022-03-29
+
+- Move stylesheet and darkmode script to `head` tag of error page
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.6...1.2.7
+
 ## 1.2.6 - 2022-03-23
 
 ## What's Changed
