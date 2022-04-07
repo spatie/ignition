@@ -54,6 +54,8 @@ For Laravel apps, head over to [laravel-ignition](https://github.com/spatie/lara
 
 For Symfony apps, go to [symfony-ignition-bundle](https://github.com/spatie/symfony-ignition-bundle).
 
+For Drupal 10+ websites, use the [Ignition module](https://www.drupal.org/project/ignition).
+
 For all other PHP projects, install the package via composer:
 
 ```bash
