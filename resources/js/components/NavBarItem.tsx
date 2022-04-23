@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import InViewContext from 'contexts/InViewContext';
-import noop from 'lodash/noop';
 import last from 'lodash/last';
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
     href?: null | string;
     important?: boolean;
     children?: React.ReactNode;
-    onClick?: () => void;
+    onClick?: (() => void) | null;
     label?: boolean;
     navRef?: React.MutableRefObject<null>;
 };
@@ -22,15 +21,22 @@ export default function NavBarItem({
     iconOpacity = 'opacity-50', // Allow optical corrections, eg. the thin Laravel icon
     important = false,
     children = null,
-    onClick = noop,
+    onClick = null,
     label = true,
     navRef
 }: Props) {
-    const { inView } = useContext(InViewContext);
+    const {inView} = useContext(InViewContext);
+
+    const onClickHandler = (e: React.MouseEvent) => {
+        if (onClick) {
+            e.preventDefault();
+            onClick();
+        }
+    };
 
     return (
         <li ref={navRef}>
-            <a href={href || `#${name}`} target={href ? '_blank' : '_self'} onClick={onClick}>
+            <a href={href || `#${name}`} target={href ? '_blank' : '_self'} onClick={onClickHandler}>
                 <button
                     className={`
                     group px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium
@@ -38,7 +44,7 @@ export default function NavBarItem({
                     ${last(inView) === name ? 'text-red-500' : ''}
                 `}
                 >
-                    {icon && 
+                    {icon &&
                         <span className={`mr-1.5 ${iconOpacity ?? 'opacity-50'}`} >
                             {icon}
                         </span>
