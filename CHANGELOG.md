@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.9 - 2022-04-23
+
+- Bump Ignition UI version to pull in changes
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.8...1.2.9
+
 ## 1.2.8 - 2022-04-23
 
 ## What's Changed
