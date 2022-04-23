@@ -2,6 +2,20 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.8 - 2022-04-23
+
+## What's Changed
+
+- Update .gitattributes by @angeljqv in https://github.com/spatie/ignition/pull/120
+- Fix flash of unstyled content in Livewire modals by @willemvb in https://github.com/spatie/ignition/pull/118
+- Don't add unnecessary URL fragments to share and settings menu
+
+## New Contributors
+
+- @angeljqv made their first contribution in https://github.com/spatie/ignition/pull/120
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.7...1.2.8
+
 ## 1.2.7 - 2022-03-29
 
 - Move stylesheet and darkmode script to `head` tag of error page
