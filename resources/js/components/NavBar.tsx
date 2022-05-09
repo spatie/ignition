@@ -30,7 +30,7 @@ function useClickOutsideListener(ref: React.MutableRefObject<any>, handler: () =
 function resolveDocs(
     errorOccurrence: ErrorOccurrence,
 ): null | { type: 'generic' | 'php' | 'laravel'; url: string; tailored: boolean } {
-    if (errorOccurrence.context_items.env?.find((env) => env.name === 'laravel_version')) {
+    if (!!errorOccurrence.context_items.env.laravel_version) {
         const laravelDocs = errorOccurrence.documentation_links.find((link) => link.startsWith('https://laravel.com/'));
 
         if (laravelDocs) {

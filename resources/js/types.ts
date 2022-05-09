@@ -1,4 +1,4 @@
-import { ErrorSolution, IgnitionConfig, LogLevel, ViewContext } from '@flareapp/ignition-ui';
+import { ErrorSolution, IgnitionConfig, ViewContext, LogLevel } from '@flareapp/ignition-ui';
 
 export type IgniteData = {
     report: IgnitionErrorOccurrence;
@@ -50,22 +50,24 @@ export type IgnitionErrorOccurrence = {
             files: Array<any>;
         };
         headers: Record<string, string>;
-        cookies: Record<string, string>;
+        cookies: Record<string, string | object | boolean>;
         session: Record<string, string>;
         route?: {
             route: string | null;
-            routeParameters: Record<string, any>;
-            controllerAction: string;
+            routeParameters: Record<string, number | string | null>;
+            controllerAction: string | null;
             middleware: Array<string>;
         } | null;
         user?: Record<string, any> | null;
-        env?: {
+        env: {
             laravel_version: string;
             laravel_locale: string;
             laravel_config_cached: boolean;
+            app_debug: boolean;
+            app_env: string;
             php_version: string;
         };
-        logs?: Array<{ message: string; level: string; context: any; microtime: number }>;
+        logs?: Array<{ message: string; level: LogLevel; context: any; microtime: number }>;
         dumps?: Array<{
             html_dump: string;
             file: string;

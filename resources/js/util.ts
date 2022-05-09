@@ -1,11 +1,4 @@
-import keyBy from 'lodash/keyBy';
-import mapValues from 'lodash/mapValues';
 import isString from 'lodash/isString';
-import { ErrorOccurrence } from '@flareapp/ignition-ui';
-
-export function getContextValues(errorOccurrence: ErrorOccurrence, group: string): { [name: string]: any } {
-    return mapValues(keyBy(errorOccurrence.context_items[group] || [], 'name'), 'value');
-}
 
 export function stringifyOccurrenceData(value: any): string {
     if (value === undefined) {
