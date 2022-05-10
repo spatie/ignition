@@ -2,6 +2,13 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.10 - 2022-05-10
+
+- Bump @flareapp/ignition-ui dependency to 3.3.5 (improves handling for missing stack trace frames)
+- Log error to console when sharing to Flare fails
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.2.9...1.2.10
+
 ## 1.2.9 - 2022-04-23
 
 - Bump Ignition UI version to pull in changes
