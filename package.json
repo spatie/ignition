@@ -10,7 +10,7 @@
         "postinstall": "sed -i '' '/For example <script/d' ./node_modules/@fortawesome/fontawesome-svg-core/index.es.js; sed -i '' '/For example <script/d' ../node_modules/@fortawesome/fontawesome-svg-core/index.es.js; exit 0"
     },
     "dependencies": {
-        "@flareapp/ignition-ui": "^3.3.4",
+        "@flareapp/ignition-ui": "^3.3.5",
         "@fortawesome/fontawesome-common-types": "^6.1.1",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "@fortawesome/free-brands-svg-icons": "^6.1.1",
