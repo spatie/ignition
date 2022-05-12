@@ -56,6 +56,7 @@ export default function ShareDropdown({ isOpen }: Props) {
 
             setPublicUrl(response.public_url);
         } catch (e) {
+            console.error(e);
             setError('Something went wrong while sharing, please try again.');
         }
 
@@ -98,7 +99,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                                 className={'bg-violet-500 border-violet-500/25 CopyButton text-white'}
                                 onClick={onShareError}
                             >
-                                <FontAwesomeIcon icon={faExternalLinkAlt} className="opacity-50 text-xs mr-1"/>
+                                <FontAwesomeIcon icon={faExternalLinkAlt} className="opacity-50 text-xs mr-1" />
                                 Create Share
                             </Button>
                         </div>

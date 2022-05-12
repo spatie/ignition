@@ -24,111 +24,23 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
             class: frame.class || '',
         })),
         context_items: {
-            request: [
-                { group: 'request', name: 'url', value: report?.context?.request?.url },
-                {
-                    group: 'request',
-                    name: 'useragent',
-                    value: report.context?.request?.useragent,
-                },
-                { group: 'request', name: 'ip', value: report.context?.request?.ip },
-                { group: 'request', name: 'method', value: report.context?.request?.method },
-            ],
-            request_data: [
-                {
-                    group: 'request_data',
-                    name: 'queryString',
-                    value: report.context.request_data.queryString,
-                },
-                {
-                    group: 'request_data',
-                    name: 'body',
-                    value: report.context.request_data.body,
-                },
-                {
-                    group: 'request_data',
-                    name: 'files',
-                    value: report.context.request_data.files,
-                },
-            ],
-            queries: report.context.queries
-                ? report.context?.queries?.map((query, i) => ({
-                      group: 'queries',
-                      name: String(i),
-                      value: {
-                          ...query,
-                          replace_bindings: true,
-                          bindings: Object.values(query.bindings).map((binding) => ({
-                              type: typeof binding,
-                              value: binding,
-                          })),
-                      },
-                  }))
-                : null,
-            dumps: report.context.dumps
-                ? report.context?.dumps?.map((value, i) => ({
-                      group: 'dumps',
-                      name: String(i),
-                      value,
-                  }))
-                : null,
-            logs: report.context.logs
-                ? report.context?.logs?.map((value, i) => ({
-                      group: 'logs',
-                      name: String(i),
-                      value,
-                  }))
-                : null,
-            headers: Object.entries(report.context.headers || {}).map(([name, [value]]) => ({
-                group: 'headers',
-                name,
-                value,
-            })),
-            cookies: Object.entries(report.context.cookies || {}).map(([name, value]) => ({
-                group: 'cookies',
-                name,
-                value,
-            })),
-            session: Object.entries(report.context.session || {}).map(([name, value]) => ({
-                group: 'session',
-                name,
-                value,
-            })),
-            env: Object.entries(report.context.env || {}).map(([name, value]) => ({
-                group: 'env',
-                name,
-                value,
-            })),
-            user: report.context.user
-                ? Object.entries(report.context.user).map(([name, value]) => ({
-                      group: 'user',
-                      name,
-                      value,
-                  }))
-                : null,
-            route: report.context.route
-                ? Object.entries(report.context.route).map(([name, value]) => ({
-                      group: 'route',
-                      name,
-                      value,
-                  }))
-                : null,
-            git: report.context.git
-                ? Object.entries(report.context.git).map(([name, value]) => ({
-                      group: 'git',
-                      name,
-                      value,
-                  }))
-                : null,
+            request: report.context?.request,
+            request_data: report.context?.request_data,
+            queries: report.context?.queries || null,
+            dumps: report.context?.dumps || null,
+            logs: report.context.logs || null,
+            headers: report.context?.headers || null,
+            cookies: report.context?.cookies || null,
+            session: report.context?.session || null,
+            env: report.context?.env,
+            user: report.context?.user || null,
+            route: report.context?.route || null,
+            git: report.context?.git || null,
             livewire: report.context.livewire || null,
             view: report.context.view || null,
-            context: [] /* @todo ? */,
         },
-        id: 0,
-        error_id: 0,
-        occurrence_number: 0,
-        received_at: new Date(report.seen_at * 1000).toISOString(),
-        seen_at_url: report?.context?.request?.url,
+        type: 'web',
+        entry_point: report?.context?.request?.url,
         exception_class: report.exception_class,
         exception_message: report.message || '',
         application_path: report.application_path,
@@ -139,11 +51,7 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
         stage: report.stage,
         first_frame_class: report.stacktrace[0].class || '',
         first_frame_method: report.stacktrace[0].method,
-        glows: report.glows.map((glow) => ({
-            ...glow,
-            id: 0,
-            received_at: '',
-        })),
+        glows: report.glows,
         solutions,
         documentation_links: report.documentation_links,
     };
