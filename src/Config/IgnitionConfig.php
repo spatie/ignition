@@ -188,6 +188,10 @@ class IgnitionConfig implements Arrayable
                     'label' => 'VS Code Insiders Remote',
                     'url' => 'vscode-insiders://vscode-remote/%path:%line',
                 ],
+                'vscodium' => [
+                    'label' => 'VS Codium',
+                    'url' => 'vscodium://file/%path:%line',
+                ],
                 'atom' => [
                     'label' => 'Atom',
                     'url' => 'atom://core/open/file?filename=%path&line=%line',
