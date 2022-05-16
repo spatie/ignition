@@ -32,7 +32,7 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
             headers: report.context?.headers || null,
             cookies: report.context?.cookies || null,
             session: report.context?.session || null,
-            env: report.context?.env,
+            env: report.context?.env || null,
             user: report.context?.user || null,
             route: report.context?.route || null,
             git: report.context?.git || null,

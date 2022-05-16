@@ -6,11 +6,10 @@
         "bundle-temp": "NODE_ENV=development microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development'",
         "dev": "NODE_ENV=development ROLLUP_WATCH=true concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
         "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
-        "typecheck": "tsc -w --preserveWatchOutput",
-        "postinstall": "sed -i '' '/For example <script/d' ./node_modules/@fortawesome/fontawesome-svg-core/index.es.js; sed -i '' '/For example <script/d' ../node_modules/@fortawesome/fontawesome-svg-core/index.es.js; exit 0"
+        "typecheck": "tsc -w --preserveWatchOutput"
     },
     "dependencies": {
-        "@flareapp/ignition-ui": "^4.0.1",
+        "@flareapp/ignition-ui": "^4.0.2",
         "@fortawesome/fontawesome-common-types": "^6.1.1",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "@fortawesome/free-brands-svg-icons": "^6.1.1",

@@ -59,13 +59,13 @@ export type IgnitionErrorOccurrence = {
             middleware: Array<string>;
         } | null;
         user?: Record<string, any> | null;
-        env: {
-            laravel_version: string;
-            laravel_locale: string;
-            laravel_config_cached: boolean;
-            app_debug: boolean;
-            app_env: string;
-            php_version: string;
+        env?: {
+            laravel_version?: string;
+            laravel_locale?: string;
+            laravel_config_cached?: boolean;
+            app_debug?: boolean;
+            app_env?: string;
+            php_version?: string;
         };
         logs?: Array<{ message: string; level: LogLevel; context: any; microtime: number }>;
         dumps?: Array<{
