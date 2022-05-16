@@ -1031,10 +1031,10 @@
   dependencies:
     error-stack-parser "^2.0.2"
 
-"@flareapp/ignition-ui@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@flareapp/ignition-ui/-/ignition-ui-4.0.1.tgz#2077769aa76368fb5b9d24a0db1c5f7a273188a4"
-  integrity sha512-ON05h0j0wfIH75pGdhGSWc34bWe4Mmcqu8+Iq2M11+Ga0LrriCNHGpfgTf+wfwr1H06t5TWLqQXuk4ut02Dhkg==
+"@flareapp/ignition-ui@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@flareapp/ignition-ui/-/ignition-ui-4.0.2.tgz#872d611194f19d4feacf08cac2a99a5803bf743c"
+  integrity sha512-C77h4eGqnDGYg5zSIzjOsa2NPc0cC2KEwca6CouCxRZgxvH/3UZPwyIF3rmbgk6ryFWLS6jYyeOp63S/BC0lxg==
   dependencies:
     "@fortawesome/fontawesome-common-types" "^6.1.1"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
