@@ -2,18 +2,37 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.3.1 - 2022-05-16
+
+- Bump Ignition UI to v4.0.2
+- - Fix types: `context.env` can be `null` or `undefined`
+- 
+- JS bundle is no longer compressed to make debugging easier
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.3.0...1.3.1
+
 ## 1.3.0 - 2022-05-12
 
 ## What's Changed
 
 - Use Ignition UI v4 by @AlexVanderbist in https://github.com/spatie/ignition/pull/129
 - - Bump Ignition UI version to 4.0.1
+- 
 - - - Fixed a missing key in Query debug section
+- - 
+- 
 - - - Fixed selecting exceptions without accidentally collapsing the error card
+- - 
+- 
 - - - Triple clicking a code snippet now always selects it
 - - 
+- 
+- - 
+- 
 - - Refactor error occurrence context items types
+- 
 - - Log error to console when sharing to Flare goes wrong
+- 
 - 
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.2.10...1.3.0
