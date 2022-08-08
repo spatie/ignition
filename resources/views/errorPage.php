@@ -30,6 +30,11 @@
         }
     </script>
 
+
+    <?php if (class_exists('Illuminate\Foundation\Vite') && is_file(base_path('vite.config.js')) && is_file(public_path('/hot'))): ?>
+        <?= app(\Illuminate\Foundation\Vite::class)->__invoke([]) ?>
+    <?php endif; ?>
+
     <style><?= $viewModel->getAssetContents('ignition.css') ?></style>
 
 </head>
