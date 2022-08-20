@@ -66,7 +66,7 @@ composer require spatie/ignition
 
 ## Usage
 
-In order display the Ignition error page when an error occurs in your project, you must add this code. Typically, this would be done in the bootstrap part of your application.
+In order to display the Ignition error page when an error occurs in your project, you must add this code. Typically, this would be done in the bootstrap part of your application.
 
 ```php
 \Spatie\Ignition\Ignition::make()->register();
@@ -204,7 +204,7 @@ To register a solution provider to Ignition you must call the `addSolutionProvid
 
 ### Sending exceptions to Flare
 
-Ignition comes the ability to send exceptions to [Flare](https://flareapp.io), an exception monitoring service. Flare
+Ignition comes with the ability to send exceptions to [Flare](https://flareapp.io), an exception monitoring service. Flare
 can notify you when new exceptions are occurring in your production environment.
 
 To send exceptions to Flare, simply call the `sendToFlareMethod` and pass it the API key you got when creating a project
@@ -263,7 +263,7 @@ use Spatie\FlareClient\Flare;
 
 ### Anonymize request to Flare
 
-By default, the Ignition collects information about the IP address of your application users. If you want don't want to send this information to Flare, call `anonymizeIp()`.
+By default, the Ignition collects information about the IP address of your application users. If you don't want to send this information to Flare, call `anonymizeIp()`.
 
 ```php
 use Spatie\FlareClient\Flare;
@@ -283,7 +283,7 @@ When an exception occurs in a web request, the Flare client will pass on any req
 
 In some cases, such as a login page, these request fields may contain a password that you don't want to send to Flare.
 
-To censor out values of certain fields, you can use call `censorRequestBodyFields`. You should pass it the names of the fields you wish to censor.
+To censor out values of certain fields, you can use `censorRequestBodyFields`. You should pass it the names of the fields you wish to censor.
 
 ```php
 use Spatie\FlareClient\Flare;
@@ -337,7 +337,7 @@ use Spatie\FlareClient\Flare;
 
 ### Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information about what has changed recently.
 
 ## Contributing
 
