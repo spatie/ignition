@@ -14,6 +14,14 @@ it('can render the error page for syntax errors', function () {
     expect($output)->toContain('window.ignite');
 });
 
+it('can render additional html in head and body', function () {
+    $output = getOutputOfApp('additional-html.php');
+
+    expect($output)
+        ->toContain('<!-- body html -->')
+        ->toContain('<!-- head html -->');
+});
+
 it('will not render if everything ran ok', function () {
     $output = getOutputOfApp('all-ok.php');
 
