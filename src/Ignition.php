@@ -49,6 +49,10 @@ class Ignition
     /** @var ArrayObject<int, callable(Throwable): mixed> */
     protected ArrayObject $documentationLinkResolvers;
 
+    protected string $customHtmlHead = '';
+
+    protected string $customHtmlBody = '';
+
     public static function make(): self
     {
         return new self();
@@ -303,9 +307,31 @@ class Ignition
             $report,
             $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
             $this->solutionTransformerClass,
+            $this->customHtmlHead,
+            $this->customHtmlBody
         );
 
         (new Renderer())->render(['viewModel' => $viewModel]);
+    }
+
+    /**
+     * Add custom HTML which will be added to the head tag of the error page.
+     */
+    public function addCustomHtmlToHead(string $html): self
+    {
+        $this->customHtmlHead .= $html;
+
+        return $this;
+    }
+
+    /**
+     * Add custom HTML which will be added to the body tag of the error page.
+     */
+    public function addCustomHtmlToBody(string $html): self
+    {
+        $this->customHtmlBody .= $html;
+
+        return $this;
     }
 
     protected function setUpFlare(): self
