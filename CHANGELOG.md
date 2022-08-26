@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.1 - 2022-08-26
+
+- Revert type change (breaking change) on `SolutionProviderRepository` interface
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.4.0...1.4.1
+
 ## 1.4.0 - 2022-08-26
 
 ### What's Changed
@@ -29,6 +35,7 @@ All notable changes to `ignition` will be documented in this file
 - - Fix types: `context.env` can be `null` or `undefined`
 - 
 - 
+- 
 - JS bundle is no longer compressed to make debugging easier
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.3.0...1.3.1
@@ -41,16 +48,25 @@ All notable changes to `ignition` will be documented in this file
 - - Bump Ignition UI version to 4.0.1
 - 
 - 
+- 
 - - - Fixed a missing key in Query debug section
 - - 
 - 
 - - 
 - 
 - 
+- - 
+- 
+- 
+- 
 - - - Fixed selecting exceptions without accidentally collapsing the error card
 - - 
 - 
 - - 
+- 
+- 
+- - 
+- 
 - 
 - 
 - - - Triple clicking a code snippet now always selects it
@@ -62,10 +78,17 @@ All notable changes to `ignition` will be documented in this file
 - - 
 - 
 - 
+- 
+- - 
+- 
+- 
+- 
 - - Refactor error occurrence context items types
 - 
 - 
+- 
 - - Log error to console when sharing to Flare goes wrong
+- 
 - 
 - 
 - 
