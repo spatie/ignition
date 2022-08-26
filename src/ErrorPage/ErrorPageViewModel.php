@@ -23,7 +23,9 @@ class ErrorPageViewModel
         protected IgnitionConfig $ignitionConfig,
         protected Report $report,
         protected array $solutions,
-        protected ?string $solutionTransformerClass = null
+        protected ?string $solutionTransformerClass = null,
+        protected string $customHtmlHead = '',
+        protected string $customHtmlBody = ''
     ) {
         $this->solutionTransformerClass ??= SolutionTransformer::class;
     }
@@ -114,5 +116,15 @@ class ErrorPageViewModel
     {
         // TODO: Should be based on Ignition config
         return  '/_ignition/update-config';
+    }
+
+    public function customHtmlHead(): string
+    {
+        return $this->customHtmlHead;
+    }
+
+    public function customHtmlBody(): string
+    {
+        return $this->customHtmlBody;
     }
 }

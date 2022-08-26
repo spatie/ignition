@@ -32,6 +32,8 @@
 
     <style><?= $viewModel->getAssetContents('ignition.css') ?></style>
 
+    <?= $viewModel->customHtmlHead() ?>
+
 </head>
 <body class="scrollbar-lg">
 
@@ -61,6 +63,8 @@
 <script>
     window.ignite(window.data);
 </script>
+
+<?= $viewModel->customHtmlBody() ?>
 
 <!--
 <?= $viewModel->throwableString() ?>
