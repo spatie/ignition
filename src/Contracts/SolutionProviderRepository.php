@@ -6,10 +6,15 @@ use Throwable;
 
 interface SolutionProviderRepository
 {
-    public function registerSolutionProvider(string $solutionProviderClass): self;
+    /**
+     * @param class-string<ProvidesSolution>|ProvidesSolution $solutionProviderClass
+     *
+     * @return $this
+     */
+    public function registerSolutionProvider(string|ProvidesSolution $solutionProviderClass): self;
 
     /**
-     * @param array<int,class-string<ProvidesSolution>|ProvidesSolution> $solutionProviderClasses
+     * @param array<class-string<ProvidesSolution>|ProvidesSolution> $solutionProviderClasses
      *
      * @return $this
      */
@@ -22,5 +27,10 @@ interface SolutionProviderRepository
      */
     public function getSolutionsForThrowable(Throwable $throwable): array;
 
+    /**
+     * @param class-string<Solution> $solutionClass
+     *
+     * @return null|Solution
+     */
     public function getSolutionForClass(string $solutionClass): ?Solution;
 }

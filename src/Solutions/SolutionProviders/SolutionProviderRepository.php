@@ -11,16 +11,16 @@ use Throwable;
 
 class SolutionProviderRepository implements SolutionProviderRepositoryContract
 {
-    /** @var Collection<int, class-string<HasSolutionsForThrowable>> */
+    /** @var Collection<int, class-string<HasSolutionsForThrowable>|HasSolutionsForThrowable> */
     protected Collection $solutionProviders;
 
-    /** @param array<int, class-string<HasSolutionsForThrowable>> $solutionProviders */
+    /** @param array<int, class-string<HasSolutionsForThrowable>|HasSolutionsForThrowable> $solutionProviders */
     public function __construct(array $solutionProviders = [])
     {
         $this->solutionProviders = Collection::make($solutionProviders);
     }
 
-    public function registerSolutionProvider(string $solutionProviderClass): SolutionProviderRepositoryContract
+    public function registerSolutionProvider(string|ProvidesSolution $solutionProviderClass): SolutionProviderRepositoryContract
     {
         $this->solutionProviders->push($solutionProviderClass);
 
@@ -46,32 +46,19 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             $solutions[] = $throwable->getSolution();
         }
 
-        $providedSolutions = $this->solutionProviders
-            ->filter(function (string $solutionClass) {
-                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass) ?: [])) {
-                    return false;
-                }
-
-                /*
-                if (in_array($solutionClass, config('ignition.ignored_solution_providers', []))) {
-                    return false;
-                }
-                */
-
-                return true;
-            })
-            ->map(fn (string $solutionClass) => new $solutionClass)
+        $providedSolutions = $this
+            ->initialiseSolutionProviderRepositories()
             ->filter(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
                 try {
                     return $solutionProvider->canSolve($throwable);
-                } catch (Throwable $e) {
+                } catch (Throwable $exception) {
                     return false;
                 }
             })
             ->map(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
                 try {
                     return $solutionProvider->getSolutions($throwable);
-                } catch (Throwable $e) {
+                } catch (Throwable $exception) {
                     return [];
                 }
             })
@@ -96,5 +83,18 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
         }
 
         return app($solutionClass);
+    }
+
+    protected function initialiseSolutionProviderRepositories(): Collection
+    {
+        return $this->solutionProviders
+            ->filter(fn (HasSolutionsForThrowable|string $provider) => in_array(HasSolutionsForThrowable::class, class_implements($provider) ?: []))
+            ->map(function (string|HasSolutionsForThrowable $provider) {
+                if (is_string($provider)) {
+                    return new $provider;
+                }
+
+                return $provider;
+            });
     }
 }
