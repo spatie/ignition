@@ -93,9 +93,8 @@ test('a custom context provider detector can be used', function () {
         ->setContextProviderDetector(new DummyContextProviderDetector())
         ->handleException(new Exception('Hey'));
 
-    $this->assertEquals([
-        'dummy-context-name' => 'dummy-context-value',
-    ], $report->toArray()['context']);
+    $this->assertArrayHasKey('dummy-context-name', $report->toArray()['context']);
+    $this->assertEquals('dummy-context-value', $report->toArray()['context']['dummy-context-name']);
 });
 
 test('a glow can be added', function () {
