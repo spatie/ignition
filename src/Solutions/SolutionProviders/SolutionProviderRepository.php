@@ -88,7 +88,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
     protected function initialiseSolutionProviderRepositories(): Collection
     {
         return $this->solutionProviders
-            ->filter(fn(HasSolutionsForThrowable|string $provider) => in_array(HasSolutionsForThrowable::class, class_implements($provider) ?: []))
+            ->filter(fn (HasSolutionsForThrowable|string $provider) => in_array(HasSolutionsForThrowable::class, class_implements($provider) ?: []))
             ->map(function (string|HasSolutionsForThrowable $provider) {
                 if (is_string($provider)) {
                     return new $provider;
