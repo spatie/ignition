@@ -48,7 +48,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 
     protected function getCurrentBranch(string $directory): string
     {
-        $branch = "'".trim((string)shell_exec("cd ${directory}; git branch | grep \\* | cut -d ' ' -f2"))."'";
+        $branch = "'".trim((string)shell_exec("cd {$directory}; git branch | grep \\* | cut -d ' ' -f2"))."'";
 
         if ($branch === "''") {
             $branch = 'current branch';
