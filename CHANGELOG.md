@@ -2,10 +2,32 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.0 - 2022-08-26
+
+### What's Changed
+
+- Improve solution provider repository interface types by @AlexVanderbist in https://github.com/spatie/ignition/pull/160
+- More readable for SQL Syntax by @SupianIDz in https://github.com/spatie/ignition/pull/159
+- Added VS Codium to the editor options by @WoutervdWaal in https://github.com/spatie/ignition/pull/130
+- Fix `${var}` string interpolation deprecation by @Ayesh in https://github.com/spatie/ignition/pull/144
+- Fix typos in readme by @krsriq in https://github.com/spatie/ignition/pull/158
+- Add ability to add dynamic HTML to head and body tags by @Jubeki in https://github.com/spatie/ignition/pull/161
+
+### New Contributors
+
+- @SupianIDz made their first contribution in https://github.com/spatie/ignition/pull/159
+- @WoutervdWaal made their first contribution in https://github.com/spatie/ignition/pull/130
+- @Ayesh made their first contribution in https://github.com/spatie/ignition/pull/144
+- @krsriq made their first contribution in https://github.com/spatie/ignition/pull/158
+- @Jubeki made their first contribution in https://github.com/spatie/ignition/pull/161
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.3.1...1.4.0
+
 ## 1.3.1 - 2022-05-16
 
 - Bump Ignition UI to v4.0.2
 - - Fix types: `context.env` can be `null` or `undefined`
+- 
 - 
 - JS bundle is no longer compressed to make debugging easier
 
@@ -18,20 +40,33 @@ All notable changes to `ignition` will be documented in this file
 - Use Ignition UI v4 by @AlexVanderbist in https://github.com/spatie/ignition/pull/129
 - - Bump Ignition UI version to 4.0.1
 - 
+- 
 - - - Fixed a missing key in Query debug section
 - - 
 - 
+- - 
+- 
+- 
 - - - Fixed selecting exceptions without accidentally collapsing the error card
 - - 
+- 
+- - 
+- 
 - 
 - - - Triple clicking a code snippet now always selects it
 - - 
 - 
 - - 
 - 
+- 
+- - 
+- 
+- 
 - - Refactor error occurrence context items types
 - 
+- 
 - - Log error to console when sharing to Flare goes wrong
+- 
 - 
 - 
 
