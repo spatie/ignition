@@ -21,11 +21,22 @@ test('flare middleware can be added to ignition', function () {
     expect($report->getMessage())->toEqual('Original message, now modified');
 });
 
-test('custom solution providers can be added', function () {
+test('custom solution providers can be added as FQCN', function () {
     $report = $this->ignition
         ->addSolutionProviders([
             AlwaysFalseSolutionProvider::class,
             AlwaysTrueSolutionProvider::class,
+        ])
+        ->handleException(new Exception('Hey'));
+
+    expect($report->toArray()['solutions'][0]['title'])->toEqual('My custom solution');
+});
+
+test('custom solution providers can be added as instances', function () {
+    $report = $this->ignition
+        ->addSolutionProviders([
+            new AlwaysFalseSolutionProvider,
+            new AlwaysTrueSolutionProvider,
         ])
         ->handleException(new Exception('Hey'));
 
