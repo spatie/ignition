@@ -11,7 +11,7 @@ interface SolutionProviderRepository
      *
      * @return $this
      */
-    public function registerSolutionProvider(string|HasSolutionsForThrowable $solutionProvider): self;
+    public function registerSolutionProvider(string $solutionProvider): self;
 
     /**
      * @param array<class-string<HasSolutionsForThrowable>|HasSolutionsForThrowable> $solutionProviders
