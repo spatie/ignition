@@ -20,9 +20,9 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
         $this->solutionProviders = Collection::make($solutionProviders);
     }
 
-    public function registerSolutionProvider(string|ProvidesSolution $solutionProviderClass): SolutionProviderRepositoryContract
+    public function registerSolutionProvider(string|HasSolutionsForThrowable $solutionProvider): SolutionProviderRepositoryContract
     {
-        $this->solutionProviders->push($solutionProviderClass);
+        $this->solutionProviders->push($solutionProvider);
 
         return $this;
     }
@@ -85,11 +85,12 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
         return app($solutionClass);
     }
 
+    /** @return Collection<int, HasSolutionsForThrowable> */
     protected function initialiseSolutionProviderRepositories(): Collection
     {
         return $this->solutionProviders
             ->filter(fn (HasSolutionsForThrowable|string $provider) => in_array(HasSolutionsForThrowable::class, class_implements($provider) ?: []))
-            ->map(function (string|HasSolutionsForThrowable $provider) {
+            ->map(function (string|HasSolutionsForThrowable $provider): HasSolutionsForThrowable {
                 if (is_string($provider)) {
                     return new $provider;
                 }

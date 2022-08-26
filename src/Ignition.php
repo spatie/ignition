@@ -14,7 +14,6 @@ use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
-use Spatie\Ignition\Contracts\ProvidesSolution;
 use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
@@ -151,7 +150,7 @@ class Ignition
     }
 
     /**
-     * @param array<int, ProvidesSolution|class-string<ProvidesSolution>> $solutionProviders
+     * @param array<int, HasSolutionsForThrowable|class-string<HasSolutionsForThrowable>> $solutionProviders
      *
      * @return $this
      */
