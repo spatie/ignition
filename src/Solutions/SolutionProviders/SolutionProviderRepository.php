@@ -79,7 +79,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
         }
 
         if (! function_exists('app')) {
-            return null;
+            return $this->attemptInstantiation($solutionClass);
         }
 
         return app($solutionClass);
@@ -97,5 +97,28 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
                 return $provider;
             });
+    }
+
+    /**
+     * @template T of Solution
+     *
+     * @param class-string<T> $class
+     *
+     * @return ?T
+     */
+    protected function attemptInstantiation(string $class): ?object
+    {
+        $reflectionClass = new \ReflectionClass($class);
+        $constructor = $reflectionClass->getConstructor();
+
+        if (null === $constructor) {
+            return $reflectionClass->newInstance();
+        }
+
+        if (0 === $constructor->getNumberOfRequiredParameters()) {
+            return $reflectionClass->newInstance();
+        }
+
+        return null;
     }
 }
