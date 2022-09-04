@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/helpers.php';
 
-use Spatie\Ignition\Config\FileConfigManager;
 use Spatie\Ignition\Config\IgnitionConfig;
 
 afterEach(function () {
@@ -35,10 +34,3 @@ test('the config can be retrieved from a file', function () {
 
     $this->assertEquals('test', $configArray['editor']);
 });
-
-if (! function_exists('app')) {
-    function app()
-    {
-        return new FileConfigManager(SETTINGS_FILE_DIRECTORY);
-    }
-}

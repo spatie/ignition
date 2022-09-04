@@ -74,7 +74,9 @@ it('will not instantiate a class that is not a solution', function (string $clas
 ]);
 
 it('can instantiate solutions with simple constructors', function (string $class) {
-    expect($this->repository->getSolutionForClass($class))->toBeInstanceOf(Solution::class);
+    expect($this->repository->getSolutionForClass($class))
+        ->toBeInstanceOf(Solution::class)
+        ->toBeInstanceOf($class);
 })->with([
     'no constructor' => [ProviderWithoutConstructor::class],
     'constructor without arguments' => [ProviderWithZeroArgumentConstructor::class],
