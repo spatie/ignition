@@ -38,7 +38,8 @@ class ProviderWithZeroRequiredArgumentConstructor implements Solution
     public function __construct(
         private string $foo = 'bar',
         private int $truth = 42,
-    ) {}
+    ) {
+    }
 }
 
 class ProviderWithRequiredArgumentConstructor implements Solution
@@ -48,22 +49,25 @@ class ProviderWithRequiredArgumentConstructor implements Solution
     public function __construct(
         private string $foo,
         private int $truth,
-    ) {}
+    ) {
+    }
 }
 
-class NoSolution {}
+class NoSolution
+{
+}
 
 beforeEach(function () {
-   $this->repository = new SolutionProviderRepository([
-       ProviderWithoutConstructor::class,
-       ProviderWithZeroArgumentConstructor::class,
-       ProviderWithZeroRequiredArgumentConstructor::class,
-       ProviderWithRequiredArgumentConstructor::class,
-   ]);
+    $this->repository = new SolutionProviderRepository([
+        ProviderWithoutConstructor::class,
+        ProviderWithZeroArgumentConstructor::class,
+        ProviderWithZeroRequiredArgumentConstructor::class,
+        ProviderWithRequiredArgumentConstructor::class,
+    ]);
 });
 
 it('will not instantiate a class that is not a solution', function (string $class) {
-   expect($this->repository->getSolutionForClass($class))->toBeNull();
+    expect($this->repository->getSolutionForClass($class))->toBeNull();
 })->with([
     'non existing class' => ['i do not exist'],
     'class does not implement solution interface' => [NoSolution::class],
