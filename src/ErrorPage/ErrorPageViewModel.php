@@ -99,7 +99,7 @@ class ErrorPageViewModel
 
     public function getAssetContents(string $asset): string
     {
-        $assetPath = __DIR__."/../../resources/compiled/{$asset}";
+        $assetPath = $this->ignitionConfig->compiledPath().$asset;
 
         return (string)file_get_contents($assetPath);
     }

@@ -84,6 +84,11 @@ class IgnitionConfig implements Arrayable
         return $this->options['editor'] ?? null;
     }
 
+    public function compiledPath(): ?string
+    {
+        return $this->options['compiledPath'] ?? null;
+    }
+
     /**
      * @return array<string, mixed> $options
      */
@@ -149,6 +154,7 @@ class IgnitionConfig implements Arrayable
             'share_endpoint' => 'https://flareapp.io/api/public-reports',
             'theme' => 'light',
             'editor' => 'vscode',
+            'compiledPath' => __DIR__ . '/../../resources/compiled/',
             'editor_options' => [
                 'sublime' => [
                     'label' => 'Sublime',
