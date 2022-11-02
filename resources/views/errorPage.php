@@ -57,7 +57,9 @@
 <div id="app"></div>
 
 <script>
-<?= $viewModel->getAssetContents('ignition.js') ?>
+    <!--
+    <?= $viewModel->getAssetContents('ignition.js') ?>
+    -->
 </script>
 
 <script>
