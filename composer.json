@@ -20,8 +20,8 @@
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "spatie/flare-client-php": "^1.1",
         "monolog/monolog": "^2.0",
+        "spatie/flare-client-php": "^1.0|dev-l10",
         "symfony/console": "^5.4|^6.0",
         "symfony/var-dumper": "^5.4|^6.0"
     },
