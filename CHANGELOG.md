@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.2 - 2023-01-23
+
+- align dependencies with Laravel 10
+
 ## 1.4.1 - 2022-08-26
 
 - Revert type change (breaking change) on `SolutionProviderRepository` interface
@@ -36,6 +40,7 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
 - JS bundle is no longer compressed to make debugging easier
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.3.0...1.3.1
@@ -49,6 +54,7 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
 - - - Fixed a missing key in Query debug section
 - - 
 - 
@@ -59,6 +65,11 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- - 
+- 
+- 
+- 
+- 
 - - - Fixed selecting exceptions without accidentally collapsing the error card
 - - 
 - 
@@ -66,6 +77,11 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - - 
+- 
+- 
+- 
+- - 
+- 
 - 
 - 
 - 
@@ -83,11 +99,19 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
+- - 
+- 
+- 
+- 
+- 
 - - Refactor error occurrence context items types
 - 
 - 
 - 
+- 
 - - Log error to console when sharing to Flare goes wrong
+- 
 - 
 - 
 - 
