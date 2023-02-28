@@ -25,7 +25,7 @@ body {
     @apply w-full;
     @apply text-gray-800;
     @apply dark:text-gray-200;
-    @apply bg-gray-100;
+    @apply bg-gray-200;
     @apply dark:bg-gray-900;
 }
 
