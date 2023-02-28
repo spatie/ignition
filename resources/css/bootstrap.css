@@ -25,13 +25,13 @@ body {
     @apply w-full;
     @apply text-gray-800;
     @apply dark:text-gray-200;
-    @apply bg-gray-200;
+    @apply bg-gray-100;
     @apply dark:bg-gray-900;
 }
 
-/* 
+/*
     For the `Auto` theme with a dark OS, `dark` class will be added to `<HTML class="auto">` by JS.
-    Following CSS already sets the right background and text-color in this case.  
+    Following CSS already sets the right background and text-color in this case.
 */
 
 @media (prefers-color-scheme: dark) {
