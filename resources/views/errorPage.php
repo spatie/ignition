@@ -35,7 +35,7 @@
     <?= $viewModel->customHtmlHead() ?>
 
 </head>
-<body class="scrollbar-lg">
+<body class="scrollbar-lg antialiased bg-center bg-dots-darker dark:bg-dots-lighter">
 
 <script>
     window.data = <?=
