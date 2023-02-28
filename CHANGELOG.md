@@ -2,6 +2,14 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.5 - 2023-02-28
+
+### What's Changed
+
+- Update Ignition UI to better match Laravel's splash page by @AlexVanderbist in https://github.com/spatie/ignition/pull/238
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.4.4...1.4.5
+
 ## 1.4.4 - 2023-02-28
 
 ### What's Changed
@@ -60,6 +68,7 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
 - JS bundle is no longer compressed to make debugging easier
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.3.0...1.3.1
@@ -70,6 +79,7 @@ All notable changes to `ignition` will be documented in this file
 
 - Use Ignition UI v4 by @AlexVanderbist in https://github.com/spatie/ignition/pull/129
 - - Bump Ignition UI version to 4.0.1
+- 
 - 
 - 
 - 
@@ -104,6 +114,14 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- - 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 - - - Fixed selecting exceptions without accidentally collapsing the error card
 - - 
 - 
@@ -126,6 +144,14 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - - 
+- 
+- 
+- 
+- 
+- 
+- 
+- - 
+- 
 - 
 - 
 - 
@@ -167,6 +193,15 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
+- - 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 - - Refactor error occurrence context items types
 - 
 - 
@@ -174,7 +209,9 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
 - - Log error to console when sharing to Flare goes wrong
+- 
 - 
 - 
 - 
