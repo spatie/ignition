@@ -13,6 +13,8 @@ use Throwable;
 
 class OpenAiSolution implements Solution
 {
+    protected string $prompt;
+
     protected OpenAiSolutionResponse $openAiSolutionResponse;
 
     public function __construct(
@@ -23,7 +25,7 @@ class OpenAiSolution implements Solution
         protected string|null         $applicationType = null,
         protected string|null         $applicationPath = null,
     ) {
-        $this->openAiSolutionResponse = $this->getAiSolution();
+        $this->prompt = $this->generatePrompt();
 
         $this->openAiSolutionResponse = $this->getAiSolution();
     }
@@ -55,7 +57,7 @@ class OpenAiSolution implements Solution
             ->chat()
             ->create([
                 'model' => $this->getModel(),
-                'messages' => [['role' => 'user', 'content' => $this->generatePrompt()]],
+                'messages' => [['role' => 'user', 'content' => $this->prompt]],
                 'max_tokens' => 1000,
                 'temperature' => 0,
             ])->choices[0]->message->content;
@@ -67,7 +69,7 @@ class OpenAiSolution implements Solution
 
     protected function getCacheKey(): string
     {
-        $hash = sha1($this->throwable->getTraceAsString());
+        $hash = sha1($this->prompt);
 
         return "ignition-solution-{$hash}";
     }
