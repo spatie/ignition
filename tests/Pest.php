@@ -3,6 +3,13 @@
 use Spatie\FlareClient\Glows\Glow;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Tests\TestClasses\FakeTime;
+use Dotenv\Dotenv;
+
+if(file_exists(__DIR__ . '/../.env')) {
+    $dotEnv = Dotenv::createImmutable(__DIR__ . '/..');
+
+    $dotEnv->load();
+}
 
 function useTime(string $dateTime, string $format = 'Y-m-d H:i:s')
 {
