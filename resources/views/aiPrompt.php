@@ -19,7 +19,7 @@ LINKS
 ENDLINKS
 ---
 
-Ok, here comes text context:
+Here comes the context and the exception message:
 
 Line: <?php echo $viewModel->line() ?>
 
