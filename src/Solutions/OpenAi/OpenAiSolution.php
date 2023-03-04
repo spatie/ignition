@@ -21,6 +21,7 @@ class OpenAiSolution implements Solution
         protected CacheInterface|null $cache = null,
         protected int|null            $cacheTtlInSeconds = 60 * 60,
         protected string|null         $applicationType = null,
+        protected string|null         $applicationPath = null,
     ) {
         $this->openAiSolutionResponse = $this->getAiSolution();
 
@@ -97,6 +98,10 @@ class OpenAiSolution implements Solution
     protected function getApplicationFrame(Throwable $throwable): ?Frame
     {
         $backtrace = Backtrace::createForThrowable($throwable);
+
+        if ($this->applicationPath) {
+            $backtrace->applicationPath($this->applicationPath);
+        }
 
         $frames = $backtrace->frames();
 

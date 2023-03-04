@@ -13,6 +13,7 @@ class OpenAiSolutionProvider implements HasSolutionsForThrowable
         protected ?CacheInterface $cache = null,
         protected int $cacheTtlInSeconds = 60 * 60,
         protected string|null $applicationType = null,
+        protected string|null $applicationPath = null,
     ) {
         $this->cache ??= new DummyCache();
     }
@@ -20,6 +21,13 @@ class OpenAiSolutionProvider implements HasSolutionsForThrowable
     public function applicationType(string $applicationType): self
     {
         $this->applicationType = $applicationType;
+
+        return $this;
+    }
+
+    public function applicationPath(string $applicationPath): self
+    {
+        $this->applicationPath = $applicationPath;
 
         return $this;
     }
@@ -46,6 +54,8 @@ class OpenAiSolutionProvider implements HasSolutionsForThrowable
                 $this->openAiKey,
                 $this->cache,
                 $this->cacheTtlInSeconds,
+                $this->applicationType,
+                $this->applicationPath,
             ),
         ];
     }
