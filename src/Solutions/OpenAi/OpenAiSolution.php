@@ -19,7 +19,7 @@ class OpenAiSolution implements Solution
         protected Throwable           $throwable,
         protected string              $openAiKey,
         protected CacheInterface|null $cache = null,
-        protected int|null            $cacheTtlInSeconds = 60 * 60,
+        protected int|null            $cacheTtlInSeconds = 60,
         protected string|null         $applicationType = null,
         protected string|null         $applicationPath = null,
     ) {
