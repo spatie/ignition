@@ -38,6 +38,10 @@
         "symfony/process": "^5.4|^6.0",
         "vlucas/phpdotenv": "^5.5"
     },
+    "suggest": {
+        "openai-php/client": "Require get solutions from OpenAI",
+        "psr/simple-cache": "To cache solutions from OpenAI"
+    },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
