@@ -33,7 +33,7 @@ class OpenAiPromptViewModel
         return $this->exceptionMessage;
     }
 
-    public function applicationType(): string
+    public function applicationType(): string|null
     {
         return $this->applicationType;
     }
