@@ -21,8 +21,7 @@ class OpenAiSolution implements Solution
         protected CacheInterface|null $cache = null,
         protected int|null            $cacheTtlInSeconds = 60 * 60,
         protected string|null         $applicationType = null,
-    )
-    {
+    ) {
         $this->openAiSolutionResponse = $this->getAiSolution();
 
         $this->openAiSolutionResponse = $this->getAiSolution();
