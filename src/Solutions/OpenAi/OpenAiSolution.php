@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Ignition\Solutions;
+namespace Spatie\Ignition\Solutions\OpenAi;
 
 use OpenAI;
 use Psr\SimpleCache\CacheInterface;
@@ -9,7 +9,6 @@ use Spatie\Backtrace\Frame;
 use Spatie\Ignition\Contracts\Solution;
 use Spatie\Ignition\ErrorPage\Renderer;
 use Spatie\Ignition\Ignition;
-use Spatie\Ignition\Support\OpenAiSolutionResponse;
 use Spatie\Ignition\Support\ViewModels\OpenAiPromptViewModel;
 use Throwable;
 
@@ -18,19 +17,37 @@ class OpenAiSolution implements Solution
     protected OpenAiSolutionResponse $openAiSolutionResponse;
 
     public function __construct(
-        protected Throwable      $throwable,
-        protected string         $openAiKey,
-        protected CacheInterface $cache,
-        protected               $cacheTtlInSeconds = 60 * 60,
-
-    ) {
+        protected Throwable           $throwable,
+        protected string              $openAiKey,
+        protected CacheInterface|null $cache = null,
+        protected int|null            $cacheTtlInSeconds = 60 * 60,
+        protected string|null         $applicationType = null,
+    )
+    {
         try {
             $this->openAiSolutionResponse = $this->getAiSolution();
         } catch (Throwable $throwable) {
             dd($throwable);
         }
-        $this->openAiSolutionResponse = $this->getAiSolution();
 
+        $this->cache ??= new DummyCache();
+        $this->openAiSolutionResponse = $this->getAiSolution();
+    }
+
+    public function applicationType(string $applicationType): self
+    {
+        $this->applicationType = $applicationType;
+
+        return $this;
+    }
+
+    public function useCache(CacheInterface $cache, int $cacheTtlInSeconds = 60 * 60): self
+    {
+        $this->cache = $cache;
+
+        $this->cacheTtlInSeconds = $cacheTtlInSeconds;
+
+        return $this;
     }
 
     public function getSolutionTitle(): string
@@ -83,10 +100,11 @@ class OpenAiSolution implements Solution
         $viewPath = Ignition::viewPath('aiPrompt');
 
         $viewModel = new OpenAiPromptViewModel(
-            $this->throwable->getFile(),
-            $this->throwable->getMessage(),
-            $this->getApplicationFrame($this->throwable)->getSnippetAsString(15),
-            $this->throwable->getLine(),
+            file: $this->throwable->getFile(),
+            exceptionMessage: $this->throwable->getMessage(),
+            snippet: $this->getApplicationFrame($this->throwable)->getSnippetAsString(15),
+            line: $this->throwable->getLine(),
+            applicationType: $this->applicationType,
         );
 
         return (new Renderer())->renderAsString(

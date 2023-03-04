@@ -1,6 +1,12 @@
 <?php /** @var \Spatie\Ignition\Support\ViewModels\OpenAiPromptViewModel $viewModel */ ?>
 
-You are a very skilled PHP programmer. Use the following context to find a possible fix for the exception message at the end. Limit your answer to 4 or 5 sentences. Also include a few links to documentation that might help.
+You are a very skilled PHP programmer.
+
+<?php if($viewModel->applicationType()) { ?>
+    You are working on a <?php echo $viewModel->applicationType() ?> application.
+<?php } ?>
+
+Use the following context to find a possible fix for the exception message at the end. Limit your answer to 4 or 5 sentences. Also include a few links to documentation that might help.
 
 Use this format in your answer, make sure links are json:
 

@@ -9,6 +9,7 @@ class OpenAiPromptViewModel
         protected string $exceptionMessage,
         protected string $snippet,
         protected string $line,
+        protected string|null $applicationType = null,
     ) {
     }
 
@@ -30,5 +31,10 @@ class OpenAiPromptViewModel
     public function exceptionMessage(): string
     {
         return $this->exceptionMessage;
+    }
+
+    public function applicationType(): string
+    {
+        return $this->applicationType;
     }
 }

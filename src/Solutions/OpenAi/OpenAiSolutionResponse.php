@@ -1,8 +1,6 @@
 <?php
 
-namespace Spatie\Ignition\Support;
-
-use Illuminate\Support\Str;
+namespace Spatie\Ignition\Solutions\OpenAi;
 
 class OpenAiSolutionResponse
 {

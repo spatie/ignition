@@ -1,10 +1,9 @@
 <?php
 
-namespace Spatie\Ignition\Solutions\SolutionProviders;
+namespace Spatie\Ignition\Solutions\OpenAi;
 
 use Psr\SimpleCache\CacheInterface;
 use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
-use Spatie\Ignition\Solutions\OpenAiSolution;
 use Throwable;
 
 class OpenAiSolutionProvider implements HasSolutionsForThrowable

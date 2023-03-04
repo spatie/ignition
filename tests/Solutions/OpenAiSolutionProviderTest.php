@@ -4,7 +4,7 @@ namespace Spatie\Ignition\Tests\Solutions;
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
-use Spatie\Ignition\Solutions\SolutionProviders\OpenAiSolutionProvider;
+use Spatie\Ignition\Solutions\OpenAi\OpenAiSolutionProvider;
 
 it('can solve an an exception using ai', function () {
     $repository = new Repository(new ArrayStore());
