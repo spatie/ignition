@@ -22,8 +22,7 @@ class OpenAiSolution implements Solution
         protected CacheInterface|null $cache = null,
         protected int|null            $cacheTtlInSeconds = 60 * 60,
         protected string|null         $applicationType = null,
-    )
-    {
+    ) {
         try {
             $this->openAiSolutionResponse = $this->getAiSolution();
         } catch (Throwable $throwable) {
@@ -62,7 +61,6 @@ class OpenAiSolution implements Solution
 
     public function getDocumentationLinks(): array
     {
-
         return $this->openAiSolutionResponse->links();
     }
 

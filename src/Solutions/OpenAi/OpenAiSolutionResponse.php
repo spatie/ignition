@@ -29,7 +29,7 @@ class OpenAiSolutionResponse
         array_filter($textLinks);
 
         $links = [];
-        foreach($textLinks as $textLink) {
+        foreach ($textLinks as $textLink) {
             $links[$textLink['title']] = $textLink['url'];
         }
 
@@ -49,6 +49,7 @@ class OpenAiSolutionResponse
         if ($endPosition === false) {
             return "";
         }
+
         return trim(substr($text, $startPosition, $endPosition - $startPosition));
     }
 }
