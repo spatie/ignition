@@ -2,7 +2,6 @@
 
 namespace Spatie\Ignition\Solutions;
 
-use DateTime;
 use OpenAI;
 use Psr\SimpleCache\CacheInterface;
 use Spatie\Backtrace\Backtrace;
@@ -20,8 +19,7 @@ class OpenAiSolution implements Solution
         protected string         $openAiKey,
         protected CacheInterface $cache,
         protected                $cacheTtlInSeconds = 60 * 60,
-    )
-    {
+    ) {
     }
 
     public function getSolutionTitle(): string
@@ -81,7 +79,7 @@ class OpenAiSolution implements Solution
 
         return (new Renderer())->renderAsString(
             ['viewModel' => $viewModel],
-             $viewPath,
+            $viewPath,
         );
     }
 

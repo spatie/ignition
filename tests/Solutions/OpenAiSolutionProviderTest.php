@@ -20,4 +20,3 @@ it('can solve an an exception using ai', function () {
 
     dd($solution->getSolutionDescription());
 });
-
