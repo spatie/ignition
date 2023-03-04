@@ -9,17 +9,28 @@ use Spatie\Backtrace\Frame;
 use Spatie\Ignition\Contracts\Solution;
 use Spatie\Ignition\ErrorPage\Renderer;
 use Spatie\Ignition\Ignition;
-use Spatie\Ignition\Support\ViewModels\AiPromptViewModel;
+use Spatie\Ignition\Support\OpenAiSolutionResponse;
+use Spatie\Ignition\Support\ViewModels\OpenAiPromptViewModel;
 use Throwable;
 
 class OpenAiSolution implements Solution
 {
+    protected OpenAiSolutionResponse $openAiSolutionResponse;
+
     public function __construct(
         protected Throwable      $throwable,
         protected string         $openAiKey,
         protected CacheInterface $cache,
-        protected                $cacheTtlInSeconds = 60 * 60,
+        protected               $cacheTtlInSeconds = 60 * 60,
+
     ) {
+        try {
+            $this->openAiSolutionResponse = $this->getAiSolution();
+        } catch (Throwable $throwable) {
+            dd($throwable);
+        }
+        $this->openAiSolutionResponse = $this->getAiSolution();
+
     }
 
     public function getSolutionTitle(): string
@@ -29,20 +40,21 @@ class OpenAiSolution implements Solution
 
     public function getSolutionDescription(): string
     {
-        return $this->getAiSolutionText();
+        return $this->openAiSolutionResponse->description();
     }
 
     public function getDocumentationLinks(): array
     {
-        return [];
+
+        return $this->openAiSolutionResponse->links();
     }
 
-    public function getAiSolutionText(): string
+    public function getAiSolution(): ?OpenAiSolutionResponse
     {
         $solution = $this->cache->get($this->getCacheKey());
 
         if ($solution) {
-            return $solution;
+            return new OpenAiSolutionResponse($solution);
         }
 
         $solutionText = OpenAI::client($this->openAiKey)
@@ -50,13 +62,13 @@ class OpenAiSolution implements Solution
             ->create([
                 'model' => $this->getModel(),
                 'messages' => [['role' => 'user', 'content' => $this->generatePrompt()]],
-                'max_tokens' => 100,
+                'max_tokens' => 1000,
                 'temperature' => 0,
             ])->choices[0]->message->content;
 
         $this->cache->set($this->getCacheKey(), $solutionText, $this->cacheTtlInSeconds);
 
-        return trim($solutionText);
+        return new OpenAiSolutionResponse($solutionText);
     }
 
     protected function getCacheKey(): string
@@ -70,7 +82,7 @@ class OpenAiSolution implements Solution
     {
         $viewPath = Ignition::viewPath('aiPrompt');
 
-        $viewModel = new AiPromptViewModel(
+        $viewModel = new OpenAiPromptViewModel(
             $this->throwable->getFile(),
             $this->throwable->getMessage(),
             $this->getApplicationFrame($this->throwable)->getSnippetAsString(15),

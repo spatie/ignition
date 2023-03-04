@@ -2,7 +2,7 @@
 
 namespace Spatie\Ignition\Support\ViewModels;
 
-class AiPromptViewModel
+class OpenAiPromptViewModel
 {
     public function __construct(
         protected string $file,

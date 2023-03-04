@@ -1,6 +1,19 @@
-<?php /** @var \Spatie\Ignition\Support\ViewModels\AiPromptViewModel $viewModel */ ?>
+<?php /** @var \Spatie\Ignition\Support\ViewModels\OpenAiPromptViewModel $viewModel */ ?>
 
-You are a very skilled PHP programmer. Use the following context to find a possible fix for the exception message at the end. Also include a few links to documentation that might help.
+You are a very skilled PHP programmer. Use the following context to find a possible fix for the exception message at the end. Limit your answer to 4 or 5 sentences. Also include a few links to documentation that might help.
+
+Use this format in your answer, make sure links are json:
+
+FIX
+insert the possible fix here
+ENDFIX
+LINKS
+{"title": "Title link 1", "url": "URL link 1"}
+{"title": "Title link 2", "url": "URL link 2"}
+ENDLINKS
+---
+
+Ok, here comes text context:
 
 Line: <?php echo $viewModel->line() ?>
 
