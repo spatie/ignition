@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Ignition\Support\ViewModels;
+namespace Spatie\Ignition\Solutions\OpenAi;
 
 class OpenAiPromptViewModel
 {

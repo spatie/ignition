@@ -9,7 +9,6 @@ use Spatie\Backtrace\Frame;
 use Spatie\Ignition\Contracts\Solution;
 use Spatie\Ignition\ErrorPage\Renderer;
 use Spatie\Ignition\Ignition;
-use Spatie\Ignition\Support\ViewModels\OpenAiPromptViewModel;
 use Throwable;
 
 class OpenAiSolution implements Solution
