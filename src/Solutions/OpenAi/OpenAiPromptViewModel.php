@@ -7,6 +7,7 @@ class OpenAiPromptViewModel
     public function __construct(
         protected string $file,
         protected string $exceptionMessage,
+        protected string $exceptionClass,
         protected string $snippet,
         protected string $line,
         protected string|null $applicationType = null,
@@ -31,6 +32,11 @@ class OpenAiPromptViewModel
     public function exceptionMessage(): string
     {
         return $this->exceptionMessage;
+    }
+
+    public function exceptionClass(): string
+    {
+        return $this->exceptionClass;
     }
 
     public function applicationType(): string|null

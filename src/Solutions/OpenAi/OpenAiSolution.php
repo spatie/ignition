@@ -79,6 +79,7 @@ class OpenAiSolution implements Solution
         $viewModel = new OpenAiPromptViewModel(
             file: $this->throwable->getFile(),
             exceptionMessage: $this->throwable->getMessage(),
+            exceptionClass: get_class($this->throwable),
             snippet: $this->getApplicationFrame($this->throwable)->getSnippetAsString(15),
             line: $this->throwable->getLine(),
             applicationType: $this->applicationType,
