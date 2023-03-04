@@ -10,9 +10,27 @@ class OpenAiSolutionProvider implements HasSolutionsForThrowable
 {
     public function __construct(
         protected string $openAiKey,
-        protected CacheInterface $cache,
-        protected $cacheTtlInSeconds = 60 * 60,
+        protected ?CacheInterface $cache = null,
+        protected int $cacheTtlInSeconds = 60 * 60,
+        protected string|null $applicationType = null,
     ) {
+        $this->cache ??= new DummyCache();
+    }
+
+    public function applicationType(string $applicationType): self
+    {
+        $this->applicationType = $applicationType;
+
+        return $this;
+    }
+
+    public function useCache(CacheInterface $cache, int $cacheTtlInSeconds = 60 * 60): self
+    {
+        $this->cache = $cache;
+
+        $this->cacheTtlInSeconds = $cacheTtlInSeconds;
+
+        return $this;
     }
 
     public function canSolve(Throwable $throwable): bool

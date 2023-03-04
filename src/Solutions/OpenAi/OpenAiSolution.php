@@ -21,31 +21,11 @@ class OpenAiSolution implements Solution
         protected CacheInterface|null $cache = null,
         protected int|null            $cacheTtlInSeconds = 60 * 60,
         protected string|null         $applicationType = null,
-    ) {
-        try {
-            $this->openAiSolutionResponse = $this->getAiSolution();
-        } catch (Throwable $throwable) {
-            dd($throwable);
-        }
-
-        $this->cache ??= new DummyCache();
+    )
+    {
         $this->openAiSolutionResponse = $this->getAiSolution();
-    }
 
-    public function applicationType(string $applicationType): self
-    {
-        $this->applicationType = $applicationType;
-
-        return $this;
-    }
-
-    public function useCache(CacheInterface $cache, int $cacheTtlInSeconds = 60 * 60): self
-    {
-        $this->cache = $cache;
-
-        $this->cacheTtlInSeconds = $cacheTtlInSeconds;
-
-        return $this;
+        $this->openAiSolutionResponse = $this->getAiSolution();
     }
 
     public function getSolutionTitle(): string
