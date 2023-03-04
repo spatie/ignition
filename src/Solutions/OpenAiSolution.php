@@ -22,7 +22,6 @@ class OpenAiSolution implements Solution
         protected string         $openAiKey,
         protected CacheInterface $cache,
         protected               $cacheTtlInSeconds = 60 * 60,
-
     ) {
         try {
             $this->openAiSolutionResponse = $this->getAiSolution();
@@ -30,7 +29,6 @@ class OpenAiSolution implements Solution
             dd($throwable);
         }
         $this->openAiSolutionResponse = $this->getAiSolution();
-
     }
 
     public function getSolutionTitle(): string
@@ -45,7 +43,6 @@ class OpenAiSolution implements Solution
 
     public function getDocumentationLinks(): array
     {
-
         return $this->openAiSolutionResponse->links();
     }
 
