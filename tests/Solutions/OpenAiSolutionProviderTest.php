@@ -11,7 +11,7 @@ it('can solve an an exception using ai', function () {
 
     $solutionProvider = new OpenAiSolutionProvider(
         env('OPEN_API_KEY'),
-        $repository
+        $repository,
     );
 
     $solutions = $solutionProvider->getSolutions(new \Exception('T_PAAMAYIM_NEKUDOTAYIM expected'));
