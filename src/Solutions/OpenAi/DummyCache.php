@@ -13,12 +13,10 @@ class DummyCache implements CacheInterface
 
     public function set(string $key, mixed $value, \DateInterval|int|null $ttl = null): bool
     {
-
     }
 
     public function delete(string $key): bool
     {
-
     }
 
     public function clear(): bool
