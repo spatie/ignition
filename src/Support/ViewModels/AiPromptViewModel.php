@@ -2,8 +2,6 @@
 
 namespace Spatie\Ignition\Support\ViewModels;
 
-use Throwable;
-
 class AiPromptViewModel
 {
     public function __construct(
@@ -11,8 +9,7 @@ class AiPromptViewModel
         protected string $exceptionMessage,
         protected string $snippet,
         protected string $line,
-    )
-    {
+    ) {
     }
 
     public function file(): string

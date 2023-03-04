@@ -2,7 +2,6 @@
 
 namespace Spatie\Ignition\Solutions\SolutionProviders;
 
-
 use Psr\SimpleCache\CacheInterface;
 use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
 use Spatie\Ignition\Solutions\OpenAiSolution;
@@ -14,8 +13,7 @@ class OpenAiSolutionProvider implements HasSolutionsForThrowable
         protected string $openAiKey,
         protected CacheInterface $cache,
         protected $cacheTtlInSeconds = 60 * 60,
-    ){
-
+    ) {
     }
 
     public function canSolve(Throwable $throwable): bool
@@ -31,7 +29,7 @@ class OpenAiSolutionProvider implements HasSolutionsForThrowable
                 $this->openAiKey,
                 $this->cache,
                 $this->cacheTtlInSeconds,
-            )
+            ),
         ];
     }
 }
