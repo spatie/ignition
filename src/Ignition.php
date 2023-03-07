@@ -165,13 +165,19 @@ class Ignition
         return $this;
     }
 
-    /** @deprecated Use `setTheme('dark')` instead */
+    /**
+     * @deprecated Use `setTheme('dark')` instead.
+     * @see setTheme()
+     */
     public function useDarkMode(): self
     {
         return $this->setTheme('dark');
     }
 
-    /** @deprecated Use `setTheme($theme)` instead */
+    /**
+     * @deprecated Use `setTheme($theme)` instead.
+     * @see setTheme()
+     */
     public function theme(string $theme): self
     {
         return $this->setTheme($theme);
