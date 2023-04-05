@@ -212,7 +212,7 @@ To start sending your errors to OpenAI, you must instanciate the `OpenAiSolution
 ```php
 use \Spatie\Ignition\Solutions\OpenAi\OpenAiSolutionProvider;
 
-$aiSolutionProvider = new OpenAiSolutionProvider($openAiKey)
+$aiSolutionProvider = new OpenAiSolutionProvider($openAiKey);
 ```
 
 To use the solution provider, you should pass it to `addSolutionProviders` when registering Ignition.
