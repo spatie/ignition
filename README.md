@@ -201,6 +201,12 @@ To register a solution provider to Ignition you must call the `addSolutionProvid
 
 Ignition can send your exception to Open AI that will attempt to automatically suggest a solution. In many cases, the suggested solutions is quite useful, but keep in mind that the solution may not be 100% correct for your context.
 
+To generate AI powered solutions, you must first install this optional dependency.
+
+```bash
+composer require openai-php/client
+```
+
 To start sending your errors to OpenAI, you must instanciate the `OpenAiSolutionProvider`. The constructor expects a OpenAI API key to be passed, you should generate this key [at OpenAI](https://platform.openai.com).
 
 ```php
