@@ -8,6 +8,12 @@ use Illuminate\Cache\Repository;
 use Spatie\Ignition\Solutions\OpenAi\OpenAiSolutionProvider;
 
 it('can solve an an exception using ai', function () {
+    if (! canRunOpenAiTest()) {
+        $this->markTestSkipped('Cannot run AI test');
+
+        return;
+    }
+
     $repository = new Repository(new ArrayStore());
 
     $solutionProvider = new OpenAiSolutionProvider(
@@ -20,4 +26,4 @@ it('can solve an an exception using ai', function () {
     $solution = $solutions[0];
 
     expect($solution->getSolutionDescription())->toBeString();
-})->skip(fn () => empty(env('OPEN_API_KEY')), 'Open AI key is not set');
+})->canRunOpenAiTest();
