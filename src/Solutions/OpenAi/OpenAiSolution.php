@@ -13,6 +13,8 @@ use Throwable;
 
 class OpenAiSolution implements Solution
 {
+    public bool $aiGenerated = true;
+
     protected string $prompt;
 
     protected OpenAiSolutionResponse $openAiSolutionResponse;
