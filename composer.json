@@ -20,17 +20,26 @@
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "spatie/backtrace": "^1.4",
         "spatie/flare-client-php": "^1.1",
         "symfony/console": "^5.4|^6.0",
         "symfony/var-dumper": "^5.4|^6.0"
     },
     "require-dev": {
+        "illuminate/cache": "^9.52",
         "mockery/mockery": "^1.4",
+        "pestphp/pest": "^1.20",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
+        "psr/simple-cache-implementation": "*",
+        "symfony/cache": "^6.2",
         "symfony/process": "^5.4|^6.0",
-        "pestphp/pest": "^1.20"
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "suggest": {
+        "openai-php/client": "Require get solutions from OpenAI",
+        "simple-cache-implementation": "To cache solutions from OpenAI"
     },
     "config": {
         "sort-packages": true,
@@ -53,6 +62,7 @@
     "prefer-stable": true,
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
+        "baseline": "vendor/bin/phpstan analyse --generate-baseline",
         "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"

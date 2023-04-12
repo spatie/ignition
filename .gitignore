@@ -1,3 +1,4 @@
+.env
 /build
 /coverage
 /node_modules
@@ -10,3 +11,4 @@ tests/stubs/Controllers/GitConflictController.php
 package-lock.json
 .php-cs-fixer.cache
 /types
+
