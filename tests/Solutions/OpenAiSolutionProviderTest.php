@@ -20,5 +20,4 @@ it('can solve an an exception using ai', function () {
     $solution = $solutions[0];
 
     expect($solution->getSolutionDescription())->toBeString();
-})->skip(fn() => empty(env('OPEN_API_KEY')), 'Open AI key is not set');
-
+})->skip(fn () => empty(env('OPEN_API_KEY')), 'Open AI key is not set');
