@@ -1,0 +1,51 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^PHPDoc tag @param for parameter \\$solutionProvider with type class\\-string\\<Spatie\\\\Ignition\\\\Contracts\\\\HasSolutionsForThrowable\\>\\|Spatie\\\\Ignition\\\\Contracts\\\\HasSolutionsForThrowable is not subtype of native type string\\.$#"
+			count: 1
+			path: src/Contracts/SolutionProviderRepository.php
+
+		-
+			message: "#^Method Spatie\\\\Ignition\\\\ErrorPage\\\\Renderer\\:\\:renderAsString\\(\\) has parameter \\$date with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ErrorPage/Renderer.php
+
+		-
+			message: "#^Method Spatie\\\\Ignition\\\\ErrorPage\\\\Renderer\\:\\:renderAsString\\(\\) should return string but returns string\\|false\\.$#"
+			count: 1
+			path: src/ErrorPage/Renderer.php
+
+		-
+			message: "#^Method Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\DummyCache\\:\\:setMultiple\\(\\) has parameter \\$values with no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Solutions/OpenAi/DummyCache.php
+
+		-
+			message: "#^Cannot call method get\\(\\) on Psr\\\\SimpleCache\\\\CacheInterface\\|null\\.$#"
+			count: 1
+			path: src/Solutions/OpenAi/OpenAiSolution.php
+
+		-
+			message: "#^Cannot call method getSnippetAsString\\(\\) on Spatie\\\\Backtrace\\\\Frame\\|null\\.$#"
+			count: 1
+			path: src/Solutions/OpenAi/OpenAiSolution.php
+
+		-
+			message: "#^Cannot call method set\\(\\) on Psr\\\\SimpleCache\\\\CacheInterface\\|null\\.$#"
+			count: 1
+			path: src/Solutions/OpenAi/OpenAiSolution.php
+
+		-
+			message: "#^Parameter \\$line of class Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiPromptViewModel constructor expects string, int given\\.$#"
+			count: 1
+			path: src/Solutions/OpenAi/OpenAiSolution.php
+
+		-
+			message: "#^Property Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiSolution\\:\\:\\$openAiSolutionResponse \\(Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiSolutionResponse\\) does not accept Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiSolutionResponse\\|null\\.$#"
+			count: 1
+			path: src/Solutions/OpenAi/OpenAiSolution.php
+
+		-
+			message: "#^Method Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiSolutionResponse\\:\\:links\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Solutions/OpenAi/OpenAiSolutionResponse.php
