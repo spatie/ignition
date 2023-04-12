@@ -26,4 +26,4 @@ it('can solve an an exception using ai', function () {
     $solution = $solutions[0];
 
     expect($solution->getSolutionDescription())->toBeString();
-})->canRunOpenAiTest();
+});
