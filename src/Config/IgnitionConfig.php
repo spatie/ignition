@@ -170,6 +170,10 @@ class IgnitionConfig implements Arrayable
                     'label' => 'PhpStorm',
                     'url' => 'phpstorm://open?file=%path&line=%line',
                 ],
+                'phpstorm-remote' => [
+                    'label' => 'PHPStorm Remote',
+                    'url' => 'http://localhost:63342/api/file/%path:%line',
+                ],
                 'idea' => [
                     'label' => 'Idea',
                     'url' => 'idea://open?file=%path&line=%line',
