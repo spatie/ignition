@@ -2,14 +2,23 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.7.0 - 2023-05-04
+
+- improvements to solution rendering
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.6.0...1.7.0
+
 ## 1.6.0 - 2023-04-27
 
 ### What's Changed
 
 - Bump spatie/ignition-ui to 4.2.0. Includes following changes:
 - - Add indicator for AI-generated solutions
+- 
 - - Add support for rendering markdown in solutions
+- 
 - - Fix vendor frame grouping on Windows
+- 
 - 
 - Bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/spatie/ignition/pull/267
 
@@ -93,6 +102,7 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
 - JS bundle is no longer compressed to make debugging easier
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.3.0...1.3.1
@@ -103,6 +113,7 @@ All notable changes to `ignition` will be documented in this file
 
 - Use Ignition UI v4 by @AlexVanderbist in https://github.com/spatie/ignition/pull/129
 - - Bump Ignition UI version to 4.0.1
+- 
 - 
 - 
 - 
@@ -167,6 +178,17 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- - 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 - - - Fixed selecting exceptions without accidentally collapsing the error card
 - - 
 - 
@@ -213,6 +235,17 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - - 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- - 
+- 
 - 
 - 
 - 
@@ -287,6 +320,18 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
+- - 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 - - Refactor error occurrence context items types
 - 
 - 
@@ -297,7 +342,9 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
+- 
 - - Log error to console when sharing to Flare goes wrong
+- 
 - 
 - 
 - 
