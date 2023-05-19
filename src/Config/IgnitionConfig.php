@@ -200,7 +200,7 @@ class IgnitionConfig implements Arrayable
                 ],
                 'nova' => [
                     'label' => 'Nova',
-                    'url' => 'nova://core/open/file?filename=%path&line=%line',
+                    'url' => 'nova://open?path=%path&line=%line',
                 ],
                 'netbeans' => [
                     'label' => 'NetBeans',
