@@ -99,6 +99,9 @@ export type IgnitionErrorOccurrence = {
             }>;
         };
         view: ViewContext | null;
+        [key: string]: undefined | null | {
+            [key: string]: any;
+        };
     };
     stage: string;
     message_level: null | string;
