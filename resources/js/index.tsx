@@ -30,10 +30,11 @@ function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrenc
         git,
         livewire,
         view,
+        exception,
         ...custom_context
     } = report.context;
 
-    const customContext = Object.entries(custom_context)
+    const customContext = Object.entries<any>(custom_context)
         .map(([name, items]) => {
             return {
                 name: name,
@@ -64,8 +65,8 @@ function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrenc
             git: git || null,
             livewire: livewire || null,
             view: view || null,
+            exception: exception || null,
         },
-        // @ts-ignore
         custom_context_items: customContext,
         type: 'web',
         entry_point: report?.context?.request?.url,
