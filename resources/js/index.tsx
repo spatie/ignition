@@ -31,6 +31,8 @@ function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrenc
         livewire,
         view,
         exception,
+        arguments: args,
+        job,
         ...custom_context
     } = report.context;
 
@@ -66,6 +68,8 @@ function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrenc
             livewire: livewire || null,
             view: view || null,
             exception: exception || null,
+            arguments: args || null,
+            job: job || null,
         },
         custom_context_items: customContext,
         type: 'web',

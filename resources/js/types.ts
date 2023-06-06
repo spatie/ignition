@@ -104,6 +104,11 @@ export type IgnitionErrorOccurrence = {
         // Context attached to the exception or error via the `context()` method.
         exception: Record<string, any> | null;
 
+        job: Record<string, any> | null;
+
+        /* @ts-ignore */
+        arguments: Array<string> | null;
+
         // Additional context groups (added via Flare::group() and Flare::context)
         [key: string]: undefined | null | {
             [key: string]: any;
