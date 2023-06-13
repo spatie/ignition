@@ -170,6 +170,10 @@ class IgnitionConfig implements Arrayable
                     'label' => 'PhpStorm',
                     'url' => 'phpstorm://open?file=%path&line=%line',
                 ],
+                'phpstorm-remote' => [
+                    'label' => 'PHPStorm Remote',
+                    'url' => 'javascript:r = new XMLHttpRequest;r.open("get", "http://localhost:63342/api/file/%path:%line");r.send()',
+                ],
                 'idea' => [
                     'label' => 'Idea',
                     'url' => 'idea://open?file=%path&line=%line',
@@ -200,7 +204,7 @@ class IgnitionConfig implements Arrayable
                 ],
                 'nova' => [
                     'label' => 'Nova',
-                    'url' => 'nova://core/open/file?filename=%path&line=%line',
+                    'url' => 'nova://open?path=%path&line=%line',
                 ],
                 'netbeans' => [
                     'label' => 'NetBeans',

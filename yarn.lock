@@ -1031,10 +1031,10 @@
   dependencies:
     error-stack-parser "^2.0.2"
 
-"@flareapp/ignition-ui@^4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@flareapp/ignition-ui/-/ignition-ui-4.2.4.tgz#16895bc27bc6ea76de8b71c46176cb12bfcca1df"
-  integrity sha512-o1whidnrPpCJloJ38rUxAFNtP/QUe+7QoxFQZJIrtzNGm+q13dyVbhzJDWK9GQZtT4e2DIEfKw5Nr3HbTQRYBA==
+"@flareapp/ignition-ui@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@flareapp/ignition-ui/-/ignition-ui-4.5.0.tgz#2b27dd8f117d775a21da5dfbf6284784b4489dd5"
+  integrity sha512-z1UqYwKQT7tsb9a/4bC5zXcF7ged+iyHPhiJEWkbBOLbLB6dIkruiG/w64wHCxixYhEmdQ3B0nt42ZEezKgUqw==
   dependencies:
     "@fortawesome/fontawesome-common-types" "^6.1.1"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
@@ -1049,6 +1049,7 @@
     md5 "^2.3.0"
     parse-path "^4.0.3"
     react "^17.0.2"
+    react-intersection-observer "^9.4.3"
     react-markdown "^8.0.7"
     react-syntax-highlighter "^15.4.5"
     sql-formatter "^4.0.2"
@@ -4731,6 +4732,11 @@ react-intersection-observer@^8.32.5:
   version "8.33.1"
   resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.33.1.tgz#8e6442cac7052ed63056e191b7539e423e7d5c64"
   integrity sha512-3v+qaJvp3D1MlGHyM+KISVg/CMhPiOlO6FgPHcluqHkx4YFCLuyXNlQ/LE6UkbODXlQcLOppfX6UMxCEkUhDLw==
+
+react-intersection-observer@^9.4.3:
+  version "9.4.4"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.4.4.tgz#e1b4c49ba2de6bcf103dd5f0d84eab4c8cdbf230"
+  integrity sha512-KQr8ezJscRSQZR0/TjogG4mZttCzdPZj8fhDzAK+xrPYOVvFjabRNy+4EY3UhS3fJaJyIedGjA8y4yKX+nc08w==
 
 react-is@^16.13.1:
   version "16.13.1"

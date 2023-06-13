@@ -1,7 +1,7 @@
-import { ErrorOccurrence } from '@flareapp/ignition-ui';
+import {ErrorOccurrence} from '@flareapp/ignition-ui';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IgniteData } from './types';
+import {IgniteData} from './types';
 import './vendor/symfony';
 import '../css/app.css';
 import Ignition from 'Ignition';
@@ -11,10 +11,39 @@ window.ignite = (data) => {
 
     console.log(data, errorOccurrence);
 
-    ReactDOM.render(<Ignition errorOccurrence={errorOccurrence} igniteData={data} />, document.querySelector('#app'));
+    ReactDOM.render(<Ignition errorOccurrence={errorOccurrence} igniteData={data}/>, document.querySelector('#app'));
 };
 
-function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurrence {
+function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrence {
+    const {
+        request,
+        request_data,
+        queries,
+        dumps,
+        logs,
+        headers,
+        cookies,
+        session,
+        env,
+        user,
+        route,
+        git,
+        livewire,
+        view,
+        exception,
+        arguments: args,
+        job,
+        ...custom_context
+    } = report.context;
+
+    const customContext = Object.entries<any>(custom_context)
+        .map(([name, items]) => {
+            return {
+                name: name,
+                items: items,
+            };
+        });
+
     return {
         frames: report.stacktrace.map((frame) => ({
             ...frame,
@@ -24,21 +53,25 @@ function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurre
             class: frame.class || '',
         })),
         context_items: {
-            request: report.context?.request,
-            request_data: report.context?.request_data,
-            queries: report.context?.queries || null,
-            dumps: report.context?.dumps || null,
-            logs: report.context.logs || null,
-            headers: report.context?.headers || null,
-            cookies: report.context?.cookies || null,
-            session: report.context?.session || null,
-            env: report.context?.env || null,
-            user: report.context?.user || null,
-            route: report.context?.route || null,
-            git: report.context?.git || null,
-            livewire: report.context.livewire || null,
-            view: report.context.view || null,
+            request: request,
+            request_data: request_data,
+            queries: queries || null,
+            dumps: dumps || null,
+            logs: logs || null,
+            headers: headers || null,
+            cookies: cookies || null,
+            session: session || null,
+            env: env || null,
+            user: user || null,
+            route: route || null,
+            git: git || null,
+            livewire: livewire || null,
+            view: view || null,
+            exception: exception || null,
+            arguments: args || null,
+            job: job || null,
         },
+        custom_context_items: customContext,
         type: 'web',
         entry_point: report?.context?.request?.url,
         exception_class: report.exception_class,

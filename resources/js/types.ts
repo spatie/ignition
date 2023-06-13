@@ -13,6 +13,7 @@ export type IgniteData = {
     appDebug: boolean;
 };
 
+// The data the PHP Ignition package passes to the client. Needs to be transformed to ErrorOccurrence to be rendered in Ignition.
 export type IgnitionErrorOccurrence = {
     notifier: string;
     language: string;
@@ -99,6 +100,19 @@ export type IgnitionErrorOccurrence = {
             }>;
         };
         view: ViewContext | null;
+
+        // Context attached to the exception or error via the `context()` method.
+        exception: Record<string, any> | null;
+
+        job: Record<string, any> | null;
+
+        /* @ts-ignore */
+        arguments: Array<string> | null;
+
+        // Additional context groups (added via Flare::group() and Flare::context)
+        [key: string]: undefined | null | {
+            [key: string]: any;
+        };
     };
     stage: string;
     message_level: null | string;
