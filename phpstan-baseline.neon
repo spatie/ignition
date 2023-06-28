@@ -36,11 +36,6 @@ parameters:
 			path: src/Solutions/OpenAi/OpenAiSolution.php
 
 		-
-			message: "#^Parameter \\$line of class Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiPromptViewModel constructor expects string, int given\\.$#"
-			count: 1
-			path: src/Solutions/OpenAi/OpenAiSolution.php
-
-		-
 			message: "#^Property Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiSolution\\:\\:\\$openAiSolutionResponse \\(Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiSolutionResponse\\) does not accept Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\OpenAiSolutionResponse\\|null\\.$#"
 			count: 1
 			path: src/Solutions/OpenAi/OpenAiSolution.php
