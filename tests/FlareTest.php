@@ -1,9 +1,14 @@
 <?php
 
+use Spatie\Backtrace\Arguments\ArgumentReducers;
+use Spatie\Backtrace\Arguments\ReducedArgument\ReducedArgument;
+use Spatie\Backtrace\Arguments\ReducedArgument\ReducedArgumentContract;
+use Spatie\Backtrace\Arguments\Reducers\ArgumentReducer;
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\Http\Client;
 use Spatie\Ignition\Ignition;
 use Spatie\Ignition\Tests\Mocks\FakeFlare;
+use Spatie\Ignition\Tests\TestClasses\TraceArguments;
 
 beforeEach(function () {
     $this->ignition = Ignition::make();
@@ -45,4 +50,41 @@ it('will send an exception to flare when an api key is set on flare', function (
         ->handleException($exception);
 
     expect($this->flare->sentReports)->toHaveCount(1);
+});
+
+it('has stack trace arguments', function () {
+    $report = $this->ignition->handleException(
+        TraceArguments::create()->exception('Hello', new DateTimeZone('Europe/Brussels'))
+    );
+
+    expect($report->toArray()['stacktrace'][1]['arguments'][0]['value'])->toEqual('Hello');
+    expect($report->toArray()['stacktrace'][1]['arguments'][1]['value'])->toEqual('Europe/Brussels');
+});
+
+it('can disable stack trace arguments', function () {
+    $this->flare->withStackFrameArguments(false);
+
+    $report = $this->ignition->handleException(
+        TraceArguments::create()->exception('Hello', new DateTimeZone('Europe/Brussels'))
+    );
+
+    expect($report->toArray()['stacktrace'][1]['arguments'])->toBeNull();
+});
+
+it('can use custom argument reducers', function (){
+    $this->flare->argumentReducers(
+        ArgumentReducers::default([new class implements ArgumentReducer{
+            public function execute($argument): ReducedArgumentContract
+            {
+                return new ReducedArgument('FAKE', gettype($argument));
+            }
+        }])
+    );
+
+    $report = $this->ignition->handleException(
+        TraceArguments::create()->exception('Hello', new DateTimeZone('Europe/Brussels'))
+    );
+
+    expect($report->toArray()['stacktrace'][1]['arguments'][0]['value'])->toEqual('FAKE');
+    expect($report->toArray()['stacktrace'][1]['arguments'][1]['value'])->toEqual('FAKE');
 });
