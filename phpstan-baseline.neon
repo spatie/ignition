@@ -21,11 +21,6 @@ parameters:
 			path: src/Solutions/OpenAi/DummyCache.php
 
 		-
-			message: "#^Call to static method client\\(\\) on an unknown class OpenAI\\.$#"
-			count: 1
-			path: src/Solutions/OpenAi/OpenAiSolution.php
-
-		-
 			message: "#^Cannot call method get\\(\\) on Psr\\\\SimpleCache\\\\CacheInterface\\|null\\.$#"
 			count: 1
 			path: src/Solutions/OpenAi/OpenAiSolution.php
