@@ -5,7 +5,6 @@ use Spatie\Ignition\Tests\TestClasses\ContextProviderDetector\DummyContextProvid
 use Spatie\Ignition\Tests\TestClasses\DummyFlareMiddleware;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysFalseSolutionProvider;
 use Spatie\Ignition\Tests\TestClasses\SolutionProviders\AlwaysTrueSolutionProvider;
-use Spatie\Ignition\Tests\TestClasses\TraceArguments;
 
 beforeEach(function () {
     $this->ignition = Ignition::make()

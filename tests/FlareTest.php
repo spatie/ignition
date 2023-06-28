@@ -71,9 +71,9 @@ it('can disable stack trace arguments', function () {
     expect($report->toArray()['stacktrace'][1]['arguments'])->toBeNull();
 });
 
-it('can use custom argument reducers', function (){
+it('can use custom argument reducers', function () {
     $this->flare->argumentReducers(
-        ArgumentReducers::default([new class implements ArgumentReducer{
+        ArgumentReducers::default([new class implements ArgumentReducer {
             public function execute($argument): ReducedArgumentContract
             {
                 return new ReducedArgument('FAKE', gettype($argument));
