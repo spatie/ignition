@@ -89,22 +89,22 @@ class ErrorPageViewModel
     {
         $report = $this->report->toArray();
 
-//        // Problem: frontend crashes for some reason
-//        // Also this is a bit of a hack, it won't update the report sent to flare
-//
-//        $framesCount = count($report['stacktrace']);
-//
-//        foreach ($report['stacktrace'] as $key => $value) {
-//            if($key === $framesCount){
-//                break;
-//            }
-//
-//            $report['stacktrace'][$key + 1]['arguments'] = $report['stacktrace'][$key]['arguments'];
-//
-//            if ($key === 0) {
-//                $report['stacktrace'][0]['arguments'] = null;
-//            }
-//        }
+        //        // Problem: frontend crashes for some reason
+        //        // Also this is a bit of a hack, it won't update the report sent to flare
+        //
+        //        $framesCount = count($report['stacktrace']);
+        //
+        //        foreach ($report['stacktrace'] as $key => $value) {
+        //            if($key === $framesCount){
+        //                break;
+        //            }
+        //
+        //            $report['stacktrace'][$key + 1]['arguments'] = $report['stacktrace'][$key]['arguments'];
+        //
+        //            if ($key === 0) {
+        //                $report['stacktrace'][0]['arguments'] = null;
+        //            }
+        //        }
 
         return $report;
     }
