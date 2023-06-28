@@ -11,6 +11,8 @@ use Spatie\Ignition\Tests\Mocks\FakeFlare;
 use Spatie\Ignition\Tests\TestClasses\TraceArguments;
 
 beforeEach(function () {
+    ini_set('zend.exception_ignore_args', 0); // Enabled on GH actions
+
     $this->ignition = Ignition::make();
 
     $this->ignition->shouldDisplayException(false);
