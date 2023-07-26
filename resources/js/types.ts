@@ -34,7 +34,7 @@ export type IgnitionErrorOccurrence = {
     stacktrace: Array<{
         line_number: number;
         method: string;
-        class: string;
+        class: string|null;
         code_snippet: Record<number, string>;
         file: string;
         application_frame: boolean;
@@ -52,9 +52,9 @@ export type IgnitionErrorOccurrence = {
             body: Record<string, string>;
             files: Array<any>;
         };
-        headers: Record<string, string>;
+        headers: Record<string, string|number>;
         cookies: Record<string, string | object | boolean>;
-        session: Record<string, string>;
+        session: Record<string, string|number>;
         route?: {
             route: string | null;
             routeParameters: Record<string, number | string | null>;
@@ -87,8 +87,8 @@ export type IgnitionErrorOccurrence = {
         git?: {
             hash: string;
             message: string;
-            tag: string;
-            remote: string;
+            tag: string|null;
+            remote: string|null;
             isDirty: boolean;
         };
         livewire?: {
@@ -104,12 +104,12 @@ export type IgnitionErrorOccurrence = {
         view: ViewContext | null;
 
         // Context attached to the exception or error via the `context()` method.
-        exception: Record<string, any> | null;
+        exception?: Record<string, any> | null;
 
-        job: Record<string, any> | null;
+        job?: Record<string, any> | null;
 
         /* @ts-ignore */
-        arguments: Array<string> | null;
+        arguments?: Array<string> | null;
 
         // Additional context groups (added via Flare::group() and Flare::context)
         [key: string]: undefined | null | {
@@ -122,4 +122,5 @@ export type IgnitionErrorOccurrence = {
     application_path: string;
     application_version: null | string;
     documentation_links: Array<string>;
+    tracking_uuid?: string;
 };
