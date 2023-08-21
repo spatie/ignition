@@ -152,7 +152,7 @@ class IgnitionConfig implements Arrayable
             'editor_options' => [
                 'clipboard' => [
                     'label' => 'Clipboard',
-                    'url' => '%path:&line',
+                    'url' => '%path:%line',
                     'clipboard' => true,
                 ],
                 'sublime' => [
