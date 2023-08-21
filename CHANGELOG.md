@@ -2,6 +2,20 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.10.0 - 2023-08-21
+
+- Add 'copy to clipboard' support for filepaths and editor URLs
+- Bump Ignition UI from 4.6.0 to 4.9.0, includes following changes:
+  - Feature: Add 'copy to clipboard' option to editors
+  - Fix: Improve detection of vendor frames for JS frames
+  - Fix: Navigation for custom contexts not working when context name has whitespaces.
+  - Use container queries for responsive components
+  - Tweak SQL parameter bindings in the query debug tab
+  - Fix: don't listen to keypress events when typing in input fields or textareas
+  - Only show context section when relevant
+  - Add browser section displaying the user agent
+  - Fix request tab not showing up for JS errors
+
 ## 1.9.0 - 2023-06-28
 
 - Add stack trace arguments support
@@ -23,16 +37,9 @@ All notable changes to `ignition` will be documented in this file
 ### What's Changed
 
 - Bump Ignition-UI to 4.4.0 which includes following changes:
-- - Add support for custom context
-- 
-- 
-- - Add support for exception context
-- 
-- 
-- - Show SQL bindings inline in debug section
-- 
-- 
-- 
+  - Add support for custom context
+  - Add support for exception context
+  - Show SQL bindings inline in debug section
 - Add support for custom context, exception context (and query bindings) by @rubenvanassche in https://github.com/spatie/ignition/pull/286
 - Add PHPStorm via IDE Remote Control editor link by @raveren in https://github.com/spatie/ignition/pull/262
 - Fix editor link for Panic's Nova by @knorthfield in https://github.com/spatie/ignition/pull/284
