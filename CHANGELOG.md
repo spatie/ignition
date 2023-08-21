@@ -2,6 +2,11 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.10.1 - 2023-08-21
+
+- Fix broken line numbers for paths copied to clipboard
+- Fix URL encoding in paths copied to clipboard
+
 ## 1.10.0 - 2023-08-21
 
 - Add 'copy to clipboard' support for filepaths and editor URLs
