@@ -124,7 +124,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                             value={editor}
                             onChange={(event) => handleEditorChange(event.target.value)}
                         >
-                            {Object.entries(ignitionConfig.editorOptions).map(([editor, { label }]) => (
+                            {Object.entries(ignitionConfig?.editorOptions || []).map(([editor, { label }]) => (
                                 <option className="text-gray-800" key={editor} value={editor}>
                                     {label}
                                 </option>

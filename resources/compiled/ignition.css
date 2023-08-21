@@ -1966,6 +1966,10 @@ pre.sf-dump .sf-dump-toggle:hover span{
   margin-left: 0.375rem;
 }
 
+.ml-4{
+  margin-left: 1rem;
+}
+
 .ml-auto{
   margin-left: auto;
 }
@@ -2148,10 +2152,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
   width: 0.75rem;
 }
 
-.w-32{
-  width: 8rem;
-}
-
 .w-4{
   width: 1rem;
 }
@@ -2168,6 +2168,14 @@ pre.sf-dump .sf-dump-toggle:hover span{
   width: 2.25rem;
 }
 
+.w-\[2rem\]{
+  width: 2rem;
+}
+
+.w-\[8rem\]{
+  width: 8rem;
+}
+
 .w-full{
   width: 100%;
 }
@@ -2178,6 +2186,10 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 .min-w-\[1rem\]{
   min-width: 1rem;
+}
+
+.min-w-\[2rem\]{
+  min-width: 2rem;
 }
 
 .min-w-\[8rem\]{
@@ -2248,6 +2260,21 @@ pre.sf-dump .sf-dump-toggle:hover span{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.translate-x-full{
+  --tw-translate-x: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-x-full{
+  --tw-translate-x: -100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-y-full{
+  --tw-translate-y: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .-rotate-180{
   --tw-rotate: -180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -2260,6 +2287,11 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 .rotate-180{
   --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.rotate-90{
+  --tw-rotate: 90deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2296,6 +2328,10 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 .grid-cols-1{
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.flex-row{
+  flex-direction: row;
 }
 
 .flex-col{
@@ -2441,8 +2477,16 @@ pre.sf-dump .sf-dump-toggle:hover span{
   border-bottom-right-radius: 9999px;
 }
 
-.rounded-r-lg{
+.rounded-t-lg{
+  border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
+}
+
+.rounded-bl-lg{
+  border-bottom-left-radius: 0.5rem;
+}
+
+.rounded-br-lg{
   border-bottom-right-radius: 0.5rem;
 }
 
@@ -3074,6 +3118,10 @@ pre.sf-dump .sf-dump-toggle:hover span{
   transition-duration: 500ms;
 }
 
+.\@container{
+  container-type: inline-size;
+}
+
 .first-letter\:uppercase::first-letter{
   text-transform: uppercase;
 }
@@ -3194,6 +3242,65 @@ pre.sf-dump .sf-dump-toggle:hover span{
   background-color: rgba(110, 231, 183, var(--tw-bg-opacity));
 }
 
+@container (min-width: 32rem){
+
+  .\@lg\:px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@container (min-width: 42rem){
+
+  .\@2xl\:block{
+    display: block;
+  }
+}
+
+@container (min-width: 56rem){
+
+  .\@4xl\:absolute{
+    position: absolute;
+  }
+
+  .\@4xl\:col-span-2{
+    grid-column: span 2 / span 2;
+  }
+
+  .\@4xl\:mr-20{
+    margin-right: 5rem;
+  }
+
+  .\@4xl\:flex{
+    display: flex;
+  }
+
+  .\@4xl\:max-h-\[none\]{
+    max-height: none;
+  }
+
+  .\@4xl\:grid-cols-\[33\.33\%_66\.66\%\]{
+    grid-template-columns: 33.33% 66.66%;
+  }
+
+  .\@4xl\:grid-rows-\[57rem\]{
+    grid-template-rows: 57rem;
+  }
+
+  .\@4xl\:rounded-r-lg{
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+
+  .\@4xl\:rounded-bl-none{
+    border-bottom-left-radius: 0px;
+  }
+
+  .\@4xl\:border-t-0{
+    border-top-width: 0px;
+  }
+}
+
 .dark .dark\:bg-black\/10{
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -3252,10 +3359,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
     margin-right: -1.25rem;
   }
 
-  .sm\:block{
-    display: block;
-  }
-
   .sm\:inline-flex{
     display: inline-flex;
   }
@@ -3273,24 +3376,8 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
 @media (min-width: 1024px){
 
-  .lg\:absolute{
-    position: absolute;
-  }
-
-  .lg\:col-span-2{
-    grid-column: span 2 / span 2;
-  }
-
-  .lg\:mr-20{
-    margin-right: 5rem;
-  }
-
   .lg\:flex{
     display: flex;
-  }
-
-  .lg\:max-h-\[none\]{
-    max-height: none;
   }
 
   .lg\:w-1\/3{
@@ -3303,22 +3390,6 @@ pre.sf-dump .sf-dump-toggle:hover span{
 
   .lg\:max-w-\[90rem\]{
     max-width: 90rem;
-  }
-
-  .lg\:grid-cols-\[33\.33\%_66\.66\%\]{
-    grid-template-columns: 33.33% 66.66%;
-  }
-
-  .lg\:grid-rows-\[57rem\]{
-    grid-template-rows: 57rem;
-  }
-
-  .lg\:justify-start{
-    justify-content: flex-start;
-  }
-
-  .lg\:border-t-0{
-    border-top-width: 0px;
   }
 
   .lg\:px-10{
