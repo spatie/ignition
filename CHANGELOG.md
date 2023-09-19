@@ -2,14 +2,22 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.11.1 - 2023-09-19
+
+- Fix: missing Tailwind classes
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.11.0...1.11.1
+
 ## 1.11.0 - 2023-09-19
 
 - Design tweaks   
+     
   - Fix gradient on stacktrace   
   - Move share dropdown to the right navbar   
   - Always open links in new tabs   
   
-- Add Flare footer
+- Add Flare footer   
+  
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.10.1...1.11.0
 
@@ -54,13 +62,17 @@ All notable changes to `ignition` will be documented in this file
 ### What's Changed
 
 - Bump Ignition-UI to 4.4.0 which includes following changes:   
+     
   - Add support for custom context   
   - Add support for exception context   
   - Show SQL bindings inline in debug section   
   
-- Add support for custom context, exception context (and query bindings) by @rubenvanassche in https://github.com/spatie/ignition/pull/286
-- Add PHPStorm via IDE Remote Control editor link by @raveren in https://github.com/spatie/ignition/pull/262
-- Fix editor link for Panic's Nova by @knorthfield in https://github.com/spatie/ignition/pull/284
+- Add support for custom context, exception context (and query bindings) by @rubenvanassche in https://github.com/spatie/ignition/pull/286   
+  
+- Add PHPStorm via IDE Remote Control editor link by @raveren in https://github.com/spatie/ignition/pull/262   
+  
+- Fix editor link for Panic's Nova by @knorthfield in https://github.com/spatie/ignition/pull/284   
+  
 
 ### New Contributors
 
@@ -80,7 +92,8 @@ All notable changes to `ignition` will be documented in this file
 
 ### What's Changed
 
-- Bump spatie/ignition-ui to 4.2.0. Includes following changes:
+- Bump spatie/ignition-ui to 4.2.0. Includes following changes:   
+  
 - - Add indicator for AI-generated solutions   
   
 - 
@@ -100,7 +113,8 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
-- Bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/spatie/ignition/pull/267
+- Bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/spatie/ignition/pull/267   
+  
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.5.0...1.6.0
 
@@ -171,7 +185,8 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.3.1 - 2022-05-16
 
-- Bump Ignition UI to v4.0.2
+- Bump Ignition UI to v4.0.2   
+  
 - - Fix types: `context.env` can be `null` or `undefined`   
   
 - 
@@ -187,7 +202,8 @@ All notable changes to `ignition` will be documented in this file
 - 
 - 
 - 
-- JS bundle is no longer compressed to make debugging easier
+- JS bundle is no longer compressed to make debugging easier   
+  
 
 **Full Changelog**: https://github.com/spatie/ignition/compare/1.3.0...1.3.1
 
@@ -195,7 +211,8 @@ All notable changes to `ignition` will be documented in this file
 
 ## What's Changed
 
-- Use Ignition UI v4 by @AlexVanderbist in https://github.com/spatie/ignition/pull/129
+- Use Ignition UI v4 by @AlexVanderbist in https://github.com/spatie/ignition/pull/129   
+  
 - - Bump Ignition UI version to 4.0.1   
   
 - 
