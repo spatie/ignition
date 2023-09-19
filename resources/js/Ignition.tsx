@@ -17,14 +17,21 @@ import {
 import {IgniteData} from './types';
 import {useInView} from 'react-intersection-observer';
 import AppDebugWarning from 'components/AppDebugWarning';
+import FlareFooter from "components/FlareFooter";
 
 type Props = {
     errorOccurrence: ErrorOccurrence;
     igniteData: IgniteData;
 };
 
-export default function Ignition({errorOccurrence, igniteData}: Props) {
-    const {ref: intersectionRef, inView: errorCardInView} = useInView({
+export default function Ignition({
+    errorOccurrence,
+    igniteData
+}: Props) {
+    const {
+        ref: intersectionRef,
+        inView: errorCardInView
+    } = useInView({
         rootMargin: '-40px 0px 0px 0px',
         threshold: 0.3,
         initialInView: true,
@@ -38,7 +45,7 @@ export default function Ignition({errorOccurrence, igniteData}: Props) {
                         <InViewContextProvider>
                             <NavBar showException={!errorCardInView}/>
                             <main
-                                className="mx-auto my-20 px-6 lg:px-10 max-w-4xl lg:max-w-[90rem] grid grid-cols-1 gap-10"
+                                className="mx-auto mt-20 mb-10 px-6 lg:px-10 max-w-4xl lg:max-w-[90rem] grid grid-cols-1 gap-10"
                             >
                                 <AppDebugWarning/>
 
@@ -51,6 +58,8 @@ export default function Ignition({errorOccurrence, igniteData}: Props) {
                                 <Section name="context" children={<Context/>}/>
 
                                 {hasDebugInfo(errorOccurrence) && <Section name="debug" children={<Debug/>}/>}
+
+                                <Section name="flare" children={<FlareFooter />}/>
                             </main>
                         </InViewContextProvider>
                     </ErrorOccurrenceContext.Provider>

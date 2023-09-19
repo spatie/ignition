@@ -162,6 +162,13 @@
     @apply dark:border-gray-500/20;
 }
 
+@layer utilities {
+    .\~border-violet-500 {
+        @apply border-violet-500;
+        @apply dark:border-violet-400/70;
+    }
+}
+
 .\~border-b-dropdown {
     @apply border-b-white !important;
     @apply dark:border-b-gray-700 !important;

@@ -41,6 +41,7 @@ export default function NavBarItem({
                     className={`
                     group px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium
                     hover:text-red-500
+                    ${important ? 'mr-2' : ''}
                     ${last(inView) === name ? 'text-red-500' : ''}
                 `}
                 >

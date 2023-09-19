@@ -104,6 +104,18 @@ export default function NavBar({ showException }: Props) {
                                 />
                             )}
 
+                            <NavBarItem
+                                name="flare"
+                                href="https://flareapp.io/?utm_campaign=ignition&utm_source=ignition"
+                                icon={<svg viewBox="0 0 36 56" fill="currentColor" className="h-[.9rem] -top-[.1rem] inline-block">
+                                    <path d="M 11.995 55.987 L 0 48.993 L 0 35 L 11.967 41.994 L 11.995 55.987 Z"/>
+                                    <path d="M 11.967 41.993 L 0 34.999 L 11.995 28 L 23.989 34.999 L 11.967 41.993 Z"/>
+                                    <path d="M 11.995 27.987 L 0 20.987 L 0 7 L 12.062 14.022 L 11.995 27.987 Z"/>
+                                    <path d="M 23.978 20.981 L 0 6.999 L 11.995 0 L 36 13.981 L 23.978 20.981 Z"/>
+                                </svg>}
+                            />
+                        </ul>
+                        <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
                             {ignitionConfig.enableShareButton && (
                                 <NavBarItem
                                     navRef={shareRef}
@@ -116,8 +128,7 @@ export default function NavBar({ showException }: Props) {
                                     <ShareDropdown isOpen={isShareDropdownOpen} />
                                 </NavBarItem>
                             )}
-                        </ul>
-                        <ul className="-mr-3 sm:-mr-5 grid grid-flow-col justify-end items-center">
+
                             {docs && (
                                 <NavBarItem
                                     name="docs"
@@ -128,7 +139,6 @@ export default function NavBar({ showException }: Props) {
                                             icon={docs.type === 'laravel' ? faLaravel : faPhp}
                                         />
                                     }
-                                    iconOpacity="opacity-80"
                                     important={docs.tailored}
                                 />
                             )}

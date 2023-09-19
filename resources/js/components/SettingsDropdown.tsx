@@ -108,7 +108,8 @@ export default function SettingsDropdown({ isOpen }: Props) {
                     <h4 className="whitespace-nowrap font-semibold">Ignition Settings</h4>
                     <a
                         className="text-xs ~text-gray-500 hover:text-red-500 flex items-center underline transition-colors"
-                        href="https://flareapp.io/ignition"
+                        href="https://flareapp.io/ignition?utm_campaign=ignition&utm_source=ignition"
+                        target="_blank"
                     >
                         Docs
                         <IgnitionIcon />

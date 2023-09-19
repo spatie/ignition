@@ -65,10 +65,10 @@ export default function ShareDropdown({ isOpen }: Props) {
 
     return (
         <div
-            className={`block absolute mt-2 top-10 left-1/2 transform -translate-x-6 transition-all duration-150 origin-top-left
+            className={`block absolute mt-2 top-10 right-1/2 transform translate-x-8 transition-all duration-150 origin-top-right
                  ${isOpen ? '' : 'opacity-0 pointer-events-none scale-90'}`}
         >
-            <div className="flex px-4 justify-start">
+            <div className="flex px-4 justify-end">
                 <div className="w-0 h-0 border-[10px] border-t-0 border-transparent ~border-b-dropdown" />
             </div>
             <div className="flex flex-col gap-6 ~bg-dropdown px-10 py-8 shadow-2xl">
@@ -76,7 +76,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                     <h4 className="whitespace-nowrap font-semibold">Share with Flare</h4>
                     <a
                         className="text-xs ~text-gray-500 hover:text-violet-500 flex items-center underline transition-colors"
-                        href="https://flareapp.io/docs/ignition-for-laravel/sharing-errors"
+                        href="https://flareapp.io/docs/ignition/introducing-ignition/sharing-errors?utm_campaign=ignition&utm_source=ignition"
                         target="_blank"
                     >
                         Docs

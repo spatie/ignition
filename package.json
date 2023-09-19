@@ -9,7 +9,7 @@
         "typecheck": "tsc -w --preserveWatchOutput"
     },
     "dependencies": {
-        "@flareapp/ignition-ui": "^4.9.1",
+        "@flareapp/ignition-ui": "^4.9.4",
         "@fortawesome/fontawesome-common-types": "^6.1.1",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "@fortawesome/free-brands-svg-icons": "^6.1.1",

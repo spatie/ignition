@@ -9,6 +9,11 @@ module.exports = {
     // important: true,
     theme: {
         extend: {
+            colors: {
+                'gray': {
+                    25: 'rgb(252, 252, 253)',
+                }
+            },
             gridTemplateColumns: {
                 'auto-1fr': 'auto 1fr'
             },
