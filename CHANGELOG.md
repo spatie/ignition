@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.11.2 - 2023-09-19
+
+- Fix missing Tailwind styles
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.11.1...1.11.2
+
 ## 1.11.1 - 2023-09-19
 
 - Fix: missing Tailwind classes
