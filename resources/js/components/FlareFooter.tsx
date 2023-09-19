@@ -9,7 +9,7 @@ export default function FlareFooter() {
                 <div className="@4xl:grid @4xl:grid-cols-[max-content,12rem] gap-x-16 xl:gap-x-24">
                     <div>
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                            <span className="bg-gradient-to-br from-[#d4c0ff] to-[#ab90e5] bg-clip-text text-transparent">Flare</span> is your error page for production.
+                            <span className="bg-clip-text text-transparent" style={{backgroundImage: 'linear-gradient(to bottom right,#d4c0ff,#ab90e5)'}}>Flare</span> is your error page for production.
                         </h2>
                         <p className="mt-6 max-w-xl text-lg leading-8 text-gray-300">
                             Start tracking errors in your application within minutes with Flare.<br/>
