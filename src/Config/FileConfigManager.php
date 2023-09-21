@@ -59,6 +59,10 @@ class FileConfigManager implements ConfigManager
             return getenv('HOME');
         }
 
+        if (! empty($_SERVER['DOCUMENT_ROOT'])) {
+            return preg_replace('/public$/', '', $_SERVER['DOCUMENT_ROOT']);
+        }
+
         return '';
     }
 
