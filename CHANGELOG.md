@@ -2,6 +2,22 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.11.3 - 2023-10-18
+
+### What's Changed
+
+- [1.x] Adds support for Symfony 7 and PHP 8.3 by @nunomaduro in https://github.com/spatie/ignition/pull/410
+- Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/spatie/ignition/pull/409
+- Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/spatie/ignition/pull/378
+- Mention the Drupal module in the README by @DieterHolvoet in https://github.com/spatie/ignition/pull/303
+- Fix unescaped backslashes in JSON produced by GPT by @DieterHolvoet in https://github.com/spatie/ignition/pull/302
+
+### New Contributors
+
+- @DieterHolvoet made their first contribution in https://github.com/spatie/ignition/pull/303
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.11.2...1.11.3
+
 ## 1.11.2 - 2023-09-19
 
 - Fix missing Tailwind styles
