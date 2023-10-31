@@ -17,6 +17,7 @@ export default function CopyableUrl({url, openText, helpText}: Props) {
                 <a
                     href={url}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="underline ~text-violet-500 hover:~text-violet-600"
                 >
                     <FontAwesomeIcon icon={faExternalLinkAlt} className="opacity-50 text-xs mr-1"/>

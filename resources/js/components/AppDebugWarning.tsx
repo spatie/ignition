@@ -30,6 +30,7 @@ export default function AppDebugWarning() {
                     <a
                         className="mt-1.5 underline inline-flex items-center gap-2"
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://flareapp.io/docs/ignition-for-laravel/security"
                     >
                         <FontAwesomeIcon icon={faShieldAlt} className="text-sm opacity-50" />
