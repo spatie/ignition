@@ -311,7 +311,15 @@ class Ignition
             $this->customHtmlBody,
         );
 
-        (new Renderer())->render(['viewModel' => $viewModel], self::viewPath('errorPage'));
+        (new Renderer())->render(
+            [
+                'viewModel' => $viewModel,
+                'cspAttrs' => \function_exists('csp_nonce')
+                    ? ' nonce="'.\csp_nonce().'"'
+                    : '',
+            ],
+            self::viewPath('errorPage'),
+        );
     }
 
     public static function viewPath(string $viewName): string

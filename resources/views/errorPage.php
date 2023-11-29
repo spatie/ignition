@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <?php /** @var \Spatie\Ignition\ErrorPage\ErrorPageViewModel $viewModel */ ?>
+<?php /** @var string $cspAttrs */ ?>
 <html lang="en" class="<?= $viewModel->theme() ?>">
 <!--
 <?= $viewModel->throwableString() ?>
 -->
 <head>
     <!-- Hide dumps asap -->
-    <style>
+    <style<?= $cspAttrs ?>>
         pre.sf-dump {
             display: none !important;
         }
@@ -19,7 +20,7 @@
 
     <title><?= $viewModel->title() ?></title>
 
-    <script>
+    <script<?= $cspAttrs ?>>
         // Livewire modals remove CSS classes on the `html` element so we re-add
         // the theme class again using JavaScript.
         document.documentElement.classList.add('<?= $viewModel->theme() ?>');
@@ -30,14 +31,14 @@
         }
     </script>
 
-    <style><?= $viewModel->getAssetContents('ignition.css') ?></style>
+    <style<?= $cspAttrs ?>><?= $viewModel->getAssetContents('ignition.css') ?></style>
 
     <?= $viewModel->customHtmlHead() ?>
 
 </head>
 <body class="scrollbar-lg antialiased bg-center bg-dots-darker dark:bg-dots-lighter">
 
-<script>
+<script<?= $cspAttrs ?>>
     window.data = <?=
         $viewModel->jsonEncode([
             'report' => $viewModel->report(),
@@ -56,13 +57,13 @@
 
 <div id="app"></div>
 
-<script>
+<script<?= $cspAttrs ?>>
     <!--
     <?= $viewModel->getAssetContents('ignition.js') ?>
     -->
 </script>
 
-<script>
+<script<?= $cspAttrs ?>>
     window.ignite(window.data);
 </script>
 
