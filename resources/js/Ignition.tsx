@@ -17,7 +17,7 @@ import {
 import {IgniteData} from './types';
 import {useInView} from 'react-intersection-observer';
 import AppDebugWarning from 'components/AppDebugWarning';
-import FlareFooter from "components/FlareFooter";
+import Footer from "components/Footer";
 
 type Props = {
     errorOccurrence: ErrorOccurrence;
@@ -59,7 +59,7 @@ export default function Ignition({
 
                                 {hasDebugInfo(errorOccurrence) && <Section name="debug" children={<Debug/>}/>}
 
-                                <Section name="flare" children={<FlareFooter />}/>
+                                <Section name="footer" children={<Footer />}/>
                             </main>
                         </InViewContextProvider>
                     </ErrorOccurrenceContext.Provider>
