@@ -28,6 +28,18 @@ it('will not render if everything ran ok', function () {
     expect($output)->toEqual('ok');
 });
 
+it('can render the error page for unsuppressed errors', function () {
+    $output = getOutputOfApp('unsuppressed-error.php');
+
+    expect($output)->toContain('window.ignite');
+});
+
+it('will not render if an error was explicitly suppressed', function () {
+    $output = getOutputOfApp('suppressed-error.php');
+
+    expect($output)->toEqual('ok');
+});
+
 it('can show a solution', function () {
     $output = getOutputOfApp('exception-with-solution.php');
 

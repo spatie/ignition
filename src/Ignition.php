@@ -267,6 +267,12 @@ class Ignition
         int $line = 0,
         array $context = []
     ): void {
+        if(error_reporting() === (E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | E_RECOVERABLE_ERROR | E_PARSE)) {
+            // This happens when PHP version is >=8 and we caught an error that was suppressed with the "@" operator
+            // See the first warning box in https://www.php.net/manual/en/language.operators.errorcontrol.php
+            return;
+        }
+
         throw new ErrorException($message, 0, $level, $file, $line);
     }
 
