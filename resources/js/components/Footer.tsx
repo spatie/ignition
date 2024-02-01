@@ -11,17 +11,30 @@ export default function Footer() {
                 </li>
                 <li>·</li>
                 <li>
-                    <a href="https://github.com/spatie/laravel-ignition" target="_blank"
-                       className="hover:text-red-500">Source</a>
+                    <a
+                        href="https://github.com/spatie/laravel-ignition"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-red-500"
+                    >Source</a>
                 </li>
                 <li>·</li>
                 <li>
-                    <a href="https://flareapp.io/docs/ignition/introducing-ignition/overview" target="_blank"
-                       className="hover:text-red-500">Docs</a>
+                    <a
+                        href="https://flareapp.io/docs/ignition/introducing-ignition/overview"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-red-500"
+                    >Docs</a>
                 </li>
                 <li>·</li>
                 <li>
-                    <a href="https://laravel.com" target="_blank" className="hover:text-red-500">Laravel</a>
+                    <a
+                        href="https://laravel.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-red-500"
+                    >Laravel</a>
                 </li>
             </ul>
             <div className="text-sm flex items-center">
@@ -30,6 +43,7 @@ export default function Footer() {
                 <a
                     href="https://flareapp.io/?utm_campaign=ignition&utm_source=ignition"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="font-medium hover:text-purple-500"
                 >
                     <FlareIcon className={"inline-block -mt-1 ml-1 mr-px"}/>

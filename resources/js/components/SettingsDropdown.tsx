@@ -110,6 +110,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                         className="text-xs ~text-gray-500 hover:text-red-500 flex items-center underline transition-colors"
                         href="https://flareapp.io/ignition?utm_campaign=ignition&utm_source=ignition"
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
                         Docs
                         <IgnitionIcon />

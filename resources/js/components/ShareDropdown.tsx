@@ -52,7 +52,7 @@ export default function ShareDropdown({ isOpen }: Props) {
         try {
             const response = await shareClient(igniteData, selectedSectionNames);
 
-            window.open(response.owner_url);
+            window.open(response.owner_url, '_blank', 'noopener,noreferrer');
 
             setPublicUrl(response.public_url);
         } catch (e) {
@@ -78,6 +78,7 @@ export default function ShareDropdown({ isOpen }: Props) {
                         className="text-xs ~text-gray-500 hover:text-violet-500 flex items-center underline transition-colors"
                         href="https://flareapp.io/docs/ignition/introducing-ignition/sharing-errors?utm_campaign=ignition&utm_source=ignition"
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
                         Docs
                         <FlareIcon />

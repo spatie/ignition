@@ -36,7 +36,12 @@ export default function NavBarItem({
 
     return (
         <li ref={navRef}>
-            <a href={href || `#${name}`} target={href ? '_blank' : '_self'} onClick={onClickHandler}>
+            <a
+                href={href || `#${name}`}
+                target={href ? '_blank' : '_self'}
+                onClick={onClickHandler}
+                rel={href ? 'noopener noreferrer' : ''}
+            >
                 <button
                     className={`
                     group px-3 sm:px-5 h-10 uppercase tracking-wider text-xs font-medium
