@@ -92,14 +92,20 @@ export type IgnitionErrorOccurrence = {
             isDirty: boolean;
         };
         livewire?: {
-            component_alias: string;
-            component_class: string;
+            component_alias?: string;
+            component_class?: string;
             component_id: string;
             data: Record<string, any>;
+            memo?: Record<string, string | object>;
             updates: Array<{
                 payload: Record<string, any>;
                 type: string;
             }>;
+            calls?: Array<{
+                path: string,
+                method: string,
+                params: Record<string, any>;
+            }>
         };
         view: ViewContext | null;
 
