@@ -74,6 +74,7 @@ function filterReport(report: IgnitionErrorOccurrence, sections: SectionName[]):
         report.context.cookies = {};
         report.context.session = {};
         report.context.route = null;
+        report.context.laravel_context = null;
         report.context.user = null;
         delete report.context.git;
         delete report.context.livewire;
