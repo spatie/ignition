@@ -33,6 +33,7 @@ function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrenc
         exception,
         arguments: args,
         job,
+        laravel_context,
         ...custom_context
     } = report.context;
 
@@ -58,6 +59,7 @@ function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrenc
             queries: queries || null,
             dumps: dumps || null,
             logs: logs || null,
+            laravel_context: laravel_context || null,
             headers: headers || null,
             cookies: cookies || null,
             session: session || null,
