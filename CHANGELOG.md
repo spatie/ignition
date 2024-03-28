@@ -2,6 +2,22 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.13.0 - 2024-03-28
+
+### What's Changed
+
+* Do not interfere with errors that were suppressed by the @ operator. by @netpalantir in https://github.com/spatie/ignition/pull/388
+* Add noopener and noreferrer to external URLs by @RobertBoes in https://github.com/spatie/ignition/pull/435
+* Bump actions/cache from 3 to 4 by @dependabot in https://github.com/spatie/ignition/pull/505
+* Support Laravel context by @freekmurze in https://github.com/spatie/ignition/pull/586
+
+### New Contributors
+
+* @netpalantir made their first contribution in https://github.com/spatie/ignition/pull/388
+* @RobertBoes made their first contribution in https://github.com/spatie/ignition/pull/435
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.12.0...1.13.0
+
 ## 1.12.0 - 2024-01-03
 
 ### What's Changed
