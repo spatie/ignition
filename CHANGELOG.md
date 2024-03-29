@@ -2,6 +2,16 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.13.1 - 2024-03-29
+
+### What's Changed
+
+* Change Laravel Context icon
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.0.0 by @dependabot in https://github.com/spatie/ignition/pull/581
+* Bump ramsey/composer-install from 2 to 3 by @dependabot in https://github.com/spatie/ignition/pull/549
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.13.0...1.13.1
+
 ## 1.13.0 - 2024-03-28
 
 ### What's Changed
