@@ -1,4 +1,4 @@
-import { ErrorSolution, IgnitionConfig, ViewContext, LogLevel, ErrorFrameArgument } from '@flareapp/ignition-ui';
+import { ErrorFrameArgument, ErrorSolution, IgnitionConfig, LogLevel, ViewContext } from '@flareapp/ignition-ui';
 
 export type IgniteData = {
     report: IgnitionErrorOccurrence;
@@ -91,7 +91,7 @@ export type IgnitionErrorOccurrence = {
             remote: string|null;
             isDirty: boolean;
         };
-        livewire?: {
+        livewire?: [{
             component_alias?: string;
             component_class?: string;
             component_id: string;
@@ -106,7 +106,7 @@ export type IgnitionErrorOccurrence = {
                 method: string,
                 params: Record<string, any>;
             }>
-        };
+        }];
         view: ViewContext | null;
 
         // Context attached to the exception or error via the `context()` method.

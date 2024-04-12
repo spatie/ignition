@@ -2987,6 +2987,16 @@ pre.sf-dump .sf-dump-toggle:hover span{
   color: rgba(234, 179, 8, var(--tw-text-opacity));
 }
 
+.text-indigo-200{
+  --tw-text-opacity: 1;
+  color: rgba(199, 210, 254, var(--tw-text-opacity));
+}
+
+.text-gray-600{
+  --tw-text-opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+
 .text-opacity-75{
   --tw-text-opacity: 0.75;
 }
