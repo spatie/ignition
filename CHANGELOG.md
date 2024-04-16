@@ -2,6 +2,14 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.13.2 - 2024-04-16
+
+### What's Changed
+
+* Fix octane by @rubenvanassche in https://github.com/spatie/ignition/pull/606
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.13.1...1.13.2
+
 ## 1.13.1 - 2024-03-29
 
 ### What's Changed
