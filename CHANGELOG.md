@@ -2,6 +2,14 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.14.0 - 2024-04-26
+
+### What's Changed
+
+* Display Livewire 3 data by @riasvdv in https://github.com/spatie/ignition/pull/511
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.13.2...1.14.0
+
 ## 1.13.2 - 2024-04-16
 
 ### What's Changed
