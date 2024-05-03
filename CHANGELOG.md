@@ -2,6 +2,20 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.14.1 - 2024-05-03
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.0.0 to 2.1.0 by @dependabot in https://github.com/spatie/ignition/pull/623
+* Added OpenMage module for Ignition to README by @fballiano in https://github.com/spatie/ignition/pull/628
+* Add support for configureable error levels by @rubenvanassche in https://github.com/spatie/ignition/pull/630
+
+### New Contributors
+
+* @fballiano made their first contribution in https://github.com/spatie/ignition/pull/628
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.14.0...1.14.1
+
 ## 1.14.0 - 2024-04-26
 
 ### What's Changed
