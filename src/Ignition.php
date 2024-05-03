@@ -242,12 +242,10 @@ class Ignition
     {
         error_reporting($errorLevels ?? -1);
 
-        /** @phpstan-ignore-next-line  */
         $errorLevels
             ? set_error_handler([$this, 'renderError'], $errorLevels)
             : set_error_handler([$this, 'renderError']);
 
-        /** @phpstan-ignore-next-line  */
         set_exception_handler([$this, 'handleException']);
 
         return $this;
