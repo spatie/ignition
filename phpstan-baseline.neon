@@ -16,6 +16,16 @@ parameters:
 			path: src/ErrorPage/Renderer.php
 
 		-
+			message: "#^Parameter \\#1 \\$callback of function set_error_handler expects \\(callable\\(int, string, string, int\\)\\: bool\\)\\|null, array\\{\\$this\\(Spatie\\\\Ignition\\\\Ignition\\), 'renderError'\\} given\\.$#"
+			count: 2
+			path: src/Ignition.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function set_exception_handler expects \\(callable\\(Throwable\\)\\: void\\)\\|null, array\\{\\$this\\(Spatie\\\\Ignition\\\\Ignition\\), 'handleException'\\} given\\.$#"
+			count: 1
+			path: src/Ignition.php
+
+		-
 			message: "#^Method Spatie\\\\Ignition\\\\Solutions\\\\OpenAi\\\\DummyCache\\:\\:setMultiple\\(\\) has parameter \\$values with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Solutions/OpenAi/DummyCache.php
