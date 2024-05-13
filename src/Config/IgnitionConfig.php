@@ -27,6 +27,19 @@ class IgnitionConfig implements Arrayable
         $this->manager = $this->initConfigManager();
     }
 
+    public function getOption(string $name): array|string|bool|null
+    {
+        return $this->options[$name] ?? $this->getOptionFromEnv($name);
+    }
+
+    public function getOptionFromEnv(string $name): string|bool|null
+    {
+        $key = 'IGNITION_' . mb_strtoupper($name);
+        return array_key_exists($key, $_ENV)
+            ? $this->parseEnvironmentValue($_ENV[$key])
+            : null;
+    }
+
     public function setOption(string $name, string $value): self
     {
         $this->options[$name] = $value;
@@ -76,12 +89,12 @@ class IgnitionConfig implements Arrayable
 
     public function hideSolutions(): bool
     {
-        return $this->options['hide_solutions'] ?? false;
+        return $this->getOption('hide_solutions') ?? false;
     }
 
     public function editor(): ?string
     {
-        return $this->options['editor'] ?? null;
+        return $this->getOption('editor');
     }
 
     /**
@@ -89,38 +102,38 @@ class IgnitionConfig implements Arrayable
      */
     public function editorOptions(): array
     {
-        return $this->options['editor_options'] ?? [];
+        return $this->getOption('editor_options') ?? [];
     }
 
     public function remoteSitesPath(): ?string
     {
-        return $this->options['remote_sites_path'] ?? null;
+        return $this->getOption('remote_sites_path');
     }
 
     public function localSitesPath(): ?string
     {
-        return $this->options['local_sites_path'] ?? null;
+        return $this->getOption('local_sites_path');
     }
 
     public function theme(): ?string
     {
-        return $this->options['theme'] ?? null;
+        return $this->getOption('theme');
     }
 
     public function shareButtonEnabled(): bool
     {
-        return (bool)($this->options['enable_share_button'] ?? false);
+        return (bool)($this->getOption('enable_share_button') ?? false);
     }
 
     public function shareEndpoint(): string
     {
-        return $this->options['share_endpoint']
+        return $this->getOption('share_endpoint')
             ?? $this->getDefaultOptions()['share_endpoint'];
     }
 
     public function runnableSolutionsEnabled(): bool
     {
-        return (bool)($this->options['enable_runnable_solutions'] ?? false);
+        return (bool)($this->getOption('enable_runnable_solutions') ?? false);
     }
 
     /** @return array<string, string|null|bool|array<string, mixed>> */
@@ -146,9 +159,9 @@ class IgnitionConfig implements Arrayable
     protected function getDefaultOptions(): array
     {
         return [
-            'share_endpoint' => 'https://flareapp.io/api/public-reports',
-            'theme' => 'light',
-            'editor' => 'vscode',
+            'share_endpoint' => $this->getOptionFromEnv('share_endpoint') ?? 'https://flareapp.io/api/public-reports',
+            'theme' => $this->getOptionFromEnv('theme') ?? 'light',
+            'editor' => $this->getOptionFromEnv('editor') ?? 'vscode',
             'editor_options' => [
                 'clipboard' => [
                     'label' => 'Clipboard',
@@ -221,5 +234,29 @@ class IgnitionConfig implements Arrayable
                 ],
             ],
         ];
+    }
+
+    private function parseEnvironmentValue($value)
+    {
+        switch (mb_strtolower($value)) {
+            case 'true':
+            case '(true)':
+                return true;
+            case 'false':
+            case '(false)':
+                return false;
+            case 'empty':
+            case '(empty)':
+                return '';
+            case 'null':
+            case '(null)':
+                return;
+        }
+
+        if (preg_match('/\A([\'"])(.*)\1\z/', $value, $matches)) {
+            return $matches[2];
+        }
+
+        return $value;
     }
 }
