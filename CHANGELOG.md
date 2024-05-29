@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.14.2 - 2024-05-29
+
+- Add Cursor as an editor
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.14.1...1.14.2
+
 ## 1.14.1 - 2024-05-03
 
 ### What's Changed
