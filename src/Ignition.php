@@ -13,14 +13,14 @@ use Spatie\FlareClient\FlareMiddleware\AddSolutions;
 use Spatie\FlareClient\FlareMiddleware\FlareMiddleware;
 use Spatie\FlareClient\Report;
 use Spatie\Ignition\Config\IgnitionConfig;
-use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
-use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
+use Spatie\ErrorSolutions\Contracts\HasSolutionsForThrowable;
+use Spatie\ErrorSolutions\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
-use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
-use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
-use Spatie\Ignition\Solutions\SolutionProviders\SolutionProviderRepository;
-use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
+use Spatie\ErrorSolutions\SolutionProviders\BadMethodCallSolutionProvider;
+use Spatie\ErrorSolutions\SolutionProviders\MergeConflictSolutionProvider;
+use Spatie\ErrorSolutions\SolutionProviderRepository;
+use Spatie\ErrorSolutions\SolutionProviders\UndefinedPropertySolutionProvider;
 use Throwable;
 
 class Ignition

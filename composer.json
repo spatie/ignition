@@ -21,9 +21,10 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "spatie/backtrace": "^1.5.3",
-        "spatie/flare-client-php": "^1.4.0",
+        "spatie/flare-client-php": "dev-solutions-refactor",
         "symfony/console": "^5.4|^6.0|^7.0",
-        "symfony/var-dumper": "^5.4|^6.0|^7.0"
+        "symfony/var-dumper": "^5.4|^6.0|^7.0",
+        "spatie/error-solutions": "dev-main"
     },
     "require-dev" : {
         "illuminate/cache" : "^9.52|^10.0|^11.0",
