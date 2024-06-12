@@ -2,11 +2,11 @@
 
 namespace Spatie\Ignition\ErrorPage;
 
+use Spatie\ErrorSolutions\Contracts\Solution;
+use Spatie\ErrorSolutions\Solutions\SolutionTransformer;
 use Spatie\FlareClient\Report;
 use Spatie\FlareClient\Truncation\ReportTrimmer;
 use Spatie\Ignition\Config\IgnitionConfig;
-use Spatie\ErrorSolutions\Contracts\Solution;
-use Spatie\ErrorSolutions\Solutions\SolutionTransformer;
 use Throwable;
 
 class ErrorPageViewModel
