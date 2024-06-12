@@ -147,7 +147,7 @@ class IgnitionConfig implements Arrayable
     {
         return [
             'share_endpoint' => 'https://flareapp.io/api/public-reports',
-            'theme' => 'light',
+            'theme' => 'auto',
             'editor' => 'vscode',
             'editor_options' => [
                 'clipboard' => [
