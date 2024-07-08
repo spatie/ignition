@@ -36,6 +36,23 @@ test('the config can be retrieved from a file', function () {
     $this->assertEquals('test', $configArray['editor']);
 });
 
+test('the config can be retrieved from environment variable', function () {
+    $_ENV['IGNITION_EDITOR'] = 'long string';
+    $_ENV['IGNITION_THEME'] = 'auto';
+    $_ENV['IGNITION_HIDE_SOLUTIONS'] = "false";
+    $_ENV['IGNITION_ENABLE_SHARE_BUTTON'] = "true";
+
+    $config = new IgnitionConfig();
+
+    $config->loadConfigFile();
+    $configArray = $config->toArray();
+
+    $this->assertEquals('long string', $configArray['editor']);
+    $this->assertEquals('auto', $configArray['theme']);
+    $this->assertFalse($configArray['hideSolutions']);
+    $this->assertTrue($configArray['enableShareButton']);
+});
+
 if (! function_exists('app')) {
     function app()
     {
