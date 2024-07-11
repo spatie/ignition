@@ -18,11 +18,11 @@ class Renderer
         include $viewFile;
     }
 
-    public function renderAsString(array $date, string $viewPath): string
+    public function renderAsString(array $data, string $viewPath): string
     {
         ob_start();
 
-        $this->render($date, $viewPath);
+        $this->render($data, $viewPath);
 
         return ob_get_clean();
     }
