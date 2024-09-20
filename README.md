@@ -89,7 +89,7 @@ By default, Ignition uses a nice white based theme. If this is too bright for yo
 
 ```php
 \Spatie\Ignition\Ignition::make()
-    ->useDarkMode()
+    ->setTheme('dark')
     ->register();
 ```
 
