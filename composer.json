@@ -17,7 +17,7 @@
     "homepage": "https://flareapp.io/ignition",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.0|^8.1|^8.2|^8.3",
         "ext-json": "*",
         "ext-mbstring": "*",
         "spatie/flare-client-php": "^1.7",
