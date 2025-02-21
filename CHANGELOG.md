@@ -2,6 +2,20 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.15.1 - 2025-02-21
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/spatie/ignition/pull/683
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/spatie/ignition/pull/785
+* Supports Laravel 12 by @duncanmcclean in https://github.com/spatie/ignition/pull/790
+
+### New Contributors
+
+* @duncanmcclean made their first contribution in https://github.com/spatie/ignition/pull/790
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.15.0...1.15.1
+
 ## 1.15.0 - 2024-06-12
 
 ### What's Changed
