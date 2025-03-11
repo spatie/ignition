@@ -7,7 +7,7 @@
 <head>
     <!-- Hide dumps asap -->
     <style>
-        pre.sf-dump {
+        #app pre.sf-dump {
             display: none !important;
         }
     </style>
