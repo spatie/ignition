@@ -1,7 +1,7 @@
-import {ErrorOccurrence} from '@flareapp/ignition-ui';
+import {ErrorOccurrence} from 'types'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IgniteData} from './types';
+import {IgniteData} from 'types';
 import './vendor/symfony';
 import '../css/app.css';
 import Ignition from 'Ignition';
@@ -15,79 +15,63 @@ window.ignite = (data) => {
 };
 
 function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrence {
-    const {
-        request,
-        request_data,
-        queries,
-        dumps,
-        logs,
-        headers,
-        cookies,
-        session,
-        env,
-        user,
-        route,
-        git,
-        livewire,
-        view,
-        exception,
-        arguments: args,
-        job,
-        laravel_context,
-        ...custom_context
-    } = report.context;
-
-    const customContext = Object.entries<any>(custom_context)
-        .map(([name, items]) => {
-            return {
-                name: name,
-                items: items,
-            };
-        });
-
     return {
         frames: report.stacktrace.map((frame) => ({
             ...frame,
             relative_file: frame.file
-                .replace(report.application_path + '/', '')
-                .replace(report.application_path + '\\', ''),
+                .replace(report.applicationPath + '/', '')
+                .replace(report.applicationPath + '\\', ''),
             class: frame.class || '',
+            line_number: frame.lineNumber,
+            application_frame: frame.isApplicationFrame,
+            code_snippet: frame.codeSnippet
         })),
         context_items: {
-            request: request,
-            request_data: request_data,
-            queries: queries || null,
-            dumps: dumps || null,
-            logs: logs || null,
-            laravel_context: laravel_context || null,
-            headers: headers || null,
-            cookies: cookies || null,
-            session: session || null,
-            env: env || null,
-            user: user || null,
-            route: route || null,
-            git: git || null,
-            livewire: livewire || null,
-            view: view || null,
-            exception: exception || null,
-            arguments: args || null,
-            job: job || null,
+            request: {
+                url: report.attributes['url.full'],
+                ip: report.attributes['client.address'] || null,
+                method: report.attributes['http.request.method'] || null,
+                useragent: report.attributes['user_agent.original'] || null,
+                referrer: report.attributes['http.request.referrer'] || null,
+                readyState: report.attributes['document.ready_state'] || null,
+            },
+            request_data: {
+                queryString: {},
+                body: {},
+                files: []
+            },
+            queries:  null,
+            dumps:  null,
+            logs:  null,
+            laravel_context:  null,
+            headers:  null,
+            cookies:  null,
+            session:  null,
+            env:  null,
+            user:  null,
+            route:  null,
+            git:  null,
+            livewire:  null,
+            view:  null,
+            exception:  null,
+            arguments:  null,
+            job:  null,
         },
-        custom_context_items: customContext,
+        custom_context_items: [],
         type: 'web',
-        entry_point: report?.context?.request?.url,
-        exception_class: report.exception_class,
+        entry_point: report.attributes['url.full'],
+        exception_class: report.exceptionClass,
         exception_message: report.message || '',
-        application_path: report.application_path,
-        application_version: report.application_version,
-        language_version: report.language_version,
-        framework_version: report.framework_version,
+        application_path: report.applicationPath,
+        application_version: report.attributes['service.version'] || null,
+        language_version: report.attributes['flare.language.version'] || null,
+        framework_version: report.attributes['flare.framework.version'] || null,
         notifier_client_name: 'Flare',
-        stage: report.stage,
+        stage: report.attributes['service.stage'],
         first_frame_class: report.stacktrace[0].class || '',
         first_frame_method: report.stacktrace[0].method,
-        glows: report.glows,
+        glows: [],
         solutions,
-        documentation_links: report.documentation_links,
+        documentation_links: [],
     };
 }

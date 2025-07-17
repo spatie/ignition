@@ -21,6 +21,10 @@
             "*": ["*", "resources/js/*"]
         }
     },
-    "include": ["resources/**/*", "node_modules/microbundle/index.d.ts"],
+    "include": [
+        "resources/**/*",
+        "node_modules/microbundle/index.d.ts",
+        "resources/compiled/ignition.js"
+    ],
     "exclude": ["**/compiled/**"]
 }

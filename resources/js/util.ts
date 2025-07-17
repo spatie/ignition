@@ -1,4 +1,5 @@
 import isString from 'lodash/isString';
+import { ErrorOccurrence } from 'types';
 
 export function stringifyOccurrenceData(value: any): string {
     if (value === undefined) {
@@ -59,4 +60,33 @@ function curlBody(requestData: any, headers: any) {
     });
 
     return `   ${formValues.join(' ')}`;
+}
+
+
+export function unixToDate(timestamp: number) {
+    return new Date(timestamp * 1000);
+}
+
+export function jsonStringify(value: any): string {
+    return JSON.stringify(value, null, 4);
+}
+
+export function hasDebugInfo(errorOccurrence: ErrorOccurrence) {
+    if (errorOccurrence.glows.length) {
+        return true;
+    }
+
+    if (Object.values(errorOccurrence.context_items.dumps || []).length) {
+        return true;
+    }
+
+    if (Object.values(errorOccurrence.context_items.logs || []).length) {
+        return true;
+    }
+
+    if (Object.values(errorOccurrence.context_items.queries || []).length) {
+        return true;
+    }
+
+    return false;
 }

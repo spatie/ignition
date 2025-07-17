@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Button, FlareIcon } from '@flareapp/ignition-ui';
 import Checkbox from 'components/ui/Checkbox';
-import { IgniteDataContext } from '../contexts/IgniteDataContext';
+import { IgniteDataContext } from 'contexts/IgniteDataContext';
 import CopyableUrl from './ui/CopyableUrl';
 import shareClient, { SectionName } from '../shareClient';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import FlareIcon from 'components/ui/icons/FlareIcon';
+import Button from 'components/ui/Button';
 
 type Props = {
     isOpen: boolean;

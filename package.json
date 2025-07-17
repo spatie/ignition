@@ -1,46 +1,62 @@
 {
-    "name": "@flareapp/ignition",
-    "version": "0.0.1",
-    "scripts": {
-        "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
-        "bundle-temp": "NODE_ENV=development microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development'",
-        "dev": "NODE_ENV=development ROLLUP_WATCH=true concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
-        "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
-        "typecheck": "tsc -w --preserveWatchOutput"
-    },
-    "dependencies": {
-        "@flareapp/ignition-ui": "^4.11.0",
-        "@fortawesome/fontawesome-common-types": "^6.1.1",
-        "@fortawesome/fontawesome-svg-core": "^6.1.1",
-        "@fortawesome/free-brands-svg-icons": "^6.1.1",
-        "@fortawesome/free-solid-svg-icons": "^6.1.1",
-        "@fortawesome/react-fontawesome": "^0.1.18",
-        "@tailwindcss/container-queries": "^0.1.1",
-        "lodash": "^4.17.21",
-        "microbundle": "^0.14.2",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-intersection-observer": "^8.32.5",
-        "tailwindcss": "^3.2"
-    },
-    "devDependencies": {
-        "@flareapp/flare-client": "^1.0.12",
-        "@types/lodash": "^4.14.169",
-        "@types/react-dom": "^17.0.5",
-        "autoprefixer": "^10.4.0",
-        "concurrently": "^6.2.0",
-        "husky": "^7.0.4",
-        "lint-staged": "^11.0.0",
-        "postcss": "^8.4.5",
-        "postcss-easy-import": "^3.0.0",
-        "postcss-import": "^14.0.2",
-        "postcss-preset-env": "^7.4.3",
-        "prettier": "^2.5.0",
-        "typescript": "^4.2.4"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged && yarn bundle-temp && git add resources/compiled/ignition.js && git add resources/compiled/ignition.css"
-        }
+  "name" : "@flareapp/ignition",
+  "version" : "0.0.1",
+  "scripts" : {
+    "bundle" : "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
+    "bundle-temp" : "NODE_ENV=development microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development'",
+    "dev" : "NODE_ENV=development ROLLUP_WATCH=true concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development' --no-compress \" \"yarn typecheck\"",
+    "format" : "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
+    "typecheck" : "tsc -w --preserveWatchOutput"
+  },
+  "dependencies" : {
+    "@fortawesome/fontawesome-common-types" : "^6.1.1",
+    "@fortawesome/fontawesome-svg-core" : "^6.1.1",
+    "@fortawesome/free-brands-svg-icons" : "^6.1.1",
+    "@fortawesome/free-solid-svg-icons" : "^6.1.1",
+    "@fortawesome/react-fontawesome" : "^0.1.18",
+    "@tailwindcss/container-queries" : "^0.1.1",
+    "lodash" : "^4.17.21",
+    "microbundle" : "^0.14.2",
+    "react" : "^17.0.2",
+    "react-dom" : "^17.0.2",
+    "react-intersection-observer" : "^8.32.5",
+    "tailwindcss" : "^3.2",
+    "url-slug": "^4.0.1",
+    "sql-formatter": "^4.0.2",
+    "react-syntax-highlighter": "^15.5.0",
+    "react-markdown": "^8.0.7",
+    "parse-path": "^4.0.3",
+    "md5": "^2.3.0",
+    "is-ssh": "^1.3.3",
+    "highlightjs-curl": "^1.3.0",
+    "highlightjs-blade": "^0.1.0",
+    "date-fns": "^2.26.0",
+
+    "use-prefers-color-scheme": "^1.1.2"
+
+  },
+  "devDependencies" : {
+    "@babel/preset-react" : "^7.16.0",
+    "@flareapp/flare-client" : "^1.0.12",
+    "@types/lodash" : "^4.14.169",
+    "@types/md5" : "^2.3.0",
+    "@types/react-dom" : "^17.0.5",
+    "autoprefixer" : "^10.4.0",
+    "concurrently" : "^6.2.0",
+    "husky" : "^7.0.4",
+    "lint-staged" : "^11.0.0",
+    "postcss" : "^8.4.5",
+    "postcss-easy-import" : "^3.0.0",
+    "postcss-import" : "^14.0.2",
+    "postcss-preset-env" : "^7.4.3",
+    "cross-env" : "^7.0.3",
+    "microbundle" : "^0.14.2",
+    "prettier" : "^2.5.0",
+    "typescript" : "^4.2.4"
+  },
+  "husky" : {
+    "hooks" : {
+      "pre-commit" : "lint-staged && yarn bundle-temp && git add resources/compiled/ignition.js && git add resources/compiled/ignition.css"
     }
+  }
 }

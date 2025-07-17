@@ -1,8 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { Button, IgnitionConfigContext, IgnitionIcon, InlineCodeSnippet } from '@flareapp/ignition-ui';
-import { IgniteDataContext } from 'contexts/IgniteDataContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon, faAdjust, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import IgnitionIcon from 'components/ui/icons/IgnitionIcon';
+import Button from 'components/ui/Button';
+import InlineCodeSnippet from 'components/ui/InlineCodeSnippet';
+import { IgniteDataContext } from '../contexts/IgniteDataContext';
+import IgnitionConfigContext from 'components/context/IgnitionConfigContext';
 
 type Props = {
     isOpen: boolean;

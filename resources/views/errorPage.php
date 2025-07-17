@@ -39,13 +39,7 @@
 
 <script>
     window.data = <?=
-        $viewModel->jsonEncode([
-            'report' => $viewModel->report(),
-            'shareableReport' => $viewModel->shareableReport(),
-            'config' => $viewModel->config(),
-            'solutions' => $viewModel->solutions(),
-            'updateConfigEndpoint' => $viewModel->updateConfigEndpoint(),
-        ])
+        $viewModel->toJson()
     ?>;
 </script>
 

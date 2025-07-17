@@ -6,11 +6,8 @@ use Illuminate\Contracts\Support\Arrayable;
 use Spatie\Ignition\Contracts\ConfigManager;
 use Throwable;
 
-/** @implements Arrayable<string, string|null|bool|array<string, mixed>> */
-class IgnitionConfig implements Arrayable
+class IgnitionConfig
 {
-    private ConfigManager $manager;
-
     public static function loadFromConfigFile(): self
     {
         return (new self())->loadConfigFile();
