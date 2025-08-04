@@ -2,7 +2,6 @@
 
 namespace Spatie\Ignition\Config;
 
-use Illuminate\Contracts\Support\Arrayable;
 use Spatie\Ignition\Contracts\ConfigManager;
 use Throwable;
 

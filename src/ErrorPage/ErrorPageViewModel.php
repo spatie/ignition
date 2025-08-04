@@ -8,7 +8,6 @@ use Spatie\FlareClient\Report;
 use Spatie\FlareClient\Truncation\ReportTrimmer;
 use Spatie\Ignition\IgnitionConfig;
 use Throwable;
-use function _PHPStan_bc6352b8e\React\Promise\race;
 
 class ErrorPageViewModel
 {
@@ -36,7 +35,7 @@ class ErrorPageViewModel
             $this->throwable->getFile(),
             $this->throwable->getLine(),
             null
-//            $this->report->getThrowable()?->getTraceAsString() // TODO: why?
+            //            $this->report->getThrowable()?->getTraceAsString() // TODO: why?
         );
 
         return htmlspecialchars($throwableString);
@@ -117,7 +116,7 @@ class ErrorPageViewModel
 
         return (string) json_encode(
             $data,
-            JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT |JSON_THROW_ON_ERROR
+            JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_THROW_ON_ERROR
         );
     }
 }
