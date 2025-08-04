@@ -1,7 +1,7 @@
 import React from 'react';
+import {CopyButton} from 'ignition-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import CopyButton from 'components/ui/CopyButton';
 
 type Props = {
     url: string;

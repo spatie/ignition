@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
+import { ErrorOccurrenceContext } from 'ignition-ui';
 import mapValues from 'lodash/mapValues';
 import keyBy from 'lodash/keyBy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShieldAlt } from '@fortawesome/free-solid-svg-icons';
-import ErrorOccurrenceContext from './context/ErrorOccurrenceContext';
 
 export default function AppDebugWarning() {
     const errorOccurrence = useContext(ErrorOccurrenceContext);

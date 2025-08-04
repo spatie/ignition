@@ -3,18 +3,21 @@ import InViewContextProvider from 'contexts/InViewContextProvider';
 import NavBar from 'components/NavBar';
 import Section from 'components/Section';
 import {IgniteDataContext} from 'contexts/IgniteDataContext';
-import { ErrorOccurrence, IgniteData } from 'types';
+import {
+    ErrorOccurrence,
+    StackTrace,
+    Context,
+    Debug,
+    ErrorOccurrenceContext,
+    ErrorCard,
+    IgnitionConfigContextProvider,
+    hasDebugInfo,
+    ErrorBoundary,
+} from 'ignition-ui';
+import {IgniteData} from './types';
 import {useInView} from 'react-intersection-observer';
 import AppDebugWarning from 'components/AppDebugWarning';
 import Footer from "components/Footer";
-import ErrorBoundary from 'components/ui/ErrorBoundary';
-import IgnitionConfigContextProvider from 'components/context/IgnitionConfigContextProvider';
-import ErrorCard from 'components/errorCard/ErrorCard';
-import StackTrace from 'components/stackTrace/components/StackTrace';
-import Context from 'components/context/Context';
-import ErrorOccurrenceContext from './components/context/ErrorOccurrenceContext';
-import Debug from 'components/debug/Debug';
-import { hasDebugInfo } from './util';
 
 type Props = {
     errorOccurrence: ErrorOccurrence;

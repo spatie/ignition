@@ -2,16 +2,13 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import NavBarItem from 'components/NavBarItem';
 import ShareDropdown from 'components/ShareDropdown';
 import SettingsDropdown from 'components/SettingsDropdown';
+import { ErrorOccurrence, ErrorOccurrenceContext, hasDebugInfo, IgnitionConfigContext } from 'ignition-ui';
 import useHasScrolled from 'hooks/useHasScrolled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faShare, faCog, faAlignLeft, faExpand, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLaravel, faPhp } from '@fortawesome/free-brands-svg-icons';
 import mapValues from 'lodash/mapValues';
 import keyBy from 'lodash/keyBy';
-import { ErrorOccurrence } from 'types';
-import { hasDebugInfo } from './../util';
-import IgnitionConfigContext from 'components/context/IgnitionConfigContext';
-import ErrorOccurrenceContext from 'components/context/ErrorOccurrenceContext';
 
 type Props = { showException: boolean };
 

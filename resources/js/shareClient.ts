@@ -56,33 +56,30 @@ function sectionsToShareTabs(sections: SectionName[]): string[] {
     return tabs;
 }
 
-/** @ts-ignore */
 function filterReport(report: IgnitionErrorOccurrence, sections: SectionName[]): IgnitionErrorOccurrence {
-    // TODO
+    if (!sections.includes('stackTrace')) {
+        report.stacktrace = report.stacktrace.slice(0, 1);
+    }
 
-    // if (!sections.includes('stackTrace')) {
-    //     report.stacktrace = report.stacktrace.slice(0, 1);
-    // }
-    //
-    // if (!sections.includes('debug')) {
-    //     report.glows = [];
-    //     report.context.dumps = [];
-    //     report.context.queries = [];
-    //     report.context.logs = [];
-    // }
-    //
-    // if (!sections.includes('context')) {
-    //     report.context.request_data = { queryString: {}, body: {}, files: [] };
-    //     report.context.headers = {};
-    //     report.context.cookies = {};
-    //     report.context.session = {};
-    //     report.context.route = null;
-    //     report.context.laravel_context = null;
-    //     report.context.user = null;
-    //     delete report.context.git;
-    //     delete report.context.livewire;
-    //     report.context.view = null;
-    // }
+    if (!sections.includes('debug')) {
+        report.glows = [];
+        report.context.dumps = [];
+        report.context.queries = [];
+        report.context.logs = [];
+    }
+
+    if (!sections.includes('context')) {
+        report.context.request_data = { queryString: {}, body: {}, files: [] };
+        report.context.headers = {};
+        report.context.cookies = {};
+        report.context.session = {};
+        report.context.route = null;
+        report.context.laravel_context = null;
+        report.context.user = null;
+        delete report.context.git;
+        delete report.context.livewire;
+        report.context.view = null;
+    }
 
     return report;
 }
