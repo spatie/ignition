@@ -223,6 +223,10 @@ class IgnitionConfig implements Arrayable
                     'label' => 'Zed',
                     'url' => 'zed://file/%path:%line',
                 ],
+                'windsurf' => [
+                    'label' => 'Windsurf',
+                    'url' => 'windsurf://file/%path:%line',
+                ],
                 'xdebug' => [
                     'label' => 'Xdebug',
                     'url' => 'xdebug://%path@%line',
