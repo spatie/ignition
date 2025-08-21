@@ -207,6 +207,10 @@ class IgnitionConfig implements Arrayable
                     'label' => 'Cursor',
                     'url' => 'cursor://file/%path:%line',
                 ],
+                'trae' => [
+                    'label' => 'Trae',
+                    'url' => 'trae://file/%path:%line',
+                ],
                 'atom' => [
                     'label' => 'Atom',
                     'url' => 'atom://core/open/file?filename=%path&line=%line',
