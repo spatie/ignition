@@ -34,6 +34,6 @@ jobs:
               run: yarn run bundle-temp
 
             - name: Commit changes
-              uses: stefanzweifel/git-auto-commit-action@v5
+              uses: stefanzweifel/git-auto-commit-action@v6
               with:
                   commit_message: Add new JS bundle build
