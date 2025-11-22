@@ -21,8 +21,8 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "spatie/flare-client-php": "^1.7",
-        "symfony/console": "^5.4|^6.0|^7.0",
-        "symfony/var-dumper": "^5.4|^6.0|^7.0",
+        "symfony/console": "^5.4|^6.0|^7.0|^8.0",
+        "symfony/var-dumper": "^5.4|^6.0|^7.0|^8.0",
         "spatie/error-solutions": "^1.0"
     },
     "require-dev" : {
@@ -33,8 +33,8 @@
         "phpstan/phpstan-deprecation-rules" : "^1.0",
         "phpstan/phpstan-phpunit" : "^1.0",
         "psr/simple-cache-implementation" : "*",
-        "symfony/cache" : "^5.4|^6.0|^7.0",
-        "symfony/process" : "^5.4|^6.0|^7.0",
+        "symfony/cache" : "^5.4|^6.0|^7.0|^8.0",
+        "symfony/process" : "^5.4|^6.0|^7.0|^8.0",
         "vlucas/phpdotenv" : "^5.5"
     },
     "suggest" : {
