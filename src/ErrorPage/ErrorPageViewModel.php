@@ -76,9 +76,9 @@ class ErrorPageViewModel
             $transformerClass = $this->solutionTransformerClass;
 
             /** @var SolutionTransformer $transformer */
-            $transformer = new $transformerClass($solution);
+            $transformer = new $transformerClass();
 
-            return ($transformer)->toArray();
+            return ($transformer)->toArray($solution);
         }, $this->solutions);
     }
 
