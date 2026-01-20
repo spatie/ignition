@@ -6,6 +6,7 @@ use Spatie\FlareClient\FlareConfig;
 
 class IgnitionConfig
 {
+    /** @param array<string, mixed> $saveableOptions */
     public static function make(): self
     {
         return new self();
@@ -13,13 +14,13 @@ class IgnitionConfig
 
     /**
      * @param array<string, mixed> $editorOptions
+     * @param array<int, string> $documentationLinkResolvers
      */
     public function __construct(
         public bool $hideSolutions = false,
         public bool $shouldDisplayException = true,
         public bool $inProductionEnvironment = false,
         public string $editor = 'vscode',
-        public array $editorOptions = [],
         public ?string $remoteSitesPath = null,
         public ?string $localSitesPath = null,
         public string $theme = 'light',
@@ -27,6 +28,8 @@ class IgnitionConfig
         public string $shareEndpoint = 'https://flareapp.io/api/public-reports',
         public string $customHtmlHead = '',
         public string $customHtmlBody = '',
+        public ?string $configPath = null,
+        public array $documentationLinkResolvers = [],
     ) {
     }
 
@@ -58,7 +61,6 @@ class IgnitionConfig
     {
         return [
             'editor' => $this->editor,
-            'editorOptions' => $this->editorOptions,
             'remoteSitesPath' => $this->remoteSitesPath,
             'localSitesPath' => $this->localSitesPath,
             'theme' => $this->theme,
@@ -66,5 +68,35 @@ class IgnitionConfig
             'directorySeparator' => DIRECTORY_SEPARATOR,
             'shareEndpoint' => $this->shareEndpoint,
         ];
+    }
+
+    /** @return array{theme: string, editor: string, hide_solutions: bool} */
+    public function toSaveableOptions(): array
+    {
+        return [
+            'theme' => $this->theme,
+            'editor' => $this->editor,
+            'hide_solutions' => $this->hideSolutions,
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function loadSaveableOptions(array $options): self
+    {
+        if (isset($options['theme'])) {
+            $this->theme = $options['theme'];
+        }
+
+        if (isset($options['editor'])) {
+            $this->editor = $options['editor'];
+        }
+
+        if (isset($options['hide_solutions'])) {
+            $this->hideSolutions = $options['hide_solutions'];
+        }
+
+        return $this;
     }
 }

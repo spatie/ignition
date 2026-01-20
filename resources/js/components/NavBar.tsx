@@ -1,14 +1,14 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import NavBarItem from 'components/NavBarItem';
-import ShareDropdown from 'components/ShareDropdown';
-import SettingsDropdown from 'components/SettingsDropdown';
-import { ErrorOccurrence, ErrorOccurrenceContext, hasDebugInfo, IgnitionConfigContext } from 'ignition-ui';
-import useHasScrolled from 'hooks/useHasScrolled';
+import NavBarItem from './NavBarItem';
+import ShareDropdown from './ShareDropdown';
+import SettingsDropdown from './SettingsDropdown';
+import { ErrorOccurrence, ErrorOccurrenceContext, IgnitionConfigContext } from 'ignition-ui';
+import useHasScrolled from './../hooks/useHasScrolled';
+import { hasDebugInfo } from './../util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBug, faShare, faCog, faAlignLeft, faExpand, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLaravel, faPhp } from '@fortawesome/free-brands-svg-icons';
-import mapValues from 'lodash/mapValues';
-import keyBy from 'lodash/keyBy';
+import { IgniteDataContext } from '../contexts/IgniteDataContext';
 
 type Props = { showException: boolean };
 
@@ -29,9 +29,10 @@ function useClickOutsideListener(ref: React.MutableRefObject<any>, handler: () =
 
 function resolveDocs(
     errorOccurrence: ErrorOccurrence,
+    documentationLinks: string[]
 ): null | { type: 'generic' | 'php' | 'laravel'; url: string; tailored: boolean } {
-    if (!!errorOccurrence.context_items.env?.laravel_version) {
-        const laravelDocs = errorOccurrence.documentation_links.find((link) => link.startsWith('https://laravel.com/'));
+    if ((errorOccurrence.attributes['flare.framework.version'] ?? null) === 'laravel') {
+        const laravelDocs = documentationLinks.find((link) => link.startsWith('https://laravel.com/'));
 
         if (laravelDocs) {
             return {
@@ -48,7 +49,7 @@ function resolveDocs(
         }
     }
 
-    const phpDocs = errorOccurrence.documentation_links.find((link) => link.startsWith('https://php.net/'));
+    const phpDocs = documentationLinks.find((link) => link.startsWith('https://php.net/'));
     if (phpDocs) {
         return {
             type: 'php',
@@ -64,8 +65,10 @@ function resolveDocs(
     };
 }
 
+
 export default function NavBar({ showException }: Props) {
     const errorOccurrence = useContext(ErrorOccurrenceContext);
+    const igniteData = useContext(IgniteDataContext);
     const [isShareDropdownOpen, setIsShareDropdownOpen] = useState(false);
     const [isSettingsDropdownOpen, setIsSettingsDropdownOpen] = useState(false);
     const hasScrolled = useHasScrolled({ distance: 10 });
@@ -77,11 +80,9 @@ export default function NavBar({ showException }: Props) {
     useClickOutsideListener(shareRef, () => setIsShareDropdownOpen(false));
     useClickOutsideListener(settingsRef, () => setIsSettingsDropdownOpen(false));
 
-    const env = mapValues(keyBy(errorOccurrence.context_items['env'] || [], 'name'), 'value');
+    const showEnvWarning = errorOccurrence.attributes['service.stage'] !== 'local';
 
-    const showEnvWarning = env.app_env !== 'local' && env.app_debug;
-
-    const docs = resolveDocs(errorOccurrence);
+    const docs = resolveDocs(errorOccurrence, igniteData.documentationLinks);
 
     return (
         <nav className="z-50 fixed top-0 h-20 w-full">
@@ -100,7 +101,7 @@ export default function NavBar({ showException }: Props) {
                                 <NavBarItem
                                     name="debug"
                                     icon={<FontAwesomeIcon icon={faBug} />}
-                                    important={!!errorOccurrence.context_items.dumps?.length}
+                                    important={errorOccurrence.events.length > 0}
                                 />
                             )}
 

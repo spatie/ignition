@@ -2,10 +2,9 @@
   "name": "@flareapp/ignition",
   "version": "0.0.1",
   "scripts": {
-    "bundle": "microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='production'",
-    "bundle-temp": "NODE_ENV=development microbundle -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none --define process.env.NODE_ENV='development'",
-    "dev": "NODE_ENV=development ROLLUP_WATCH=true concurrently -n \"dev,typescript\" -c \",green\" \"microbundle watch -i resources/js/index.tsx -o resources/compiled/ignition.js --generateTypes false --jsx React.createElement --jsxFragment React.Fragment -f cjs --no-sourcemap --external none  --define process.env.NODE_ENV='development' --no-compress --tsconfig tsconfig.dev.json\" \"npm run typecheck\"",
-    "format": "prettier --write 'resources/**/*.{css,js,ts,tsx}'",
+    "dev": "vite build --watch --mode development",
+    "build": "vite build",
+    "reinstall-deps": "npm install --force",
     "typecheck": "tsc -w --preserveWatchOutput"
   },
   "dependencies": {
@@ -19,13 +18,12 @@
     "microbundle": "^0.14.2",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",
+    "react-markdown": "^8.0.7",
     "react-intersection-observer": "^8.32.5",
     "tailwindcss": "^3.2",
     "ignition-ui": "file:../flareapp.io/resources/packages/ignition-ui"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.16.0",
-    "@babel/preset-typescript": "^7.16.0",
     "@flareapp/flare-client": "^1.0.12",
     "@types/lodash": "^4.14.169",
     "@types/react": "^18.2.0",
@@ -40,7 +38,9 @@
     "postcss-import": "^14.0.2",
     "postcss-preset-env": "^7.4.3",
     "prettier": "^2.5.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^5.0.0"
   },
   "husky": {
     "hooks": {

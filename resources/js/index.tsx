@@ -1,68 +1,44 @@
-import {ErrorOccurrence} from 'ignition-ui';
-import React from 'react';
+import { ErrorOccurrence } from 'ignition-ui';
 import ReactDOM from 'react-dom';
-import {IgniteData} from './types';
+import { IgniteData } from 'types';
 import './vendor/symfony';
 import '../css/app.css';
-import Ignition from 'Ignition';
+import Ignition from './Ignition';
 
 window.ignite = (data) => {
-    console.log(data);
-
     const errorOccurrence = transformIgnitionError(data);
 
-    console.log(data, errorOccurrence);
-
-    ReactDOM.render(<Ignition errorOccurrence={errorOccurrence} igniteData={data}/>, document.querySelector('#app'));
+    ReactDOM.render(<Ignition errorOccurrence={errorOccurrence} igniteData={data} />, document.querySelector('#app'));
 };
 
-function transformIgnitionError({report, solutions}: IgniteData): ErrorOccurrence {
-    const {
-        request,
-        request_data,
-        queries,
-        dumps,
-        logs,
-        headers,
-        cookies,
-        session,
-        env,
-        user,
-        route,
-        git,
-        livewire,
-        view,
-        exception,
-        arguments: args,
-        job,
-        laravel_context,
-        ...custom_context
-    } = report.context;
-
-
+function transformIgnitionError({ report, solutions }: IgniteData): ErrorOccurrence {
     return {
-        frames: report.stacktrace.map((frame) => ({
-            ...frame,
-            relative_file: frame.file
-                .replace(report.application_path + '/', '')
-                .replace(report.application_path + '\\', ''),
-            class: frame.class || '',
-        })),
-        attributes: {}, // TODO
-        events: [], // TODO
         type: 'web',
-        entry_point: report?.context?.request?.url,
-        exception_class: report.exception_class,
-        exception_message: report.message || '',
-        application_path: report.application_path,
-        application_version: report.application_version,
-        language_version: report.language_version,
-        framework_version: report.framework_version,
-        notifier_client_name: 'Flare',
-        stage: report.stage,
+        entry_point: 'todo',
+        exception_message: report.message,
+        exception_class: report.exceptionClass,
+        application_path: report.applicationPath,
+        application_version: report.attributes['service.version'] ?? null,
+        notifier_client_name: report.attributes['telemetry.sdk.name'] ?? 'Ignition',
+        language_version: report.attributes['flare.language.version'] ?? null,
+        framework_version: report.attributes['flare.framework.version'] ?? null,
+        stage: report.attributes['service.version'] ?? null,
+        attributes: report.attributes,
+        events: report.events,
         first_frame_class: report.stacktrace[0].class || '',
-        first_frame_method: report.stacktrace[0].method,
-        solutions,
-        documentation_links: report.documentation_links,
+        first_frame_method: report.stacktrace[0].method || '',
+        solutions: solutions,
+        documentation_links: [],
+        frames: report.stacktrace.map(frame => ({
+            class: frame.class || '',
+            method: frame.method,
+            file: frame.file,
+            relative_file: frame.file, // TODO
+            line_number: frame.lineNumber,
+            application_frame: frame.isApplicationFrame,
+            arguments: frame.arguments || [],
+            code_snippet: frame.codeSnippet,
+        })),
+        language: 'PHP',
     };
 }

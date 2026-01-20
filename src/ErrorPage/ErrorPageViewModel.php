@@ -6,6 +6,7 @@ use Spatie\ErrorSolutions\Contracts\Solution;
 use Spatie\ErrorSolutions\Solutions\SolutionTransformer;
 use Spatie\FlareClient\Report;
 use Spatie\FlareClient\Truncation\ReportTrimmer;
+use Spatie\Ignition\Config\EditorOptions;
 use Spatie\Ignition\IgnitionConfig;
 use Throwable;
 use function _PHPStan_bc6352b8e\React\Promise\race;
@@ -14,12 +15,14 @@ class ErrorPageViewModel
 {
     /**
      * @param array<Solution> $solutions
+     * @param array<string> $documentationLinks
      */
     public function __construct(
         protected ?Throwable $throwable,
         protected Report $report,
         protected IgnitionConfig $config,
         protected array $solutions,
+        protected array $documentationLinks = [],
     ) {
     }
 
@@ -36,7 +39,6 @@ class ErrorPageViewModel
             $this->throwable->getFile(),
             $this->throwable->getLine(),
             null
-//            $this->report->getThrowable()?->getTraceAsString() // TODO: why?
         );
 
         return htmlspecialchars($throwableString);
@@ -91,7 +93,6 @@ class ErrorPageViewModel
 
     public function updateConfigEndpoint(): string
     {
-        // TODO: Should be based on Ignition config
         return '/_ignition/update-config';
     }
 
@@ -105,13 +106,15 @@ class ErrorPageViewModel
         return $this->config->customHtmlBody;
     }
 
-    public function toJson()
+    public function toJson(): string
     {
         $data = [
             'report' => $this->report->toArray(),
             'shareableReport' => $this->shareableReport(),
             'solutions' => $this->solutions(),
+            'documentationLinks' => $this->documentationLinks,
             'updateConfigEndpoint' => $this->updateConfigEndpoint(),
+            'editorOptions' => (new EditorOptions())->toArray(),
             'config' => $this->config->toArray(),
         ];
 

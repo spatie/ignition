@@ -1,4 +1,4 @@
-import { IgniteData, IgnitionErrorOccurrence } from './types';
+import { IgniteData, IgnitionErrorOccurrence } from 'types';
 
 type ShareResponse = {
     owner_url: string;
@@ -62,23 +62,44 @@ function filterReport(report: IgnitionErrorOccurrence, sections: SectionName[]):
     }
 
     if (!sections.includes('debug')) {
-        report.glows = [];
-        report.context.dumps = [];
-        report.context.queries = [];
-        report.context.logs = [];
+        report.events = [];
     }
 
     if (!sections.includes('context')) {
-        report.context.request_data = { queryString: {}, body: {}, files: [] };
-        report.context.headers = {};
-        report.context.cookies = {};
-        report.context.session = {};
-        report.context.route = null;
-        report.context.laravel_context = null;
-        report.context.user = null;
-        delete report.context.git;
-        delete report.context.livewire;
-        report.context.view = null;
+        const attributes = report.attributes as Record<string, any>;
+
+        delete attributes['client.address'];
+        delete attributes['user_agent.original'];
+        delete attributes['user.id'];
+        delete attributes['user.full_name'];
+        delete attributes['user.email'];
+        delete attributes['user.attributes'];
+
+        Object.keys(attributes).forEach(key => {
+            if (key.startsWith('http.') || key.startsWith('url.')) {
+                delete attributes[key];
+            }
+        });
+
+        Object.keys(attributes).forEach(key => {
+            if (key.startsWith('laravel.') || key.startsWith('view.') || key.startsWith('service.')) {
+                delete attributes[key];
+            }
+        });
+
+        Object.keys(attributes).forEach(key => {
+            if (
+                key.startsWith('git.') ||
+                key.startsWith('host.') ||
+                key.startsWith('network.') ||
+                key.startsWith('context.') ||
+                key.startsWith('os.') ||
+                key.startsWith('process.') ||
+                key.startsWith('telemetry.')
+            ) {
+                delete attributes[key];
+            }
+        });
     }
 
     return report;

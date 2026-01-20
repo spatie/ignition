@@ -41,6 +41,8 @@
     window.data = <?=
         $viewModel->toJson()
     ?>;
+
+    console.log('ignition data', window.data);
 </script>
 
 <!-- The noscript representation is for HTTP client like Postman that have JS disabled. -->
@@ -50,10 +52,9 @@
 
 <div id="app"></div>
 
+
 <script>
-    <!--
     <?= $viewModel->getAssetContents('ignition.js') ?>
-    -->
 </script>
 
 <script>

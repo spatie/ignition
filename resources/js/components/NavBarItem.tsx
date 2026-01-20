@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import InViewContext from 'contexts/InViewContext';
+import InViewContext from './../contexts/InViewContext';
 import last from 'lodash/last';
 
 type Props = {

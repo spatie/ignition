@@ -8,28 +8,33 @@ use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\FlareConfig;
 use Spatie\FlareClient\Report;
 use Spatie\FlareClient\Support\Container;
+use Spatie\Ignition\Actions\UpdateConfigAction;
+use Spatie\Ignition\Config\FileConfigManager;
+use Spatie\Ignition\Contracts\DocumentationLinkResolver;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
+use Symfony\Component\Mime\Part\File;
 use Throwable;
 
 class Ignition
 {
     public static function make(
-        string|FlareConfig|null $apiToken = null,
+        string|FlareConfig|null $flareConfig = null,
         IgnitionConfig|null $ignitionConfig = null,
     ): self {
-        $flareConfig = $apiToken instanceof FlareConfig
-            ? $apiToken
-            : FlareConfig::make($apiToken);
+        $flareConfig = $flareConfig instanceof FlareConfig
+            ? $flareConfig
+            : FlareConfig::make($flareConfig)->useDefaults();
 
         $ignitionConfig ??= IgnitionConfig::make()->useDefaults($flareConfig);
+
+        $ignitionConfig->loadSaveableOptions(FileConfigManager::fromIgnitionConfig($ignitionConfig)->load());
 
         $container = Container::instance();
 
         Flare::make($flareConfig);
 
         $provider = new IgnitionProvider(
-            $flareConfig,
             $ignitionConfig,
             $container
         );
@@ -40,13 +45,16 @@ class Ignition
         return $container->get(Ignition::class);
     }
 
+    /**
+     * @param array<DocumentationLinkResolver> $documentationLinkResolvers
+     */
     public function __construct(
         protected Flare $flare,
         protected SolutionProviderRepository $solutionProviderRepository,
         protected bool $shouldDisplayException,
         protected bool $inProductionEnvironment,
-        protected bool $apiTokenIsSet,
         protected IgnitionConfig $ignitionConfig,
+        protected array $documentationLinkResolvers = [],
     ) {
     }
 
@@ -86,7 +94,7 @@ class Ignition
             $this->renderException($throwable, $report);
         }
 
-        if ($this->apiTokenIsSet && $this->inProductionEnvironment !== false) {
+        if ($this->flare->hasApiToken() && $this->inProductionEnvironment !== false) {
             $this->flare->report($throwable, report: $report);
         }
 
@@ -97,16 +105,34 @@ class Ignition
     {
         $report ??= $this->flare->createReport($throwable);
 
+        $solutions = $this->solutionProviderRepository->getSolutionsForThrowable($throwable);
+
+        $documentationLinks = [];
+
+        foreach ($this->documentationLinkResolvers as $resolver) {
+            array_push($documentationLinks, ...$resolver->find($throwable));
+        }
+
+        foreach ($solutions as $solution) {
+            array_push($documentationLinks, ...$solution->getDocumentationLinks());
+        }
+
         $viewModel = new ErrorPageViewModel(
             $throwable,
             $report,
             $this->ignitionConfig,
             $this->solutionProviderRepository->getSolutionsForThrowable($throwable),
+            $documentationLinks,
         );
 
         $viewPath = __DIR__."/../resources/views/errorPage.php";
 
         (new Renderer())->render(['viewModel' => $viewModel], $viewPath);
+    }
+
+    public function getUpdateConfigAction(): UpdateConfigAction
+    {
+        return new UpdateConfigAction(FileConfigManager::fromIgnitionConfig($this->ignitionConfig));
     }
 
     public function flare(): Flare
