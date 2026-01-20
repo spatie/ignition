@@ -7,7 +7,6 @@ use Spatie\ErrorSolutions\Contracts\SolutionProviderRepository as SolutionProvid
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\Support\Container;
 
-
 class IgnitionProvider
 {
     public function __construct(

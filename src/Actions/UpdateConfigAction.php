@@ -18,7 +18,7 @@ class UpdateConfigAction
     {
         $request ??= Request::createFromGlobals();
 
-        if (!$request->isMethod('POST')) {
+        if (! $request->isMethod('POST')) {
             return false;
         }
 
@@ -48,7 +48,7 @@ class UpdateConfigAction
 
     private function validateTheme(mixed $theme): string
     {
-        if (!is_string($theme) || !in_array($theme, ['light', 'dark', 'auto'])) {
+        if (! is_string($theme) || ! in_array($theme, ['light', 'dark', 'auto'])) {
             return 'light';
         }
 
@@ -57,13 +57,13 @@ class UpdateConfigAction
 
     private function validateEditor(mixed $editor): string
     {
-        if (!is_string($editor)) {
+        if (! is_string($editor)) {
             return 'vscode';
         }
 
         $validEditors = array_keys((new EditorOptions())->toArray());
 
-        if (!in_array($editor, $validEditors)) {
+        if (! in_array($editor, $validEditors)) {
             return 'vscode';
         }
 

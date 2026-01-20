@@ -13,7 +13,6 @@ use Spatie\Ignition\Config\FileConfigManager;
 use Spatie\Ignition\Contracts\DocumentationLinkResolver;
 use Spatie\Ignition\ErrorPage\ErrorPageViewModel;
 use Spatie\Ignition\ErrorPage\Renderer;
-use Symfony\Component\Mime\Part\File;
 use Throwable;
 
 class Ignition
