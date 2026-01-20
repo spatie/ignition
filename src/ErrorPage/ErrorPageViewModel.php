@@ -6,28 +6,23 @@ use Spatie\ErrorSolutions\Contracts\Solution;
 use Spatie\ErrorSolutions\Solutions\SolutionTransformer;
 use Spatie\FlareClient\Report;
 use Spatie\FlareClient\Truncation\ReportTrimmer;
-use Spatie\Ignition\Config\IgnitionConfig;
+use Spatie\Ignition\Config\EditorOptions;
+use Spatie\Ignition\IgnitionConfig;
 use Throwable;
 
 class ErrorPageViewModel
 {
     /**
-     * @param \Throwable|null $throwable
-     * @param \Spatie\Ignition\Config\IgnitionConfig $ignitionConfig
-     * @param \Spatie\FlareClient\Report $report
-     * @param array<int, Solution> $solutions
-     * @param string|null $solutionTransformerClass
+     * @param array<Solution> $solutions
+     * @param array<string> $documentationLinks
      */
     public function __construct(
         protected ?Throwable $throwable,
-        protected IgnitionConfig $ignitionConfig,
         protected Report $report,
+        protected IgnitionConfig $config,
         protected array $solutions,
-        protected ?string $solutionTransformerClass = null,
-        protected string $customHtmlHead = '',
-        protected string $customHtmlBody = ''
+        protected array $documentationLinks = [],
     ) {
-        $this->solutionTransformerClass ??= SolutionTransformer::class;
     }
 
     public function throwableString(): string
@@ -42,7 +37,7 @@ class ErrorPageViewModel
             $this->throwable->getMessage(),
             $this->throwable->getFile(),
             $this->throwable->getLine(),
-            $this->report->getThrowable()?->getTraceAsString()
+            null
         );
 
         return htmlspecialchars($throwableString);
@@ -50,20 +45,13 @@ class ErrorPageViewModel
 
     public function title(): string
     {
-        return htmlspecialchars($this->report->getMessage());
+        return htmlspecialchars($this->report->message);
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function config(): array
-    {
-        return $this->ignitionConfig->toArray();
-    }
 
     public function theme(): string
     {
-        return $this->config()['theme'] ?? 'auto';
+        return $this->config->theme;
     }
 
     /**
@@ -71,30 +59,20 @@ class ErrorPageViewModel
      */
     public function solutions(): array
     {
-        return array_map(function (Solution $solution) {
-            /** @var class-string $transformerClass */
-            $transformerClass = $this->solutionTransformerClass;
+        $transformer = new SolutionTransformer();
 
-            /** @var SolutionTransformer $transformer */
-            $transformer = new $transformerClass($solution);
-
-            return ($transformer)->toArray();
-        }, $this->solutions);
+        return array_map(
+            fn (Solution $solution) => $transformer->toArray($solution),
+            $this->solutions
+        );
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function report(): array
-    {
-        return $this->report->toArray();
-    }
 
     public function jsonEncode(mixed $data): string
     {
         $jsonOptions = JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 
-        return (string) json_encode($data, $jsonOptions);
+        return (string) json_encode($data, $jsonOptions, JSON_THROW_ON_ERROR);
     }
 
     public function getAssetContents(string $asset): string
@@ -109,22 +87,39 @@ class ErrorPageViewModel
      */
     public function shareableReport(): array
     {
-        return (new ReportTrimmer())->trim($this->report());
+        return (new ReportTrimmer())->trim($this->report->toArray());
     }
 
     public function updateConfigEndpoint(): string
     {
-        // TODO: Should be based on Ignition config
         return '/_ignition/update-config';
     }
 
     public function customHtmlHead(): string
     {
-        return $this->customHtmlHead;
+        return $this->config->customHtmlHead;
     }
 
     public function customHtmlBody(): string
     {
-        return $this->customHtmlBody;
+        return $this->config->customHtmlBody;
+    }
+
+    public function toJson(): string
+    {
+        $data = [
+            'report' => $this->report->toArray(),
+            'shareableReport' => $this->shareableReport(),
+            'solutions' => $this->solutions(),
+            'documentationLinks' => $this->documentationLinks,
+            'updateConfigEndpoint' => $this->updateConfigEndpoint(),
+            'editorOptions' => (new EditorOptions())->toArray(),
+            'config' => $this->config->toArray(),
+        ];
+
+        return (string) json_encode(
+            $data,
+            JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_THROW_ON_ERROR
+        );
     }
 }

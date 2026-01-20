@@ -2,18 +2,18 @@
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "jsx": "react",
-        "lib": ["dom", "es2020"],
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react-jsx",
+        "lib": ["dom", "es2020", "dom.iterable"],
         "noEmit": true,
         "module": "esnext",
-        "esModuleInterop": true,
         "moduleResolution": "node",
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "preserveConstEnums": true,
         "removeComments": false,
         "skipLibCheck": true,
-        "sourceMap": false,
+        "sourceMap": true,
         "strict": true,
         "target": "esnext",
         "baseUrl": ".",
@@ -21,6 +21,5 @@
             "*": ["*", "resources/js/*"]
         }
     },
-    "include": ["resources/**/*", "node_modules/microbundle/index.d.ts"],
-    "exclude": ["**/compiled/**"]
+    "include": ["resources/**/*"],
 }

@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { Button, IgnitionConfigContext, IgnitionIcon, InlineCodeSnippet } from '@flareapp/ignition-ui';
-import { IgniteDataContext } from 'contexts/IgniteDataContext';
+import { useState, useContext } from 'react';
+import { Button, IgnitionConfigContext, IgnitionIcon, InlineCodeSnippet } from 'ignition-ui';
+import { IgniteDataContext } from '../contexts/IgniteDataContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon, faAdjust, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -126,7 +126,7 @@ export default function SettingsDropdown({ isOpen }: Props) {
                             value={editor}
                             onChange={(event) => handleEditorChange(event.target.value)}
                         >
-                            {Object.entries(ignitionConfig?.editorOptions || []).map(([editor, { label }]) => (
+                            {Object.entries(igniteData.editorOptions || []).map(([editor, { label }]) => (
                                 <option className="text-gray-800" key={editor} value={editor}>
                                     {label}
                                 </option>

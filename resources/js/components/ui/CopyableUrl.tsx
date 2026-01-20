@@ -1,5 +1,4 @@
-import React from 'react';
-import {CopyButton} from '@flareapp/ignition-ui';
+import {CopyButton} from 'ignition-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 

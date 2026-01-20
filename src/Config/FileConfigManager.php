@@ -2,10 +2,10 @@
 
 namespace Spatie\Ignition\Config;
 
-use Spatie\Ignition\Contracts\ConfigManager;
+use Spatie\Ignition\IgnitionConfig;
 use Throwable;
 
-class FileConfigManager implements ConfigManager
+class FileConfigManager
 {
     private const SETTINGS_FILE_NAME = '.ignition.json';
 
@@ -13,30 +13,28 @@ class FileConfigManager implements ConfigManager
 
     private string $file;
 
-    public function __construct(string $path = '')
+    public static function fromIgnitionConfig(IgnitionConfig $ignitionConfig): self
+    {
+        return new self($ignitionConfig->configPath);
+    }
+
+    public function __construct(?string $path = null)
     {
         $this->path = $this->initPath($path);
         $this->file = $this->initFile();
     }
 
-    protected function initPath(string $path): string
+    protected function initPath(?string $path): string
     {
-        $path = $this->retrievePath($path);
+        if ($path === null) {
+            $path = $this->initPathFromEnvironment();
+        }
 
         if (! $this->isValidWritablePath($path)) {
             return '';
         }
 
         return $this->preparePath($path);
-    }
-
-    protected function retrievePath(string $path): string
-    {
-        if ($path !== '') {
-            return $path;
-        }
-
-        return $this->initPathFromEnvironment();
     }
 
     protected function isValidWritablePath(string $path): bool
@@ -67,20 +65,14 @@ class FileConfigManager implements ConfigManager
         return $this->path . DIRECTORY_SEPARATOR . self::SETTINGS_FILE_NAME;
     }
 
-    /** {@inheritDoc} */
-    public function load(): array
-    {
-        return $this->readFromFile();
-    }
-
     /** @return array<string, mixed> */
-    protected function readFromFile(): array
+    public function load(): array
     {
         if (! $this->isValidFile()) {
             return [];
         }
 
-        $content = (string)file_get_contents($this->file);
+        $content = (string) file_get_contents($this->file);
         $settings = json_decode($content, true) ?? [];
 
         return $settings;
@@ -98,7 +90,9 @@ class FileConfigManager implements ConfigManager
         return trim($this->path) !== '';
     }
 
-    /** {@inheritDoc} */
+    /**
+     * @param array<string, mixed> $options
+     */
     public function save(array $options): bool
     {
         if (! $this->createFile()) {
@@ -146,7 +140,7 @@ class FileConfigManager implements ConfigManager
         return (file_put_contents($this->file, $content) !== false);
     }
 
-    /** {@inheritDoc} */
+    /** @return array<string, string> */
     public function getPersistentInfo(): array
     {
         return [

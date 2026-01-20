@@ -1,4 +1,5 @@
 import isString from 'lodash/isString';
+import { ErrorOccurrence } from 'node_modules/ignition-ui';
 
 export function stringifyOccurrenceData(value: any): string {
     if (value === undefined) {
@@ -59,4 +60,8 @@ function curlBody(requestData: any, headers: any) {
     });
 
     return `   ${formValues.join(' ')}`;
+}
+
+export function hasDebugInfo(errorOccurrence: ErrorOccurrence): boolean {
+    return errorOccurrence.events.length > 0;
 }

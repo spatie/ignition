@@ -16,26 +16,26 @@
     ],
     "homepage": "https://flareapp.io/ignition",
     "license": "MIT",
+    "repositories" : [{"type":  "path", "url" : "../flare-client-php"}],
     "require": {
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "spatie/flare-client-php": "^1.7",
+        "spatie/flare-client-php": "@dev",
         "symfony/console": "^5.4|^6.0|^7.0",
-        "symfony/var-dumper": "^5.4|^6.0|^7.0",
-        "spatie/error-solutions": "^1.0"
+        "symfony/var-dumper": "^5.4|^6.0|^7.0"
     },
     "require-dev" : {
-        "illuminate/cache" : "^9.52|^10.0|^11.0|^12.0",
-        "mockery/mockery" : "^1.4",
-        "pestphp/pest" : "^1.20|^2.0",
-        "phpstan/extension-installer" : "^1.1",
-        "phpstan/phpstan-deprecation-rules" : "^1.0",
-        "phpstan/phpstan-phpunit" : "^1.0",
-        "psr/simple-cache-implementation" : "*",
-        "symfony/cache" : "^5.4|^6.0|^7.0",
-        "symfony/process" : "^5.4|^6.0|^7.0",
-        "vlucas/phpdotenv" : "^5.5"
+        "mockery/mockery": "^1.4",
+        "pestphp/pest": "^2.36.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan-deprecation-rules": "^1.2",
+        "phpstan/phpstan-phpunit": "^1.4",
+        "psr/simple-cache-implementation": "*",
+        "spatie/ray": "^1.42",
+        "symfony/cache": "^5.4|^6.0|^7.0",
+        "symfony/process": "^5.4|^6.0|^7.0",
+        "vlucas/phpdotenv": "^5.5"
     },
     "suggest" : {
         "openai-php/client" : "Require get solutions from OpenAI",

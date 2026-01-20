@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run bundle-temp:*)",
+      "Bash(npm run bundle:*)",
+      "Bash(npm run dev:*)",
+      "Bash(find:*)"
+    ],
+    "deny": []
+  }
+}

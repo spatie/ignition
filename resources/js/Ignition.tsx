@@ -1,8 +1,7 @@
-import React from 'react';
-import InViewContextProvider from 'contexts/InViewContextProvider';
-import NavBar from 'components/NavBar';
-import Section from 'components/Section';
-import {IgniteDataContext} from 'contexts/IgniteDataContext';
+import InViewContextProvider from './contexts/InViewContextProvider';
+import NavBar from './components/NavBar';
+import Section from './components/Section';
+import {IgniteDataContext} from './contexts/IgniteDataContext';
 import {
     ErrorOccurrence,
     StackTrace,
@@ -11,13 +10,13 @@ import {
     ErrorOccurrenceContext,
     ErrorCard,
     IgnitionConfigContextProvider,
-    hasDebugInfo,
     ErrorBoundary,
-} from '@flareapp/ignition-ui';
+} from 'ignition-ui';
 import {IgniteData} from './types';
+import {hasDebugInfo} from './util';
 import {useInView} from 'react-intersection-observer';
-import AppDebugWarning from 'components/AppDebugWarning';
-import Footer from "components/Footer";
+import AppDebugWarning from './components/AppDebugWarning';
+import Footer from './components/Footer';
 
 type Props = {
     errorOccurrence: ErrorOccurrence;
@@ -40,7 +39,7 @@ export default function Ignition({
     return (
         <ErrorBoundary>
             <IgniteDataContext.Provider value={igniteData}>
-                <IgnitionConfigContextProvider ignitionConfig={igniteData.config}>
+                <IgnitionConfigContextProvider editorOptions={igniteData.editorOptions} ignitionConfig={igniteData.config}>
                     <ErrorOccurrenceContext.Provider value={errorOccurrence}>
                         <InViewContextProvider>
                             <NavBar showException={!errorCardInView}/>

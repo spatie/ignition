@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Button, FlareIcon } from '@flareapp/ignition-ui';
-import Checkbox from 'components/ui/Checkbox';
+import { useContext, useState } from 'react';
+import { Button, FlareIcon } from 'ignition-ui';
+import Checkbox from './ui/Checkbox';
 import { IgniteDataContext } from '../contexts/IgniteDataContext';
 import CopyableUrl from './ui/CopyableUrl';
 import shareClient, { SectionName } from '../shareClient';

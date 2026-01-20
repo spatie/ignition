@@ -1,5 +1,4 @@
-import {FlareIcon, IgnitionIcon} from '@flareapp/ignition-ui';
-import React from 'react';
+import {FlareIcon, IgnitionIcon} from 'ignition-ui';
 
 export default function Footer() {
     return (

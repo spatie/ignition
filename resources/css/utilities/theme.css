@@ -122,6 +122,10 @@
     @apply dark:bg-black/10;
 }
 
+.bg-purple-50\/60 {
+    background-color: #f5f3ff99;  /* TODO */
+}
+
 .hover\:\~bg-gray-500\/5 {
     @apply hover:bg-gray-500/5;
     @apply dark:hover:bg-gray-900/20;
