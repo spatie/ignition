@@ -2,8 +2,8 @@
 
 namespace Spatie\Ignition\Tests\TestClasses\SolutionProviders;
 
-use Spatie\Ignition\Contracts\BaseSolution;
-use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
+use Spatie\ErrorSolutions\Contracts\BaseSolution;
+use Spatie\ErrorSolutions\Contracts\HasSolutionsForThrowable;
 use Throwable;
 
 class AlwaysTrueSolutionProvider implements HasSolutionsForThrowable
