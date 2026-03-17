@@ -2,6 +2,19 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.16.0 - 2026-03-17
+
+### What's Changed
+
+#### PHP 8.4 & 8.5 Compatibility
+
+- Bump minimum dependency versions for PHP 8.4 compatibility
+- Bump spatie/backtrace minimum to ^1.7.1 to fix implicit nullable deprecation on PHP 8.5
+- Add symfony/http-foundation and symfony/mime constraints for PHP 8.4
+- Allow pestphp/pest ^3.0
+
+**Full Changelog**: https://github.com/spatie/ignition/compare/1.15.1...1.16.0
+
 ## 1.15.1 - 2025-02-21
 
 ### What's Changed
