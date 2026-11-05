@@ -9,7 +9,7 @@ jobs:
             fail-fast: false
             matrix:
                 os: [ ubuntu-latest, windows-latest ]
-                php: [ 8.0, 8.1, 8.2, 8.3, 8.4, 8.5 ]
+                php: [ 8.0, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6 ]
                 stability: [ prefer-lowest, prefer-stable ]
 
         name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -41,7 +41,7 @@ jobs:
                 run: composer require "pestphp/pest:^2.0" --dev --no-update
 
             -   name: Require Pest 3 for PHP 8.4+
-                if: matrix.php == '8.4' || matrix.php == '8.5'
+                if: matrix.php == '8.4' || matrix.php == '8.5' || matrix.php == '8.6'
                 shell: bash
                 run: composer require "pestphp/pest:^3.0" "illuminate/cache:^12.0" --dev --no-update
 
